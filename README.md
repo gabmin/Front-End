@@ -1,72 +1,48 @@
-# Getting Started with Create React App
+# 개미들의 곡소리 FRONT-END
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Git commit message rule
 
-## Available Scripts
+![https://blog.kakaocdn.net/dn/mCPCF/btraGOpkmjL/ukdxuLYL8TWsgmrHkQe6tk/img.png](https://blog.kakaocdn.net/dn/mCPCF/btraGOpkmjL/ukdxuLYL8TWsgmrHkQe6tk/img.png)
 
-In the project directory, you can run:
+- add : 새로운 파일 추가
+- feat : 새로운 기능 추가
+- fix : 오류 수정
+- edit : 기능 수정
+- style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
+- refactor : 코드 리펙토링
+- test : 테스트 코드, 리펙토링 테스트 코드 추가
+- chore : 빌드 업무 수정, 패키지 매니저 수정
 
-### `yarn start`
+## Coding convention
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Airbnb의 React/JSX 스타일 가이드를 따릅니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[GitHub - parksb/javascript-style-guide: Airbnb JavaScript 스타일 가이드](https://github.com/ParkSB/javascript-style-guide)
 
-### `yarn test`
+✅ **필수!!!** ✅
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. 변수명은 camel case 적용하기!! (단어가 합쳐진 부분마다 맨 처음 글자를 대문자로 표기.. )
 
-### `yarn build`
+```jsx
+const onClickBtn = () => {
+  alert("버튼 클릭됨!");
+};
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. ESLint, Prettier extension을 설치해서 코드 스타일, 포맷 맞추기
+2. useState, useEffect 등 hooks API는 import해서 사용!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 예시) useState의 경우...
+  ```jsx
+  const [comment, setComment] = React.useState(); // React. 호출이 중복됨!!
+  const [comment2, setComment3] = React.useState();
+  const [comment2, setComment3] = React.useState();
+  ```
+  ```jsx
+  import { useState } from "react";
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# kurly-frontend
-# Front-End
+  // 한번만 import하면 반복되는 React. 호출을 줄일 수 있음.
+  const [comment, setComment] = useState();
+  const [comment2, setComment3] = useState();
+  const [comment2, setComment3] = useState();
+  ```
