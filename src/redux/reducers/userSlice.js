@@ -3,8 +3,8 @@ import { loginDB } from "../actions/user";
 
 // 기본 state
 export const initialState = {
-  myInfo: "gom", // 내 정보
-  loginLoading: false, // 로그인 시도중
+  userInfo: "admin",
+  loginLoading: false,
   loginDone: false,
   loginError: null,
 };
@@ -15,8 +15,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logoutUser: state => {
-      state.user = {};
-      state.isLoggedIn = false;
+      state.userInfo = null;
+      state.loginDone = false;
     },
   },
   extraReducers: builder =>
@@ -29,7 +29,7 @@ const userSlice = createSlice({
       })
       .addCase(loginDB.fulfilled, (state, action) => {
         state.loginLoading = false;
-        state.myInfo = action.payload;
+        state.userInfo = action.payload;
         state.loginDone = true;
       })
       .addCase(loginDB.rejected, (state, action) => {
