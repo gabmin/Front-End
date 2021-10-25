@@ -3,7 +3,7 @@ import { loginDB } from "../actions/user";
 
 // 기본 state
 export const initialState = {
-  myInfo: null, // 내 정보
+  myInfo: "gom", // 내 정보
   loginLoading: false, // 로그인 시도중
   loginDone: false,
   loginError: null,
@@ -29,7 +29,7 @@ const userSlice = createSlice({
       })
       .addCase(loginDB.fulfilled, (state, action) => {
         state.loginLoading = false;
-        state.me = action.payload;
+        state.myInfo = action.payload;
         state.loginDone = true;
       })
       .addCase(loginDB.rejected, (state, action) => {
