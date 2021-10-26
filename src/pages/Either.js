@@ -23,9 +23,61 @@ const EitherButton = styled.button`
 `;
 const SlickLayout = styled.div`
   margin: 100px auto;
+  width: 100%;
+  height: 100%;
 `;
 
 const Either = props => {
+  const cardList = [
+    {
+      title: "삼전 9층인데 익절해야할까요?",
+      contentA: "ㅇㅇ익절ㄱㄱ",
+      contentB: "ㄴㄴ 존버가 답이다",
+      user: "김개미",
+      date: "13분전",
+      likeCnt: 11,
+    },
+    {
+      title: "카카오 9층인데 익절해야할까요?",
+      contentA: "ㅇㅇ익절ㄱㄱ",
+      contentB: "ㄴㄴ 존버가 답이다",
+      user: "김개미",
+      date: "13분전",
+      likeCnt: 11,
+    },
+    {
+      title: "네이버 9층인데 익절해야할까요?",
+      contentA: "ㅇㅇ익절ㄱㄱ",
+      contentB: "ㄴㄴ 존버가 답이다",
+      user: "김개미",
+      date: "13분전",
+      likeCnt: 17,
+    },
+    {
+      title: "제주항공 9층인데 익절해야할까요?",
+      contentA: "ㅇㅇ익절ㄱㄱ",
+      contentB: "ㄴㄴ 존버가 답이다",
+      user: "김개미",
+      date: "13분전",
+      likeCnt: 13,
+    },
+    {
+      title: "애플 9층인데 익절해야할까요?",
+      contentA: "ㅇㅇ익절ㄱㄱ",
+      contentB: "ㄴㄴ 존버가 답이다",
+      user: "김개미",
+      date: "13분전",
+      likeCnt: 14,
+    },
+    {
+      title: "테슬라 9층인데 익절해야할까요?",
+      contentA: "ㅇㅇ익절ㄱㄱ",
+      contentB: "ㄴㄴ 존버가 답이다",
+      user: "김개미",
+      date: "13분전",
+      likeCnt: 15,
+    },
+  ];
   return (
     <>
       <Wrap>
@@ -35,7 +87,7 @@ const Either = props => {
           <EitherButton>종료됨</EitherButton>
         </EitherButtonGrid>
         <SlickLayout>
-          <EitherSlick />
+          <EitherSlick cardList={cardList} />
         </SlickLayout>
       </Wrap>
     </>
