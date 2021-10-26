@@ -15,6 +15,7 @@ import Multi from "../pages/Multi";
 import MultiEdit from "../pages/MultiEdit";
 import MultiDetail from "../pages/MultiDetail";
 import ErrorPage from "../pages/ErrorPage";
+import Footer from "../components/Footer";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/multi/edit/:multi_id" component={MultiEdit} />
           <Route path="*" component={ErrorPage} />
         </Switch>
+        <Footer></Footer>
       </ConnectedRouter>
     </>
   );
