@@ -1,18 +1,37 @@
 import React from "react";
+import styled from "styled-components";
+import EitherWrite from "../components/EitherWrite";
+import MultiWire from "../components/MultiWrite";
 
 const CardWrite = () => {
   return (
     <>
-      <div>
-        <div></div>
+      <Wrap>
+        <ButtonGrid>
+          <button>{"<"} 뒤로가기</button>
+          <button>목록</button>
+        </ButtonGrid>
+        <EitherWrite />
+        {/* <MultiWire /> */}
         <div>
-          <div>구분</div>
-          <div>제목</div>
-          <div>내용</div>
+          <button>취소</button>
+          <button>완료</button>
         </div>
-      </div>
+      </Wrap>
     </>
   );
 };
+
+const Wrap = styled.div`
+  width: 80%;
+  height: 100%;
+  margin: 50px auto;
+`;
+const ButtonGrid = styled.div`
+  width: 100%;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default CardWrite;
