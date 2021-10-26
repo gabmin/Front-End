@@ -3,14 +3,6 @@ import AnswerList from "../components/AnswerList";
 
 const MultiDetail = props => {
   const multiId = props.match.params.multi_id;
-  const [answer, setAnswer] = React.useState();
-
-  const changeAnswer = e => {
-    setAnswer(e.target.value);
-    console.log("앤서", e.target.value);
-  };
-
-  const create = () => {};
 
   return (
     <div>
