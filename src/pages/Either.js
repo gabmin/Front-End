@@ -1,7 +1,6 @@
 import React from "react";
-import Card from "../components/Card";
 import styled from "styled-components";
-import Slider from "react-slick";
+import EitherSlick from "../components/EitherSlick";
 
 const Wrap = styled.div`
   max-width: 100%;
@@ -22,26 +21,10 @@ const EitherButton = styled.button`
     color: green;
   }
 `;
-
-const settings = {
-  className: "center",
-  centerMode: true,
-  infinite: true,
-  centerPadding: "60px",
-  slidesToShow: 2,
-  slidesToScroll: 1,
-  speed: 500,
-};
-
-const StyledSlider = styled(Slider)`
-  .slick-slide {
-    display: inline-block;
-  }
-  .slick-list {
-    width: 1000px;
-    margin: 0 auto;
-  }
+const SlickLayout = styled.div`
+  margin: 100px auto;
 `;
+
 const Either = props => {
   return (
     <>
@@ -51,16 +34,9 @@ const Either = props => {
           <EitherButton>진행중</EitherButton>
           <EitherButton>종료됨</EitherButton>
         </EitherButtonGrid>
-        <div>
-          <StyledSlider {...settings}>
-            <div>
-              <Card />
-            </div>
-            <div>
-              <Card />
-            </div>
-          </StyledSlider>
-        </div>
+        <SlickLayout>
+          <EitherSlick />
+        </SlickLayout>
       </Wrap>
     </>
   );
