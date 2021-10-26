@@ -77,7 +77,7 @@ const EiterSlick = ({ cardList }) => {
             {cardList?.map((v, i) => (
               <div>
                 <EitherCard
-                  eitherId={i}
+                  key={i}
                   user={v.user}
                   title={v.title}
                   contentA={v.contentA}
@@ -119,6 +119,9 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center div {
     transform: scale(1.1);
     opacity: 1;
+    button:hover {
+      background-color: green;
+    }
   }
 `;
 export default EiterSlick;

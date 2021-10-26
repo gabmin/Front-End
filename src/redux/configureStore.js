@@ -5,6 +5,7 @@ import { connectRouter } from "connected-react-router";
 
 //모듈 불러오기
 import userSlice from "./reducers/userSlice";
+import cardSlice from "./reducers/eitherCardSlice";
 
 export const history = createBrowserHistory();
 
@@ -12,6 +13,7 @@ export const history = createBrowserHistory();
 const reducer = combineReducers({
   router: connectRouter(history),
   user: userSlice.reducer,
+  eitherCard: cardSlice.reducer,
 });
 
 const middlewares = [];

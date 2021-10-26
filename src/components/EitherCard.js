@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Line } from "rc-progress";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 const EitherCard = props => {
   const {
@@ -34,13 +34,12 @@ const EitherCard = props => {
           </EitherButton>
         </div>
         <EitherProgress>
-          <Line
-            percent="30"
-            strokeWidth="4"
-            strokeColor="green"
-            trailWidth="4"
-            trailColor="yellow"
-            style={{ width: "300px" }}
+          <ProgressBar
+            completed={50}
+            height="15px"
+            width="90%"
+            labelSize="10px"
+            margin="auto"
           />
         </EitherProgress>
         <EitherFooter>
@@ -78,9 +77,6 @@ const EitherProgress = styled.div`
 const EitherButton = styled.button`
   width: 40%;
   height: 40%;
-  &:hover {
-    background-color: green;
-  }
 `;
 const EitherFooter = styled.div`
   display: flex;
