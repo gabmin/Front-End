@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const AnswerList = props => {
+  const DataList = props.dataList;
   const [color, setColor] = React.useState("");
   const selected = e => {
     const checkSelect = t => [...t.parentElement.children].filter(e => e !== t);
@@ -26,27 +27,27 @@ const AnswerList = props => {
   return (
     <Answerdiv>
       <AnswerBtn color="#777777" onClick={selectAnswer}>
-        contentA
+        {DataList.contentA}
       </AnswerBtn>
       <AnswerBtn color="#777777" onClick={selectAnswer}>
-        contentB
+        {DataList.contentB}
       </AnswerBtn>
       <AnswerBtn color="#777777" onClick={selectAnswer}>
-        contentC
+        {DataList.contentC}
       </AnswerBtn>
       <AnswerBtn color="#777777" onClick={selectAnswer}>
-        contentD
+        {DataList.contentD}
       </AnswerBtn>
       <AnswerBtn color="#777777" onClick={selectAnswer}>
-        contentE
+        {DataList.contentE}
       </AnswerBtn>
     </Answerdiv>
   );
 };
 
 const Answerdiv = styled.div`
-  height: 200px;
-  width: 200px;
+  height: 100%;
+  width: 100%;
   margin: auto;
   border: 1px solid #000000;
   display: flex;
@@ -55,8 +56,9 @@ const Answerdiv = styled.div`
 
 const AnswerBtn = styled.button`
   border: none;
-  margin: 10px auto;
+  margin: 5px auto;
   width: 50%;
+  height: 50px;
   opacity: 0.5;
   background-color: ${props => props.color};
   cursor: pointer;
