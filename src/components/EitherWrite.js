@@ -3,29 +3,10 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const EitherWrite = () => {
-  const [eitherState, setEitherState] = useState(true);
-  const [multiState, setMultiState] = useState(false);
   const [title, setTitle] = useState("");
   const [contentA, setContentA] = useState("");
   const [contentB, setContentB] = useState("");
 
-  //radio button
-  const EitherRadioBtn = () => {
-    if (eitherState === true) {
-      return;
-    } else {
-      setEitherState(!eitherState);
-      setMultiState(!multiState);
-    }
-  };
-  const MultiRadioBtn = () => {
-    if (multiState === true) {
-      return;
-    } else {
-      setEitherState(!eitherState);
-      setMultiState(!multiState);
-    }
-  };
   //Title Value
   const OnChangeTitle = e => {
     setTitle(e.target.value);
@@ -44,85 +25,40 @@ const EitherWrite = () => {
 
   return (
     <>
-      <ContentBox>
-        <Index>
-          <h4 style={{ width: "30px" }}>구분</h4>
-          <div style={{ display: "flex" }}>
-            <RadioButton>
-              <input
-                type="radio"
-                id="either"
-                checked={eitherState}
-                onChange={EitherRadioBtn}
-              />
-              <label htmlFor="either">찬반</label>
-            </RadioButton>
-            <RadioButton>
-              <input
-                type="radio"
-                id="multi"
-                checked={multiState}
-                onChange={MultiRadioBtn}
-              />
-              <label htmlFor="multi">객관식</label>
-            </RadioButton>
-          </div>
-        </Index>
-        <hr />
-        <Title>
-          <h4 style={{ width: "30px" }}>제목</h4>
-          <Input
-            type="text"
-            placeholder="질문을 입력해주세요."
-            value={title}
-            onChange={OnChangeTitle}
-          />
-        </Title>
-        <hr />
-        <VoteBox>
-          <EitherButtonGrid>
-            <EitherButton>
-              <h1 style={{ marginTop: "70px" }}>O</h1>
-              <ButtonInput
-                placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
-                value={contentA}
-                onChange={OnChangeContentA}
-              />
-            </EitherButton>
-            <EitherButton>
-              <h1 style={{ marginTop: "70px" }}>X</h1>
-              <ButtonInput
-                placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
-                value={contentB}
-                onChange={OnChangeContentB}
-              />
-            </EitherButton>
-          </EitherButtonGrid>
-        </VoteBox>
-      </ContentBox>
+      <hr />
+      <Title>
+        <h4 style={{ width: "30px" }}>제목</h4>
+        <Input
+          type="text"
+          placeholder="질문을 입력해주세요."
+          value={title}
+          onChange={OnChangeTitle}
+        />
+      </Title>
+      <hr />
+      <VoteBox>
+        <EitherButtonGrid>
+          <EitherButton>
+            <h1 style={{ marginTop: "70px" }}>O</h1>
+            <ButtonInput
+              placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
+              value={contentA}
+              onChange={OnChangeContentA}
+            />
+          </EitherButton>
+          <EitherButton>
+            <h1 style={{ marginTop: "70px" }}>X</h1>
+            <ButtonInput
+              placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
+              value={contentB}
+              onChange={OnChangeContentB}
+            />
+          </EitherButton>
+        </EitherButtonGrid>
+      </VoteBox>
     </>
   );
 };
-
-const RadioButton = styled.div`
-  width: 70px;
-  display: flex;
-  margin: 0px 0px 0px 60px;
-  align-items: center;
-`;
-
-const ContentBox = styled.div`
-  border: 1px solid black;
-  width: 100%;
-  height: 100%;
-  padding: 1em;
-  box-sizing: border-box;
-`;
-
-const Index = styled.div`
-  margin: 10px;
-  display: flex;
-`;
 
 const Title = styled.div`
   margin: 10px;

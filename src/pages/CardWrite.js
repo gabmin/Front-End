@@ -1,11 +1,16 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { useState } from "react";
+
 import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
 
 import { history } from "../redux/configureStore";
 
 const CardWrite = () => {
+  const [eitherState, setEitherState] = useState(true);
+  const [multiState, setMultiState] = useState(false);
+
   const onClickBack = useCallback(() => {
     history.push("/either");
   });
@@ -13,6 +18,23 @@ const CardWrite = () => {
     history.push("/");
   });
 
+  //radio button
+  const EitherRadioBtn = () => {
+    if (eitherState === true) {
+      return;
+    } else {
+      setEitherState(!eitherState);
+      setMultiState(!multiState);
+    }
+  };
+  const MultiRadioBtn = () => {
+    if (multiState === true) {
+      return;
+    } else {
+      setEitherState(!eitherState);
+      setMultiState(!multiState);
+    }
+  };
   return (
     <>
       <Wrap>
@@ -20,8 +42,34 @@ const CardWrite = () => {
           <button onClick={onClickBack}>{"<"} 뒤로가기</button>
           <button onClick={onClickIndex}>목록</button>
         </ButtonGrid>
-        {/* <EitherWrite /> */}
-        <MultiWrite />
+        <ContentBox>
+          <Index>
+            <h4 style={{ width: "30px" }}>구분</h4>
+            <div style={{ display: "flex" }}>
+              <RadioButton>
+                <input
+                  type="radio"
+                  id="either"
+                  checked={eitherState}
+                  onChange={EitherRadioBtn}
+                />
+                <label htmlFor="either">찬반</label>
+              </RadioButton>
+              <RadioButton>
+                <input
+                  type="radio"
+                  id="multi"
+                  checked={multiState}
+                  onChange={MultiRadioBtn}
+                />
+                <label htmlFor="multi">객관식</label>
+              </RadioButton>
+            </div>
+          </Index>
+          <EitherWrite />
+          {/* <MultiWrite /> */}
+        </ContentBox>
+
         <div>
           <button>취소</button>
           <button>완료</button>
@@ -43,4 +91,22 @@ const ButtonGrid = styled.div`
   justify-content: space-between;
 `;
 
+const ContentBox = styled.div`
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+`;
+const RadioButton = styled.div`
+  width: 70px;
+  display: flex;
+  margin: 0px 0px 0px 60px;
+  align-items: center;
+`;
+
+const Index = styled.div`
+  margin: 10px;
+  display: flex;
+`;
 export default CardWrite;
