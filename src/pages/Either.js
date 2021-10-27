@@ -11,9 +11,13 @@ const Either = props => {
     state => state.eitherCard,
   );
 
+  const cardList = eitherPost.either;
+  console.log(eitherPost.either);
+
   console.log(eitherPost);
   useEffect(() => {
     dispatch(PostDB());
+    return null;
   }, []);
 
   const onClickPost = () => {
@@ -26,72 +30,6 @@ const Either = props => {
     dispatch(PostCompleteDB());
   };
 
-  // const cardList = [{
-  //   eitherId: eitherPost.eitherId,
-  //   title: eitherPost.title,
-  //   contentA: eitherPost.contentA,
-  //   contentB: eitherPost.contentB,
-  //   date: eitherPost.date,
-  //   complete: eitherPost.complete,
-  //   edited: eitherPost.edited,
-  //   editedDate: eitherPost.editedDate,
-  //   likeCnt: eitherPost.likeCnt,
-  //   user: eitherPost.user,
-  //   voteCntA: eitherPost.voteCntA,
-  //   voteCntB: eitherPost.voteCntB,
-  //   nickname: eitherPost.nickname,
-  //   voted: eitherPost.voted,
-  // }]
-  const cardList = [
-    {
-      title: "삼전 9층인데 익절해야할까요?",
-      contentA: "ㅇㅇ익절ㄱㄱ",
-      contentB: "ㄴㄴ 존버가 답이다",
-      user: "김개미",
-      date: "13분전",
-      likeCnt: 11,
-    },
-    {
-      title: "카카오 9층인데 익절해야할까요?",
-      contentA: "ㅇㅇ익절ㄱㄱ",
-      contentB: "ㄴㄴ 존버가 답이다",
-      user: "김개미",
-      date: "13분전",
-      likeCnt: 11,
-    },
-    {
-      title: "네이버 9층인데 익절해야할까요?",
-      contentA: "ㅇㅇ익절ㄱㄱ",
-      contentB: "ㄴㄴ 존버가 답이다",
-      user: "김개미",
-      date: "13분전",
-      likeCnt: 17,
-    },
-    {
-      title: "제주항공 9층인데 익절해야할까요?",
-      contentA: "ㅇㅇ익절ㄱㄱ",
-      contentB: "ㄴㄴ 존버가 답이다",
-      user: "김개미",
-      date: "13분전",
-      likeCnt: 13,
-    },
-    {
-      title: "애플 9층인데 익절해야할까요?",
-      contentA: "ㅇㅇ익절ㄱㄱ",
-      contentB: "ㄴㄴ 존버가 답이다",
-      user: "김개미",
-      date: "13분전",
-      likeCnt: 14,
-    },
-    {
-      title: "테슬라 9층인데 익절해야할까요?",
-      contentA: "ㅇㅇ익절ㄱㄱ",
-      contentB: "ㄴㄴ 존버가 답이다",
-      user: "김개미",
-      date: "13분전",
-      likeCnt: 15,
-    },
-  ];
   return (
     <>
       <Wrap>

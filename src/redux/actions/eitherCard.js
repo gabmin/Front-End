@@ -4,7 +4,7 @@ import api from "../../shared/api";
 //post 전체보기
 export const PostDB = createAsyncThunk(
   "eitherPost/PostDB",
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await api.get("/posts/either");
       return response.data;
@@ -16,7 +16,7 @@ export const PostDB = createAsyncThunk(
 //post 진행중보기
 export const PostingDB = createAsyncThunk(
   "eitherPost/PostingDB",
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await api.get("/posts/either/ing");
       return response.data;
@@ -28,7 +28,7 @@ export const PostingDB = createAsyncThunk(
 //post 종료보기
 export const PostCompleteDB = createAsyncThunk(
   "eitherPost/PostCompleteDB",
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await api.get("/posts/either/complete");
       return response.data;
@@ -64,7 +64,7 @@ export const editPostDB = createAsyncThunk(
 //post 삭제하기
 export const deletePostDB = createAsyncThunk(
   "eitherPost/deletePostDB",
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await api.delete("/posts/either/:either_id");
       return response.data;
@@ -76,7 +76,7 @@ export const deletePostDB = createAsyncThunk(
 //post 종료하기
 export const completePostDB = createAsyncThunk(
   "eitherPost/completePostDB",
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await api.patch("/posts/either/:either_id/complete");
       return response.data;
@@ -88,7 +88,7 @@ export const completePostDB = createAsyncThunk(
 //post 좋아요
 export const likePostDB = createAsyncThunk(
   "eitherPost/likePostDB",
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("/posts/either/:either_id/complete");
       return response.data;

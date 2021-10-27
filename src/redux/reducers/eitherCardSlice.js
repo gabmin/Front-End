@@ -44,6 +44,9 @@ export const initialState = {
   likePostDBLoading: false,
   likePostDBDone: false,
   likePostDBError: null,
+  votePostDBLoading: false,
+  votePostDBDone: false,
+  votePostDBError: null,
 };
 
 // toolkit 사용방법
@@ -71,7 +74,7 @@ const postSlice = createSlice({
       })
       .addCase(PostDB.rejected, (state, action) => {
         state.PostDBLoading = false;
-        state.PostDBError = action.payload;
+        state.PostDBError = action.error;
       })
       // Post 진행중보기
       .addCase(PostingDB.pending, state => {
@@ -113,7 +116,6 @@ const postSlice = createSlice({
         state.addPostDBLoading = false;
         state.addPostDBDone = true;
         state.eitherPost.unshift(action.payload);
-        console.log(state.eitherPost);
       })
       .addCase(addPostDB.rejected, (state, action) => {
         state.addPostDBLoading = false;
@@ -198,5 +200,5 @@ const postSlice = createSlice({
         state.votePostDBError = action.payload;
       }),
 });
-export const { addPost } = postSlice.actions;
+
 export default postSlice;

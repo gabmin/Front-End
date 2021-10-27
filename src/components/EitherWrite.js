@@ -15,17 +15,14 @@ const EitherWrite = props => {
   //Title Value
   const onChangeTitle = e => {
     setTitle(e.target.value);
-    console.log(e.target.value);
   };
   //contentA button Value
   const onChangeContentA = e => {
     setContentA(e.target.value);
-    console.log(e.target.value);
   };
   //contentB button Value
   const onChangeContentB = e => {
     setContentB(e.target.value);
-    console.log(e.target.value);
   };
   // date
   const date = moment().format("YYYY-MM-DD HH:mm:ss");

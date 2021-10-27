@@ -68,6 +68,21 @@ function PrevArrow(props) {
   );
 }
 
+// eitherId: eitherPost.eitherId,
+// title: eitherPost.title,
+// contentA: eitherPost.contentA,
+// contentB: eitherPost.contentB,
+// date: eitherPost.date,
+// complete: eitherPost.complete,
+// edited: eitherPost.edited,
+// editedDate: eitherPost.editedDate,
+// likeCnt: eitherPost.likeCnt,
+// user: eitherPost.user,
+// voteCntA: eitherPost.voteCntA,
+// voteCntB: eitherPost.voteCntB,
+// nickname: eitherPost.nickname,
+// voted: eitherPost.voted,
+
 const EiterSlick = ({ cardList }) => {
   return (
     <>
@@ -78,7 +93,7 @@ const EiterSlick = ({ cardList }) => {
               <div>
                 <EitherCard
                   key={i}
-                  user={v.user}
+                  nickname={v.nickname}
                   title={v.title}
                   contentA={v.contentA}
                   contentB={v.contentB}

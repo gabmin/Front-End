@@ -3,19 +3,7 @@ import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const EitherCard = props => {
-  const {
-    eitherId,
-    user,
-    title,
-    contentA,
-    contentB,
-    date,
-    edited,
-    editedDate,
-    likeCnt,
-    voteCntA,
-    voteCntB,
-  } = props;
+  const { nickname, title, contentA, contentB, date, likeCnt } = props;
   return (
     <>
       <Container>
@@ -44,7 +32,7 @@ const EitherCard = props => {
         </EitherProgress>
         <EitherFooter>
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            {user} {"|"} {date}
+            {nickname} {"|"} {date}
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
