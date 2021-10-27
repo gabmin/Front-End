@@ -46,13 +46,14 @@ const EitherCard = props => {
 
 const Container = styled.div`
   text-align: center;
-  width: 70%;
+  width: 80%;
   height: auto;
   margin: 100px auto;
   border: 1px solid black;
   border-radius: 10px;
   padding: 1em;
   opacity: 0.3;
+  background-color: white;
 `;
 
 const EitherText = styled.div`

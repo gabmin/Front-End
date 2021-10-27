@@ -1,5 +1,6 @@
 import React from "react";
 import EitherCard from "./EitherCard";
+import EitherCompleteCard from "./EitherCompleteCard";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -68,42 +69,66 @@ function PrevArrow(props) {
   );
 }
 
-// eitherId: eitherPost.eitherId,
-// title: eitherPost.title,
-// contentA: eitherPost.contentA,
-// contentB: eitherPost.contentB,
-// date: eitherPost.date,
-// complete: eitherPost.complete,
-// edited: eitherPost.edited,
-// editedDate: eitherPost.editedDate,
-// likeCnt: eitherPost.likeCnt,
-// user: eitherPost.user,
-// voteCntA: eitherPost.voteCntA,
-// voteCntB: eitherPost.voteCntB,
-// nickname: eitherPost.nickname,
-// voted: eitherPost.voted,
-
-const EiterSlick = ({ cardList }) => {
+const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
+  console.log(PostList);
+  console.log(PostingList);
+  console.log(PostCompleteList);
   return (
     <>
       <Wrap>
         <div>
           <StyledSlider {...settings}>
-            {cardList?.map((v, i) => (
-              <div>
-                <EitherCard
-                  key={i}
-                  nickname={v.nickname}
-                  title={v.title}
-                  contentA={v.contentA}
-                  contentB={v.contentB}
-                  date={v.date}
-                  likeCnt={v.likeCnt}
-                  voteCntA={v.voteCntA}
-                  voteCntB={v.voteCntB}
-                />
-              </div>
-            ))}
+            {PostList
+              ? PostList?.map((v, i) => (
+                  <div>
+                    <EitherCard
+                      key={i}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                    />
+                  </div>
+                ))
+              : null}
+            {PostingList
+              ? PostingList?.map((v, i) => (
+                  <div>
+                    <EitherCard
+                      key={i}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                    />
+                  </div>
+                ))
+              : null}
+            {PostCompleteList
+              ? PostCompleteList?.map((v, i) => (
+                  <div>
+                    <EitherCompleteCard
+                      key={i}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                    />
+                  </div>
+                ))
+              : null}
           </StyledSlider>
         </div>
       </Wrap>
@@ -134,6 +159,7 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center div {
     transform: scale(1.1);
     opacity: 1;
+    z-index: 10;
     button:hover {
       background-color: green;
     }

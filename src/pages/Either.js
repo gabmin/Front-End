@@ -1,33 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import EiterSlick from "../components/EitherSlick";
 
 import EitherSlick from "../components/EitherSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 
 const Either = props => {
   const dispatch = useDispatch();
+
   const { eitherPost, eitherPosting, eitherPostComplete } = useSelector(
     state => state.eitherCard,
   );
+  const PostList = eitherPost.either;
+  const PostingList = eitherPosting.either;
+  const PostCompleteList = eitherPostComplete.either;
 
-  const cardList = eitherPost.either;
-  console.log(eitherPost.either);
+  const [status, setStatus] = useState("Post");
 
-  console.log(eitherPost);
   useEffect(() => {
     dispatch(PostDB());
-    return null;
+    setStatus("Post");
   }, []);
 
   const onClickPost = () => {
     dispatch(PostDB());
+    setStatus("Post");
   };
   const onClickPosting = () => {
     dispatch(PostingDB());
+    setStatus("Posting");
   };
   const onClickCompletePost = () => {
     dispatch(PostCompleteDB());
+    setStatus("CompletePost");
   };
 
   return (
@@ -39,7 +45,18 @@ const Either = props => {
           <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
         </EitherButtonGrid>
         <SlickLayout>
-          <EitherSlick cardList={cardList} />
+          {status === "Post" ? <EitherSlick PostList={PostList} /> : null}
+          {status === "Posting" ? (
+            <EitherSlick PostingList={PostingList} />
+          ) : null}
+          {status === "CompletePost" ? (
+            <EitherSlick PostCompleteList={PostCompleteList} />
+          ) : null}
+          {/* 
+          if ( status === "Post") {<EitherSlick cardList={PostList} />}else if
+          (status === "Posting"){<EitherSlick cardList={PostingList} />}else if
+          (status === "CompletePost")
+          {<EitherSlick cardList={PostCompleteList} />} */}
         </SlickLayout>
       </Wrap>
     </>
