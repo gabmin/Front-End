@@ -1,14 +1,23 @@
 import styled from "styled-components";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useInput from "../hooks/useInput";
 import { isError } from "lodash";
+import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
+import Spinner from "../elements/Spinner";
 
 const Signup = () => {
   // const isLoggedIn = useSelector((state) => state.user.signinDone);
 
   const dispatch = useDispatch();
+
+  const {
+    checkIdDupResult,
+    checkIdDupLoading,
+    checkNickDupLoading,
+    checkNickDupResult,
+  } = useSelector(state => state.user);
 
   const [id, onChangeId] = useInput("");
   const [nickname, onChangeNickname] = useInput("");
@@ -16,10 +25,32 @@ const Signup = () => {
   const [passwordCheck, setPasswordCheck] = useInput("");
   const [age, setAge] = useInput("");
   const [idError, setIdError] = useState(false);
+  const [idNotice, setIdNotice] = useState(false);
+  const [idDupCheck, setIdDupCheck] = useState(false);
+  const [nickNotice, setNickNotice] = useState(false);
+  const [nickDupCheck, setNickDupCheck] = useState(false);
   const [nickError, setNickError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordEqual, setPasswordEqual] = useState(false);
   const [ageError, setAgeError] = useState(false);
+
+  useEffect(() => {
+    setIdNotice(false);
+    setIdDupCheck(false);
+  }, [id]);
+
+  useEffect(() => {
+    setNickNotice(false);
+    setNickDupCheck(false);
+  }, [nickname]);
+
+  useEffect(() => {
+    setIdDupCheck(checkIdDupResult);
+  }, [checkIdDupResult]);
+
+  useEffect(() => {
+    setNickDupCheck(checkNickDupResult);
+  }, [checkNickDupResult]);
 
   const idFilter = useCallback(id => {
     const filter = /^[a-z0-9_-]{5,20}$/;
@@ -88,36 +119,32 @@ const Signup = () => {
     e => {
       e.preventDefault();
       console.log(id, nickname, password, passwordCheck, age);
-      idChecker();
-      pwChecker();
-      nickChecker();
-      pwEqualChecker();
-      ageChecker();
 
-      if (
-        idChecker() &&
-        pwChecker() &&
-        nickChecker() &&
-        pwEqualChecker() &&
-        ageChecker()
-      ) {
-        alert("회원가입!");
-        return;
-      }
-
-      // dispatch(
-      //   signup({
-      //     id: null,
-      //     nickname: nickname,
-      //     id: id,
-      //     password: password,
-      //   }),
-      // );
+      if (!idChecker()) return;
+      if (!nickChecker()) return;
+      if (!pwChecker()) return;
+      if (!pwEqualChecker()) return;
+      if (!ageChecker()) return;
+      if (!idDupCheck) return alert("아이디 중복체크를 해주세요");
+      if (!nickDupCheck) return alert("닉네임 중복체크를 해주세요");
+      alert("회원가입!");
+      dispatch(
+        signup({
+          userId: id,
+          nickname: nickname,
+          pw: password,
+          confirmPw: passwordCheck,
+          ageGroup: age,
+        }),
+      );
+      return;
     },
     [
       idChecker,
+      idDupCheck,
       pwChecker,
       nickChecker,
+      nickDupCheck,
       pwEqualChecker,
       ageChecker,
       id,
@@ -125,7 +152,38 @@ const Signup = () => {
       password,
       passwordCheck,
       age,
+      dispatch,
     ],
+  );
+
+  const onClickIdDup = useCallback(
+    e => {
+      e.preventDefault();
+      idChecker();
+      dispatch(
+        checkIdDup({
+          userId: id,
+        }),
+      );
+      setIdNotice(true);
+      setIdDupCheck(true);
+    },
+    [dispatch, id, idChecker],
+  );
+
+  const onClickNickDup = useCallback(
+    e => {
+      e.preventDefault();
+      nickChecker();
+      dispatch(
+        checkNickDup({
+          nickname,
+        }),
+      );
+      setNickNotice(true);
+      setNickDupCheck(true);
+    },
+    [dispatch, nickname, nickChecker],
   );
 
   return (
@@ -136,38 +194,50 @@ const Signup = () => {
             <InputWrapper>
               <input
                 type="id"
-                id="idInput"
                 value={id}
                 onChange={onChangeId}
                 placeholder="아이디"
               />
-              <button>중복확인</button>
+              <button onClick={onClickIdDup}>중복확인</button>
             </InputWrapper>
 
-            {idError && (
+            {idError && !checkIdDupLoading && idNotice && (
               <span>
                 5~20자의 영문 소문자, 숫자와 특수기호(),(-)만 사용 가능합니다
               </span>
+            )}
+            {checkIdDupResult && !idError && !checkIdDupLoading && idNotice && (
+              <span>사용가능한 아이디 입니다</span>
+            )}
+            {checkIdDupResult === false && !checkIdDupLoading && idNotice && (
+              <span>이미 사용중인 아이디 입니다</span>
             )}
           </Content>
           <Content>
             <InputWrapper>
               <input
                 type="text"
-                id="nicknameInput"
                 value={nickname}
                 onChange={onChangeNickname}
                 placeholder="닉네임"
               />
-              <button>중복확인</button>
+              <button onClick={onClickNickDup}>중복확인</button>
             </InputWrapper>
-            {nickError && <span>닉네임을 입력하세요</span>}
+            {nickError && !checkNickDupLoading && nickNotice && (
+              <span>닉네임을 입력하세요</span>
+            )}
+            {checkNickDupResult &&
+              !nickError &&
+              !checkNickDupLoading &&
+              nickNotice && <span>사용가능한 닉네임 입니다</span>}
+            {checkNickDupResult === false &&
+              !checkNickDupLoading &&
+              nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
           </Content>
           <Content>
             <InputWrapper>
               <input
                 type="password"
-                id="passwordInput"
                 value={password}
                 onChange={setPassword}
                 placeholder="비밀번호"
@@ -182,7 +252,6 @@ const Signup = () => {
             <InputWrapper>
               <input
                 type="password"
-                id="passwordCheckInput"
                 value={passwordCheck}
                 onChange={setPasswordCheck}
                 placeholder="비밀번호확인"
@@ -194,19 +263,12 @@ const Signup = () => {
           <Content>
             <InputWrapper>
               <select onChange={setAge}>
-                <option value={""} selected>
-                  연령대를 선택해 주세요
-                </option>
-                <option value={1}>10대 미만</option>
+                <option value="">연령대를 선택해 주세요</option>
                 <option value={10}>10대</option>
                 <option value={20}>20대</option>
                 <option value={30}>30대</option>
                 <option value={40}>40대</option>
-                <option value={50}>50대</option>
-                <option value={60}>60대</option>
-                <option value={70}>70대</option>
-                <option value={80}>80대</option>
-                <option value={90}>90대</option>
+                <option value={50}>50대 이상</option>
               </select>
             </InputWrapper>
             {ageError && <span>연령대를 선택해 주세요</span>}

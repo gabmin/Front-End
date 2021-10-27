@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { login } from "../redux/actions/user";
 import { history } from "../redux/configureStore";
 
 const Login = () => {
@@ -15,28 +16,33 @@ const Login = () => {
   const idChecker = useCallback(() => {
     if (!id.trim()) {
       setIdCheck(true);
+      return false;
     }
+    return true;
   }, [id]);
 
   const pwChecker = useCallback(() => {
     if (!password.trim()) {
       setPwCheck(true);
+      return false;
     }
+    return true;
   }, [password]);
 
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
-      idChecker();
-      pwChecker();
-      // dispatch(
-      //   signin({
-      //     id,
-      //     password,
-      //   })
-      // );
+
+      if (idChecker() && pwChecker()) {
+        dispatch(
+          login({
+            userId: id,
+            pw: password,
+          }),
+        );
+      }
     },
-    [idChecker, pwChecker],
+    [idChecker, pwChecker, dispatch, id, password],
   );
 
   const onChangeIdInput = useCallback(e => {
