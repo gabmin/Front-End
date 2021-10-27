@@ -28,10 +28,10 @@ const EitherWrite = props => {
     console.log(e.target.value);
   };
   // date
-  const nowDate = moment().format("YYYY-MM-DD HH:mm:ss");
+  const date = moment().format("YYYY-MM-DD HH:mm:ss");
 
   const onClickSave = () => {
-    dispatch(addPostDB({ title, contentA, contentB, nowDate }));
+    dispatch(addPostDB({ title, contentA, contentB, date }));
   };
   return (
     <>
