@@ -3,21 +3,13 @@ import styled from "styled-components";
 import ChildComment from "./ChildComment";
 
 const ChildList = props => {
-  const dataList = props.dataList;
-  const commentList = props.dataList.Comment;
   const childList = props.dataList.childComment;
   const { parentComment } = props;
 
-  console.log("코멘트리스트", commentList);
-  console.log("차일드리스트", childList);
-  // const parentId =
-  const filterList = childList.filter((p, i) => {
+  const filterList = childList.filter(p => {
     const commentId = p.parentComment;
-    console.log("피차코아이디", p);
     return parentComment === commentId;
   });
-
-  console.log("필터테스트", filterList);
 
   return (
     <React.Fragment>
@@ -39,6 +31,8 @@ const ChildList = props => {
 };
 
 const TempDiv = styled.div`
+  width: 90%;
+  margin: 0 0 0 10%;
   background-color: yellow;
 `;
 

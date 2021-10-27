@@ -26,6 +26,8 @@ const CommentList = props => {
 };
 
 const TempDiv = styled.div`
+  width: 80%;
+  margin: auto;
   background-color: yellow;
 `;
 
