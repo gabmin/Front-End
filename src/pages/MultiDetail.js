@@ -63,7 +63,7 @@ const MultiDetail = props => {
       {
         id: "ch111",
         multi: multiId,
-        parentComment: "당연히 삼전 아닌가요",
+        parentComment: "111",
         comment: "삼전은 아직입니다",
         date: "date",
         edited: "edited",
@@ -72,6 +72,21 @@ const MultiDetail = props => {
           {
             id: "joorin2",
             nickname: "주린이2",
+          },
+        ],
+      },
+      {
+        id: "ch222",
+        multi: multiId,
+        parentComment: "222",
+        comment: "역시 삼전입니다",
+        date: "date",
+        edited: "edited",
+        editedDate: "editedDate",
+        User: [
+          {
+            id: "joorin22",
+            nickname: "주린이22",
           },
         ],
       },
