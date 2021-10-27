@@ -1,28 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import moment from "moment";
 
-const EitherWrite = () => {
+import { addPostDB } from "../redux/actions/eitherCard";
+
+const EitherWrite = props => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [contentA, setContentA] = useState("");
   const [contentB, setContentB] = useState("");
 
   //Title Value
-  const OnChangeTitle = e => {
+  const onChangeTitle = e => {
     setTitle(e.target.value);
     console.log(e.target.value);
   };
   //contentA button Value
-  const OnChangeContentA = e => {
+  const onChangeContentA = e => {
     setContentA(e.target.value);
     console.log(e.target.value);
   };
   //contentB button Value
-  const OnChangeContentB = e => {
+  const onChangeContentB = e => {
     setContentB(e.target.value);
     console.log(e.target.value);
   };
+  // date
+  const nowDate = moment().format("YYYY-MM-DD HH:mm:ss");
 
+  const onClickSave = () => {
+    dispatch(addPostDB({ title, contentA, contentB, nowDate }));
+  };
   return (
     <>
       <hr />
@@ -32,7 +42,7 @@ const EitherWrite = () => {
           type="text"
           placeholder="질문을 입력해주세요."
           value={title}
-          onChange={OnChangeTitle}
+          onChange={onChangeTitle}
         />
       </Title>
       <hr />
@@ -43,7 +53,7 @@ const EitherWrite = () => {
             <ButtonInput
               placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
               value={contentA}
-              onChange={OnChangeContentA}
+              onChange={onChangeContentA}
             />
           </EitherButton>
           <EitherButton>
@@ -51,10 +61,14 @@ const EitherWrite = () => {
             <ButtonInput
               placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
               value={contentB}
-              onChange={OnChangeContentB}
+              onChange={onChangeContentB}
             />
           </EitherButton>
         </EitherButtonGrid>
+        <div>
+          <button>취소</button>
+          <button onClick={onClickSave}>완료</button>
+        </div>
       </VoteBox>
     </>
   );

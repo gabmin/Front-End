@@ -20,15 +20,15 @@ export const initialState = {
   PostDBLoading: false,
   PostDBDone: false,
   PostDBError: null,
-  eitherpost: [],
+  eitherPost: [],
   PostingDBLoading: false,
   PostingDBDone: false,
   PostingDBError: null,
-  eitherposting: [],
+  eitherPosting: [],
   PostCompleteDBLoading: false,
   PostCompleteDBDone: false,
   PostCompleteDBError: null,
-  eitherpostComplete: [],
+  eitherPostComplete: [],
   addPostDBLoading: false,
   addPostDBDone: false,
   addPostDBError: null,
@@ -67,7 +67,7 @@ const postSlice = createSlice({
       .addCase(PostDB.fulfilled, (state, action) => {
         state.PostDBLoading = false;
         state.PostDBDone = true;
-        state.eitherpost = action.payload;
+        state.eitherPost = action.payload;
       })
       .addCase(PostDB.rejected, (state, action) => {
         state.PostDBLoading = false;
@@ -82,7 +82,7 @@ const postSlice = createSlice({
       .addCase(PostingDB.fulfilled, (state, action) => {
         state.PostingDBLoading = false;
         state.PostingDBDone = true;
-        state.eitherposting = action.payload;
+        state.eitherPosting = action.payload;
       })
       .addCase(PostingDB.rejected, (state, action) => {
         state.PostDBLoading = false;
@@ -97,7 +97,7 @@ const postSlice = createSlice({
       .addCase(PostCompleteDB.fulfilled, (state, action) => {
         state.PostCompleteDBLoading = false;
         state.PostCompleteDBDone = true;
-        state.eitherpostComplete = action.payload;
+        state.eitherPostComplete = action.payload;
       })
       .addCase(PostCompleteDB.rejected, (state, action) => {
         state.PostCompleteDBLoading = false;
@@ -112,7 +112,8 @@ const postSlice = createSlice({
       .addCase(addPostDB.fulfilled, (state, action) => {
         state.addPostDBLoading = false;
         state.addPostDBDone = true;
-        state.eitherpost.unshift(action.payload);
+        state.eitherPost.unshift(action.payload);
+        console.log(state.eitherPost);
       })
       .addCase(addPostDB.rejected, (state, action) => {
         state.addPostDBLoading = false;
@@ -127,7 +128,7 @@ const postSlice = createSlice({
       .addCase(editPostDB.fulfilled, (state, action) => {
         state.editPostDBLoading = false;
         state.editPostDBDone = true;
-        const post = _find(state.eitherpost, { id: action.payload.eitherId });
+        const post = _find(state.eitherPost, { id: action.payload.eitherId });
         //검토 필요
         post.content = action.payload.content;
       })
@@ -144,7 +145,7 @@ const postSlice = createSlice({
       .addCase(deletePostDB.fulfilled, (state, action) => {
         state.deletePostDBLoading = false;
         state.deletePostDBDone = true;
-        _remove(state.eitherpost, { id: action.payload.eitherId });
+        _remove(state.eitherPost, { id: action.payload.eitherId });
       })
       .addCase(deletePostDB.rejected, (state, action) => {
         state.deletePostDBLoading = false;
@@ -159,7 +160,7 @@ const postSlice = createSlice({
       .addCase(completePostDB.fulfilled, (state, action) => {
         state.completePostDBLoading = false;
         state.completePostDBDone = true;
-        const post = _find(state.eitherpost, { id: action.payload.eitherId });
+        const post = _find(state.eitherPost, { id: action.payload.eitherId });
         post.voted = action.payload.voted(true);
       })
       .addCase(completePostDB.rejected, (state, action) => {
@@ -175,7 +176,7 @@ const postSlice = createSlice({
       .addCase(likePostDB.fulfilled, (state, action) => {
         state.likePostDBLoading = false;
         state.likePostDBDone = true;
-        const post = _find(state.eitherpost, { id: action.payload.eitherId });
+        const post = _find(state.eitherPost, { id: action.payload.eitherId });
         post.likeNum = action.payload.likeNum + 1;
       })
       .addCase(likePostDB.rejected, (state, action) => {
@@ -197,5 +198,5 @@ const postSlice = createSlice({
         state.votePostDBError = action.payload;
       }),
 });
-
+export const { addPost } = postSlice.actions;
 export default postSlice;

@@ -39,7 +39,7 @@ export const PostCompleteDB = createAsyncThunk(
 );
 //post 작성하기
 export const addPostDB = createAsyncThunk(
-  "eitherPost/addPostDB",
+  "/posts/either",
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("/posts/either", data);

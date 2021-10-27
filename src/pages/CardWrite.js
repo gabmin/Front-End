@@ -6,7 +6,6 @@ import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
 
 import { history } from "../redux/configureStore";
-
 const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
@@ -69,11 +68,6 @@ const CardWrite = () => {
           <EitherWrite />
           {/* <MultiWrite /> */}
         </ContentBox>
-
-        <div>
-          <button>취소</button>
-          <button>완료</button>
-        </div>
       </Wrap>
     </>
   );
