@@ -18,36 +18,81 @@ const MultiVoted = props => {
   const PerE = (DataList.voteCntE / TotalCnt) * 100;
   const [perA, setPerA] = useState(0);
   setTimeout(() => {
-    setPerA(PerA);
+    setPerA(PerA.toFixed(1));
   }, 1000);
   const [perB, setPerB] = useState(0);
   setTimeout(() => {
-    setPerB(PerB);
-  }, 1000);
+    setPerB(PerB.toFixed(1));
+  }, 1200);
   const [perC, setPerC] = useState(0);
   setTimeout(() => {
-    setPerC(PerC);
-  }, 1000);
+    setPerC(PerC.toFixed(1));
+  }, 1400);
   const [perD, setPerD] = useState(0);
   setTimeout(() => {
-    setPerD(PerD);
-  }, 1000);
+    setPerD(PerD.toFixed(1));
+  }, 1600);
   const [perE, setPerE] = useState(0);
   setTimeout(() => {
-    setPerE(PerE);
-  }, 1000);
+    setPerE(PerE.toFixed(1));
+  }, 1800);
   return (
     <Container>
-      <p>{DataList.contentA}</p>
-      <StyledProgressBar completed={perA} maxCompleted={100} />
-      <p>{DataList.contentB}</p>
-      <StyledProgressBar completed={perB} maxCompleted={100} />
-      <p>{DataList.contentC}</p>
-      <StyledProgressBar completed={perC} maxCompleted={100} />
-      <p>{DataList.contentD}</p>
-      <StyledProgressBar completed={perD} maxCompleted={100} />
-      <p>{DataList.contentE}</p>
-      <StyledProgressBar completed={perE} maxCompleted={100} />
+      <p>
+        {DataList.contentA} {perA}%
+      </p>
+      <StyledProgressBar
+        labelSize="2px"
+        height="40px"
+        bgColor="#777777"
+        borderRadius="8px"
+        completed={perA}
+        maxCompleted={100}
+      />
+      <p>
+        {DataList.contentB} {perB}%
+      </p>
+      <StyledProgressBar
+        labelSize="2px"
+        height="40px"
+        bgColor="#777777"
+        borderRadius="8px"
+        completed={perB}
+        maxCompleted={100}
+      />
+      <p>
+        {DataList.contentC} {perC}%
+      </p>
+      <StyledProgressBar
+        labelSize="2px"
+        height="40px"
+        bgColor="#777777"
+        borderRadius="8px"
+        completed={perC}
+        maxCompleted={100}
+      />
+      <p>
+        {DataList.contentD} {perD}%
+      </p>
+      <StyledProgressBar
+        labelSize="2px"
+        height="40px"
+        bgColor="#777777"
+        borderRadius="8px"
+        completed={perD}
+        maxCompleted={100}
+      />
+      <p>
+        {DataList.contentE} {perE}%
+      </p>
+      <StyledProgressBar
+        labelSize="2px"
+        height="40px"
+        bgColor="#777777"
+        borderRadius="8px"
+        completed={perE}
+        maxCompleted={100}
+      />
     </Container>
   );
 };

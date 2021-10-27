@@ -1,4 +1,5 @@
 import React from "react";
+import MultiComment from "../components/MultiComment";
 import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
 
@@ -31,7 +32,12 @@ const MultiDetail = props => {
   if (dataList.voted === true) {
     return (
       <div>
-        <MultiVoted dataList={dataList} />
+        <div>
+          <MultiVoted dataList={dataList} />
+        </div>
+        <div>
+          <MultiComment dataList={dataList} />
+        </div>
       </div>
     );
   } else {
