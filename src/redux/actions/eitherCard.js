@@ -3,10 +3,10 @@ import api from "../../shared/api";
 
 //post 전체보기
 export const PostDB = createAsyncThunk(
-  "posts/either",
+  "eitherPost/PostDB",
   async ({ rejectWithValue }) => {
     try {
-      const response = await api.get("/post/either");
+      const response = await api.get("/posts/either");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -15,10 +15,10 @@ export const PostDB = createAsyncThunk(
 );
 //post 진행중보기
 export const PostingDB = createAsyncThunk(
-  "posts/either/ing",
+  "eitherPost/PostingDB",
   async ({ rejectWithValue }) => {
     try {
-      const response = await api.get("/post/either/ing");
+      const response = await api.get("/posts/either/ing");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -27,10 +27,10 @@ export const PostingDB = createAsyncThunk(
 );
 //post 종료보기
 export const PostCompleteDB = createAsyncThunk(
-  "posts/either/complete",
+  "eitherPost/PostCompleteDB",
   async ({ rejectWithValue }) => {
     try {
-      const response = await api.get("/post/either/complete");
+      const response = await api.get("/posts/either/complete");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -39,10 +39,70 @@ export const PostCompleteDB = createAsyncThunk(
 );
 //post 작성하기
 export const addPostDB = createAsyncThunk(
-  "post/either",
+  "eitherPost/addPostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.post("/post/either", data);
+      const response = await api.post("/posts/either", data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+//post 수정하기
+export const editPostDB = createAsyncThunk(
+  "eitherPost/editPostDB",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.patch("/posts/either/:either_id/edit", data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+//post 삭제하기
+export const deletePostDB = createAsyncThunk(
+  "eitherPost/deletePostDB",
+  async ({ rejectWithValue }) => {
+    try {
+      const response = await api.delete("/posts/either/:either_id");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+//post 종료하기
+export const completePostDB = createAsyncThunk(
+  "eitherPost/completePostDB",
+  async ({ rejectWithValue }) => {
+    try {
+      const response = await api.patch("/posts/either/:either_id/complete");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+//post 좋아요
+export const likePostDB = createAsyncThunk(
+  "eitherPost/likePostDB",
+  async ({ rejectWithValue }) => {
+    try {
+      const response = await api.post("/posts/either/:either_id/complete");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+//post 투표하기
+export const votePostDB = createAsyncThunk(
+  "eitherPost/votePostDB",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/posts/either/:either_id/vote", data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
