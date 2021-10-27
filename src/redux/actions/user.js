@@ -23,6 +23,8 @@ export const signup = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("/users/signup", data);
+      alert("회원가입이 되었습니다");
+      history.push("/login");
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);

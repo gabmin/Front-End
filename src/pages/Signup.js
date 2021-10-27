@@ -65,10 +65,12 @@ const Signup = () => {
   const idChecker = useCallback(() => {
     if (!id.trim()) {
       setIdError(true);
+      setIdNotice(true);
       return false;
     }
     if (!idFilter(id)) {
       setIdError(true);
+      setIdNotice(true);
       return false;
     }
     setIdError(false);
@@ -78,6 +80,7 @@ const Signup = () => {
   const nickChecker = useCallback(() => {
     if (!nickname.trim()) {
       setNickError(true);
+      setNickNotice(true);
       return false;
     }
     setNickError(false);
@@ -127,7 +130,6 @@ const Signup = () => {
       if (!ageChecker()) return;
       if (!idDupCheck) return alert("아이디 중복체크를 해주세요");
       if (!nickDupCheck) return alert("닉네임 중복체크를 해주세요");
-      alert("회원가입!");
       dispatch(
         signup({
           userId: id,

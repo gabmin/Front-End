@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteCookie, setCookie } from "../../shared/Cookie";
+import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import { checkIdDup, checkNickDup, login, signup } from "../actions/user";
 import { history } from "../configureStore";
 
 // 기본 state
 export const initialState = {
-  userInfo: "admin",
+  userInfo: null,
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
@@ -26,6 +26,10 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    loginUser: state => {
+      state.userInfo = getCookie("nickname");
+      state.loginDone = false;
+    },
     logoutUser: state => {
       state.userInfo = null;
       state.loginDone = false;
@@ -97,5 +101,7 @@ const userSlice = createSlice({
         state.checkNickDupResult = action.payload.success;
       }),
 });
+
+export const { loginUser, logoutUser } = userSlice.actions;
 
 export default userSlice;
