@@ -3,7 +3,7 @@ import axios from "axios";
 // Axios 인스턴스 설정
 const api = axios.create(
   {
-    baseURL: process.env.REACT_APP_API_URL,
+    baseURL: "http://13.124.99.118",
   },
   { withCredentials: true },
 );
