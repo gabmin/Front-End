@@ -18,23 +18,23 @@ const MultiVoted = props => {
   const PerE = (DataList.voteCntE / TotalCnt) * 100;
   const [perA, setPerA] = useState(0);
   setTimeout(() => {
-    setPerA(PerA.toFixed(1));
+    setPerA(PerA.toFixed(0));
   }, 1000);
   const [perB, setPerB] = useState(0);
   setTimeout(() => {
-    setPerB(PerB.toFixed(1));
+    setPerB(PerB.toFixed(0));
   }, 1200);
   const [perC, setPerC] = useState(0);
   setTimeout(() => {
-    setPerC(PerC.toFixed(1));
+    setPerC(PerC.toFixed(0));
   }, 1400);
   const [perD, setPerD] = useState(0);
   setTimeout(() => {
-    setPerD(PerD.toFixed(1));
+    setPerD(PerD.toFixed(0));
   }, 1600);
   const [perE, setPerE] = useState(0);
   setTimeout(() => {
-    setPerE(PerE.toFixed(1));
+    setPerE(PerE.toFixed(0));
   }, 1800);
   return (
     <Container>

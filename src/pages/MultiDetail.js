@@ -27,6 +27,55 @@ const MultiDetail = props => {
     commentCnt: "0",
     voted: true,
     liked: false,
+    Comment: [
+      {
+        id: "111",
+        multi: multiId,
+        comment: "당연히 삼전 아닌가요",
+        commentLikeCnt: "3",
+        date: "date",
+        edited: "edited",
+        editedDate: "editedDate",
+        User: [
+          {
+            id: "joorin",
+            nickname: "주린이",
+          },
+        ],
+      },
+      {
+        id: "222",
+        multi: multiId,
+        comment: "당연히 카카오 아닌가요",
+        commentLikeCnt: "7",
+        date: "date",
+        edited: "edited",
+        editedDate: "editedDate",
+        User: [
+          {
+            id: "joorin11",
+            nickname: "주린이11",
+          },
+        ],
+      },
+    ],
+    childComment: [
+      {
+        id: "ch111",
+        multi: multiId,
+        parentComment: "당연히 삼전 아닌가요",
+        comment: "삼전은 아직입니다",
+        date: "date",
+        edited: "edited",
+        editedDate: "editedDate",
+        User: [
+          {
+            id: "joorin2",
+            nickname: "주린이2",
+          },
+        ],
+      },
+    ],
   };
 
   if (dataList.voted === true) {
