@@ -24,21 +24,19 @@ const MultiDetail = props => {
     completed: false,
     likeCnt: "0",
     commentCnt: "0",
-    voted: false,
+    voted: true,
     liked: false,
   };
 
   if (dataList.voted === true) {
     return (
       <div>
-        aaa
-        <MultiVoted />
+        <MultiVoted dataList={dataList} />
       </div>
     );
   } else {
     return (
       <div>
-        <div>N지선다 상세페이지 글 아이디 : {multiId}</div>
         <MultiUnvoted dataList={dataList} />
       </div>
     );

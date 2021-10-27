@@ -49,7 +49,7 @@ const Answerdiv = styled.div`
   height: 100%;
   width: 100%;
   margin: auto;
-  border: 1px solid #000000;
+  /* border: 1px solid #000000; */
   display: flex;
   flex-direction: column;
 `;
@@ -59,6 +59,7 @@ const AnswerBtn = styled.button`
   margin: 5px auto;
   width: 50%;
   height: 50px;
+  border-radius: 5px;
   opacity: 0.5;
   background-color: ${props => props.color};
   cursor: pointer;

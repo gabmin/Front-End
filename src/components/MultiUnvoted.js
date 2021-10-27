@@ -5,17 +5,17 @@ import AnswerList from "./AnswerList";
 const MultiUnvoted = props => {
   const DataList = props.dataList;
   return (
-    <React.Fragment>
+    <Container>
       <TitleDiv>
         <p>{DataList.title}</p>
       </TitleDiv>
-
       <hr></hr>
-      <p>{DataList.description}</p>
+      <DesDiv>
+        <p>{DataList.description}</p>
+      </DesDiv>
       <div>
         <AnswerList dataList={DataList} />
       </div>
-
       <hr></hr>
       <p>{DataList.user}</p>
       <p>{DataList.date}</p>
@@ -23,10 +23,24 @@ const MultiUnvoted = props => {
       <p>{DataList.completed}</p> */}
       <p>좋아요{DataList.likeCnt}</p>
       <p>댓글{DataList.commentCnt}</p>
-    </React.Fragment>
+    </Container>
   );
 };
 
-const TitleDiv = styled.div``;
+const Container = styled.div`
+  max-width: 50%;
+  margin: auto;
+  padding: 20px;
+`;
+
+const TitleDiv = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+`;
+
+const DesDiv = styled.div`
+  font-size: 14px;
+`;
 
 export default MultiUnvoted;

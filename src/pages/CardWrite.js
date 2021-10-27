@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import EitherWrite from "../components/EitherWrite";
-import MultiWire from "../components/MultiWrite";
+import MultiWrite from "../components/MultiWrite";
 
 const CardWrite = () => {
   return (
@@ -12,7 +12,7 @@ const CardWrite = () => {
           <button>목록</button>
         </ButtonGrid>
         <EitherWrite />
-        {/* <MultiWire /> */}
+        {/* <MultiWrite /> */}
         <div>
           <button>취소</button>
           <button>완료</button>
