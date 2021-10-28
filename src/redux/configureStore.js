@@ -7,6 +7,7 @@ import { connectRouter } from "connected-react-router";
 import userSlice from "./reducers/userSlice";
 import mainSlice from "./reducers/mainSlice";
 import postSlice from "./reducers/eitherCardSlice";
+import multiPostSlice from "./reducers/multiCardSlice";
 
 export const history = createBrowserHistory();
 
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   user: userSlice.reducer,
   main: mainSlice.reducer,
   eitherCard: postSlice.reducer,
+  multiCard: multiPostSlice.reducer,
 });
 
 const middlewares = [];
