@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import MultiSlick from "../components/MultiSlick";
-import { PostDB } from "../redux/actions/multiCard";
+import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
 
 const Multi = props => {
   const dispatch = useDispatch();
-  const { multiPost } = useSelector(state => state.multiCard);
+  const { multiPost, multiPosting, multiPostComplete } = useSelector(
+    state => state.multiCard,
+  );
 
   const cardList = multiPost.multi;
+  const ingCardList = multiPosting.multi;
+  const completeCardList = multiPostComplete.multi;
   console.log("멀티포스트", cardList);
   // const cardList = [
   //   {
@@ -86,6 +90,10 @@ const Multi = props => {
       </TabBtndiv>
       <Sliderdiv>
         {status === "Post" ? <MultiSlick cardList={cardList} /> : null}
+        {status === "Posting" ? <MultiSlick cardList={ingCardList} /> : null}
+        {status === "CompletePost" ? (
+          <MultiSlick cardList={completeCardList} />
+        ) : null}
       </Sliderdiv>
       <QuestionBtnDiv>
         <QuestionBtn>나도질문하기</QuestionBtn>
