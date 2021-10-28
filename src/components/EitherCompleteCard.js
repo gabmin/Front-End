@@ -3,20 +3,21 @@ import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const EitherCard = props => {
-  const { nickname, title, contentA, contentB, date, likeCnt } = props;
+  const { user, title, contentA, contentB, date, likeCnt } = props;
   return (
     <>
       <Container>
         <EitherText>
           <b>OX</b>
           <h2>{title}</h2>
+          <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
         <div>
-          <EitherButton>
+          <EitherButton disalbed>
             <h1>O</h1>
             <h5>{contentA}</h5>
           </EitherButton>
-          <EitherButton>
+          <EitherButton disalbed>
             <h1>X</h1>
             <h5>{contentB}</h5>
           </EitherButton>
@@ -32,7 +33,7 @@ const EitherCard = props => {
         </EitherProgress>
         <EitherFooter>
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            {nickname} {"|"} {date}
+            {user} {"|"} {date}
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
@@ -53,7 +54,6 @@ const Container = styled.div`
   border-radius: 10px;
   padding: 1em;
   opacity: 0.3;
-  background-color: white;
 `;
 
 const EitherText = styled.div`

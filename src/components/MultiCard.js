@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 
 const MultiCard = props => {
@@ -13,8 +14,12 @@ const MultiCard = props => {
     likeCnt,
     commentCnt,
   } = props;
+  const history = useHistory();
+  const goToDetail = () => {
+    history.push(`/multi/:${multiId}`);
+  };
   return (
-    <Container>
+    <Container onClick={goToDetail}>
       <Card>
         <TitleDiv>
           <h1>{title}</h1>
@@ -57,6 +62,7 @@ const Card = styled.div`
 `;
 
 const TitleDiv = styled.div`
+  margin: 0 0 0 10px;
   min-height: 20%;
 `;
 

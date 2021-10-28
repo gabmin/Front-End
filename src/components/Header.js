@@ -1,12 +1,17 @@
-import React, { useCallback } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
+import { loginUser, logoutUser } from "../redux/reducers/userSlice";
 
 const Header = () => {
-  // const userInfo = useSelector(state => state.user.userInfo);
-  const userInfo = null;
+  const dispatch = useDispatch();
+  const userInfo = useSelector(state => state.user.userInfo);
+
+  useEffect(() => {
+    dispatch(loginUser());
+  }, [dispatch]);
 
   const onClickLogin = useCallback(() => {
     history.push("/login");
@@ -14,7 +19,11 @@ const Header = () => {
 
   const onClickLogo = useCallback(() => {
     history.push("/");
-  });
+  }, []);
+
+  const onClickLogout = useCallback(() => {
+    dispatch(logoutUser());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -22,10 +31,14 @@ const Header = () => {
         개<span>미들의</span>곡소리
       </Logo>
       <Menu>
+        <input placeholder="검색어를 입력하세요" />
         <span>찬반</span>
         <span>객관식</span>
         {userInfo ? (
-          <span>{userInfo}</span>
+          <>
+            <span>{userInfo}</span>
+            <span onClick={onClickLogout}>로그아웃</span>
+          </>
         ) : (
           <span onClick={onClickLogin}>로그인</span>
         )}

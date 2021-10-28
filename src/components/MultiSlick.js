@@ -27,7 +27,7 @@ const MultiSlick = props => {
           {CardList?.map((p, i) => (
             <div>
               <MultiCard
-                multiId={i}
+                multiId={p.multiId}
                 title={p.title}
                 description={p.description}
                 user={p.user}

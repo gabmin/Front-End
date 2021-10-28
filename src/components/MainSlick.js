@@ -1,6 +1,6 @@
 import React from "react";
-import Slider from "react-slick";
 import styled from "styled-components";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -13,7 +13,14 @@ const Wrap = styled.div`
   margin: 0;
 `;
 
+const StyledSlider = styled(Slider)`
+  .slick-active:last-child {
+    opacity: 0.2;
+  }
+`;
+
 const ProductSlick = ({ cardList, type }) => {
+  console.log(cardList);
   const settings = {
     speed: 500,
     infinite: false,
@@ -55,19 +62,19 @@ const ProductSlick = ({ cardList, type }) => {
             {type === "either" ? "찬반 랭킹 : Top 10" : "객관식 랭킹 : Top 10"}
           </span>
         </div>
-        <Slider {...settings}>
+        <StyledSlider {...settings}>
           {cardList?.map((v, i) => (
             <MainCard
               key={i}
               title={v.title}
-              content={v.content}
+              content={v.description}
               type={type}
-              commentNum={v.commentNum}
-              likeNum={v.likeNum}
+              commentNum={v.commentCnt}
+              likeNum={v.likeCnt}
               username={v.username}
             />
           ))}
-        </Slider>
+        </StyledSlider>
       </Wrap>
     </>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import EitherCard from "./EitherCard";
+import EitherCompleteCard from "./EitherCompleteCard";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -67,28 +68,80 @@ function PrevArrow(props) {
     </div>
   );
 }
+const PostCompleteList = [
+  {
+    title: "컴플리트 되나?",
+    contentA: "ㄸㅂㅈㅂㄷㅈ",
+    contentB: "rqwe",
+    nickname: "rk",
+    date: "지금",
+  },
+  {
+    title: "두번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "rk",
+    date: "지금",
+  },
+];
+const EiterSlick = ({ PostList, PostingList }) => {
+  console.log(PostList);
+  console.log(PostingList);
+  console.log(PostCompleteList);
 
-const EiterSlick = ({ cardList }) => {
   return (
     <>
       <Wrap>
         <div>
           <StyledSlider {...settings}>
-            {cardList?.map((v, i) => (
-              <div>
-                <EitherCard
-                  eitherId={i}
-                  user={v.user}
-                  title={v.title}
-                  contentA={v.contentA}
-                  contentB={v.contentB}
-                  date={v.date}
-                  likeCnt={v.likeCnt}
-                  voteCntA={v.voteCntA}
-                  voteCntB={v.voteCntB}
-                />
-              </div>
-            ))}
+            {PostList &&
+              PostList?.map((v, i) => (
+                <div>
+                  <EitherCard
+                    key={i}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                  />
+                </div>
+              ))}
+            {PostingList &&
+              PostingList?.map((v, i) => (
+                <div>
+                  <EitherCard
+                    key={i}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                  />
+                </div>
+              ))}
+            {PostCompleteList &&
+              PostCompleteList?.map((v, i) => (
+                <div>
+                  <EitherCompleteCard
+                    key={i}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                  />
+                </div>
+              ))}
           </StyledSlider>
         </div>
       </Wrap>
@@ -99,7 +152,7 @@ const EiterSlick = ({ cardList }) => {
 const settings = {
   className: "center",
   centerMode: true,
-  infinite: true,
+  infinite: false,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,
@@ -119,6 +172,10 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center div {
     transform: scale(1.1);
     opacity: 1;
+    z-index: 10;
+    button:hover {
+      background-color: green;
+    }
   }
 `;
 export default EiterSlick;
