@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import { checkIdDup, checkNickDup, login, signup } from "../actions/user";
-import { history } from "../configureStore";
 
 // 기본 state
 export const initialState = {
@@ -20,6 +19,9 @@ export const initialState = {
   checkNickDupDone: false,
   checkNickDupError: null,
   checkNickDupResult: null,
+  mainDataLoading: false, // 메인페이지 정보 get 시도 중
+  mainDataDone: false,
+  mainDataError: null,
 };
 // toolkit 사용방법
 const userSlice = createSlice({
