@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
 import { isError } from "lodash";
 import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
-import Spinner from "../elements/Spinner";
+// import Spinner from "../elements/Spinner";
 
 const Signup = () => {
   // const isLoggedIn = useSelector((state) => state.user.signinDone);

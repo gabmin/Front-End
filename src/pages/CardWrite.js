@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import EitherWrite from "../components/EitherWrite";
+import MultiWrite from "../components/MultiWrite";
 
 import { history } from "../redux/configureStore";
-
-const EitherEdit = props => {
+const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
 
@@ -34,12 +34,8 @@ const EitherEdit = props => {
       setMultiState(!multiState);
     }
   };
-
-  const eitherId = props.match.params.either_id;
-
   return (
     <>
-      <div>2지선다 수정페이지 글 아이디 : {eitherId}</div>;
       <Wrap>
         <ButtonGrid>
           <button onClick={onClickBack}>{"<"} 뒤로가기</button>
@@ -72,11 +68,6 @@ const EitherEdit = props => {
           <EitherWrite />
           {/* <MultiWrite /> */}
         </ContentBox>
-
-        <div>
-          <button>취소</button>
-          <button>완료</button>
-        </div>
       </Wrap>
     </>
   );
@@ -112,4 +103,4 @@ const Index = styled.div`
   margin: 10px;
   display: flex;
 `;
-export default EitherEdit;
+export default CardWrite;
