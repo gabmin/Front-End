@@ -14,6 +14,7 @@ import EitherEdit from "../pages/EitherEdit";
 import Multi from "../pages/Multi";
 import MultiEdit from "../pages/MultiEdit";
 import MultiDetail from "../pages/MultiDetail";
+import CardWrite from "../pages/CardWrite";
 import ErrorPage from "../pages/ErrorPage";
 import Footer from "../components/Footer";
 
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/multi" component={Multi} />
           <Route exact path="/multi/:multi_id" component={MultiDetail} />
           <Route exact path="/multi/edit/:multi_id" component={MultiEdit} />
+          <Route exact path="/write" component={CardWrite} />
           <Route path="*" component={ErrorPage} />
         </Switch>
         <Footer></Footer>
