@@ -3,46 +3,59 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import MainSlick from "../components/MainSlick";
+import { getMainData } from "../redux/actions/main";
 
-const Main = props => {
+const Main = () => {
   const dispatch = useDispatch();
-  const cardList = [
-    {
-      title: "삼전 풀매수 가나요?",
-      content: "내용입니다",
-      username: "김개미",
-      commentNum: 1,
-      likeNum: 11,
-    },
-    {
-      title: "삼전 풀매수 가나요?2",
-      content: "내용입니다2",
-      username: "김개미",
-      commentNum: 2,
-      likeNum: 12,
-    },
-    {
-      title: "삼전 풀매수 가나요?3",
-      content: "내용입니다3",
-      username: "김개미",
-      commentNum: 3,
-      likeNum: 13,
-    },
-    {
-      title: "삼전 풀매수 가나요?4",
-      content: "내용입니다4",
-      username: "김개미",
-      commentNum: 4,
-      likeNum: 14,
-    },
-    {
-      title: "삼전 풀매수 가나요?5",
-      content: "내용입니다5",
-      username: "김개미",
-      commentNum: 5,
-      likeNum: 15,
-    },
-  ];
+
+  const { either, multi, attendNum, postingNum } = useSelector(
+    state => state.main.mainPosts,
+  );
+
+  useEffect(() => {
+    dispatch(getMainData());
+  }, [dispatch]);
+
+  // const cardList = [
+  //   {
+  //     title: "삼전 풀매수 가나요?",
+  //     content: "내용입니다",
+  //     username: "김개미",
+  //     commentNum: 1,
+  //     likeNum: 11,
+  //   },
+  //   {
+  //     title: "삼전 풀매수 가나요?2",
+  //     content: "내용입니다2",
+  //     username: "김개미",
+  //     commentNum: 2,
+  //     likeNum: 12,
+  //   },
+  //   {
+  //     title: "삼전 풀매수 가나요?3",
+  //     content: "내용입니다3",
+  //     username: "김개미",
+  //     commentNum: 3,
+  //     likeNum: 13,
+  //   },
+  //   {
+  //     title: "삼전 풀매수 가나요?4",
+  //     content: "내용입니다4",
+  //     username: "김개미",
+  //     commentNum: 4,
+  //     likeNum: 14,
+  //   },
+  //   {
+  //     title: "삼전 풀매수 가나요?5",
+  //     content: "내용입니다5",
+  //     username: "김개미",
+  //     commentNum: 5,
+  //     likeNum: 15,
+  //     Comment: {
+  //       parentComment: "zzz",
+  //     },
+  //   },
+  // ];
 
   return (
     <Container>
@@ -53,14 +66,14 @@ const Main = props => {
 
       <Wrapper height="100px" justify="end">
         <CountContainer>
-          <span>고민 : 111개</span> <span>참여 : 111개</span>
+          <span>고민 : {postingNum}</span> <span>참여 : {attendNum}</span>
         </CountContainer>
       </Wrapper>
       <Wrapper height="300px">
-        <MainSlick cardList={cardList} type="either"></MainSlick>
+        <MainSlick cardList={either} type="either"></MainSlick>
       </Wrapper>
       <Wrapper height="300px">
-        <MainSlick cardList={cardList} type="multi"></MainSlick>
+        <MainSlick cardList={multi} type="multi"></MainSlick>
       </Wrapper>
     </Container>
   );

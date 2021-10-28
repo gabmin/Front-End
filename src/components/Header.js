@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
-import { getCookie } from "../shared/Cookie";
 import { loginUser, logoutUser } from "../redux/reducers/userSlice";
 
 const Header = () => {
@@ -32,6 +31,7 @@ const Header = () => {
         개<span>미들의</span>곡소리
       </Logo>
       <Menu>
+        <input placeholder="검색어를 입력하세요" />
         <span>찬반</span>
         <span>객관식</span>
         {userInfo ? (
