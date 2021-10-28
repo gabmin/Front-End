@@ -68,67 +68,80 @@ function PrevArrow(props) {
     </div>
   );
 }
-
-const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
+const PostCompleteList = [
+  {
+    title: "컴플리트 되나?",
+    contentA: "ㄸㅂㅈㅂㄷㅈ",
+    contentB: "rqwe",
+    nickname: "rk",
+    date: "지금",
+  },
+  {
+    title: "두번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "rk",
+    date: "지금",
+  },
+];
+const EiterSlick = ({ PostList, PostingList }) => {
   console.log(PostList);
   console.log(PostingList);
   console.log(PostCompleteList);
+
   return (
     <>
       <Wrap>
         <div>
           <StyledSlider {...settings}>
-            {PostList
-              ? PostList?.map((v, i) => (
-                  <div>
-                    <EitherCard
-                      key={i}
-                      nickname={v.nickname}
-                      title={v.title}
-                      contentA={v.contentA}
-                      contentB={v.contentB}
-                      date={v.date}
-                      likeCnt={v.likeCnt}
-                      voteCntA={v.voteCntA}
-                      voteCntB={v.voteCntB}
-                    />
-                  </div>
-                ))
-              : null}
-            {PostingList
-              ? PostingList?.map((v, i) => (
-                  <div>
-                    <EitherCard
-                      key={i}
-                      nickname={v.nickname}
-                      title={v.title}
-                      contentA={v.contentA}
-                      contentB={v.contentB}
-                      date={v.date}
-                      likeCnt={v.likeCnt}
-                      voteCntA={v.voteCntA}
-                      voteCntB={v.voteCntB}
-                    />
-                  </div>
-                ))
-              : null}
-            {PostCompleteList
-              ? PostCompleteList?.map((v, i) => (
-                  <div>
-                    <EitherCompleteCard
-                      key={i}
-                      nickname={v.nickname}
-                      title={v.title}
-                      contentA={v.contentA}
-                      contentB={v.contentB}
-                      date={v.date}
-                      likeCnt={v.likeCnt}
-                      voteCntA={v.voteCntA}
-                      voteCntB={v.voteCntB}
-                    />
-                  </div>
-                ))
-              : null}
+            {PostList &&
+              PostList?.map((v, i) => (
+                <div>
+                  <EitherCard
+                    key={i}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                  />
+                </div>
+              ))}
+            {PostingList &&
+              PostingList?.map((v, i) => (
+                <div>
+                  <EitherCard
+                    key={i}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                  />
+                </div>
+              ))}
+            {PostCompleteList &&
+              PostCompleteList?.map((v, i) => (
+                <div>
+                  <EitherCompleteCard
+                    key={i}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                  />
+                </div>
+              ))}
           </StyledSlider>
         </div>
       </Wrap>
@@ -139,7 +152,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
 const settings = {
   className: "center",
   centerMode: true,
-  infinite: true,
+  infinite: false,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,
