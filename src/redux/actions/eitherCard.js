@@ -54,7 +54,10 @@ export const editPostDB = createAsyncThunk(
   "eitherPost/editPostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.patch("/posts/either/:either_id/edit", data);
+      const response = await api.patch(
+        `/posts/either/${data.eitherId}/edit`,
+        data.data,
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

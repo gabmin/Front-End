@@ -89,7 +89,7 @@ const postSlice = createSlice({
       })
       .addCase(PostingDB.rejected, (state, action) => {
         state.PostDBLoading = false;
-        state.PostDBError = action.payload;
+        state.PostDBError = action.error;
       })
       // Post 종료보기
       .addCase(PostCompleteDB.pending, state => {
@@ -104,7 +104,7 @@ const postSlice = createSlice({
       })
       .addCase(PostCompleteDB.rejected, (state, action) => {
         state.PostCompleteDBLoading = false;
-        state.PostCompleteDBError = action.payload;
+        state.PostCompleteDBError = action.error;
       })
       // Post 작성하기
       .addCase(addPostDB.pending, state => {
@@ -119,7 +119,7 @@ const postSlice = createSlice({
       })
       .addCase(addPostDB.rejected, (state, action) => {
         state.addPostDBLoading = false;
-        state.addPostDBError = action.payload;
+        state.addPostDBError = action.error;
       })
       // Post 수정하기
       .addCase(editPostDB.pending, state => {
@@ -130,13 +130,10 @@ const postSlice = createSlice({
       .addCase(editPostDB.fulfilled, (state, action) => {
         state.editPostDBLoading = false;
         state.editPostDBDone = true;
-        const post = _find(state.eitherPost, { id: action.payload.eitherId });
-        //검토 필요
-        post.content = action.payload.content;
       })
       .addCase(editPostDB.rejected, (state, action) => {
         state.editPostDBLoading = false;
-        state.editPostDBError = action.payload;
+        state.editPostDBError = action.error;
       })
       // Post 삭제하기
       .addCase(deletePostDB.pending, state => {
@@ -151,7 +148,7 @@ const postSlice = createSlice({
       })
       .addCase(deletePostDB.rejected, (state, action) => {
         state.deletePostDBLoading = false;
-        state.deletePostDBError = action.payload;
+        state.deletePostDBError = action.error;
       })
       // Post 종료하기
       .addCase(completePostDB.pending, state => {
@@ -167,7 +164,7 @@ const postSlice = createSlice({
       })
       .addCase(completePostDB.rejected, (state, action) => {
         state.completePostDBLoading = false;
-        state.completePostDBError = action.payload;
+        state.completePostDBError = action.error;
       })
       // Post 좋아요
       .addCase(likePostDB.pending, state => {
@@ -183,7 +180,7 @@ const postSlice = createSlice({
       })
       .addCase(likePostDB.rejected, (state, action) => {
         state.likePostDBLoading = false;
-        state.likePostDBError = action.payload;
+        state.likePostDBError = action.error;
       })
       // Post 투표하기
       .addCase(votePostDB.pending, state => {
@@ -197,7 +194,7 @@ const postSlice = createSlice({
       })
       .addCase(votePostDB.rejected, (state, action) => {
         state.votePostDBLoading = false;
-        state.votePostDBError = action.payload;
+        state.votePostDBError = action.error;
       }),
 });
 

@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-const EitherCard = props => {
-  const { user, title, contentA, contentB, date, likeCnt } = props;
+import { history } from "../redux/configureStore";
+import { useSelector } from "react-redux";
+
+const EitherCompleteCard = props => {
+  const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
+    props;
+  const userInfo = useSelector(state => state.user.userInfo);
+
+  const onClickModify = () => {
+    history.push(`/either/${eitherId}`);
+  };
+  const onClickDelete = useCallback(() => {
+    history.push("/eitehr");
+  });
+
   return (
     <>
       <Container>
         <EitherText>
-          <b>OX</b>
+          <div>
+            <b>OX</b>
+            {nickname === userInfo ? (
+              <div>
+                <button
+                  onClick={eitherId => {
+                    onClickModify(eitherId);
+                  }}
+                >
+                  수정하기
+                </button>
+                <button onClick={onClickDelete}>삭제하기</button>
+              </div>
+            ) : null}
+          </div>
           <h2>{title}</h2>
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
@@ -33,7 +60,7 @@ const EitherCard = props => {
         </EitherProgress>
         <EitherFooter>
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            {user} {"|"} {date}
+            {nickname} {"|"} {date}
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
@@ -72,4 +99,4 @@ const EitherFooter = styled.div`
   justify-content: space-between;
 `;
 
-export default EitherCard;
+export default EitherCompleteCard;

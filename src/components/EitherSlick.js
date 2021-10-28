@@ -70,25 +70,40 @@ function PrevArrow(props) {
 }
 const PostCompleteList = [
   {
+    eitherId: "15",
     title: "컴플리트 되나?",
     contentA: "ㄸㅂㅈㅂㄷㅈ",
     contentB: "rqwe",
-    nickname: "rk",
+    nickname: "test5",
     date: "지금",
   },
   {
+    eitherId: "2",
     title: "두번쨰",
     contentA: "두번쨰",
     contentB: "두",
     nickname: "rk",
     date: "지금",
   },
+  {
+    eitherId: "3",
+    title: "세번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "test5",
+    date: "지금",
+  },
+  {
+    eitherId: "4",
+    title: "네번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "rk",
+    date: "지금",
+  },
 ];
-const EiterSlick = ({ PostList, PostingList }) => {
-  console.log(PostList);
-  console.log(PostingList);
-  console.log(PostCompleteList);
 
+const EiterSlick = ({ PostList, PostingList }) => {
   return (
     <>
       <Wrap>
@@ -99,6 +114,7 @@ const EiterSlick = ({ PostList, PostingList }) => {
                 <div>
                   <EitherCard
                     key={i}
+                    eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
                     contentA={v.contentA}
@@ -115,6 +131,7 @@ const EiterSlick = ({ PostList, PostingList }) => {
                 <div>
                   <EitherCard
                     key={i}
+                    eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
                     contentA={v.contentA}
@@ -131,6 +148,7 @@ const EiterSlick = ({ PostList, PostingList }) => {
                 <div>
                   <EitherCompleteCard
                     key={i}
+                    eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
                     contentA={v.contentA}
@@ -152,7 +170,9 @@ const EiterSlick = ({ PostList, PostingList }) => {
 const settings = {
   className: "center",
   centerMode: true,
-  infinite: false,
+  infinite: true,
+  adaptiveHeight: true,
+  focusOnSelect: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,

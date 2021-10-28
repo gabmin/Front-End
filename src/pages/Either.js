@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import EiterSlick from "../components/EitherSlick";
 
 import EitherSlick from "../components/EitherSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
@@ -52,11 +51,6 @@ const Either = props => {
           {status === "CompletePost" ? (
             <EitherSlick PostCompleteList={PostCompleteList} />
           ) : null}
-          {/* 
-          if ( status === "Post") {<EitherSlick cardList={PostList} />}else if
-          (status === "Posting"){<EitherSlick cardList={PostingList} />}else if
-          (status === "CompletePost")
-          {<EitherSlick cardList={PostCompleteList} />} */}
         </SlickLayout>
       </Wrap>
     </>
