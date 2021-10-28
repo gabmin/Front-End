@@ -53,12 +53,7 @@ export const initialState = {
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {
-    // logoutUser: state => {
-    //   state.userInfo = null;
-    //   state.loginDone = false;
-    // },
-  },
+  reducers: {},
   extraReducers: builder =>
     builder
       // Post 전체보기

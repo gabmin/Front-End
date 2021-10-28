@@ -86,7 +86,7 @@ const PostCompleteList = [
     date: "지금",
   },
   {
-    eitherId: "3",
+    eitherId: "13",
     title: "세번쨰",
     contentA: "두번쨰",
     contentB: "두",

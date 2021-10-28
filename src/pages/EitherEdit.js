@@ -9,23 +9,32 @@ import { editPostDB } from "../redux/actions/eitherCard";
 
 const EitherEdit = props => {
   const dispatch = useDispatch();
+
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
   const { eitherPost } = useSelector(state => state.eitherCard);
+
+  useEffect(() => {
+    if (!postList) {
+      history.push("/either");
+    }
+  }, []);
 
   //해당게시글 아이디
   const eitherId = props.match.params.either_id;
   //게시글 전체 리스트
   const postList = eitherPost.either;
-  //수정가능한 상태인지 확인
-  const isEdit = eitherId ? true : false;
   //해당게시글 가져오기
-  const targetPost = isEdit ? postList.find(p => p.eitherId == eitherId) : null;
+  const targetPost = postList?.find(p => p.eitherId == eitherId);
 
   //수정된 데이터
-  const [title, setTitle] = useState(targetPost.title);
-  const [contentA, setContentA] = useState(targetPost.contentA);
-  const [contentB, setContentB] = useState(targetPost.contentB);
+  const [title, setTitle] = useState(postList ? targetPost.title : null);
+  const [contentA, setContentA] = useState(
+    postList ? targetPost.contentA : null,
+  );
+  const [contentB, setContentB] = useState(
+    postList ? targetPost.contentB : null,
+  );
 
   //Title Value
   const onChangeTitle = e => {
