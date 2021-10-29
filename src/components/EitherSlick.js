@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+//다음으로 넘어가기 버튼
 function NextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -36,7 +37,7 @@ function NextArrow(props) {
     </div>
   );
 }
-
+//이전으로 넘어가기 버튼
 function PrevArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -68,42 +69,46 @@ function PrevArrow(props) {
     </div>
   );
 }
-// const PostCompleteList = [
-//   {
-//     eitherId: "15",
-//     title: "컴플리트 되나?",
-//     contentA: "ㄸㅂㅈㅂㄷㅈ",
-//     contentB: "rqwe",
-//     nickname: "test5",
-//     date: "지금",
-//   },
-//   {
-//     eitherId: "2",
-//     title: "두번쨰",
-//     contentA: "두번쨰",
-//     contentB: "두",
-//     nickname: "rk",
-//     date: "지금",
-//   },
-//   {
-//     eitherId: "13",
-//     title: "세번쨰",
-//     contentA: "두번쨰",
-//     contentB: "두",
-//     nickname: "test5",
-//     date: "지금",
-//   },
-//   {
-//     eitherId: "4",
-//     title: "네번쨰",
-//     contentA: "두번쨰",
-//     contentB: "두",
-//     nickname: "rk",
-//     date: "지금",
-//   },
-// ];
+const PostingList = [
+  {
+    eitherId: "15",
+    completed: 0,
+    title: "컴플리트 되나?",
+    contentA: "ㄸㅂㅈㅂㄷㅈ",
+    contentB: "rqwe",
+    nickname: "test5",
+    date: "지금",
+  },
+  {
+    eitherId: "2",
+    completed: 0,
+    title: "두번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "rk",
+    date: "지금",
+  },
+  {
+    eitherId: "13",
+    completed: 0,
+    title: "세번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "test5",
+    date: "지금",
+  },
+  {
+    eitherId: "4",
+    completed: 0,
+    title: "네번쨰",
+    contentA: "두번쨰",
+    contentB: "두",
+    nickname: "rk",
+    date: "지금",
+  },
+];
 
-const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
+const EiterSlick = ({ PostList, PostCompleteList }) => {
   return (
     <>
       <Wrap>

@@ -154,8 +154,6 @@ const postSlice = createSlice({
       .addCase(completePostDB.fulfilled, (state, action) => {
         state.completePostDBLoading = false;
         state.completePostDBDone = true;
-        const post = _find(state.eitherPost, { id: action.payload.eitherId });
-        post.voted = action.payload.voted(true);
       })
       .addCase(completePostDB.rejected, (state, action) => {
         state.completePostDBLoading = false;

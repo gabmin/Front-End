@@ -81,7 +81,7 @@ export const completePostDB = createAsyncThunk(
   "eitherPost/completePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.patch("/posts/either/:either_id/complete");
+      const response = await api.patch(`/posts/either/${data}/complete`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

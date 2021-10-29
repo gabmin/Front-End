@@ -11,8 +11,11 @@ const EitherEdit = props => {
 
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
-  const { eitherPost } = useSelector(state => state.eitherCard);
+  const { eitherPost, completePostDB, completePostDBDone } = useSelector(
+    state => state.eitherCard,
+  );
 
+  //불러온 데이터가 없거나 새로고침 시 페이지 이동
   useEffect(() => {
     if (!postList) {
       history.push("/either");
@@ -25,7 +28,7 @@ const EitherEdit = props => {
   const postList = eitherPost.either;
   //해당게시글 가져오기
   const targetPost = postList?.find(p => p.eitherId == eitherId);
-
+  console.log(postList);
   //수정된 데이터
   const [title, setTitle] = useState(postList ? targetPost.title : null);
   const [contentA, setContentA] = useState(
@@ -35,19 +38,22 @@ const EitherEdit = props => {
     postList ? targetPost.contentB : null,
   );
 
-  //Title Value
+  //제목 데이터
   const onChangeTitle = e => {
     setTitle(e.target.value);
   };
-  //contentA button Value
+
+  //contentA 데이터
   const onChangeContentA = e => {
     setContentA(e.target.value);
   };
-  //contentB button Value
+
+  //contentB 데이터
   const onChangeContentB = e => {
     setContentB(e.target.value);
   };
-  // editeddate
+
+  // 수정된 날짜
   const editedDate = moment().format("YYYY-MM-DD HH:mm:ss");
 
   //뒤로가기
@@ -60,7 +66,7 @@ const EitherEdit = props => {
     history.push("/");
   });
 
-  //radio button
+  //radio 버튼
   const EitherRadioBtn = () => {
     if (eitherState === true) {
       return;
@@ -84,6 +90,13 @@ const EitherEdit = props => {
     );
     alert("수정되었습니다.");
     history.push("/either");
+  };
+  //완료하기
+  const onClickComplete = () => {
+    dispatch(completePostDB(eitherId));
+    if (completePostDBDone) {
+      alert("투표가 종료되었습니다.");
+    }
   };
 
   return (
@@ -146,10 +159,15 @@ const EitherEdit = props => {
                   onChange={onChangeContentB}
                 />
               </EitherButton>
-              <div>
-                <button onClick={onClickEdit}>수정하기</button>
-              </div>
             </EitherButtonGrid>
+            <div>
+              <button onClick={onClickEdit}>수정하기</button>
+            </div>
+            {targetPost?.completed === 0 ? (
+              <div>
+                <button onClick={onClickComplete}>종료하기</button>
+              </div>
+            ) : null}
           </VoteBox>
         </ContentBox>
       </Wrap>

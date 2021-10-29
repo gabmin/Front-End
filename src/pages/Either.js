@@ -11,26 +11,30 @@ const Either = props => {
   const { eitherPost, eitherPosting, eitherPostComplete } = useSelector(
     state => state.eitherCard,
   );
+  // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
-  console.log(PostList);
 
+  //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("Post");
 
+  //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
     dispatch(PostDB());
     setStatus("Post");
   }, []);
-
+  //전체 게시글 보여주기
   const onClickPost = () => {
     dispatch(PostDB());
     setStatus("Post");
   };
+  //진행중 게시글 보여주기
   const onClickPosting = () => {
     dispatch(PostingDB());
     setStatus("Posting");
   };
+  //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
     dispatch(PostCompleteDB());
     setStatus("CompletePost");
