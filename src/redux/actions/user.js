@@ -10,6 +10,7 @@ export const login = createAsyncThunk(
       history.push("/");
       return response.data;
     } catch (err) {
+      alert("아이디 및 비밀번호를 다시 확인해 주세요");
       return rejectWithValue(err.response.data);
     }
   },

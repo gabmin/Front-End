@@ -54,7 +54,10 @@ export const editPostDB = createAsyncThunk(
   "eitherPost/editPostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.patch("/posts/either/:either_id/edit", data);
+      const response = await api.patch(
+        `/posts/either/${data.eitherId}/edit`,
+        data.data,
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -66,7 +69,7 @@ export const deletePostDB = createAsyncThunk(
   "eitherPost/deletePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.delete("/posts/either/:either_id");
+      const response = await api.delete(`/posts/either/${data}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -78,7 +81,7 @@ export const completePostDB = createAsyncThunk(
   "eitherPost/completePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.patch("/posts/either/:either_id/complete");
+      const response = await api.patch(`/posts/either/${data}/complete`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -90,7 +93,7 @@ export const likePostDB = createAsyncThunk(
   "eitherPost/likePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.post("/posts/either/:either_id/complete");
+      const response = await api.post(`/posts/either/${data}/likes`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -102,7 +105,22 @@ export const votePostDB = createAsyncThunk(
   "eitherPost/votePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.post("/posts/either/:either_id/vote", data);
+      const response = await api.post(
+        `/posts/either/${data.eitherId}/votes`,
+        data.data,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+//특정페이지 보기
+export const detailPostDB = createAsyncThunk(
+  "eitherPost/detailPostDB",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/posts/either/${data}/target`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

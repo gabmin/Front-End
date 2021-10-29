@@ -1,11 +1,13 @@
 import React from "react";
-import EitherCard from "./EitherCard";
-import EitherCompleteCard from "./EitherCompleteCard";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import EitherCard from "./EitherCard";
+import EitherCompleteCard from "./EitherCompleteCard";
+
+//다음으로 넘어가기 버튼
 function NextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -36,7 +38,7 @@ function NextArrow(props) {
     </div>
   );
 }
-
+//이전으로 넘어가기 버튼
 function PrevArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -68,27 +70,46 @@ function PrevArrow(props) {
     </div>
   );
 }
-const PostCompleteList = [
-  {
-    title: "컴플리트 되나?",
-    contentA: "ㄸㅂㅈㅂㄷㅈ",
-    contentB: "rqwe",
-    nickname: "rk",
-    date: "지금",
-  },
-  {
-    title: "두번쨰",
-    contentA: "두번쨰",
-    contentB: "두",
-    nickname: "rk",
-    date: "지금",
-  },
-];
-const EiterSlick = ({ PostList, PostingList }) => {
-  console.log(PostList);
-  console.log(PostingList);
-  console.log(PostCompleteList);
+// const PostingList = [
+//   {
+//     eitherId: "15",
+//     completed: 0,
+//     title: "컴플리트 되나?",
+//     contentA: "ㄸㅂㅈㅂㄷㅈ",
+//     contentB: "rqwe",
+//     nickname: "test5",
+//     date: "지금",
+//   },
+//   {
+//     eitherId: "2",
+//     completed: 0,
+//     title: "두번쨰",
+//     contentA: "두번쨰",
+//     contentB: "두",
+//     nickname: "rk",
+//     date: "지금",
+//   },
+//   {
+//     eitherId: "13",
+//     completed: 0,
+//     title: "세번쨰",
+//     contentA: "두번쨰",
+//     contentB: "두",
+//     nickname: "test5",
+//     date: "지금",
+//   },
+//   {
+//     eitherId: "4",
+//     completed: 0,
+//     title: "네번쨰",
+//     contentA: "두번쨰",
+//     contentB: "두",
+//     nickname: "rk",
+//     date: "지금",
+//   },
+// ];
 
+const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   return (
     <>
       <Wrap>
@@ -99,6 +120,7 @@ const EiterSlick = ({ PostList, PostingList }) => {
                 <div>
                   <EitherCard
                     key={i}
+                    eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
                     contentA={v.contentA}
@@ -115,6 +137,7 @@ const EiterSlick = ({ PostList, PostingList }) => {
                 <div>
                   <EitherCard
                     key={i}
+                    eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
                     contentA={v.contentA}
@@ -131,6 +154,7 @@ const EiterSlick = ({ PostList, PostingList }) => {
                 <div>
                   <EitherCompleteCard
                     key={i}
+                    eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
                     contentA={v.contentA}
@@ -152,7 +176,9 @@ const EiterSlick = ({ PostList, PostingList }) => {
 const settings = {
   className: "center",
   centerMode: true,
-  infinite: false,
+  infinite: true,
+  adaptiveHeight: true,
+  focusOnSelect: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,

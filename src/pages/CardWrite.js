@@ -1,19 +1,20 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
 
 import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
-
 import { history } from "../redux/configureStore";
+
 const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
   const [status, setStatus] = useState(true);
 
+  //뒤로가기
   const onClickBack = useCallback(() => {
     history.push("/either");
   });
+  //목록으로가기
   const onClickIndex = useCallback(() => {
     history.push("/");
   });
