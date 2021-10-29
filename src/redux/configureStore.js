@@ -8,6 +8,8 @@ import userSlice from "./reducers/userSlice";
 import mainSlice from "./reducers/mainSlice";
 import postSlice from "./reducers/eitherCardSlice";
 import multiPostSlice from "./reducers/multiCardSlice";
+import profileSlice from "./reducers/profileSlice";
+import searchSlice from "./reducers/searchSlice";
 
 export const history = createBrowserHistory();
 
@@ -18,6 +20,8 @@ const reducer = combineReducers({
   main: mainSlice.reducer,
   eitherCard: postSlice.reducer,
   multiCard: multiPostSlice.reducer,
+  profile: profileSlice.reducer,
+  search: searchSlice.reducer,
 });
 
 const middlewares = [];
