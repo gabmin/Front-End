@@ -9,6 +9,7 @@ import { history } from "../redux/configureStore";
 const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
+  const [status, setStatus] = useState(true);
 
   const onClickBack = useCallback(() => {
     history.push("/either");
@@ -18,22 +19,35 @@ const CardWrite = () => {
   });
 
   //radio button
-  const EitherRadioBtn = () => {
-    if (eitherState === true) {
+  const EitherRadioBtn = e => {
+    if (e.target.value === "on") {
+      setStatus(true);
       return;
     } else {
       setEitherState(!eitherState);
       setMultiState(!multiState);
     }
   };
-  const MultiRadioBtn = () => {
-    if (multiState === true) {
+  const MultiRadioBtn = e => {
+    if (e.target.value === "on") {
       return;
     } else {
       setEitherState(!eitherState);
       setMultiState(!multiState);
     }
   };
+
+  console.log("status", status);
+
+  // const EitherRadioBtn = e => {
+  //   if (e.target.value === "on") {
+  //     setStatus(true);
+  //   }
+  // };
+
+  // const MultiRadioBtn = e => {
+  //   console.log(e.target.value);
+  // };
   return (
     <>
       <Wrap>
@@ -45,28 +59,29 @@ const CardWrite = () => {
           <Index>
             <h4 style={{ width: "30px" }}>구분</h4>
             <div style={{ display: "flex" }}>
-              <RadioButton>
+              <RadioBtnWarpper>
                 <input
+                  name="write"
                   type="radio"
                   id="either"
-                  checked={eitherState}
+                  // checked
                   onChange={EitherRadioBtn}
                 />
                 <label htmlFor="either">찬반</label>
-              </RadioButton>
-              <RadioButton>
+              </RadioBtnWarpper>
+              <RadioBtnWarpper>
                 <input
+                  name="write"
                   type="radio"
                   id="multi"
-                  checked={multiState}
+                  // checked={multiState}
                   onChange={MultiRadioBtn}
                 />
                 <label htmlFor="multi">객관식</label>
-              </RadioButton>
+              </RadioBtnWarpper>
             </div>
           </Index>
-          <EitherWrite />
-          <MultiWrite />
+          {status ? <EitherWrite /> : <MultiWrite />}
         </ContentBox>
       </Wrap>
     </>
@@ -92,7 +107,7 @@ const ContentBox = styled.div`
   padding: 1em;
   box-sizing: border-box;
 `;
-const RadioButton = styled.div`
+const RadioBtnWarpper = styled.div`
   width: 70px;
   display: flex;
   margin: 0px 0px 0px 60px;

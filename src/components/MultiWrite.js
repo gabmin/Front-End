@@ -209,36 +209,36 @@ const MultiWrite = () => {
       </Content>
       <hr />
       <VoteBox>
-        <InputDiv>
+        <InputWarpper>
           <InputPoll onChange={changeContentA} value={contentA} />
-        </InputDiv>
-        <InputDiv>
+        </InputWarpper>
+        <InputWarpper>
           <InputPoll onChange={changeContentB} value={contentB} />
           {hiddenBtnB ? <FullBtn onClick={showInputC}>+ </FullBtn> : null}
-        </InputDiv>
+        </InputWarpper>
         {hiddenInputC ? (
-          <InputDiv>
+          <InputWarpper>
             <InputPoll onChange={changeContentC} value={contentC} />
-            <BtnDiv>
+            <BtnWarpper>
               {hiddenBtnC ? <HalfBtn onClick={hideInputC}>-</HalfBtn> : null}
               {hiddenBtnC ? <HalfBtn onClick={showInputD}>+ </HalfBtn> : null}
-            </BtnDiv>
-          </InputDiv>
+            </BtnWarpper>
+          </InputWarpper>
         ) : null}
         {hiddenInputD ? (
-          <InputDiv>
+          <InputWarpper>
             <InputPoll onChange={changeContentD} value={contentD} />
-            <BtnDiv>
+            <BtnWarpper>
               {hiddenBtnD ? <HalfBtn onClick={hideInputD}>-</HalfBtn> : null}
               {hiddenBtnD ? <HalfBtn onClick={showInputE}>+ </HalfBtn> : null}
-            </BtnDiv>
-          </InputDiv>
+            </BtnWarpper>
+          </InputWarpper>
         ) : null}
         {hiddenInputE ? (
-          <InputDiv>
+          <InputWarpper>
             <InputPoll onChange={changeContentE} value={contentE} />
             <FullBtn onClick={hideInputE}>-</FullBtn>
-          </InputDiv>
+          </InputWarpper>
         ) : null}
         <div>
           <button>취소</button>
@@ -281,7 +281,7 @@ const VoteBox = styled.div`
   height: 500px;
 `;
 
-const InputDiv = styled.div`
+const InputWarpper = styled.div`
   width: 70%;
   margin: auto;
   display: flex;
@@ -298,7 +298,7 @@ const InputPoll = styled.input`
   box-sizing: border-box;
 `;
 
-const BtnDiv = styled.div`
+const BtnWarpper = styled.div`
   width: 100%;
   margin: auto;
 `;

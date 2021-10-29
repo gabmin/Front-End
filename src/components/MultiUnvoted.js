@@ -6,13 +6,13 @@ const MultiUnvoted = props => {
   const DataList = props.dataList;
   return (
     <Container>
-      <TitleDiv>
+      <TitleWrapper>
         <p>{DataList.title}</p>
-      </TitleDiv>
+      </TitleWrapper>
       <hr></hr>
-      <DesDiv>
+      <DesWrapper>
         <p>{DataList.description}</p>
-      </DesDiv>
+      </DesWrapper>
       <div>
         <AnswerList dataList={DataList} />
       </div>
@@ -33,13 +33,13 @@ const Container = styled.div`
   padding: 20px;
 `;
 
-const TitleDiv = styled.div`
+const TitleWrapper = styled.div`
   text-align: center;
   font-size: 20px;
   font-weight: 700;
 `;
 
-const DesDiv = styled.div`
+const DesWrapper = styled.div`
   font-size: 14px;
 `;
 
