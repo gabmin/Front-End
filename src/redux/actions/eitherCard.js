@@ -93,7 +93,7 @@ export const likePostDB = createAsyncThunk(
   "eitherPost/likePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.post("/posts/either/:either_id/complete");
+      const response = await api.post(`/posts/either/${data}/likes`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

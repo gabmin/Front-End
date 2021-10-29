@@ -13,21 +13,21 @@ const EitherWrite = props => {
   const [contentA, setContentA] = useState("");
   const [contentB, setContentB] = useState("");
 
-  //Title Value
+  //Title 데이터
   const onChangeTitle = e => {
     setTitle(e.target.value);
   };
-  //contentA button Value
+  //contentA 데이터
   const onChangeContentA = e => {
     setContentA(e.target.value);
   };
-  //contentB button Value
+  //contentB 데이터
   const onChangeContentB = e => {
     setContentB(e.target.value);
   };
   // date
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
-
+  //저장하기
   const onClickSave = () => {
     dispatch(addPostDB({ title, contentA, contentB, date }));
     alert("저장이 완료되었습니다!");

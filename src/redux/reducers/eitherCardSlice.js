@@ -44,6 +44,7 @@ export const initialState = {
   likePostDBLoading: false,
   likePostDBDone: false,
   likePostDBError: null,
+  likeCnt: 0,
   votePostDBLoading: false,
   votePostDBDone: false,
   votePostDBError: null,
@@ -168,8 +169,7 @@ const postSlice = createSlice({
       .addCase(likePostDB.fulfilled, (state, action) => {
         state.likePostDBLoading = false;
         state.likePostDBDone = true;
-        const post = _find(state.eitherPost, { id: action.payload.eitherId });
-        post.likeNum = action.payload.likeNum + 1;
+        state.likeCnt = action.payload.likeCnt + 1;
       })
       .addCase(likePostDB.rejected, (state, action) => {
         state.likePostDBLoading = false;

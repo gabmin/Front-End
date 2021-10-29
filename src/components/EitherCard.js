@@ -3,21 +3,27 @@ import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { deletePostDB } from "../redux/actions/eitherCard";
+import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCard = props => {
   const dispatch = useDispatch();
   const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
     props;
-  const userInfo = useSelector(state => state.user.userInfo);
 
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
+  //수정하기
   const onClickModify = () => {
     history.push(`/either/${eitherId}`);
   };
+  //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
   };
-
+  //좋아요
+  const onClickLike = () => {
+    dispatch(likePostDB(eitherId));
+  };
   return (
     <>
       <Container>
@@ -64,7 +70,7 @@ const EitherCard = props => {
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            좋아요 {likeCnt}
+            <button onClick={onClickLike}>좋아요</button> {likeCnt}
           </div>
         </EitherFooter>
       </Container>
