@@ -46,3 +46,11 @@ const onClickBtn = () => {
   const [comment2, setComment3] = useState();
   const [comment2, setComment3] = useState();
   ```
+
+## Import 순서
+- react
+- package
+- (공백 한줄)
+- components
+- elements
+- redux modules

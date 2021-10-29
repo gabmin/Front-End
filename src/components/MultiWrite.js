@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import { useDispatch } from "react-redux";
@@ -21,9 +21,13 @@ const MultiWrite = () => {
 
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
+  const titleRef = useRef();
   const addPost = () => {
     if (title === "") {
-      return window.alert("no title");
+      window.alert("no title");
+      setTimeout(() => {
+        titleRef.focus();
+      });
     } else if (description === "") {
       return window.alert("no description");
     } else if (contentA === "") {
@@ -185,6 +189,7 @@ const MultiWrite = () => {
       <Title>
         <h4 style={{ width: "30px" }}>제목</h4>
         <Input
+          ref={titleRef}
           type="text"
           placeholder="질문을 입력해주세요."
           onChange={changeTitle}
