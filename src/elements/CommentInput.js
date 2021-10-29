@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 const CommentInput = props => {
   return (
-    <React.Fragment>
+    <>
       <div>
         <TextArea></TextArea>
         <button>작성완료</button>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

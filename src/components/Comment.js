@@ -30,7 +30,7 @@ const Comment = props => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <TempDiv>
         <div>{User[0].nickname}</div>
         <div>{date}</div>
@@ -47,7 +47,7 @@ const Comment = props => {
           <ChildList parentComment={id} dataList={dataList} />
         </div>
       </TempDiv>
-    </React.Fragment>
+    </>
   );
 };
 

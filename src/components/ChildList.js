@@ -12,7 +12,7 @@ const ChildList = props => {
   });
 
   return (
-    <React.Fragment>
+    <>
       <TempDiv>
         {filterList.map(p => (
           <div>
@@ -26,7 +26,7 @@ const ChildList = props => {
           </div>
         ))}
       </TempDiv>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ const MultiComment = props => {
   const dataList = props.dataList;
   console.log("멀티코멘트", dataList);
   return (
-    <React.Fragment>
+    <>
       <TempDiv>
         <TextAreaDiv>
           <p>댓글 {dataList.commentCnt}개</p>
@@ -18,7 +18,7 @@ const MultiComment = props => {
           <CommentList dataList={dataList} />
         </div>
       </TempDiv>
-    </React.Fragment>
+    </>
   );
 };
 

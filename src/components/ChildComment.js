@@ -22,7 +22,7 @@ const ChildComment = props => {
     }
   };
   return (
-    <React.Fragment>
+    <>
       <div>
         <div>{User[0].nickname}</div>
         <div>{date}</div>
@@ -35,7 +35,7 @@ const ChildComment = props => {
 
         {hiddenInput ? <CommentInput /> : null}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

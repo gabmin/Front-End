@@ -6,7 +6,7 @@ const CommentList = props => {
   const dataList = props.dataList;
   const commentList = props.dataList.Comment;
   return (
-    <React.Fragment>
+    <>
       <TempDiv>
         {commentList.map((p, i) => (
           <div>
@@ -21,7 +21,7 @@ const CommentList = props => {
           </div>
         ))}
       </TempDiv>
-    </React.Fragment>
+    </>
   );
 };
 

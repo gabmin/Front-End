@@ -6,11 +6,8 @@ const AnswerList = props => {
   const [color, setColor] = React.useState("");
   const selected = e => {
     const checkSelect = t => [...t.parentElement.children].filter(e => e !== t);
-    console.log("셀렉티드 이", e);
     checkSelect(e.target).map(x => {
       const newClass = String(x.classList[0] + " " + x.classList[1]);
-      console.log("체크셀렉트엑스", x.classList[0], x.classList[1]);
-      console.log("뉴클래스", newClass);
       if (x.classList[2] === "on") {
         x.setAttribute("class", newClass);
       }
