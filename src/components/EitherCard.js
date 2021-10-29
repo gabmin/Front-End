@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ import {
 
 const EitherCard = props => {
   const dispatch = useDispatch();
+  const [percent, setPercent] = useState("");
   const {
     eitherId,
     nickname,
@@ -23,8 +24,17 @@ const EitherCard = props => {
     voteCntB,
     voted,
   } = props;
-  const voteA = 30;
-  const voteB = 45;
+  //Progress Bar 퍼센트 계산
+  useEffect(() => {
+    if (voteCntA === 0) {
+      setPercent(100);
+    } else if (voteCntB === 0) {
+      setPercent(0);
+    } else {
+      let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
+      setPercent(Math.round(calPercent));
+    }
+  }, []);
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
@@ -95,8 +105,7 @@ const EitherCard = props => {
         )}
         <EitherProgress>
           <ProgressBar
-            completed={(voteA / voteB) * 100}
-            maxCompleted="100"
+            completed={percent}
             labelAlignment="center"
             height="15px"
             width="90%"
@@ -108,7 +117,6 @@ const EitherCard = props => {
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
             {nickname} {"|"} {date}
           </div>
-
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
             <button onClick={onClickLike}>좋아요</button> {likeCnt}
           </div>
