@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import _concat from "lodash/concat";
-import _remove from "lodash/remove";
-import _find from "lodash/find";
 
 import {
   PostDB,
@@ -48,6 +45,8 @@ export const initialState = {
   votePostDBLoading: false,
   votePostDBDone: false,
   votePostDBError: null,
+  voteCntA: 0,
+  voteCntB: 0,
 };
 
 // toolkit 사용방법
@@ -140,7 +139,6 @@ const postSlice = createSlice({
       .addCase(deletePostDB.fulfilled, (state, action) => {
         state.deletePostDBLoading = false;
         state.deletePostDBDone = true;
-        _remove(state.eitherPost, { id: action.payload.eitherId });
       })
       .addCase(deletePostDB.rejected, (state, action) => {
         state.deletePostDBLoading = false;
@@ -169,7 +167,7 @@ const postSlice = createSlice({
       .addCase(likePostDB.fulfilled, (state, action) => {
         state.likePostDBLoading = false;
         state.likePostDBDone = true;
-        state.likeCnt = action.payload.likeCnt + 1;
+        state.likeCnt = action.payload;
       })
       .addCase(likePostDB.rejected, (state, action) => {
         state.likePostDBLoading = false;
@@ -184,6 +182,8 @@ const postSlice = createSlice({
       .addCase(votePostDB.fulfilled, (state, action) => {
         state.votePostDBLoading = false;
         state.votePostDBDone = true;
+        state.voteCntA = action.payload.voteCntA;
+        state.voteCntB = action.payload.voteCntB;
       })
       .addCase(votePostDB.rejected, (state, action) => {
         state.votePostDBLoading = false;

@@ -105,7 +105,10 @@ export const votePostDB = createAsyncThunk(
   "eitherPost/votePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.post("/posts/either/:either_id/vote", data);
+      const response = await api.post(
+        `/posts/either/${data.eitherId}/votes`,
+        data.data,
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

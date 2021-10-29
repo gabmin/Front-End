@@ -11,7 +11,7 @@ const EitherEdit = props => {
 
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
-  const { eitherPost, completePostDBDone } = useSelector(
+  const { eitherPost, editPostDBDone, completePostDBDone } = useSelector(
     state => state.eitherCard,
   );
 
@@ -83,13 +83,16 @@ const EitherEdit = props => {
       setMultiState(!multiState);
     }
   };
+
   //수정하기
   const onClickEdit = () => {
     dispatch(
       editPostDB({ eitherId, data: { title, contentA, contentB, editedDate } }),
     );
-    alert("수정되었습니다.");
-    history.push("/either");
+    if (editPostDBDone) {
+      alert("수정되었습니다.");
+      history.push("/either");
+    }
   };
   //완료하기
   const onClickComplete = () => {

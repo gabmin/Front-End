@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
+import {
+  deletePostDB,
+  likePostDB,
+  votePostDB,
+} from "../redux/actions/eitherCard";
 
 const EitherCard = props => {
   const dispatch = useDispatch();
-  const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
-    props;
+  const {
+    eitherId,
+    nickname,
+    title,
+    contentA,
+    contentB,
+    date,
+    likeCnt,
+    voteCntA,
+    voteCntB,
+    voted,
+  } = props;
+  const voteA = 30;
+  const voteB = 45;
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
@@ -24,6 +40,15 @@ const EitherCard = props => {
   const onClickLike = () => {
     dispatch(likePostDB(eitherId));
   };
+  //contentA 투표
+  const onClickContentA = () => {
+    dispatch(votePostDB({ eitherId, data: { vote: "A" } }));
+  };
+  //contentB 투표
+  const onClickContentB = () => {
+    dispatch(votePostDB({ eitherId, data: { vote: "B" } }));
+  };
+
   return (
     <>
       <Container>
@@ -45,19 +70,34 @@ const EitherCard = props => {
           </div>
           <h2>{title}</h2>
         </EitherText>
-        <div>
-          <EitherButton>
-            <h1>O</h1>
-            <h5>{contentA}</h5>
-          </EitherButton>
-          <EitherButton>
-            <h1>X</h1>
-            <h5>{contentB}</h5>
-          </EitherButton>
-        </div>
+        {voted === 1 ? (
+          <div>
+            <EitherButton onClick={onClickContentA} disabled>
+              <h1>O</h1>
+              <h5>{contentA}</h5>
+            </EitherButton>
+            <EitherButton onClick={onClickContentB} disabled>
+              <h1>X</h1>
+              <h5>{contentB}</h5>
+            </EitherButton>
+          </div>
+        ) : (
+          <div>
+            <EitherButton onClick={onClickContentA}>
+              <h1>O</h1>
+              <h5>{contentA}</h5>
+            </EitherButton>
+            <EitherButton onClick={onClickContentB}>
+              <h1>X</h1>
+              <h5>{contentB}</h5>
+            </EitherButton>
+          </div>
+        )}
         <EitherProgress>
           <ProgressBar
-            completed={50}
+            completed={(voteA / voteB) * 100}
+            maxCompleted="100"
+            labelAlignment="center"
             height="15px"
             width="90%"
             labelSize="10px"
