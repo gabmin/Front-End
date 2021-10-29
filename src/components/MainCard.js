@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
 
 const Card = ({
   title,
@@ -15,6 +16,7 @@ const Card = ({
   username,
   commentNum,
   likeNum,
+  id,
 }) => {
   const styles = {
     width: width,
@@ -22,6 +24,14 @@ const Card = ({
     margin: margin,
     center: center,
   };
+
+  const onClickDetail = useCallback(() => {
+    if (type === "either") {
+      history.push(`/either/${id}`);
+      return;
+    }
+    history.push(`/multi/${id}`);
+  }, [id, type]);
 
   return (
     <>
@@ -34,7 +44,7 @@ const Card = ({
             </Content>
           )}
         </TextLayout>
-        <DetailBtn>투표하러 가기 {">"}</DetailBtn>
+        <DetailBtn onClick={onClickDetail}>투표하러 가기 {">"}</DetailBtn>
         <Info>
           <span>{username}</span>
           {type === "multi" && <span>💬{commentNum}</span>}
