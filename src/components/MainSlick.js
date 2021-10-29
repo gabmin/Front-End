@@ -65,6 +65,7 @@ const ProductSlick = ({ cardList, type }) => {
         <StyledSlider {...settings}>
           {cardList?.map((v, i) => (
             <MainCard
+              id={v.eitherId || v.multiId}
               key={i}
               title={v.title}
               content={v.description}
