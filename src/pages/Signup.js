@@ -128,8 +128,8 @@ const Signup = () => {
       if (!pwChecker()) return;
       if (!pwEqualChecker()) return;
       if (!ageChecker()) return;
-      if (!idDupCheck) return alert("아이디 중복체크를 해주세요");
-      if (!nickDupCheck) return alert("닉네임 중복체크를 해주세요");
+      if (!idDupCheck) return;
+      if (!nickDupCheck) return;
       dispatch(
         signup({
           userId: id,
@@ -199,8 +199,8 @@ const Signup = () => {
                 value={id}
                 onChange={onChangeId}
                 placeholder="아이디"
+                onBlur={onClickIdDup}
               />
-              <button onClick={onClickIdDup}>중복확인</button>
             </InputWrapper>
 
             {idError && !checkIdDupLoading && idNotice && (
@@ -222,8 +222,8 @@ const Signup = () => {
                 value={nickname}
                 onChange={onChangeNickname}
                 placeholder="닉네임"
+                onBlur={onClickNickDup}
               />
-              <button onClick={onClickNickDup}>중복확인</button>
             </InputWrapper>
             {nickError && !checkNickDupLoading && nickNotice && (
               <span>닉네임을 입력하세요</span>
@@ -243,7 +243,6 @@ const Signup = () => {
                 value={password}
                 onChange={setPassword}
                 placeholder="비밀번호"
-                style={{ width: "100%" }}
               />
             </InputWrapper>
             {passwordError && (
@@ -257,7 +256,6 @@ const Signup = () => {
                 value={passwordCheck}
                 onChange={setPasswordCheck}
                 placeholder="비밀번호확인"
-                style={{ width: "100%" }}
               />
             </InputWrapper>
             {passwordEqual && <span>같은 비밀번호를 입력해 주세요</span>}
@@ -323,14 +321,7 @@ const InputWrapper = styled.div`
   height: 60%;
 
   input {
-    height: 100%;
-    width: 70%;
-    box-sizing: border-box;
-  }
-
-  button {
-    height: 100%;
-    width: 30%;
+    width: 100%;
   }
 `;
 
