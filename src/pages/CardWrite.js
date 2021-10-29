@@ -66,7 +66,7 @@ const CardWrite = () => {
             </div>
           </Index>
           <EitherWrite />
-          {/* <MultiWrite /> */}
+          <MultiWrite />
         </ContentBox>
       </Wrap>
     </>

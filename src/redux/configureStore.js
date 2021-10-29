@@ -7,6 +7,7 @@ import { connectRouter } from "connected-react-router";
 import userSlice from "./reducers/userSlice";
 import mainSlice from "./reducers/mainSlice";
 import postSlice from "./reducers/eitherCardSlice";
+import multiPostSlice from "./reducers/multiCardSlice";
 import profileSlice from "./reducers/profileSlice";
 import searchSlice from "./reducers/searchSlice";
 
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   user: userSlice.reducer,
   main: mainSlice.reducer,
   eitherCard: postSlice.reducer,
+  multiCard: multiPostSlice.reducer,
   profile: profileSlice.reducer,
   search: searchSlice.reducer,
 });
