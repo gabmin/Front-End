@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/profile/:user_id" component={Profile} />
-          <Route exact path="/search/:value" component={Search} />
+          <Route exact path="/search/:search?" component={Search} />
           <Route exact path="/either" component={Either} />
           <Route exact path="/either/:either_id" component={EitherEdit} />
           <Route exact path="/multi" component={Multi} />
