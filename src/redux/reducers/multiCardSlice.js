@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { PostDB, PostingDB, PostCompleteDB } from "../actions/multiCard";
+import {
+  PostDB,
+  PostingDB,
+  PostCompleteDB,
+  AddPostDB,
+} from "../actions/multiCard";
 
 export const initialState = {
   PostDBLoading: false,
@@ -15,6 +20,9 @@ export const initialState = {
   PostCompleteDBDone: false,
   PostCompleteDBError: null,
   multiPostComplete: [],
+  AddPostDBLoading: false,
+  AddPostDBDone: false,
+  AddPostDBError: null,
 };
 
 const multiPostSlice = createSlice({
@@ -23,6 +31,7 @@ const multiPostSlice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
+      //multi 전체보기
       .addCase(PostDB.pending, state => {
         state.PostDBLoading = true;
         state.PostDBDone = false;
@@ -37,6 +46,7 @@ const multiPostSlice = createSlice({
         state.PostDBLoading = false;
         state.PostDBError = action.error;
       })
+      //multi 진행중 보기
       .addCase(PostingDB.pending, state => {
         state.PostDBLoading = true;
         state.PostDBDone = false;
@@ -51,6 +61,7 @@ const multiPostSlice = createSlice({
         state.PostDBLoading = false;
         state.PostDBError = action.error;
       })
+      //multi 종료됨 보기
       .addCase(PostCompleteDB.pending, state => {
         state.PostDBLoading = true;
         state.PostDBDone = false;
@@ -64,6 +75,21 @@ const multiPostSlice = createSlice({
       .addCase(PostCompleteDB.rejected, (state, action) => {
         state.PostDBLoading = false;
         state.PostDBError = action.error;
+      })
+      //multi 작성하기
+      .addCase(AddPostDB.pending, state => {
+        state.AddPostDBLoading = true;
+        state.AddPostDBDone = false;
+        state.AddPostDBError = null;
+      })
+      .addCase(AddPostDB.fulfilled, (state, action) => {
+        state.AddPostDBLoading = false;
+        state.AddPostDBDone = true;
+        state.multiPost.unshift(action.payload);
+      })
+      .addCase(AddPostDB.rejected, (state, action) => {
+        state.AddPostDBLoading = false;
+        state.AddPostDBError = action.error;
       }),
 });
 

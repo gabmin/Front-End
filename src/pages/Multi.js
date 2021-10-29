@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import MultiSlick from "../components/MultiSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
@@ -69,24 +70,28 @@ const Multi = props => {
     setStatus("Post");
   }, []);
 
-  const onClickPost = () => {
+  const showPost = () => {
     dispatch(PostDB());
     setStatus("Post");
   };
-  const onClickPosting = () => {
+  const showPosting = () => {
     dispatch(PostingDB());
     setStatus("Posting");
   };
-  const onClickCompletePost = () => {
+  const showCompletePost = () => {
     dispatch(PostCompleteDB());
     setStatus("CompletePost");
+  };
+
+  const goToWrite = () => {
+    history.push("/write");
   };
   return (
     <Container>
       <TabBtndiv>
-        <TabBtn onClick={onClickPost}>전체</TabBtn>
-        <TabBtn onClick={onClickPosting}>진행중</TabBtn>
-        <TabBtn onClick={onClickCompletePost}>종료됨</TabBtn>
+        <TabBtn onClick={showPost}>전체</TabBtn>
+        <TabBtn onClick={showPosting}>진행중</TabBtn>
+        <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
       </TabBtndiv>
       <Sliderdiv>
         {status === "Post" ? <MultiSlick cardList={cardList} /> : null}
@@ -96,7 +101,7 @@ const Multi = props => {
         ) : null}
       </Sliderdiv>
       <QuestionBtnDiv>
-        <QuestionBtn>나도질문하기</QuestionBtn>
+        <QuestionBtn onClick={goToWrite}>나도질문하기</QuestionBtn>
       </QuestionBtnDiv>
     </Container>
   );

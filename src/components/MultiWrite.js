@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import PollMaker from "./PollMaker";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { AddPostDB } from "../redux/actions/multiCard";
 
 const MultiWrite = () => {
   const [title, setTitle] = useState("");
@@ -16,6 +18,81 @@ const MultiWrite = () => {
   const [contentC, setContentC] = useState("");
   const [contentD, setContentD] = useState("");
   const [contentE, setContentE] = useState("");
+
+  const dispatch = useDispatch();
+  const date = moment().format("YYYY-MM-DD HH:mm:ss");
+  const addPost = () => {
+    if (title === "") {
+      return window.alert("no title");
+    } else if (description === "") {
+      return window.alert("no description");
+    } else if (contentA === "") {
+      return window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+    } else if (contentB === "") {
+      return window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+    } else if ((contentD !== "" || contentE !== "") && contentC === "") {
+      return window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+    } else if ((contentC !== "" || contentE !== "") && contentD === "") {
+      return window.alert("선택지를 차례대로 입력해 주세요");
+    } else if (contentC === "" && contentD === "" && contentE === "") {
+      dispatch(
+        AddPostDB({
+          title,
+          description,
+          date,
+          contentA,
+          contentB,
+        }),
+      );
+    } else if (contentD === "" && contentE === "") {
+      dispatch(
+        AddPostDB({
+          title,
+          description,
+          date,
+          contentA,
+          contentB,
+          contentC,
+        }),
+      );
+    } else if (contentE === "") {
+      dispatch(
+        AddPostDB({
+          title,
+          description,
+          date,
+          contentA,
+          contentB,
+          contentC,
+          contentD,
+        }),
+      );
+    } else {
+      dispatch(
+        AddPostDB({
+          title,
+          description,
+          date,
+          contentA,
+          contentB,
+          contentC,
+          contentD,
+          contentE,
+        }),
+      );
+    }
+  };
+  console.log(
+    "addPost",
+    title,
+    description,
+    contentA,
+    contentB,
+    contentC,
+    contentD,
+    contentE,
+    date,
+  );
 
   const changeTitle = e => {
     setTitle(e.target.value);
@@ -33,6 +110,7 @@ const MultiWrite = () => {
   const hideInputC = () => {
     setHiddenInputC(false);
     showBtnB();
+    setContentC("");
   };
 
   const showInputD = () => {
@@ -43,6 +121,7 @@ const MultiWrite = () => {
   const hideInputD = () => {
     setHiddenInputD(false);
     showBtnC();
+    setContentD("");
   };
 
   const showInputE = () => {
@@ -53,6 +132,7 @@ const MultiWrite = () => {
   const hideInputE = () => {
     setHiddenInputE(false);
     showBtnD();
+    setContentE("");
   };
 
   const showBtnB = () => {
@@ -155,6 +235,10 @@ const MultiWrite = () => {
             <FullBtn onClick={hideInputE}>-</FullBtn>
           </InputDiv>
         ) : null}
+        <div>
+          <button>취소</button>
+          <button onClick={addPost}>완료</button>
+        </div>
       </VoteBox>
     </>
   );

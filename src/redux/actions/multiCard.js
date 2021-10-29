@@ -37,3 +37,15 @@ export const PostCompleteDB = createAsyncThunk(
     }
   },
 );
+// multi 작성하기
+export const AddPostDB = createAsyncThunk(
+  "multiPost/AddPostDB",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/posts/multi", data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
