@@ -1,14 +1,46 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-const EitherCard = props => {
-  const { user, title, contentA, contentB, date, likeCnt } = props;
+import { history } from "../redux/configureStore";
+import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
+
+const EitherCompleteCard = props => {
+  const dispatch = useDispatch();
+  const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
+    props;
+
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
+  //수정하기
+  // const onClickModify = () => {
+  //   history.push(`/either/${eitherId}/edit`);
+  // };
+  //삭제하기
+  const onClickDelete = () => {
+    dispatch(deletePostDB(eitherId));
+    alert("삭제되었습니다.");
+    history.push("/either");
+  };
+  //좋아요
+  const onClickLike = () => {
+    dispatch(likePostDB(eitherId));
+  };
+
   return (
     <>
       <Container>
         <EitherText>
-          <b>OX</b>
+          <div>
+            <b>OX</b>
+            {nickname === userInfo ? (
+              <div>
+                {/* <button onClick={onClickModify}>수정하기</button> */}
+                <button onClick={onClickDelete}>삭제하기</button>
+              </div>
+            ) : null}
+          </div>
           <h2>{title}</h2>
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
@@ -33,11 +65,11 @@ const EitherCard = props => {
         </EitherProgress>
         <EitherFooter>
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            {user} {"|"} {date}
+            {nickname} {"|"} {date}
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            좋아요 {likeCnt}
+            <button onClick={onClickLike}>좋아요</button> {likeCnt}
           </div>
         </EitherFooter>
       </Container>
@@ -72,4 +104,4 @@ const EitherFooter = styled.div`
   justify-content: space-between;
 `;
 
-export default EitherCard;
+export default EitherCompleteCard;

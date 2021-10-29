@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import moment from "moment";
 
+import { history } from "../redux/configureStore";
 import { addPostDB } from "../redux/actions/eitherCard";
 
 const EitherWrite = props => {
@@ -12,23 +12,25 @@ const EitherWrite = props => {
   const [contentA, setContentA] = useState("");
   const [contentB, setContentB] = useState("");
 
-  //Title Value
+  //Title 데이터
   const onChangeTitle = e => {
     setTitle(e.target.value);
   };
-  //contentA button Value
+  //contentA 데이터
   const onChangeContentA = e => {
     setContentA(e.target.value);
   };
-  //contentB button Value
+  //contentB 데이터
   const onChangeContentB = e => {
     setContentB(e.target.value);
   };
   // date
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
-
+  //저장하기
   const onClickSave = () => {
     dispatch(addPostDB({ title, contentA, contentB, date }));
+    alert("저장이 완료되었습니다!");
+    history.push("/either");
   };
   return (
     <>
