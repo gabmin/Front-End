@@ -69,7 +69,7 @@ export const deletePostDB = createAsyncThunk(
   "eitherPost/deletePostDB",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await api.delete("/posts/either/:either_id");
+      const response = await api.delete(`/posts/either/${data}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

@@ -68,42 +68,42 @@ function PrevArrow(props) {
     </div>
   );
 }
-const PostCompleteList = [
-  {
-    eitherId: "15",
-    title: "컴플리트 되나?",
-    contentA: "ㄸㅂㅈㅂㄷㅈ",
-    contentB: "rqwe",
-    nickname: "test5",
-    date: "지금",
-  },
-  {
-    eitherId: "2",
-    title: "두번쨰",
-    contentA: "두번쨰",
-    contentB: "두",
-    nickname: "rk",
-    date: "지금",
-  },
-  {
-    eitherId: "13",
-    title: "세번쨰",
-    contentA: "두번쨰",
-    contentB: "두",
-    nickname: "test5",
-    date: "지금",
-  },
-  {
-    eitherId: "4",
-    title: "네번쨰",
-    contentA: "두번쨰",
-    contentB: "두",
-    nickname: "rk",
-    date: "지금",
-  },
-];
+// const PostCompleteList = [
+//   {
+//     eitherId: "15",
+//     title: "컴플리트 되나?",
+//     contentA: "ㄸㅂㅈㅂㄷㅈ",
+//     contentB: "rqwe",
+//     nickname: "test5",
+//     date: "지금",
+//   },
+//   {
+//     eitherId: "2",
+//     title: "두번쨰",
+//     contentA: "두번쨰",
+//     contentB: "두",
+//     nickname: "rk",
+//     date: "지금",
+//   },
+//   {
+//     eitherId: "13",
+//     title: "세번쨰",
+//     contentA: "두번쨰",
+//     contentB: "두",
+//     nickname: "test5",
+//     date: "지금",
+//   },
+//   {
+//     eitherId: "4",
+//     title: "네번쨰",
+//     contentA: "두번쨰",
+//     contentB: "두",
+//     nickname: "rk",
+//     date: "지금",
+//   },
+// ];
 
-const EiterSlick = ({ PostList, PostingList }) => {
+const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   return (
     <>
       <Wrap>

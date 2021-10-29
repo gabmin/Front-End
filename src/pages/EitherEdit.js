@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect } from "react";
-import styled from "styled-components";
-import moment from "moment";
-import { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import moment from "moment";
 
 import { editPostDB } from "../redux/actions/eitherCard";
 

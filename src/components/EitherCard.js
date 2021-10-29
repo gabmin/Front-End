@@ -1,11 +1,12 @@
-import React, { useCallback } from "react";
+import React from "react";
+import { history } from "../redux/configureStore";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
-
-import { history } from "../redux/configureStore";
-import { useSelector } from "react-redux";
+import { deletePostDB } from "../redux/actions/eitherCard";
 
 const EitherCard = props => {
+  const dispatch = useDispatch();
   const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
     props;
   const userInfo = useSelector(state => state.user.userInfo);
@@ -13,9 +14,9 @@ const EitherCard = props => {
   const onClickModify = () => {
     history.push(`/either/${eitherId}`);
   };
-  const onClickDelete = useCallback(() => {
-    history.push("/eitehr");
-  });
+  const onClickDelete = () => {
+    dispatch(deletePostDB(eitherId));
+  };
 
   return (
     <>

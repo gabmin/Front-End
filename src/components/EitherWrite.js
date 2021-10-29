@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../redux/configureStore";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import moment from "moment";
@@ -29,6 +30,8 @@ const EitherWrite = props => {
 
   const onClickSave = () => {
     dispatch(addPostDB({ title, contentA, contentB, date }));
+    alert("저장이 완료되었습니다!");
+    history.push("/either");
   };
   return (
     <>
