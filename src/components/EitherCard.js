@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
+
+import { history } from "../redux/configureStore";
 import {
   deletePostDB,
   likePostDB,
@@ -40,7 +41,7 @@ const EitherCard = props => {
   const userInfo = useSelector(state => state.user.userInfo);
   //수정하기
   const onClickModify = () => {
-    history.push(`/either/${eitherId}`);
+    history.push(`/either/${eitherId}/edit`);
   };
   //삭제하기
   const onClickDelete = () => {
@@ -66,16 +67,16 @@ const EitherCard = props => {
           <div>
             <b>OX</b>
             {nickname === userInfo ? (
-              <div>
-                <button
-                  onClick={eitherId => {
-                    onClickModify(eitherId);
-                  }}
-                >
-                  수정하기
-                </button>
-                <button onClick={onClickDelete}>삭제하기</button>
-              </div>
+              voteCntA + voteCntB === 0 ? (
+                <div>
+                  <button onClick={onClickModify}>수정하기</button>
+                  <button onClick={onClickDelete}>삭제하기</button>
+                </div>
+              ) : (
+                <div>
+                  <button onClick={onClickDelete}>삭제하기</button>
+                </div>
+              )
             ) : null}
           </div>
           <h2>{title}</h2>

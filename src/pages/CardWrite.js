@@ -1,10 +1,9 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
-import { history } from "../redux/configureStore";
 
 import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
+import { history } from "../redux/configureStore";
 
 const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);

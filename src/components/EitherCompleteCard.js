@@ -1,8 +1,9 @@
 import React from "react";
-import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
+
+import { history } from "../redux/configureStore";
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCompleteCard = props => {
@@ -13,14 +14,14 @@ const EitherCompleteCard = props => {
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
   //수정하기
-  const onClickModify = () => {
-    history.push(`/either/${eitherId}`);
-  };
+  // const onClickModify = () => {
+  //   history.push(`/either/${eitherId}/edit`);
+  // };
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
-    // history.push("/either");
-    console.log(eitherId);
+    alert("삭제되었습니다.");
+    history.push("/either");
   };
   //좋아요
   const onClickLike = () => {
@@ -35,13 +36,7 @@ const EitherCompleteCard = props => {
             <b>OX</b>
             {nickname === userInfo ? (
               <div>
-                <button
-                  onClick={eitherId => {
-                    onClickModify(eitherId);
-                  }}
-                >
-                  수정하기
-                </button>
+                {/* <button onClick={onClickModify}>수정하기</button> */}
                 <button onClick={onClickDelete}>삭제하기</button>
               </div>
             ) : null}

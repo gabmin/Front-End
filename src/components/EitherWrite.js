@@ -1,10 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { history } from "../redux/configureStore";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import moment from "moment";
 
+import { history } from "../redux/configureStore";
 import { addPostDB } from "../redux/actions/eitherCard";
 
 const EitherWrite = props => {

@@ -10,6 +10,7 @@ import {
   completePostDB,
   likePostDB,
   votePostDB,
+  detailPostDB,
 } from "../actions/eitherCard";
 
 // 기본 state
@@ -47,6 +48,10 @@ export const initialState = {
   votePostDBError: null,
   voteCntA: 0,
   voteCntB: 0,
+  detailPostDBLoading: false,
+  detailPostDBDone: false,
+  detailPostDBError: null,
+  detailPost: [],
 };
 
 // toolkit 사용방법
@@ -188,6 +193,21 @@ const postSlice = createSlice({
       .addCase(votePostDB.rejected, (state, action) => {
         state.votePostDBLoading = false;
         state.votePostDBError = action.error;
+      })
+      // 특정페이지 보기
+      .addCase(detailPostDB.pending, state => {
+        state.detailPostDBLoading = true;
+        state.detailPostDBDone = false;
+        state.detailPostDBError = null;
+      })
+      .addCase(detailPostDB.fulfilled, (state, action) => {
+        state.detailPostDBLoading = false;
+        state.detailPostDBDone = true;
+        state.detailPost = action.payload;
+      })
+      .addCase(detailPostDB.rejected, (state, action) => {
+        state.detailPostDBDone = false;
+        state.detailPostDBError = action.error;
       }),
 });
 

@@ -1,10 +1,11 @@
 import React from "react";
-import EitherCard from "./EitherCard";
-import EitherCompleteCard from "./EitherCompleteCard";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import EitherCard from "./EitherCard";
+import EitherCompleteCard from "./EitherCompleteCard";
 
 //다음으로 넘어가기 버튼
 function NextArrow(props) {

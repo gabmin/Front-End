@@ -115,3 +115,15 @@ export const votePostDB = createAsyncThunk(
     }
   },
 );
+//특정페이지 보기
+export const detailPostDB = createAsyncThunk(
+  "eitherPost/detailPostDB",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/posts/either/${data}/target`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { history } from "../redux/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
+import { history } from "../redux/configureStore";
 import { editPostDB, completePostDB } from "../redux/actions/eitherCard";
 
 const EitherEdit = props => {
