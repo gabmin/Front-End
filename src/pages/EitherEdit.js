@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
-import { editPostDB } from "../redux/actions/eitherCard";
+import { editPostDB, completePostDB } from "../redux/actions/eitherCard";
 
 const EitherEdit = props => {
   const dispatch = useDispatch();
 
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
-  const { eitherPost, completePostDB, completePostDBDone } = useSelector(
+  const { eitherPost, completePostDBDone } = useSelector(
     state => state.eitherCard,
   );
 
