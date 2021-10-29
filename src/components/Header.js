@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
-import { getCookie } from "../shared/Cookie";
 import { loginUser, logoutUser } from "../redux/reducers/userSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user.userInfo);
+  const { nickname = "", userId = "" } = useSelector(
+    state => state.user.userInfo,
+  );
+
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(loginUser());
@@ -26,17 +29,53 @@ const Header = () => {
     dispatch(logoutUser());
   }, [dispatch]);
 
+  const onChangeSearch = useCallback(e => {
+    setSearch(e.target.value);
+  }, []);
+
+  const submitSearch = useCallback(
+    e => {
+      if (e.key === "Enter") {
+        if (!search.trim()) {
+          alert("검색어를 입력해 주세요");
+          return;
+        }
+        history.push(`/search?search=${search}`);
+        setSearch("");
+      }
+    },
+    [search],
+  );
+
+  const onClickNickname = useCallback(() => {
+    history.push(`/profile/${userId}`);
+  }, [userId]);
+
+  const onClickEither = useCallback(() => {
+    history.push(`/either`);
+  }, []);
+
+  const onClickMulti = useCallback(() => {
+    history.push(`/multi`);
+  }, []);
+
   return (
     <Container>
       <Logo onClick={onClickLogo}>
         개<span>미들의</span>곡소리
       </Logo>
       <Menu>
-        <span>찬반</span>
-        <span>객관식</span>
-        {userInfo ? (
+        <input
+          placeholder="검색어를 입력하세요"
+          onKeyPress={submitSearch}
+          onChange={onChangeSearch}
+          value={search}
+        />
+        <span onClick={onClickEither}>찬반</span>
+        <span onClick={onClickMulti}>객관식</span>
+        {nickname ? (
           <>
-            <span>{userInfo}</span>
+            <span onClick={onClickNickname}>{nickname}</span>
             <span onClick={onClickLogout}>로그아웃</span>
           </>
         ) : (

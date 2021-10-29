@@ -5,7 +5,11 @@ import { connectRouter } from "connected-react-router";
 
 //모듈 불러오기
 import userSlice from "./reducers/userSlice";
+import mainSlice from "./reducers/mainSlice";
 import postSlice from "./reducers/eitherCardSlice";
+import multiPostSlice from "./reducers/multiCardSlice";
+import profileSlice from "./reducers/profileSlice";
+import searchSlice from "./reducers/searchSlice";
 
 export const history = createBrowserHistory();
 
@@ -13,7 +17,11 @@ export const history = createBrowserHistory();
 const reducer = combineReducers({
   router: connectRouter(history),
   user: userSlice.reducer,
+  main: mainSlice.reducer,
   eitherCard: postSlice.reducer,
+  multiCard: multiPostSlice.reducer,
+  profile: profileSlice.reducer,
+  search: searchSlice.reducer,
 });
 
 const middlewares = [];

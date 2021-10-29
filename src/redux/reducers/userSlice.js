@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import { checkIdDup, checkNickDup, login, signup } from "../actions/user";
-import { history } from "../configureStore";
 
 // 기본 state
 export const initialState = {
-  userInfo: null,
+  userInfo: { nickname: null, userId: null },
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
@@ -20,6 +19,9 @@ export const initialState = {
   checkNickDupDone: false,
   checkNickDupError: null,
   checkNickDupResult: null,
+  mainDataLoading: false, // 메인페이지 정보 get 시도 중
+  mainDataDone: false,
+  mainDataError: null,
 };
 // toolkit 사용방법
 const userSlice = createSlice({
@@ -27,13 +29,15 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loginUser: state => {
-      state.userInfo = getCookie("nickname");
+      state.userInfo.nickname = getCookie("nickname");
+      state.userInfo.userId = getCookie("userId");
       state.loginDone = false;
     },
     logoutUser: state => {
-      state.userInfo = null;
+      state.userInfo = { nickname: null, userId: null };
       state.loginDone = false;
       deleteCookie("nickname");
+      deleteCookie("userId");
     },
   },
   extraReducers: builder =>
@@ -46,8 +50,10 @@ const userSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loginLoading = false;
-        state.userInfo = action.payload.nickname;
+        state.userInfo.nickname = action.payload.nickname;
+        state.userInfo.userId = action.payload.userId;
         setCookie("nickname", action.payload.nickname);
+        setCookie("userId", action.payload.userId);
         state.loginDone = true;
       })
       .addCase(login.rejected, (state, action) => {
