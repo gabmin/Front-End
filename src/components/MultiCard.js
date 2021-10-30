@@ -16,7 +16,7 @@ const MultiCard = props => {
   } = props;
   const history = useHistory();
   const goToDetail = () => {
-    history.push(`/multi/:${multiId}`);
+    history.push(`/multi/${multiId}`);
   };
   return (
     <Container onClick={goToDetail}>
