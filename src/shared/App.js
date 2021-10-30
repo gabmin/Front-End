@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import Profile from "../pages/Profile";
 import Search from "../pages/Search";
 import Either from "../pages/Either";
+import EitherDetail from "../pages/EitherDetail";
 import EitherEdit from "../pages/EitherEdit";
 import Multi from "../pages/Multi";
 import MultiEdit from "../pages/MultiEdit";
@@ -26,9 +27,10 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/profile/:user_id" component={Profile} />
-          <Route exact path="/search/:value" component={Search} />
+          <Route exact path="/search/:search?" component={Search} />
           <Route exact path="/either" component={Either} />
-          <Route exact path="/either/:either_id" component={EitherEdit} />
+          <Route exact path="/either/:either_id" component={EitherDetail} />
+          <Route exact path="/either/:either_id/edit" component={EitherEdit} />
           <Route exact path="/multi" component={Multi} />
           <Route exact path="/multi/:multi_id" component={MultiDetail} />
           <Route exact path="/multi/edit/:multi_id" component={MultiEdit} />
