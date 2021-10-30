@@ -1,38 +1,44 @@
-name: master
+name: Deploy to Production
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@main
+  deploy:
+    name: Build, Deploy to S3 bucket
+    runs-on: [ubuntu-latest]
 
-      - name: Cache node modules # node modules 캐싱
-        uses: actions/cache@v1
+    strategy:
+      matrix:
+        node-version: [12.16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+          node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn
 
       - name: Build
-        run: unset CI && yarn build
-
-      - name: Deploy
+        run: yarn build
         env:
+          CI: ""
+
+      - name: Transfer to S3 for serving static
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: citestant
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 cp \
-            --recursive \
-            --region ap-northeast-2 \
-            build s3://citestant
+          AWS_REGION: ap-northeast-2
