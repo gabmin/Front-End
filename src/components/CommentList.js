@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import Comment from "./Comment";
 
 const CommentList = props => {
@@ -7,7 +8,7 @@ const CommentList = props => {
   const commentList = props.dataList.Comment;
   return (
     <>
-      <TempDiv>
+      <TempWarpper>
         {commentList.map((p, i) => (
           <div>
             <Comment
@@ -20,12 +21,12 @@ const CommentList = props => {
             />
           </div>
         ))}
-      </TempDiv>
+      </TempWarpper>
     </>
   );
 };
 
-const TempDiv = styled.div`
+const TempWarpper = styled.div`
   width: 80%;
   margin: auto;
   background-color: yellow;

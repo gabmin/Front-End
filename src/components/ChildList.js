@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import ChildComment from "./ChildComment";
 
 const ChildList = props => {
@@ -13,7 +14,7 @@ const ChildList = props => {
 
   return (
     <>
-      <TempDiv>
+      <TempWarpper>
         {filterList.map(p => (
           <div>
             <ChildComment
@@ -25,12 +26,12 @@ const ChildList = props => {
             />
           </div>
         ))}
-      </TempDiv>
+      </TempWarpper>
     </>
   );
 };
 
-const TempDiv = styled.div`
+const TempWarpper = styled.div`
   width: 90%;
   margin: 0 0 0 10%;
   background-color: yellow;
