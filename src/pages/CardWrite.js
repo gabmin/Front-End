@@ -66,8 +66,8 @@ const CardWrite = () => {
               </RadioButton>
             </div>
           </Index>
-          <EitherWrite />
-          <MultiWrite />
+          {eitherState ? <EitherWrite /> : null}
+          {multiState ? <MultiWrite /> : null}
         </ContentBox>
       </Wrap>
     </>
