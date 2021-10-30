@@ -39,6 +39,6 @@ jobs:
           args: --acl public-read --follow-symlinks --delete
         env:
           AWS_S3_BUCKET: citestant
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.SECRET_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
           AWS_REGION: ap-northeast-2
