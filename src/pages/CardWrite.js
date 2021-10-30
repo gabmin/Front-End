@@ -19,7 +19,7 @@ const CardWrite = () => {
     history.push("/");
   });
 
-  //radio button
+  // radio button
   const EitherRadioBtn = e => {
     if (e.target.value === "on") {
       setStatus(true);
@@ -64,25 +64,26 @@ const CardWrite = () => {
                 <input
                   name="write"
                   type="radio"
-                  id="either"
-                  // checked
+                  // id="either"
+                  checked
                   onChange={EitherRadioBtn}
                 />
-                <label htmlFor="either">찬반</label>
+                <label>찬반</label>
               </RadioBtnWarpper>
               <RadioBtnWarpper>
                 <input
                   name="write"
                   type="radio"
-                  id="multi"
+                  // id="multi"
                   // checked={multiState}
-                  onChange={MultiRadioBtn}
+                  // onChange={MultiRadioBtn}
                 />
-                <label htmlFor="multi">객관식</label>
+                <label>객관식</label>
               </RadioBtnWarpper>
             </div>
           </Index>
-          {status ? <EitherWrite /> : <MultiWrite />}
+          <EitherWrite />
+          <MultiWrite />
         </ContentBox>
       </Wrap>
     </>
