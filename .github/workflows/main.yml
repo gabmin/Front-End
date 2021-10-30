@@ -12,7 +12,7 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@main
 
-      - name: Cache node modules  # node modules 캐싱
+      - name: Cache node modules # node modules 캐싱
         uses: actions/cache@v1
         with:
           path: node_modules
@@ -22,7 +22,7 @@ jobs:
             ${{ runner.OS }}-
 
       - name: Install Dependencies
-        run: yarn
+        run: yarn install
 
       - name: Build
         run: yarn build
