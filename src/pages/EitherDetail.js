@@ -23,7 +23,6 @@ const EitherDetail = props => {
   const eitherId = props.match.params.either_id;
   //해당 게시글 정보
   const targetPost = detailPost.either && detailPost.either[0];
-  console.log("리렌더링됨........");
 
   useEffect(() => {
     //특정페이지 데이터 가져오기
