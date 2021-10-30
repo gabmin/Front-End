@@ -14,15 +14,23 @@ import {
 const EitherDetail = props => {
   const dispatch = useDispatch();
 
-  const { detailPost } = useSelector(state => state.eitherCard);
+  const detailPost = useSelector(state => state.eitherCard.detailPost);
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
   const [percent, setPercent] = useState("");
 
   // 해당 eitherId
   const eitherId = props.match.params.either_id;
+  //해당 게시글 정보
+  const targetPost = detailPost.either && detailPost.either[0];
+  console.log("리렌더링됨........");
 
   useEffect(() => {
     //특정페이지 데이터 가져오기
     dispatch(detailPostDB(eitherId));
+  }, [eitherId, dispatch]);
+
+  useEffect(() => {
     // Progress Bar 퍼센트 계산
     if (targetPost?.voteCntA === 0) {
       setPercent(100);
@@ -34,14 +42,7 @@ const EitherDetail = props => {
         100;
       setPercent(Math.round(calPercent));
     }
-  }, []);
-
-  //해당 게시글 정보
-  const targetPost = detailPost.either && detailPost.either[0];
-
-  console.log(targetPost);
-  //유저정보(닉네임)
-  const userInfo = useSelector(state => state.user.userInfo);
+  }, [targetPost]);
 
   //수정하기
   const onClickModify = () => {

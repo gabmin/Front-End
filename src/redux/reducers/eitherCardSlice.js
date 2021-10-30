@@ -206,6 +206,7 @@ const postSlice = createSlice({
         state.detailPost = action.payload;
       })
       .addCase(detailPostDB.rejected, (state, action) => {
+        state.detailPostDBLoading = false;
         state.detailPostDBDone = false;
         state.detailPostDBError = action.error;
       }),

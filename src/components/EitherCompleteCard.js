@@ -8,8 +8,17 @@ import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCompleteCard = props => {
   const dispatch = useDispatch();
-  const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
-    props;
+  const {
+    eitherId,
+    nickname,
+    title,
+    contentA,
+    contentB,
+    date,
+    likeCnt,
+    voteCntA,
+    voteCntB,
+  } = props;
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
@@ -45,14 +54,31 @@ const EitherCompleteCard = props => {
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
         <div>
-          <EitherButton disalbed>
-            <h1>O</h1>
-            <h5>{contentA}</h5>
-          </EitherButton>
-          <EitherButton disalbed>
-            <h1>X</h1>
-            <h5>{contentB}</h5>
-          </EitherButton>
+          {voteCntA > voteCntB ? (
+            <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+              <h1>O</h1>
+              <h5>{contentA}</h5>
+            </EitherButton>
+          ) : (
+            <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+              <h1>X</h1>
+              <h5>{contentB}</h5>
+            </EitherButton>
+          )}
+          {
+            (voteCntA = voteCntB ? (
+              <div>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>O</h1>
+                  <h5>{contentA}</h5>
+                </EitherButton>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>X</h1>
+                  <h5>{contentB}</h5>
+                </EitherButton>
+              </div>
+            ) : null)
+          }
         </div>
         <EitherProgress>
           <ProgressBar
@@ -87,11 +113,9 @@ const Container = styled.div`
   padding: 1em;
   opacity: 0.3;
 `;
-
 const EitherText = styled.div`
   width: 100%;
 `;
-
 const EitherProgress = styled.div`
   margin: 30px;
 `;
