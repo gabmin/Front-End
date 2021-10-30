@@ -12,7 +12,7 @@ import {
 
 const EitherCard = props => {
   const dispatch = useDispatch();
-  const [percent, setPercent] = useState("");
+
   const {
     eitherId,
     nickname,
@@ -25,17 +25,23 @@ const EitherCard = props => {
     voteCntB,
     voted,
   } = props;
+
+  const [percent, setPercent] = useState("");
+  const [likes, setLikes] = useState(likeCnt);
+  const [voteA, setVoteA] = useState(voteCntA);
+  const [voteB, setVoteB] = useState(voteCntB);
+
   //Progress Bar 퍼센트 계산
   useEffect(() => {
-    if (voteCntA === 0) {
+    if (voteA === 0) {
       setPercent(100);
-    } else if (voteCntB === 0) {
+    } else if (voteB === 0) {
       setPercent(0);
     } else {
-      let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
+      let calPercent = (voteA / (voteA + voteB)) * 100;
       setPercent(Math.round(calPercent));
     }
-  }, []);
+  }, [voteA, voteB]);
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
@@ -50,14 +56,17 @@ const EitherCard = props => {
   //좋아요
   const onClickLike = () => {
     dispatch(likePostDB(eitherId));
+    setLikes(likeCnt + 1);
   };
   //contentA 투표
   const onClickContentA = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "A" } }));
+    setVoteA(voteCntA + 1);
   };
   //contentB 투표
   const onClickContentB = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "B" } }));
+    setVoteB(voteCntB + 1);
   };
 
   return (
@@ -119,7 +128,7 @@ const EitherCard = props => {
             {nickname} {"|"} {date}
           </div>
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            <button onClick={onClickLike}>좋아요</button> {likeCnt}
+            <button onClick={onClickLike}>좋아요</button> {likes}
           </div>
         </EitherFooter>
       </Container>
