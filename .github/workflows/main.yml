@@ -31,8 +31,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.SECRET_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
-        run: |
-          aws s3 cp \
-            --recursive \
-            --region ap-northeast-2 \
-            dist s3://gomtang.shop
+        run: aws s3 cp \
+          --recursive \
+          --region ap-northeast-2 \
+          dist s3://gomtang.shop
