@@ -33,7 +33,7 @@ jobs:
         env:
           CI: ""
 
-      - name: Transfer to S3 for serving static
+      - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
