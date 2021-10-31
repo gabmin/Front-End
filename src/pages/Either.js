@@ -24,7 +24,7 @@ const Either = props => {
   useEffect(() => {
     dispatch(PostDB());
     setStatus("Post");
-  }, []);
+  }, [dispatch]);
   //전체 게시글 보여주기
   const onClickPost = () => {
     dispatch(PostDB());

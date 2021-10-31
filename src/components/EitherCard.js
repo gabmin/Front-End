@@ -33,7 +33,9 @@ const EitherCard = props => {
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
-    if (voteA === 0) {
+    if (voteA === 0 && voteB === 0) {
+      setPercent(50);
+    } else if (voteA === 0) {
       setPercent(100);
     } else if (voteB === 0) {
       setPercent(0);

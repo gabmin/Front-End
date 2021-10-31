@@ -35,6 +35,8 @@ const EitherDetail = props => {
       setPercent(100);
     } else if (targetPost?.voteCntB === 0) {
       setPercent(0);
+    } else if (targetPost?.voteCntA === targetPost?.voteCntB) {
+      setPercent(50);
     } else {
       let calPercent =
         (targetPost?.voteCntA / (targetPost?.voteCntA + targetPost?.voteCntB)) *

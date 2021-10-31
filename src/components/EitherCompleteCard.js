@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -22,10 +22,21 @@ const EitherCompleteCard = props => {
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
-  //수정하기
-  // const onClickModify = () => {
-  //   history.push(`/either/${eitherId}/edit`);
-  // };
+  const [percent, setPercent] = useState("");
+  const [likes, setLikes] = useState(likeCnt);
+
+  //Progress Bar 퍼센트 계산
+  useEffect(() => {
+    if (voteCntA === 0) {
+      setPercent(100);
+    } else if (voteCntB === 0) {
+      setPercent(0);
+    } else {
+      let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
+      setPercent(Math.round(calPercent));
+    }
+  }, [voteCntA, voteCntB]);
+
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
@@ -35,6 +46,7 @@ const EitherCompleteCard = props => {
   //좋아요
   const onClickLike = () => {
     dispatch(likePostDB(eitherId));
+    setLikes(likeCnt + 1);
   };
 
   return (
@@ -45,7 +57,6 @@ const EitherCompleteCard = props => {
             <b>OX</b>
             {nickname === userInfo ? (
               <div>
-                {/* <button onClick={onClickModify}>수정하기</button> */}
                 <button onClick={onClickDelete}>삭제하기</button>
               </div>
             ) : null}
@@ -82,7 +93,7 @@ const EitherCompleteCard = props => {
         </div>
         <EitherProgress>
           <ProgressBar
-            completed={50}
+            completed={percent}
             height="15px"
             width="90%"
             labelSize="10px"
@@ -95,7 +106,7 @@ const EitherCompleteCard = props => {
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            <button onClick={onClickLike}>좋아요</button> {likeCnt}
+            <button onClick={onClickLike}>좋아요</button> {likes}
           </div>
         </EitherFooter>
       </Container>
