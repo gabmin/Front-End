@@ -3,7 +3,7 @@ import axios from "axios";
 // Axios 인스턴스 설정
 const api = axios.create(
   {
-    baseURL: "http://13.124.99.118",
+    baseURL: "https://starandnight.shop",
   },
   { withCredentials: true },
 );
