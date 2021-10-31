@@ -8,10 +8,11 @@ import { DetailDB } from "../redux/actions/multiDetail";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
+
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
-  const dataList = multiDetail.multi;
-  console.log("dataList", multiDetail);
+  const dataList = multiDetail.multi && multiDetail;
+  console.log("dataList", dataList);
 
   // const dataList = {
   //   title: "종목 추천 좀",
@@ -105,24 +106,18 @@ const MultiDetail = props => {
     dispatch(DetailDB(multiId));
   }, [dispatch, multiId]);
 
-  if (dataList?.voted !== null) {
+  if (dataList && dataList.multi.voted !== null) {
+    console.log("voted", dataList.multi.voted);
     return (
       <div>
-        aaa
         <div>
           <MultiVoted dataList={dataList} />
         </div>
-        <div>
-          <MultiComment dataList={dataList} />
-        </div>
+        <div>{/* <MultiComment dataList={dataList} /> */}</div>
       </div>
     );
   } else {
-    return (
-      <div>
-        <MultiUnvoted dataList={dataList} />
-      </div>
-    );
+    return <div>{dataList && <MultiUnvoted dataList={dataList} />}</div>;
   }
 };
 

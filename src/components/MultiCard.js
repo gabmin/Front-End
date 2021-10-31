@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
+import { DetailDB } from "../redux/actions/multiDetail";
 
 const MultiCard = props => {
+  const dispatch = useDispatch();
   const {
     multiId,
     title,
@@ -16,6 +19,7 @@ const MultiCard = props => {
   } = props;
   const history = useHistory();
   const goToDetail = () => {
+    dispatch(DetailDB(multiId));
     history.push(`/multi/${multiId}`);
   };
   return (

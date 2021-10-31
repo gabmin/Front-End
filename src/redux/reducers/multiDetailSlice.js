@@ -25,6 +25,7 @@ const multiDetailSlice = createSlice({
         state.DetailDBLoading = false;
         state.DetailDBDone = true;
         state.multiDetail = action.payload;
+        console.log("action", action);
       })
       .addCase(DetailDB.rejected, (state, action) => {
         state.DetailDBLoading = false;

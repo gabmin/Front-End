@@ -3,7 +3,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
 
 const MultiVoted = props => {
-  const DataList = props.dataList;
+  const DataList = props.dataList.multi;
   const TotalCnt =
     DataList.voteCntA +
     DataList.voteCntB +
