@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const MultiVoted = props => {
+  const userInfo = useSelector(state => state.user.userInfo);
   const DataList = props.dataList.multi;
   const TotalCnt =
     DataList.voteCntA +
@@ -44,6 +46,10 @@ const MultiVoted = props => {
 
   return (
     <Container>
+      <TitleWrapper>
+        <p>{DataList.title}</p>
+      </TitleWrapper>
+      <hr></hr>
       <div>
         <p>
           {DataList.contentA} {perA}%
@@ -115,7 +121,9 @@ const MultiVoted = props => {
           />
         </div>
       ) : null}
-      <button>투표 종료</button>
+      {DataList.nickname === userInfo.nickname ? (
+        <button>투표 종료</button>
+      ) : null}
     </Container>
   );
 };
@@ -124,6 +132,12 @@ const Container = styled.div`
   max-width: 50%;
   margin: auto;
   padding: 20px;
+`;
+
+const TitleWrapper = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 const StyledProgressBar = styled(ProgressBar)`

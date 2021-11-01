@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { DetailVote } from "../redux/actions/multiDetail";
+import { history } from "../redux/configureStore";
 
 const AnswerList = props => {
   const dispatch = useDispatch();
   const DataList = props.dataList;
   const multiId = DataList.multiId;
+  const render = props.render;
+  console.log("answerrender", render);
 
   const [color, setColor] = useState("");
   const [select, setSelect] = useState("");
@@ -32,9 +35,19 @@ const AnswerList = props => {
 
   console.log("select", select);
 
+  const reRender = () => {
+    render(true);
+  };
+
   const selectComplete = () => {
-    console.log(multiId, select);
-    dispatch(DetailVote({ multiId, select: { select } }));
+    if (select !== "") {
+      dispatch(DetailVote({ multiId, select: { select } }));
+      reRender();
+      history.replace(`/multi/${multiId}`);
+    } else {
+      window.alert("선택한 투표항목이 없습니다");
+      return;
+    }
   };
 
   return (
@@ -47,7 +60,6 @@ const AnswerList = props => {
       </AnswerBtn>
       {DataList.contentC !== null ? (
         <AnswerBtn id="C" color="#777777" onClick={selectAnswer}>
-          {" "}
           {DataList.contentC}
         </AnswerBtn>
       ) : null}
@@ -62,6 +74,7 @@ const AnswerList = props => {
         </AnswerBtn>
       ) : null}
       <button onClick={selectComplete}>완료하고 결과보기</button>
+      <button>render</button>
     </Container>
   );
 };

@@ -49,3 +49,15 @@ export const AddPostDB = createAsyncThunk(
     }
   },
 );
+// multi 삭제하기
+export const DeletePostDB = createAsyncThunk(
+  "multiPost/DeletePostDB",
+  async (multiId, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/posts/multi/${multiId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);

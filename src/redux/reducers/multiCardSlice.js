@@ -5,6 +5,7 @@ import {
   PostingDB,
   PostCompleteDB,
   AddPostDB,
+  DeletePostDB,
 } from "../actions/multiCard";
 
 export const initialState = {
@@ -23,6 +24,9 @@ export const initialState = {
   AddPostDBLoading: false,
   AddPostDBDone: false,
   AddPostDBError: null,
+  DeletePostDBLoading: false,
+  DeletePostDBDone: false,
+  DeletePostDBError: null,
 };
 
 const multiPostSlice = createSlice({
@@ -85,12 +89,26 @@ const multiPostSlice = createSlice({
       .addCase(AddPostDB.fulfilled, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBDone = true;
-        console.log("addaction", action.payload);
-        state.multiPost = [...state.multiPost, action.payload];
+        // state.multiPost = [...state.multiPost, action.payload];
       })
       .addCase(AddPostDB.rejected, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBError = action.error;
+      })
+      //multi 삭제하기
+      .addCase(DeletePostDB.pending, state => {
+        state.DeletePostDBLoading = true;
+        state.DeletePostDBDone = false;
+        state.DeletePostDBError = null;
+      })
+      .addCase(DeletePostDB.fulfilled, (state, action) => {
+        state.DeletePostDBLoading = false;
+        state.DeletePostDBDone = true;
+        // state.multiPost = [...state.multiPost, action.payload];
+      })
+      .addCase(DeletePostDB.rejected, (state, action) => {
+        state.DeletePostDBLoading = false;
+        state.DeletePostDBError = action.error;
       }),
 });
 
