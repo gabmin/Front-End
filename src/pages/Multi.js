@@ -88,21 +88,21 @@ const Multi = props => {
   };
   return (
     <Container>
-      <TabBtndiv>
+      <TabBtnWarpper>
         <TabBtn onClick={showPost}>전체</TabBtn>
         <TabBtn onClick={showPosting}>진행중</TabBtn>
         <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
-      </TabBtndiv>
-      <Sliderdiv>
+      </TabBtnWarpper>
+      <SliderWarpper>
         {status === "Post" ? <MultiSlick cardList={cardList} /> : null}
         {status === "Posting" ? <MultiSlick cardList={ingCardList} /> : null}
         {status === "CompletePost" ? (
           <MultiSlick cardList={completeCardList} />
         ) : null}
-      </Sliderdiv>
-      <QuestionBtnDiv>
+      </SliderWarpper>
+      <QuestionBtnWarpper>
         <QuestionBtn onClick={goToWrite}>나도질문하기</QuestionBtn>
-      </QuestionBtnDiv>
+      </QuestionBtnWarpper>
     </Container>
   );
 };
@@ -111,7 +111,7 @@ const Container = styled.div`
   max-width: 100%;
 `;
 
-const TabBtndiv = styled.div`
+const TabBtnWarpper = styled.div`
   margin: 50px 0px;
   width: 100%;
   text-align: center;
@@ -127,13 +127,13 @@ const TabBtn = styled.button`
   }
 `;
 
-const Sliderdiv = styled.div`
+const SliderWarpper = styled.div`
   margin: 100px auto;
   width: 100%;
   height: 100%;
 `;
 
-const QuestionBtnDiv = styled.div`
+const QuestionBtnWarpper = styled.div`
   margin: 50px 0px;
   width: 100%;
   text-align: center;

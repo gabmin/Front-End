@@ -22,7 +22,7 @@ const MultiSlick = props => {
   };
   return (
     <Container>
-      <Sliderdiv>
+      <SliderWarpper>
         <StyledSlider {...settings}>
           {CardList?.map((p, i) => (
             <div>
@@ -40,7 +40,7 @@ const MultiSlick = props => {
             </div>
           ))}
         </StyledSlider>
-      </Sliderdiv>
+      </SliderWarpper>
     </Container>
   );
 };
@@ -49,7 +49,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const Sliderdiv = styled.div`
+const SliderWarpper = styled.div`
   margin: 20px auto;
 `;
 

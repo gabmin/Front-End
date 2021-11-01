@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import _concat from "lodash/concat";
 
 import {
   PostDB,
@@ -115,7 +116,7 @@ const postSlice = createSlice({
       .addCase(addPostDB.fulfilled, (state, action) => {
         state.addPostDBLoading = false;
         state.addPostDBDone = true;
-        state.eitherPost.unshift(action.payload);
+        state.eitherPost = _concat(state.eitherPost, action.payload);
       })
       .addCase(addPostDB.rejected, (state, action) => {
         state.addPostDBLoading = false;
@@ -206,6 +207,7 @@ const postSlice = createSlice({
         state.detailPost = action.payload;
       })
       .addCase(detailPostDB.rejected, (state, action) => {
+        state.detailPostDBLoading = false;
         state.detailPostDBDone = false;
         state.detailPostDBError = action.error;
       }),

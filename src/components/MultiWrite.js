@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
+
+import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { AddPostDB } from "../redux/actions/multiCard";
 
@@ -22,22 +24,43 @@ const MultiWrite = () => {
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const titleRef = useRef();
+  const descriptionRef = useRef();
+  const contentARef = useRef();
+  const contentBRef = useRef();
+  const contentCRef = useRef();
+  const contentDRef = useRef();
+  const contentERef = useRef();
   const addPost = () => {
     if (title === "") {
       window.alert("no title");
-      setTimeout(() => {
-        titleRef.focus();
-      });
+      return setTimeout(() => {
+        titleRef.current.focus();
+      }, 500);
     } else if (description === "") {
-      return window.alert("no description");
+      window.alert("no description");
+      return setTimeout(() => {
+        descriptionRef.current.focus();
+      }, 500);
     } else if (contentA === "") {
-      return window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentARef.current.focus();
+      }, 500);
     } else if (contentB === "") {
-      return window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentBRef.current.focus();
+      }, 500);
     } else if ((contentD !== "" || contentE !== "") && contentC === "") {
-      return window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
-    } else if ((contentC !== "" || contentE !== "") && contentD === "") {
-      return window.alert("선택지를 차례대로 입력해 주세요");
+      window.alert("세번째 선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentCRef.current.focus();
+      }, 500);
+    } else if (contentE !== "" && contentD === "") {
+      window.alert("네번째 선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentDRef.current.focus();
+      }, 500);
     } else if (contentC === "" && contentD === "" && contentE === "") {
       dispatch(
         AddPostDB({
@@ -163,6 +186,10 @@ const MultiWrite = () => {
     setHiddenBtnD(false);
   };
 
+  const cancel = () => {
+    history.push("/multi");
+  };
+
   const changeContentA = e => {
     setContentA(e.target.value);
   };
@@ -200,6 +227,7 @@ const MultiWrite = () => {
       <Content>
         <h4 style={{ width: "30px" }}>내용</h4>
         <Textarea
+          ref={descriptionRef}
           type="text"
           placeholder="선택지 추가를 눌러 선택지 개수를 늘려보세요. 최대 5개까지 추가할 수 있습니다."
           rows="10"
@@ -209,39 +237,59 @@ const MultiWrite = () => {
       </Content>
       <hr />
       <VoteBox>
-        <InputDiv>
-          <InputPoll onChange={changeContentA} value={contentA} />
-        </InputDiv>
-        <InputDiv>
-          <InputPoll onChange={changeContentB} value={contentB} />
+        <InputWarpper>
+          <InputPoll
+            ref={contentARef}
+            onChange={changeContentA}
+            value={contentA}
+          />
+        </InputWarpper>
+        <InputWarpper>
+          <InputPoll
+            ref={contentBRef}
+            onChange={changeContentB}
+            value={contentB}
+          />
           {hiddenBtnB ? <FullBtn onClick={showInputC}>+ </FullBtn> : null}
-        </InputDiv>
+        </InputWarpper>
         {hiddenInputC ? (
-          <InputDiv>
-            <InputPoll onChange={changeContentC} value={contentC} />
-            <BtnDiv>
+          <InputWarpper>
+            <InputPoll
+              ref={contentCRef}
+              onChange={changeContentC}
+              value={contentC}
+            />
+            <BtnWarpper>
               {hiddenBtnC ? <HalfBtn onClick={hideInputC}>-</HalfBtn> : null}
               {hiddenBtnC ? <HalfBtn onClick={showInputD}>+ </HalfBtn> : null}
-            </BtnDiv>
-          </InputDiv>
+            </BtnWarpper>
+          </InputWarpper>
         ) : null}
         {hiddenInputD ? (
-          <InputDiv>
-            <InputPoll onChange={changeContentD} value={contentD} />
-            <BtnDiv>
+          <InputWarpper>
+            <InputPoll
+              ref={contentDRef}
+              onChange={changeContentD}
+              value={contentD}
+            />
+            <BtnWarpper>
               {hiddenBtnD ? <HalfBtn onClick={hideInputD}>-</HalfBtn> : null}
               {hiddenBtnD ? <HalfBtn onClick={showInputE}>+ </HalfBtn> : null}
-            </BtnDiv>
-          </InputDiv>
+            </BtnWarpper>
+          </InputWarpper>
         ) : null}
         {hiddenInputE ? (
-          <InputDiv>
-            <InputPoll onChange={changeContentE} value={contentE} />
+          <InputWarpper>
+            <InputPoll
+              ref={contentERef}
+              onChange={changeContentE}
+              value={contentE}
+            />
             <FullBtn onClick={hideInputE}>-</FullBtn>
-          </InputDiv>
+          </InputWarpper>
         ) : null}
         <div>
-          <button>취소</button>
+          <button onClick={cancel}>취소</button>
           <button onClick={addPost}>완료</button>
         </div>
       </VoteBox>
@@ -281,7 +329,7 @@ const VoteBox = styled.div`
   height: 500px;
 `;
 
-const InputDiv = styled.div`
+const InputWarpper = styled.div`
   width: 70%;
   margin: auto;
   display: flex;
@@ -298,7 +346,7 @@ const InputPoll = styled.input`
   box-sizing: border-box;
 `;
 
-const BtnDiv = styled.div`
+const BtnWarpper = styled.div`
   width: 100%;
   margin: auto;
 `;

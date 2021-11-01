@@ -70,44 +70,6 @@ function PrevArrow(props) {
     </div>
   );
 }
-// const PostingList = [
-//   {
-//     eitherId: "15",
-//     completed: 0,
-//     title: "컴플리트 되나?",
-//     contentA: "ㄸㅂㅈㅂㄷㅈ",
-//     contentB: "rqwe",
-//     nickname: "test5",
-//     date: "지금",
-//   },
-//   {
-//     eitherId: "2",
-//     completed: 0,
-//     title: "두번쨰",
-//     contentA: "두번쨰",
-//     contentB: "두",
-//     nickname: "rk",
-//     date: "지금",
-//   },
-//   {
-//     eitherId: "13",
-//     completed: 0,
-//     title: "세번쨰",
-//     contentA: "두번쨰",
-//     contentB: "두",
-//     nickname: "test5",
-//     date: "지금",
-//   },
-//   {
-//     eitherId: "4",
-//     completed: 0,
-//     title: "네번쨰",
-//     contentA: "두번쨰",
-//     contentB: "두",
-//     nickname: "rk",
-//     date: "지금",
-//   },
-// ];
 
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   return (

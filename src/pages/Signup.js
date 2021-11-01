@@ -243,6 +243,7 @@ const Signup = () => {
                 value={password}
                 onChange={setPassword}
                 placeholder="비밀번호"
+                autocomplete="new-password"
               />
             </InputWrapper>
             {passwordError && (
