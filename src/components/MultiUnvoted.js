@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AnswerList from "./AnswerList";
 
 const MultiUnvoted = props => {
-  const DataList = props.dataList;
+  const DataList = props.dataList.multi;
   return (
     <Container>
       <TitleWrapper>
