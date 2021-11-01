@@ -30,13 +30,12 @@ const EitherDetail = props => {
   }, [eitherId, dispatch]);
 
   useEffect(() => {
-    // Progress Bar 퍼센트 계산
-    if (targetPost?.voteCntA === 0) {
+    if (targetPost?.voteCntA === 0 && targetPost?.voteCntB === 0) {
+      setPercent(50);
+    } else if (targetPost?.voteCntA === 0) {
       setPercent(100);
     } else if (targetPost?.voteCntB === 0) {
       setPercent(0);
-    } else if (targetPost?.voteCntA === targetPost?.voteCntB) {
-      setPercent(50);
     } else {
       let calPercent =
         (targetPost?.voteCntA / (targetPost?.voteCntA + targetPost?.voteCntB)) *
@@ -44,7 +43,7 @@ const EitherDetail = props => {
       setPercent(Math.round(calPercent));
     }
   }, [targetPost]);
-
+  console.log("선택한 데이터", targetPost);
   //수정하기
   const onClickModify = () => {
     history.push(`/either/${eitherId}/edit`);

@@ -29,8 +29,8 @@ const EitherWrite = props => {
   //저장하기
   const onClickSave = () => {
     dispatch(addPostDB({ title, contentA, contentB, date }));
-    alert("저장이 완료되었습니다!");
-    history.push("/either");
+    // alert("저장이 완료되었습니다!");
+    // history.push("/either");
   };
   //취소하기
   const onClickCancle = () => {
@@ -110,6 +110,7 @@ const EitherButton = styled.div`
   border: 1px solid black;
   text-align: center;
   align-content: center;
+  z-index: 10;
 `;
 
 const ButtonInput = styled.input`

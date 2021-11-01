@@ -16,6 +16,7 @@ const Either = props => {
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
+  console.log("전체 리스트 불러옴", PostList);
 
   //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("Post");

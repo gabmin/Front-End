@@ -120,7 +120,7 @@ const EitherCard = props => {
             completed={percent}
             labelAlignment="center"
             height="15px"
-            width="90%"
+            width="80%"
             labelSize="10px"
             margin="auto"
           />
