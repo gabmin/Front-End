@@ -18,6 +18,18 @@ export const login = createAsyncThunk(
   },
 );
 
+export const logout = createAsyncThunk(
+  "/users/logout",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/users/logout");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
 export const signup = createAsyncThunk(
   "/users/signup",
   async (data, { rejectWithValue }) => {

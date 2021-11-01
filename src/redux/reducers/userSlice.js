@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
-import { checkIdDup, checkNickDup, login, signup } from "../actions/user";
+import {
+  checkIdDup,
+  checkNickDup,
+  login,
+  logout,
+  signup,
+} from "../actions/user";
 
 // 기본 state
 export const initialState = {
@@ -8,6 +14,9 @@ export const initialState = {
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
+  logoutLoading: false, // 로그아웃웃 시도 중
+  logoutDone: false,
+  logoutError: null,
   signupLoading: false, // 회원가입 시도 중
   signupDone: false,
   signupError: null,
@@ -33,12 +42,6 @@ const userSlice = createSlice({
       state.userInfo.userId = getCookie("userId");
       state.loginDone = false;
     },
-    logoutUser: state => {
-      state.userInfo = { nickname: null, userId: null };
-      state.loginDone = false;
-      deleteCookie("nickname");
-      deleteCookie("userId");
-    },
   },
   extraReducers: builder =>
     builder
@@ -59,6 +62,23 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loginLoading = false;
         state.loginError = action.payload;
+      })
+      // logout
+      .addCase(logout.pending, state => {
+        state.logoutLoading = true;
+        state.logoutDone = false;
+        state.logoutError = null;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.userInfo = { nickname: null, userId: null };
+        deleteCookie("nickname");
+        deleteCookie("userId");
+        state.logoutLoading = false;
+        state.logoutDone = true;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.logoutLoading = false;
+        state.logoutError = action.payload;
       })
       // signup
       .addCase(signup.pending, state => {
@@ -108,6 +128,6 @@ const userSlice = createSlice({
       }),
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser } = userSlice.actions;
 
 export default userSlice;
