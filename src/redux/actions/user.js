@@ -67,3 +67,15 @@ export const checkNickDup = createAsyncThunk(
     }
   },
 );
+
+export const updateNick = createAsyncThunk(
+  "/profiles/nick",
+  async (nickname, { rejectWithValue }) => {
+    try {
+      const response = await api.patch("/profiles/nick", { nickname });
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  },
+);

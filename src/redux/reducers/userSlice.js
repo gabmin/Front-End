@@ -6,6 +6,7 @@ import {
   login,
   logout,
   signup,
+  updateNick,
 } from "../actions/user";
 
 // 기본 state
@@ -31,6 +32,9 @@ export const initialState = {
   mainDataLoading: false, // 메인페이지 정보 get 시도 중
   mainDataDone: false,
   mainDataError: null,
+  updateNickLoading: false,
+  updateNickDone: false,
+  updateNickError: null,
 };
 // toolkit 사용방법
 const userSlice = createSlice({
@@ -125,6 +129,25 @@ const userSlice = createSlice({
         state.checkNickDupLoading = false;
         state.checkNickDupError = action.payload;
         state.checkNickDupResult = action.payload.success;
+      })
+      // updateNick
+      .addCase(updateNick.pending, state => {
+        state.updateNickLoading = true;
+        state.updateNickDone = false;
+        state.updateNickError = null;
+      })
+      .addCase(updateNick.fulfilled, (state, action) => {
+        state.updateNickLoading = false;
+        state.updateNickDone = true;
+        state.userInfo.nickname = action.payload.nickname;
+        setCookie("nickname", action.payload.nickname);
+        console.log("nick action");
+        console.log(action.payload);
+      })
+      .addCase(updateNick.rejected, (state, action) => {
+        state.updateNickLoading = false;
+        state.updateNickDone = false;
+        alert("서버와의 통신에 실패했습니다");
       }),
 });
 

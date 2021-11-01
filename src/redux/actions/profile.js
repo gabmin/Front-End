@@ -22,6 +22,20 @@ export const getMyPolls = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (err) {
+      console.log(`err.response`);
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
+export const getProfileNick = createAsyncThunk(
+  "/profiles/nick",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/profiles/${id}`);
+      return response.data;
+    } catch (err) {
       return rejectWithValue(err.response.data);
     }
   },
