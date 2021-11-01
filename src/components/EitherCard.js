@@ -96,22 +96,22 @@ const EitherCard = props => {
           <div>
             <EitherButton onClick={onClickContentA} disabled>
               <h1>O</h1>
-              <h5>{contentA}</h5>
+              <ButtonText>{contentA}</ButtonText>
             </EitherButton>
             <EitherButton onClick={onClickContentB} disabled>
               <h1>X</h1>
-              <h5>{contentB}</h5>
+              <ButtonText>{contentB}</ButtonText>
             </EitherButton>
           </div>
         ) : (
           <div>
             <EitherButton onClick={onClickContentA}>
               <h1>O</h1>
-              <h5>{contentA}</h5>
+              <ButtonText>{contentA}</ButtonText>
             </EitherButton>
             <EitherButton onClick={onClickContentB}>
               <h1>X</h1>
-              <h5>{contentB}</h5>
+              <ButtonText>{contentB}</ButtonText>
             </EitherButton>
           </div>
         )}
@@ -165,5 +165,7 @@ const EitherFooter = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
+const ButtonText = styled.h5`
+  word-break: break-all;
+`;
 export default EitherCard;
