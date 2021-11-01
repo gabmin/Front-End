@@ -85,7 +85,8 @@ const multiPostSlice = createSlice({
       .addCase(AddPostDB.fulfilled, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBDone = true;
-        state.multiPost.unshift(action.payload);
+        console.log("addaction", action.payload);
+        state.multiPost = [...state.multiPost, action.payload];
       })
       .addCase(AddPostDB.rejected, (state, action) => {
         state.AddPostDBLoading = false;

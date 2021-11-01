@@ -11,6 +11,8 @@ const MultiDetail = props => {
 
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const userInfo = useSelector(state => state.user.userInfo);
+  console.log("userInfo", userInfo);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataList", dataList);
 
@@ -106,7 +108,11 @@ const MultiDetail = props => {
     dispatch(DetailDB(multiId));
   }, [dispatch, multiId]);
 
-  if (dataList && dataList.multi.voted !== null) {
+  if (
+    dataList &&
+    (userInfo.nickname === dataList.multi.nickname ||
+      dataList.multi.voted !== null)
+  ) {
     console.log("voted", dataList.multi.voted);
     return (
       <div>

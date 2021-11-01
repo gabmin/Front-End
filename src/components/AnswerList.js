@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { DetailVote } from "../redux/actions/multiDetail";
 
 const AnswerList = props => {
+  const dispatch = useDispatch();
   const DataList = props.dataList;
-  const [color, setColor] = React.useState("");
+  const multiId = DataList.multiId;
+
+  const [color, setColor] = useState("");
+  const [select, setSelect] = useState("");
+
   const selected = e => {
     const checkSelect = t => [...t.parentElement.children].filter(e => e !== t);
     checkSelect(e.target).map(x => {
@@ -19,25 +26,42 @@ const AnswerList = props => {
     const color = e.target.attributes.color.value;
     setColor(color);
     selected(e);
+    setSelect(e.target.id);
+    console.log("e", e.target.id);
+  };
+
+  console.log("select", select);
+
+  const selectComplete = () => {
+    console.log(multiId, select);
+    dispatch(DetailVote({ multiId, select: { select } }));
   };
 
   return (
     <Container>
-      <AnswerBtn color="#777777" onClick={selectAnswer}>
+      <AnswerBtn id="A" color="#777777" onClick={selectAnswer}>
         {DataList.contentA}
       </AnswerBtn>
-      <AnswerBtn color="#777777" onClick={selectAnswer}>
+      <AnswerBtn id="B" color="#777777" onClick={selectAnswer}>
         {DataList.contentB}
       </AnswerBtn>
-      <AnswerBtn color="#777777" onClick={selectAnswer}>
-        {DataList.contentC}
-      </AnswerBtn>
-      <AnswerBtn color="#777777" onClick={selectAnswer}>
-        {DataList.contentD}
-      </AnswerBtn>
-      <AnswerBtn color="#777777" onClick={selectAnswer}>
-        {DataList.contentE}
-      </AnswerBtn>
+      {DataList.contentC !== null ? (
+        <AnswerBtn id="C" color="#777777" onClick={selectAnswer}>
+          {" "}
+          {DataList.contentC}
+        </AnswerBtn>
+      ) : null}
+      {DataList.contentD !== null ? (
+        <AnswerBtn id="D" color="#777777" onClick={selectAnswer}>
+          {DataList.contentD}
+        </AnswerBtn>
+      ) : null}
+      {DataList.contentE !== null ? (
+        <AnswerBtn id="E" color="#777777" onClick={selectAnswer}>
+          {DataList.contentE}
+        </AnswerBtn>
+      ) : null}
+      <button onClick={selectComplete}>완료하고 결과보기</button>
     </Container>
   );
 };

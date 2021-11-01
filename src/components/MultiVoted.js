@@ -44,61 +44,78 @@ const MultiVoted = props => {
 
   return (
     <Container>
-      <p>
-        {DataList.contentA} {perA}%
-      </p>
-      <StyledProgressBar
-        labelSize="2px"
-        height="40px"
-        bgColor="#777777"
-        borderRadius="8px"
-        completed={perA}
-        maxCompleted={100}
-      />
-      <p>
-        {DataList.contentB} {perB}%
-      </p>
-      <StyledProgressBar
-        labelSize="2px"
-        height="40px"
-        bgColor="#777777"
-        borderRadius="8px"
-        completed={perB}
-        maxCompleted={100}
-      />
-      <p>
-        {DataList.contentC} {perC}%
-      </p>
-      <StyledProgressBar
-        labelSize="2px"
-        height="40px"
-        bgColor="#777777"
-        borderRadius="8px"
-        completed={perC}
-        maxCompleted={100}
-      />
-      <p>
-        {DataList.contentD} {perD}%
-      </p>
-      <StyledProgressBar
-        labelSize="2px"
-        height="40px"
-        bgColor="#777777"
-        borderRadius="8px"
-        completed={perD}
-        maxCompleted={100}
-      />
-      <p>
-        {DataList.contentE} {perE}%
-      </p>
-      <StyledProgressBar
-        labelSize="2px"
-        height="40px"
-        bgColor="#777777"
-        borderRadius="8px"
-        completed={perE}
-        maxCompleted={100}
-      />
+      <div>
+        <p>
+          {DataList.contentA} {perA}%
+        </p>
+        <StyledProgressBar
+          labelSize="2px"
+          height="40px"
+          bgColor="#777777"
+          borderRadius="8px"
+          completed={perA}
+          maxCompleted={100}
+        />
+      </div>
+      <div>
+        <p>
+          {DataList.contentB} {perB}%
+        </p>
+        <StyledProgressBar
+          labelSize="2px"
+          height="40px"
+          bgColor="#777777"
+          borderRadius="8px"
+          completed={perB}
+          maxCompleted={100}
+        />
+      </div>
+      {DataList.contentC !== null ? (
+        <div>
+          <p>
+            {DataList.contentC} {perC}%
+          </p>
+          <StyledProgressBar
+            labelSize="2px"
+            height="40px"
+            bgColor="#777777"
+            borderRadius="8px"
+            completed={perC}
+            maxCompleted={100}
+          />
+        </div>
+      ) : null}
+      {DataList.contentD !== null ? (
+        <div>
+          <p>
+            {DataList.contentD} {perD}%
+          </p>
+          <StyledProgressBar
+            labelSize="2px"
+            height="40px"
+            bgColor="#777777"
+            borderRadius="8px"
+            completed={perD}
+            maxCompleted={100}
+          />
+        </div>
+      ) : null}
+      {DataList.contentE !== null ? (
+        <div>
+          <p>
+            {DataList.contentE} {perE}%
+          </p>
+          <StyledProgressBar
+            labelSize="2px"
+            height="40px"
+            bgColor="#777777"
+            borderRadius="8px"
+            completed={perE}
+            maxCompleted={100}
+          />
+        </div>
+      ) : null}
+      <button>투표 종료</button>
     </Container>
   );
 };
