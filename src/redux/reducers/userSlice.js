@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
-import { checkIdDup, checkNickDup, login, signup } from "../actions/user";
+import {
+  checkIdDup,
+  checkNickDup,
+  login,
+  logout,
+  signup,
+  updateNick,
+} from "../actions/user";
 
 // 기본 state
 export const initialState = {
@@ -8,6 +15,9 @@ export const initialState = {
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
+  logoutLoading: false, // 로그아웃웃 시도 중
+  logoutDone: false,
+  logoutError: null,
   signupLoading: false, // 회원가입 시도 중
   signupDone: false,
   signupError: null,
@@ -22,6 +32,9 @@ export const initialState = {
   mainDataLoading: false, // 메인페이지 정보 get 시도 중
   mainDataDone: false,
   mainDataError: null,
+  updateNickLoading: false,
+  updateNickDone: false,
+  updateNickError: null,
 };
 // toolkit 사용방법
 const userSlice = createSlice({
@@ -32,12 +45,6 @@ const userSlice = createSlice({
       state.userInfo.nickname = getCookie("nickname");
       state.userInfo.userId = getCookie("userId");
       state.loginDone = false;
-    },
-    logoutUser: state => {
-      state.userInfo = { nickname: null, userId: null };
-      state.loginDone = false;
-      deleteCookie("nickname");
-      deleteCookie("userId");
     },
   },
   extraReducers: builder =>
@@ -59,6 +66,23 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loginLoading = false;
         state.loginError = action.payload;
+      })
+      // logout
+      .addCase(logout.pending, state => {
+        state.logoutLoading = true;
+        state.logoutDone = false;
+        state.logoutError = null;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.userInfo = { nickname: null, userId: null };
+        deleteCookie("nickname");
+        deleteCookie("userId");
+        state.logoutLoading = false;
+        state.logoutDone = true;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.logoutLoading = false;
+        state.logoutError = action.payload;
       })
       // signup
       .addCase(signup.pending, state => {
@@ -105,9 +129,28 @@ const userSlice = createSlice({
         state.checkNickDupLoading = false;
         state.checkNickDupError = action.payload;
         state.checkNickDupResult = action.payload.success;
+      })
+      // updateNick
+      .addCase(updateNick.pending, state => {
+        state.updateNickLoading = true;
+        state.updateNickDone = false;
+        state.updateNickError = null;
+      })
+      .addCase(updateNick.fulfilled, (state, action) => {
+        state.updateNickLoading = false;
+        state.updateNickDone = true;
+        state.userInfo.nickname = action.payload.nickname;
+        setCookie("nickname", action.payload.nickname);
+        console.log("nick action");
+        console.log(action.payload);
+      })
+      .addCase(updateNick.rejected, (state, action) => {
+        state.updateNickLoading = false;
+        state.updateNickDone = false;
+        alert("서버와의 통신에 실패했습니다");
       }),
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser } = userSlice.actions;
 
 export default userSlice;

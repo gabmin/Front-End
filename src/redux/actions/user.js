@@ -18,6 +18,18 @@ export const login = createAsyncThunk(
   },
 );
 
+export const logout = createAsyncThunk(
+  "/users/logout",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/users/logout");
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
 export const signup = createAsyncThunk(
   "/users/signup",
   async (data, { rejectWithValue }) => {
@@ -49,6 +61,18 @@ export const checkNickDup = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("/users/signup/nick", data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
+export const updateNick = createAsyncThunk(
+  "/profiles/nick",
+  async (nickname, { rejectWithValue }) => {
+    try {
+      const response = await api.patch("/profiles/nick", { nickname });
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
