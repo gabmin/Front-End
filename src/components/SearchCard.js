@@ -20,7 +20,6 @@ const SearchCard = ({
     history.push(`/multi/${id}`);
   }, [id, type]);
 
-  console.log(id, user, date, editedDate, completed, likeCnt);
   return (
     <Container onClick={onClickContent}>
       <Subjects>

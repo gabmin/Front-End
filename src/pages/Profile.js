@@ -15,7 +15,9 @@ const Profile = props => {
   const dispatch = useDispatch();
 
   const { myPosts, myPolls, nickname } = useSelector(state => state.profile);
-  const myId = useSelector(state => state.user.userInfo.userId);
+  const { userId: myId, nickname: userNick } = useSelector(
+    state => state.user.userInfo,
+  );
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(nickname);
@@ -94,8 +96,8 @@ const Profile = props => {
             />
           ) : (
             <>
-              <Nickname>{nickname}</Nickname>
-              {userId === myId && (
+              <Nickname>{userNick}</Nickname>
+              {userId == myId && (
                 <button onClick={onClickNickname}>수정</button>
               )}
             </>

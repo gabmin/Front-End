@@ -140,9 +140,8 @@ const userSlice = createSlice({
         state.updateNickLoading = false;
         state.updateNickDone = true;
         state.userInfo.nickname = action.payload.nickname;
+        deleteCookie("nickname");
         setCookie("nickname", action.payload.nickname);
-        console.log("nick action");
-        console.log(action.payload);
       })
       .addCase(updateNick.rejected, (state, action) => {
         state.updateNickLoading = false;

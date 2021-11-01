@@ -6,7 +6,6 @@ export const getMyPosts = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.get(`/profiles/${id}/posts`);
-      console.log(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -19,18 +18,15 @@ export const getMyPolls = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.get(`/profiles/${id}/polls`);
-      console.log(response.data);
       return response.data;
     } catch (err) {
-      console.log(`err.response`);
-      console.log(err);
       return rejectWithValue(err.response.data);
     }
   },
 );
 
 export const getProfileNick = createAsyncThunk(
-  "/profiles/nick",
+  "/profiles/getnick",
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.get(`/profiles/${id}`);
