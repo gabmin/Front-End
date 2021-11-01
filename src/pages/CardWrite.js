@@ -8,7 +8,6 @@ import { history } from "../redux/configureStore";
 const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
-  const [status, setStatus] = useState(true);
 
   //뒤로가기
   const onClickBack = useCallback(() => {
@@ -21,34 +20,14 @@ const CardWrite = () => {
 
   // radio button
   const EitherRadioBtn = e => {
-    if (e.target.value === "on") {
-      setStatus(true);
-      return;
-    } else {
-      setEitherState(!eitherState);
-      setMultiState(!multiState);
-    }
+    setEitherState(!eitherState);
+    setMultiState(!multiState);
   };
   const MultiRadioBtn = e => {
-    if (e.target.value === "on") {
-      return;
-    } else {
-      setEitherState(!eitherState);
-      setMultiState(!multiState);
-    }
+    setEitherState(!eitherState);
+    setMultiState(!multiState);
   };
 
-  console.log("status", status);
-
-  // const EitherRadioBtn = e => {
-  //   if (e.target.value === "on") {
-  //     setStatus(true);
-  //   }
-  // };
-
-  // const MultiRadioBtn = e => {
-  //   console.log(e.target.value);
-  // };
   return (
     <>
       <Wrap>
@@ -64,8 +43,8 @@ const CardWrite = () => {
                 <input
                   name="write"
                   type="radio"
-                  // id="either"
-                  checked
+                  id="either"
+                  checked={eitherState}
                   onChange={EitherRadioBtn}
                 />
                 <label>찬반</label>
@@ -74,16 +53,16 @@ const CardWrite = () => {
                 <input
                   name="write"
                   type="radio"
-                  // id="multi"
-                  // checked={multiState}
-                  // onChange={MultiRadioBtn}
+                  id="multi"
+                  checked={multiState}
+                  onChange={MultiRadioBtn}
                 />
                 <label>객관식</label>
               </RadioBtnWarpper>
             </div>
           </Index>
-          <EitherWrite />
-          <MultiWrite />
+          {eitherState ? <EitherWrite /> : null}
+          {multiState ? <MultiWrite /> : null}
         </ContentBox>
       </Wrap>
     </>
