@@ -8,6 +8,8 @@ export const login = createAsyncThunk(
     try {
       const response = await api.post("/users/login", data);
       history.push("/");
+      console.log("response");
+      console.log(response);
       return response.data;
     } catch (err) {
       alert("아이디 및 비밀번호를 다시 확인해 주세요");
