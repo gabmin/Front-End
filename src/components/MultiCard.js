@@ -16,27 +16,27 @@ const MultiCard = props => {
   } = props;
   const history = useHistory();
   const goToDetail = () => {
-    history.push(`/multi/:${multiId}`);
+    history.push(`/multi/${multiId}`);
   };
   return (
     <Container onClick={goToDetail}>
       <Card>
-        <TitleDiv>
+        <TitleWrapper>
           <h1>{title}</h1>
-        </TitleDiv>
-        <DesDiv>
+        </TitleWrapper>
+        <DesWrapper>
           <p>{description}</p>
-        </DesDiv>
+        </DesWrapper>
         <hr></hr>
-        <FooterDiv>
-          <UserDiv>
+        <FooterWrapper>
+          <UserWrapper>
             <p>{user}</p>
             <p>{date}</p>
             {/* {isEdited ? <p>{editedDate}</p> : null} */}
-          </UserDiv>
+          </UserWrapper>
           <p>{likeCnt}</p>
           <p>{commentCnt}</p>
-        </FooterDiv>
+        </FooterWrapper>
       </Card>
     </Container>
   );
@@ -61,21 +61,21 @@ const Card = styled.div`
   box-sizing: border-box;
 `;
 
-const TitleDiv = styled.div`
+const TitleWrapper = styled.div`
   margin: 0 0 0 10px;
   min-height: 20%;
 `;
 
-const DesDiv = styled.div`
+const DesWrapper = styled.div`
   min-height: 70%;
 `;
 
-const FooterDiv = styled.div`
+const FooterWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const UserDiv = styled.div`
+const UserWrapper = styled.div`
   font-size: 6px;
   display: flex;
   flex-direction: row;

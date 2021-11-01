@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -8,15 +8,35 @@ import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCompleteCard = props => {
   const dispatch = useDispatch();
-  const { eitherId, nickname, title, contentA, contentB, date, likeCnt } =
-    props;
+  const {
+    eitherId,
+    nickname,
+    title,
+    contentA,
+    contentB,
+    date,
+    likeCnt,
+    voteCntA,
+    voteCntB,
+  } = props;
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
-  //수정하기
-  // const onClickModify = () => {
-  //   history.push(`/either/${eitherId}/edit`);
-  // };
+  const [percent, setPercent] = useState("");
+  const [likes, setLikes] = useState(likeCnt);
+
+  //Progress Bar 퍼센트 계산
+  useEffect(() => {
+    if (voteCntA === 0) {
+      setPercent(100);
+    } else if (voteCntB === 0) {
+      setPercent(0);
+    } else {
+      let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
+      setPercent(Math.round(calPercent));
+    }
+  }, [voteCntA, voteCntB]);
+
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
@@ -26,6 +46,7 @@ const EitherCompleteCard = props => {
   //좋아요
   const onClickLike = () => {
     dispatch(likePostDB(eitherId));
+    setLikes(likeCnt + 1);
   };
 
   return (
@@ -36,7 +57,6 @@ const EitherCompleteCard = props => {
             <b>OX</b>
             {nickname === userInfo ? (
               <div>
-                {/* <button onClick={onClickModify}>수정하기</button> */}
                 <button onClick={onClickDelete}>삭제하기</button>
               </div>
             ) : null}
@@ -45,18 +65,35 @@ const EitherCompleteCard = props => {
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
         <div>
-          <EitherButton disalbed>
-            <h1>O</h1>
-            <h5>{contentA}</h5>
-          </EitherButton>
-          <EitherButton disalbed>
-            <h1>X</h1>
-            <h5>{contentB}</h5>
-          </EitherButton>
+          {voteCntA > voteCntB ? (
+            <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+              <h1>O</h1>
+              <h5>{contentA}</h5>
+            </EitherButton>
+          ) : (
+            <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+              <h1>X</h1>
+              <h5>{contentB}</h5>
+            </EitherButton>
+          )}
+          {
+            (voteCntA = voteCntB ? (
+              <div>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>O</h1>
+                  <h5>{contentA}</h5>
+                </EitherButton>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>X</h1>
+                  <h5>{contentB}</h5>
+                </EitherButton>
+              </div>
+            ) : null)
+          }
         </div>
         <EitherProgress>
           <ProgressBar
-            completed={50}
+            completed={percent}
             height="15px"
             width="90%"
             labelSize="10px"
@@ -69,7 +106,7 @@ const EitherCompleteCard = props => {
           </div>
 
           <div style={{ fontSize: "10px", padding: "0px 2em" }}>
-            <button onClick={onClickLike}>좋아요</button> {likeCnt}
+            <button onClick={onClickLike}>좋아요</button> {likes}
           </div>
         </EitherFooter>
       </Container>
@@ -87,11 +124,9 @@ const Container = styled.div`
   padding: 1em;
   opacity: 0.3;
 `;
-
 const EitherText = styled.div`
   width: 100%;
 `;
-
 const EitherProgress = styled.div`
   margin: 30px;
 `;
