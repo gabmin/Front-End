@@ -69,7 +69,7 @@ const MultiDetail = props => {
           </div>
         ) : null}
         <div>
-          <MultiComment dataList={dataList} />
+          <MultiComment dataList={dataList} multiId={multiId} />
         </div>
       </div>
     );

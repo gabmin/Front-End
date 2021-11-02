@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import { AddCommentDB } from "../redux/actions/comment";
 
 const CommentInput = props => {
+  const dispatch = useDispatch();
+  const date = moment().format("YYYY-MM-DD HH:mm:ss");
+  const multiId = props.multiId;
   const [comment, setComment] = useState();
   const changeComment = e => {
     setComment(e.target.value);
+  };
+  const data = { comment, date };
+  console.log("commentinput", multiId, data);
+
+  const addComment = () => {
+    dispatch(AddCommentDB({ multiId, data }));
   };
 
   return (
     <>
       <div>
         <TextArea onChange={changeComment}></TextArea>
-        <button>작성완료</button>
+        <button onClick={addComment}>작성완료</button>
       </div>
     </>
   );

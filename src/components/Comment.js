@@ -7,9 +7,10 @@ import CommentInput from "../elements/CommentInput";
 const Comment = props => {
   const dataList = props.dataList;
 
-  const { User, date, commentLikeCnt, comment, id } = props;
+  const { nickname, date, commentLikeCnt, comment, id } = props;
 
   console.log("코멘트데이터", dataList);
+  console.log("nickname", nickname, props.nickname);
 
   const [hiddenInput, setHiddenInput] = useState(false);
   const [hiddenBtn, setHiddenBtn] = useState(true);
@@ -33,10 +34,14 @@ const Comment = props => {
   return (
     <>
       <TempWarpper>
-        <div>{User[0].nickname}</div>
+        <div>{nickname}</div>
         <div>{date}</div>
         <div>좋아요 {commentLikeCnt}</div>
         <div>{comment}</div>
+        {/* <div>user</div>
+        <div>date</div>
+        <div>좋아요 </div>
+        <div>comment</div> */}
         {hiddenBtn ? (
           <button onClick={showInput}>댓글작성</button>
         ) : (

@@ -6,6 +6,7 @@ import Comment from "./Comment";
 const CommentList = props => {
   const dataList = props.dataList;
   const commentList = props.dataList.comment;
+  console.log("commentList", commentList);
   return (
     <>
       <TempWarpper>
@@ -13,7 +14,7 @@ const CommentList = props => {
           <div>
             <Comment
               dataList={dataList}
-              User={p.User}
+              nickname={p.nickname}
               date={p.date}
               commentLikeCnt={p.commentLikeCnt}
               comment={p.comment}
