@@ -92,6 +92,8 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
                     liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
                   />
                 </div>
               ))}
@@ -110,6 +112,8 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
                     liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
                   />
                 </div>
               ))}
@@ -128,6 +132,8 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
                     liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
                   />
                 </div>
               ))}

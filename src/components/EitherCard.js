@@ -24,12 +24,15 @@ const EitherCard = props => {
     voteCntA,
     voteCntB,
     liked,
+    voted,
+    completed,
   } = props;
 
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(likeCnt);
   const [voteA, setVoteA] = useState(voteCntA);
   const [voteB, setVoteB] = useState(voteCntB);
+  const [choice, setChoice] = useState(voted);
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
@@ -57,7 +60,6 @@ const EitherCard = props => {
     dispatch(deletePostDB(eitherId));
   };
   //좋아요
-  console.log(liked);
   const onClickLike = () => {
     if (liked !== null) {
       return;
@@ -70,11 +72,13 @@ const EitherCard = props => {
   const onClickContentA = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "A" } }));
     setVoteA(voteA);
+    setChoice("A");
   };
   //contentB 투표
   const onClickContentB = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "B" } }));
     setVoteB(voteB);
+    setChoice("B");
   };
 
   return (
@@ -83,31 +87,114 @@ const EitherCard = props => {
         <EitherText>
           <div>
             <b>OX</b>
-            {/* {nickname === userInfo.nickname ? (
-              voteCntA + voteCntB === 0 ? ( */}
-            <div>
-              <button onClick={onClickModify}>수정하기</button>
-              <button onClick={onClickDelete}>삭제하기</button>
-            </div>
-            {/* ) : (
+            {nickname === userInfo.nickname ? (
+              voteCntA + voteCntB === 0 ? (
+                <div>
+                  <button onClick={onClickModify}>수정하기</button>
+                  <button onClick={onClickDelete}>삭제하기</button>
+                </div>
+              ) : (
                 <div>
                   <button onClick={onClickDelete}>삭제하기</button>
                 </div>
               )
-            ) : null} */}
+            ) : null}
           </div>
           <h2>{title}</h2>
+          {completed === 1 ? (
+            <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
+          ) : null}
         </EitherText>
-        <div>
-          <EitherButton onClick={onClickContentA}>
-            <h1>O</h1>
-            <ButtonText>{contentA}</ButtonText>
-          </EitherButton>
-          <EitherButton onClick={onClickContentB}>
-            <h1>X</h1>
-            <ButtonText>{contentB}</ButtonText>
-          </EitherButton>
-        </div>
+        {choice === "A" ? (
+          <div>
+            {completed === 1 ? (
+              <EitherButton
+                onClick={onClickContentA}
+                style={{ backgroundColor: "orange" }}
+                disabled
+              >
+                <h1>O</h1>
+                <ButtonText>{contentA}</ButtonText>
+              </EitherButton>
+            ) : (
+              <EitherButton
+                onClick={onClickContentA}
+                style={{ backgroundColor: "orange" }}
+              >
+                <h1>O</h1>
+                <ButtonText>{contentA}</ButtonText>
+              </EitherButton>
+            )}
+            {completed === 1 ? (
+              <EitherButton onClick={onClickContentB} disabled>
+                <h1>X</h1>
+                <ButtonText>{contentB}</ButtonText>
+              </EitherButton>
+            ) : (
+              <EitherButton onClick={onClickContentB}>
+                <h1>X</h1>
+                <ButtonText>{contentB}</ButtonText>
+              </EitherButton>
+            )}
+          </div>
+        ) : choice === "B" ? (
+          <div>
+            {completed === 1 ? (
+              <EitherButton onClick={onClickContentA} disabled>
+                <h1>O</h1>
+                <ButtonText>{contentA}</ButtonText>
+              </EitherButton>
+            ) : (
+              <EitherButton onClick={onClickContentA}>
+                <h1>O</h1>
+                <ButtonText>{contentA}</ButtonText>
+              </EitherButton>
+            )}
+            {completed === 1 ? (
+              <EitherButton
+                onClick={onClickContentB}
+                style={{ backgroundColor: "orange" }}
+                disabled
+              >
+                <h1>X</h1>
+                <ButtonText>{contentB}</ButtonText>
+              </EitherButton>
+            ) : (
+              <EitherButton
+                onClick={onClickContentB}
+                style={{ backgroundColor: "orange" }}
+              >
+                <h1>X</h1>
+                <ButtonText>{contentB}</ButtonText>
+              </EitherButton>
+            )}
+          </div>
+        ) : (
+          <div>
+            {completed === 1 ? (
+              <EitherButton onClick={onClickContentA} disabled>
+                <h1>O</h1>
+                <ButtonText>{contentA}</ButtonText>
+              </EitherButton>
+            ) : (
+              <EitherButton onClick={onClickContentA}>
+                <h1>O</h1>
+                <ButtonText>{contentA}</ButtonText>
+              </EitherButton>
+            )}
+            {completed === 1 ? (
+              <EitherButton onClick={onClickContentB} disabled>
+                <h1>X</h1>
+                <ButtonText>{contentB}</ButtonText>
+              </EitherButton>
+            ) : (
+              <EitherButton onClick={onClickContentB}>
+                <h1>X</h1>
+                <ButtonText>{contentB}</ButtonText>
+              </EitherButton>
+            )}
+          </div>
+        )}
         <EitherProgress>
           <ProgressBar
             completed={percent}

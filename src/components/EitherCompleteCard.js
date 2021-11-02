@@ -26,9 +26,6 @@ const EitherCompleteCard = props => {
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(likeCnt);
 
-  console.log(props);
-  console.log(percent);
-  console.log(voteCntA, voteCntB);
   //Progress Bar 퍼센트 계산
   useEffect(() => {
     if (voteCntA === 0 && voteCntB === 0) {
