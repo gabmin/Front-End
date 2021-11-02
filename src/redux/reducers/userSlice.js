@@ -160,7 +160,10 @@ const userSlice = createSlice({
       .addCase(updateNick.rejected, (state, action) => {
         state.updateNickLoading = false;
         state.updateNickDone = false;
-        alert("서버와의 통신에 실패했습니다");
+        state.updateNickError = action.payload;
+        if (action.payload === "Validation error") {
+          alert("이미 사용중인 닉네임입니다");
+        }
       })
       // getProfileNick
       .addCase(getProfileNick.pending, state => {
