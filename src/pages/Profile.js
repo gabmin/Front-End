@@ -18,8 +18,8 @@ const Profile = props => {
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(profileNick);
-  console.log("nickInput");
-  console.log(profileNick);
+  console.log("userId");
+  console.log(userId);
 
   useEffect(() => {
     dispatch(getProfileNick(userId));
