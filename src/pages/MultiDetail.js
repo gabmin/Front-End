@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MultiComment from "../components/MultiComment";
 import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
-import { DeletePostDB } from "../redux/actions/multiCard";
+import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 
 const MultiDetail = props => {
@@ -47,6 +47,10 @@ const MultiDetail = props => {
     }
   };
 
+  const closePost = () => {
+    dispatch(ClosePostDB(multiId));
+  };
+
   if (
     dataList &&
     (userInfo.nickname === dataList.multi.nickname ||
@@ -61,9 +65,12 @@ const MultiDetail = props => {
         {userInfo.nickname === dataList.multi.nickname ? (
           <div>
             <button onClick={deletePost}>삭제하기</button>
+            <button onClick={closePost}>종료하기</button>
           </div>
         ) : null}
-        <div>{/* <MultiComment dataList={dataList} /> */}</div>
+        <div>
+          <MultiComment dataList={dataList} />
+        </div>
       </div>
     );
   } else {

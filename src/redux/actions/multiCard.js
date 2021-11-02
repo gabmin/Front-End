@@ -61,3 +61,16 @@ export const DeletePostDB = createAsyncThunk(
     }
   },
 );
+
+// multi 종료하기
+export const ClosePostDB = createAsyncThunk(
+  "multiPost/ClosePostDB",
+  async (multiId, { rejectWithValue }) => {
+    try {
+      const response = await api.patch(`/posts/multi/${multiId}/complete`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);

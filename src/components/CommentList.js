@@ -5,7 +5,7 @@ import Comment from "./Comment";
 
 const CommentList = props => {
   const dataList = props.dataList;
-  const commentList = props.dataList.Comment;
+  const commentList = props.dataList.comment;
   return (
     <>
       <TempWarpper>

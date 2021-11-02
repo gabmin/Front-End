@@ -7,6 +7,7 @@ import CommentInput from "../elements/CommentInput";
 const MultiComment = props => {
   const dataList = props.dataList;
   console.log("멀티코멘트", dataList);
+
   return (
     <>
       <TempWarpper>
