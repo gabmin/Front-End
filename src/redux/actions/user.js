@@ -77,3 +77,15 @@ export const updateNick = createAsyncThunk(
     }
   },
 );
+
+export const getProfileNick = createAsyncThunk(
+  "/profiles/getnick",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/profiles/${id}`);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  },
+);

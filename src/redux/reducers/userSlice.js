@@ -3,6 +3,7 @@ import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 import {
   checkIdDup,
   checkNickDup,
+  getProfileNick,
   login,
   logout,
   signup,
@@ -12,6 +13,7 @@ import {
 // 기본 state
 export const initialState = {
   userInfo: { nickname: null, userId: null },
+  profileNick: null,
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
@@ -35,6 +37,9 @@ export const initialState = {
   updateNickLoading: false,
   updateNickDone: false,
   updateNickError: null,
+  getProfileNickLoading: false,
+  getProfileNickDone: false,
+  getProfileNickError: null,
 };
 // toolkit 사용방법
 const userSlice = createSlice({
@@ -140,6 +145,7 @@ const userSlice = createSlice({
         state.updateNickLoading = false;
         state.updateNickDone = true;
         state.userInfo.nickname = action.payload.nickname;
+        state.profileNick = action.payload.nickname;
         deleteCookie("nickname");
         setCookie("nickname", action.payload.nickname);
       })
@@ -147,6 +153,22 @@ const userSlice = createSlice({
         state.updateNickLoading = false;
         state.updateNickDone = false;
         alert("서버와의 통신에 실패했습니다");
+      })
+      // getProfileNick
+      .addCase(getProfileNick.pending, state => {
+        state.getProfileNickLoading = true;
+        state.getProfileNickDone = false;
+        state.getProfileNickError = null;
+      })
+      .addCase(getProfileNick.fulfilled, (state, action) => {
+        state.getProfileNickLoading = false;
+        state.getProfileNickDone = true;
+        state.profileNick = action.payload.nickname;
+      })
+      .addCase(getProfileNick.rejected, (state, action) => {
+        state.getProfileNickLoading = false;
+        state.getProfileNickDone = false;
+        state.getProfileNickError = action.payload;
       }),
 });
 
