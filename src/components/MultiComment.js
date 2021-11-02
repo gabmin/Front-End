@@ -18,7 +18,7 @@ const MultiComment = props => {
         </TextAreaWarpper>
         <hr></hr>
         <div>
-          <CommentList dataList={dataList} />
+          <CommentList multiId={multiId} dataList={dataList} />
         </div>
       </TempWarpper>
     </>

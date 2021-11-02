@@ -6,6 +6,7 @@ import Comment from "./Comment";
 const CommentList = props => {
   const dataList = props.dataList;
   const commentList = props.dataList.comment;
+  const multiId = props.multiId;
   console.log("commentList", commentList);
   return (
     <>
@@ -14,6 +15,7 @@ const CommentList = props => {
           <div>
             <Comment
               dataList={dataList}
+              multiId={multiId}
               nickname={p.nickname}
               date={p.date}
               commentLikeCnt={p.commentLikeCnt}
