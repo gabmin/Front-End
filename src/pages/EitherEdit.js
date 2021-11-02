@@ -21,14 +21,26 @@ const EitherEdit = props => {
       history.push("/either");
     }
   }, []);
-
+  //수정 후 알림창, 페이지 이동
+  useEffect(() => {
+    if (editPostDBDone) {
+      alert("수정이 완료되었습니다.");
+      window.location.replace("/either");
+    }
+  }, [editPostDBDone]);
+  //종료 후 알림창, 페이지 이동
+  useEffect(() => {
+    if (completePostDBDone) {
+      alert("투표가 완료되었습니다.");
+      window.location.replace("/either");
+    }
+  }, [completePostDBDone]);
   //해당게시글 아이디
   const eitherId = props.match.params.either_id;
   //게시글 전체 리스트
   const postList = eitherPost.either;
   //해당게시글 가져오기
   const targetPost = postList?.find(p => p.eitherId == eitherId);
-  console.log(postList);
   //수정된 데이터
   const [title, setTitle] = useState(postList ? targetPost.title : null);
   const [contentA, setContentA] = useState(
@@ -89,17 +101,10 @@ const EitherEdit = props => {
     dispatch(
       editPostDB({ eitherId, data: { title, contentA, contentB, editedDate } }),
     );
-    if (editPostDBDone) {
-      alert("수정되었습니다.");
-      history.push("/either");
-    }
   };
   //완료하기
   const onClickComplete = () => {
     dispatch(completePostDB(eitherId));
-    if (completePostDBDone) {
-      alert("투표가 종료되었습니다.");
-    }
   };
 
   return (

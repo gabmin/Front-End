@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -11,6 +11,19 @@ const EitherWrite = props => {
   const [title, setTitle] = useState("");
   const [contentA, setContentA] = useState("");
   const [contentB, setContentB] = useState("");
+
+  const { addPostDBDone, addPostDBError } = useSelector(
+    state => state.eitherCard,
+  );
+  useEffect(() => {
+    if (addPostDBDone) {
+      alert("작성이 완료되었습니다!");
+      history.replace("/either");
+    }
+    if (addPostDBError) {
+      alert("투표 작성에 문제가 발생하였습니다!");
+    }
+  }, [addPostDBDone, addPostDBError]);
 
   //Title 데이터
   const onChangeTitle = e => {
@@ -28,9 +41,11 @@ const EitherWrite = props => {
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   //저장하기
   const onClickSave = () => {
-    dispatch(addPostDB({ title, contentA, contentB, date }));
-    // alert("저장이 완료되었습니다!");
-    // history.push("/either");
+    if (title === "" || contentA === "" || contentB === "") {
+      alert("모든 항목을 입력해주세요!");
+    } else {
+      dispatch(addPostDB({ title, contentA, contentB, date }));
+    }
   };
   //취소하기
   const onClickCancle = () => {

@@ -12,7 +12,14 @@ import {
 
 const EitherCard = props => {
   const dispatch = useDispatch();
-
+  // const { deletePostDBDone } = useSelector(state => state.eitherCard);
+  // useEffect(() => {
+  //   if (deletePostDBDone) {
+  //     alert("삭제가 완료되었습니다!");
+  //     window.location.replace("/either");
+  //     deletePostDBDone = false;
+  //   }
+  // }, [deletePostDBDone]);
   const {
     eitherId,
     nickname,
@@ -87,24 +94,27 @@ const EitherCard = props => {
         <EitherText>
           <div>
             <b>OX</b>
+            {/* 자신이 작성한 글에 따른 수정,삭제하기 버튼 보여주기 */}
             {nickname === userInfo.nickname ? (
-              voteCntA + voteCntB === 0 ? (
+              voteCntA + voteCntB !== 0 || completed === 1 ? (
                 <div>
-                  <button onClick={onClickModify}>수정하기</button>
                   <button onClick={onClickDelete}>삭제하기</button>
                 </div>
               ) : (
                 <div>
+                  <button onClick={onClickModify}>수정하기</button>
                   <button onClick={onClickDelete}>삭제하기</button>
                 </div>
               )
             ) : null}
           </div>
           <h2>{title}</h2>
+          {/* 투표 완료에 따른 종료 안내글 표시 */}
           {completed === 1 ? (
             <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
           ) : null}
         </EitherText>
+        {/* 선택 결과에 따라 보여주기 */}
         {choice === "A" ? (
           <div>
             {completed === 1 ? (

@@ -81,7 +81,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
               PostList?.map((v, i) => (
                 <div>
                   <EitherCard
-                    key={i}
+                    key="{v}"
                     eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
@@ -101,7 +101,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
               PostingList?.map((v, i) => (
                 <div>
                   <EitherCard
-                    key={i}
+                    key="{i}"
                     eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
@@ -121,7 +121,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
               PostCompleteList?.map((v, i) => (
                 <div>
                   <EitherCompleteCard
-                    key={i}
+                    key="{v}"
                     eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
