@@ -10,6 +10,7 @@ import postSlice from "./reducers/eitherCardSlice";
 import multiPostSlice from "./reducers/multiCardSlice";
 import profileSlice from "./reducers/profileSlice";
 import searchSlice from "./reducers/searchSlice";
+import multiDetailSlice from "./reducers/multiDetailSlice";
 
 export const history = createBrowserHistory();
 
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   main: mainSlice.reducer,
   eitherCard: postSlice.reducer,
   multiCard: multiPostSlice.reducer,
+  multiDetail: multiDetailSlice.reducer,
   profile: profileSlice.reducer,
   search: searchSlice.reducer,
 });
