@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchCard from "../components/SearchCard";
 import { getMyPolls, getMyPosts } from "../redux/actions/profile";
 import { getProfileNick, updateNick } from "../redux/actions/user";
-import { history } from "../redux/configureStore";
 
 const Profile = props => {
   const userId = props.match.params.user_id;
@@ -23,15 +22,10 @@ const Profile = props => {
   console.log(userId);
 
   useEffect(() => {
-    if (userNick === null) {
-      alert("로그인 후 접속이 가능합니다다");
-      history.push("/login");
-      return;
-    }
     dispatch(getProfileNick(userId));
     dispatch(getMyPosts(userId));
     dispatch(getMyPolls(userId));
-  }, [dispatch, userId]);
+  }, [dispatch, userId, userNick]);
 
   // const posts = [
   //   {

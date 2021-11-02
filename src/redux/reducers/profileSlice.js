@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMyPosts, getMyPolls, getProfileNick } from "../actions/profile";
+
+import { getMyPosts, getMyPolls } from "../actions/profile";
 
 export const initialState = {
   myPosts: [],
