@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMyPosts, getMyPolls, getProfileNick } from "../actions/profile";
+
+import { getMyPosts, getMyPolls } from "../actions/profile";
 
 export const initialState = {
   myPosts: [],
@@ -11,9 +12,6 @@ export const initialState = {
   getMyPollsLoading: false,
   getMyPollsDone: false,
   getMyPollsError: null,
-  getProfileNickLoading: false,
-  getProfileNickDone: false,
-  getProfileNickError: null,
 };
 const profileSlice = createSlice({
   name: "main",
@@ -50,22 +48,6 @@ const profileSlice = createSlice({
       .addCase(getMyPolls.rejected, (state, action) => {
         state.getMyPollsLoading = false;
         state.getMyPollsError = action.payload;
-      })
-      // getProfileNick
-      .addCase(getProfileNick.pending, state => {
-        state.getProfileNickLoading = true;
-        state.getProfileNickDone = false;
-        state.getProfileNickError = null;
-      })
-      .addCase(getProfileNick.fulfilled, (state, action) => {
-        state.getProfileNickLoading = false;
-        state.getProfileNickDone = true;
-        state.nickname = action.payload.nickname;
-      })
-      .addCase(getProfileNick.rejected, (state, action) => {
-        state.getProfileNickLoading = false;
-        state.getProfileNickDone = false;
-        state.getProfileNickError = action.payload;
       }),
 });
 

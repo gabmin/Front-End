@@ -121,7 +121,6 @@ const Signup = () => {
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
-      console.log(id, nickname, password, passwordCheck, age);
 
       if (!idChecker()) return;
       if (!nickChecker()) return;

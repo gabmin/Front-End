@@ -3,28 +3,29 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import SearchCard from "../components/SearchCard";
-import {
-  getMyPolls,
-  getMyPosts,
-  getProfileNick,
-} from "../redux/actions/profile";
-import { updateNick } from "../redux/actions/user";
+import { getMyPolls, getMyPosts } from "../redux/actions/profile";
+import { getProfileNick, updateNick } from "../redux/actions/user";
 
 const Profile = props => {
   const userId = props.match.params.user_id;
   const dispatch = useDispatch();
 
-  const { myPosts, myPolls, nickname } = useSelector(state => state.profile);
-  const myId = useSelector(state => state.user.userInfo.userId);
+  const { myPosts, myPolls } = useSelector(state => state.profile);
+  const { userId: myId, nickname: userNick } = useSelector(
+    state => state.user.userInfo,
+  );
+  const { profileNick } = useSelector(state => state.user);
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
-  const [nickInput, setNickInput] = useState(nickname);
+  const [nickInput, setNickInput] = useState(profileNick);
+  console.log("userId");
+  console.log(userId);
 
   useEffect(() => {
     dispatch(getProfileNick(userId));
     dispatch(getMyPosts(userId));
     dispatch(getMyPolls(userId));
-  }, [dispatch, userId]);
+  }, [dispatch, userId, userNick]);
 
   // const posts = [
   //   {
@@ -94,8 +95,8 @@ const Profile = props => {
             />
           ) : (
             <>
-              <Nickname>{nickname}</Nickname>
-              {userId === myId && (
+              <Nickname>{profileNick}</Nickname>
+              {userId == myId && (
                 <button onClick={onClickNickname}>수정</button>
               )}
             </>
