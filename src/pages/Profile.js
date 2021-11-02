@@ -4,18 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 
 import SearchCard from "../components/SearchCard";
 import { getMyPolls, getMyPosts } from "../redux/actions/profile";
+import { getProfileNick, updateNick } from "../redux/actions/user";
 
 const Profile = props => {
   const userId = props.match.params.user_id;
   const dispatch = useDispatch();
 
   const { myPosts, myPolls } = useSelector(state => state.profile);
+  const { userId: myId, nickname: userNick } = useSelector(
+    state => state.user.userInfo,
+  );
+  const { profileNick } = useSelector(state => state.user);
   const [clicked, setClicked] = useState("posts");
+  const [nicknameClick, setNicknameClick] = useState(false);
+  const [nickInput, setNickInput] = useState(profileNick);
+  console.log("userId");
+  console.log(userId);
 
   useEffect(() => {
+    dispatch(getProfileNick(userId));
     dispatch(getMyPosts(userId));
     dispatch(getMyPolls(userId));
-  }, [dispatch, userId]);
+  }, [dispatch, userId, userNick]);
 
   // const posts = [
   //   {
@@ -50,15 +60,48 @@ const Profile = props => {
   const onClickPostBtn = useCallback(type => {
     setClicked(type);
   }, []);
-  console.log("clicked");
-  console.log(clicked);
+
+  const onClickNickname = useCallback(() => {
+    setNicknameClick(true);
+  }, []);
+
+  const onChangeNick = useCallback(e => {
+    setNickInput(e.target.value);
+  }, []);
+
+  const onSubmitNick = useCallback(
+    e => {
+      if (e.key === "Enter") {
+        console.log("nickInput");
+        console.log(nickInput);
+        dispatch(updateNick(nickInput));
+        setNicknameClick(false);
+      }
+    },
+    [dispatch, nickInput],
+  );
 
   return (
     <>
       <div>프로필 페이지 유저 아이디 : {userId}</div>
       <MyInfo>
         <Icon />
-        닉네임
+        <div>
+          {nicknameClick ? (
+            <input
+              onChange={onChangeNick}
+              defaultValue={nickInput}
+              onKeyPress={onSubmitNick}
+            />
+          ) : (
+            <>
+              <Nickname>{profileNick}</Nickname>
+              {userId == myId && (
+                <button onClick={onClickNickname}>수정</button>
+              )}
+            </>
+          )}
+        </div>
       </MyInfo>
       <PostsContainer>
         <PostBtns>
@@ -113,6 +156,7 @@ const Profile = props => {
 
 const MyInfo = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -121,6 +165,11 @@ const MyInfo = styled.div`
   background-color: lightgray;
   margin: auto;
   padding: 50px 100px;
+
+  button {
+    position: absolute;
+    bottom: 8.5em;
+  }
 `;
 
 const Icon = styled.div`
@@ -129,6 +178,11 @@ const Icon = styled.div`
   border-radius: 50%;
   background-color: gray;
   margin: 0 0 15px;
+`;
+
+const Nickname = styled.span`
+  font-size: 1.5em;
+  margin: 0 1em;
 `;
 
 const PostsContainer = styled.div`

@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { getMyPosts, getMyPolls } from "../actions/profile";
 
 export const initialState = {
   myPosts: [],
   myPolls: [],
+  nickname: null,
+  getMyPostsLoading: false,
+  getMyPostsDone: false,
+  getMyPostsError: null,
+  getMyPollsLoading: false,
+  getMyPollsDone: false,
+  getMyPollsError: null,
 };
 const profileSlice = createSlice({
   name: "main",
@@ -13,33 +21,33 @@ const profileSlice = createSlice({
     builder
       // getMyPosts
       .addCase(getMyPosts.pending, state => {
-        state.mainDataLoading = true;
-        state.mainDataDone = false;
-        state.mainDataError = null;
+        state.getMyPostsLoading = true;
+        state.getMyPostsDone = false;
+        state.getMyPostsError = null;
       })
       .addCase(getMyPosts.fulfilled, (state, action) => {
-        state.mainDataLoading = false;
-        state.mainDataDone = true;
+        state.getMyPostsLoading = false;
+        state.getMyPostsDone = true;
         state.myPosts = action.payload.posts;
       })
       .addCase(getMyPosts.rejected, (state, action) => {
-        state.mainDataLoading = false;
-        state.myPosts = action.payload;
+        state.getMyPostsLoading = false;
+        state.getMyPostsError = action.payload;
       })
       // getMyPolls
       .addCase(getMyPolls.pending, state => {
-        state.mainDataLoading = true;
-        state.mainDataDone = false;
-        state.mainDataError = null;
+        state.getMyPollsLoading = true;
+        state.getMyPollsDone = false;
+        state.getMyPollsError = null;
       })
       .addCase(getMyPolls.fulfilled, (state, action) => {
-        state.mainDataLoading = false;
-        state.mainDataDone = true;
+        state.getMyPollsLoading = false;
+        state.getMyPollsDone = true;
         state.myPolls = action.payload.posts;
       })
       .addCase(getMyPolls.rejected, (state, action) => {
-        state.mainDataLoading = false;
-        state.myPolls = action.payload;
+        state.getMyPollsLoading = false;
+        state.getMyPollsError = action.payload;
       }),
 });
 

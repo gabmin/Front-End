@@ -14,9 +14,9 @@ const Wrap = styled.div`
 `;
 
 const StyledSlider = styled(Slider)`
-  .slick-active:last-child {
+  /* .slick-active:last-child {
     opacity: 0.2;
-  }
+  } */
 `;
 
 const ProductSlick = ({ cardList, type }) => {
