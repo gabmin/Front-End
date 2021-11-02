@@ -8,26 +8,31 @@ import {
   deletePostDB,
   likePostDB,
   votePostDB,
-  detailPostDB,
+  PostDB,
+  PostingDB,
 } from "../redux/actions/eitherCard";
 
 const EitherDetail = props => {
   const dispatch = useDispatch();
 
-  const detailPost = useSelector(state => state.eitherCard.detailPost);
+  //해당 eitherId
+  const eitherId = props.match.params.either_id;
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+  //전체 게시글 정보
+  const PostList = useSelector(state => state.eitherCard.eitherPost);
+  const PostLists = PostList && PostList.either;
+  //전체 게시글 중 해당 게시글 찾기
+  const targetPost = PostLists?.find(p => p.eitherId == eitherId);
+  console.log(targetPost);
   const [percent, setPercent] = useState("");
-
-  // 해당 eitherId
-  const eitherId = props.match.params.either_id;
-  //해당 게시글 정보
-  const targetPost = detailPost.either && detailPost.either[0];
+  const [likes, setLikes] = useState(targetPost && targetPost.likeCnt);
 
   useEffect(() => {
-    //특정페이지 데이터 가져오기
-    dispatch(detailPostDB(eitherId));
-  }, [eitherId, dispatch]);
+    //데이터 가져오기
+    dispatch(PostDB());
+    dispatch(PostingDB());
+  }, [dispatch]);
 
   useEffect(() => {
     if (targetPost?.voteCntA === 0 && targetPost?.voteCntB === 0) {
@@ -43,7 +48,10 @@ const EitherDetail = props => {
       setPercent(Math.round(calPercent));
     }
   }, [targetPost]);
-  console.log("선택한 데이터", targetPost);
+
+  useEffect(() => {
+    setLikes(targetPost?.likeCnt);
+  }, [targetPost]);
   //수정하기
   const onClickModify = () => {
     history.push(`/either/${eitherId}/edit`);
@@ -54,7 +62,12 @@ const EitherDetail = props => {
   };
   //좋아요
   const onClickLike = () => {
-    dispatch(likePostDB(eitherId));
+    if (targetPost?.liked !== null) {
+      return;
+    } else {
+      dispatch(likePostDB(eitherId));
+      setLikes(targetPost.likeCnt + 1);
+    }
   };
   //contentA 투표
   const onClickContentA = () => {
@@ -142,8 +155,7 @@ const EitherDetail = props => {
               {targetPost?.nickname} {"|"} {targetPost?.date}
             </div>
             <div style={{ fontSize: "15px", padding: "0px 2em" }}>
-              <button onClick={onClickLike}>좋아요</button>{" "}
-              {targetPost?.likeCnt}
+              <button onClick={onClickLike}>좋아요</button> {likes}
             </div>
           </EitherFooter>
         </Container>

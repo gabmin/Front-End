@@ -186,12 +186,20 @@ const postSlice = createSlice({
       .addCase(votePostDB.fulfilled, (state, action) => {
         state.votePostDBLoading = false;
         state.votePostDBDone = true;
+        //전체
         const post = state.eitherPost.either.find(
-          either => either.eitherId == action.payload.either,
+          either => either.eitherId === action.payload.either,
         );
         post.voteCntA = action.payload.voteCntA;
         post.voteCntB = action.payload.voteCntB;
+        //진행중
+        const posting = state.eitherPosting.either.find(
+          either => either.eitherId === action.payload.either,
+        );
+        posting.voteCntA = action.payload.voteCntA;
+        posting.voteCntB = action.payload.voteCntB;
       })
+
       .addCase(votePostDB.rejected, (state, action) => {
         state.votePostDBLoading = false;
         state.votePostDBError = action.error;

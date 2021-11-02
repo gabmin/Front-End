@@ -23,7 +23,7 @@ const EitherCard = props => {
     likeCnt,
     voteCntA,
     voteCntB,
-    voted,
+    liked,
   } = props;
 
   const [percent, setPercent] = useState("");
@@ -44,10 +44,10 @@ const EitherCard = props => {
       setPercent(Math.round(calPercent));
     }
   }, [voteCntA, voteCntB]);
-  console.log(title, voteCntA, voteCntB);
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+
   //수정하기
   const onClickModify = () => {
     history.push(`/either/${eitherId}/edit`);
@@ -57,9 +57,14 @@ const EitherCard = props => {
     dispatch(deletePostDB(eitherId));
   };
   //좋아요
+  console.log(liked);
   const onClickLike = () => {
-    dispatch(likePostDB(eitherId));
-    setLikes(likeCnt + 1);
+    if (liked !== null) {
+      return;
+    } else {
+      dispatch(likePostDB(eitherId));
+      setLikes(likeCnt + 1);
+    }
   };
   //contentA 투표
   const onClickContentA = () => {
@@ -78,44 +83,31 @@ const EitherCard = props => {
         <EitherText>
           <div>
             <b>OX</b>
-            {nickname === userInfo ? (
-              voteCntA + voteCntB === 0 ? (
-                <div>
-                  <button onClick={onClickModify}>수정하기</button>
-                  <button onClick={onClickDelete}>삭제하기</button>
-                </div>
-              ) : (
+            {/* {nickname === userInfo.nickname ? (
+              voteCntA + voteCntB === 0 ? ( */}
+            <div>
+              <button onClick={onClickModify}>수정하기</button>
+              <button onClick={onClickDelete}>삭제하기</button>
+            </div>
+            {/* ) : (
                 <div>
                   <button onClick={onClickDelete}>삭제하기</button>
                 </div>
               )
-            ) : null}
+            ) : null} */}
           </div>
           <h2>{title}</h2>
         </EitherText>
-        {voted === 1 ? (
-          <div>
-            <EitherButton onClick={onClickContentA} disabled>
-              <h1>O</h1>
-              <ButtonText>{contentA}</ButtonText>
-            </EitherButton>
-            <EitherButton onClick={onClickContentB} disabled>
-              <h1>X</h1>
-              <ButtonText>{contentB}</ButtonText>
-            </EitherButton>
-          </div>
-        ) : (
-          <div>
-            <EitherButton onClick={onClickContentA}>
-              <h1>O</h1>
-              <ButtonText>{contentA}</ButtonText>
-            </EitherButton>
-            <EitherButton onClick={onClickContentB}>
-              <h1>X</h1>
-              <ButtonText>{contentB}</ButtonText>
-            </EitherButton>
-          </div>
-        )}
+        <div>
+          <EitherButton onClick={onClickContentA}>
+            <h1>O</h1>
+            <ButtonText>{contentA}</ButtonText>
+          </EitherButton>
+          <EitherButton onClick={onClickContentB}>
+            <h1>X</h1>
+            <ButtonText>{contentB}</ButtonText>
+          </EitherButton>
+        </div>
         <EitherProgress>
           <ProgressBar
             completed={percent}
@@ -161,6 +153,9 @@ const EitherProgress = styled.div`
 const EitherButton = styled.button`
   width: 40%;
   height: 40%;
+  &:active {
+    background-color: black;
+  }
 `;
 const EitherFooter = styled.div`
   display: flex;

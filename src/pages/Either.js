@@ -8,23 +8,24 @@ import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 
 const Either = props => {
   const dispatch = useDispatch();
-
+  //게시글 리스트 (전체, 진행중, 종료)
   const { eitherPost, eitherPosting, eitherPostComplete } = useSelector(
     state => state.eitherCard,
   );
-
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
-  console.log("전체 리스트 불러옴", PostList);
 
   //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("Post");
-
+  console.log(PostList);
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
     dispatch(PostDB());
+    dispatch(PostingDB());
     setStatus("Post");
   }, [dispatch]);
   //전체 게시글 보여주기
@@ -44,7 +45,12 @@ const Either = props => {
   };
   //게시글 작성하러가기
   const goToWrite = () => {
-    history.push("/write");
+    if (!userInfo.nickname) {
+      alert("로그인 후 가능합니다.");
+      history.push("/login");
+    } else {
+      history.push("/write");
+    }
   };
   return (
     <>

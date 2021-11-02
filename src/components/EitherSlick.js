@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -91,6 +91,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     likeCnt={v.likeCnt}
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
+                    liked={v.liked}
                   />
                 </div>
               ))}
@@ -108,6 +109,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     likeCnt={v.likeCnt}
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
+                    liked={v.liked}
                   />
                 </div>
               ))}
@@ -125,6 +127,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     likeCnt={v.likeCnt}
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
+                    liked={v.liked}
                   />
                 </div>
               ))}
@@ -162,7 +165,7 @@ const StyledSlider = styled(Slider)`
     opacity: 1;
     z-index: 10;
     button:hover {
-      background-color: green;
+      background-color: darkGray;
     }
   }
 `;
