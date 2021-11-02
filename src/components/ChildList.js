@@ -12,13 +12,15 @@ const ChildList = props => {
     return parentComment === commentId;
   });
 
+  console.log("filterList", parentComment);
+
   return (
     <>
       <TempWarpper>
         {filterList.map(p => (
           <div>
             <ChildComment
-              User={p.User}
+              nickname={p.nickname}
               date={p.date}
               id={p.id}
               parentComment={p.parentComment}

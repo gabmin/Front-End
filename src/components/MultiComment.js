@@ -6,17 +6,19 @@ import CommentInput from "../elements/CommentInput";
 
 const MultiComment = props => {
   const dataList = props.dataList;
-  console.log("멀티코멘트", dataList);
+  const multiId = props.multiId;
+  console.log("commentdataList", dataList);
+
   return (
     <>
       <TempWarpper>
         <TextAreaWarpper>
-          <p>댓글 {dataList.commentCnt}개</p>
-          <CommentInput />
+          <p>댓글 {dataList.multi.commentCnt}개</p>
+          <CommentInput multiId={multiId} />
         </TextAreaWarpper>
         <hr></hr>
         <div>
-          <CommentList dataList={dataList} />
+          <CommentList multiId={multiId} dataList={dataList} />
         </div>
       </TempWarpper>
     </>

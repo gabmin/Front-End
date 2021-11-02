@@ -30,6 +30,7 @@ const MultiWrite = () => {
   const contentCRef = useRef();
   const contentDRef = useRef();
   const contentERef = useRef();
+
   const addPost = () => {
     if (title === "") {
       window.alert("no title");
@@ -108,6 +109,7 @@ const MultiWrite = () => {
         }),
       );
     }
+    history.push("/multi");
   };
   console.log(
     "addPost",
