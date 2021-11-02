@@ -21,6 +21,7 @@ const CommentList = props => {
               commentLikeCnt={p.commentLikeCnt}
               comment={p.comment}
               id={p.id}
+              deleted={p.deleted}
             />
           </div>
         ))}

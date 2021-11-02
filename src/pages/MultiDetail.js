@@ -79,6 +79,9 @@ const MultiDetail = props => {
         {dataList && (
           <MultiUnvoted dataList={dataList} render={p => render(p)} />
         )}
+        <div>
+          <MultiComment dataList={dataList} multiId={multiId} />
+        </div>
       </div>
     );
   }

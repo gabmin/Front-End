@@ -28,15 +28,15 @@ const ChildComment = props => {
         <div>{nickname}</div>
         <div>{date}</div>
         <div>{comment}</div>
-        {hiddenBtn ? (
+        {/* {hiddenBtn ? (
           <button onClick={showInput}>댓글작성</button>
         ) : (
           <button onClick={showBtn}>취소</button>
-        )}
+        )} */}
 
-        {hiddenInput ? (
+        {/* {hiddenInput ? (
           <ChildCommentInput parentComment={parentComment} />
-        ) : null}
+        ) : null} */}
       </div>
     </>
   );
