@@ -90,7 +90,7 @@ const Profile = props => {
           {nicknameClick ? (
             <input
               onChange={onChangeNick}
-              defaultValue={nickInput}
+              defaultValue={profileNick}
               onKeyPress={onSubmitNick}
             />
           ) : (
