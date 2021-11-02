@@ -8,7 +8,7 @@ import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCompleteCard = props => {
   const dispatch = useDispatch();
-  const {
+  let {
     eitherId,
     nickname,
     title,
@@ -18,6 +18,7 @@ const EitherCompleteCard = props => {
     likeCnt,
     voteCntA,
     voteCntB,
+    liked,
   } = props;
 
   //유저정보(닉네임)
@@ -27,7 +28,9 @@ const EitherCompleteCard = props => {
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
-    if (voteCntA === 0) {
+    if (voteCntA === 0 && voteCntB === 0) {
+      setPercent(50);
+    } else if (voteCntA === 0) {
       setPercent(100);
     } else if (voteCntB === 0) {
       setPercent(0);
@@ -45,8 +48,12 @@ const EitherCompleteCard = props => {
   };
   //좋아요
   const onClickLike = () => {
-    dispatch(likePostDB(eitherId));
-    setLikes(likeCnt + 1);
+    if (liked !== null) {
+      return;
+    } else {
+      dispatch(likePostDB(eitherId));
+      setLikes(likeCnt + 1);
+    }
   };
 
   return (
@@ -55,7 +62,7 @@ const EitherCompleteCard = props => {
         <EitherText>
           <div>
             <b>OX</b>
-            {nickname === userInfo ? (
+            {nickname === userInfo.nickname ? (
               <div>
                 <button onClick={onClickDelete}>삭제하기</button>
               </div>
@@ -65,31 +72,40 @@ const EitherCompleteCard = props => {
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
         <div>
-          {voteCntA > voteCntB ? (
-            <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-              <h1>O</h1>
-              <h5>{contentA}</h5>
-            </EitherButton>
+          {voteCntA === voteCntB ? (
+            <div>
+              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                <h1>O</h1>
+                <h5>{contentA}</h5>
+              </EitherButton>
+              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                <h1>X</h1>
+                <h5>{contentB}</h5>
+              </EitherButton>
+            </div>
+          ) : voteCntA > voteCntB ? (
+            <div>
+              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                <h1>O</h1>
+                <h5>{contentA}</h5>
+              </EitherButton>
+              <EitherButton disalbed>
+                <h1>X</h1>
+                <h5>{contentB}</h5>
+              </EitherButton>
+            </div>
           ) : (
-            <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-              <h1>X</h1>
-              <h5>{contentB}</h5>
-            </EitherButton>
+            <div>
+              <EitherButton disalbed>
+                <h1>O</h1>
+                <h5>{contentA}</h5>
+              </EitherButton>
+              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                <h1>X</h1>
+                <h5>{contentB}</h5>
+              </EitherButton>
+            </div>
           )}
-          {
-            (voteCntA = voteCntB ? (
-              <div>
-                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                  <h1>O</h1>
-                  <h5>{contentA}</h5>
-                </EitherButton>
-                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                  <h1>X</h1>
-                  <h5>{contentB}</h5>
-                </EitherButton>
-              </div>
-            ) : null)
-          }
         </div>
         <EitherProgress>
           <ProgressBar
