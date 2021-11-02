@@ -12,6 +12,7 @@ const Either = props => {
   const { eitherPost, eitherPosting, eitherPostComplete } = useSelector(
     state => state.eitherCard,
   );
+
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;

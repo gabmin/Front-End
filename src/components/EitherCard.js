@@ -33,17 +33,18 @@ const EitherCard = props => {
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
-    if (voteA === 0 && voteB === 0) {
+    if (voteCntA === 0 && voteCntB === 0) {
       setPercent(50);
-    } else if (voteA === 0) {
+    } else if (voteCntA === 0) {
       setPercent(100);
-    } else if (voteB === 0) {
+    } else if (voteCntB === 0) {
       setPercent(0);
     } else {
-      let calPercent = (voteA / (voteA + voteB)) * 100;
+      let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
       setPercent(Math.round(calPercent));
     }
-  }, [voteA, voteB]);
+  }, [voteCntA, voteCntB]);
+  console.log(title, voteCntA, voteCntB);
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
@@ -63,12 +64,12 @@ const EitherCard = props => {
   //contentA 투표
   const onClickContentA = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "A" } }));
-    setVoteA(voteCntA + 1);
+    setVoteA(voteA);
   };
   //contentB 투표
   const onClickContentB = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "B" } }));
-    setVoteB(voteCntB + 1);
+    setVoteB(voteB);
   };
 
   return (

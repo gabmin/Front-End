@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { current } from "@reduxjs/toolkit";
 
 import {
   PostDB,
@@ -46,8 +47,7 @@ export const initialState = {
   votePostDBLoading: false,
   votePostDBDone: false,
   votePostDBError: null,
-  voteCntA: 0,
-  voteCntB: 0,
+  voteCnt: 0,
   detailPostDBLoading: false,
   detailPostDBDone: false,
   detailPostDBError: null,
@@ -115,7 +115,6 @@ const postSlice = createSlice({
       .addCase(addPostDB.fulfilled, (state, action) => {
         state.addPostDBLoading = false;
         state.addPostDBDone = true;
-        state.eitherPost = [...state.eitherPost, action.payload];
       })
       .addCase(addPostDB.rejected, (state, action) => {
         state.addPostDBLoading = false;
@@ -187,8 +186,11 @@ const postSlice = createSlice({
       .addCase(votePostDB.fulfilled, (state, action) => {
         state.votePostDBLoading = false;
         state.votePostDBDone = true;
-        state.voteCntA = action.payload.voteCntA;
-        state.voteCntB = action.payload.voteCntB;
+        const post = state.eitherPost.either.find(
+          either => either.eitherId == action.payload.either,
+        );
+        post.voteCntA = action.payload.voteCntA;
+        post.voteCntB = action.payload.voteCntB;
       })
       .addCase(votePostDB.rejected, (state, action) => {
         state.votePostDBLoading = false;
