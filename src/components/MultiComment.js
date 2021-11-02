@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 import CommentList from "./CommentList";
 import CommentInput from "../elements/CommentInput";
+import { useSelector } from "react-redux";
 
 const MultiComment = props => {
-  const dataList = props.dataList;
+  const dataList = useSelector(state => state.multiDetail.multiDetail);
   const multiId = props.multiId;
   console.log("commentdataList", dataList);
 
