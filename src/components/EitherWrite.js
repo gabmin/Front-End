@@ -20,7 +20,7 @@ const EitherWrite = props => {
     if (action) {
       if (addPostDBDone) {
         alert("작성이 완료되었습니다!");
-        history.replace("/either");
+        window.location.replace("/either");
       }
       if (addPostDBError) {
         alert("투표 작성에 문제가 발생하였습니다!");

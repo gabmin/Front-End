@@ -163,7 +163,7 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center div {
     transform: scale(1.1);
     opacity: 1;
-    z-index: 10;
+    z-index: 0.5;
     button:hover {
       background-color: darkGray;
     }

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
+import MaterialIcon from "material-icons-react";
 
 import { history } from "../redux/configureStore";
 import {
@@ -131,14 +135,72 @@ const EitherCard = props => {
     <>
       <Container>
         <EitherText>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              margin: "10px 40px",
+            }}
+          >
             <b>OX</b>
             {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
             {nickname === userInfo.nickname ? (
+              // <div>
+              //   <button onClick={onClickModify}>수정하기</button>
+              //   <button onClick={onClickComplete}>투표 종료하기</button>
+              //   <button onClick={onClickDelete}>삭제하기</button>
+              // </div>
               <div>
-                <button onClick={onClickModify}>수정하기</button>
-                <button onClick={onClickComplete}>투표 종료하기</button>
-                <button onClick={onClickDelete}>삭제하기</button>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <MaterialIcon icon="more_vert" size="small" />
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                >
+                  <MenuItem
+                    styles={{
+                      fontSize: "10px",
+                      margin: "-5px",
+                      position: "relative",
+                      zIndex: "1000",
+                    }}
+                    onClick={onClickModify}
+                  >
+                    <MaterialIcon icon="mode_edit_outline" size={15} />
+                    수정하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "10px",
+                      margin: "-5px",
+                      position: "relative",
+                      zIndex: "1000",
+                    }}
+                    onClick={onClickComplete}
+                  >
+                    <MaterialIcon icon="done" size={15} />
+                    투표 종료하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "10px",
+                      margin: "-5px",
+                      position: "relative",
+                      zIndex: "1000",
+                    }}
+                    onClick={onClickDelete}
+                  >
+                    <MaterialIcon icon="delete" size={15} />
+                    삭제하기
+                  </MenuItem>
+                </Menu>
               </div>
             ) : null}
           </div>
@@ -284,9 +346,7 @@ const EitherProgress = styled.div`
 const EitherButton = styled.button`
   width: 40%;
   height: 40%;
-  &:active {
-    background-color: black;
-  }
+  z-index: inherit;
 `;
 const EitherFooter = styled.div`
   display: flex;
