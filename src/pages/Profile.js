@@ -14,7 +14,9 @@ const Profile = props => {
   const { userId: myId, nickname: userNick } = useSelector(
     state => state.user.userInfo,
   );
-  const { profileNick } = useSelector(state => state.user);
+  const { profileNick, getProfileNickLoading } = useSelector(
+    state => state.user,
+  );
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(profileNick);
@@ -90,12 +92,16 @@ const Profile = props => {
           {nicknameClick ? (
             <input
               onChange={onChangeNick}
-              defaultValue={nickInput}
+              defaultValue={profileNick}
               onKeyPress={onSubmitNick}
             />
           ) : (
             <>
-              <Nickname>{profileNick}</Nickname>
+              {
+                <Nickname>
+                  {getProfileNickLoading ? nickInput : profileNick}
+                </Nickname>
+              }
               {userId == myId && (
                 <button onClick={onClickNickname}>수정</button>
               )}

@@ -5,6 +5,8 @@ import {
   PostingDB,
   PostCompleteDB,
   AddPostDB,
+  DeletePostDB,
+  ClosePostDB,
 } from "../actions/multiCard";
 
 export const initialState = {
@@ -23,6 +25,12 @@ export const initialState = {
   AddPostDBLoading: false,
   AddPostDBDone: false,
   AddPostDBError: null,
+  DeletePostDBLoading: false,
+  DeletePostDBDone: false,
+  DeletePostDBError: null,
+  ClosePostDBLoading: false,
+  ClosePostDBDone: false,
+  ClosePostDBError: null,
 };
 
 const multiPostSlice = createSlice({
@@ -85,11 +93,41 @@ const multiPostSlice = createSlice({
       .addCase(AddPostDB.fulfilled, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBDone = true;
-        state.multiPost.unshift(action.payload);
+        // state.multiPost = [...state.multiPost, action.payload];
       })
       .addCase(AddPostDB.rejected, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBError = action.error;
+      })
+      //multi 삭제하기
+      .addCase(DeletePostDB.pending, state => {
+        state.DeletePostDBLoading = true;
+        state.DeletePostDBDone = false;
+        state.DeletePostDBError = null;
+      })
+      .addCase(DeletePostDB.fulfilled, (state, action) => {
+        state.DeletePostDBLoading = false;
+        state.DeletePostDBDone = true;
+        // state.multiPost = [...state.multiPost, action.payload];
+      })
+      .addCase(DeletePostDB.rejected, (state, action) => {
+        state.DeletePostDBLoading = false;
+        state.DeletePostDBError = action.error;
+      })
+      //multi 종료하기
+      .addCase(ClosePostDB.pending, state => {
+        state.ClosePostDBLoading = true;
+        state.ClosePostDBDone = false;
+        state.ClosePostDBError = null;
+      })
+      .addCase(ClosePostDB.fulfilled, (state, action) => {
+        state.ClosePostDBLoading = false;
+        state.ClosePostDBDone = true;
+        // state.multiPost = [...state.multiPost, action.payload];
+      })
+      .addCase(ClosePostDB.rejected, (state, action) => {
+        state.ClosePostDBLoading = false;
+        state.ClosePostDBError = action.error;
       }),
 });
 

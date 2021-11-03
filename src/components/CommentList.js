@@ -5,7 +5,9 @@ import Comment from "./Comment";
 
 const CommentList = props => {
   const dataList = props.dataList;
-  const commentList = props.dataList.Comment;
+  const commentList = props.dataList.comment;
+  const multiId = props.multiId;
+  console.log("commentList", commentList);
   return (
     <>
       <TempWarpper>
@@ -13,11 +15,13 @@ const CommentList = props => {
           <div>
             <Comment
               dataList={dataList}
-              User={p.User}
+              multiId={multiId}
+              nickname={p.nickname}
               date={p.date}
               commentLikeCnt={p.commentLikeCnt}
               comment={p.comment}
               id={p.id}
+              deleted={p.deleted}
             />
           </div>
         ))}

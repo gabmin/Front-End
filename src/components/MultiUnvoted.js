@@ -4,6 +4,8 @@ import AnswerList from "./AnswerList";
 
 const MultiUnvoted = props => {
   const DataList = props.dataList.multi;
+  const render = props.render;
+  console.log("unvotedrender", render);
   return (
     <Container>
       <TitleWrapper>
@@ -14,7 +16,7 @@ const MultiUnvoted = props => {
         <p>{DataList.description}</p>
       </DesWrapper>
       <div>
-        <AnswerList dataList={DataList} />
+        <AnswerList dataList={DataList} render={render} />
       </div>
       <hr></hr>
       <p>{DataList.user}</p>

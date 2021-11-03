@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import CommentInput from "../elements/CommentInput";
+import ChildCommentInput from "../elements/ChildCommentInput";
 
 const ChildComment = props => {
-  const { User, date, id, parentComment, comment } = props;
+  const { nickname, date, id, parentComment, comment } = props;
   const [hiddenInput, setHiddenInput] = useState(false);
   const [hiddenBtn, setHiddenBtn] = useState(true);
   const showInput = () => {
@@ -25,16 +25,18 @@ const ChildComment = props => {
   return (
     <>
       <div>
-        <div>{User[0].nickname}</div>
+        <div>{nickname}</div>
         <div>{date}</div>
         <div>{comment}</div>
-        {hiddenBtn ? (
+        {/* {hiddenBtn ? (
           <button onClick={showInput}>댓글작성</button>
         ) : (
           <button onClick={showBtn}>취소</button>
-        )}
+        )} */}
 
-        {hiddenInput ? <CommentInput /> : null}
+        {/* {hiddenInput ? (
+          <ChildCommentInput parentComment={parentComment} />
+        ) : null} */}
       </div>
     </>
   );

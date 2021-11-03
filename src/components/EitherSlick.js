@@ -81,7 +81,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
               PostList?.map((v, i) => (
                 <div>
                   <EitherCard
-                    key={i}
+                    key="{v}"
                     eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
@@ -91,6 +91,9 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     likeCnt={v.likeCnt}
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
                   />
                 </div>
               ))}
@@ -98,7 +101,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
               PostingList?.map((v, i) => (
                 <div>
                   <EitherCard
-                    key={i}
+                    key="{i}"
                     eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
@@ -108,6 +111,9 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     likeCnt={v.likeCnt}
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
                   />
                 </div>
               ))}
@@ -115,7 +121,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
               PostCompleteList?.map((v, i) => (
                 <div>
                   <EitherCompleteCard
-                    key={i}
+                    key="{v}"
                     eitherId={v.eitherId}
                     nickname={v.nickname}
                     title={v.title}
@@ -125,6 +131,9 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     likeCnt={v.likeCnt}
                     voteCntA={v.voteCntA}
                     voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
                   />
                 </div>
               ))}
@@ -162,7 +171,7 @@ const StyledSlider = styled(Slider)`
     opacity: 1;
     z-index: 10;
     button:hover {
-      background-color: green;
+      background-color: darkGray;
     }
   }
 `;
