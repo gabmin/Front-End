@@ -13,11 +13,8 @@ const MultiDetail = props => {
 
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
-  console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
-  console.log("userInfo", userInfo);
   const dataList = multiDetail.multi && multiDetail;
-  console.log("dataList", dataList);
 
   const render = temp => {
     setState(temp);
@@ -69,7 +66,11 @@ const MultiDetail = props => {
           </div>
         ) : null}
         <div>
-          <MultiComment dataList={dataList} multiId={multiId} />
+          <MultiComment
+            dataList={dataList}
+            multiId={multiId}
+            render={p => render(p)}
+          />
         </div>
       </div>
     );
@@ -79,10 +80,14 @@ const MultiDetail = props => {
         {dataList && (
           <MultiUnvoted dataList={dataList} render={p => render(p)} />
         )}
-        {/* {dataList && (
+        {dataList && (
           <div>
-            <MultiComment dataList={dataList} multiId={multiId} />
-          </div> */}
+            <MultiComment
+              dataList={dataList}
+              multiId={multiId}
+              render={p => render(p)}
+            />
+          </div>
         )}
       </div>
     );
