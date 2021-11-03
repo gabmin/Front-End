@@ -10,6 +10,7 @@ import {
   votePostDB,
   PostDB,
   PostingDB,
+  completePostDB,
 } from "../redux/actions/eitherCard";
 
 const EitherDetail = props => {
@@ -24,16 +25,51 @@ const EitherDetail = props => {
   const PostLists = PostList && PostList.either;
   //전체 게시글 중 해당 게시글 찾기
   const targetPost = PostLists?.find(p => p.eitherId == eitherId);
-  console.log(targetPost);
+
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(targetPost && targetPost.likeCnt);
+  const [choice, setChoice] = useState(targetPost && targetPost.voted);
+  const [action, setAction] = useState(null);
 
   useEffect(() => {
     //데이터 가져오기
     dispatch(PostDB());
     dispatch(PostingDB());
-  }, [dispatch]);
+    setChoice(targetPost?.voted);
+  }, [dispatch, targetPost?.voted]);
 
+  const {
+    completePostDBDone,
+    completePostDBError,
+    deletePostDBDone,
+    deletePostDBError,
+  } = useSelector(state => state.eitherCard);
+  useEffect(() => {
+    if (action) {
+      if (completePostDBDone) {
+        alert("투표가 종료되었습니다.");
+        window.location.replace(`/either/${targetPost.eitherId}`);
+      }
+      if (completePostDBError) {
+        alert("투표 종료에 오류가 발생하였습니다.");
+      }
+      if (deletePostDBDone) {
+        alert("투표가 삭제되었습니다.");
+        window.location.replace("/either");
+      }
+      if (deletePostDBError) {
+        alert("투표 삭제에 오류가 발생하였습니다.");
+      }
+      setAction(null);
+    }
+  }, [
+    completePostDBDone,
+    deletePostDBDone,
+    completePostDBError,
+    deletePostDBError,
+  ]);
+
+  //Progress Bar 퍼센트 계산
   useEffect(() => {
     if (targetPost?.voteCntA === 0 && targetPost?.voteCntB === 0) {
       setPercent(50);
@@ -48,17 +84,26 @@ const EitherDetail = props => {
       setPercent(Math.round(calPercent));
     }
   }, [targetPost]);
-
+  //좋아요
   useEffect(() => {
     setLikes(targetPost?.likeCnt);
   }, [targetPost]);
   //수정하기
   const onClickModify = () => {
-    history.push(`/either/${eitherId}/edit`);
+    if (
+      targetPost.completed === 1 ||
+      targetPost.voteCntA + targetPost.voteCntB > 0
+    ) {
+      alert("이미 투표가 진행되었거나 투표가 종료된 글은 수정할 수 없습니다.");
+      return;
+    } else {
+      history.push(`/either/${eitherId}/edit`);
+    }
   };
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
+    setAction(true);
   };
   //좋아요
   const onClickLike = () => {
@@ -72,10 +117,22 @@ const EitherDetail = props => {
   //contentA 투표
   const onClickContentA = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "A" } }));
+    setChoice("A");
   };
   //contentB 투표
   const onClickContentB = () => {
     dispatch(votePostDB({ eitherId, data: { vote: "B" } }));
+    setChoice("B");
+  };
+  //투표 종료하기
+  const onClickComplete = () => {
+    if (targetPost.completed === 1) {
+      alert("이미 투표가 종료되었습니다.");
+      return;
+    } else {
+      dispatch(completePostDB(eitherId));
+      setAction(true);
+    }
   };
   //돌아가기
   const onClickGoBack = () => {
@@ -98,17 +155,12 @@ const EitherDetail = props => {
             <div>
               <b>OX</b>
               {/* 한개이상의 투표가 있으면 수정불가 */}
-              {targetPost?.nickname === userInfo ? (
-                targetPost.voteCntA + targetPost.voteCntB === 0 ? (
-                  <div>
-                    <button onClick={onClickModify}>수정하기</button>
-                    <button onClick={onClickDelete}>삭제하기</button>
-                  </div>
-                ) : (
-                  <div>
-                    <button onClick={onClickDelete}>삭제하기</button>
-                  </div>
-                )
+              {targetPost?.nickname === userInfo.nickname ? (
+                <div>
+                  <button onClick={onClickModify}>수정하기</button>
+                  <button onClick={onClickComplete}>투표 종료하기</button>
+                  <button onClick={onClickDelete}>삭제하기</button>
+                </div>
               ) : null}
             </div>
             <h2>{targetPost?.title}</h2>
@@ -117,27 +169,94 @@ const EitherDetail = props => {
               <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
             ) : null}
           </EitherText>
-          {targetPost?.voted === 1 || targetPost?.completed === 1 ? (
+          {choice === "A" ? (
             <div>
-              <ChoiceButton onClick={onClickContentA} disabled>
-                <h1>O</h1>
-                <h5>{targetPost?.contentA}</h5>
-              </ChoiceButton>
-              <ChoiceButton onClick={onClickContentB} disabled>
-                <h1>X</h1>
-                <h5>{targetPost?.contentB}</h5>
-              </ChoiceButton>
+              {targetPost?.completed === 1 ? (
+                <EitherButton
+                  onClick={onClickContentA}
+                  style={{ backgroundColor: "orange" }}
+                  disabled
+                >
+                  <h1>O</h1>
+                  <ButtonText>{targetPost?.contentA}</ButtonText>
+                </EitherButton>
+              ) : (
+                <EitherButton
+                  onClick={onClickContentA}
+                  style={{ backgroundColor: "orange" }}
+                >
+                  <h1>O</h1>
+                  <ButtonText>{targetPost?.contentA}</ButtonText>
+                </EitherButton>
+              )}
+              {targetPost?.completed === 1 ? (
+                <EitherButton onClick={onClickContentB} disabled>
+                  <h1>X</h1>
+                  <ButtonText>{targetPost?.contentB}</ButtonText>
+                </EitherButton>
+              ) : (
+                <EitherButton onClick={onClickContentB}>
+                  <h1>X</h1>
+                  <ButtonText>{targetPost?.contentB}</ButtonText>
+                </EitherButton>
+              )}
+            </div>
+          ) : choice === "B" ? (
+            <div>
+              {targetPost?.completed === 1 ? (
+                <EitherButton onClick={onClickContentA} disabled>
+                  <h1>O</h1>
+                  <ButtonText>{targetPost?.contentA}</ButtonText>
+                </EitherButton>
+              ) : (
+                <EitherButton onClick={onClickContentA}>
+                  <h1>O</h1>
+                  <ButtonText>{targetPost?.contentA}</ButtonText>
+                </EitherButton>
+              )}
+              {targetPost?.completed === 1 ? (
+                <EitherButton
+                  onClick={onClickContentB}
+                  style={{ backgroundColor: "orange" }}
+                  disabled
+                >
+                  <h1>X</h1>
+                  <ButtonText>{targetPost?.contentB}</ButtonText>
+                </EitherButton>
+              ) : (
+                <EitherButton
+                  onClick={onClickContentB}
+                  style={{ backgroundColor: "orange" }}
+                >
+                  <h1>X</h1>
+                  <ButtonText>{targetPost?.contentB}</ButtonText>
+                </EitherButton>
+              )}
             </div>
           ) : (
             <div>
-              <ChoiceButton onClick={onClickContentA}>
-                <h1>O</h1>
-                <h5>{targetPost?.contentA}</h5>
-              </ChoiceButton>
-              <ChoiceButton onClick={onClickContentB}>
-                <h1>X</h1>
-                <h5>{targetPost?.contentB}</h5>
-              </ChoiceButton>
+              {targetPost?.completed === 1 ? (
+                <EitherButton onClick={onClickContentA} disabled>
+                  <h1>O</h1>
+                  <ButtonText>{targetPost?.contentA}</ButtonText>
+                </EitherButton>
+              ) : (
+                <EitherButton onClick={onClickContentA}>
+                  <h1>O</h1>
+                  <ButtonText>{targetPost?.contentA}</ButtonText>
+                </EitherButton>
+              )}
+              {targetPost?.completed === 1 ? (
+                <EitherButton onClick={onClickContentB} disabled>
+                  <h1>X</h1>
+                  <ButtonText>{targetPost?.contentB}</ButtonText>
+                </EitherButton>
+              ) : (
+                <EitherButton onClick={onClickContentB}>
+                  <h1>X</h1>
+                  <ButtonText>{targetPost?.contentB}</ButtonText>
+                </EitherButton>
+              )}
             </div>
           )}
           <EitherProgress>
@@ -195,9 +314,15 @@ const Container = styled.div`
 const EitherText = styled.div`
   width: 100%;
 `;
-const ChoiceButton = styled.button`
+const EitherButton = styled.button`
   width: 40%;
-  height: 60%;
+  height: 40%;
+  &:active {
+    background-color: black;
+  }
+`;
+const ButtonText = styled.h5`
+  word-break: break-all;
 `;
 const EitherProgress = styled.div`
   margin: 30px;
