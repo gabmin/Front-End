@@ -8,15 +8,21 @@ const CommentInput = props => {
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const multiId = props.multiId;
+  const render = props.render;
   const [comment, setComment] = useState();
+
   const changeComment = e => {
     setComment(e.target.value);
   };
   const data = { comment, date };
-  console.log("commentinput", multiId, data);
+
+  // const reRender = () => {
+  //   render("newComment");
+  // };
 
   const addComment = () => {
     dispatch(AddCommentDB({ multiId, data }));
+    // reRender();
   };
 
   return (
