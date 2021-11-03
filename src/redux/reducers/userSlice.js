@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
+
 import {
   checkIdDup,
   checkNickDup,
@@ -48,9 +48,9 @@ const userSlice = createSlice({
   reducers: {
     loginUser: state => {
       // state.userInfo.nickname = getCookie("nickname");
-      state.userInfo.nickname = localStorage.getItem("nickname");
+      state.userInfo.nickname = sessionStorage.getItem("nickname");
       // state.userInfo.userId = getCookie("userId");
-      state.userInfo.userId = localStorage.getItem("userId");
+      state.userInfo.userId = sessionStorage.getItem("userId");
       state.loginDone = false;
     },
   },
@@ -67,9 +67,9 @@ const userSlice = createSlice({
         state.userInfo.nickname = action.payload.nickname;
         state.userInfo.userId = action.payload.userId;
         // setCookie("nickname", action.payload.nickname);
-        localStorage.setItem("nickname", action.payload.nickname);
+        sessionStorage.setItem("nickname", action.payload.nickname);
         // setCookie("userId", action.payload.userId);
-        localStorage.setItem("userId", action.payload.userId);
+        sessionStorage.setItem("userId", action.payload.userId);
         state.loginDone = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -85,9 +85,9 @@ const userSlice = createSlice({
       .addCase(logout.fulfilled, (state, action) => {
         state.userInfo = { nickname: null, userId: null };
         // deleteCookie("nickname");
-        localStorage.removeItem("nickname");
+        sessionStorage.removeItem("nickname");
         // deleteCookie("userId");
-        localStorage.removeItem("userId");
+        sessionStorage.removeItem("userId");
         state.logoutLoading = false;
         state.logoutDone = true;
       })
@@ -153,9 +153,9 @@ const userSlice = createSlice({
         state.userInfo.nickname = action.payload.nickname;
         state.profileNick = action.payload.nickname;
         // deleteCookie("nickname");
-        localStorage.removeItem("nickname");
+        sessionStorage.removeItem("nickname");
         // setCookie("nickname", action.payload.nickname);
-        localStorage.setItem("nickname", action.payload.nickname);
+        sessionStorage.setItem("nickname", action.payload.nickname);
       })
       .addCase(updateNick.rejected, (state, action) => {
         state.updateNickLoading = false;
