@@ -2,24 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
+import MaterialIcon from "material-icons-react";
 
 import { history } from "../redux/configureStore";
 import {
   deletePostDB,
   likePostDB,
   votePostDB,
+  completePostDB,
 } from "../redux/actions/eitherCard";
 
 const EitherCard = props => {
   const dispatch = useDispatch();
-  // const { deletePostDBDone } = useSelector(state => state.eitherCard);
-  // useEffect(() => {
-  //   if (deletePostDBDone) {
-  //     alert("삭제가 완료되었습니다!");
-  //     window.location.replace("/either");
-  //     deletePostDBDone = false;
-  //   }
-  // }, [deletePostDBDone]);
   const {
     eitherId,
     nickname,
@@ -40,7 +37,38 @@ const EitherCard = props => {
   const [voteA, setVoteA] = useState(voteCntA);
   const [voteB, setVoteB] = useState(voteCntB);
   const [choice, setChoice] = useState(voted);
+  const [action, setAction] = useState(null);
 
+  const {
+    completePostDBDone,
+    completePostDBError,
+    deletePostDBDone,
+    deletePostDBError,
+  } = useSelector(state => state.eitherCard);
+  useEffect(() => {
+    if (action) {
+      if (completePostDBDone) {
+        alert("투표가 종료되었습니다.");
+        window.location.replace("/either");
+      }
+      if (completePostDBError) {
+        alert("투표 종료에 오류가 발생하였습니다.");
+      }
+      if (deletePostDBDone) {
+        alert("투표가 삭제되었습니다.");
+        window.location.replace("/either");
+      }
+      if (deletePostDBError) {
+        alert("투표 삭제에 오류가 발생하였습니다.");
+      }
+      setAction(null);
+    }
+  }, [
+    completePostDBDone,
+    deletePostDBDone,
+    completePostDBError,
+    deletePostDBError,
+  ]);
   //Progress Bar 퍼센트 계산
   useEffect(() => {
     if (voteCntA === 0 && voteCntB === 0) {
@@ -60,11 +88,17 @@ const EitherCard = props => {
 
   //수정하기
   const onClickModify = () => {
-    history.push(`/either/${eitherId}/edit`);
+    if (completed === 1 || voteCntA + voteCntB > 0) {
+      alert("이미 투표가 진행되었거나 투표가 종료된 글은 수정할 수 없습니다.");
+      return;
+    } else {
+      history.push(`/either/${eitherId}/edit`);
+    }
   };
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
+    setAction(true);
   };
   //좋아요
   const onClickLike = () => {
@@ -87,25 +121,87 @@ const EitherCard = props => {
     setVoteB(voteB);
     setChoice("B");
   };
-
+  //투표 종료하기
+  const onClickComplete = () => {
+    if (completed === 1) {
+      alert("이미 투표가 종료되었습니다.");
+      return;
+    } else {
+      dispatch(completePostDB(eitherId));
+      setAction(true);
+    }
+  };
   return (
     <>
       <Container>
         <EitherText>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              margin: "10px 40px",
+            }}
+          >
             <b>OX</b>
-            {/* 자신이 작성한 글에 따른 수정,삭제하기 버튼 보여주기 */}
+            {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
             {nickname === userInfo.nickname ? (
-              voteCntA + voteCntB !== 0 || completed === 1 ? (
-                <div>
-                  <button onClick={onClickDelete}>삭제하기</button>
-                </div>
-              ) : (
-                <div>
-                  <button onClick={onClickModify}>수정하기</button>
-                  <button onClick={onClickDelete}>삭제하기</button>
-                </div>
-              )
+              // <div>
+              //   <button onClick={onClickModify}>수정하기</button>
+              //   <button onClick={onClickComplete}>투표 종료하기</button>
+              //   <button onClick={onClickDelete}>삭제하기</button>
+              // </div>
+              <div>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <MaterialIcon icon="more_vert" size="small" />
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                >
+                  <MenuItem
+                    styles={{
+                      fontSize: "10px",
+                      margin: "-5px",
+                      position: "relative",
+                      zIndex: "1000",
+                    }}
+                    onClick={onClickModify}
+                  >
+                    <MaterialIcon icon="mode_edit_outline" size={15} />
+                    수정하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "10px",
+                      margin: "-5px",
+                      position: "relative",
+                      zIndex: "1000",
+                    }}
+                    onClick={onClickComplete}
+                  >
+                    <MaterialIcon icon="done" size={15} />
+                    투표 종료하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "10px",
+                      margin: "-5px",
+                      position: "relative",
+                      zIndex: "1000",
+                    }}
+                    onClick={onClickDelete}
+                  >
+                    <MaterialIcon icon="delete" size={15} />
+                    삭제하기
+                  </MenuItem>
+                </Menu>
+              </div>
             ) : null}
           </div>
           <h2>{title}</h2>
@@ -250,9 +346,7 @@ const EitherProgress = styled.div`
 const EitherButton = styled.button`
   width: 40%;
   height: 40%;
-  &:active {
-    background-color: black;
-  }
+  z-index: inherit;
 `;
 const EitherFooter = styled.div`
   display: flex;

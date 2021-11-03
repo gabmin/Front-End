@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-import { history } from "../redux/configureStore";
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCompleteCard = props => {
@@ -23,8 +22,26 @@ const EitherCompleteCard = props => {
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(likeCnt);
+  const [action, setAction] = useState(null);
+
+  const { deletePostDBDone, deletePostDBError } = useSelector(
+    state => state.eitherCard,
+  );
+  useEffect(() => {
+    if (action) {
+      if (deletePostDBDone) {
+        alert("투표가 삭제되었습니다.");
+        window.location.replace("/either");
+      }
+      if (deletePostDBError) {
+        alert("투표 삭제에 오류가 발생하였습니다.");
+      }
+      setAction(null);
+    }
+  }, [deletePostDBDone, deletePostDBError]);
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
@@ -43,8 +60,7 @@ const EitherCompleteCard = props => {
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
-    alert("삭제되었습니다.");
-    history.push("/either");
+    setAction(true);
   };
   //좋아요
   const onClickLike = () => {

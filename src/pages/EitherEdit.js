@@ -102,10 +102,6 @@ const EitherEdit = props => {
       editPostDB({ eitherId, data: { title, contentA, contentB, editedDate } }),
     );
   };
-  //완료하기
-  const onClickComplete = () => {
-    dispatch(completePostDB(eitherId));
-  };
 
   return (
     <>
@@ -122,7 +118,7 @@ const EitherEdit = props => {
                 <input
                   type="radio"
                   id="either"
-                  checked={eitherState}
+                  checked={true}
                   onChange={EitherRadioBtn}
                 />
                 <label htmlFor="either">찬반</label>
@@ -131,7 +127,7 @@ const EitherEdit = props => {
                 <input
                   type="radio"
                   id="multi"
-                  checked={multiState}
+                  checked={false}
                   onChange={MultiRadioBtn}
                 />
                 <label htmlFor="multi">객관식</label>
@@ -171,11 +167,6 @@ const EitherEdit = props => {
             <div>
               <button onClick={onClickEdit}>수정하기</button>
             </div>
-            {targetPost?.completed === 0 ? (
-              <div>
-                <button onClick={onClickComplete}>종료하기</button>
-              </div>
-            ) : null}
           </VoteBox>
         </ContentBox>
       </Wrap>
