@@ -5,10 +5,12 @@ import styled from "styled-components";
 import Comment from "./Comment";
 
 const CommentList = props => {
-  const dataList = useSelector(state => state.multiDetail.multiDetail);
+  // const dataList = useSelector(state => state.multiDetail.multiDetail);
+  const dataList = props.dataList;
   const commentList = dataList.comment;
   const multiId = props.multiId;
   const render = props.render;
+  const renderState = props.renderState;
 
   return (
     <>
@@ -19,10 +21,11 @@ const CommentList = props => {
               dataList={dataList}
               multiId={multiId}
               render={render}
+              renderState={renderState}
               nickname={p.nickname}
-              date={p.date}
+              commetDate={p.date}
               commentLikeCnt={p.commentLikeCnt}
-              comment={p.comment}
+              parentComment={p.comment}
               id={p.id}
               deleted={p.deleted}
             />
