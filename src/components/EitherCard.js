@@ -140,6 +140,7 @@ const EitherCard = props => {
               display: "flex",
               justifyContent: "space-between",
               margin: "10px 40px",
+              zIndex: "999999999",
             }}
           >
             <b>OX</b>
@@ -163,41 +164,33 @@ const EitherCard = props => {
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
+                  portal={true}
                 >
                   <MenuItem
                     styles={{
-                      fontSize: "10px",
-                      margin: "-5px",
-                      position: "relative",
-                      zIndex: "1000",
+                      fontSize: "20px",
                     }}
                     onClick={onClickModify}
                   >
-                    <MaterialIcon icon="mode_edit_outline" size={15} />
+                    <MaterialIcon icon="mode_edit_outline" size="small" />
                     수정하기
                   </MenuItem>
                   <MenuItem
                     styles={{
-                      fontSize: "10px",
-                      margin: "-5px",
-                      position: "relative",
-                      zIndex: "1000",
+                      fontSize: "20px",
                     }}
                     onClick={onClickComplete}
                   >
-                    <MaterialIcon icon="done" size={15} />
+                    <MaterialIcon icon="done" size="small" />
                     투표 종료하기
                   </MenuItem>
                   <MenuItem
                     styles={{
-                      fontSize: "10px",
-                      margin: "-5px",
-                      position: "relative",
-                      zIndex: "1000",
+                      fontSize: "20px",
                     }}
                     onClick={onClickDelete}
                   >
-                    <MaterialIcon icon="delete" size={15} />
+                    <MaterialIcon icon="delete" size="small" />
                     삭제하기
                   </MenuItem>
                 </Menu>
