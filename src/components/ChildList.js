@@ -5,6 +5,7 @@ import ChildComment from "./ChildComment";
 
 const ChildList = props => {
   const childList = props.dataList.childComment;
+  const multiId = props.multiId;
   const { parentComment } = props;
 
   const filterList = childList.filter(p => {
@@ -12,19 +13,19 @@ const ChildList = props => {
     return parentComment === commentId;
   });
 
-  console.log("filterList", parentComment);
-
   return (
     <>
       <TempWarpper>
         {filterList.map(p => (
           <div>
             <ChildComment
+              multiId={multiId}
               nickname={p.nickname}
               date={p.date}
               id={p.id}
               parentComment={p.parentComment}
               comment={p.comment}
+              deleted={p.deleted}
             />
           </div>
         ))}

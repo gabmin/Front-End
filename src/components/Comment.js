@@ -1,25 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import ChildList from "./ChildList";
 import ChildCommentInput from "../elements/ChildCommentInput";
-import { useDispatch, useSelector } from "react-redux";
 import { DelCommentDB } from "../redux/actions/comment";
 
 const Comment = props => {
+  const { nickname, date, commentLikeCnt, comment, id, deleted } = props;
   const dataList = props.dataList;
   const multiId = props.multiId;
+  const render = props.render;
   const userInfo = useSelector(state => state.user.userInfo);
+
   const dispatch = useDispatch();
-  console.log("userInfo", userInfo);
-
-  const { nickname, date, commentLikeCnt, comment, id, deleted } = props;
-
-  console.log("코멘트데이터", dataList);
-  console.log("nickname", nickname, props.nickname);
-
   const [hiddenInput, setHiddenInput] = useState(false);
   const [hiddenBtn, setHiddenBtn] = useState(true);
+
   const showInput = () => {
     if (hiddenInput === false) {
       setHiddenInput(true);
@@ -28,6 +25,7 @@ const Comment = props => {
       setHiddenInput(false);
     }
   };
+
   const showBtn = () => {
     if (hiddenBtn === true) {
       setHiddenBtn(false);
@@ -37,10 +35,13 @@ const Comment = props => {
     }
   };
 
-  console.log("commentId", id, multiId, deleted);
+  const reRender = () => {
+    render("delcomment");
+  };
 
   const delComment = () => {
     dispatch(DelCommentDB({ id, multiId }));
+    reRender();
   };
 
   return (
@@ -68,7 +69,7 @@ const Comment = props => {
           <ChildCommentInput parentComment={id} multiId={multiId} />
         ) : null}
         <div>
-          <ChildList parentComment={id} dataList={dataList} />
+          <ChildList parentComment={id} dataList={dataList} multiId={multiId} />
         </div>
       </TempWarpper>
     </>

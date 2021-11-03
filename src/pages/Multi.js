@@ -15,60 +15,13 @@ const Multi = props => {
   const ingCardList = multiPosting.multi;
   const completeCardList = multiPostComplete.multi;
   console.log("멀티포스트", cardList);
-  // const cardList = [
-  //   {
-  //     multiId: "1111",
-  //     title: "title",
-  //     description: "description",
-  //     user: "user",
-  //     date: "date",
-  //     editedDate: "editedDate",
-  //     completed: false,
-  //     likeCnt: "0",
-  //     commentCnt: "0",
-  //   },
-  //   {
-  //     multiId: "2222",
-  //     title: "title1",
-  //     description: "description1",
-  //     user: "user1",
-  //     date: "date1",
-  //     editedDate: "editedDate1",
-  //     completed: false,
-  //     likeCnt: "1",
-  //     commentCnt: "1",
-  //   },
-  //   {
-  //     multiId: "3333",
-  //     title: "title2",
-  //     description: "description2",
-  //     user: "user2",
-  //     date: "date2",
-  //     editedDate: "editedDate2",
-  //     completed: false,
-  //     likeCnt: "2",
-  //     commentCnt: "2",
-  //   },
-  //   {
-  //     multiId: "4444",
-  //     title: "title3",
-  //     description: "description3",
-  //     user: "user3",
-  //     date: "date3",
-  //     editedDate: "editedDate3",
-  //     completed: false,
-  //     likeCnt: "3",
-  //     commentCnt: "3",
-  //   },
-  // ];
-  // const cardList = multiPost.multi;
-  // console.log("카드리스트", cardList);
+
   const [status, setStatus] = useState("Post");
 
   useEffect(() => {
     dispatch(PostDB());
     setStatus("Post");
-  }, []);
+  }, [dispatch]);
 
   const showPost = () => {
     dispatch(PostDB());
