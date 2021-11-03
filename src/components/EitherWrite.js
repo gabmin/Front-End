@@ -11,17 +11,21 @@ const EitherWrite = props => {
   const [title, setTitle] = useState("");
   const [contentA, setContentA] = useState("");
   const [contentB, setContentB] = useState("");
+  const [action, setAction] = useState(null);
 
   const { addPostDBDone, addPostDBError } = useSelector(
     state => state.eitherCard,
   );
   useEffect(() => {
-    if (addPostDBDone) {
-      alert("작성이 완료되었습니다!");
-      history.replace("/either");
-    }
-    if (addPostDBError) {
-      alert("투표 작성에 문제가 발생하였습니다!");
+    if (action) {
+      if (addPostDBDone) {
+        alert("작성이 완료되었습니다!");
+        history.replace("/either");
+      }
+      if (addPostDBError) {
+        alert("투표 작성에 문제가 발생하였습니다!");
+      }
+      setAction(null);
     }
   }, [addPostDBDone, addPostDBError]);
 
@@ -45,6 +49,7 @@ const EitherWrite = props => {
       alert("모든 항목을 입력해주세요!");
     } else {
       dispatch(addPostDB({ title, contentA, contentB, date }));
+      setAction(true);
     }
   };
   //취소하기
