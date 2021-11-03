@@ -78,64 +78,58 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
         <div>
           <StyledSlider {...settings}>
             {PostList &&
-              PostList?.map((v, i) => (
-                <div>
-                  <EitherCard
-                    key="{v}"
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                  />
-                </div>
+              PostList?.map(v => (
+                <EitherCard
+                  key={v.toString()}
+                  eitherId={v.eitherId}
+                  nickname={v.nickname}
+                  title={v.title}
+                  contentA={v.contentA}
+                  contentB={v.contentB}
+                  date={v.date}
+                  likeCnt={v.likeCnt}
+                  voteCntA={v.voteCntA}
+                  voteCntB={v.voteCntB}
+                  liked={v.liked}
+                  voted={v.voted}
+                  completed={v.completed}
+                />
               ))}
             {PostingList &&
-              PostingList?.map((v, i) => (
-                <div>
-                  <EitherCard
-                    key="{i}"
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                  />
-                </div>
+              PostingList?.map(v => (
+                <EitherCard
+                  key={v.toString()}
+                  eitherId={v.eitherId}
+                  nickname={v.nickname}
+                  title={v.title}
+                  contentA={v.contentA}
+                  contentB={v.contentB}
+                  date={v.date}
+                  likeCnt={v.likeCnt}
+                  voteCntA={v.voteCntA}
+                  voteCntB={v.voteCntB}
+                  liked={v.liked}
+                  voted={v.voted}
+                  completed={v.completed}
+                />
               ))}
             {PostCompleteList &&
-              PostCompleteList?.map((v, i) => (
-                <div>
-                  <EitherCompleteCard
-                    key="{v}"
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                  />
-                </div>
+              PostCompleteList?.map(v => (
+                <EitherCompleteCard
+                  key={v.toString()}
+                  eitherId={v.eitherId}
+                  nickname={v.nickname}
+                  title={v.title}
+                  contentA={v.contentA}
+                  contentB={v.contentB}
+                  date={v.date}
+                  likeCnt={v.likeCnt}
+                  voteCntA={v.voteCntA}
+                  voteCntB={v.voteCntB}
+                  liked={v.liked}
+                  voted={v.voted}
+                  completed={v.completed}
+                />
               ))}
           </StyledSlider>
         </div>
