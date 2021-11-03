@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CommentInput from "../elements/CommentInput";
+
 import ChildList from "./ChildList";
+import CommentInput from "../elements/CommentInput";
 
 const Comment = props => {
   const dataList = props.dataList;
@@ -31,7 +32,7 @@ const Comment = props => {
 
   return (
     <>
-      <TempDiv>
+      <TempWarpper>
         <div>{User[0].nickname}</div>
         <div>{date}</div>
         <div>좋아요 {commentLikeCnt}</div>
@@ -46,12 +47,12 @@ const Comment = props => {
         <div>
           <ChildList parentComment={id} dataList={dataList} />
         </div>
-      </TempDiv>
+      </TempWarpper>
     </>
   );
 };
 
-const TempDiv = styled.div`
+const TempWarpper = styled.div`
   background-color: white;
 `;
 

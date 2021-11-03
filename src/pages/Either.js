@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 
@@ -23,7 +24,7 @@ const Either = props => {
   useEffect(() => {
     dispatch(PostDB());
     setStatus("Post");
-  }, []);
+  }, [dispatch]);
   //전체 게시글 보여주기
   const onClickPost = () => {
     dispatch(PostDB());
@@ -39,7 +40,10 @@ const Either = props => {
     dispatch(PostCompleteDB());
     setStatus("CompletePost");
   };
-
+  //게시글 작성하러가기
+  const goToWrite = () => {
+    history.push("/write");
+  };
   return (
     <>
       <Wrap>
@@ -57,6 +61,9 @@ const Either = props => {
             <EitherSlick PostCompleteList={PostCompleteList} />
           ) : null}
         </SlickLayout>
+        <QuestionBtnDiv>
+          <QuestionBtn onClick={goToWrite}>나도질문하기</QuestionBtn>
+        </QuestionBtnDiv>
       </Wrap>
     </>
   );
@@ -86,5 +93,18 @@ const SlickLayout = styled.div`
   width: 100%;
   height: 100%;
 `;
-
+const QuestionBtnDiv = styled.div`
+  margin: 50px 0px;
+  width: 100%;
+  text-align: center;
+`;
+const QuestionBtn = styled.button`
+  border: none;
+  background-color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    color: #777777;
+  }
+`;
 export default Either;

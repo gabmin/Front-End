@@ -121,7 +121,6 @@ const Signup = () => {
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
-      console.log(id, nickname, password, passwordCheck, age);
 
       if (!idChecker()) return;
       if (!nickChecker()) return;
@@ -243,6 +242,7 @@ const Signup = () => {
                 value={password}
                 onChange={setPassword}
                 placeholder="비밀번호"
+                autocomplete="new-password"
               />
             </InputWrapper>
             {passwordError && (

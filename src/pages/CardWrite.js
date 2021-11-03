@@ -18,23 +18,16 @@ const CardWrite = () => {
     history.push("/");
   });
 
-  //radio button
-  const EitherRadioBtn = () => {
-    if (eitherState === true) {
-      return;
-    } else {
-      setEitherState(!eitherState);
-      setMultiState(!multiState);
-    }
+  // radio button
+  const EitherRadioBtn = e => {
+    setEitherState(!eitherState);
+    setMultiState(!multiState);
   };
-  const MultiRadioBtn = () => {
-    if (multiState === true) {
-      return;
-    } else {
-      setEitherState(!eitherState);
-      setMultiState(!multiState);
-    }
+  const MultiRadioBtn = e => {
+    setEitherState(!eitherState);
+    setMultiState(!multiState);
   };
+
   return (
     <>
       <Wrap>
@@ -46,28 +39,30 @@ const CardWrite = () => {
           <Index>
             <h4 style={{ width: "30px" }}>구분</h4>
             <div style={{ display: "flex" }}>
-              <RadioButton>
+              <RadioBtnWarpper>
                 <input
+                  name="write"
                   type="radio"
                   id="either"
                   checked={eitherState}
                   onChange={EitherRadioBtn}
                 />
-                <label htmlFor="either">찬반</label>
-              </RadioButton>
-              <RadioButton>
+                <label>찬반</label>
+              </RadioBtnWarpper>
+              <RadioBtnWarpper>
                 <input
+                  name="write"
                   type="radio"
                   id="multi"
                   checked={multiState}
                   onChange={MultiRadioBtn}
                 />
-                <label htmlFor="multi">객관식</label>
-              </RadioButton>
+                <label>객관식</label>
+              </RadioBtnWarpper>
             </div>
           </Index>
-          <EitherWrite />
-          <MultiWrite />
+          {eitherState ? <EitherWrite /> : null}
+          {multiState ? <MultiWrite /> : null}
         </ContentBox>
       </Wrap>
     </>
@@ -93,7 +88,7 @@ const ContentBox = styled.div`
   padding: 1em;
   box-sizing: border-box;
 `;
-const RadioButton = styled.div`
+const RadioBtnWarpper = styled.div`
   width: 70px;
   display: flex;
   margin: 0px 0px 0px 60px;

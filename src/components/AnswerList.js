@@ -22,7 +22,7 @@ const AnswerList = props => {
   };
 
   return (
-    <Answerdiv>
+    <Container>
       <AnswerBtn color="#777777" onClick={selectAnswer}>
         {DataList.contentA}
       </AnswerBtn>
@@ -38,11 +38,11 @@ const AnswerList = props => {
       <AnswerBtn color="#777777" onClick={selectAnswer}>
         {DataList.contentE}
       </AnswerBtn>
-    </Answerdiv>
+    </Container>
   );
 };
 
-const Answerdiv = styled.div`
+const Container = styled.div`
   height: 100%;
   width: 100%;
   margin: auto;

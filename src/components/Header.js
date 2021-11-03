@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
-import { loginUser, logoutUser } from "../redux/reducers/userSlice";
+import { loginUser } from "../redux/reducers/userSlice";
+import { logout } from "../redux/actions/user";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Header = () => {
   }, []);
 
   const onClickLogout = useCallback(() => {
-    dispatch(logoutUser());
+    dispatch(logout());
   }, [dispatch]);
 
   const onChangeSearch = useCallback(e => {

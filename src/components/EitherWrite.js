@@ -32,6 +32,10 @@ const EitherWrite = props => {
     alert("저장이 완료되었습니다!");
     history.push("/either");
   };
+  //취소하기
+  const onClickCancle = () => {
+    history.goBack();
+  };
   return (
     <>
       <hr />
@@ -65,7 +69,7 @@ const EitherWrite = props => {
           </EitherButton>
         </EitherButtonGrid>
         <div>
-          <button>취소</button>
+          <button onClick={onClickCancle}>취소</button>
           <button onClick={onClickSave}>완료</button>
         </div>
       </VoteBox>
@@ -93,7 +97,7 @@ const VoteBox = styled.div`
 
 const EitherButtonGrid = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -112,6 +116,7 @@ const ButtonInput = styled.input`
   border: none;
   outline: none;
   width: 80%;
+  font-size: 16px;
   text-align: center;
 `;
 

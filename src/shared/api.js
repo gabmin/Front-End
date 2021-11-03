@@ -1,12 +1,10 @@
 import axios from "axios";
 
 // Axios 인스턴스 설정
-const api = axios.create(
-  {
-    baseURL: "http://13.124.99.118",
-  },
-  { withCredentials: true },
-);
+const api = axios.create({
+  baseURL: "https://starandnight.shop",
+  withCredentials: true,
+});
 
 const getToken = async () => {
   const token = localStorage.getItem("token");
