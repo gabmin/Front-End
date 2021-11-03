@@ -9,7 +9,6 @@ const AnswerList = props => {
   const DataList = props.dataList;
   const multiId = DataList.multiId;
   const render = props.render;
-  console.log("answerrender", render);
 
   const [color, setColor] = useState("");
   const [select, setSelect] = useState("");

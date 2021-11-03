@@ -6,6 +6,7 @@ export const initialState = {
   AddChildDBLoading: false,
   AddChildDBDone: false,
   AddChildDBError: null,
+  ChildCommentDB: [],
 };
 
 const childCommentSlice = createSlice({
@@ -23,7 +24,7 @@ const childCommentSlice = createSlice({
       .addCase(AddChildDB.fulfilled, (state, action) => {
         state.AddChildDBLoading = false;
         state.AddChildDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        // state.ChildCommentDB = [...state.ChildCommentDB, action.payload];
       })
       .addCase(AddChildDB.rejected, (state, action) => {
         state.AddChildDBLoading = false;

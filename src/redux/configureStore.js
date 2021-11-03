@@ -11,6 +11,8 @@ import multiPostSlice from "./reducers/multiCardSlice";
 import profileSlice from "./reducers/profileSlice";
 import searchSlice from "./reducers/searchSlice";
 import multiDetailSlice from "./reducers/multiDetailSlice";
+import commentSlice from "./reducers/commentSlice";
+import childCommentSlice from "./reducers/childCommentSlice";
 
 export const history = createBrowserHistory();
 
@@ -24,6 +26,8 @@ const reducer = combineReducers({
   multiDetail: multiDetailSlice.reducer,
   profile: profileSlice.reducer,
   search: searchSlice.reducer,
+  comment: commentSlice.reducer,
+  childComment: childCommentSlice.reducer,
 });
 
 const middlewares = [];

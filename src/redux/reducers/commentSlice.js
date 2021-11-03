@@ -9,6 +9,7 @@ export const initialState = {
   DelCommentDBLoading: false,
   DelCommentDBDone: false,
   DelCommentDBError: null,
+  NewCommentList: [],
 };
 
 const commentSlice = createSlice({
@@ -26,7 +27,7 @@ const commentSlice = createSlice({
       .addCase(AddCommentDB.fulfilled, (state, action) => {
         state.AddCommentDBLoading = false;
         state.AddCommentDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        state.multiPost = [...state.multiPost, action.payload];
       })
       .addCase(AddCommentDB.rejected, (state, action) => {
         state.AddCommentDBLoading = false;
