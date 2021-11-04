@@ -3,7 +3,7 @@ import { current } from "@reduxjs/toolkit";
 
 import { DetailDB, DetailVote } from "../actions/multiDetail";
 import { AddCommentDB, EditCommentDB, DelCommentDB } from "../actions/comment";
-import { AddChildDB, DelChildDB } from "../actions/childComment";
+import { AddChildDB, EditChildDB, DelChildDB } from "../actions/childComment";
 
 export const initialState = {
   DetailDBLoading: false,
@@ -26,6 +26,9 @@ export const initialState = {
   AddChildDBLoading: false,
   AddChildDBDone: false,
   AddChildDBError: null,
+  EditChildDBLoading: false,
+  EditChildDBDone: false,
+  EditChildDBError: null,
   DelChildDBLoading: false,
   DelChildDBDone: false,
   DelChildDBError: null,
@@ -165,6 +168,30 @@ const multiDetailSlice = createSlice({
       .addCase(AddChildDB.rejected, (state, action) => {
         state.AddChildDBLoading = false;
         state.AddChildDBError = action.error;
+      })
+      //childcomment 수정하기
+      .addCase(EditChildDB.pending, state => {
+        state.EditChildDBLoading = true;
+        state.EditChildDBDone = false;
+        state.EditChildDBError = null;
+      })
+      .addCase(EditChildDB.fulfilled, (state, action) => {
+        state.EditChildDBLoading = false;
+        state.EditChildDBDone = true;
+        const targetChildIdx = state.multiDetail.childComment.findIndex(p => {
+          const newTargetId = p.id;
+          return newTargetId == action.payload.childComment.id;
+        });
+
+        state.multiDetail.childComment.splice(
+          targetChildIdx,
+          1,
+          action.payload.childComment,
+        );
+      })
+      .addCase(EditChildDB.rejected, (state, action) => {
+        state.EditChildDBLoading = false;
+        state.EditChildDBError = action.error;
       })
       //childcomment 삭제하기
       .addCase(DelChildDB.pending, state => {

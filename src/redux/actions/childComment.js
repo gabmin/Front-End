@@ -18,11 +18,27 @@ export const AddChildDB = createAsyncThunk(
   },
 );
 
+// childComment 수정하기
+export const EditChildDB = createAsyncThunk(
+  "multiPost/EditChildDB",
+  async (data, { rejectWithValue }) => {
+    console.log("editchildData", data);
+    try {
+      const response = await api.patch(
+        `/posts/multi/${data.multiId}/childComment/${data.id}/edit`,
+        data.data,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
 // childComment 삭제하기
 export const DelChildDB = createAsyncThunk(
   "multiPost/DelChildDB",
   async (data, { rejectWithValue }) => {
-    console.log("delchildData", data);
     try {
       const response = await api.patch(
         `/posts/multi/${data.multiId}/childComment/${data.id}/delete`,
