@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AddLikeDB } from "../redux/actions/multiLike";
 
 const MultiVoted = props => {
+  const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.userInfo);
   const DataList = props.dataList.multi;
+  const multiId = props.multiId;
+  const [likes, setLikes] = useState(DataList.likeCnt);
+
   const TotalCnt =
     DataList.voteCntA +
     DataList.voteCntB +
@@ -43,6 +49,15 @@ const MultiVoted = props => {
   setTimeout(() => {
     setPerE(PerE.toFixed(0));
   }, 1800);
+
+  const addLike = () => {
+    if (DataList.liked === null) {
+      dispatch(AddLikeDB(multiId));
+      setLikes(likes + 1);
+    } else {
+      return;
+    }
+  };
 
   return (
     <Container>
@@ -124,12 +139,19 @@ const MultiVoted = props => {
       {/* {DataList.nickname === userInfo.nickname ? (
         <button>투표 종료</button>
       ) : null} */}
+      <hr />
+      <div>
+        <p>작성자{DataList.nickname}</p>
+        <p>{DataList.date}</p>
+        <button onClick={addLike}>좋아요</button>
+        {likes}
+      </div>
     </Container>
   );
 };
 
 const Container = styled.div`
-  max-width: 50%;
+  max-width: 100%;
   margin: auto;
   padding: 20px;
 `;
