@@ -140,7 +140,6 @@ const EitherCard = props => {
               display: "flex",
               justifyContent: "space-between",
               margin: "10px 40px",
-              zIndex: "999999999",
             }}
           >
             <b>OX</b>

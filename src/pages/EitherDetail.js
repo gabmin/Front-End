@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
+import MaterialIcon from "material-icons-react";
 
 import { history } from "../redux/configureStore";
 import {
@@ -156,10 +160,54 @@ const EitherDetail = props => {
               <b>OX</b>
               {/* 한개이상의 투표가 있으면 수정불가 */}
               {targetPost?.nickname === userInfo.nickname ? (
+                // <div>
+                //   <button onClick={onClickModify}>수정하기</button>
+                //   <button onClick={onClickComplete}>투표 종료하기</button>
+                //   <button onClick={onClickDelete}>삭제하기</button>
+                // </div>
                 <div>
-                  <button onClick={onClickModify}>수정하기</button>
-                  <button onClick={onClickComplete}>투표 종료하기</button>
-                  <button onClick={onClickDelete}>삭제하기</button>
+                  <Menu
+                    menuButton={
+                      <MenuButton
+                        styles={{
+                          border: "none",
+                          backgroundColor: "white",
+                        }}
+                      >
+                        <MaterialIcon icon="more_vert" size="small" />
+                      </MenuButton>
+                    }
+                    menuStyles={{ border: "0px solid" }}
+                    portal={true}
+                  >
+                    <MenuItem
+                      styles={{
+                        fontSize: "20px",
+                      }}
+                      onClick={onClickModify}
+                    >
+                      <MaterialIcon icon="mode_edit_outline" size="small" />
+                      수정하기
+                    </MenuItem>
+                    <MenuItem
+                      styles={{
+                        fontSize: "20px",
+                      }}
+                      onClick={onClickComplete}
+                    >
+                      <MaterialIcon icon="done" size="small" />
+                      투표 종료하기
+                    </MenuItem>
+                    <MenuItem
+                      styles={{
+                        fontSize: "20px",
+                      }}
+                      onClick={onClickDelete}
+                    >
+                      <MaterialIcon icon="delete" size="small" />
+                      삭제하기
+                    </MenuItem>
+                  </Menu>
                 </div>
               ) : null}
             </div>
