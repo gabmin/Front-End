@@ -156,9 +156,15 @@ const EitherDetail = props => {
         </EitherButtonGrid>
         <Container>
           <EitherText>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                margin: "10px 40px",
+              }}
+            >
               <b>OX</b>
-              {/* 한개이상의 투표가 있으면 수정불가 */}
+              {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
               {targetPost?.nickname === userInfo.nickname ? (
                 // <div>
                 //   <button onClick={onClickModify}>수정하기</button>
