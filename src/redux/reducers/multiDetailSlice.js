@@ -92,11 +92,24 @@ const multiDetailSlice = createSlice({
       .addCase(DelCommentDB.fulfilled, (state, action) => {
         state.DelCommentDBLoading = false;
         state.DelCommentDBDone = true;
-        const newComment = state.multiDetail.comment.filter(p => {
-          const targetId = p.id;
-          return targetId !== action.payload.newComment.id;
+
+        const targetIdx = state.multiDetail.comment.findIndex(p => {
+          const newTargetId = p.id;
+          return newTargetId == action.payload.newComment.id;
         });
-        state.multiDetail.comment = [...newComment, action.payload.newComment];
+        console.log("newTargetId", targetIdx);
+
+        state.multiDetail.comment.splice(
+          targetIdx,
+          1,
+          action.payload.newComment,
+        );
+
+        // const newComment = state.multiDetail.comment.filter(p => {
+        //   const targetId = p.id;
+        //   return targetId !== action.payload.newComment.id;
+        // });
+        // state.multiDetail.comment = [...newComment, action.payload.newComment];
 
         console.log("current", state.multiDetail.comment);
       })

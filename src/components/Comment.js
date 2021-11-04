@@ -61,6 +61,7 @@ const Comment = props => {
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, id, data }));
     setHiddenInput(false);
+    setHiddenBtn(true);
   };
 
   return (
