@@ -8,7 +8,7 @@ export const AddChildDB = createAsyncThunk(
     console.log("addchildData", data);
     try {
       const response = await api.post(
-        `/posts/multi/${data.multiId}/comment/${data.commentId}`,
+        `/posts/multi/${data.multiId}/comment/${data.id}`,
         data.data,
       );
       return response.data;
