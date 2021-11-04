@@ -9,15 +9,7 @@ import { EditCommentDB, DelCommentDB } from "../redux/actions/comment";
 import { AddChildDB } from "../redux/actions/childComment";
 
 const Comment = props => {
-  const {
-    nickname,
-    commentDate,
-    commentLikeCnt,
-    parentComment,
-    id,
-    deleted,
-    comment,
-  } = props;
+  const { nickname, commentDate, commentLikeCnt, id, deleted, comment } = props;
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
@@ -26,9 +18,6 @@ const Comment = props => {
   const userInfo = useSelector(state => state.user.userInfo);
 
   const dispatch = useDispatch();
-  // const [isEdit, setIsEdit] = useState(false);
-  // console.log("commentIsEdit", isEdit);
-  // console.log("editeditedit", comment);
   const [addInput, setAddInput] = useState(false);
   const [editInput, setEditInput] = useState(false);
   const [addBtn, setAddBtn] = useState(true);
@@ -81,7 +70,7 @@ const Comment = props => {
   const changeComment = e => {
     setNewComment(e.target.value);
   };
-
+  console.log("commentCheck", multiId, id);
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, id, data: { comment: newComment, date } }));
     setAddInput(false);
@@ -114,11 +103,7 @@ const Comment = props => {
         <div>{nickname}</div>
         <div>{commentDate}</div>
         <div>좋아요 {commentLikeCnt}</div>
-        {deleted ? (
-          <div>{"삭제된 댓글입니다"}</div>
-        ) : (
-          <div>{parentComment}</div>
-        )}
+        {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
         {userInfo.nickname === nickname ? (
           <div>
             {editBtn ? <button onClick={showEditInput}>수정</button> : null}
