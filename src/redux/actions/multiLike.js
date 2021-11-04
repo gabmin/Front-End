@@ -14,15 +14,13 @@ export const AddLikeDB = createAsyncThunk(
   },
 );
 
-//detail 투표하기
-export const DetailVote = createAsyncThunk(
-  "multiDetail/DetailVote",
+//comment like
+export const AddLikeComment = createAsyncThunk(
+  "multiDetail/AddLikeComment",
   async (data, { rejectWithValue }) => {
-    console.log("data", data);
     try {
       const response = await api.post(
-        `/posts/multi/${data.multiId}/votes`,
-        data.select,
+        `/posts/multi/${data.multiId}/comment/${data.id}/likes`,
       );
       return response.data;
     } catch (error) {

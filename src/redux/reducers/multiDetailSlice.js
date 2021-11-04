@@ -4,7 +4,7 @@ import { current } from "@reduxjs/toolkit";
 import { DetailDB, DetailVote } from "../actions/multiDetail";
 import { AddCommentDB, EditCommentDB, DelCommentDB } from "../actions/comment";
 import { AddChildDB, EditChildDB, DelChildDB } from "../actions/childComment";
-import { AddLikeDB } from "../actions/multiLike";
+import { AddLikeDB, AddLikeComment } from "../actions/multiLike";
 
 export const initialState = {
   DetailDBLoading: false,
@@ -36,6 +36,9 @@ export const initialState = {
   AddLikeDBLoading: false,
   AddLikeDBDone: false,
   AddLikeDBError: null,
+  AddLikeCommentLoading: false,
+  AddLikeCommentDone: false,
+  AddLikeCommentError: null,
 };
 
 const multiDetailSlice = createSlice({
@@ -236,6 +239,22 @@ const multiDetailSlice = createSlice({
       .addCase(AddLikeDB.rejected, (state, action) => {
         state.AddLikeDBLoading = false;
         state.AddLikeDBError = action.error;
+      })
+
+      //comment like
+      .addCase(AddLikeComment.pending, state => {
+        state.AddLikeCommentLoading = true;
+        state.AddLikeCommentDone = false;
+        state.AddLikeCommentError = null;
+      })
+      .addCase(AddLikeComment.fulfilled, (state, action) => {
+        state.AddLikeCommentLoading = false;
+        state.AddLikeCommentDone = true;
+        state.AddLikeComment = action.payload;
+      })
+      .addCase(AddLikeComment.rejected, (state, action) => {
+        state.AddLikeCommentLoading = false;
+        state.AddLikeCommentError = action.error;
       }),
 });
 

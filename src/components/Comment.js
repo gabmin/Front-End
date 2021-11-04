@@ -7,9 +7,11 @@ import ChildList from "./ChildList";
 import ChildCommentInput from "../elements/ChildCommentInput";
 import { EditCommentDB, DelCommentDB } from "../redux/actions/comment";
 import { AddChildDB } from "../redux/actions/childComment";
+import { AddLikeComment } from "../redux/actions/multiLike";
 
 const Comment = props => {
-  const { nickname, commentDate, commentLikeCnt, id, deleted, comment } = props;
+  const { nickname, commentDate, commentLikeCnt, id, deleted, comment, liked } =
+    props;
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
@@ -25,6 +27,7 @@ const Comment = props => {
   const [editBtn, setEditBtn] = useState(true);
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
+  const [likes, setLikes] = useState(commentLikeCnt);
 
   const showInput = () => {
     if (addInput === false) {
@@ -93,16 +96,29 @@ const Comment = props => {
     console.log("checkcheck", multiId, id);
   };
 
+  //댓글 삭제
   const delComment = () => {
     dispatch(DelCommentDB({ id, multiId }));
   };
+
+  // 댓글 좋아요
+  const addLike = () => {
+    if (liked === null) {
+      dispatch(AddLikeComment({ id, multiId }));
+      setLikes(likes + 1);
+    } else {
+      return;
+    }
+  };
+  console.log("cntcnt", commentLikeCnt);
 
   return (
     <>
       <TempWarpper>
         <div>{nickname}</div>
         <div>{commentDate}</div>
-        <div>좋아요 {commentLikeCnt}</div>
+        <button onClick={addLike}>좋아요 </button>
+        {likes}
         {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
         {userInfo.nickname === nickname ? (
           <div>
