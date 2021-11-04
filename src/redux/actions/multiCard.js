@@ -49,6 +49,21 @@ export const AddPostDB = createAsyncThunk(
     }
   },
 );
+// multi 수정하기
+export const EditPostDB = createAsyncThunk(
+  "multiPost/EditPostDB",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.patch(
+        `/posts/multi/${data.multiId}`,
+        data.data,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 // multi 삭제하기
 export const DeletePostDB = createAsyncThunk(
   "multiPost/DeletePostDB",

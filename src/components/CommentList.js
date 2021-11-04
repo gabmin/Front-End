@@ -23,6 +23,7 @@ const CommentList = props => {
               render={render}
               renderState={renderState}
               nickname={p.nickname}
+              comment={p.comment}
               commetDate={p.date}
               commentLikeCnt={p.commentLikeCnt}
               parentComment={p.comment}

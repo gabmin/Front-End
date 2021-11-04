@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { history } from "../redux/configureStore";
 
 import MultiComment from "../components/MultiComment";
 import MultiUnvoted from "../components/MultiUnvoted";
@@ -16,6 +17,7 @@ const MultiDetail = props => {
   console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
+  console.log("dataListList", dataList);
 
   const render = temp => {
     setState(temp);
@@ -47,12 +49,20 @@ const MultiDetail = props => {
     dispatch(ClosePostDB(multiId));
   };
 
+  const editPost = () => {
+    if (TotalCnt === 0) {
+      history.push(`/multi/${multiId}/edit`);
+    } else {
+      window.alert("투표가 진행된 게시물은 수정할 수 없습니다");
+      return;
+    }
+  };
+
   if (
     dataList &&
     (userInfo.nickname === dataList.multi.nickname ||
       dataList.multi.voted !== null)
   ) {
-    console.log("voted", dataList.multi.voted);
     return (
       <div>
         <div>
@@ -60,8 +70,16 @@ const MultiDetail = props => {
         </div>
         {userInfo.nickname === dataList.multi.nickname ? (
           <div>
-            <button onClick={deletePost}>삭제하기</button>
-            <button onClick={closePost}>종료하기</button>
+            {/* <div>투표가 종료되었습니다</div> */}
+            <div>
+              <button onClick={deletePost}>삭제하기</button>
+              {dataList.multi.completed !== 1 ? (
+                <div>
+                  <button onClick={editPost}>수정하기</button>
+                  <button onClick={closePost}>종료하기</button>
+                </div>
+              ) : null}
+            </div>
           </div>
         ) : null}
         <div>
