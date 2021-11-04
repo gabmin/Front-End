@@ -13,13 +13,14 @@ const MultiDetail = props => {
 
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
 
   const render = temp => {
     setState(temp);
   };
-  console.log("detailrender", render);
+  console.log("state", state);
 
   const TotalCnt =
     dataList &&
@@ -29,11 +30,9 @@ const MultiDetail = props => {
       dataList.multi.voteCntD +
       dataList.multi.voteCntE;
 
-  console.log("TotalCnt", TotalCnt);
-
   useEffect(() => {
     dispatch(DetailDB(multiId));
-  }, [dispatch, multiId, state]);
+  }, [dispatch, multiId]);
 
   const deletePost = () => {
     if (TotalCnt === 0) {
@@ -66,11 +65,7 @@ const MultiDetail = props => {
           </div>
         ) : null}
         <div>
-          <MultiComment
-            dataList={dataList}
-            multiId={multiId}
-            render={p => render(p)}
-          />
+          <MultiComment multiId={multiId} />
         </div>
       </div>
     );
@@ -82,11 +77,7 @@ const MultiDetail = props => {
         )}
         {dataList && (
           <div>
-            <MultiComment
-              dataList={dataList}
-              multiId={multiId}
-              render={p => render(p)}
-            />
+            <MultiComment multiId={multiId} />
           </div>
         )}
       </div>

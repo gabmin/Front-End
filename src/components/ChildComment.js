@@ -10,11 +10,9 @@ const ChildComment = props => {
   const dispatch = useDispatch();
   const multiId = props.multiId;
   const userInfo = useSelector(state => state.user.userInfo);
-  const childComments = useSelector(state => state.childComment.ChildCommentDB);
+  // const childComments = useSelector(state => state.childComment.ChildCommentDB);
   const [hiddenInput, setHiddenInput] = useState(false);
   const [hiddenBtn, setHiddenBtn] = useState(true);
-
-  console.log("childCommentss", childComments);
 
   const showInput = () => {
     if (hiddenInput === false) {
@@ -38,18 +36,12 @@ const ChildComment = props => {
     dispatch(DelChildDB({ id, multiId }));
   };
 
-  console.log("childComment", id, nickname, multiId);
-
   return (
     <>
       <div>
         <div>{nickname}</div>
         <div>{date}</div>
-        {deleted !== 1 ? (
-          <div>{comment}</div>
-        ) : (
-          <div>{"삭제된 댓글입니다"}</div>
-        )}
+        {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
         {userInfo.nickname === nickname ? (
           <button onClick={delComment}>삭제</button>
         ) : null}

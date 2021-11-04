@@ -3,6 +3,7 @@ import { current } from "@reduxjs/toolkit";
 
 import { DetailDB, DetailVote } from "../actions/multiDetail";
 import { AddCommentDB, DelCommentDB } from "../actions/comment";
+import { AddChildDB } from "../actions/childComment";
 
 export const initialState = {
   DetailDBLoading: false,
@@ -19,16 +20,15 @@ export const initialState = {
   DelCommentDBLoading: false,
   DelCommentDBDone: false,
   DelCommentDBError: null,
+  AddChildDBLoading: false,
+  AddChildDBDone: false,
+  AddChildDBError: null,
 };
 
 const multiDetailSlice = createSlice({
   name: "detail",
   initialState,
-  reducers: {
-    detailLoad: state => {
-      state.multiDetail = localStorage;
-    },
-  },
+  reducers: {},
   extraReducers: builder =>
     builder
       //detail 보기
@@ -61,6 +61,7 @@ const multiDetailSlice = createSlice({
         state.DetailVoteLoading = false;
         state.DetailVoteError = action.error;
       })
+
       //comment 생성하기
       .addCase(AddCommentDB.pending, state => {
         state.AddCommentDBLoading = true;
@@ -70,14 +71,13 @@ const multiDetailSlice = createSlice({
       .addCase(AddCommentDB.fulfilled, (state, action) => {
         state.AddCommentDBLoading = false;
         state.AddCommentDBDone = true;
-        const tempMultiDetail = [
+        state.multiDetail.comment = [
           ...state.multiDetail.comment,
           action.payload.newComment,
         ];
-        console.log("temptemp", tempMultiDetail);
-        // state.multiDetail = action.payload;
-        console.log("payload", action.payload.newComment);
-        console.log("current", current(state.multiDetail.comment));
+        // console.log("temptemp", tempMultiDetail);
+        // console.log("payload", action.payload.newComment);
+        // console.log("current", state.multiDetail.comment);
       })
       .addCase(AddCommentDB.rejected, (state, action) => {
         state.AddCommentDBLoading = false;
@@ -92,11 +92,38 @@ const multiDetailSlice = createSlice({
       .addCase(DelCommentDB.fulfilled, (state, action) => {
         state.DelCommentDBLoading = false;
         state.DelCommentDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        const newComment = state.multiDetail.comment.filter(p => {
+          const targetId = p.id;
+          return targetId !== action.payload.newComment.id;
+        });
+        state.multiDetail.comment = [...newComment, action.payload.newComment];
+
+        console.log("current", state.multiDetail.comment);
       })
       .addCase(DelCommentDB.rejected, (state, action) => {
         state.DelCommentDBLoading = false;
         state.DelCommentDBError = action.error;
+      })
+
+      //childcomment 작성하기
+      .addCase(AddChildDB.pending, state => {
+        state.AddChildDBLoading = true;
+        state.AddChildDBDone = false;
+        state.AddChildDBError = null;
+      })
+      .addCase(AddChildDB.fulfilled, (state, action) => {
+        state.AddChildDBLoading = false;
+        state.AddChildDBDone = true;
+        state.multiDetail.childComment = [
+          ...state.multiDetail.childComment,
+          action.payload.childComment,
+        ];
+        // state.multiDetail.childComment.push(action.payload.childComment);
+        console.log("child", action.payload);
+      })
+      .addCase(AddChildDB.rejected, (state, action) => {
+        state.AddChildDBLoading = false;
+        state.AddChildDBError = action.error;
       }),
 });
 

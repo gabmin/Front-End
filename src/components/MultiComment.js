@@ -1,39 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import CommentList from "./CommentList";
 import CommentInput from "../elements/CommentInput";
 
 const MultiComment = props => {
+  const dispatch = useDispatch();
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   const multiId = props.multiId;
   const render = props.render;
-  console.log("commentdataList", dataList);
+  const renderState = props.state;
+  console.log("renderState", renderState);
+  console.log("commentdataList", dataList.comment);
   const [action, setAction] = useState(false);
 
-  const { AddCommentDBLoading, AddCommentDBDone } = useSelector(
-    state => state.comment,
-  );
+  // const { AddCommentDBLoading, AddCommentDBDone } = useSelector(
+  //   state => state.comment,
+  // );
 
   // useEffect(() => {
-  //   if (AddCommentDBDone && action === true) {
-  //     setAction(false);
-  //   } else if (AddCommentDBDone && action === false) {
-  //     setAction(true);
-  //   }
-  // }, [AddCommentDBDone]);
+  //   dispatch()
+  // }, []);
 
   return (
     <>
       <TempWarpper>
         <TextAreaWarpper>
-          <p>댓글 {dataList.multi.commentCnt}개</p>
-          <CommentInput multiId={multiId} render={render} />
+          <p>댓글 {dataList.comment.length + dataList.childComment.length}개</p>
+          <CommentInput multiId={multiId} />
         </TextAreaWarpper>
         <hr></hr>
         <div>
-          <CommentList multiId={multiId} render={render} />
+          <CommentList
+            multiId={multiId}
+            dataList={dataList}
+            // render={render}
+            // renderState={renderState}
+          />
         </div>
       </TempWarpper>
     </>
