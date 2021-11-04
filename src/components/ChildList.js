@@ -15,8 +15,8 @@ const ChildList = props => {
     // const commentId = p.parentComment;
     return parentComment == p.parentComment;
   });
-  console.log("childList", childList);
-  console.log("filterList", filterList);
+  // console.log("childList", childList);
+  // console.log("filterList", filterList);
 
   return (
     <>

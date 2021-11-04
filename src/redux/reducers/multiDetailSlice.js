@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { current } from "@reduxjs/toolkit";
 
 import { DetailDB, DetailVote } from "../actions/multiDetail";
-import { AddCommentDB, DelCommentDB } from "../actions/comment";
+import { AddCommentDB, EditCommentDB, DelCommentDB } from "../actions/comment";
 import { AddChildDB, DelChildDB } from "../actions/childComment";
 
 export const initialState = {
@@ -17,6 +17,9 @@ export const initialState = {
   AddCommentDBLoading: false,
   AddCommentDBDone: false,
   AddCommentDBError: null,
+  EditCommentDBLoading: false,
+  EditCommentDBDone: false,
+  EditCommentDBError: null,
   DelCommentDBLoading: false,
   DelCommentDBDone: false,
   DelCommentDBError: null,
@@ -85,6 +88,31 @@ const multiDetailSlice = createSlice({
       .addCase(AddCommentDB.rejected, (state, action) => {
         state.AddCommentDBLoading = false;
         state.AddCommentDBError = action.error;
+      })
+      //comment 수정하기
+      .addCase(EditCommentDB.pending, state => {
+        state.EditCommentDBLoading = true;
+        state.EditCommentDBDone = false;
+        state.EditCommentDBError = null;
+      })
+      .addCase(EditCommentDB.fulfilled, (state, action) => {
+        state.EditCommentDBLoading = false;
+        state.EditCommentDBDone = true;
+
+        const targetIdx = state.multiDetail.comment.findIndex(p => {
+          const targetId = p.id;
+          return targetId == action.payload.newComment.id;
+        });
+
+        state.multiDetail.comment.splice(
+          targetIdx,
+          1,
+          action.payload.newComment,
+        );
+      })
+      .addCase(EditCommentDB.rejected, (state, action) => {
+        state.EditCommentDBLoading = false;
+        state.EditCommentDBError = action.error;
       })
       //comment 삭제하기
       .addCase(DelCommentDB.pending, state => {

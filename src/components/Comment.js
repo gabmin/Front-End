@@ -5,12 +5,19 @@ import moment from "moment";
 
 import ChildList from "./ChildList";
 import ChildCommentInput from "../elements/ChildCommentInput";
-import { DelCommentDB } from "../redux/actions/comment";
+import { EditCommentDB, DelCommentDB } from "../redux/actions/comment";
 import { AddChildDB } from "../redux/actions/childComment";
 
 const Comment = props => {
-  const { nickname, commentDate, commentLikeCnt, parentComment, id, deleted } =
-    props;
+  const {
+    nickname,
+    commentDate,
+    commentLikeCnt,
+    parentComment,
+    id,
+    deleted,
+    comment,
+  } = props;
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
@@ -19,24 +26,46 @@ const Comment = props => {
   const userInfo = useSelector(state => state.user.userInfo);
 
   const dispatch = useDispatch();
-  const [hiddenInput, setHiddenInput] = useState(false);
-  const [hiddenBtn, setHiddenBtn] = useState(true);
+  // const [isEdit, setIsEdit] = useState(false);
+  // console.log("commentIsEdit", isEdit);
+  // console.log("editeditedit", comment);
+  const [addInput, setAddInput] = useState(false);
+  const [editInput, setEditInput] = useState(false);
+  const [addBtn, setAddBtn] = useState(true);
+  const [cancelBtn, setCancelBtn] = useState(false);
+  const [editBtn, setEditBtn] = useState(true);
+  const [editCancelBtn, setEditCancelBtn] = useState(false);
+  const [delBtn, setDelBtn] = useState(true);
 
   const showInput = () => {
-    if (hiddenInput === false) {
-      setHiddenInput(true);
-      showBtn();
+    if (addInput === false) {
+      setAddInput(true);
+      setAddBtn(false);
+      setCancelBtn(true);
+      setEditBtn(false);
+      setDelBtn(false);
     } else {
-      setHiddenInput(false);
+      setAddInput(false);
+      setAddBtn(true);
+      setCancelBtn(false);
+      setEditBtn(true);
+      setDelBtn(true);
     }
   };
 
-  const showBtn = () => {
-    if (hiddenBtn === true) {
-      setHiddenBtn(false);
+  const showEditInput = () => {
+    if (editInput === false) {
+      setEditInput(true);
+      setAddBtn(false);
+      setEditCancelBtn(true);
+      setEditBtn(false);
+      setDelBtn(false);
     } else {
-      setHiddenBtn(true);
-      showInput();
+      setEditInput(false);
+      setAddBtn(true);
+      setEditCancelBtn(false);
+      setEditBtn(true);
+      setDelBtn(true);
     }
   };
 
@@ -46,22 +75,36 @@ const Comment = props => {
   //   }
   //   return render(false);
   // };
+  //대댓글 작성
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
+  const [newComment, setNewComment] = useState();
+  const changeComment = e => {
+    setNewComment(e.target.value);
+  };
+
+  const addChildComment = () => {
+    dispatch(AddChildDB({ multiId, id, data: { comment: newComment, date } }));
+    setAddInput(false);
+    setAddBtn(true);
+  };
+
+  //댓글 수정
+  const editedDate = moment().format("YYYY-MM-DD HH:mm:ss");
+  const [newEdit, setNewEdit] = useState();
+  const changeEditComment = e => {
+    setNewEdit(e.target.value);
+    console.log("newEdit", newEdit);
+  };
+
+  const editComment = () => {
+    dispatch(
+      EditCommentDB({ multiId, id, data: { comment: newEdit, editedDate } }),
+    );
+    console.log("checkcheck", multiId, id);
+  };
 
   const delComment = () => {
     dispatch(DelCommentDB({ id, multiId }));
-  };
-
-  const [comment, setcomment] = useState();
-  const changeComment = e => {
-    setcomment(e.target.value);
-  };
-  const data = { comment, date };
-
-  const addChildComment = () => {
-    dispatch(AddChildDB({ multiId, id, data }));
-    setHiddenInput(false);
-    setHiddenBtn(true);
   };
 
   return (
@@ -76,20 +119,30 @@ const Comment = props => {
           <div>{parentComment}</div>
         )}
         {userInfo.nickname === nickname ? (
-          <button onClick={delComment}>삭제</button>
+          <div>
+            {editBtn ? <button onClick={showEditInput}>수정</button> : null}
+            {editCancelBtn ? (
+              <button onClick={showEditInput}>수정취소</button>
+            ) : null}
+            {delBtn ? <button onClick={delComment}>삭제</button> : null}
+          </div>
         ) : null}
 
-        {hiddenBtn ? (
-          <button onClick={showInput}>댓글작성</button>
-        ) : (
-          <button onClick={showBtn}>취소</button>
-        )}
+        {addBtn ? <button onClick={showInput}>댓글작성</button> : null}
+        {cancelBtn ? <button onClick={showInput}>취소</button> : null}
 
-        {hiddenInput ? (
+        {addInput ? (
           // <ChildCommentInput parentComment={id} multiId={multiId} />
           <div>
             <TextArea onChange={changeComment}></TextArea>
             <button onClick={addChildComment}>작성완료</button>
+          </div>
+        ) : null}
+        {editInput ? (
+          // <ChildCommentInput parentComment={id} multiId={multiId} />
+          <div>
+            <TextArea onChange={changeEditComment}>{comment}</TextArea>
+            <button onClick={editComment}>수정완료</button>
           </div>
         ) : null}
         <div>
