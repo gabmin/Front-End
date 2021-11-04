@@ -45,7 +45,7 @@ const MultiComment = props => {
 };
 
 const TempWarpper = styled.div`
-  max-width: 60%;
+  max-width: 100%;
   margin: auto;
   /* background-color: green; */
 `;

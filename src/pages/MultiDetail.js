@@ -7,6 +7,7 @@ import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
+import styled from "styled-components";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
@@ -64,9 +65,9 @@ const MultiDetail = props => {
       dataList.multi.voted !== null)
   ) {
     return (
-      <div>
+      <Container>
         <div>
-          <MultiVoted dataList={dataList} />
+          <MultiVoted multiId={multiId} dataList={dataList} />
         </div>
         {userInfo.nickname === dataList.multi.nickname ? (
           <div>
@@ -82,25 +83,36 @@ const MultiDetail = props => {
             </div>
           </div>
         ) : null}
+
         <div>
           <MultiComment multiId={multiId} />
         </div>
-      </div>
+      </Container>
     );
   } else {
     return (
-      <div>
+      <Container>
         {dataList && (
-          <MultiUnvoted dataList={dataList} render={p => render(p)} />
+          <MultiUnvoted
+            multiId={multiId}
+            dataList={dataList}
+            render={p => render(p)}
+          />
         )}
+
         {dataList && (
           <div>
             <MultiComment multiId={multiId} />
           </div>
         )}
-      </div>
+      </Container>
     );
   }
 };
+
+const Container = styled.div`
+  max-width: 60%;
+  margin: auto;
+`;
 
 export default MultiDetail;
