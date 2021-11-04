@@ -31,6 +31,8 @@ const ChildList = props => {
               parentComment={p.parentComment}
               comment={p.comment}
               deleted={p.deleted}
+              commentLikeCnt={p.commentLikeCnt}
+              liked={p.liked}
             />
           </div>
         ))}

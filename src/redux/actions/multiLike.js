@@ -28,3 +28,18 @@ export const AddLikeComment = createAsyncThunk(
     }
   },
 );
+
+//childComment like
+export const AddLikeChild = createAsyncThunk(
+  "multiDetail/AddLikeChild",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post(
+        `/posts/multi/${data.multiId}/childComment/${data.id}/likes`,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);

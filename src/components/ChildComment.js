@@ -9,9 +9,19 @@ import {
   DelChildDB,
   EditChildDB,
 } from "../redux/actions/childComment";
+import { AddLikeChild } from "../redux/actions/multiLike";
 
 const ChildComment = props => {
-  const { nickname, date, id, parentComment, comment, deleted } = props;
+  const {
+    nickname,
+    date,
+    id,
+    parentComment,
+    comment,
+    deleted,
+    commentLikeCnt,
+    liked,
+  } = props;
 
   const dispatch = useDispatch();
   const multiId = props.multiId;
@@ -24,6 +34,8 @@ const ChildComment = props => {
   const [editBtn, setEditBtn] = useState(true);
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
+  const [likes, setLikes] = useState(commentLikeCnt);
+
   console.log("childComment", comment);
 
   const showInput = () => {
@@ -91,10 +103,21 @@ const ChildComment = props => {
     dispatch(DelChildDB({ id, multiId }));
   };
 
+  const addLike = () => {
+    if (liked === null) {
+      dispatch(AddLikeChild({ id, multiId }));
+      setLikes(likes + 1);
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <div>
         <div>{nickname}</div>
+        <button onClick={addLike}>좋아요</button>
+        {likes}
         <div>{date}</div>
         {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
         {userInfo.nickname === nickname ? (

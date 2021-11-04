@@ -4,7 +4,7 @@ import { current } from "@reduxjs/toolkit";
 import { DetailDB, DetailVote } from "../actions/multiDetail";
 import { AddCommentDB, EditCommentDB, DelCommentDB } from "../actions/comment";
 import { AddChildDB, EditChildDB, DelChildDB } from "../actions/childComment";
-import { AddLikeDB, AddLikeComment } from "../actions/multiLike";
+import { AddLikeDB, AddLikeComment, AddLikeChild } from "../actions/multiLike";
 
 export const initialState = {
   DetailDBLoading: false,
@@ -39,6 +39,9 @@ export const initialState = {
   AddLikeCommentLoading: false,
   AddLikeCommentDone: false,
   AddLikeCommentError: null,
+  AddLikeChildLoading: false,
+  AddLikeChildDone: false,
+  AddLikeChildError: null,
 };
 
 const multiDetailSlice = createSlice({
@@ -255,6 +258,22 @@ const multiDetailSlice = createSlice({
       .addCase(AddLikeComment.rejected, (state, action) => {
         state.AddLikeCommentLoading = false;
         state.AddLikeCommentError = action.error;
+      })
+
+      //childComment like
+      .addCase(AddLikeChild.pending, state => {
+        state.AddLikeChildLoading = true;
+        state.AddLikeChildDone = false;
+        state.AddLikeChildError = null;
+      })
+      .addCase(AddLikeChild.fulfilled, (state, action) => {
+        state.AddLikeChildLoading = false;
+        state.AddLikeChildDone = true;
+        state.AddLikeChild = action.payload;
+      })
+      .addCase(AddLikeChild.rejected, (state, action) => {
+        state.AddLikeChildLoading = false;
+        state.AddLikeChildError = action.error;
       }),
 });
 
