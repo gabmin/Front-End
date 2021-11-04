@@ -100,6 +100,7 @@ const Comment = props => {
     dispatch(
       EditCommentDB({ multiId, id, data: { comment: newEdit, editedDate } }),
     );
+    showEditInput();
     console.log("checkcheck", multiId, id);
   };
 
