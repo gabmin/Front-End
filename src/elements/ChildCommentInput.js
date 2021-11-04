@@ -8,13 +8,13 @@ const ChildCommentInput = props => {
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const multiId = props.multiId;
-  const commentId = props.parentComment;
+  const commentId = props.parentId;
   const [comment, setComment] = useState();
   const changeComment = e => {
     setComment(e.target.value);
   };
   const data = { comment, date };
-  console.log("childcommentinput", multiId, commentId, data);
+  console.log(commentId);
 
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, commentId, data }));

@@ -121,9 +121,9 @@ const MultiVoted = props => {
           />
         </div>
       ) : null}
-      {DataList.nickname === userInfo.nickname ? (
+      {/* {DataList.nickname === userInfo.nickname ? (
         <button>투표 종료</button>
-      ) : null}
+      ) : null} */}
     </Container>
   );
 };
