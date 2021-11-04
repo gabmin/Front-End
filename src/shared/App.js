@@ -35,7 +35,7 @@ function App() {
           <Route exact path="/either/:either_id/edit" component={EitherEdit} />
           <Route exact path="/multi" component={Multi} />
           <Route exact path="/multi/:multi_id" component={MultiDetail} />
-          <Route exact path="/multi/edit/:multi_id" component={MultiEdit} />
+          <Route exact path="/multi/:multi_id/edit" component={MultiEdit} />
           <Route exact path="/write" component={CardWrite} />
           <Route path="*" component={ErrorPage} />
         </Switch>

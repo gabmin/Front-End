@@ -5,6 +5,7 @@ import {
   PostingDB,
   PostCompleteDB,
   AddPostDB,
+  EditPostDB,
   DeletePostDB,
   ClosePostDB,
 } from "../actions/multiCard";
@@ -25,6 +26,9 @@ export const initialState = {
   AddPostDBLoading: false,
   AddPostDBDone: false,
   AddPostDBError: null,
+  EditPostDBLoading: false,
+  EditPostDBDone: false,
+  EditPostDBError: null,
   DeletePostDBLoading: false,
   DeletePostDBDone: false,
   DeletePostDBError: null,
@@ -98,6 +102,21 @@ const multiPostSlice = createSlice({
       .addCase(AddPostDB.rejected, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBError = action.error;
+      })
+      //multi 수정하기
+      .addCase(EditPostDB.pending, state => {
+        state.EditPostDBLoading = true;
+        state.EditPostDBDone = false;
+        state.EditPostDBError = null;
+      })
+      .addCase(EditPostDB.fulfilled, (state, action) => {
+        state.EditPostDBLoading = false;
+        state.EditPostDBDone = true;
+        // state.multiPost = [...state.multiPost, action.payload];
+      })
+      .addCase(EditPostDB.rejected, (state, action) => {
+        state.EditPostDBLoading = false;
+        state.EditPostDBError = action.error;
       })
       //multi 삭제하기
       .addCase(DeletePostDB.pending, state => {

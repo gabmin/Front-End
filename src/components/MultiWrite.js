@@ -4,25 +4,45 @@ import moment from "moment";
 
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
-import { AddPostDB } from "../redux/actions/multiCard";
+import { AddPostDB, EditPostDB } from "../redux/actions/multiCard";
 
-const MultiWrite = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [hiddenBtnB, setHiddenBtnB] = useState(true);
-  const [hiddenBtnC, setHiddenBtnC] = useState(true);
-  const [hiddenBtnD, setHiddenBtnD] = useState(true);
-  const [hiddenInputC, setHiddenInputC] = useState(false);
-  const [hiddenInputD, setHiddenInputD] = useState(false);
-  const [hiddenInputE, setHiddenInputE] = useState(false);
-  const [contentA, setContentA] = useState("");
-  const [contentB, setContentB] = useState("");
-  const [contentC, setContentC] = useState("");
-  const [contentD, setContentD] = useState("");
-  const [contentE, setContentE] = useState("");
+const MultiWrite = props => {
+  const editData = props.editData;
+  const multiId = props.multiId;
+  console.log("editwrite", editData);
+  const isEdit = editData ? true : false;
+  console.log("isEdit", isEdit);
+  const [title, setTitle] = useState(isEdit ? editData.title : "");
+  const [description, setDescription] = useState(
+    isEdit ? editData.description : "",
+  );
+  const [hiddenBtnB, setHiddenBtnB] = useState(
+    isEdit && editData.contentC !== null ? false : true,
+  );
+  const [hiddenBtnC, setHiddenBtnC] = useState(
+    isEdit && editData.contentD !== null ? false : true,
+  );
+  const [hiddenBtnD, setHiddenBtnD] = useState(
+    isEdit && editData.contentE !== null ? false : true,
+  );
+  const [hiddenInputC, setHiddenInputC] = useState(
+    isEdit && editData.contentC !== null ? true : false,
+  );
+  const [hiddenInputD, setHiddenInputD] = useState(
+    isEdit && editData.contentD !== null ? true : false,
+  );
+  const [hiddenInputE, setHiddenInputE] = useState(
+    isEdit && editData.contentE !== null ? true : false,
+  );
+  const [contentA, setContentA] = useState(isEdit ? editData.contentA : "");
+  const [contentB, setContentB] = useState(isEdit ? editData.contentB : "");
+  const [contentC, setContentC] = useState(isEdit ? editData.contentC : "");
+  const [contentD, setContentD] = useState(isEdit ? editData.contentD : "");
+  const [contentE, setContentE] = useState(isEdit ? editData.contentE : "");
 
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
+  const editedDate = moment().format("YYYY-MM-DD HH:mm:ss");
   const titleRef = useRef();
   const descriptionRef = useRef();
   const contentARef = useRef();
@@ -31,6 +51,7 @@ const MultiWrite = () => {
   const contentDRef = useRef();
   const contentERef = useRef();
 
+  // post 작성하기
   const addPost = () => {
     if (title === "") {
       window.alert("no title");
@@ -121,6 +142,104 @@ const MultiWrite = () => {
     contentD,
     contentE,
     date,
+  );
+  // post 수정하기
+  const eidtPost = () => {
+    if (title === "") {
+      window.alert("no title");
+      return setTimeout(() => {
+        titleRef.current.focus();
+      }, 500);
+    } else if (description === "") {
+      window.alert("no description");
+      return setTimeout(() => {
+        descriptionRef.current.focus();
+      }, 500);
+    } else if (contentA === "") {
+      window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentARef.current.focus();
+      }, 500);
+    } else if (contentB === "") {
+      window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentBRef.current.focus();
+      }, 500);
+    } else if ((contentD !== "" || contentE !== "") && contentC === "") {
+      window.alert("세번째 선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentCRef.current.focus();
+      }, 500);
+    } else if (contentE !== "" && contentD === "") {
+      window.alert("네번째 선택지를 빈칸없이 차례대로 입력해 주세요");
+      return setTimeout(() => {
+        contentDRef.current.focus();
+      }, 500);
+    } else if (contentC === "" && contentD === "" && contentE === "") {
+      dispatch(
+        EditPostDB({
+          multiId,
+          data: { title, description, editedDate, contentA, contentB },
+        }),
+      );
+    } else if (contentD === "" && contentE === "") {
+      dispatch(
+        EditPostDB({
+          multiId,
+          data: {
+            title,
+            description,
+            editedDate,
+            contentA,
+            contentB,
+            contentC,
+          },
+        }),
+      );
+    } else if (contentE === "") {
+      dispatch(
+        EditPostDB({
+          multiId,
+          data: {
+            title,
+            description,
+            editedDate,
+            contentA,
+            contentB,
+            contentC,
+            contentD,
+          },
+        }),
+      );
+    } else {
+      dispatch(
+        EditPostDB({
+          multiId,
+          data: {
+            title,
+            description,
+            editedDate,
+            contentA,
+            contentB,
+            contentC,
+            contentD,
+            contentE,
+          },
+        }),
+      );
+    }
+    history.push("/multi");
+  };
+  console.log(
+    "editPost",
+    title,
+    description,
+    contentA,
+    contentB,
+    contentC,
+    contentD,
+    contentE,
+    editedDate,
   );
 
   const changeTitle = e => {
@@ -292,7 +411,11 @@ const MultiWrite = () => {
         ) : null}
         <div>
           <button onClick={cancel}>취소</button>
-          <button onClick={addPost}>완료</button>
+          {isEdit ? (
+            <button onClick={eidtPost}>수정완료</button>
+          ) : (
+            <button onClick={addPost}>완료</button>
+          )}
         </div>
       </VoteBox>
     </>
