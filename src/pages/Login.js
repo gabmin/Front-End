@@ -1,17 +1,25 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
 import { login } from "../redux/actions/user";
 import { history } from "../redux/configureStore";
 
 const Login = () => {
   const dispatch = useDispatch();
-  // const isLoggedIn = useSelector((state) => state.user.signinDone);
+  const isLoggedIn = useSelector(state => state.user.userInfo.userId);
 
   const [id, onChangeId] = useState("");
   const [password, onChangePassword] = useState("");
   const [idCheck, setIdCheck] = useState(false);
   const [pwCheck, setPwCheck] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      alert("로그인 상태에서 접속할 수 없습니다");
+      history.push("/");
+    }
+  }, [isLoggedIn]);
 
   const idChecker = useCallback(() => {
     if (!id.trim()) {

@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import useInput from "../hooks/useInput";
 import { isError } from "lodash";
+
+import useInput from "../hooks/useInput";
 import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
-// import Spinner from "../elements/Spinner";
+import { history } from "../redux/configureStore";
 
 const Signup = () => {
-  // const isLoggedIn = useSelector((state) => state.user.signinDone);
+  const isLoggedIn = useSelector(state => state.user.userInfo.userId);
 
   const dispatch = useDispatch();
 
@@ -43,6 +44,13 @@ const Signup = () => {
     setNickNotice(false);
     setNickDupCheck(false);
   }, [nickname]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      alert("로그인 상태에서 접속할 수 없습니다");
+      history.push("/");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     setIdDupCheck(checkIdDupResult);
@@ -121,7 +129,6 @@ const Signup = () => {
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
-      console.log(id, nickname, password, passwordCheck, age);
 
       if (!idChecker()) return;
       if (!nickChecker()) return;

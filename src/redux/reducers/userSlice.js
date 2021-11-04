@@ -1,13 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
-import { checkIdDup, checkNickDup, login, signup } from "../actions/user";
+
+import {
+  checkIdDup,
+  checkNickDup,
+  getProfileNick,
+  login,
+  logout,
+  signup,
+  updateNick,
+} from "../actions/user";
 
 // 기본 state
 export const initialState = {
   userInfo: { nickname: null, userId: null },
+  profileNick: null,
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
+  logoutLoading: false, // 로그아웃웃 시도 중
+  logoutDone: false,
+  logoutError: null,
   signupLoading: false, // 회원가입 시도 중
   signupDone: false,
   signupError: null,
@@ -22,6 +34,12 @@ export const initialState = {
   mainDataLoading: false, // 메인페이지 정보 get 시도 중
   mainDataDone: false,
   mainDataError: null,
+  updateNickLoading: false,
+  updateNickDone: false,
+  updateNickError: null,
+  getProfileNickLoading: false,
+  getProfileNickDone: false,
+  getProfileNickError: null,
 };
 // toolkit 사용방법
 const userSlice = createSlice({
@@ -29,15 +47,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loginUser: state => {
-      state.userInfo.nickname = getCookie("nickname");
-      state.userInfo.userId = getCookie("userId");
+      // state.userInfo.nickname = getCookie("nickname");
+      state.userInfo.nickname = sessionStorage.getItem("nickname");
+      // state.userInfo.userId = getCookie("userId");
+      state.userInfo.userId = sessionStorage.getItem("userId");
       state.loginDone = false;
-    },
-    logoutUser: state => {
-      state.userInfo = { nickname: null, userId: null };
-      state.loginDone = false;
-      deleteCookie("nickname");
-      deleteCookie("userId");
     },
   },
   extraReducers: builder =>
@@ -52,13 +66,34 @@ const userSlice = createSlice({
         state.loginLoading = false;
         state.userInfo.nickname = action.payload.nickname;
         state.userInfo.userId = action.payload.userId;
-        setCookie("nickname", action.payload.nickname);
-        setCookie("userId", action.payload.userId);
+        // setCookie("nickname", action.payload.nickname);
+        sessionStorage.setItem("nickname", action.payload.nickname);
+        // setCookie("userId", action.payload.userId);
+        sessionStorage.setItem("userId", action.payload.userId);
         state.loginDone = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loginLoading = false;
         state.loginError = action.payload;
+      })
+      // logout
+      .addCase(logout.pending, state => {
+        state.logoutLoading = true;
+        state.logoutDone = false;
+        state.logoutError = null;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.userInfo = { nickname: null, userId: null };
+        // deleteCookie("nickname");
+        sessionStorage.removeItem("nickname");
+        // deleteCookie("userId");
+        sessionStorage.removeItem("userId");
+        state.logoutLoading = false;
+        state.logoutDone = true;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.logoutLoading = false;
+        state.logoutError = action.payload;
       })
       // signup
       .addCase(signup.pending, state => {
@@ -105,9 +140,49 @@ const userSlice = createSlice({
         state.checkNickDupLoading = false;
         state.checkNickDupError = action.payload;
         state.checkNickDupResult = action.payload.success;
+      })
+      // updateNick
+      .addCase(updateNick.pending, state => {
+        state.updateNickLoading = true;
+        state.updateNickDone = false;
+        state.updateNickError = null;
+      })
+      .addCase(updateNick.fulfilled, (state, action) => {
+        state.updateNickLoading = false;
+        state.updateNickDone = true;
+        state.userInfo.nickname = action.payload.nickname;
+        state.profileNick = action.payload.nickname;
+        // deleteCookie("nickname");
+        sessionStorage.removeItem("nickname");
+        // setCookie("nickname", action.payload.nickname);
+        sessionStorage.setItem("nickname", action.payload.nickname);
+      })
+      .addCase(updateNick.rejected, (state, action) => {
+        state.updateNickLoading = false;
+        state.updateNickDone = false;
+        state.updateNickError = action.payload;
+        if (action.payload === "Validation error") {
+          alert("이미 사용중인 닉네임입니다");
+        }
+      })
+      // getProfileNick
+      .addCase(getProfileNick.pending, state => {
+        state.getProfileNickLoading = true;
+        state.getProfileNickDone = false;
+        state.getProfileNickError = null;
+      })
+      .addCase(getProfileNick.fulfilled, (state, action) => {
+        state.getProfileNickLoading = false;
+        state.getProfileNickDone = true;
+        state.profileNick = action.payload.nickname;
+      })
+      .addCase(getProfileNick.rejected, (state, action) => {
+        state.getProfileNickLoading = false;
+        state.getProfileNickDone = false;
+        state.getProfileNickError = action.payload;
       }),
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser } = userSlice.actions;
 
 export default userSlice;

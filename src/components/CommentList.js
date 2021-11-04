@@ -1,11 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import Comment from "./Comment";
 
 const CommentList = props => {
+  // const dataList = useSelector(state => state.multiDetail.multiDetail);
   const dataList = props.dataList;
-  const commentList = props.dataList.Comment;
+  const commentList = dataList.comment;
+  const multiId = props.multiId;
+  const render = props.render;
+  const renderState = props.renderState;
+
   return (
     <>
       <TempWarpper>
@@ -13,11 +19,15 @@ const CommentList = props => {
           <div>
             <Comment
               dataList={dataList}
-              User={p.User}
-              date={p.date}
+              multiId={multiId}
+              render={render}
+              renderState={renderState}
+              nickname={p.nickname}
+              commetDate={p.date}
               commentLikeCnt={p.commentLikeCnt}
-              comment={p.comment}
+              parentComment={p.comment}
               id={p.id}
+              deleted={p.deleted}
             />
           </div>
         ))}

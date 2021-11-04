@@ -49,3 +49,28 @@ export const AddPostDB = createAsyncThunk(
     }
   },
 );
+// multi 삭제하기
+export const DeletePostDB = createAsyncThunk(
+  "multiPost/DeletePostDB",
+  async (multiId, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/posts/multi/${multiId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+// multi 종료하기
+export const ClosePostDB = createAsyncThunk(
+  "multiPost/ClosePostDB",
+  async (multiId, { rejectWithValue }) => {
+    try {
+      const response = await api.patch(`/posts/multi/${multiId}/complete`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);

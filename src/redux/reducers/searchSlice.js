@@ -3,6 +3,9 @@ import { search } from "../actions/search";
 
 export const initialState = {
   searchList: [],
+  searchLoading: false,
+  searchDone: false,
+  searchError: null,
 };
 const searchSlice = createSlice({
   name: "main",
@@ -12,17 +15,17 @@ const searchSlice = createSlice({
     builder
       // search
       .addCase(search.pending, state => {
-        state.mainDataLoading = true;
-        state.mainDataDone = false;
-        state.mainDataError = null;
+        state.searchLoading = true;
+        state.searchDone = false;
+        state.searchError = null;
       })
       .addCase(search.fulfilled, (state, action) => {
-        state.mainDataLoading = false;
-        state.mainDataDone = true;
+        state.searchLoading = false;
+        state.searchDone = true;
         state.searchList = action.payload.posts;
       })
       .addCase(search.rejected, (state, action) => {
-        state.mainDataLoading = false;
+        state.searchLoading = false;
         state.searchList = action.payload;
       }),
 });

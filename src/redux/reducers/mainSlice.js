@@ -3,6 +3,9 @@ import { getMainData } from "../actions/main";
 
 export const initialState = {
   mainPosts: [],
+  mainDataLoading: false,
+  mainDataDone: false,
+  mainDataError: null,
 };
 const mainSlice = createSlice({
   name: "main",
