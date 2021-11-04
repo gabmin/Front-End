@@ -50,7 +50,12 @@ const MultiDetail = props => {
   };
 
   const editPost = () => {
-    history.push(`/multi/${multiId}/edit`);
+    if (TotalCnt === 0) {
+      history.push(`/multi/${multiId}/edit`);
+    } else {
+      window.alert("투표가 진행된 게시물은 수정할 수 없습니다");
+      return;
+    }
   };
 
   if (
