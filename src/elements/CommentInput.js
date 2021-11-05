@@ -8,15 +8,24 @@ const CommentInput = props => {
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const multiId = props.multiId;
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState("");
 
   const changeComment = e => {
     setComment(e.target.value);
   };
-  const data = { comment, date };
 
   const addComment = () => {
-    dispatch(AddCommentDB({ multiId, data }));
+    if (comment == "") {
+      window.alert("댓글 내용을 입력해주세요");
+    } else {
+      dispatch(AddCommentDB({ multiId, data: { comment, date } }));
+      setComment("");
+    }
+    console.log("comment", comment);
+  };
+
+  const reset = () => {
+    setComment("");
   };
 
   return (
@@ -24,6 +33,7 @@ const CommentInput = props => {
       <div>
         <TextArea onChange={changeComment}></TextArea>
         <button onClick={addComment}>작성완료</button>
+        <button onClick={reset}>reset</button>
       </div>
     </>
   );

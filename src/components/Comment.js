@@ -73,7 +73,7 @@ const Comment = props => {
   const changeComment = e => {
     setNewComment(e.target.value);
   };
-  console.log("commentCheck", multiId, id);
+
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, id, data: { comment: newComment, date } }));
     setAddInput(false);
@@ -110,7 +110,6 @@ const Comment = props => {
       return;
     }
   };
-  console.log("cntcnt", commentLikeCnt);
 
   return (
     <>
@@ -120,7 +119,7 @@ const Comment = props => {
         <button onClick={addLike}>좋아요 </button>
         {likes}
         {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
-        {userInfo.nickname === nickname ? (
+        {userInfo.nickname === nickname && !deleted ? (
           <div>
             {editBtn ? <button onClick={showEditInput}>수정</button> : null}
             {editCancelBtn ? (

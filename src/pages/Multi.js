@@ -11,9 +11,9 @@ const Multi = props => {
     state => state.multiCard,
   );
 
-  const cardList = multiPost.multi;
-  const ingCardList = multiPosting.multi;
-  const completeCardList = multiPostComplete.multi;
+  const cardList = multiPost && multiPost.multi;
+  const ingCardList = multiPosting && multiPosting.multi;
+  const completeCardList = multiPostComplete && multiPostComplete.multi;
   console.log("멀티포스트", cardList);
 
   const [status, setStatus] = useState("Post");
