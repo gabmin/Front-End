@@ -1,14 +1,27 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router";
 
 import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
 import { history } from "../redux/configureStore";
 
 const CardWrite = () => {
+  const location = useLocation();
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
+  const checkRadio = location.state.select;
+  console.log("checkRadio", checkRadio);
 
+  useEffect(() => {
+    if (checkRadio === "checkMulti") {
+      setEitherState(false);
+      setMultiState(true);
+    } else {
+      setEitherState(true);
+      setMultiState(false);
+    }
+  }, []);
   //뒤로가기
   const onClickBack = useCallback(() => {
     history.push("/either");
