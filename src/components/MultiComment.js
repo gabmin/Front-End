@@ -53,7 +53,7 @@ const TempWarpper = styled.div`
 const TextAreaWarpper = styled.div`
   max-width: 80%;
   margin: auto;
-  background-color: green;
+  /* background-color: green; */
 `;
 
 export default MultiComment;

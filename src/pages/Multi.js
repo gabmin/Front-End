@@ -10,12 +10,14 @@ const Multi = props => {
   const { multiPost, multiPosting, multiPostComplete } = useSelector(
     state => state.multiCard,
   );
+  const userInfo = useSelector(state => state.user.userInfo);
 
-  const cardList = multiPost.multi;
-  const ingCardList = multiPosting.multi;
-  const completeCardList = multiPostComplete.multi;
+  const cardList = multiPost && multiPost.multi;
+  const ingCardList = multiPosting && multiPosting.multi;
+  const completeCardList = multiPostComplete && multiPostComplete.multi;
   console.log("멀티포스트", cardList);
 
+  const [select, setSelect] = useState("checkMulti");
   const [status, setStatus] = useState("Post");
 
   useEffect(() => {
@@ -37,7 +39,14 @@ const Multi = props => {
   };
 
   const goToWrite = () => {
-    history.push("/write");
+    if (!userInfo.nickname) {
+      window.alert("로그인 후 이용 가능합니다");
+      history.push("/login");
+    }
+    history.push({
+      pathname: "/write",
+      state: { select: select },
+    });
   };
   return (
     <Container>

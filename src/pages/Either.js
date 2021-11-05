@@ -19,6 +19,8 @@ const Either = props => {
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
 
+  const [select, setSelect] = useState("checkEither");
+
   //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("Post");
   console.log(PostList);
@@ -49,7 +51,10 @@ const Either = props => {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
-      history.push("/write");
+      history.push({
+        pathname: "/write",
+        state: { select: select },
+      });
     }
   };
   return (

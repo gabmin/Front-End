@@ -120,7 +120,7 @@ const ChildComment = props => {
         {likes}
         <div>{date}</div>
         {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
-        {userInfo.nickname === nickname ? (
+        {userInfo.nickname === nickname && !deleted ? (
           <div>
             {editBtn ? <button onClick={showEditInput}>수정</button> : null}
             {delBtn ? <button onClick={delComment}>삭제</button> : null}

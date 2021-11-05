@@ -1,10 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import { DetailDB } from "../redux/actions/multiDetail";
 
 const MultiCard = props => {
+  const userInfo = useSelector(state => state.user.userInfo);
+
   const dispatch = useDispatch();
   const {
     multiId,
@@ -19,8 +21,13 @@ const MultiCard = props => {
   } = props;
   const history = useHistory();
   const goToDetail = () => {
-    dispatch(DetailDB(multiId));
-    history.push(`/multi/${multiId}`);
+    if (!userInfo.nickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else {
+      dispatch(DetailDB(multiId));
+      history.push(`/multi/${multiId}`);
+    }
   };
   return (
     <Container onClick={goToDetail}>
@@ -34,7 +41,7 @@ const MultiCard = props => {
         <hr></hr>
         <FooterWrapper>
           <UserWrapper>
-            <p>{user}</p>
+            <p>{userInfo.nickname}</p>
             <p>{date}</p>
             {/* {isEdited ? <p>{editedDate}</p> : null} */}
           </UserWrapper>
