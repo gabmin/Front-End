@@ -102,7 +102,7 @@ const EitherCard = props => {
   };
   //좋아요
   const onClickLike = () => {
-    if (liked !== null) {
+    if (liked !== null || !userInfo.nickname) {
       return;
     } else {
       dispatch(likePostDB(eitherId));
