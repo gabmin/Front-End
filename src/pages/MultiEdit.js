@@ -1,26 +1,32 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 
 import MultiWrite from "../components/MultiWrite";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { DetailDB } from "../redux/actions/multiDetail";
 
 const MultiEdit = props => {
+  const dispatch = useDispatch();
   const [eitherState, setEitherState] = useState(false);
   const [multiState, setMultiState] = useState(true);
+
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   console.log("multiDetail", multiDetail);
-  const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataListList", dataList);
 
   const editData = dataList && dataList.multi;
   console.log("editData", editData);
 
+  useEffect(() => {
+    dispatch(DetailDB(multiId));
+  }, []);
+
   //뒤로가기
   const onClickBack = useCallback(() => {
-    history.push("/either");
+    history.push("/multi");
   });
   //목록으로가기
   const onClickIndex = useCallback(() => {
@@ -36,48 +42,50 @@ const MultiEdit = props => {
     setEitherState(!eitherState);
     setMultiState(!multiState);
   };
+  if (dataList) {
+    return (
+      <>
+        <Wrap>
+          <ButtonGrid>
+            <button onClick={onClickBack}>{"<"} 뒤로가기</button>
+            <button onClick={onClickIndex}>목록</button>
+          </ButtonGrid>
+          <ContentBox>
+            <Index>
+              <h4 style={{ width: "30px" }}>구분</h4>
+              <div style={{ display: "flex" }}>
+                <RadioBtnWarpper>
+                  <input
+                    name="write"
+                    type="radio"
+                    id="either"
+                    checked={eitherState}
+                    onChange={EitherRadioBtn}
+                  />
+                  <label>찬반</label>
+                </RadioBtnWarpper>
+                <RadioBtnWarpper>
+                  <input
+                    name="write"
+                    type="radio"
+                    id="multi"
+                    checked={multiState}
+                    onChange={MultiRadioBtn}
+                  />
+                  <label>객관식</label>
+                </RadioBtnWarpper>
+              </div>
+            </Index>
 
-  return (
-    <>
-      <Wrap>
-        <ButtonGrid>
-          <button onClick={onClickBack}>{"<"} 뒤로가기</button>
-          <button onClick={onClickIndex}>목록</button>
-        </ButtonGrid>
-        <ContentBox>
-          <Index>
-            <h4 style={{ width: "30px" }}>구분</h4>
-            <div style={{ display: "flex" }}>
-              <RadioBtnWarpper>
-                <input
-                  name="write"
-                  type="radio"
-                  id="either"
-                  checked={eitherState}
-                  onChange={EitherRadioBtn}
-                />
-                <label>찬반</label>
-              </RadioBtnWarpper>
-              <RadioBtnWarpper>
-                <input
-                  name="write"
-                  type="radio"
-                  id="multi"
-                  checked={multiState}
-                  onChange={MultiRadioBtn}
-                />
-                <label>객관식</label>
-              </RadioBtnWarpper>
-            </div>
-          </Index>
-
-          {multiState ? (
-            <MultiWrite editData={editData} multiId={multiId} />
-          ) : null}
-        </ContentBox>
-      </Wrap>
-    </>
-  );
+            {multiState ? (
+              <MultiWrite editData={editData} multiId={multiId} />
+            ) : null}
+          </ContentBox>
+        </Wrap>
+      </>
+    );
+  }
+  return null;
 };
 
 const Wrap = styled.div`
