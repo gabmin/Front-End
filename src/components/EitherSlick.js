@@ -50,7 +50,6 @@ function PrevArrow(props) {
         height: "50px",
         right: "-27px",
         top: "120px",
-        zIndex: "999",
       }}
       onClick={onClick}
     >
