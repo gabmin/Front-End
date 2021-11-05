@@ -41,7 +41,7 @@ const MultiCard = props => {
         <hr></hr>
         <FooterWrapper>
           <UserWrapper>
-            <p>{user}</p>
+            <p>{userInfo.nickname}</p>
             <p>{date}</p>
             {/* {isEdited ? <p>{editedDate}</p> : null} */}
           </UserWrapper>
