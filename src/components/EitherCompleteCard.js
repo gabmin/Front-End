@@ -120,21 +120,10 @@ const EitherCompleteCard = props => {
           <h2>{title}</h2>
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
-        <div>
-          {voteCntA === voteCntB ? (
+        {!userInfo.nickname ? (
+          <div>
             <div>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>O</h1>
-                <h5>{contentA}</h5>
-              </EitherButton>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>X</h1>
-                <h5>{contentB}</h5>
-              </EitherButton>
-            </div>
-          ) : voteCntA > voteCntB ? (
-            <div>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+              <EitherButton disalbed>
                 <h1>O</h1>
                 <h5>{contentA}</h5>
               </EitherButton>
@@ -143,19 +132,45 @@ const EitherCompleteCard = props => {
                 <h5>{contentB}</h5>
               </EitherButton>
             </div>
-          ) : (
-            <div>
-              <EitherButton disalbed>
-                <h1>O</h1>
-                <h5>{contentA}</h5>
-              </EitherButton>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>X</h1>
-                <h5>{contentB}</h5>
-              </EitherButton>
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div>
+            {voteCntA === voteCntB ? (
+              <div>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>O</h1>
+                  <h5>{contentA}</h5>
+                </EitherButton>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>X</h1>
+                  <h5>{contentB}</h5>
+                </EitherButton>
+              </div>
+            ) : voteCntA > voteCntB ? (
+              <div>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>O</h1>
+                  <h5>{contentA}</h5>
+                </EitherButton>
+                <EitherButton disalbed>
+                  <h1>X</h1>
+                  <h5>{contentB}</h5>
+                </EitherButton>
+              </div>
+            ) : (
+              <div>
+                <EitherButton disalbed>
+                  <h1>O</h1>
+                  <h5>{contentA}</h5>
+                </EitherButton>
+                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
+                  <h1>X</h1>
+                  <h5>{contentB}</h5>
+                </EitherButton>
+              </div>
+            )}
+          </div>
+        )}
         <EitherProgress>
           <ProgressBar
             completed={percent}

@@ -35,6 +35,14 @@ const EitherDetail = props => {
   const [choice, setChoice] = useState(targetPost && targetPost.voted);
   const [action, setAction] = useState(null);
 
+  //불러온 데이터가 없거나 새로고침 시 페이지 이동
+  useEffect(() => {
+    if (!userInfo.nickname) {
+      alert("로그인 후 이용해주세요.");
+      history.push("/");
+    }
+  }, []);
+
   useEffect(() => {
     //데이터 가져오기
     dispatch(PostDB());
