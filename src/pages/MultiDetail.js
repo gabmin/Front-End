@@ -59,7 +59,10 @@ const MultiDetail = props => {
     }
   };
 
-  if (
+  if (dataList && !userInfo.nickname) {
+    window.alert("로그인 후 이용가능합니다");
+    history.push("/login");
+  } else if (
     dataList &&
     (userInfo.nickname === dataList.multi.nickname ||
       dataList.multi.voted !== null)
@@ -108,6 +111,7 @@ const MultiDetail = props => {
       </Container>
     );
   }
+  return null;
 };
 
 const Container = styled.div`

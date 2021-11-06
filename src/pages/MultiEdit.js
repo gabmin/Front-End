@@ -13,6 +13,8 @@ const MultiEdit = props => {
 
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const userInfo = useSelector(state => state.user.userInfo);
+
   console.log("multiDetail", multiDetail);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataListList", dataList);
@@ -42,7 +44,11 @@ const MultiEdit = props => {
     setEitherState(!eitherState);
     setMultiState(!multiState);
   };
-  if (dataList) {
+
+  if (dataList && !userInfo.nickname) {
+    window.alert("로그인 후 이용가능합니다");
+    history.push("/login");
+  } else if (dataList) {
     return (
       <>
         <Wrap>
