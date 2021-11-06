@@ -111,7 +111,7 @@ const EitherDetail = props => {
   };
   //좋아요
   const onClickLike = () => {
-    if (targetPost?.liked !== null) {
+    if (targetPost?.liked !== null || !userInfo.nickname) {
       return;
     } else {
       dispatch(likePostDB(eitherId));
