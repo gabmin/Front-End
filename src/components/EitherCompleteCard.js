@@ -76,11 +76,11 @@ const EitherCompleteCard = props => {
     }
   };
   //버튼 상태 보여주기
-  const SelctButton = (a, b, c) => {
+  const SelctButton = (color, title, content) => {
     return (
-      <EitherButton style={{ backgroundColor: a }} disabled>
-        <h1>{b}</h1>
-        <ButtonText>{c}</ButtonText>
+      <EitherButton style={{ backgroundColor: color }} disabled>
+        <h1>{title}</h1>
+        <ButtonText>{content}</ButtonText>
       </EitherButton>
     );
   };

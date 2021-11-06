@@ -150,17 +150,17 @@ const EitherDetail = props => {
     history.push("/");
   };
   //버튼 상태 보여주기
-  const SelctButton = (a, b, c, d, e) => {
+  const SelctButton = (color, disabled, vote, title, content) => {
     return (
       <EitherButton
-        style={{ backgroundColor: a }}
-        disabled={b}
+        style={{ backgroundColor: color }}
+        disabled={disabled}
         onClick={() => {
-          onClickContent(c);
+          onClickContent(vote);
         }}
       >
-        <h1>{d}</h1>
-        <ButtonText>{e}</ButtonText>
+        <h1>{title}</h1>
+        <ButtonText>{content}</ButtonText>
       </EitherButton>
     );
   };
