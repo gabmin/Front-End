@@ -126,15 +126,10 @@ const EitherDetail = props => {
       setLikes(targetPost.likeCnt + 1);
     }
   };
-  //contentA 투표
-  const onClickContentA = () => {
-    dispatch(votePostDB({ eitherId, data: { vote: "A" } }));
-    setChoice("A");
-  };
-  //contentB 투표
-  const onClickContentB = () => {
-    dispatch(votePostDB({ eitherId, data: { vote: "B" } }));
-    setChoice("B");
+  //content 투표
+  const onClickContent = e => {
+    dispatch(votePostDB({ eitherId, data: { vote: e } }));
+    setChoice(e);
   };
   //투표 종료하기
   const onClickComplete = () => {
@@ -154,7 +149,21 @@ const EitherDetail = props => {
   const onClickIndex = () => {
     history.push("/");
   };
-
+  //버튼 상태 보여주기
+  const SelctButton = (a, b, c, d, e) => {
+    return (
+      <EitherButton
+        style={{ backgroundColor: a }}
+        disabled={b}
+        onClick={() => {
+          onClickContent(c);
+        }}
+      >
+        <h1>{d}</h1>
+        <ButtonText>{e}</ButtonText>
+      </EitherButton>
+    );
+  };
   return (
     <>
       <Wrap>
@@ -174,11 +183,6 @@ const EitherDetail = props => {
               <b>OX</b>
               {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
               {targetPost?.nickname === userInfo.nickname ? (
-                // <div>
-                //   <button onClick={onClickModify}>수정하기</button>
-                //   <button onClick={onClickComplete}>투표 종료하기</button>
-                //   <button onClick={onClickDelete}>삭제하기</button>
-                // </div>
                 <div>
                   <Menu
                     menuButton={
@@ -231,94 +235,37 @@ const EitherDetail = props => {
               <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
             ) : null}
           </EitherText>
-          {choice === "A" ? (
+          {!userInfo.nickname ? (
             <div>
-              {targetPost?.completed === 1 ? (
-                <EitherButton
-                  onClick={onClickContentA}
-                  style={{ backgroundColor: "orange" }}
-                  disabled
-                >
-                  <h1>O</h1>
-                  <ButtonText>{targetPost?.contentA}</ButtonText>
-                </EitherButton>
-              ) : (
-                <EitherButton
-                  onClick={onClickContentA}
-                  style={{ backgroundColor: "orange" }}
-                >
-                  <h1>O</h1>
-                  <ButtonText>{targetPost?.contentA}</ButtonText>
-                </EitherButton>
-              )}
-              {targetPost?.completed === 1 ? (
-                <EitherButton onClick={onClickContentB} disabled>
-                  <h1>X</h1>
-                  <ButtonText>{targetPost?.contentB}</ButtonText>
-                </EitherButton>
-              ) : (
-                <EitherButton onClick={onClickContentB}>
-                  <h1>X</h1>
-                  <ButtonText>{targetPost?.contentB}</ButtonText>
-                </EitherButton>
-              )}
+              {SelctButton(null, true, null, "O", targetPost?.contentA)}
+              {SelctButton(null, true, null, "X", targetPost?.contentB)}
             </div>
-          ) : choice === "B" ? (
+          ) : userInfo.nickname && choice === "A" ? (
             <div>
-              {targetPost?.completed === 1 ? (
-                <EitherButton onClick={onClickContentA} disabled>
-                  <h1>O</h1>
-                  <ButtonText>{targetPost?.contentA}</ButtonText>
-                </EitherButton>
-              ) : (
-                <EitherButton onClick={onClickContentA}>
-                  <h1>O</h1>
-                  <ButtonText>{targetPost?.contentA}</ButtonText>
-                </EitherButton>
-              )}
-              {targetPost?.completed === 1 ? (
-                <EitherButton
-                  onClick={onClickContentB}
-                  style={{ backgroundColor: "orange" }}
-                  disabled
-                >
-                  <h1>X</h1>
-                  <ButtonText>{targetPost?.contentB}</ButtonText>
-                </EitherButton>
-              ) : (
-                <EitherButton
-                  onClick={onClickContentB}
-                  style={{ backgroundColor: "orange" }}
-                >
-                  <h1>X</h1>
-                  <ButtonText>{targetPost?.contentB}</ButtonText>
-                </EitherButton>
-              )}
+              {targetPost?.completed === 1
+                ? SelctButton("orange", true, null, "O", targetPost?.contentA)
+                : SelctButton("orange", false, "A", "O", targetPost?.contentA)}
+              {targetPost?.completed === 1
+                ? SelctButton(null, true, null, "X", targetPost?.contentB)
+                : SelctButton(null, false, "B", "X", targetPost?.contentB)}
+            </div>
+          ) : userInfo.nickname && choice === "B" ? (
+            <div>
+              {targetPost?.completed === 1
+                ? SelctButton(null, true, null, "O", targetPost?.contentA)
+                : SelctButton(null, false, "A", "O", targetPost?.contentA)}
+              {targetPost?.completed === 1
+                ? SelctButton("orange", true, null, "X", targetPost?.contentB)
+                : SelctButton("orange", false, "B", "X", targetPost?.contentB)}
             </div>
           ) : (
             <div>
-              {targetPost?.completed === 1 ? (
-                <EitherButton onClick={onClickContentA} disabled>
-                  <h1>O</h1>
-                  <ButtonText>{targetPost?.contentA}</ButtonText>
-                </EitherButton>
-              ) : (
-                <EitherButton onClick={onClickContentA}>
-                  <h1>O</h1>
-                  <ButtonText>{targetPost?.contentA}</ButtonText>
-                </EitherButton>
-              )}
-              {targetPost?.completed === 1 ? (
-                <EitherButton onClick={onClickContentB} disabled>
-                  <h1>X</h1>
-                  <ButtonText>{targetPost?.contentB}</ButtonText>
-                </EitherButton>
-              ) : (
-                <EitherButton onClick={onClickContentB}>
-                  <h1>X</h1>
-                  <ButtonText>{targetPost?.contentB}</ButtonText>
-                </EitherButton>
-              )}
+              {targetPost?.completed === 1
+                ? SelctButton(null, true, null, "O", targetPost?.contentA)
+                : SelctButton(null, false, "A", "O", targetPost?.contentA)}
+              {targetPost?.completed === 1
+                ? SelctButton(null, true, null, "X", targetPost?.contentB)
+                : SelctButton(null, false, "B", "X", targetPost?.contentB)}
             </div>
           )}
           <EitherProgress>

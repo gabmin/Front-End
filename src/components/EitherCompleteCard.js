@@ -75,7 +75,15 @@ const EitherCompleteCard = props => {
       setLikes(likeCnt + 1);
     }
   };
-
+  //버튼 상태 보여주기
+  const SelctButton = (a, b, c) => {
+    return (
+      <EitherButton style={{ backgroundColor: a }} disabled>
+        <h1>{b}</h1>
+        <ButtonText>{c}</ButtonText>
+      </EitherButton>
+    );
+  };
   return (
     <>
       <Container>
@@ -122,51 +130,25 @@ const EitherCompleteCard = props => {
         </EitherText>
         {!userInfo.nickname ? (
           <div>
-            <div>
-              <EitherButton disalbed>
-                <h1>O</h1>
-                <h5>{contentA}</h5>
-              </EitherButton>
-              <EitherButton disalbed>
-                <h1>X</h1>
-                <h5>{contentB}</h5>
-              </EitherButton>
-            </div>
+            {SelctButton(null, "O", contentA)}
+            {SelctButton(null, "X", contentB)}
           </div>
         ) : (
           <div>
             {voteCntA === voteCntB ? (
               <div>
-                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                  <h1>O</h1>
-                  <h5>{contentA}</h5>
-                </EitherButton>
-                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                  <h1>X</h1>
-                  <h5>{contentB}</h5>
-                </EitherButton>
+                {SelctButton("orange", "O", contentA)}
+                {SelctButton("orange", "X", contentB)}
               </div>
             ) : voteCntA > voteCntB ? (
               <div>
-                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                  <h1>O</h1>
-                  <h5>{contentA}</h5>
-                </EitherButton>
-                <EitherButton disalbed>
-                  <h1>X</h1>
-                  <h5>{contentB}</h5>
-                </EitherButton>
+                {SelctButton("orange", "O", contentA)}
+                {SelctButton(null, "X", contentB)}
               </div>
             ) : (
               <div>
-                <EitherButton disalbed>
-                  <h1>O</h1>
-                  <h5>{contentA}</h5>
-                </EitherButton>
-                <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                  <h1>X</h1>
-                  <h5>{contentB}</h5>
-                </EitherButton>
+                {SelctButton(null, "O", contentA)}
+                {SelctButton("orange", "X", contentB)}
               </div>
             )}
           </div>
@@ -218,5 +200,7 @@ const EitherFooter = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
+const ButtonText = styled.h5`
+  word-break: break-all;
+`;
 export default EitherCompleteCard;
