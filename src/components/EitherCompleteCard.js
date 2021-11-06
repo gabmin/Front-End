@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
+import MaterialIcon from "material-icons-react";
 
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
@@ -76,11 +80,40 @@ const EitherCompleteCard = props => {
     <>
       <Container>
         <EitherText>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              margin: "10px 40px",
+            }}
+          >
             <b>OX</b>
             {nickname === userInfo.nickname ? (
               <div>
-                <button onClick={onClickDelete}>삭제하기</button>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "white",
+                      }}
+                    >
+                      <MaterialIcon icon="more_vert" size="small" />
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                  portal={true}
+                >
+                  <MenuItem
+                    styles={{
+                      fontSize: "20px",
+                    }}
+                    onClick={onClickDelete}
+                  >
+                    <MaterialIcon icon="delete" size="small" />
+                    삭제하기
+                  </MenuItem>
+                </Menu>
               </div>
             ) : null}
           </div>
