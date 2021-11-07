@@ -75,7 +75,15 @@ const EitherCompleteCard = props => {
       setLikes(likeCnt + 1);
     }
   };
-
+  //버튼 상태 보여주기
+  const SelctButton = (color, title, content) => {
+    return (
+      <EitherButton style={{ backgroundColor: color }} disabled>
+        <h1>{title}</h1>
+        <ButtonText>{content}</ButtonText>
+      </EitherButton>
+    );
+  };
   return (
     <>
       <Container>
@@ -120,42 +128,31 @@ const EitherCompleteCard = props => {
           <h2>{title}</h2>
           <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
         </EitherText>
-        <div>
-          {voteCntA === voteCntB ? (
-            <div>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>O</h1>
-                <h5>{contentA}</h5>
-              </EitherButton>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>X</h1>
-                <h5>{contentB}</h5>
-              </EitherButton>
-            </div>
-          ) : voteCntA > voteCntB ? (
-            <div>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>O</h1>
-                <h5>{contentA}</h5>
-              </EitherButton>
-              <EitherButton disalbed>
-                <h1>X</h1>
-                <h5>{contentB}</h5>
-              </EitherButton>
-            </div>
-          ) : (
-            <div>
-              <EitherButton disalbed>
-                <h1>O</h1>
-                <h5>{contentA}</h5>
-              </EitherButton>
-              <EitherButton style={{ backgroundColor: "orange" }} disalbed>
-                <h1>X</h1>
-                <h5>{contentB}</h5>
-              </EitherButton>
-            </div>
-          )}
-        </div>
+        {!userInfo.nickname ? (
+          <div>
+            {SelctButton(null, "O", contentA)}
+            {SelctButton(null, "X", contentB)}
+          </div>
+        ) : (
+          <div>
+            {voteCntA === voteCntB ? (
+              <div>
+                {SelctButton("orange", "O", contentA)}
+                {SelctButton("orange", "X", contentB)}
+              </div>
+            ) : voteCntA > voteCntB ? (
+              <div>
+                {SelctButton("orange", "O", contentA)}
+                {SelctButton(null, "X", contentB)}
+              </div>
+            ) : (
+              <div>
+                {SelctButton(null, "O", contentA)}
+                {SelctButton("orange", "X", contentB)}
+              </div>
+            )}
+          </div>
+        )}
         <EitherProgress>
           <ProgressBar
             completed={percent}
@@ -203,5 +200,7 @@ const EitherFooter = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
+const ButtonText = styled.h5`
+  word-break: break-all;
+`;
 export default EitherCompleteCard;
