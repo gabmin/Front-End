@@ -4,9 +4,10 @@ import api from "../../shared/api";
 //post 전체보기
 export const PostDB = createAsyncThunk(
   "multiPost/PostDB",
-  async (data, { rejectWithValue }) => {
+  async (checkPosition, { rejectWithValue }) => {
+    console.log("checkPosition", checkPosition);
     try {
-      const response = await api.get("/posts/multi");
+      const response = await api.get(`/posts/multi/${checkPosition}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

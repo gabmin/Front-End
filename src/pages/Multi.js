@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
+
 import styled from "styled-components";
 import MultiSlick from "../components/MultiSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
 
 const Multi = props => {
   const dispatch = useDispatch();
+  const [select, setSelect] = useState("checkMulti");
+  const [status, setStatus] = useState("Post");
+  const userInfo = useSelector(state => state.user.userInfo);
+  const paramsId = useSelector(state => state.params.paramsId);
   const { multiPost, multiPosting, multiPostComplete } = useSelector(
     state => state.multiCard,
   );
-  const userInfo = useSelector(state => state.user.userInfo);
 
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
   const completeCardList = multiPostComplete && multiPostComplete.multi;
-  console.log("멀티포스트", cardList);
-
-  const [select, setSelect] = useState("checkMulti");
-  const [status, setStatus] = useState("Post");
 
   useEffect(() => {
-    dispatch(PostDB());
+    dispatch(PostDB(paramsId));
     setStatus("Post");
-  }, [dispatch]);
+  }, [dispatch, paramsId]);
 
   const showPost = () => {
     dispatch(PostDB());
