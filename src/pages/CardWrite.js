@@ -5,19 +5,24 @@ import { useLocation } from "react-router";
 import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
 import { history } from "../redux/configureStore";
+import { useSelector } from "react-redux";
 
 const CardWrite = () => {
   const location = useLocation();
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
-  const checkRadio = location.state.select;
+  const userInfo = useSelector(state => state.user.userInfo);
+  const checkRadio = location.state?.select;
   console.log("checkRadio", checkRadio);
 
   useEffect(() => {
     if (checkRadio === "checkMulti") {
       setEitherState(false);
       setMultiState(true);
-    } else {
+    } else if (checkRadio === "checkEither") {
+      setEitherState(true);
+      setMultiState(false);
+    } else if (checkRadio !== "checkMulti" && checkRadio !== "checkEither") {
       setEitherState(true);
       setMultiState(false);
     }
@@ -40,7 +45,10 @@ const CardWrite = () => {
     setEitherState(!eitherState);
     setMultiState(!multiState);
   };
-
+  if (!userInfo.nickname) {
+    window.alert("로그인 후 이용가능합니다");
+    history.push("/login");
+  }
   return (
     <>
       <Wrap>

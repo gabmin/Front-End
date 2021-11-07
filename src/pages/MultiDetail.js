@@ -8,11 +8,11 @@ import MultiVoted from "../components/MultiVoted";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import styled from "styled-components";
+import { SetParams } from "../redux/reducers/paramsSlice";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
   const [state, setState] = useState(false);
-
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   console.log("multiDetail", multiDetail);
@@ -35,6 +35,7 @@ const MultiDetail = props => {
 
   useEffect(() => {
     dispatch(DetailDB(multiId));
+    dispatch(SetParams(multiId));
   }, [dispatch, multiId]);
 
   const deletePost = () => {
@@ -44,6 +45,13 @@ const MultiDetail = props => {
       window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
       return;
     }
+  };
+
+  const goToMulti = () => {
+    history.push({
+      pathname: "/multi",
+      state: { multiId: multiId },
+    });
   };
 
   const closePost = () => {
@@ -59,7 +67,10 @@ const MultiDetail = props => {
     }
   };
 
-  if (
+  if (dataList && !userInfo.nickname) {
+    window.alert("로그인 후 이용가능합니다");
+    history.push("/login");
+  } else if (
     dataList &&
     (userInfo.nickname === dataList.multi.nickname ||
       dataList.multi.voted !== null)
@@ -67,6 +78,7 @@ const MultiDetail = props => {
     return (
       <Container>
         <div>
+          <button onClick={goToMulti}>뒤로가기</button>
           <MultiVoted multiId={multiId} dataList={dataList} />
         </div>
         {userInfo.nickname === dataList.multi.nickname ? (
@@ -92,6 +104,7 @@ const MultiDetail = props => {
   } else {
     return (
       <Container>
+        <button onClick={goToMulti}>뒤로가기</button>
         {dataList && (
           <MultiUnvoted
             multiId={multiId}
@@ -108,6 +121,7 @@ const MultiDetail = props => {
       </Container>
     );
   }
+  return null;
 };
 
 const Container = styled.div`

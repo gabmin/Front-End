@@ -14,10 +14,12 @@ const EitherEdit = props => {
   const { eitherPost, editPostDBDone, completePostDBDone } = useSelector(
     state => state.eitherCard,
   );
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
 
   //불러온 데이터가 없거나 새로고침 시 페이지 이동
   useEffect(() => {
-    if (!postList) {
+    if (!postList || !userInfo.nickname) {
       history.push("/either");
     }
   }, []);
