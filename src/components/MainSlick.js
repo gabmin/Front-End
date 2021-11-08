@@ -9,6 +9,7 @@ import MainCard from "../components/MainCard";
 import PrevArrow from "../elements/PrevArrow";
 import NextArrow from "../elements/NextArrow";
 import { history } from "../redux/configureStore";
+import { blue, red, mobile, tablet } from "../shared/style";
 
 const ProductSlick = ({ cardList, type }) => {
   console.log(cardList);
@@ -94,11 +95,6 @@ const ProductSlick = ({ cardList, type }) => {
     </>
   );
 };
-
-const blue = "#00397c";
-const red = "#E25B45";
-const tablet = "1300px";
-const mobile = "768px";
 
 const Wrap = styled.div`
   width: 104%;

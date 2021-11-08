@@ -6,11 +6,7 @@ import MainSlick from "../components/MainSlick";
 import { getMainData } from "../redux/actions/main";
 import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
 import { history } from "../redux/configureStore";
-
-const blue = "#00397c";
-const red = "#E25B45";
-const tablet = "1300px";
-const mobile = "768px";
+import { blue, red, mobile, tablet } from "../shared/style";
 
 const Main = () => {
   const dispatch = useDispatch();

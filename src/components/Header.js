@@ -8,6 +8,7 @@ import { SetParams } from "../redux/reducers/paramsSlice";
 import { loginCheck, logout } from "../redux/actions/user";
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
+import { blue, red, mobile, tablet } from "../shared/style";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -106,11 +107,6 @@ const Header = () => {
     </Container>
   );
 };
-
-const blue = "#00397c";
-const red = "#E25B45";
-const tablet = "1300px";
-const mobile = "768px";
 
 const Container = styled.div`
   display: flex;

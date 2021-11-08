@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
 import { history } from "../redux/configureStore";
+import { blue, red, mobile, tablet } from "../shared/style";
 
 const Card = ({
   title,
@@ -65,10 +66,6 @@ const Card = ({
     </Layout>
   );
 };
-
-const blue = "#00397c";
-const red = "#E25B45";
-const mobile = "1280px";
 
 Card.defaultProps = {
   width: "290px",

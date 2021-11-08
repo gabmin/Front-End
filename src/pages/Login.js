@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { login } from "../redux/actions/user";
 import { history } from "../redux/configureStore";
+import { blue, red, mobile, tablet } from "../shared/style";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -99,23 +100,26 @@ const Login = () => {
     </>
   );
 };
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 620px;
   width: 90%;
-  height: 300px;
+  height: 416px;
   margin: 100px auto 300px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 100%;
   height: 100%;
   font-size: 20px;
-  margin: 30px auto 0;
   padding: 50px 50px 50px;
-  border: 1px solid gray;
+  border: 2px solid ${blue};
+  border-radius: 10px;
+  box-sizing: border-box;
 
   & div {
     display: flex;
