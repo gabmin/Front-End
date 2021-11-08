@@ -51,29 +51,30 @@ const AnswerList = props => {
 
   return (
     <Container>
-      <AnswerBtn id="A" color="#777777" onClick={selectAnswer}>
+      <AnswerBtn id="A" color="#ffffff" onClick={selectAnswer}>
         {DataList.contentA}
       </AnswerBtn>
-      <AnswerBtn id="B" color="#777777" onClick={selectAnswer}>
+      <AnswerBtn id="B" color="#ffffff" onClick={selectAnswer}>
         {DataList.contentB}
       </AnswerBtn>
       {DataList.contentC !== null ? (
-        <AnswerBtn id="C" color="#777777" onClick={selectAnswer}>
+        <AnswerBtn id="C" color="#ffffff" onClick={selectAnswer}>
           {DataList.contentC}
         </AnswerBtn>
       ) : null}
       {DataList.contentD !== null ? (
-        <AnswerBtn id="D" color="#777777" onClick={selectAnswer}>
+        <AnswerBtn id="D" color="#ffffff" onClick={selectAnswer}>
           {DataList.contentD}
         </AnswerBtn>
       ) : null}
       {DataList.contentE !== null ? (
-        <AnswerBtn id="E" color="#777777" onClick={selectAnswer}>
+        <AnswerBtn id="E" color="#ffffff" onClick={selectAnswer}>
           {DataList.contentE}
         </AnswerBtn>
       ) : null}
-      <button onClick={selectComplete}>완료하고 결과보기</button>
-      <button>render</button>
+      <CompleteWrapper>
+        <CompleteBtn onClick={selectComplete}>완료하고 결과보기</CompleteBtn>
+      </CompleteWrapper>
     </Container>
   );
 };
@@ -88,20 +89,35 @@ const Container = styled.div`
 `;
 
 const AnswerBtn = styled.button`
-  border: none;
+  border: 1px #00397c solid;
   margin: 5px auto;
-  width: 50%;
-  height: 50px;
-  border-radius: 5px;
-  opacity: 0.5;
+  width: 620px;
+  height: 72px;
+  border-radius: 8px;
+  color: #00397c;
   background-color: ${props => props.color};
   cursor: pointer;
   &.on {
     opacity: 1;
+    background-color: #00397c;
+    color: #ffffff;
   }
   &:hover {
     opacity: 1;
   }
+`;
+
+const CompleteBtn = styled.button`
+  width: 180px;
+  height: 40px;
+  color: #ffffff;
+  background-color: #e25b45;
+  border: none;
+  border-radius: 8px;
+`;
+
+const CompleteWrapper = styled.div`
+  margin: auto;
 `;
 
 export default AnswerList;
