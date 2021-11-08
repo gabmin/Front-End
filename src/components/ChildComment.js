@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
+import colors from "../shared/colors";
 import ChildCommentInput from "../elements/ChildCommentInput";
 import {
   AddChildDB,
@@ -10,6 +11,9 @@ import {
   EditChildDB,
 } from "../redux/actions/childComment";
 import { AddLikeChild } from "../redux/actions/multiLike";
+import CommentNick from "../elements/CommentNick";
+import CommentContent from "../elements/CommentContent";
+import CommentDate from "../elements/CommentDate";
 
 const ChildComment = props => {
   const {
@@ -115,40 +119,61 @@ const ChildComment = props => {
   return (
     <>
       <div>
-        <div>{nickname}</div>
+        <NickWarpper>
+          <CommentNick>{nickname}</CommentNick>
+          <CommentDate>{date}</CommentDate>
+        </NickWarpper>
+        {addBtn ? <EventBtn onClick={showInput}>답글 달기</EventBtn> : null}
         <button onClick={addLike}>좋아요</button>
         {likes}
-        <div>{date}</div>
-        {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
+
+        {deleted ? (
+          <CommentContent>{"삭제된 댓글입니다"}</CommentContent>
+        ) : (
+          <CommentContent>{comment}</CommentContent>
+        )}
         {userInfo.nickname === nickname && !deleted ? (
           <div>
-            {editBtn ? <button onClick={showEditInput}>수정</button> : null}
-            {delBtn ? <button onClick={delComment}>삭제</button> : null}
+            {editBtn ? <EventBtn onClick={showEditInput}>수정</EventBtn> : null}
+            {delBtn ? <EventBtn onClick={delComment}>삭제</EventBtn> : null}
             {editCancelBtn ? (
-              <button onClick={showEditInput}>수정취소</button>
+              <EventBtn onClick={showEditInput}>수정취소</EventBtn>
             ) : null}
           </div>
         ) : null}
         {editInput ? (
           <div>
             <TextArea onChange={changeEditChild}>{comment}</TextArea>
-            <button onClick={editChildComment}>수정완료</button>
+            <EventBtn onClick={editChildComment}>수정완료</EventBtn>
           </div>
         ) : null}
 
-        {addBtn ? <button onClick={showInput}>댓글작성</button> : null}
-        {cancelBtn ? <button onClick={showInput}>취소</button> : null}
+        {cancelBtn ? <EventBtn onClick={showInput}>취소</EventBtn> : null}
 
         {addInput ? (
           <div>
             <TextArea onChange={changeChild}></TextArea>
-            <button onClick={addChildComment}>완료</button>
+            <EventBtn onClick={addChildComment}>완료</EventBtn>
           </div>
         ) : null}
       </div>
     </>
   );
 };
+
+const NickWarpper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const EventBtn = styled.button`
+  font-size: 10px;
+  text-decoration: underline;
+  border: none;
+  color: ${colors.red};
+  background-color: ${colors.white};
+`;
 
 const TextArea = styled.textarea`
   width: 80%;

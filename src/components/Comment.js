@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
+import { FiThumbsUp } from "react-icons/fi";
 
+import colors from "../shared/colors";
 import ChildList from "./ChildList";
 import ChildCommentInput from "../elements/ChildCommentInput";
 import { EditCommentDB, DelCommentDB } from "../redux/actions/comment";
 import { AddChildDB } from "../redux/actions/childComment";
 import { AddLikeComment } from "../redux/actions/multiLike";
+import CommentNick from "../elements/CommentNick";
+import CommentContent from "../elements/CommentContent";
+import CommentDate from "../elements/CommentDate";
 
 const Comment = props => {
   const { nickname, commentDate, commentLikeCnt, id, deleted, comment, liked } =
@@ -114,54 +119,142 @@ const Comment = props => {
   return (
     <>
       <TempWarpper>
-        <div>{nickname}</div>
-        <div>{commentDate}</div>
-        <button onClick={addLike}>좋아요 </button>
-        {likes}
-        {deleted ? <div>{"삭제된 댓글입니다"}</div> : <div>{comment}</div>}
-        {userInfo.nickname === nickname && !deleted ? (
-          <div>
-            {editBtn ? <button onClick={showEditInput}>수정</button> : null}
-            {editCancelBtn ? (
-              <button onClick={showEditInput}>수정취소</button>
+        <InfoWarpper>
+          <NickWarpper>
+            <CommentNick>{nickname}</CommentNick>
+            <CommentDate>{commentDate}</CommentDate>
+          </NickWarpper>
+          <BtnWrapper>
+            {userInfo.nickname === nickname && !deleted && editBtn ? (
+              <EventBtn onClick={showEditInput}>수정</EventBtn>
             ) : null}
-            {delBtn ? <button onClick={delComment}>삭제</button> : null}
-          </div>
-        ) : null}
-
-        {addBtn ? <button onClick={showInput}>댓글작성</button> : null}
-        {cancelBtn ? <button onClick={showInput}>취소</button> : null}
+            {userInfo.nickname === nickname && !deleted && delBtn ? (
+              <EventBtn onClick={delComment}>삭제</EventBtn>
+            ) : null}
+            {addBtn ? <EventBtn onClick={showInput}>답글 달기</EventBtn> : null}
+          </BtnWrapper>
+        </InfoWarpper>
+        <ContentWrapper>
+          {deleted ? (
+            <CommentContent>{"삭제된 댓글입니다"}</CommentContent>
+          ) : (
+            <CommentContent>{comment}</CommentContent>
+          )}
+          <LikeWrapper>
+            <LikeBtn onClick={addLike}>
+              <FiThumbsUp />
+            </LikeBtn>
+            <TotalLikes>{likes}</TotalLikes>
+          </LikeWrapper>
+        </ContentWrapper>
 
         {addInput ? (
-          // <ChildCommentInput parentComment={id} multiId={multiId} />
-          <div>
+          <ReplyWarpper>
             <TextArea onChange={changeComment}></TextArea>
-            <button onClick={addChildComment}>작성완료</button>
-          </div>
+            {cancelBtn ? <EventBtn onClick={showInput}>취소</EventBtn> : null}
+            <EventBtn onClick={addChildComment}>작성완료</EventBtn>
+          </ReplyWarpper>
         ) : null}
         {editInput ? (
-          // <ChildCommentInput parentComment={id} multiId={multiId} />
           <div>
             <TextArea onChange={changeEditComment}>{comment}</TextArea>
-            <button onClick={editComment}>수정완료</button>
+            {userInfo.nickname === nickname && !deleted ? (
+              <div>
+                {editCancelBtn ? (
+                  <EventBtn onClick={showEditInput}>수정취소</EventBtn>
+                ) : null}
+              </div>
+            ) : null}
+            <EventBtn onClick={editComment}>수정완료</EventBtn>
           </div>
         ) : null}
         <div>
           <ChildList parentComment={id} multiId={multiId} dataList={dataList} />
         </div>
+        <CommentHr />
       </TempWarpper>
     </>
   );
 };
 
 const TempWarpper = styled.div`
-  background-color: white;
+  background-color: ${colors.white};
+`;
+
+const InfoWarpper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const NickWarpper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const BtnWrapper = styled.div``;
+
+const EventBtn = styled.button`
+  font-size: 10px;
+  text-decoration: underline;
+  border: none;
+  color: ${colors.red};
+  background-color: ${colors.white};
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const LikeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const LikeBtn = styled.button`
+  border: none;
+  color: ${colors.gray5};
+  background-color: ${colors.white};
+`;
+
+const TotalLikes = styled.p`
+  font-size: 10px;
+  color: ${colors.darkGray};
+`;
+
+const ReplyWarpper = styled.div`
+  width: 80%;
+  height: 80px;
+  margin: 0 0 0 auto;
+  border: 1px ${colors.gray5} solid;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  background-color: ${colors.gray};
 `;
 
 const TextArea = styled.textarea`
   width: 80%;
   height: 50px;
+  margin: auto;
+  border: none;
   resize: none;
+  background-color: ${colors.gray};
+  &:focus {
+    outline: none;
+  }
+`;
+
+const CommentHr = styled.hr`
+  width: 556px;
+  height: 2px;
+  border: none;
+  background-color: ${colors.gray};
 `;
 
 export default Comment;
