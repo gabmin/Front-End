@@ -6,6 +6,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import MaterialIcon from "material-icons-react";
 import { FiThumbsUp } from "react-icons/fi";
+import { FaRegUser } from "react-icons/fa";
 
 import { history } from "../redux/configureStore";
 import {
@@ -166,10 +167,10 @@ const EitherCard = props => {
                   <MenuButton
                     styles={{
                       border: "none",
-                      backgroundColor: "white",
+                      backgroundColor: "transparent",
                     }}
                   >
-                    <MaterialIcon icon="more_horiz" size="small" />
+                    <MaterialIcon icon="more_horiz" size={32} />
                   </MenuButton>
                 }
                 menuStyles={{ border: "0px solid" }}
@@ -208,11 +209,16 @@ const EitherCard = props => {
         </div>
         <TitleDiv> {title} </TitleDiv>
         <DateDiv>{date}</DateDiv>
-        {/* 투표 완료에 따른 종료 안내글 표시 */}
-        {completed === 1 ? (
-          <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
-        ) : null}
-
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "32px",
+          }}
+        >
+          <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
+          <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
+        </div>
         {/* 선택 결과에 따라 보여주기 */}
         {!userInfo.nickname ? (
           <div>
@@ -296,6 +302,12 @@ const DateDiv = styled.div`
   margin: auto;
   color: #868e96;
 `;
+const TotalCntDiv = styled.div`
+  font-size: 14px;
+  line-height: 20px;
+  color: #868e96;
+  margin-left: 8px;
+`;
 const EitherProgress = styled.div`
   margin: 24px auto;
   border: 2px solid #00397c;
@@ -326,7 +338,7 @@ const EitherButtonA = styled.button`
   border-bottom-left-radius: 10px;
   font-size: 16px;
   line-height: 23px;
-  margin: 34px auto 0px auto;
+  margin: 24px auto 0px auto;
 `;
 const EitherButtonB = styled.button`
   width: 240px;
@@ -336,10 +348,10 @@ const EitherButtonB = styled.button`
   border-bottom-right-radius: 10px;
   font-size: 16px;
   line-height: 23px;
-  margin: 34px auto 0px auto;
+  margin: 24px auto 0px auto;
 `;
 const EitherFooter = styled.div`
-  margin: 78px 77px;
+  margin: 36px 77px;
   display: flex;
   justify-content: space-between;
   align-items: center;
