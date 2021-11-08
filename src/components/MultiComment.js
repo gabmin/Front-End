@@ -24,13 +24,12 @@ const MultiComment = props => {
   // }, []);
 
   return (
-    <>
+    <Contaier>
       <TempWarpper>
         <TextAreaWarpper>
-          <p>댓글 {dataList.comment.length + dataList.childComment.length}개</p>
           <CommentInput multiId={multiId} />
         </TextAreaWarpper>
-        <hr></hr>
+
         <div>
           <CommentList
             multiId={multiId}
@@ -40,20 +39,25 @@ const MultiComment = props => {
           />
         </div>
       </TempWarpper>
-    </>
+    </Contaier>
   );
 };
+
+const Contaier = styled.div`
+  width: 620px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+`;
 
 const TempWarpper = styled.div`
   max-width: 100%;
   margin: auto;
-  /* background-color: green; */
 `;
 
 const TextAreaWarpper = styled.div`
-  max-width: 80%;
-  margin: auto;
-  /* background-color: green; */
+  max-width: 100%;
+  margin: 0 auto 20px;
 `;
 
 export default MultiComment;

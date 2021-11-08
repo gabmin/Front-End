@@ -33,7 +33,7 @@ const MultiCard = props => {
     <Container onClick={goToDetail}>
       <Card>
         <TitleWrapper>
-          <h1>{title}</h1>
+          <TitleText>{title}</TitleText>
         </TitleWrapper>
         <DesWrapper>
           <p>{description}</p>
@@ -54,27 +54,34 @@ const MultiCard = props => {
 };
 
 const Container = styled.div`
-  width: 70%;
-  height: 100%;
+  width: 620px;
+  height: 600px;
   padding: 20px;
   margin: 100px auto;
   background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
-  opacity: 0.3;
+  border: 2px #00397c solid;
+  border-radius: 10px;
+  box-sizing: border-box;
+  word-break: break-all;
 `;
 
 const Card = styled.div`
-  width: 100%;
-  min-height: 200px;
+  width: 620px;
+  height: 600px;
   padding: 20px 20px;
   margin: auto;
-  box-sizing: border-box;
+  word-break: break-all;
 `;
 
 const TitleWrapper = styled.div`
+  width: 100%;
   margin: 0 0 0 10px;
   min-height: 20%;
+  word-break: break-all;
+`;
+
+const TitleText = styled.p`
+  font-size: 24px;
 `;
 
 const DesWrapper = styled.div`

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
+import { FiArrowLeft } from "react-icons/fi";
 
+import colors from "../shared/colors";
 import MultiComment from "../components/MultiComment";
 import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
@@ -77,47 +79,57 @@ const MultiDetail = props => {
   ) {
     return (
       <Container>
-        <div>
-          <button onClick={goToMulti}>뒤로가기</button>
-          <MultiVoted multiId={multiId} dataList={dataList} />
-        </div>
-        {userInfo.nickname === dataList.multi.nickname ? (
+        <BackBtn onClick={goToMulti}>
+          <FiArrowLeft />
+          뒤로가기
+        </BackBtn>
+        <Wrapper>
           <div>
-            {/* <div>투표가 종료되었습니다</div> */}
-            <div>
-              <button onClick={deletePost}>삭제하기</button>
-              {dataList.multi.completed !== 1 ? (
-                <div>
-                  <button onClick={editPost}>수정하기</button>
-                  <button onClick={closePost}>종료하기</button>
-                </div>
-              ) : null}
-            </div>
+            <MultiVoted multiId={multiId} dataList={dataList} />
           </div>
-        ) : null}
+          {userInfo.nickname === dataList.multi.nickname ? (
+            <div>
+              {/* <div>투표가 종료되었습니다</div> */}
+              <div>
+                <button onClick={deletePost}>삭제하기</button>
+                {dataList.multi.completed !== 1 ? (
+                  <div>
+                    <button onClick={editPost}>수정하기</button>
+                    <button onClick={closePost}>종료하기</button>
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
 
-        <div>
-          <MultiComment multiId={multiId} />
-        </div>
+          <div>
+            <MultiComment multiId={multiId} />
+          </div>
+        </Wrapper>
       </Container>
     );
   } else {
     return (
       <Container>
-        <button onClick={goToMulti}>뒤로가기</button>
-        {dataList && (
-          <MultiUnvoted
-            multiId={multiId}
-            dataList={dataList}
-            render={p => render(p)}
-          />
-        )}
+        <BackBtn onClick={goToMulti}>
+          <FiArrowLeft />
+          뒤로가기
+        </BackBtn>
+        <Wrapper>
+          {dataList && (
+            <MultiUnvoted
+              multiId={multiId}
+              dataList={dataList}
+              render={p => render(p)}
+            />
+          )}
 
-        {dataList && (
-          <div>
-            <MultiComment multiId={multiId} />
-          </div>
-        )}
+          {dataList && (
+            <div>
+              <MultiComment multiId={multiId} />
+            </div>
+          )}
+        </Wrapper>
       </Container>
     );
   }
@@ -127,6 +139,18 @@ const MultiDetail = props => {
 const Container = styled.div`
   max-width: 60%;
   margin: auto;
+`;
+
+const BackBtn = styled.button`
+  border: none;
+  background-color: ${colors.white};
+`;
+
+const Wrapper = styled.div`
+  width: 800px;
+  margin: 64px auto;
+  border: 2px ${colors.blue} solid;
+  border-radius: 10px;
 `;
 
 export default MultiDetail;
