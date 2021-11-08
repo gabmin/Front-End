@@ -11,9 +11,7 @@ const MultiComment = props => {
   const multiId = props.multiId;
   const render = props.render;
   const renderState = props.state;
-  console.log("renderState", renderState);
   console.log("commentdataList", dataList.comment);
-  const [action, setAction] = useState(false);
 
   // const { AddCommentDBLoading, AddCommentDBDone } = useSelector(
   //   state => state.comment,
@@ -29,15 +27,18 @@ const MultiComment = props => {
         <TextAreaWarpper>
           <CommentInput multiId={multiId} />
         </TextAreaWarpper>
-
-        <div>
-          <CommentList
-            multiId={multiId}
-            dataList={dataList}
-            // render={render}
-            // renderState={renderState}
-          />
-        </div>
+        {dataList.comment[0] ? (
+          <div>
+            <CommentList
+              multiId={multiId}
+              dataList={dataList}
+              // render={render}
+              // renderState={renderState}
+            />
+          </div>
+        ) : (
+          <p>댓글이 없습니다.</p>
+        )}
       </TempWarpper>
     </Contaier>
   );
