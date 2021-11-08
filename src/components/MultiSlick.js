@@ -39,6 +39,7 @@ const MultiSlick = props => {
                 completed={p.completed}
                 likeCnt={p.likeCnt}
                 commentCnt={p.commentCnt}
+                nickname={p.nickname}
               />
             </div>
           ))}
