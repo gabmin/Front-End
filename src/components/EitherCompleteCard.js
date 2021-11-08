@@ -77,10 +77,10 @@ const EitherCompleteCard = props => {
     }
   };
   //버튼A 상태 보여주기
-  const SelctButtonA = (BGcolor, color, content) => {
+  const SelctButtonA = (BGcolor, content) => {
     return (
       <EitherButtonA
-        style={{ backgroundColor: BGcolor, color: color }}
+        style={{ backgroundColor: BGcolor, color: "#101214" }}
         disabled
       >
         <ButtonText>{content}</ButtonText>
@@ -88,10 +88,10 @@ const EitherCompleteCard = props => {
     );
   };
   //버튼B 상태 보여주기
-  const SelctButtonB = (BGcolor, color, content) => {
+  const SelctButtonB = (BGcolor, content) => {
     return (
       <EitherButtonB
-        style={{ backgroundColor: BGcolor, color: color }}
+        style={{ backgroundColor: BGcolor, color: "#101214" }}
         disabled
       >
         <ButtonText>{content}</ButtonText>
@@ -104,7 +104,7 @@ const EitherCompleteCard = props => {
         <div
           style={{
             position: "absolute",
-            margin: "21px 31px 0px 557px",
+            margin: "21px 32px 0px 500px",
           }}
         >
           {nickname === userInfo.nickname ? (
@@ -114,10 +114,10 @@ const EitherCompleteCard = props => {
                   <MenuButton
                     styles={{
                       border: "none",
-                      backgroundColor: "white",
+                      backgroundColor: "transparent",
                     }}
                   >
-                    <MaterialIcon icon="more_horiz" size="small" />
+                    <MaterialIcon icon="more_horiz" size={32} />
                   </MenuButton>
                 }
                 menuStyles={{ border: "0px solid" }}
@@ -150,25 +150,25 @@ const EitherCompleteCard = props => {
         </div>
         {!userInfo.nickname ? (
           <div>
-            {SelctButtonA(null, "#101214", contentA)}
-            {SelctButtonB(null, "#101214", contentB)}
+            {SelctButtonA(null, contentA)}
+            {SelctButtonB(null, contentB)}
           </div>
         ) : (
           <div>
             {voteCntA === voteCntB ? (
               <div>
-                {SelctButtonA("#00397c", "#FFFFFF", contentA)}
-                {SelctButtonB("#00397c", "#FFFFFF", contentB)}
+                {SelctButtonA("#DFDFDF", contentA)}
+                {SelctButtonB("#DFDFDF", contentB)}
               </div>
             ) : voteCntA > voteCntB ? (
               <div>
-                {SelctButtonA("#00397c", "#FFFFFF", contentA)}
-                {SelctButtonB(null, "#101214", contentB)}
+                {SelctButtonA("#DFDFDF", contentA)}
+                {SelctButtonB(null, contentB)}
               </div>
             ) : (
               <div>
-                {SelctButtonA(null, "#101214", contentA)}
-                {SelctButtonB("#00397c", "#FFFFFF", contentB)}
+                {SelctButtonA(null, contentA)}
+                {SelctButtonB("#DFDFDF", contentB)}
               </div>
             )}
           </div>
@@ -208,6 +208,11 @@ const Container = styled.div`
   margin: 100px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 57, 124, 0.2) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
 `;
 const TitleDiv = styled.div`
   width: 482px;
