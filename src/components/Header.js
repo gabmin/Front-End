@@ -107,13 +107,18 @@ const Header = () => {
   );
 };
 
+const blue = "#00397c";
+const red = "#E25B45";
+const tablet = "1300px";
+const mobile = "768px";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 120px;
-  border-bottom: 3px solid lightgray;
+  border-bottom: 1px solid ${red};
 
   span {
     cursor: pointer;
@@ -147,7 +152,7 @@ const Bottom = styled.div`
     border-radius: 9px;
   }
 
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: ${tablet}) {
     display: none;
   }
 `;
@@ -184,7 +189,7 @@ const Menu = styled.div`
   height: 100%;
 
   span {
-    margin: 0 1em;
+    width: 80px;
     color: #e25b45;
   }
 
@@ -193,6 +198,10 @@ const Menu = styled.div`
     background-color: #e25b45;
     padding: 5px;
     border-radius: 7px;
+  }
+
+  @media screen and (max-width: ${tablet}) {
+    display: none;
   }
 `;
 
