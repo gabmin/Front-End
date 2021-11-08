@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // 기본 state
 export const initialState = {
-  paramsId: [],
+  paramsId: null,
 };
 
 // toolkit 사용방법

@@ -14,6 +14,8 @@ const Either = props => {
   );
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+  //이전 페이지 파람스 아이디 가져오기
+  const paramsId = useSelector(state => state.params.paramsId);
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
@@ -26,23 +28,23 @@ const Either = props => {
   console.log(PostList);
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
-    dispatch(PostDB());
-    dispatch(PostingDB());
+    dispatch(PostDB(paramsId));
+    dispatch(PostingDB(paramsId));
     setStatus("Post");
-  }, [dispatch]);
+  }, [dispatch, paramsId]);
   //전체 게시글 보여주기
   const onClickPost = () => {
-    dispatch(PostDB());
+    dispatch(PostDB(paramsId));
     setStatus("Post");
   };
   //진행중 게시글 보여주기
   const onClickPosting = () => {
-    dispatch(PostingDB());
+    dispatch(PostingDB(paramsId));
     setStatus("Posting");
   };
   //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
-    dispatch(PostCompleteDB());
+    dispatch(PostCompleteDB(paramsId));
     setStatus("CompletePost");
   };
   //게시글 작성하러가기
