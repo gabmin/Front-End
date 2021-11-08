@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
 import { loginUser } from "../redux/reducers/userSlice";
+import { SetParams } from "../redux/reducers/paramsSlice";
 import { logout } from "../redux/actions/user";
 
 const Header = () => {
@@ -53,10 +54,12 @@ const Header = () => {
   }, [userId]);
 
   const onClickEither = useCallback(() => {
+    dispatch(SetParams());
     history.push(`/either`);
   }, []);
 
   const onClickMulti = useCallback(() => {
+    dispatch(SetParams());
     history.push(`/multi`);
   }, []);
 
