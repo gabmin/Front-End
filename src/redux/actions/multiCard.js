@@ -4,10 +4,10 @@ import api from "../../shared/api";
 //post 전체보기
 export const PostDB = createAsyncThunk(
   "multiPost/PostDB",
-  async (checkPosition, { rejectWithValue }) => {
-    console.log("checkPosition", checkPosition);
+  async (multiId, { rejectWithValue }) => {
+    console.log("checkPosition", multiId);
     try {
-      const response = await api.get(`/posts/multi/${checkPosition}`);
+      const response = await api.get(`/posts/multi/${multiId}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -17,9 +17,9 @@ export const PostDB = createAsyncThunk(
 //post 진행중보기
 export const PostingDB = createAsyncThunk(
   "multiPost/PostingDB",
-  async (data, { rejectWithValue }) => {
+  async (multiId, { rejectWithValue }) => {
     try {
-      const response = await api.get("/posts/multi/ing");
+      const response = await api.get(`/posts/multi/${multiId}/ing`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -29,9 +29,9 @@ export const PostingDB = createAsyncThunk(
 //post 종료보기
 export const PostCompleteDB = createAsyncThunk(
   "multiPost/PostCompleteDB",
-  async (data, { rejectWithValue }) => {
+  async (multiId, { rejectWithValue }) => {
     try {
-      const response = await api.get("/posts/multi/complete");
+      const response = await api.get(`/posts/multi/${multiId}/complete`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
