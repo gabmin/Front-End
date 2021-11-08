@@ -161,10 +161,9 @@ const StyledSlider = styled(Slider)`
   overflow: hidden;
   .slick-slide.slick-center div {
     /* transform: scale(1.1); */
-    opacity: 1;
-    z-index: 0.5;
     button:hover {
-      background-color: darkGray;
+      color: white;
+      background-color: #00397c;
     }
   }
 `;

@@ -152,69 +152,67 @@ const EitherCard = props => {
   return (
     <>
       <Container>
-        <EitherText>
-          <div
-            style={{
-              position: "fixed",
-              right: "20px",
-              top: "-15px",
-            }}
-          >
-            {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
-            {nickname === userInfo.nickname ? (
-              <div>
-                <Menu
-                  menuButton={
-                    <MenuButton
-                      styles={{
-                        border: "none",
-                        backgroundColor: "white",
-                      }}
-                    >
-                      <MaterialIcon icon="more_vert" size="small" />
-                    </MenuButton>
-                  }
-                  menuStyles={{ border: "0px solid" }}
-                  portal={true}
+        <div
+          style={{
+            position: "absolute",
+            margin: "21px 31px 0px 557px",
+          }}
+        >
+          {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
+          {nickname === userInfo.nickname ? (
+            <div>
+              <Menu
+                menuButton={
+                  <MenuButton
+                    styles={{
+                      border: "none",
+                      backgroundColor: "white",
+                    }}
+                  >
+                    <MaterialIcon icon="more_horiz" size="small" />
+                  </MenuButton>
+                }
+                menuStyles={{ border: "0px solid" }}
+                portal={true}
+              >
+                <MenuItem
+                  styles={{
+                    fontSize: "20px",
+                  }}
+                  onClick={onClickModify}
                 >
-                  <MenuItem
-                    styles={{
-                      fontSize: "20px",
-                    }}
-                    onClick={onClickModify}
-                  >
-                    <MaterialIcon icon="mode_edit_outline" size="small" />
-                    수정하기
-                  </MenuItem>
-                  <MenuItem
-                    styles={{
-                      fontSize: "20px",
-                    }}
-                    onClick={onClickComplete}
-                  >
-                    <MaterialIcon icon="done" size="small" />
-                    투표 종료하기
-                  </MenuItem>
-                  <MenuItem
-                    styles={{
-                      fontSize: "20px",
-                    }}
-                    onClick={onClickDelete}
-                  >
-                    <MaterialIcon icon="delete" size="small" />
-                    삭제하기
-                  </MenuItem>
-                </Menu>
-              </div>
-            ) : null}
-          </div>
-          <TitleDiv> {title} </TitleDiv>
-          <DateDiv>{date}</DateDiv>
-          {/* 투표 완료에 따른 종료 안내글 표시 */}
-          {completed === 1 ? (
-            <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
+                  <MaterialIcon icon="mode_edit_outline" size="small" />
+                  수정하기
+                </MenuItem>
+                <MenuItem
+                  styles={{
+                    fontSize: "20px",
+                  }}
+                  onClick={onClickComplete}
+                >
+                  <MaterialIcon icon="done" size="small" />
+                  투표 종료하기
+                </MenuItem>
+                <MenuItem
+                  styles={{
+                    fontSize: "20px",
+                  }}
+                  onClick={onClickDelete}
+                >
+                  <MaterialIcon icon="delete" size="small" />
+                  삭제하기
+                </MenuItem>
+              </Menu>
+            </div>
           ) : null}
-        </EitherText>
+        </div>
+        <TitleDiv> {title} </TitleDiv>
+        <DateDiv>{date}</DateDiv>
+        {/* 투표 완료에 따른 종료 안내글 표시 */}
+        {completed === 1 ? (
+          <h2 style={{ color: "gray" }}>종료된 투표입니다</h2>
+        ) : null}
+
         {/* 선택 결과에 따라 보여주기 */}
         {!userInfo.nickname ? (
           <div>
@@ -252,8 +250,8 @@ const EitherCard = props => {
         <div style={{ width: "480px", margin: "auto" }}>
           <EitherProgress>
             <ProgressLabel>
-              <div style={{ margin: "2px 0px 0px 10px" }}>{percent + "%"}</div>
-              <div style={{ margin: "2px 10px 0px 0px" }}>
+              <div style={{ margin: "8px 0px 0px 10px" }}>{percent + "%"}</div>
+              <div style={{ margin: "8px 10px 0px 0px" }}>
                 {100 - percent + "%"}
               </div>
             </ProgressLabel>
@@ -292,28 +290,24 @@ const TitleDiv = styled.div`
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  margin: 56px auto 0px auto;
+  margin: 56px auto 16px auto;
 `;
 const DateDiv = styled.div`
-  margin: 14px auto;
+  margin: auto;
   color: #868e96;
 `;
-const EitherText = styled.div`
-  width: 100%;
-`;
-
 const EitherProgress = styled.div`
-  margin: 6px auto;
+  margin: 24px auto;
   border: 2px solid #00397c;
   border-radius: 6px;
   width: 100%;
-  height: 19px;
+  height: 32px;
 `;
 const HightLight = styled.div`
   background-color: #dfdfdf;
   transition: 1s;
   width: ${props => props.width};
-  height: 19px;
+  height: 32px;
   border-radius: 5px;
 `;
 const ProgressLabel = styled.div`
@@ -332,7 +326,7 @@ const EitherButtonA = styled.button`
   border-bottom-left-radius: 10px;
   font-size: 16px;
   line-height: 23px;
-  margin: 72px auto 8px auto;
+  margin: 34px auto 0px auto;
 `;
 const EitherButtonB = styled.button`
   width: 240px;
@@ -342,10 +336,10 @@ const EitherButtonB = styled.button`
   border-bottom-right-radius: 10px;
   font-size: 16px;
   line-height: 23px;
-  margin: 72px auto 8px auto;
+  margin: 34px auto 0px auto;
 `;
 const EitherFooter = styled.div`
-  margin: 69px 77px;
+  margin: 78px 77px;
   display: flex;
   justify-content: space-between;
   align-items: center;
