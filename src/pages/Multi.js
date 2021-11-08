@@ -26,15 +26,15 @@ const Multi = props => {
   }, [dispatch, paramsId]);
 
   const showPost = () => {
-    dispatch(PostDB(paramsId));
+    dispatch(PostDB());
     setStatus("Post");
   };
   const showPosting = () => {
-    dispatch(PostingDB(paramsId));
+    dispatch(PostingDB());
     setStatus("Posting");
   };
   const showCompletePost = () => {
-    dispatch(PostCompleteDB(paramsId));
+    dispatch(PostCompleteDB());
     setStatus("CompletePost");
   };
 
