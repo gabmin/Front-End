@@ -110,7 +110,7 @@ const Comment = props => {
   const addLike = () => {
     if (liked === null) {
       dispatch(AddLikeComment({ id, multiId }));
-      setLikes(likes + 1);
+      setLikes(commentLikeCnt + 1);
     } else {
       return;
     }
@@ -121,7 +121,10 @@ const Comment = props => {
       <TempWarpper>
         <InfoWarpper>
           <NickWarpper>
-            <CommentNick>{nickname}</CommentNick>
+            <CommentNick>
+              {nickname}
+              {"\u00a0\u00a0"}
+            </CommentNick>
             <CommentDate>{commentDate}</CommentDate>
           </NickWarpper>
           <BtnWrapper>
@@ -135,11 +138,13 @@ const Comment = props => {
           </BtnWrapper>
         </InfoWarpper>
         <ContentWrapper>
-          {deleted ? (
-            <CommentContent>{"삭제된 댓글입니다"}</CommentContent>
-          ) : (
-            <CommentContent>{comment}</CommentContent>
-          )}
+          <CommentWrapper>
+            {deleted ? (
+              <CommentContent>{"삭제된 댓글입니다"}</CommentContent>
+            ) : (
+              <CommentContent>{comment}</CommentContent>
+            )}
+          </CommentWrapper>
           <LikeWrapper>
             <LikeBtn onClick={addLike}>
               <FiThumbsUp />
@@ -151,22 +156,25 @@ const Comment = props => {
         {addInput ? (
           <ReplyWarpper>
             <TextArea onChange={changeComment}></TextArea>
-            {cancelBtn ? <EventBtn onClick={showInput}>취소</EventBtn> : null}
-            <EventBtn onClick={addChildComment}>작성완료</EventBtn>
+            {cancelBtn ? (
+              <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
+            ) : null}
+            <TextAreaBtn onClick={addChildComment}>작성</TextAreaBtn>
           </ReplyWarpper>
         ) : null}
+
         {editInput ? (
-          <div>
+          <ReplyWarpper>
             <TextArea onChange={changeEditComment}>{comment}</TextArea>
             {userInfo.nickname === nickname && !deleted ? (
               <div>
                 {editCancelBtn ? (
-                  <EventBtn onClick={showEditInput}>수정취소</EventBtn>
+                  <TextAreaBtn onClick={showEditInput}>취소</TextAreaBtn>
                 ) : null}
               </div>
             ) : null}
-            <EventBtn onClick={editComment}>수정완료</EventBtn>
-          </div>
+            <TextAreaBtn onClick={editComment}>완료</TextAreaBtn>
+          </ReplyWarpper>
         ) : null}
         <div>
           <ChildList parentComment={id} multiId={multiId} dataList={dataList} />
@@ -182,6 +190,7 @@ const TempWarpper = styled.div`
 `;
 
 const InfoWarpper = styled.div`
+  margin: 5px 0 5px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -205,10 +214,13 @@ const EventBtn = styled.button`
 `;
 
 const ContentWrapper = styled.div`
+  margin: -20px auto 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
+
+const CommentWrapper = styled.div``;
 
 const LikeWrapper = styled.div`
   display: flex;
@@ -228,7 +240,7 @@ const TotalLikes = styled.p`
 `;
 
 const ReplyWarpper = styled.div`
-  width: 80%;
+  width: 90%;
   height: 80px;
   margin: 0 0 0 auto;
   border: 1px ${colors.gray5} solid;
@@ -236,6 +248,17 @@ const ReplyWarpper = styled.div`
   display: flex;
   flex-direction: row;
   background-color: ${colors.gray};
+`;
+
+const TextAreaBtn = styled.button`
+  border: none;
+  border-radius: 4px;
+  margin: 60px 5px 0 0;
+  width: 35px;
+  height: 16px;
+  font-size: 10px;
+  color: ${colors.white};
+  background-color: ${colors.red};
 `;
 
 const TextArea = styled.textarea`
@@ -252,9 +275,9 @@ const TextArea = styled.textarea`
 
 const CommentHr = styled.hr`
   width: 556px;
-  height: 2px;
+  height: 1px;
   border: none;
-  background-color: ${colors.gray};
+  background-color: ${colors.lineGray};
 `;
 
 export default Comment;

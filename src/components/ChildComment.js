@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
+import { FiThumbsUp } from "react-icons/fi";
 
 import colors from "../shared/colors";
 import ChildCommentInput from "../elements/ChildCommentInput";
@@ -110,7 +111,7 @@ const ChildComment = props => {
   const addLike = () => {
     if (liked === null) {
       dispatch(AddLikeChild({ id, multiId }));
-      setLikes(likes + 1);
+      setLikes(commentLikeCnt + 1);
     } else {
       return;
     }
@@ -119,53 +120,73 @@ const ChildComment = props => {
   return (
     <>
       <div>
-        <NickWarpper>
-          <CommentNick>{nickname}</CommentNick>
-          <CommentDate>{date}</CommentDate>
-        </NickWarpper>
-        {addBtn ? <EventBtn onClick={showInput}>답글 달기</EventBtn> : null}
-        <button onClick={addLike}>좋아요</button>
-        {likes}
-
-        {deleted ? (
-          <CommentContent>{"삭제된 댓글입니다"}</CommentContent>
-        ) : (
-          <CommentContent>{comment}</CommentContent>
-        )}
-        {userInfo.nickname === nickname && !deleted ? (
-          <div>
-            {editBtn ? <EventBtn onClick={showEditInput}>수정</EventBtn> : null}
-            {delBtn ? <EventBtn onClick={delComment}>삭제</EventBtn> : null}
-            {editCancelBtn ? (
-              <EventBtn onClick={showEditInput}>수정취소</EventBtn>
+        <InfoWarpper>
+          <NickWarpper>
+            <CommentNick>
+              {nickname}
+              {"\u00a0\u00a0"}
+            </CommentNick>
+            <CommentDate>{date}</CommentDate>
+          </NickWarpper>
+          <BtnWrapper>
+            {userInfo.nickname === nickname && !deleted && editBtn ? (
+              <EventBtn onClick={showEditInput}>수정</EventBtn>
             ) : null}
-          </div>
-        ) : null}
-        {editInput ? (
-          <div>
-            <TextArea onChange={changeEditChild}>{comment}</TextArea>
-            <EventBtn onClick={editChildComment}>수정완료</EventBtn>
-          </div>
-        ) : null}
+            {userInfo.nickname === nickname && !deleted && delBtn ? (
+              <EventBtn onClick={delComment}>삭제</EventBtn>
+            ) : null}
+            {addBtn ? <EventBtn onClick={showInput}>답글 달기</EventBtn> : null}
+          </BtnWrapper>
+        </InfoWarpper>
+        <ContentWrapper>
+          {deleted ? (
+            <CommentContent>{"삭제된 댓글입니다"}</CommentContent>
+          ) : (
+            <CommentContent>{comment}</CommentContent>
+          )}
+          <LikeWrapper>
+            <LikeBtn onClick={addLike}>
+              <FiThumbsUp />
+            </LikeBtn>
+            <TotalLikes>{likes}</TotalLikes>
+          </LikeWrapper>
+        </ContentWrapper>
 
-        {cancelBtn ? <EventBtn onClick={showInput}>취소</EventBtn> : null}
+        {userInfo.nickname === nickname && !deleted && editInput ? (
+          <ReplyWarpper>
+            <TextArea onChange={changeEditChild}>{comment}</TextArea>
+            <TextAreaBtn onClick={editChildComment}>완료</TextAreaBtn>
+            <TextAreaBtn onClick={showEditInput}>취소</TextAreaBtn>
+          </ReplyWarpper>
+        ) : null}
 
         {addInput ? (
-          <div>
+          <ReplyWarpper>
             <TextArea onChange={changeChild}></TextArea>
-            <EventBtn onClick={addChildComment}>완료</EventBtn>
-          </div>
+            <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
+            <TextAreaBtn onClick={addChildComment}>완료</TextAreaBtn>
+          </ReplyWarpper>
         ) : null}
       </div>
     </>
   );
 };
 
+const InfoWarpper = styled.div`
+  margin: 5px 0 5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const NickWarpper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
+
+const BtnWrapper = styled.div``;
 
 const EventBtn = styled.button`
   font-size: 10px;
@@ -175,10 +196,62 @@ const EventBtn = styled.button`
   background-color: ${colors.white};
 `;
 
+const ContentWrapper = styled.div`
+  margin: -20px auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const LikeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const LikeBtn = styled.button`
+  border: none;
+  color: ${colors.gray5};
+  background-color: ${colors.white};
+`;
+
+const TotalLikes = styled.p`
+  font-size: 10px;
+  color: ${colors.darkGray};
+`;
+
+const ReplyWarpper = styled.div`
+  width: 100%;
+  height: 80px;
+  margin: 0 0 0 auto;
+  border: 1px ${colors.gray5} solid;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  background-color: ${colors.gray};
+`;
+
+const TextAreaBtn = styled.button`
+  border: none;
+  border-radius: 4px;
+  margin: 60px 5px 0 0;
+  width: 35px;
+  height: 16px;
+  font-size: 10px;
+  color: ${colors.white};
+  background-color: ${colors.red};
+`;
+
 const TextArea = styled.textarea`
   width: 80%;
   height: 50px;
+  margin: auto;
+  border: none;
   resize: none;
+  background-color: ${colors.gray};
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default ChildComment;

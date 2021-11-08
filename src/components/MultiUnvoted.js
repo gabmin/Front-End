@@ -30,7 +30,7 @@ const MultiUnvoted = props => {
         <Title>{multiList.title}</Title>
       </TitleWrapper>
       <Date>{multiList.date}</Date>
-      <Hr />
+      <TitleHr />
       <div>
         <AnswerList dataList={multiList} />
       </div>
@@ -85,11 +85,13 @@ const Date = styled.p`
   font-size: 14px;
 `;
 
-const Hr = styled.hr`
+const TitleHr = styled.hr`
+  margin: 34px auto 34px auto;
   width: 103px;
 `;
 
 const DesWrapper = styled.div`
+  margin: 20px auto 20px 0;
   font-size: 14px;
 `;
 
@@ -142,8 +144,6 @@ const LikeWarpper = styled.div`
 const LikeBtn = styled.button`
   font-size: 16px;
   color: ${colors.red};
-  /* width: 24px;
-  height: 24px; */
   border: none;
   background-color: ${colors.white};
 `;
@@ -153,7 +153,10 @@ const TotalLike = styled.p`
 `;
 
 const CommentHr = styled.hr`
+  border: none;
   width: 620px;
+  height: 1px;
+  background-color: ${colors.lineGray};
 `;
 
 export default MultiUnvoted;

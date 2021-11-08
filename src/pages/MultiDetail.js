@@ -137,18 +137,20 @@ const MultiDetail = props => {
 };
 
 const Container = styled.div`
-  max-width: 60%;
+  max-width: 1100px;
   margin: auto;
 `;
 
 const BackBtn = styled.button`
+  margin: 20px auto 0 0;
   border: none;
+  color: ${colors.gray5};
   background-color: ${colors.white};
 `;
 
 const Wrapper = styled.div`
-  width: 800px;
-  margin: 64px auto;
+  width: 840px;
+  margin: auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
 `;

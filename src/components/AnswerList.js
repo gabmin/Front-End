@@ -93,6 +93,8 @@ const AnswerBtn = styled.button`
   margin: 5px auto;
   width: 620px;
   height: 72px;
+  text-align: left;
+  word-break: break-all;
   border-radius: 8px;
   color: #00397c;
   background-color: ${props => props.color};
@@ -110,6 +112,7 @@ const AnswerBtn = styled.button`
 const CompleteBtn = styled.button`
   width: 180px;
   height: 40px;
+  margin: 14px auto 14px auto;
   color: #ffffff;
   background-color: #e25b45;
   border: none;
