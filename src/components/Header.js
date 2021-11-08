@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
-import { loginUser } from "../redux/reducers/userSlice";
 import { SetParams } from "../redux/reducers/paramsSlice";
-import { logout } from "../redux/actions/user";
+import { loginCheck, logout } from "../redux/actions/user";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const Header = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    dispatch(loginUser());
+    dispatch(loginCheck());
   }, [dispatch]);
 
   const onClickLogin = useCallback(() => {

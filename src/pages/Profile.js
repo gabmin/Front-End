@@ -20,44 +20,12 @@ const Profile = props => {
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(profileNick);
-  console.log("userId");
-  console.log(userId);
 
   useEffect(() => {
     dispatch(getProfileNick(userId));
     dispatch(getMyPosts(userId));
     dispatch(getMyPolls(userId));
   }, [dispatch, userId, userNick]);
-
-  // const posts = [
-  //   {
-  //     eitherId: "either1",
-  //     user: "gom",
-  //     title: "삼전 풀매수?",
-  //     date: "2020-02-20 16:10:11",
-  //     editedDate: null,
-  //     completed: false,
-  //     likeCnt: 10,
-  //   },
-  //   {
-  //     eitherId: "either2",
-  //     user: "gom",
-  //     title: "삼전 풀매수2?",
-  //     date: "2020-02-20 16:10:11",
-  //     editedDate: null,
-  //     completed: true,
-  //     likeCnt: 10,
-  //   },
-  //   {
-  //     multiId: "multi1",
-  //     user: "gom",
-  //     title: "내일 떡상 리스트다. 반박받음",
-  //     date: "2020-02-20 16:10:11",
-  //     editedDate: null,
-  //     completed: false,
-  //     likeCnt: 15,
-  //   },
-  // ];
 
   const onClickPostBtn = useCallback(type => {
     setClicked(type);
@@ -74,8 +42,6 @@ const Profile = props => {
   const onSubmitNick = useCallback(
     e => {
       if (e.key === "Enter") {
-        console.log("nickInput");
-        console.log(nickInput);
         dispatch(updateNick(nickInput));
         setNicknameClick(false);
       }
@@ -102,7 +68,7 @@ const Profile = props => {
                   {getProfileNickLoading ? nickInput : profileNick}
                 </Nickname>
               }
-              {userId == myId && (
+              {Number(userId) === myId && (
                 <button onClick={onClickNickname}>수정</button>
               )}
             </>
