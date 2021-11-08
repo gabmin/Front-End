@@ -104,7 +104,7 @@ const EitherCompleteCard = props => {
         <div
           style={{
             position: "absolute",
-            margin: "21px 32px 0px 500px",
+            margin: "21px 32px 0px 557px",
           }}
         >
           {nickname === userInfo.nickname ? (
@@ -216,11 +216,12 @@ const Container = styled.div`
 `;
 const TitleDiv = styled.div`
   width: 482px;
-  height: 30px;
+  height: 60px;
   text-align: center;
   font-size: 24px;
   font-weight: bold;
   margin: 56px auto 16px auto;
+  word-break: break-all;
 `;
 const DateDiv = styled.div`
   margin: auto;
@@ -233,7 +234,7 @@ const TotalCntDiv = styled.div`
   margin-left: 8px;
 `;
 const EitherProgress = styled.div`
-  margin: 24px auto;
+  margin: 24px auto 0px auto;
   border: 2px solid #00397c;
   border-radius: 6px;
   width: 100%;
@@ -276,7 +277,7 @@ const EitherButtonB = styled.button`
   margin: 24px auto 0px auto;
 `;
 const EitherFooter = styled.div`
-  margin: 78px 77px;
+  margin: 36px 77px;
   display: flex;
   justify-content: space-between;
   align-items: center;
