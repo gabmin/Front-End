@@ -189,15 +189,21 @@ const Menu = styled.div`
   height: 100%;
 
   span {
-    width: 80px;
+    width: 100px;
+    margin: 0;
     color: #e25b45;
+    text-align: center;
   }
 
   .loginBtn {
     color: white;
+    position: relative;
+    left: 40px;
+    width: 60px;
     background-color: #e25b45;
     padding: 5px;
     border-radius: 7px;
+    box-sizing: border-box;
   }
 
   @media screen and (max-width: ${tablet}) {
