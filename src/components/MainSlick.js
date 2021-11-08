@@ -97,7 +97,8 @@ const ProductSlick = ({ cardList, type }) => {
 
 const blue = "#00397c";
 const red = "#E25B45";
-const mobile = "1280px";
+const tablet = "1300px";
+const mobile = "768px";
 
 const Wrap = styled.div`
   width: 104%;
@@ -180,6 +181,14 @@ const Title = styled.div`
     border-bottom: 1px solid ${red};
     cursor: pointer;
     user-select: none;
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    flex-direction: column;
+
+    .showAll {
+      width: 70px;
+    }
   }
 `;
 

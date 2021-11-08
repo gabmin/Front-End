@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -36,6 +36,10 @@ const Main = () => {
       });
     }
   };
+
+  const onClickTop = useCallback(() => {
+    window.scroll(0, 0);
+  }, []);
 
   // const cardList = [
   //   {
@@ -117,6 +121,7 @@ const Main = () => {
           <p className="countType">참여</p>
         </div>
       </Counts>
+      <Top onClick={onClickTop}>TOP</Top>
     </Container>
   );
 };
@@ -134,6 +139,23 @@ const Container = styled.div`
   @media screen and (max-width: 1540px) {
     top: 50px;
     flex-direction: column;
+    height: 1300px;
+  }
+`;
+
+const Top = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: -80px;
+  font-size: 18px;
+  font-weight: bold;
+  color: ${blue};
+  border-bottom: 1px solid ${blue};
+  cursor: pointer;
+
+  @media screen and (max-width: 1540px) {
+    bottom: 100px;
+    right: -40px;
   }
 `;
 
@@ -236,6 +258,10 @@ const Wrapper = styled.div`
   width: 100%;
   height: ${props => props.height};
   margin: 10px 0 80px;
+
+  @media screen and (max-width: 1540px) {
+    margin-top: 50px;
+  }
 `;
 
 const Counts = styled.div`
