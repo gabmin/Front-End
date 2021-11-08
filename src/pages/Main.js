@@ -4,6 +4,13 @@ import styled from "styled-components";
 
 import MainSlick from "../components/MainSlick";
 import { getMainData } from "../redux/actions/main";
+import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
+import { history } from "../redux/configureStore";
+
+const blue = "#00397c";
+const red = "#E25B45";
+const tablet = "1300px";
+const mobile = "768px";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -12,9 +19,23 @@ const Main = () => {
     state => state.main.mainPosts,
   );
 
+  const { nickname } = useSelector(state => state.user.userInfo);
+
   useEffect(() => {
     dispatch(getMainData());
   }, [dispatch]);
+
+  const goToWrite = select => {
+    if (nickname === "GUEST") {
+      alert("로그인 후 가능합니다.");
+      history.push("/login");
+    } else {
+      history.push({
+        pathname: "/write",
+        state: { select: select },
+      });
+    }
+  };
 
   // const cardList = [
   //   {
@@ -60,71 +81,198 @@ const Main = () => {
   return (
     <Container>
       <Notice>
-        <h1>개미들의 곡소리</h1>
-        <h3>고민을 올려보세요</h3>
+        <GoEither
+          onClick={() => {
+            goToWrite("checkEither");
+          }}
+        >
+          <h3> {attendNum}마리의 개미들이 참여 중입니다!</h3>
+          <h1> 찬반 질문 작성하기</h1>
+          <StyledGoAnt color="blue" />
+        </GoEither>
+        <GoMulti
+          onClick={() => {
+            goToWrite("checkMulti");
+          }}
+        >
+          <h3> {attendNum}마리의 개미들이 참여 중입니다!</h3>
+          <h1> 객관식 질문 작성하기</h1>
+          <StyledGoAnt color="white" />
+        </GoMulti>
       </Notice>
-
-      <Wrapper height="100px" justify="end">
-        <CountContainer>
-          <span>고민 : {postingNum}</span> <span>참여 : {attendNum}</span>
-        </CountContainer>
-      </Wrapper>
-      <Wrapper height="300px">
+      <Wrapper height="230px">
         <MainSlick cardList={either} type="either"></MainSlick>
       </Wrapper>
-      <Wrapper height="300px">
+      <Wrapper height="500px">
         <MainSlick cardList={multi} type="multi"></MainSlick>
       </Wrapper>
+      <Counts>
+        <div className="countsWrapper">
+          <p className="countNum">{postingNum}</p>
+          <p className="countType">고민</p>
+        </div>
+        <div className="betweenLine"></div>
+        <div className="countsWrapper">
+          <p className="countNum">{attendNum}</p>
+          <p className="countType">참여</p>
+        </div>
+      </Counts>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  width: 1280px;
-  height: 1200px;
-  /* background-color: royalblue; */
-  border: 1px solid gray;
+  width: 67%;
+  height: 1170px;
   margin: auto;
+  user-select: none;
+
+  @media screen and (max-width: 1540px) {
+    top: 50px;
+    flex-direction: column;
+  }
 `;
 
 const Notice = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 300px;
-  background-color: silver;
-  h1,
-  h3 {
-    margin: 10px 100px;
+  height: 250px;
+
+  @media screen and (max-width: 1540px) {
+    flex-direction: column;
   }
 `;
 
-const CountContainer = styled.div`
+const GoEither = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 620px;
+  height: 120px;
+  padding: 0 50px;
+  justify-content: center;
+  border: 2px solid ${blue};
+  box-sizing: border-box;
+  border-radius: 20px;
+  cursor: pointer;
+
+  @media screen and (max-width: 1540px) {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  h1 {
+    margin: 5px 0 0;
+    color: ${blue};
+    font-size: 24px;
+  }
+  h3 {
+    margin: 0;
+    color: ${blue};
+    font-size: 14px;
+    font-weight: 500;
+  }
+`;
+
+const GoMulti = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 100%;
-  border: 1px solid lightgray;
+  position: relative;
+  width: 620px;
+  height: 120px;
+  padding: 0 50px;
+  background-color: ${blue};
+  border-radius: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
 
-  span {
-    margin: 0.5em 0;
+  h1 {
+    margin: 5px 0 0;
+    color: white;
+    font-size: 24px;
+  }
+  h3 {
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 1540px) {
+    width: 100%;
+    padding: 0 10px;
+
+    h1 {
+      font-size: 22px;
+    }
+  }
+`;
+
+const StyledGoAnt = styled(GoAnt)`
+  position: absolute;
+  bottom: ${props => (props.color === "blue" ? "0" : "2px")};
+  right: ${props => (props.color === "blue" ? "0" : "2px")};
+  border-radius: ${props =>
+    props.color === "blue" ? "0 0 12px 0" : "0 0 17px 0"};
+  fill: ${props => (props.color === "blue" ? blue : "#ffffff")};
+  stroke: ${props => (props.color === "blue" ? blue : "#ffffff")};
+
+  @media screen and (max-width: ${mobile}) {
+    display: none;
   }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: ${props => (props.justify ? props.justify : "center")};
-  width: 80%;
+  width: 100%;
   height: ${props => props.height};
-  /* background-color: gray; */
-  border: 1px solid gray;
-  margin: 50px 0 0;
+  margin: 10px 0 80px;
+`;
+
+const Counts = styled.div`
+  position: relative;
+  bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  justify-content: space-between;
+
+  .countsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .betweenLine {
+    content: "";
+    width: 1px;
+    height: 100%;
+    background-color: lightgray;
+  }
+
+  p {
+    margin: 3px 0;
+  }
+
+  .countNum {
+    font-size: 20px;
+    color: ${red};
+    font-weight: bold;
+  }
+
+  .countType {
+    font-size: 12px;
+    font-weight: bold;
+  }
 `;
 
 export default Main;

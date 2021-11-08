@@ -1,5 +1,5 @@
 function NextArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, style, onClick, top, color } = props;
   return (
     <div
       className={className}
@@ -7,13 +7,17 @@ function NextArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        right: "-27px",
-        top: "120px",
+        right: "-50px",
+        top: top,
       }}
       onClick={onClick}
     >
       <img
-        src={require("../images/arrow.png").default}
+        src={
+          color === "red"
+            ? require("../images/arrowRed.png").default
+            : require("../images/arrowL.png").default
+        }
         alt="arrowNext"
         style={{
           position: "absolute",
@@ -21,7 +25,6 @@ function NextArrow(props) {
           height: "100%",
           right: "5px",
           top: "-10px",
-          border: "1px solid rgb(197, 197, 197)",
           borderRadius: "50%",
         }}
       />
