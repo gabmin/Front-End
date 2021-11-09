@@ -22,6 +22,8 @@ const MultiEdit = props => {
   const editData = dataList && dataList.multi;
   console.log("editData", editData);
 
+  useEffect(() => {});
+
   useEffect(() => {
     dispatch(DetailDB(multiId));
   }, []);
@@ -45,7 +47,7 @@ const MultiEdit = props => {
     setMultiState(!multiState);
   };
 
-  if (dataList && !userInfo.nickname) {
+  if (userInfo.nickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
     history.push("/login");
   } else if (dataList) {
