@@ -119,7 +119,6 @@ const Input = styled.input`
   line-height: 22px;
   font-size: 16px;
   font-weight: 300;
-  color: #868e96;
 `;
 const EitherButtonGrid = styled.div`
   width: 100%;

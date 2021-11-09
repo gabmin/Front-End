@@ -163,15 +163,15 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
 const settings = {
   className: "center",
   centerMode: true,
-  infinite: true,
-  adaptiveHeight: true,
-  focusOnSelect: true,
+  infinite: false,
+  // adaptiveHeight: true,
+  // focusOnSelect: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,
-  centerPadding: "-10px",
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
+  zIndex: 1,
 };
 
 const Wrap = styled.div`

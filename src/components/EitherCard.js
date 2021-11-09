@@ -320,7 +320,8 @@ const HightLight = styled.div`
   transition: 1s;
   width: ${props => props.width};
   height: 32px;
-  border-radius: 5px;
+  border-radius: ${props =>
+    props.width === "100%" ? "0px 5px 5px 0px" : "5px 0px 0px 5px"};
 `;
 const ProgressLabel = styled.div`
   width: 480px;

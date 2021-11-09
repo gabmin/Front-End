@@ -149,7 +149,7 @@ const SlickLayout = styled.div`
 const QuestionBtnDiv = styled.div`
   width: 100%;
   text-align: center;
-  margin-top: 48px;
+  margin-top: 80px;
 `;
 const QuestionBtn = styled.button`
   width: 180px;
