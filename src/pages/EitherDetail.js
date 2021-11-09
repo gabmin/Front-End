@@ -23,12 +23,17 @@ const EitherDetail = props => {
   const PostLists = PostList && PostList.either;
   //전체 게시글 중 해당 게시글 찾기
   const targetPost = PostLists?.find(p => p.eitherId == eitherId);
-
+  console.log(userInfo);
   useEffect(() => {
     //데이터 가져오기
     dispatch(PostDB());
     dispatch(PostingDB());
-  }, [dispatch]);
+
+    if (PostLists && !userInfo.nickname) {
+      alert("로그인 후 사용가능합니다.");
+      history.push("/login");
+    }
+  }, [dispatch, userInfo.nickname]);
 
   //돌아가기
   const onClickGoBack = () => {
@@ -36,12 +41,9 @@ const EitherDetail = props => {
   };
   //목록으로 돌아가기
   const onClickIndex = () => {
-    history.push("/");
+    history.push("/either");
   };
-  if (!userInfo.nickname) {
-    alert("로그인 후 사용가능합니다.");
-    history.push("/login");
-  }
+
   return (
     <>
       <Wrap>
