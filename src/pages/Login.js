@@ -18,11 +18,13 @@ import {
 const Login = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.user.userInfo.userId);
+  const { loginError } = useSelector(state => state.user);
 
   const [id, onChangeId] = useState("");
   const [password, onChangePassword] = useState("");
   const [idCheck, setIdCheck] = useState(false);
   const [pwCheck, setPwCheck] = useState(false);
+  const [typed, setTyped] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -59,6 +61,7 @@ const Login = () => {
           }),
         );
       }
+      setTyped(false);
     },
     [idChecker, pwChecker, dispatch, id, password],
   );
@@ -71,18 +74,20 @@ const Login = () => {
   const onChangePasswordInput = useCallback(e => {
     onChangePassword(e.target.value);
     setPwCheck(false);
+    setTyped(true);
   }, []);
 
   const onClickSignup = useCallback(() => {
     history.push("/signup");
   }, []);
-
+  console.log("pwCheck");
+  console.log(pwCheck);
   return (
     <>
       <Container>
         <Form onSubmit={onSubmit}>
           <StyledSymbol />
-          <Logo fill={blue} height="30px" style={{ margin: "0 0 40px" }} />
+          <Logo fill={blue} height="30px" style={{ margin: "10px 0 40px" }} />
           <div>
             <input
               type="text"
@@ -100,7 +105,13 @@ const Login = () => {
               onChange={onChangePasswordInput}
               placeholder="비밀번호"
             />
-            <span>{pwCheck && "비밀번호를 입력하세요"}</span>
+            <span>
+              {pwCheck && "비밀번호를 입력하세요"}
+              {!typed &&
+                !pwCheck &&
+                loginError &&
+                "아이디 또는 비밀번호를 잘못 입력했습니다."}
+            </span>
           </div>
           <LoginButton type="submit">로그인</LoginButton>
         </Form>
@@ -121,6 +132,11 @@ const Container = styled.div`
   width: 90%;
   height: 961px;
   margin: auto;
+
+  @media screen and (max-width: ${mobile}) {
+    align-items: unset;
+    height: 100vh;
+  }
 `;
 
 const Form = styled.form`
@@ -132,12 +148,17 @@ const Form = styled.form`
   width: 100%;
   height: 416px;
   font-size: 20px;
-  padding: 50px 50px 50px;
+  padding: 40px 50px 50px;
   border: 2px solid ${blue};
   border-radius: 10px;
   box-sizing: border-box;
 
+  @media screen and (max-width: ${mobile}) {
+    top: 20px;
+  }
+
   & div {
+    max-width: 400px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -196,6 +217,10 @@ const SignupWrapper = styled.div`
   margin: 220px 0 0;
   font-size: 12px;
   font-weight: 500;
+
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px 0;
+  }
 `;
 
 const SignupButton = styled.button`
