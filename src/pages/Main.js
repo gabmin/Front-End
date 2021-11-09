@@ -15,6 +15,8 @@ const Main = () => {
     state => state.main.mainPosts,
   );
 
+  const { mainDataDone } = useSelector(state => state.main);
+
   const { nickname } = useSelector(state => state.user.userInfo);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const Main = () => {
   }, [dispatch]);
 
   const goToWrite = select => {
-    if (nickname === null) {
+    if (nickname === "GUEST") {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
@@ -101,10 +103,14 @@ const Main = () => {
         </GoMulti>
       </Notice>
       <Wrapper height="230px">
-        <MainSlick cardList={either} type="either"></MainSlick>
+        {mainDataDone === true && (
+          <MainSlick cardList={either} type="either"></MainSlick>
+        )}
       </Wrapper>
       <Wrapper height="500px">
-        <MainSlick cardList={multi} type="multi"></MainSlick>
+        {mainDataDone === true && (
+          <MainSlick cardList={multi} type="multi"></MainSlick>
+        )}
       </Wrapper>
       <Counts>
         <div className="countsWrapper">

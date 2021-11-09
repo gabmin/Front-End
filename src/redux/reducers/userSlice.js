@@ -95,7 +95,7 @@ const userSlice = createSlice({
         state.logoutError = null;
       })
       .addCase(logout.fulfilled, (state, action) => {
-        state.userInfo = { nickname: null, userId: null };
+        state.userInfo = { nickname: "GUEST", userId: "" };
         state.logoutLoading = false;
         state.logoutDone = true;
       })
