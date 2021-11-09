@@ -15,6 +15,8 @@ const Main = () => {
     state => state.main.mainPosts,
   );
 
+  const { mainDataDone } = useSelector(state => state.main);
+
   const { nickname } = useSelector(state => state.user.userInfo);
 
   useEffect(() => {
@@ -101,10 +103,14 @@ const Main = () => {
         </GoMulti>
       </Notice>
       <Wrapper height="230px">
-        <MainSlick cardList={either} type="either"></MainSlick>
+        {mainDataDone === true && (
+          <MainSlick cardList={either} type="either"></MainSlick>
+        )}
       </Wrapper>
       <Wrapper height="500px">
-        <MainSlick cardList={multi} type="multi"></MainSlick>
+        {mainDataDone === true && (
+          <MainSlick cardList={multi} type="multi"></MainSlick>
+        )}
       </Wrapper>
       <Counts>
         <div className="countsWrapper">
@@ -128,6 +134,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 67%;
+  max-width: 1280px;
   height: 1170px;
   margin: auto;
   user-select: none;

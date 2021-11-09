@@ -49,7 +49,7 @@ const Either = props => {
   };
   //게시글 작성하러가기
   const goToWrite = () => {
-    if (!userInfo.nickname) {
+    if (userInfo.nickname === "GEUST") {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
@@ -60,7 +60,7 @@ const Either = props => {
     }
   };
   return (
-    <>
+    <Container>
       <Wrap>
         <EitherButtonGrid>
           {status === "Post" ? (
@@ -107,13 +107,16 @@ const Either = props => {
           <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
         </QuestionBtnDiv>
       </Wrap>
-    </>
+    </Container>
   );
 };
-
+const Container = styled.div`
+  width: 100%;
+  height: 909px;
+`;
 const Wrap = styled.div`
   max-width: 100%;
-  height: 773px;
+  height: 733px;
 `;
 
 const EitherButtonGrid = styled.div`
@@ -146,15 +149,16 @@ const SlickLayout = styled.div`
 const QuestionBtnDiv = styled.div`
   width: 100%;
   text-align: center;
+  margin-top: 48px;
 `;
 const QuestionBtn = styled.button`
+  width: 180px;
+  height: 40px;
   border: 1px solid #e25b45;
   color: #e25b45;
   font-size: 16px;
-  padding: 8px 60px 9px 61px;
   border-radius: 8px;
   background-color: #ffffff;
-  font-size: 16px;
   cursor: pointer;
   &:hover {
     background-color: #e25b45;
