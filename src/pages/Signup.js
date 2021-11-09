@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isError } from "lodash";
 
+import { ReactComponent as Logo } from "../images/logo.svg";
+import { ReactComponent as Symbol } from "../images/symbolBlue.svg";
 import {
   blue,
   red,
@@ -10,6 +11,7 @@ import {
   tablet,
   gray5,
   grayMultiply,
+  darkGray,
 } from "../shared/style";
 import useInput from "../hooks/useInput";
 import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
@@ -206,50 +208,62 @@ const Signup = () => {
     <>
       <Container>
         <Form onSubmit={onSubmit}>
-          <Content>
-            <InputWrapper>
-              <input
-                type="id"
-                value={id}
-                onChange={onChangeId}
-                placeholder="아이디"
-                onBlur={onClickIdDup}
-              />
-            </InputWrapper>
+          <StyledSymbol />
+          <Logo fill={blue} height="30px" style={{ margin: "10px 0 35" }} />
+          <SelectSubject>
+            <span className="selectAgeInfo">가입 하기</span>
+          </SelectSubject>
+          <IdPwWrapper>
+            <InputContent>
+              <InputWrapper>
+                <input
+                  type="id"
+                  value={id}
+                  onChange={onChangeId}
+                  placeholder="아이디"
+                  onBlur={onClickIdDup}
+                />
+              </InputWrapper>
 
-            {idError && !checkIdDupLoading && idNotice && (
-              <span>
-                5~20자의 영문 소문자, 숫자와 특수기호(),(-)만 사용 가능합니다
-              </span>
-            )}
-            {checkIdDupResult && !idError && !checkIdDupLoading && idNotice && (
-              <span>사용가능한 아이디 입니다</span>
-            )}
-            {checkIdDupResult === false && !checkIdDupLoading && idNotice && (
-              <span>이미 사용중인 아이디 입니다</span>
-            )}
-          </Content>
-          <Content>
-            <InputWrapper>
-              <input
-                type="text"
-                value={nickname}
-                onChange={onChangeNickname}
-                placeholder="닉네임"
-                onBlur={onClickNickDup}
-              />
-            </InputWrapper>
-            {nickError && !checkNickDupLoading && nickNotice && (
-              <span>닉네임을 입력하세요</span>
-            )}
-            {checkNickDupResult &&
-              !nickError &&
-              !checkNickDupLoading &&
-              nickNotice && <span>사용가능한 닉네임 입니다</span>}
-            {checkNickDupResult === false &&
-              !checkNickDupLoading &&
-              nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
-          </Content>
+              {idError && !checkIdDupLoading && idNotice && (
+                <span>
+                  5~20자의 영문 소문자, 숫자와 특수기호(),(-)만 가능합니다.
+                </span>
+              )}
+              {checkIdDupResult &&
+                !idError &&
+                !checkIdDupLoading &&
+                idNotice && (
+                  <span style={{ color: blue }}>사용가능한 아이디 입니다</span>
+                )}
+              {checkIdDupResult === false && !checkIdDupLoading && idNotice && (
+                <span>이미 사용중인 아이디 입니다</span>
+              )}
+            </InputContent>
+            <Content>
+              <InputWrapper>
+                <input
+                  type="text"
+                  value={nickname}
+                  onChange={onChangeNickname}
+                  placeholder="닉네임"
+                  onBlur={onClickNickDup}
+                />
+              </InputWrapper>
+              {nickError && !checkNickDupLoading && nickNotice && (
+                <span>닉네임을 입력하세요</span>
+              )}
+              {checkNickDupResult &&
+                !nickError &&
+                !checkNickDupLoading &&
+                nickNotice && (
+                  <span style={{ color: blue }}>사용가능한 닉네임 입니다</span>
+                )}
+              {checkNickDupResult === false &&
+                !checkNickDupLoading &&
+                nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
+            </Content>
+          </IdPwWrapper>
           <Content>
             <InputWrapper>
               <input
@@ -276,6 +290,13 @@ const Signup = () => {
             {passwordEqual && <span>같은 비밀번호를 입력해 주세요</span>}
           </Content>
           <Content>
+            <SelectSubject>
+              <span className="selectAgeInfo">연령 정보</span>
+              <span className="selectAgeExp">
+                아래의 정보는 이용자 통계에만 이용되며, 공개적으로 표시되지
+                않습니다.
+              </span>
+            </SelectSubject>
             <InputWrapper>
               <select onChange={setAge}>
                 <option value="">연령대를 선택해 주세요</option>
@@ -289,7 +310,7 @@ const Signup = () => {
             {ageError && <span>연령대를 선택해 주세요</span>}
           </Content>
           <ButtonWrapper>
-            <button type="submit">회원가입</button>
+            <SignupButton type="submit">회원가입</SignupButton>
           </ButtonWrapper>
         </Form>
       </Container>
@@ -318,18 +339,52 @@ const Form = styled.form`
   padding: 2em;
 
   select {
+    border-radius: 10px;
+    border: 1px solid ${darkGray};
+    padding-left: 20px;
     width: 100%;
-    height: 3em;
+    height: 48px;
+    /* appearance: none; */
+    /* background-image: url('../images/chevronDown.png'); */
   }
+
+  input {
+    border-radius: 10px;
+    border: 1px solid ${gray5};
+    background-color: ${grayMultiply};
+    padding-left: 20px;
+
+    ::placeholder {
+      font-size: 14px;
+    }
+  }
+`;
+
+const StyledSymbol = styled(Symbol)`
+  cursor: pointer;
+  user-select: none;
+  height: 37px;
+  fill: ${blue};
+`;
+
+const InputContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 620px;
+  height: 80px;
+  font-size: 0.6em;
+  color: ${red};
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 90%;
+  max-width: 620px;
   height: 80px;
   font-size: 0.6em;
-  color: red;
+  color: ${red};
 `;
 
 const InputWrapper = styled.div`
@@ -343,6 +398,38 @@ const InputWrapper = styled.div`
   }
 `;
 
+const SelectSubject = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: black;
+  width: 90%;
+  max-width: 620px;
+
+  .selectAgeInfo {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .selectAgeExp {
+    font-size: 12px;
+    color: #495057;
+    margin: 5px 0;
+  }
+`;
+
+const IdPwWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  max-width: 620px;
+  justify-content: space-between;
+
+  input {
+    width: 290px;
+    box-sizing: border-box;
+  }
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -352,6 +439,20 @@ const ButtonWrapper = styled.div`
     width: 100%;
     height: 3em;
   }
+`;
+
+const SignupButton = styled.button`
+  position: relative;
+  top: 60px;
+  width: 180px;
+  height: 40px;
+  margin: 0 0 10px;
+  background-color: ${red};
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 `;
 
 export default Signup;
