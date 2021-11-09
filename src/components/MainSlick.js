@@ -12,6 +12,7 @@ import { history } from "../redux/configureStore";
 import { blue, red, mobile, tablet } from "../shared/style";
 
 const ProductSlick = ({ cardList, type }) => {
+  console.log("cardList");
   console.log(cardList);
   const settings = {
     dots: true,
@@ -20,6 +21,7 @@ const ProductSlick = ({ cardList, type }) => {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
+    lazyLoad: true,
     nextArrow: <NextArrow color="red" />,
     prevArrow: <PrevArrow color="red" />,
     centerPadding: "150px",
@@ -30,7 +32,7 @@ const ProductSlick = ({ cardList, type }) => {
           slidesToShow: 3,
           slidesToScroll: 1,
           dots: true,
-          initialSlide: 0,
+          initialSlide: 1,
         },
       },
       {
@@ -39,7 +41,7 @@ const ProductSlick = ({ cardList, type }) => {
           slidesToShow: 2,
           slidesToScroll: 1,
           dots: true,
-          initialSlide: 0,
+          initialSlide: 1,
         },
       },
       {
@@ -48,7 +50,7 @@ const ProductSlick = ({ cardList, type }) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           dots: true,
-          initialSlide: 0,
+          initialSlide: 1,
         },
       },
     ],

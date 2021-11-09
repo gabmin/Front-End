@@ -12,9 +12,10 @@ import { blue, red, mobile, tablet } from "../shared/style";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { nickname = "", userId = "" } = useSelector(
+  const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
+  const { loginCheckDone } = useSelector(state => state.user);
 
   const [search, setSearch] = useState("");
 
@@ -89,20 +90,25 @@ const Header = () => {
             value={search}
           />
         </Wrapper>
-        <Menu>
-          <span onClick={onClickEither}>찬반</span>
-          <span onClick={onClickMulti}>객관식</span>
-          {nickname ? (
-            <>
-              <span onClick={onClickNickname}>{nickname}</span>
-              <span onClick={onClickLogout}>로그아웃</span>
-            </>
-          ) : (
-            <span onClick={onClickLogin} className="loginBtn">
-              로그인
-            </span>
-          )}
-        </Menu>
+        {loginCheckDone ? (
+          <Menu loggedIn={nickname !== "GUEST"}>
+            <span onClick={onClickEither}>찬반</span>
+            <span onClick={onClickMulti}>객관식</span>
+            {nickname === "GUEST" && (
+              <span onClick={onClickLogin} className="loginBtn">
+                로그인
+              </span>
+            )}
+            {nickname !== "GUEST" && (
+              <>
+                <span onClick={onClickNickname}>{nickname}</span>
+                <span onClick={onClickLogout}>로그아웃</span>
+              </>
+            )}
+          </Menu>
+        ) : (
+          <MenuLoading></MenuLoading>
+        )}
       </Bottom>
     </Container>
   );
@@ -134,6 +140,7 @@ const Top = styled.div`
 const Bottom = styled.div`
   display: flex;
   position: relative;
+  max-width: 1280px;
   width: 67%;
   height: 64px;
   align-items: center;
@@ -176,6 +183,8 @@ const StyledSymbol = styled(Symbol)`
 `;
 
 const Menu = styled.div`
+  position: relative;
+  right: ${props => (props.loggedIn ? 0 : "45px")};
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -205,6 +214,10 @@ const Menu = styled.div`
   @media screen and (max-width: ${tablet}) {
     display: none;
   }
+`;
+
+const MenuLoading = styled.div`
+  width: 30%;
 `;
 
 export default Header;
