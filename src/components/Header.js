@@ -134,6 +134,7 @@ const Top = styled.div`
 const Bottom = styled.div`
   display: flex;
   position: relative;
+  max-width: 1280px;
   width: 67%;
   height: 64px;
   align-items: center;
