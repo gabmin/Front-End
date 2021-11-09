@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { isError } from "lodash";
 
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+} from "../shared/style";
 import useInput from "../hooks/useInput";
 import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
 import { history } from "../redux/configureStore";
@@ -301,10 +308,13 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
+  width: 840px;
+  height: 656px;
+  box-sizing: border-box;
   margin: 30px auto;
   font-size: 20px;
-  border: 1px solid gray;
+  border: 2px solid ${blue};
+  border-radius: 10px;
   padding: 2em;
 
   select {
