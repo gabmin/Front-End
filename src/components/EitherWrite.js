@@ -168,10 +168,15 @@ const CancleButton = styled.button`
   height: 40px;
   border: 1px solid #e25b45;
   border-radius: 8px;
-  background-color: transparent;
+  background-color: #ffffff;
   color: #e25b45;
   font-size: 16px;
   line-height: 23px;
+  cursor: pointer;
+  &:hover {
+    background-color: #e25b45;
+    color: #ffffff;
+  }
 `;
 const CheckButton = styled.button`
   width: 180px;
@@ -182,5 +187,10 @@ const CheckButton = styled.button`
   color: #ffffff;
   font-size: 16px;
   line-height: 23px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffffff;
+    color: #e25b45;
+  }
 `;
 export default EitherWrite;

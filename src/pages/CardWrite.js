@@ -99,6 +99,10 @@ const BackBtn = styled.div`
   background-color: transparent;
   color: #868e96;
   font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: #e25b45;
+  }
 `;
 const ContentBox = styled.div`
   border: 2px solid #00397c;
