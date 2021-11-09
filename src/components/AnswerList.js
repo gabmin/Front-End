@@ -91,7 +91,8 @@ const Container = styled.div`
 const AnswerBtn = styled.button`
   border: 1px #00397c solid;
   margin: 5px auto;
-  width: 620px;
+  min-width: 100%;
+  max-width: 620px;
   height: 72px;
   text-align: left;
   word-break: break-all;
