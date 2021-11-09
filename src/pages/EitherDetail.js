@@ -18,10 +18,12 @@ const EitherDetail = props => {
   const eitherId = props.match.params.either_id;
   //전체 게시글 정보
   const PostList = useSelector(state => state.eitherCard.eitherPost);
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
   const PostLists = PostList && PostList.either;
   //전체 게시글 중 해당 게시글 찾기
   const targetPost = PostLists?.find(p => p.eitherId == eitherId);
-
+  console.log(userInfo);
   useEffect(() => {
     //데이터 가져오기
     dispatch(PostDB());
@@ -34,8 +36,12 @@ const EitherDetail = props => {
   };
   //목록으로 돌아가기
   const onClickIndex = () => {
-    history.push("/");
+    history.push("/either");
   };
+  if (userInfo.nickname === "GUEST") {
+    alert("로그인 후 이용가능합니다.");
+    history.push("/login");
+  }
   return (
     <>
       <Wrap>
