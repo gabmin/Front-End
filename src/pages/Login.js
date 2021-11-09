@@ -2,8 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { ReactComponent as Logo } from "../images/logo.svg";
+import { ReactComponent as Symbol } from "../images/symbolBlue.svg";
 import { login } from "../redux/actions/user";
 import { history } from "../redux/configureStore";
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+} from "../shared/style";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -71,6 +81,8 @@ const Login = () => {
     <>
       <Container>
         <Form onSubmit={onSubmit}>
+          <StyledSymbol />
+          <Logo fill={blue} height="30px" style={{ margin: "0 0 40px" }} />
           <div>
             <input
               type="text"
@@ -88,59 +100,115 @@ const Login = () => {
               onChange={onChangePasswordInput}
               placeholder="비밀번호"
             />
-            {pwCheck && "비밀번호를 입력하세요"}
+            <span>{pwCheck && "비밀번호를 입력하세요"}</span>
           </div>
-          <Buttons>
-            <button type="submit">로그인</button>
-            <button onClick={onClickSignup}>회원가입</button>
-          </Buttons>
+          <LoginButton type="submit">로그인</LoginButton>
         </Form>
+        <SignupWrapper>
+          <span>계정이 없으신가요? 지금 바로 가입하세요!</span>
+          <SignupButton onClick={onClickSignup}>회원가입</SignupButton>
+        </SignupWrapper>
       </Container>
     </>
   );
 };
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 620px;
   width: 90%;
-  height: 300px;
-  margin: 100px auto 300px;
+  height: 961px;
+  margin: auto;
 `;
 
 const Form = styled.form`
+  position: relative;
+  top: 170px;
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 100%;
+  align-items: center;
+  width: 100%;
+  height: 416px;
   font-size: 20px;
-  margin: 30px auto 0;
   padding: 50px 50px 50px;
-  border: 1px solid gray;
+  border: 2px solid ${blue};
+  border-radius: 10px;
+  box-sizing: border-box;
 
   & div {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    height: 80px;
-    font-size: 0.8em;
-    color: red;
+    height: 70px;
+    font-size: 12px;
+    color: ${red};
 
     input {
+      max-width: 400px;
       width: 100%;
-      height: 50px;
-      float: right;
+      height: 48px;
+      border: 1px solid ${gray5};
+      border-radius: 7px;
+      background-color: ${grayMultiply};
+      padding-left: 20px;
+      margin: 0 auto 3px;
+      box-sizing: border-box;
+
+      ::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    span {
+      margin: 3px 0 0;
     }
   }
 `;
 
-const Buttons = styled.div`
+const StyledSymbol = styled(Symbol)`
+  cursor: pointer;
+  user-select: none;
+  height: 37px;
+  fill: ${blue};
+`;
+
+const LoginButton = styled.button`
+  position: relative;
+  top: 35px;
+  width: 180px;
+  height: 40px;
+  margin: 0 0 10px;
+  background-color: ${red};
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
+const SignupWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 220px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+`;
 
-  button {
-    width: 100%;
-    height: 50px;
-    margin: 0 0 10px;
-  }
+const SignupButton = styled.button`
+  position: relative;
+  width: 180px;
+  height: 40px;
+  margin: 15px 0 0;
+  background-color: white;
+  color: ${red};
+  font-size: 16px;
+  border: 1px solid ${red};
+  border-radius: 10px;
+  cursor: pointer;
 `;
 
 export default Login;

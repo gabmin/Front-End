@@ -1,5 +1,5 @@
 function PrevArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, style, onClick, top, color } = props;
   return (
     <div
       className={className}
@@ -7,14 +7,18 @@ function PrevArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        right: "-27px",
-        top: "120px",
+        left: "-70px",
+        top: top,
         zIndex: "999",
       }}
       onClick={onClick}
     >
       <img
-        src={require("../images/arrowL.png").default}
+        src={
+          color === "red"
+            ? require("../images/arrowLRed.png").default
+            : require("../images/arrowL.png").default
+        }
         alt="arrowNext"
         style={{
           position: "absolute",
@@ -22,7 +26,6 @@ function PrevArrow(props) {
           height: "100%",
           left: "0px",
           top: "-10px",
-          border: "1px solid rgb(197, 197, 197)",
           borderRadius: "50%",
         }}
       />
