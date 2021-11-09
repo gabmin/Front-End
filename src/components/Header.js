@@ -12,7 +12,7 @@ import { blue, red, mobile, tablet } from "../shared/style";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { nickname = "", userId = "" } = useSelector(
+  const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
 
@@ -92,7 +92,7 @@ const Header = () => {
         <Menu>
           <span onClick={onClickEither}>찬반</span>
           <span onClick={onClickMulti}>객관식</span>
-          {nickname ? (
+          {nickname !== "GUEST" ? (
             <>
               <span onClick={onClickNickname}>{nickname}</span>
               <span onClick={onClickLogout}>로그아웃</span>
@@ -134,6 +134,7 @@ const Top = styled.div`
 const Bottom = styled.div`
   display: flex;
   position: relative;
+  max-width: 1280px;
   width: 67%;
   height: 64px;
   align-items: center;

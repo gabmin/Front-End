@@ -22,7 +22,7 @@ const Main = () => {
   }, [dispatch]);
 
   const goToWrite = select => {
-    if (nickname === "GUEST") {
+    if (nickname === null) {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
@@ -128,6 +128,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 67%;
+  max-width: 1280px;
   height: 1170px;
   margin: auto;
   user-select: none;
