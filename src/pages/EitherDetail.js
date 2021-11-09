@@ -18,6 +18,8 @@ const EitherDetail = props => {
   const eitherId = props.match.params.either_id;
   //전체 게시글 정보
   const PostList = useSelector(state => state.eitherCard.eitherPost);
+  //유저정보(닉네임)
+  const userInfo = useSelector(state => state.user.userInfo);
   const PostLists = PostList && PostList.either;
   //전체 게시글 중 해당 게시글 찾기
   const targetPost = PostLists?.find(p => p.eitherId == eitherId);
@@ -36,6 +38,10 @@ const EitherDetail = props => {
   const onClickIndex = () => {
     history.push("/");
   };
+  if (!userInfo.nickname) {
+    alert("로그인 후 사용가능합니다.");
+    history.push("/login");
+  }
   return (
     <>
       <Wrap>
