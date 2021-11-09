@@ -7,7 +7,7 @@ function PrevArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        left: "-70px",
+        left: "-45px",
         top: top,
         zIndex: "999",
       }}
