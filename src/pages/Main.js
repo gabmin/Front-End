@@ -22,7 +22,7 @@ const Main = () => {
   }, [dispatch]);
 
   const goToWrite = select => {
-    if (nickname === "GUEST") {
+    if (nickname === null) {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {

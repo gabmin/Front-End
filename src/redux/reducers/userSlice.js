@@ -78,7 +78,9 @@ const userSlice = createSlice({
       .addCase(loginCheck.fulfilled, (state, action) => {
         state.loginCheckLoading = false;
         state.userInfo.nickname =
-          action.payload.nickname === "GUEST" ? null : action.payload.nickname;
+          action.payload.nickname === "GUEST"
+            ? "GUEST"
+            : action.payload.nickname;
         state.userInfo.userId = action.payload.user || null;
         state.loginCheckDone = true;
       })
