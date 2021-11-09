@@ -5,6 +5,7 @@ import {
   checkNickDup,
   getProfileNick,
   login,
+  loginCheck,
   logout,
   signup,
   updateNick,
@@ -17,7 +18,10 @@ export const initialState = {
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
-  logoutLoading: false, // 로그아웃웃 시도 중
+  loginCheckLoading: false, // 로그인체크크 시도 중
+  loginCheckDone: false,
+  loginCheckError: null,
+  logoutLoading: false, // 로그아웃 시도 중
   logoutDone: false,
   logoutError: null,
   signupLoading: false, // 회원가입 시도 중
@@ -45,15 +49,7 @@ export const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    loginUser: state => {
-      // state.userInfo.nickname = getCookie("nickname");
-      state.userInfo.nickname = sessionStorage.getItem("nickname");
-      // state.userInfo.userId = getCookie("userId");
-      state.userInfo.userId = sessionStorage.getItem("userId");
-      state.loginDone = false;
-    },
-  },
+  reducers: {},
   extraReducers: builder =>
     builder
       // login
@@ -66,15 +62,29 @@ const userSlice = createSlice({
         state.loginLoading = false;
         state.userInfo.nickname = action.payload.nickname;
         state.userInfo.userId = action.payload.userId;
-        // setCookie("nickname", action.payload.nickname);
-        sessionStorage.setItem("nickname", action.payload.nickname);
-        // setCookie("userId", action.payload.userId);
-        sessionStorage.setItem("userId", action.payload.userId);
+
         state.loginDone = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loginLoading = false;
         state.loginError = action.payload;
+      })
+      // loginCheck
+      .addCase(loginCheck.pending, state => {
+        state.loginCheckLoading = true;
+        state.loginCheckDone = false;
+        state.loginCheckError = null;
+      })
+      .addCase(loginCheck.fulfilled, (state, action) => {
+        state.loginCheckLoading = false;
+        state.userInfo.nickname =
+          action.payload.nickname === "GUEST" ? null : action.payload.nickname;
+        state.userInfo.userId = action.payload.user || null;
+        state.loginCheckDone = true;
+      })
+      .addCase(loginCheck.rejected, (state, action) => {
+        state.loginCheckLoading = false;
+        state.loginCheckError = action.payload;
       })
       // logout
       .addCase(logout.pending, state => {
@@ -84,10 +94,6 @@ const userSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.userInfo = { nickname: null, userId: null };
-        // deleteCookie("nickname");
-        sessionStorage.removeItem("nickname");
-        // deleteCookie("userId");
-        sessionStorage.removeItem("userId");
         state.logoutLoading = false;
         state.logoutDone = true;
       })
@@ -152,10 +158,6 @@ const userSlice = createSlice({
         state.updateNickDone = true;
         state.userInfo.nickname = action.payload.nickname;
         state.profileNick = action.payload.nickname;
-        // deleteCookie("nickname");
-        sessionStorage.removeItem("nickname");
-        // setCookie("nickname", action.payload.nickname);
-        sessionStorage.setItem("nickname", action.payload.nickname);
       })
       .addCase(updateNick.rejected, (state, action) => {
         state.updateNickLoading = false;
@@ -183,6 +185,6 @@ const userSlice = createSlice({
       }),
 });
 
-export const { loginUser } = userSlice.actions;
+// export const { loginUser } = userSlice.actions;
 
 export default userSlice;

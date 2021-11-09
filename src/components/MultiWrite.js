@@ -5,6 +5,7 @@ import moment from "moment";
 import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { AddPostDB, EditPostDB } from "../redux/actions/multiCard";
+import { SetParams } from "../redux/reducers/paramsSlice";
 
 const MultiWrite = props => {
   const editData = props.editData;
@@ -130,19 +131,10 @@ const MultiWrite = props => {
         }),
       );
     }
+    dispatch(SetParams());
     history.push("/multi");
   };
-  console.log(
-    "addPost",
-    title,
-    description,
-    contentA,
-    contentB,
-    contentC,
-    contentD,
-    contentE,
-    date,
-  );
+
   // post 수정하기
   const eidtPost = () => {
     if (title === "") {
@@ -228,19 +220,9 @@ const MultiWrite = props => {
         }),
       );
     }
+    dispatch(SetParams());
     history.push("/multi");
   };
-  console.log(
-    "editPost",
-    title,
-    description,
-    contentA,
-    contentB,
-    contentC,
-    contentD,
-    contentE,
-    editedDate,
-  );
 
   const changeTitle = e => {
     setTitle(e.target.value);
@@ -308,6 +290,7 @@ const MultiWrite = props => {
   };
 
   const cancel = () => {
+    dispatch(SetParams());
     history.push("/multi");
   };
 

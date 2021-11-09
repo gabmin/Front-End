@@ -44,7 +44,6 @@ const ChildList = props => {
 const TempWarpper = styled.div`
   width: 90%;
   margin: 0 0 0 10%;
-  background-color: yellow;
 `;
 
 export default ChildList;
