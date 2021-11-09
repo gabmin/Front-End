@@ -51,7 +51,8 @@ const Container = styled.div`
 `;
 
 const Warpper = styled.div`
-  width: 556px;
+  min-width: 100%;
+  max-width: 556px;
   height: 80px;
   border: 1px ${colors.gray5} solid;
   border-radius: 6px;
@@ -64,6 +65,7 @@ const TextArea = styled.textarea`
   width: 480px;
   height: 50px;
   margin: auto;
+  padding: 0 0 0 10px;
   border: none;
   resize: none;
   background-color: ${colors.gray};
