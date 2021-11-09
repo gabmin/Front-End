@@ -45,7 +45,7 @@ const CardWrite = () => {
     setEitherState(!eitherState);
     setMultiState(!multiState);
   };
-  if (!userInfo.nickname) {
+  if (userInfo.nickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
     history.push("/login");
   }

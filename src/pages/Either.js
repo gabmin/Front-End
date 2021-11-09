@@ -49,7 +49,7 @@ const Either = props => {
   };
   //게시글 작성하러가기
   const goToWrite = () => {
-    if (!userInfo.nickname) {
+    if (userInfo.nickname === "GEUST") {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
