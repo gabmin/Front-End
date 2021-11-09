@@ -25,7 +25,7 @@ const Either = props => {
 
   //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("Post");
-  console.log(PostList);
+
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
     dispatch(PostDB(paramsId));
@@ -63,9 +63,36 @@ const Either = props => {
     <>
       <Wrap>
         <EitherButtonGrid>
-          <EitherButton onClick={onClickPost}>전체</EitherButton>
-          <EitherButton onClick={onClickPosting}>진행중</EitherButton>
-          <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
+          {status === "Post" ? (
+            <EitherButton
+              onClick={onClickPost}
+              style={{ color: "#00397c", textDecoration: "underline" }}
+            >
+              전체
+            </EitherButton>
+          ) : (
+            <EitherButton onClick={onClickPost}>전체</EitherButton>
+          )}
+          {status === "Posting" ? (
+            <EitherButton
+              onClick={onClickPosting}
+              style={{ color: "#00397c", textDecoration: "underline" }}
+            >
+              진행중
+            </EitherButton>
+          ) : (
+            <EitherButton onClick={onClickPosting}>진행중</EitherButton>
+          )}
+          {status === "CompletePost" ? (
+            <EitherButton
+              onClick={onClickCompletePost}
+              style={{ color: "#00397c", textDecoration: "underline" }}
+            >
+              종료됨
+            </EitherButton>
+          ) : (
+            <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
+          )}
         </EitherButtonGrid>
         <SlickLayout>
           {status === "Post" ? <EitherSlick PostList={PostList} /> : null}
@@ -77,7 +104,7 @@ const Either = props => {
           ) : null}
         </SlickLayout>
         <QuestionBtnDiv>
-          <QuestionBtn onClick={goToWrite}>나도질문하기</QuestionBtn>
+          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
         </QuestionBtnDiv>
       </Wrap>
     </>
@@ -86,40 +113,52 @@ const Either = props => {
 
 const Wrap = styled.div`
   max-width: 100%;
+  height: 773px;
 `;
 
 const EitherButtonGrid = styled.div`
-  margin: 50px 0px;
+  margin: 51px auto 0px auto;
   width: 100%;
   text-align: center;
+  width: 401px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const EitherButton = styled.button`
   border: none;
-  background-color: #fff;
+  background-color: #ffffff;
   font-size: 20px;
+  font-weight: bold;
+  color: #868e96;
+  line-height: 29px;
   cursor: pointer;
   &:hover {
-    color: green;
+    color: #00397c;
+    text-decoration: underline;
   }
 `;
 const SlickLayout = styled.div`
-  margin: 100px auto;
+  margin: 0px auto;
   width: 100%;
   height: 100%;
 `;
 const QuestionBtnDiv = styled.div`
-  margin: 50px 0px;
   width: 100%;
   text-align: center;
 `;
 const QuestionBtn = styled.button`
-  border: none;
+  border: 1px solid #e25b45;
+  color: #e25b45;
+  font-size: 16px;
+  padding: 8px 60px 9px 61px;
+  border-radius: 8px;
   background-color: #ffffff;
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    color: #777777;
+    background-color: #e25b45;
+    color: #ffffff;
   }
 `;
 export default Either;

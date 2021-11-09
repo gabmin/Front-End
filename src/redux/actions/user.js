@@ -17,6 +17,19 @@ export const login = createAsyncThunk(
   },
 );
 
+export const loginCheck = createAsyncThunk(
+  "/users/loginCheck",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/users/login");
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  },
+);
+
 export const logout = createAsyncThunk(
   "/users/logout",
   async (data, { rejectWithValue }) => {
@@ -68,7 +81,7 @@ export const checkNickDup = createAsyncThunk(
 );
 
 export const updateNick = createAsyncThunk(
-  "/updateNick",
+  "/profiles/updateNick",
   async (nickname, { rejectWithValue }) => {
     try {
       const response = await api.patch("/profiles/nick", { nickname });

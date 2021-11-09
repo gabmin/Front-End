@@ -273,7 +273,7 @@ const multiDetailSlice = createSlice({
       })
       .addCase(AddLikeChild.rejected, (state, action) => {
         state.AddLikeChildLoading = false;
-        state.AddLikeChildError = action.error;
+        state.AddLikeError = action.error;
       }),
 });
 

@@ -60,8 +60,10 @@ const SliderWarpper = styled.div`
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   .slick-slide.slick-center div {
-    transform: scale(1.1);
-    opacity: 1;
+    transform: scale(1);
+  }
+  .slick-slide.slick-list div {
+    transform: scale(0.88);
   }
 `;
 

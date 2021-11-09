@@ -24,7 +24,7 @@ const CommentList = props => {
               renderState={renderState}
               nickname={p.nickname}
               comment={p.comment}
-              commetDate={p.date}
+              commentDate={p.date}
               commentLikeCnt={p.CommentLikeCnt}
               id={p.id}
               deleted={p.deleted}
@@ -38,9 +38,8 @@ const CommentList = props => {
 };
 
 const TempWarpper = styled.div`
-  width: 80%;
+  width: 100%;
   margin: auto;
-  background-color: yellow;
 `;
 
 export default CommentList;

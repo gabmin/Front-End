@@ -71,14 +71,37 @@ function PrevArrow(props) {
 }
 
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
+  const NotCompleteList =
+    PostList && PostList.filter(post => post.completed === 0);
+  const CompleteList =
+    PostList && PostList.filter(post => post.completed === 1);
+
   return (
     <>
       <Wrap>
         <div>
           <StyledSlider {...settings}>
-            {PostList &&
-              PostList?.map(v => (
+            {NotCompleteList &&
+              NotCompleteList?.map(v => (
                 <EitherCard
+                  key={v.toString()}
+                  eitherId={v.eitherId}
+                  nickname={v.nickname}
+                  title={v.title}
+                  contentA={v.contentA}
+                  contentB={v.contentB}
+                  date={v.date}
+                  likeCnt={v.likeCnt}
+                  voteCntA={v.voteCntA}
+                  voteCntB={v.voteCntB}
+                  liked={v.liked}
+                  voted={v.voted}
+                  completed={v.completed}
+                />
+              ))}
+            {CompleteList &&
+              CompleteList.map(v => (
+                <EitherCompleteCard
                   key={v.toString()}
                   eitherId={v.eitherId}
                   nickname={v.nickname}
@@ -160,11 +183,10 @@ const Wrap = styled.div`
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   .slick-slide.slick-center div {
-    transform: scale(1.1);
-    opacity: 1;
-    z-index: 0.5;
+    /* transform: scale(1.1); */
     button:hover {
-      background-color: darkGray;
+      color: #ffffff;
+      background-color: #00397c;
     }
   }
 `;
