@@ -69,7 +69,7 @@ const MultiDetail = props => {
     }
   };
 
-  if (dataList && !userInfo.nickname) {
+  if (userInfo.nickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
     history.push("/login");
   } else if (
