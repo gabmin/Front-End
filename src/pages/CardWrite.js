@@ -31,11 +31,6 @@ const CardWrite = () => {
   const onClickBack = useCallback(() => {
     history.push("/either");
   });
-  //목록으로가기
-  const onClickIndex = useCallback(() => {
-    history.push("/");
-  });
-
   // radio button
   const EitherRadioBtn = e => {
     setEitherState(!eitherState);
@@ -53,14 +48,13 @@ const CardWrite = () => {
     <>
       <Wrap>
         <ButtonGrid>
-          <button onClick={onClickBack}>{"<"} 뒤로가기</button>
-          <button onClick={onClickIndex}>목록</button>
+          <BackBtn onClick={onClickBack}> {"←"}뒤로가기</BackBtn>
         </ButtonGrid>
         <ContentBox>
           <Index>
-            <h4 style={{ width: "30px" }}>구분</h4>
+            <p>구분</p>
             <div style={{ display: "flex" }}>
-              <RadioBtnWarpper>
+              <RadioBtnWarpperE>
                 <input
                   name="write"
                   type="radio"
@@ -69,8 +63,8 @@ const CardWrite = () => {
                   onChange={EitherRadioBtn}
                 />
                 <label>찬반</label>
-              </RadioBtnWarpper>
-              <RadioBtnWarpper>
+              </RadioBtnWarpperE>
+              <RadioBtnWarpperM>
                 <input
                   name="write"
                   type="radio"
@@ -79,7 +73,7 @@ const CardWrite = () => {
                   onChange={MultiRadioBtn}
                 />
                 <label>객관식</label>
-              </RadioBtnWarpper>
+              </RadioBtnWarpperM>
             </div>
           </Index>
           {eitherState ? <EitherWrite /> : null}
@@ -91,33 +85,56 @@ const CardWrite = () => {
 };
 
 const Wrap = styled.div`
-  width: 80%;
-  height: 100%;
-  margin: 50px auto;
+  width: 100%;
+  height: 760px;
+  margin: auto;
 `;
 const ButtonGrid = styled.div`
   width: 100%;
-  margin: 10px 0px;
+  margin: 20px 0px 15px 317px;
   display: flex;
-  justify-content: space-between;
 `;
-
+const BackBtn = styled.div`
+  border: none;
+  background-color: transparent;
+  color: #868e96;
+  font-size: 14px;
+`;
 const ContentBox = styled.div`
-  border: 1px solid black;
-  width: 100%;
-  height: 100%;
-  padding: 1em;
+  border: 2px solid #00397c;
+  width: 840px;
+  height: 504px;
   box-sizing: border-box;
+  margin: auto;
+  border-radius: 10px;
+  padding: 64px 109px 64px 110px;
 `;
-const RadioBtnWarpper = styled.div`
-  width: 70px;
+const Index = styled.div`
   display: flex;
-  margin: 0px 0px 0px 60px;
+  p {
+    font-size: 18px;
+    color: #101214;
+    font-weight: bold;
+    line-height: 26px;
+    margin: 0px;
+  }
+  margin: 0px 0px 22px 0px;
+`;
+const RadioBtnWarpperE = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 76px;
   align-items: center;
+  label {
+    font-size: 16px;
+  }
+`;
+const RadioBtnWarpperM = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 47px;
+  align-items: center;
+  label {
+    font-size: 16px;
+  }
 `;
 
-const Index = styled.div`
-  margin: 10px;
-  display: flex;
-`;
 export default CardWrite;
