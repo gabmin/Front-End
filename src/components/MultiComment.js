@@ -11,9 +11,7 @@ const MultiComment = props => {
   const multiId = props.multiId;
   const render = props.render;
   const renderState = props.state;
-  console.log("renderState", renderState);
   console.log("commentdataList", dataList.comment);
-  const [action, setAction] = useState(false);
 
   // const { AddCommentDBLoading, AddCommentDBDone } = useSelector(
   //   state => state.comment,
@@ -24,36 +22,43 @@ const MultiComment = props => {
   // }, []);
 
   return (
-    <>
+    <Contaier>
       <TempWarpper>
         <TextAreaWarpper>
-          <p>댓글 {dataList.comment.length + dataList.childComment.length}개</p>
           <CommentInput multiId={multiId} />
         </TextAreaWarpper>
-        <hr></hr>
-        <div>
-          <CommentList
-            multiId={multiId}
-            dataList={dataList}
-            // render={render}
-            // renderState={renderState}
-          />
-        </div>
+        {dataList.comment[0] ? (
+          <div>
+            <CommentList
+              multiId={multiId}
+              dataList={dataList}
+              // render={render}
+              // renderState={renderState}
+            />
+          </div>
+        ) : (
+          <p>댓글이 없습니다.</p>
+        )}
       </TempWarpper>
-    </>
+    </Contaier>
   );
 };
+
+const Contaier = styled.div`
+  width: 620px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+`;
 
 const TempWarpper = styled.div`
   max-width: 100%;
   margin: auto;
-  /* background-color: green; */
 `;
 
 const TextAreaWarpper = styled.div`
-  max-width: 80%;
-  margin: auto;
-  /* background-color: green; */
+  max-width: 100%;
+  margin: 0 auto 20px;
 `;
 
 export default MultiComment;

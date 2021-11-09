@@ -73,7 +73,7 @@ const MultiVoted = props => {
   const addLike = () => {
     if (DataList.liked === null) {
       dispatch(AddLikeDB(multiId));
-      setLikes(likes + 1);
+      setLikes(DataList.likeCnt + 1);
     } else {
       return;
     }
