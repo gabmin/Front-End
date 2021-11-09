@@ -81,8 +81,7 @@ const Comment = props => {
 
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, id, data: { comment: newComment, date } }));
-    setAddInput(false);
-    setAddBtn(true);
+    showInput();
   };
 
   //댓글 수정
@@ -90,7 +89,6 @@ const Comment = props => {
   const [newEdit, setNewEdit] = useState();
   const changeEditComment = e => {
     setNewEdit(e.target.value);
-    console.log("newEdit", newEdit);
   };
 
   const editComment = () => {
@@ -98,7 +96,6 @@ const Comment = props => {
       EditCommentDB({ multiId, id, data: { comment: newEdit, editedDate } }),
     );
     showEditInput();
-    console.log("checkcheck", multiId, id);
   };
 
   //댓글 삭제
