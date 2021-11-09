@@ -28,12 +28,7 @@ const EitherDetail = props => {
     //데이터 가져오기
     dispatch(PostDB());
     dispatch(PostingDB());
-
-    if (PostLists && !userInfo.nickname) {
-      alert("로그인 후 사용가능합니다.");
-      history.push("/login");
-    }
-  }, [dispatch, userInfo.nickname]);
+  }, [dispatch]);
 
   //돌아가기
   const onClickGoBack = () => {
@@ -43,7 +38,10 @@ const EitherDetail = props => {
   const onClickIndex = () => {
     history.push("/either");
   };
-
+  if (userInfo.nickname === "GUEST") {
+    alert("로그인 후 이용가능합니다.");
+    history.push("/login");
+  }
   return (
     <>
       <Wrap>

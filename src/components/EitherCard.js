@@ -285,7 +285,7 @@ const Container = styled.div`
   text-align: center;
   width: 620px;
   height: 600px;
-  margin: 100px auto;
+  margin: 100px auto 0px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
   background-color: white;
