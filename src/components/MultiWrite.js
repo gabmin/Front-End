@@ -326,7 +326,8 @@ const MultiWrite = props => {
           <Input
             ref={titleRef}
             type="text"
-            placeholder="질문을 입력해주세요."
+            maxlength="40"
+            placeholder="질문을 입력해주세요 (40자이내)"
             onChange={changeTitle}
             value={title}
           />

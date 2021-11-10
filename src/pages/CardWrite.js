@@ -57,7 +57,7 @@ const CardWrite = () => {
                   type="radio"
                   id="either"
                   checked={eitherState}
-                  onChange={EitherRadioBtn}
+                  // onChange={EitherRadioBtn}
                 />
                 <label>찬반</label>
               </RadioBtnWarpperE>
@@ -93,7 +93,7 @@ const ContentBox = styled.div`
   box-sizing: border-box;
   margin: 56px auto 56px auto;
   border-radius: 10px;
-  padding: 4% 8% 4% 8%;
+  padding: 4% 110px 4% 110px;
 `;
 
 const Index = styled.div`
