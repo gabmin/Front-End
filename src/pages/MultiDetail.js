@@ -62,7 +62,15 @@ const MultiDetail = props => {
   };
 
   const closePost = () => {
-    dispatch(ClosePostDB(multiId));
+    const closeVote = window.confirm("투표를 종료하시겠습니까?");
+    if (closeVote == true) {
+      dispatch(ClosePostDB(multiId));
+      history.push({
+        pathname: "/multi",
+        state: { multiId: multiId },
+      });
+    }
+    return;
   };
 
   const editPost = () => {
