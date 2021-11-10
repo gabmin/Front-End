@@ -17,8 +17,8 @@ function NextArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        right: "-27px",
-        top: "120px",
+        right: "0px",
+        top: "260px",
       }}
       onClick={onClick}
     >
@@ -31,8 +31,7 @@ function NextArrow(props) {
           height: "100%",
           right: "30px",
           top: "0px",
-          border: "1px solid rgb(197, 197, 197)",
-          borderRadius: "50%",
+          border: null,
         }}
       />
     </div>
@@ -48,8 +47,8 @@ function PrevArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        right: "-27px",
-        top: "120px",
+        right: "0px",
+        top: "260px",
       }}
       onClick={onClick}
     >
@@ -62,8 +61,7 @@ function PrevArrow(props) {
           height: "100%",
           left: "50px",
           top: "0px",
-          border: "1px solid rgb(197, 197, 197)",
-          borderRadius: "50%",
+          border: null,
         }}
       />
     </div>
@@ -80,7 +78,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     <>
       <Wrap>
         <div>
-          <StyledSlider {...settings}>
+          <Slider {...settings}>
             {NotCompleteList &&
               NotCompleteList?.map(v => (
                 <EitherCard
@@ -153,7 +151,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   completed={v.completed}
                 />
               ))}
-          </StyledSlider>
+          </Slider>
         </div>
       </Wrap>
     </>
@@ -171,10 +169,10 @@ const settings = {
   speed: 500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
-  centerPadding: "10px",
+  centerPadding: "60px",
   responsive: [
-    { breakpoint: 2000, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-    { breakpoint: 1800, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+    { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+    { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
   ],
 };
 
@@ -184,16 +182,4 @@ const Wrap = styled.div`
   margin: auto;
 `;
 
-const StyledSlider = styled(Slider)`
-  /* transform: scale(0.8); */
-  .slick-slide {
-    z-index: 0;
-  }
-  .slick-slide.slick-center {
-    /* transform: scale(1); */
-    button:hover {
-      background-color: #dfdfdf;
-    }
-  }
-`;
 export default EiterSlick;

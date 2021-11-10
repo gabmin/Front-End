@@ -75,9 +75,9 @@ const EitherCard = props => {
     if (voteCntA === 0 && voteCntB === 0) {
       setPercent(50);
     } else if (voteCntA === 0) {
-      setPercent(100);
-    } else if (voteCntB === 0) {
       setPercent(0);
+    } else if (voteCntB === 0) {
+      setPercent(100);
     } else {
       let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
       setPercent(Math.round(calPercent));
@@ -244,8 +244,8 @@ const EitherCard = props => {
               ? SelctButtonA(null, "#101214", true, null, contentA)
               : SelctButtonA(null, "#101214", false, "A", contentA)}
             {completed === 1
-              ? SelctButtonB("#00397c", "#FFFFFF", true, null, contentB)
-              : SelctButtonB("#00397c", "#FFFFFF", false, "B", contentB)}
+              ? SelctButtonB("#E25B45", "#101214", true, null, contentB)
+              : SelctButtonB("#E25B45", "#101214", false, "B", contentB)}
           </div>
         ) : (
           <div>
@@ -329,17 +329,18 @@ const TotalCntDiv = styled.div`
 `;
 const EitherProgress = styled.div`
   margin: 24px auto;
-  border: 2px solid #00397c;
   border-radius: 6px;
   width: 100%;
-  height: 32px;
+  height: 6px;
   z-index: 0;
+  background-color: #e25b45;
 `;
 const HightLight = styled.div`
-  background-color: #dfdfdf;
+  background-color: #00397c;
   transition: 1s;
   width: ${props => props.width};
-  height: 33px;
+  height: 6px;
+  margin-bottom: 1px;
   border-radius: ${props =>
     props.width === "100%" ? "5px 5px 5px 5px" : "5px 0px 0px 5px"};
 `;
@@ -347,6 +348,7 @@ const ProgressLabel = styled.div`
   width: 480px;
   position: absolute;
   color: #00397c;
+  margin-top: 6px;
   font-size: 12px;
   display: flex;
   justify-content: space-between;
@@ -360,6 +362,9 @@ const EitherButtonA = styled.button`
   font-size: 16px;
   line-height: 23px;
   margin: 24px auto 0px auto;
+  &:hover {
+    background-color: #dfdfdf;
+  }
 `;
 const EitherButtonB = styled.button`
   width: 240px;
@@ -370,6 +375,9 @@ const EitherButtonB = styled.button`
   font-size: 16px;
   line-height: 23px;
   margin: 24px auto 0px auto;
+  &:hover {
+    background-color: #dfdfdf;
+  }
 `;
 const EitherFooter = styled.div`
   margin: 36px 77px;
