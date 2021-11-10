@@ -12,9 +12,8 @@ import { blue, red, mobile, tablet } from "../shared/style";
 const Main = () => {
   const dispatch = useDispatch();
 
-  const { either, multi, attendNum, postingNum } = useSelector(
-    state => state.main.mainPosts,
-  );
+  const { either, multi, attendNum, postingNum, eitherNum, multiNum } =
+    useSelector(state => state.main.mainPosts);
 
   const { mainDataDone } = useSelector(state => state.main);
 
@@ -89,7 +88,7 @@ const Main = () => {
             goToWrite("checkEither");
           }}
         >
-          <h3> {attendNum}마리의 개미들이 참여 중입니다!</h3>
+          <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
           <h1> 찬반 질문 작성하기</h1>
           <StyledGoAnt color="blue" />
         </GoEither>
@@ -98,7 +97,7 @@ const Main = () => {
             goToWrite("checkMulti");
           }}
         >
-          <h3> {attendNum}마리의 개미들이 참여 중입니다!</h3>
+          <h3>들린다... {multiNum}개의 곡소리가.....</h3>
           <h1> 객관식 질문 작성하기</h1>
           <StyledGoAnt color="white" />
         </GoMulti>
@@ -116,7 +115,7 @@ const Main = () => {
       <Counts>
         <div className="countsWrapper">
           <p className="countNum">{postingNum}</p>
-          <p className="countType">고민</p>
+          <p className="countType">곡소리</p>
         </div>
         <div className="betweenLine"></div>
         <div className="countsWrapper">

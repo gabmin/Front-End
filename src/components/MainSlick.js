@@ -90,6 +90,7 @@ const ProductSlick = ({ cardList, type }) => {
               commentNum={v.commentCnt}
               likeNum={v.likeCnt}
               username={v.nickname}
+              userId={v.user}
               date={v.date}
             />
           ))}
