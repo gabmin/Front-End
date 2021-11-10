@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import useInput from "../hooks/useInput";
+import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
+import { history } from "../redux/configureStore";
+
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolBlue.svg";
 import {
@@ -13,9 +17,6 @@ import {
   grayMultiply,
   darkGray,
 } from "../shared/style";
-import useInput from "../hooks/useInput";
-import { signup, checkIdDup, checkNickDup } from "../redux/actions/user";
-import { history } from "../redux/configureStore";
 
 const Signup = () => {
   const isLoggedIn = useSelector(state => state.user.userInfo.userId);
