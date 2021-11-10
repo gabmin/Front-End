@@ -71,15 +71,9 @@ const EitherEdit = props => {
   const editedDate = moment().format("YYYY-MM-DD HH:mm:ss");
 
   //뒤로가기
-  const onClickBack = useCallback(() => {
+  const onClickCancle = useCallback(() => {
     history.push("/either");
   });
-
-  //목록으로가기
-  const onClickIndex = useCallback(() => {
-    history.push("/");
-  });
-
   //radio 버튼
   const EitherRadioBtn = () => {
     if (eitherState === true) {
@@ -108,68 +102,68 @@ const EitherEdit = props => {
   return (
     <>
       <Wrap>
-        <ButtonGrid>
-          <button onClick={onClickBack}>{"<"} 뒤로가기</button>
-          <button onClick={onClickIndex}>목록</button>
-        </ButtonGrid>
         <ContentBox>
           <Index>
-            <h4 style={{ width: "30px" }}>구분</h4>
+            <p>구분</p>
             <div style={{ display: "flex" }}>
-              <RadioButton>
+              <RadioBtnWarpperE>
                 <input
+                  name="write"
                   type="radio"
                   id="either"
-                  checked={true}
+                  checked={eitherState}
                   onChange={EitherRadioBtn}
+                  disabled
                 />
-                <label htmlFor="either">찬반</label>
-              </RadioButton>
-              <RadioButton>
+                <label>찬반</label>
+              </RadioBtnWarpperE>
+              <RadioBtnWarpperM>
                 <input
+                  name="write"
                   type="radio"
                   id="multi"
-                  checked={false}
+                  checked={multiState}
                   onChange={MultiRadioBtn}
+                  disabled
                 />
-                <label htmlFor="multi">객관식</label>
-              </RadioButton>
+                <label>객관식</label>
+              </RadioBtnWarpperM>
             </div>
           </Index>
-          <hr />
-          <Title>
-            <h4 style={{ width: "30px" }}>제목</h4>
-            <Input
-              type="text"
-              placeholder="질문을 입력해주세요."
-              value={title}
-              onChange={onChangeTitle}
-            />
-          </Title>
-          <hr />
-          <VoteBox>
+          <Container>
+            <hr />
+            <Title>
+              <p>제목</p>
+              <Input
+                type="text"
+                placeholder="질문을 입력해주세요. (40자 이내)"
+                value={title}
+                onChange={onChangeTitle}
+              />
+            </Title>
+            <hr />
             <EitherButtonGrid>
-              <EitherButton>
-                <h1 style={{ marginTop: "70px" }}>O</h1>
+              <EitherButtonA>
                 <ButtonInput
-                  placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
+                  placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
                   value={contentA}
                   onChange={onChangeContentA}
                 />
-              </EitherButton>
-              <EitherButton>
-                <h1 style={{ marginTop: "70px" }}>X</h1>
+              </EitherButtonA>
+              <EitherButtonB>
                 <ButtonInput
-                  placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
+                  placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
                   value={contentB}
                   onChange={onChangeContentB}
                 />
-              </EitherButton>
+              </EitherButtonB>
             </EitherButtonGrid>
-            <div>
-              <button onClick={onClickEdit}>수정하기</button>
-            </div>
-          </VoteBox>
+            <hr />
+            <OptionButtonGrid>
+              <CancleButton onClick={onClickCancle}>취소</CancleButton>
+              <CheckButton onClick={onClickEdit}>완료</CheckButton>
+            </OptionButtonGrid>
+          </Container>
         </ContentBox>
       </Wrap>
     </>
@@ -177,76 +171,142 @@ const EitherEdit = props => {
 };
 
 const Wrap = styled.div`
-  width: 80%;
-  height: 100%;
-  margin: 50px auto;
+  min-width: 100%;
+  max-width: 840px;
+  margin: auto;
 `;
-const ButtonGrid = styled.div`
-  width: 100%;
-  margin: 10px 0px;
-  display: flex;
-  justify-content: space-between;
-`;
-
 const ContentBox = styled.div`
-  border: 1px solid black;
+  border: 2px solid #00397c;
+  width: 840px;
+  box-sizing: border-box;
+  margin: 56px auto 50px auto;
+  border-radius: 10px;
+  padding: 64px 109px 64px 110px;
+`;
+const Index = styled.div`
+  display: flex;
+  p {
+    font-size: 18px;
+    color: #101214;
+    font-weight: bold;
+    line-height: 26px;
+    margin: 0px;
+  }
+  margin: 0px 0px 22px 0px;
+`;
+const RadioBtnWarpperE = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 76px;
+  align-items: center;
+  label {
+    font-size: 16px;
+  }
+`;
+const RadioBtnWarpperM = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 47px;
+  align-items: center;
+  label {
+    font-size: 16px;
+  }
+`;
+const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 1em;
-  box-sizing: border-box;
+  hr {
+    margin: 0px;
+    border-color: #eeeeee;
+  }
 `;
-const RadioButton = styled.div`
-  width: 70px;
-  display: flex;
-  margin: 0px 0px 0px 60px;
-  align-items: center;
-`;
-
-const Index = styled.div`
-  margin: 10px;
-  display: flex;
-`;
-
 const Title = styled.div`
-  margin: 10px;
   display: flex;
+  p {
+    width: 34px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 26px;
+    color: #101214;
+    margin: 0px;
+    margin: 22px 76px 28px 0px;
+  }
 `;
-
 const Input = styled.input`
-  width: 100%;
-  margin: 15px 0px 15px 30px;
+  width: 80%;
   border: none;
   outline: none;
-  font-size: 18px;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 300;
 `;
-
-const VoteBox = styled.div`
-  width: 100%;
-  height: 400px;
-`;
-
 const EitherButtonGrid = styled.div`
   width: 100%;
-  height: 100%;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
-const EitherButton = styled.div`
-  width: 40%;
-  height: 60%;
-  border: 1px solid black;
-  text-align: center;
-  align-content: center;
+const EitherButtonA = styled.div`
+  width: 310.5px;
+  height: 232px;
+  border: 1px solid #868e96;
+  margin: 24px 0px 24px 0px;
+  border-radius: 10px 0px 0px 10px;
+  padding: 24px 24px 0px 24px;
 `;
-
-const ButtonInput = styled.input`
+const EitherButtonB = styled.div`
+  width: 310.5px;
+  height: 232px;
+  border: 1px solid #868e96;
+  margin: 24px 0px 24px 0px;
+  border-radius: 0px 10px 10px 0px;
+  padding: 24px 24px 0px 24px;
+`;
+const ButtonInput = styled.textarea`
   border: none;
   outline: none;
-  width: 80%;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
   text-align: center;
+  resize: none;
+  box-sizing: border-box;
+  padding: 3px;
 `;
-
+const OptionButtonGrid = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+const CancleButton = styled.button`
+  width: 290px;
+  height: 40px;
+  border: 1px solid #e25b45;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #e25b45;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  margin-top: 24px;
+  &:hover {
+    background-color: #e25b45;
+    color: #ffffff;
+  }
+`;
+const CheckButton = styled.button`
+  width: 290px;
+  height: 40px;
+  border: 1px solid #e25b45;
+  border-radius: 8px;
+  background-color: #e25b45;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  margin-top: 24px;
+  &:hover {
+    background-color: #ffffff;
+    color: #e25b45;
+  }
+`;
 export default EitherEdit;

@@ -17,8 +17,8 @@ function NextArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        right: "-27px",
-        top: "120px",
+        right: "0px",
+        top: "260px",
       }}
       onClick={onClick}
     >
@@ -31,8 +31,7 @@ function NextArrow(props) {
           height: "100%",
           right: "30px",
           top: "0px",
-          border: "1px solid rgb(197, 197, 197)",
-          borderRadius: "50%",
+          border: null,
         }}
       />
     </div>
@@ -48,8 +47,8 @@ function PrevArrow(props) {
         ...style,
         width: "50px",
         height: "50px",
-        right: "-27px",
-        top: "120px",
+        right: "0px",
+        top: "260px",
       }}
       onClick={onClick}
     >
@@ -62,8 +61,7 @@ function PrevArrow(props) {
           height: "100%",
           left: "50px",
           top: "0px",
-          border: "1px solid rgb(197, 197, 197)",
-          borderRadius: "50%",
+          border: null,
         }}
       />
     </div>
@@ -80,7 +78,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     <>
       <Wrap>
         <div>
-          <StyledSlider {...settings}>
+          <Slider {...settings}>
             {NotCompleteList &&
               NotCompleteList?.map(v => (
                 <EitherCard
@@ -153,7 +151,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   completed={v.completed}
                 />
               ))}
-          </StyledSlider>
+          </Slider>
         </div>
       </Wrap>
     </>
@@ -164,30 +162,24 @@ const settings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  adaptiveHeight: true,
-  focusOnSelect: true,
+  // adaptiveHeight: true,
+  // focusOnSelect: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,
-  centerPadding: "-10px",
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
+  centerPadding: "60px",
+  responsive: [
+    { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+    { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+  ],
 };
 
 const Wrap = styled.div`
-  display: inline-block;
   width: 100%;
   height: 100%;
+  margin: auto;
 `;
 
-const StyledSlider = styled(Slider)`
-  overflow: hidden;
-  .slick-slide.slick-center div {
-    /* transform: scale(1.1); */
-    button:hover {
-      color: #ffffff;
-      background-color: #00397c;
-    }
-  }
-`;
 export default EiterSlick;
