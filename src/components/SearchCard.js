@@ -24,6 +24,7 @@ const SearchCard = ({
   completed,
   likeCnt,
   commentCnt,
+  userId,
 }) => {
   const onClickContent = useCallback(() => {
     if (type === "찬반") {
@@ -33,9 +34,16 @@ const SearchCard = ({
     history.push(`/multi/${id}`);
   }, [id, type]);
 
+  const onClickNick = useCallback(() => {
+    if (userId) {
+      history.push(`/profile/${userId}`);
+      window.scroll(0, 0);
+    }
+  });
+
   return (
-    <Container onClick={onClickContent}>
-      <Subjects>
+    <Container>
+      <Subjects onClick={onClickContent}>
         <Type type={type}>{type}</Type>
         <span className="subjectContent">{title}</span>
         <Completed completed={completed}>
@@ -44,7 +52,12 @@ const SearchCard = ({
       </Subjects>
       <Contents>
         <div>
-          <span style={{ fontWeight: "bold" }}>{user}</span>
+          <span
+            style={{ fontWeight: "bold", cursor: "pointer" }}
+            onClick={onClickNick}
+          >
+            {user}
+          </span>
           <span
             style={{ color: gray5, margin: "0 30px", fontWeight: "normal" }}
           >
@@ -76,8 +89,8 @@ const Container = styled.div`
   border: 1px solid ${blue};
   border-radius: 5px;
   margin: 10px auto;
-  cursor: pointer;
   box-sizing: border-box;
+  user-select: none;
 `;
 
 const Subjects = styled.div`
@@ -88,6 +101,8 @@ const Subjects = styled.div`
   height: 39px;
   margin: 18px 20px;
   box-sizing: border-box;
+  cursor: pointer;
+
   div {
     display: flex;
     flex-direction: row;

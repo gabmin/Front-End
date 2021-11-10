@@ -123,7 +123,7 @@ const Profile = props => {
                 type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
                 id={v.multiId || v.eitherId}
                 title={v.title}
-                user={userNick}
+                user={profileNick}
                 date={v.date}
                 editedDate={v.editedDate}
                 completed={v.completed}
@@ -137,7 +137,8 @@ const Profile = props => {
                 type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
                 id={v.multiId || v.eitherId}
                 title={v.title}
-                user={userNick}
+                user={v.nickname}
+                userId={v.user}
                 date={v.date}
                 editedDate={v.editedDate}
                 completed={v.completed}
