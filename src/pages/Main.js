@@ -4,8 +4,9 @@ import styled from "styled-components";
 
 import MainSlick from "../components/MainSlick";
 import { getMainData } from "../redux/actions/main";
-import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
 import { history } from "../redux/configureStore";
+
+import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
 
 const Main = () => {
