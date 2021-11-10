@@ -311,6 +311,7 @@ const Description = styled.p`
   font-size: 16px;
   color: ${colors.gray5};
   word-break: break-all;
+  white-space: pre-wrap;
 `;
 
 const InfoWarpper = styled.div`

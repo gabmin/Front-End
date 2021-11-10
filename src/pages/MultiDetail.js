@@ -45,6 +45,17 @@ const MultiDetail = props => {
     dispatch(SetParams(multiId));
   }, [dispatch, multiId]);
 
+  const goToMulti = () => {
+    history.push({
+      pathname: "/multi",
+      state: { multiId: multiId },
+    });
+  };
+
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const deletePost = () => {
     if (TotalCnt === 0) {
       dispatch(DeletePostDB(multiId));
@@ -52,13 +63,6 @@ const MultiDetail = props => {
       window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
       return;
     }
-  };
-
-  const goToMulti = () => {
-    history.push({
-      pathname: "/multi",
-      state: { multiId: multiId },
-    });
   };
 
   const closePost = () => {
@@ -86,7 +90,12 @@ const MultiDetail = props => {
     window.alert("로그인 후 이용가능합니다");
     history.push("/login");
   } else if (dataList && dataList.multi.completed === 1) {
-    return <CompletedDetail multiId={multiId} />;
+    return (
+      <div>
+        <CompletedDetail multiId={multiId} />{" "}
+        <TopBtn onClick={goToTop}>TOP</TopBtn>
+      </div>
+    );
   } else if (
     dataList &&
     (userInfo.nickname === dataList.multi.nickname ||
@@ -165,7 +174,7 @@ const MultiDetail = props => {
             <MultiComment multiId={multiId} />
           </div>
         </Wrapper>
-        <button>TOP</button>
+        <TopBtn onClick={goToTop}>TOP</TopBtn>
       </Container>
     );
   } else {
@@ -189,7 +198,7 @@ const MultiDetail = props => {
             </div>
           )}
         </Wrapper>
-        <button>TOP</button>
+        <TopBtn onClick={goToTop}>TOP</TopBtn>
       </Container>
     );
   }
@@ -238,6 +247,14 @@ const MenuWarpper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+`;
+
+const TopBtn = styled.button`
+  display: block;
+  margin: 0 10% 20px auto;
+  border: none;
+  background-color: ${colors.white};
+  color: ${colors.blue};
 `;
 
 export default MultiDetail;

@@ -52,7 +52,6 @@ const CompletedDetail = props => {
             <MultiComment multiId={multiId} />
           </div>
         </Wrapper>
-        <button>TOP</button>
       </Container>
     </>
   );

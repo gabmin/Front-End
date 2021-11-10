@@ -6,6 +6,7 @@ import { history } from "../redux/configureStore";
 import { useDispatch } from "react-redux";
 import { AddPostDB, EditPostDB } from "../redux/actions/multiCard";
 import { SetParams } from "../redux/reducers/paramsSlice";
+import colors from "../shared/colors";
 
 const MultiWrite = props => {
   const editData = props.editData;
@@ -138,22 +139,22 @@ const MultiWrite = props => {
   // post 수정하기
   const eidtPost = () => {
     if (title === "") {
-      window.alert("no title");
+      window.alert("제목을 입력해주세요");
       return setTimeout(() => {
         titleRef.current.focus();
       }, 500);
     } else if (description === "") {
-      window.alert("no description");
+      window.alert("내용을 입력해주세요");
       return setTimeout(() => {
         descriptionRef.current.focus();
       }, 500);
     } else if (contentA === "") {
-      window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      window.alert("첫번쨰 선택지를 빈칸없이 차례대로 입력해 주세요");
       return setTimeout(() => {
         contentARef.current.focus();
       }, 500);
     } else if (contentB === "") {
-      window.alert("선택지를 빈칸없이 차례대로 입력해 주세요");
+      window.alert("두번쨰 선택지를 빈칸없이 차례대로 입력해 주세요");
       return setTimeout(() => {
         contentBRef.current.focus();
       }, 500);
@@ -316,116 +317,159 @@ const MultiWrite = props => {
 
   return (
     <>
-      <hr />
-      <Title>
-        <h4 style={{ width: "30px" }}>제목</h4>
-        <Input
-          ref={titleRef}
-          type="text"
-          placeholder="질문을 입력해주세요."
-          onChange={changeTitle}
-          value={title}
-        />
-      </Title>
-      <hr />
-      <Content>
-        <h4 style={{ width: "30px" }}>내용</h4>
-        <Textarea
-          ref={descriptionRef}
-          type="text"
-          placeholder="선택지 추가를 눌러 선택지 개수를 늘려보세요. 최대 5개까지 추가할 수 있습니다."
-          rows="10"
-          onChange={changeDescription}
-          value={description}
-        />
-      </Content>
-      <hr />
-      <VoteBox>
+      <WriteHr />
+      <TitleWarpper>
+        <InfoWarpper>
+          <InfoText>제목</InfoText>
+        </InfoWarpper>
         <InputWarpper>
+          <Input
+            ref={titleRef}
+            type="text"
+            placeholder="질문을 입력해주세요."
+            onChange={changeTitle}
+            value={title}
+          />
+        </InputWarpper>
+      </TitleWarpper>
+      <WriteHr />
+      <ContentWarpper>
+        <InfoWarpper>
+          <InfoText>내용</InfoText>
+        </InfoWarpper>
+        <InputWarpper>
+          <Textarea
+            ref={descriptionRef}
+            type="text"
+            placeholder="선택지 추가를 눌러 선택지 개수를 늘려보세요. 최대 5개까지 추가할 수 있습니다."
+            rows="10"
+            onChange={changeDescription}
+            value={description}
+          />
+        </InputWarpper>
+      </ContentWarpper>
+      <VoteBox>
+        <PollWarpper>
           <InputPoll
             ref={contentARef}
             onChange={changeContentA}
             value={contentA}
           />
-        </InputWarpper>
-        <InputWarpper>
+        </PollWarpper>
+        <PollWarpper>
           <InputPoll
             ref={contentBRef}
             onChange={changeContentB}
             value={contentB}
           />
-          {hiddenBtnB ? <FullBtn onClick={showInputC}>+ </FullBtn> : null}
-        </InputWarpper>
+          {hiddenBtnB ? (
+            <FullBtn onClick={showInputC}>+ 선택지 추가</FullBtn>
+          ) : null}
+        </PollWarpper>
         {hiddenInputC ? (
-          <InputWarpper>
+          <PollWarpper>
             <InputPoll
               ref={contentCRef}
               onChange={changeContentC}
               value={contentC}
             />
             <BtnWarpper>
-              {hiddenBtnC ? <HalfBtn onClick={hideInputC}>-</HalfBtn> : null}
-              {hiddenBtnC ? <HalfBtn onClick={showInputD}>+ </HalfBtn> : null}
+              {hiddenBtnC ? (
+                <HalfBtn onClick={hideInputC}>- 선택지 삭제</HalfBtn>
+              ) : null}
+              {hiddenBtnC ? (
+                <HalfBtn onClick={showInputD}>+ 선택지 추가</HalfBtn>
+              ) : null}
             </BtnWarpper>
-          </InputWarpper>
+          </PollWarpper>
         ) : null}
         {hiddenInputD ? (
-          <InputWarpper>
+          <PollWarpper>
             <InputPoll
               ref={contentDRef}
               onChange={changeContentD}
               value={contentD}
             />
             <BtnWarpper>
-              {hiddenBtnD ? <HalfBtn onClick={hideInputD}>-</HalfBtn> : null}
-              {hiddenBtnD ? <HalfBtn onClick={showInputE}>+ </HalfBtn> : null}
+              {hiddenBtnD ? (
+                <HalfBtn onClick={hideInputD}>- 선택지 삭제</HalfBtn>
+              ) : null}
+              {hiddenBtnD ? (
+                <HalfBtn onClick={showInputE}>+ 선택지 추가</HalfBtn>
+              ) : null}
             </BtnWarpper>
-          </InputWarpper>
+          </PollWarpper>
         ) : null}
         {hiddenInputE ? (
-          <InputWarpper>
+          <PollWarpper>
             <InputPoll
               ref={contentERef}
               onChange={changeContentE}
               value={contentE}
             />
-            <FullBtn onClick={hideInputE}>-</FullBtn>
-          </InputWarpper>
+            <FullBtn onClick={hideInputE}>- 선택지 삭제</FullBtn>
+          </PollWarpper>
         ) : null}
-        <div>
-          <button onClick={cancel}>취소</button>
+        <WriteHr />
+        <EventBtnWarpper>
+          <CancelBtn onClick={cancel}>취소</CancelBtn>
           {isEdit ? (
-            <button onClick={eidtPost}>수정완료</button>
+            <AddBtn onClick={eidtPost}>수정완료</AddBtn>
           ) : (
-            <button onClick={addPost}>완료</button>
+            <AddBtn onClick={addPost}>완료</AddBtn>
           )}
-        </div>
+        </EventBtnWarpper>
       </VoteBox>
     </>
   );
 };
 
-const Title = styled.div`
-  margin: 10px;
+const WriteHr = styled.hr`
+  border: none;
+  height: 1px;
+  background-color: ${colors.lineGray};
+`;
+
+const TitleWarpper = styled.div`
+  height: 66px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const InfoWarpper = styled.div`
+  width: 110px;
+`;
+
+const InfoText = styled.p`
+  width: 100%;
+  left: 0px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
+  color: ${colors.darkGray};
+`;
+
+const ContentWarpper = styled.div`
   display: flex;
 `;
 
-const Content = styled.div`
-  margin: 10px;
-  display: flex;
+const InputWarpper = styled.div`
+  width: 510px;
 `;
 
 const Input = styled.input`
   width: 100%;
-  margin: 15px 0px 15px 30px;
   border: none;
   outline: none;
   font-size: 18px;
 `;
 
 const Textarea = styled.textarea`
-  width: 100%;
-  margin: 15px 0px 15px 30px;
+  min-width: 100%;
+  max-width: 510px;
+  /* max-width: 100%; */
+  margin: 16px 0;
   border: none;
   outline: none;
   font-size: 18px;
@@ -433,12 +477,14 @@ const Textarea = styled.textarea`
 `;
 
 const VoteBox = styled.div`
-  width: 100%;
-  height: 500px;
+  margin: auto;
+  min-width: 100%;
+  max-width: 620px;
+  /* height: 500px; */
 `;
 
-const InputWarpper = styled.div`
-  width: 70%;
+const PollWarpper = styled.div`
+  max-width: 620px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -447,27 +493,71 @@ const InputWarpper = styled.div`
 
 const InputPoll = styled.input`
   width: 100%;
-  height: 50px;
-  margin: 5px auto;
+  height: 48px;
+  margin: 4px auto;
   padding: 10px;
-  background-color: #999999;
+  background-color: ${colors.gray};
+  border: 1px ${colors.gray5} solid;
+  border-radius: 8px;
   box-sizing: border-box;
 `;
 
 const BtnWarpper = styled.div`
   width: 100%;
   margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const FullBtn = styled.button`
-  width: 100%;
+  min-width: 100%;
+  max-width: 510px;
+  height: 48px;
   padding: 10px;
-  margin: auto;
+  margin: 8px auto 16px auto;
+  color: ${colors.blue};
+  background-color: ${colors.white};
+  border: 1px ${colors.blue} solid;
+  border-radius: 8px;
 `;
 
 const HalfBtn = styled.button`
-  width: 50%;
+  /* min-width: 0%; */
+  width: 290px;
+  height: 48px;
+  margin: 8px 0;
   padding: 10px;
+  color: ${colors.blue};
+  background-color: ${colors.white};
+  border: 1px ${colors.blue} solid;
+  border-radius: 8px;
+`;
+
+const EventBtnWarpper = styled.div`
+  width: 100%;
+  margin: 24px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const AddBtn = styled.button`
+  width: 290px;
+  height: 40px;
+  color: ${colors.white};
+  border: 1px ${colors.red} solid;
+  border-radius: 8px;
+  background-color: ${colors.red};
+`;
+
+const CancelBtn = styled.button`
+  width: 290px;
+  height: 40px;
+  color: ${colors.red};
+  border: 1px ${colors.red} solid;
+  border-radius: 8px;
+  background-color: ${colors.white};
 `;
 
 export default MultiWrite;
