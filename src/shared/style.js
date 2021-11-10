@@ -4,5 +4,6 @@ const tablet = "1300px";
 const mobile = "768px";
 const gray5 = "#868E96";
 const grayMultiply = "#F8F8F8";
+const darkGray = "#101214";
 
-export { blue, red, tablet, mobile, gray5, grayMultiply };
+export { blue, red, tablet, mobile, gray5, grayMultiply, darkGray };
