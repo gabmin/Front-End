@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import { FiArrowLeft } from "react-icons/fi";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
+import MaterialIcon from "material-icons-react";
 
 import colors from "../shared/colors";
 import MultiComment from "../components/MultiComment";
@@ -79,28 +83,71 @@ const MultiDetail = props => {
   ) {
     return (
       <Container>
-        <BackBtn onClick={goToMulti}>
-          <FiArrowLeft />
-          뒤로가기
-        </BackBtn>
         <Wrapper>
+          <MenuWarpper>
+            <BackBtn onClick={goToMulti}>
+              <FiArrowLeft />
+            </BackBtn>
+
+            {userInfo.nickname === dataList.multi.nickname ? (
+              // <div>
+              //   {/* <div>투표가 종료되었습니다</div> */}
+              //   <div>
+              //     <button onClick={deletePost}>삭제하기</button>
+              //     {dataList.multi.completed !== 1 ? (
+              //       <div>
+              //         <button onClick={editPost}>수정하기</button>
+              //         <button onClick={closePost}>종료하기</button>
+              //       </div>
+              //     ) : null}
+              //   </div>
+              // </div>
+              <MenuBar>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                      }}
+                    >
+                      <MaterialIcon icon="more_horiz" size={32} />
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                  portal={true}
+                >
+                  <MenuItem
+                    styles={{
+                      fontSize: "14px",
+                    }}
+                    onClick={editPost}
+                  >
+                    수정하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "14px",
+                    }}
+                    onClick={deletePost}
+                  >
+                    삭제하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "14px",
+                    }}
+                    onClick={closePost}
+                  >
+                    투표 종료하기
+                  </MenuItem>
+                </Menu>
+              </MenuBar>
+            ) : null}
+          </MenuWarpper>
           <div>
             <MultiVoted multiId={multiId} dataList={dataList} />
           </div>
-          {userInfo.nickname === dataList.multi.nickname ? (
-            <div>
-              {/* <div>투표가 종료되었습니다</div> */}
-              <div>
-                <button onClick={deletePost}>삭제하기</button>
-                {dataList.multi.completed !== 1 ? (
-                  <div>
-                    <button onClick={editPost}>수정하기</button>
-                    <button onClick={closePost}>종료하기</button>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          ) : null}
 
           <div>
             <MultiComment multiId={multiId} />
@@ -111,11 +158,10 @@ const MultiDetail = props => {
   } else {
     return (
       <Container>
-        <BackBtn onClick={goToMulti}>
-          <FiArrowLeft />
-          뒤로가기
-        </BackBtn>
         <Wrapper>
+          <BackBtn onClick={goToMulti}>
+            <FiArrowLeft />
+          </BackBtn>
           {dataList && (
             <MultiUnvoted
               multiId={multiId}
@@ -137,22 +183,37 @@ const MultiDetail = props => {
 };
 
 const Container = styled.div`
+  min-width: 100%;
   max-width: 1100px;
-  margin: auto;
+  margin: 10px auto 50px auto;
 `;
 
 const BackBtn = styled.button`
-  margin: 20px auto 0 0;
+  margin: 10px auto 0 10px;
   border: none;
+  font-size: 24px;
   color: ${colors.gray5};
   background-color: ${colors.white};
 `;
 
 const Wrapper = styled.div`
-  width: 840px;
+  /* min-width: 80%; */
+  max-width: 840px;
   margin: auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
+`;
+
+const MenuBar = styled.div`
+  margin: 10px 10px 0 auto;
+`;
+
+const MenuWarpper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default MultiDetail;

@@ -60,7 +60,7 @@ const MultiUnvoted = props => {
 };
 
 const Container = styled.div`
-  width: 620px;
+  max-width: 620px;
   margin: auto;
   padding: 20px;
   display: flex;
@@ -68,7 +68,7 @@ const Container = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  width: 612px;
+  max-width: 612px;
   margin: auto;
   text-align: center;
   font-size: 20px;
@@ -88,6 +88,9 @@ const Date = styled.p`
 const TitleHr = styled.hr`
   margin: 34px auto 34px auto;
   width: 103px;
+  height: 1px;
+  border: none;
+  background-color: ${colors.gray5};
 `;
 
 const DesWrapper = styled.div`
@@ -154,7 +157,8 @@ const TotalLike = styled.p`
 
 const CommentHr = styled.hr`
   border: none;
-  width: 620px;
+  min-width: 100%;
+  max-width: 620px;
   height: 1px;
   background-color: ${colors.lineGray};
 `;
