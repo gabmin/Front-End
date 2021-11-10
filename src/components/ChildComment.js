@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
@@ -31,7 +31,8 @@ const ChildComment = props => {
   const dispatch = useDispatch();
   const multiId = props.multiId;
   const userInfo = useSelector(state => state.user.userInfo);
-  // const childComments = useSelector(state => state.childComment.ChildCommentDB);
+  const dataList = useSelector(state => state.multiDetail.multiDetail);
+
   const [addInput, setAddInput] = useState(false);
   const [addBtn, setAddBtn] = useState(true);
   const [cancelBtn, setCancelBtn] = useState(false);
@@ -42,6 +43,18 @@ const ChildComment = props => {
   const [likes, setLikes] = useState(commentLikeCnt);
 
   console.log("childComment", comment);
+
+  useEffect(() => {
+    if (dataList.multi.completed === 1) {
+      setAddInput(false);
+      setAddInput(false);
+      setAddBtn(false);
+      setCancelBtn(false);
+      setEditBtn(false);
+      setEditCancelBtn(false);
+      setDelBtn(false);
+    }
+  }, []);
 
   const showInput = () => {
     if (addInput === false) {

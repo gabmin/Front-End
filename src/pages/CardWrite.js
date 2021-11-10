@@ -57,7 +57,7 @@ const CardWrite = () => {
                   type="radio"
                   id="either"
                   checked={eitherState}
-                  onChange={EitherRadioBtn}
+                  // onChange={EitherRadioBtn}
                 />
                 <label>찬반</label>
               </RadioBtnWarpperE>
@@ -86,14 +86,16 @@ const Wrap = styled.div`
   max-width: 840px;
   margin: auto;
 `;
+
 const ContentBox = styled.div`
   border: 2px solid #00397c;
   max-width: 840px;
   box-sizing: border-box;
-  margin: 56px auto 50px auto;
+  margin: 56px auto 56px auto;
   border-radius: 10px;
-  padding: 3% 110px 4% 110px;
+  padding: 4% 110px 4% 110px;
 `;
+
 const Index = styled.div`
   display: flex;
   p {
@@ -105,6 +107,7 @@ const Index = styled.div`
   }
   margin: 0px 0px 22px 0px;
 `;
+
 const RadioBtnWarpperE = styled.div`
   display: flex;
   margin: 0px 0px 0px 76px;
@@ -113,6 +116,7 @@ const RadioBtnWarpperE = styled.div`
     font-size: 16px;
   }
 `;
+
 const RadioBtnWarpperM = styled.div`
   display: flex;
   margin: 0px 0px 0px 47px;
