@@ -92,7 +92,7 @@ const ContentBox = styled.div`
   box-sizing: border-box;
   margin: 56px auto 50px auto;
   border-radius: 10px;
-  padding: 3% 8% 4% 8%;
+  padding: 3% 110px 4% 110px;
 `;
 const Index = styled.div`
   display: flex;
