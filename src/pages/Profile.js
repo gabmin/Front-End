@@ -5,6 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchCard from "../components/SearchCard";
 import { getMyPolls, getMyPosts } from "../redux/actions/profile";
 import { getProfileNick, updateNick } from "../redux/actions/user";
+import { FiEdit3 } from "react-icons/fi";
+
+import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+  darkGray,
+} from "../shared/style";
 
 const Profile = props => {
   const userId = props.match.params.user_id;
@@ -51,10 +63,9 @@ const Profile = props => {
 
   return (
     <>
-      <div>프로필 페이지 유저 아이디 : {userId}</div>
       <MyInfo>
-        <Icon />
-        <div>
+        <CommonIcon />
+        <div className="nicknameWrapper">
           {nicknameClick ? (
             <input
               onChange={onChangeNick}
@@ -69,13 +80,22 @@ const Profile = props => {
                 </Nickname>
               }
               {Number(userId) === myId && (
-                <button onClick={onClickNickname}>수정</button>
+                <FiEdit3
+                  size={24}
+                  stroke={red}
+                  onClick={onClickNickname}
+                  style={{
+                    cursor: "pointer",
+                    top: "3px",
+                    position: "absolute",
+                  }}
+                >
+                  수정
+                </FiEdit3>
               )}
             </>
           )}
         </div>
-      </MyInfo>
-      <PostsContainer>
         <PostBtns>
           <MyPostsBtn
             clicked={clicked}
@@ -94,6 +114,8 @@ const Profile = props => {
             참여한 글
           </MyPollsBtn>
         </PostBtns>
+      </MyInfo>
+      <PostsContainer>
         {clicked === "posts"
           ? myPosts.map((v, i) => (
               <SearchCard
@@ -101,11 +123,12 @@ const Profile = props => {
                 type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
                 id={v.multiId || v.eitherId}
                 title={v.title}
-                user={v.user}
+                user={userNick}
                 date={v.date}
                 editedDate={v.editedDate}
                 completed={v.completed}
                 likeCnt={v.likeCnt}
+                commentCnt={v.commentCnt}
               />
             ))
           : myPolls.map((v, i) => (
@@ -114,11 +137,12 @@ const Profile = props => {
                 type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
                 id={v.multiId || v.eitherId}
                 title={v.title}
-                user={v.user}
+                user={userNick}
                 date={v.date}
                 editedDate={v.editedDate}
                 completed={v.completed}
                 likeCnt={v.likeCnt}
+                commentCnt={v.commentCnt}
               />
             ))}
       </PostsContainer>
@@ -132,56 +156,69 @@ const MyInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1000px;
-  height: 300px;
-  background-color: lightgray;
+  max-width: 840px;
+  width: 100vw;
+  height: 288px;
   margin: auto;
-  padding: 50px 100px;
+  user-select: none;
 
   button {
     position: absolute;
     bottom: 8.5em;
   }
-`;
 
-const Icon = styled.div`
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background-color: gray;
-  margin: 0 0 15px;
+  .nicknameWrapper {
+    position: relative;
+    top: 32px;
+    height: 32px;
+  }
+
+  input {
+    height: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+  }
 `;
 
 const Nickname = styled.span`
-  font-size: 1.5em;
-  margin: 0 1em;
+  font-size: 24px;
+  margin: 0 16px;
 `;
 
 const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1000px;
-  min-height: 1200px;
-  border: 1px solid lightgray;
+  width: 100%;
+  min-height: 600px;
+  background-color: ${grayMultiply};
   margin: auto;
-  padding: 50px 100px;
+  padding: 54px 0;
 `;
 
 const PostBtns = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
+  position: relative;
+  bottom: -50px;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const MyPostsBtn = styled.span`
-  margin: 0 1em;
   cursor: pointer;
-  background-color: ${props => props.clicked === "posts" && "skyblue"};
+  padding: 14px;
+  border-bottom: ${props =>
+    props.clicked === "posts" ? `3px solid ${blue}` : `3px solid white`};
+  color: ${props => (props.clicked === "posts" ? blue : gray5)};
 `;
 
 const MyPollsBtn = styled.span`
-  margin: 0 1em;
   cursor: pointer;
-  background-color: ${props => props.clicked === "polls" && "skyblue"};
+  padding: 14px;
+  border-bottom: ${props =>
+    props.clicked === "polls" ? `3px solid ${blue}` : `3px solid white`};
+  color: ${props => (props.clicked === "polls" ? blue : gray5)};
 `;
 
 export default Profile;

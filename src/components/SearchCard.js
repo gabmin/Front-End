@@ -1,6 +1,18 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+
 import { history } from "../redux/configureStore";
+
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+  darkGray,
+} from "../shared/style";
 
 const SearchCard = ({
   type,
@@ -11,6 +23,7 @@ const SearchCard = ({
   editedDate,
   completed,
   likeCnt,
+  commentCnt,
 }) => {
   const onClickContent = useCallback(() => {
     if (type === "찬반") {
@@ -23,16 +36,32 @@ const SearchCard = ({
   return (
     <Container onClick={onClickContent}>
       <Subjects>
-        <div>
-          <Type>{type}</Type>
-          {title}
-        </div>
-        {completed ? "종료됨" : "진행중"}
+        <Type type={type}>{type}</Type>
+        <span className="subjectContent">{title}</span>
+        <Completed completed={completed}>
+          {completed ? "종료됨" : "진행중"}
+        </Completed>
       </Subjects>
       <Contents>
-        <span>{user}</span>
-        <span>{date}</span>
-        <span>{likeCnt}</span>
+        <div>
+          <span style={{ fontWeight: "bold" }}>{user}</span>
+          <span
+            style={{ color: gray5, margin: "0 30px", fontWeight: "normal" }}
+          >
+            {date.substring(0, 16)}
+          </span>
+        </div>
+        <div style={{ position: "relative", right: "-85px" }}>
+          {type === "객관식" && (
+            <FiMessageSquare
+              stroke={blue}
+              style={{ position: "relative", top: "1px" }}
+            />
+          )}
+          <span style={{ color: blue }}>{type === "객관식" && commentCnt}</span>
+          <FiThumbsUp stroke={red} style={{ marginLeft: "10px" }} />
+          <span style={{ color: red }}> {likeCnt}</span>
+        </div>
       </Contents>
     </Container>
   );
@@ -41,40 +70,61 @@ const SearchCard = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100px;
-  border: 1px solid lightgray;
-  margin: 10px 0;
+  max-width: 840px;
+  width: 90%;
+  height: 112px;
+  border: 1px solid ${blue};
+  border-radius: 5px;
+  margin: 10px auto;
   cursor: pointer;
+  box-sizing: border-box;
 `;
 
 const Subjects = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 1em 2em;
+  width: 95%;
+  height: 39px;
+  margin: 18px 20px;
+  box-sizing: border-box;
   div {
     display: flex;
     flex-direction: row;
   }
+
+  .subjectContent {
+    width: 619px;
+    color: ${blue};
+    font-weight: bold;
+  }
+`;
+const Completed = styled.span`
+  color: ${props => (props.completed ? gray5 : red)};
+  font-weight: bold;
 `;
 
 const Type = styled.div`
   display: flex;
   justify-content: center;
-  width: 3em;
-  margin: 0 10px;
+  width: 50px;
+  height: 20px;
   padding: 0 5px;
-  font-weight: 100;
-  background-color: lightgray;
-  color: black;
-  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: ${props => (props.type === "찬반" ? "white" : blue)};
+  color: ${props => (props.type === "찬반" ? blue : "white")};
+  border: 1px solid ${blue};
+  border-radius: 5px;
+  box-sizing: border-box;
 `;
 
 const Contents = styled.div`
   display: flex;
+  width: 619px;
+  margin: 0 auto 14px;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 export default SearchCard;
