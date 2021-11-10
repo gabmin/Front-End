@@ -57,88 +57,140 @@ const EitherWrite = props => {
     history.goBack();
   };
   return (
-    <>
+    <Container>
       <hr />
       <Title>
-        <h4 style={{ width: "30px" }}>제목</h4>
+        <p>제목</p>
         <Input
           type="text"
-          placeholder="질문을 입력해주세요."
+          placeholder="질문을 입력해주세요. (40자 이내)"
           value={title}
           onChange={onChangeTitle}
         />
       </Title>
       <hr />
-      <VoteBox>
-        <EitherButtonGrid>
-          <EitherButton>
-            <h1 style={{ marginTop: "70px" }}>O</h1>
-            <ButtonInput
-              placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
-              value={contentA}
-              onChange={onChangeContentA}
-            />
-          </EitherButton>
-          <EitherButton>
-            <h1 style={{ marginTop: "70px" }}>X</h1>
-            <ButtonInput
-              placeholder="해당 항목의 상세설명이 필요하면 적어주세요"
-              value={contentB}
-              onChange={onChangeContentB}
-            />
-          </EitherButton>
-        </EitherButtonGrid>
-        <div>
-          <button onClick={onClickCancle}>취소</button>
-          <button onClick={onClickSave}>완료</button>
-        </div>
-      </VoteBox>
-    </>
+      <EitherButtonGrid>
+        <EitherButtonA>
+          <ButtonInput
+            placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
+            value={contentA}
+            onChange={onChangeContentA}
+          />
+        </EitherButtonA>
+        <EitherButtonB>
+          <ButtonInput
+            placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
+            value={contentB}
+            onChange={onChangeContentB}
+          />
+        </EitherButtonB>
+      </EitherButtonGrid>
+      <hr />
+      <OptionButtonGrid>
+        <CancleButton onClick={onClickCancle}>취소</CancleButton>
+        <CheckButton onClick={onClickSave}>완료</CheckButton>
+      </OptionButtonGrid>
+    </Container>
   );
 };
-
-const Title = styled.div`
-  margin: 10px;
-  display: flex;
-`;
-
-const Input = styled.input`
+const Container = styled.div`
   width: 100%;
-  margin: 15px 0px 15px 30px;
+  height: 100%;
+  hr {
+    margin: 0px;
+    border-color: #eeeeee;
+  }
+`;
+const Title = styled.div`
+  display: flex;
+  p {
+    width: 34px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 26px;
+    color: #101214;
+    margin: 0px;
+    margin: 22px 76px 28px 0px;
+  }
+`;
+const Input = styled.input`
+  width: 80%;
   border: none;
   outline: none;
-  font-size: 18px;
+  line-height: 22px;
+  font-size: 16px;
+  font-weight: 300;
 `;
-
-const VoteBox = styled.div`
-  width: 100%;
-  height: 400px;
-`;
-
 const EitherButtonGrid = styled.div`
   width: 100%;
-  height: 90%;
+  height: 320px;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
-const EitherButton = styled.div`
-  width: 40%;
-  height: 60%;
-  border: 1px solid black;
-  text-align: center;
-  align-content: center;
-  z-index: 10;
+const EitherButtonA = styled.div`
+  width: 310.5px;
+  height: 232px;
+  border: 1px solid #868e96;
+  margin: 24px 0px 24px 0px;
+  border-radius: 10px 0px 0px 10px;
+  padding: 24px 24px 0px 24px;
 `;
-
-const ButtonInput = styled.input`
+const EitherButtonB = styled.div`
+  width: 310.5px;
+  height: 232px;
+  border: 1px solid #868e96;
+  margin: 24px 0px 24px 0px;
+  border-radius: 0px 10px 10px 0px;
+  padding: 24px 24px 0px 24px;
+`;
+const ButtonInput = styled.textarea`
   border: none;
   outline: none;
-  width: 80%;
+  width: 100%;
+  height: 100%;
   font-size: 16px;
   text-align: center;
+  resize: none;
+  box-sizing: border-box;
+  padding: 3px;
 `;
-
+const OptionButtonGrid = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+const CancleButton = styled.button`
+  width: 290px;
+  height: 40px;
+  border: 1px solid #e25b45;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #e25b45;
+  font-size: 16px;
+  line-height: 23px;
+  margin-top: 24px;
+  cursor: pointer;
+  &:hover {
+    background-color: #e25b45;
+    color: #ffffff;
+  }
+`;
+const CheckButton = styled.button`
+  width: 290px;
+  height: 40px;
+  border: 1px solid #e25b45;
+  border-radius: 8px;
+  background-color: #e25b45;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 23px;
+  margin-top: 24px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffffff;
+    color: #e25b45;
+  }
+`;
 export default EitherWrite;
