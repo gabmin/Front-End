@@ -66,7 +66,7 @@ const EitherCompleteCard = props => {
 
   //좋아요
   const onClickLike = () => {
-    if (liked !== null) {
+    if (liked !== null || userInfo.nickname === "GUEST") {
       return;
     } else {
       dispatch(likePostDB(eitherId));
