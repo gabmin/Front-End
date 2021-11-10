@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
@@ -33,6 +33,18 @@ const Comment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(commentLikeCnt);
+
+  useEffect(() => {
+    if (dataList.multi.completed === 1) {
+      setAddInput(false);
+      setAddInput(false);
+      setAddBtn(false);
+      setCancelBtn(false);
+      setEditBtn(false);
+      setEditCancelBtn(false);
+      setDelBtn(false);
+    }
+  }, []);
 
   const showInput = () => {
     if (addInput === false) {

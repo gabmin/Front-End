@@ -15,6 +15,7 @@ import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import styled from "styled-components";
 import { SetParams } from "../redux/reducers/paramsSlice";
+import CompletedDetail from "../components/CompletedDetail";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
@@ -76,6 +77,8 @@ const MultiDetail = props => {
   if (userInfo.nickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
     history.push("/login");
+  } else if (dataList && dataList.multi.completed === 1) {
+    return <CompletedDetail multiId={multiId} />;
   } else if (
     dataList &&
     (userInfo.nickname === dataList.multi.nickname ||
@@ -83,6 +86,7 @@ const MultiDetail = props => {
   ) {
     return (
       <Container>
+        {/* {dataList.multi.completed === 0 ? <Temp>aaaaa</Temp> : null} */}
         <Wrapper>
           <MenuWarpper>
             <BackBtn onClick={goToMulti}>
@@ -153,6 +157,7 @@ const MultiDetail = props => {
             <MultiComment multiId={multiId} />
           </div>
         </Wrapper>
+        <button>TOP</button>
       </Container>
     );
   } else {
@@ -176,6 +181,7 @@ const MultiDetail = props => {
             </div>
           )}
         </Wrapper>
+        <button>TOP</button>
       </Container>
     );
   }
@@ -185,7 +191,17 @@ const MultiDetail = props => {
 const Container = styled.div`
   min-width: 100%;
   max-width: 1100px;
+  min-height: 100%;
   margin: 10px auto 50px auto;
+`;
+
+const Temp = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.1;
+  z-index: 50;
+  position: absolute;
 `;
 
 const BackBtn = styled.button`

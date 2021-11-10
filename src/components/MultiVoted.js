@@ -236,6 +236,7 @@ const TitleWrapper = styled.div`
 
 const Title = styled.p`
   font-size: 24px;
+  word-break: break-all;
 `;
 
 const TitleHr = styled.hr`
@@ -248,16 +249,17 @@ const TitleHr = styled.hr`
 
 const ProgressWrapper = styled.div`
   width: 620px;
-  margin: auto;
 `;
 
 const SelectContent = styled.p`
   font-size: 16px;
   color: ${colors.blue};
+  margin: 16px auto 0 auto;
+  word-break: break-all;
 `;
 
 const Progress = styled.div`
-  margin: 24px 0 0 0;
+  margin: 9px 0 0 0;
   border: 1px ${colors.blue} solid;
   border-radius: 8px;
   min-width: 100%;
@@ -272,7 +274,7 @@ const HighLight = styled.div`
   transition: 1s;
   width: ${props => props.width};
   height: 32px;
-  border-radius: 8px 0 0 8px;
+  border-radius: 8px;
 `;
 
 const VotedHighLight = styled.div`
@@ -281,7 +283,7 @@ const VotedHighLight = styled.div`
   transition: 1s;
   width: ${props => props.width};
   height: 32px;
-  border-radius: 7px 0 0 7px;
+  border-radius: 7px;
 `;
 
 const UnVotedLabel = styled.div`
@@ -308,6 +310,7 @@ const DesWrapper = styled.div`
 const Description = styled.p`
   font-size: 16px;
   color: ${colors.gray5};
+  word-break: break-all;
 `;
 
 const InfoWarpper = styled.div`
