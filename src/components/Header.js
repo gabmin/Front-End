@@ -2,10 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
+import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { loginCheck, logout } from "../redux/actions/user";
+
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
@@ -78,9 +80,11 @@ const Header = () => {
         />
       </Top>
       <Bottom>
-        <Wrapper>
+        <MenuWrapper>
           <StyledSymbol onClick={onClickSimbol} />
-        </Wrapper>
+          <span onClick={onClickEither}>찬반</span>
+          <span onClick={onClickMulti}>객관식</span>
+        </MenuWrapper>
         <Wrapper>
           <StyledSearch onClick={submitSearch} />
           <input
@@ -91,9 +95,7 @@ const Header = () => {
           />
         </Wrapper>
         {loginCheckDone ? (
-          <Menu loggedIn={nickname !== "GUEST"}>
-            <span onClick={onClickEither}>찬반</span>
-            <span onClick={onClickMulti}>객관식</span>
+          <MenuWrapper loggedIn={nickname !== "GUEST"}>
             {nickname === "GUEST" && (
               <span onClick={onClickLogin} className="loginBtn">
                 로그인
@@ -101,11 +103,13 @@ const Header = () => {
             )}
             {nickname !== "GUEST" && (
               <>
-                <span onClick={onClickNickname}>{nickname}</span>
-                <span onClick={onClickLogout}>로그아웃</span>
+                <Menu menuButton={<span>{nickname}</span>}>
+                  <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
+                  <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+                </Menu>
               </>
             )}
-          </Menu>
+          </MenuWrapper>
         ) : (
           <MenuLoading></MenuLoading>
         )}
@@ -182,7 +186,7 @@ const StyledSymbol = styled(Symbol)`
   height: 37px;
 `;
 
-const Menu = styled.div`
+const MenuWrapper = styled.div`
   position: relative;
   right: ${props => (props.loggedIn ? 0 : "45px")};
   display: flex;
