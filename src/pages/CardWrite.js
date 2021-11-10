@@ -47,9 +47,6 @@ const CardWrite = () => {
   return (
     <>
       <Wrap>
-        <ButtonGrid>
-          <BackBtn onClick={onClickBack}> {"←"}뒤로가기</BackBtn>
-        </ButtonGrid>
         <ContentBox>
           <Index>
             <p>구분</p>
@@ -89,27 +86,12 @@ const Wrap = styled.div`
   height: 760px;
   margin: auto;
 `;
-const ButtonGrid = styled.div`
-  width: 100%;
-  margin: 20px 0px 15px 317px;
-  display: flex;
-`;
-const BackBtn = styled.div`
-  border: none;
-  background-color: transparent;
-  color: #868e96;
-  font-size: 14px;
-  cursor: pointer;
-  &:hover {
-    color: #e25b45;
-  }
-`;
 const ContentBox = styled.div`
   border: 2px solid #00397c;
   width: 840px;
   height: 504px;
   box-sizing: border-box;
-  margin: auto;
+  margin: 56px auto 0px auto;
   border-radius: 10px;
   padding: 64px 109px 64px 110px;
 `;

@@ -6,6 +6,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import MaterialIcon from "material-icons-react";
 import { FiThumbsUp } from "react-icons/fi";
+import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
 import { history } from "../redux/configureStore";
@@ -36,6 +37,7 @@ const EitherCard = props => {
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(likeCnt);
   const [choice, setChoice] = useState(voted);
+  const [likeState, setLikeState] = useState(liked === null ? false : true);
   const [action, setAction] = useState(null);
 
   const {
@@ -105,6 +107,7 @@ const EitherCard = props => {
     } else {
       dispatch(likePostDB(eitherId));
       setLikes(likeCnt + 1);
+      setLikeState(true);
     }
   };
   //content 투표
@@ -269,10 +272,25 @@ const EitherCard = props => {
           <div
             style={{ color: "#E25B45", display: "flex", alignItems: "center" }}
           >
-            <FiThumbsUp
-              onClick={onClickLike}
-              style={{ width: "24", height: "24" }}
-            />
+            {!likeState ? (
+              <FiThumbsUp
+                onClick={onClickLike}
+                style={{
+                  width: "24",
+                  height: "24",
+                  cursor: "pointer",
+                }}
+              />
+            ) : (
+              <HiThumbUp
+                style={{
+                  width: "24",
+                  height: "24",
+                  cursor: "pointer",
+                }}
+              />
+            )}
+
             <div style={{ fontSize: "14px", marginLeft: "14px" }}>{likes}</div>
           </div>
         </EitherFooter>
@@ -288,7 +306,7 @@ const Container = styled.div`
   margin: 100px auto 0px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
-  background-color: white;
+  background-color: #ffffff;
 `;
 const TitleDiv = styled.div`
   width: 482px;
@@ -314,14 +332,15 @@ const EitherProgress = styled.div`
   border-radius: 6px;
   width: 100%;
   height: 32px;
+  z-index: 0;
 `;
 const HightLight = styled.div`
   background-color: #dfdfdf;
   transition: 1s;
   width: ${props => props.width};
-  height: 32px;
+  height: 33px;
   border-radius: ${props =>
-    props.width === "100%" ? "0px 5px 5px 0px" : "5px 0px 0px 5px"};
+    props.width === "100%" ? "5px 5px 5px 5px" : "5px 0px 0px 5px"};
 `;
 const ProgressLabel = styled.div`
   width: 480px;

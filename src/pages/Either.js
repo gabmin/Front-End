@@ -66,7 +66,11 @@ const Either = props => {
           {status === "Post" ? (
             <EitherButton
               onClick={onClickPost}
-              style={{ color: "#00397c", textDecoration: "underline" }}
+              style={{
+                color: "#00397c",
+                textDecoration: "underline",
+                textUnderlinePosition: "under",
+              }}
             >
               전체
             </EitherButton>
@@ -76,7 +80,11 @@ const Either = props => {
           {status === "Posting" ? (
             <EitherButton
               onClick={onClickPosting}
-              style={{ color: "#00397c", textDecoration: "underline" }}
+              style={{
+                color: "#00397c",
+                textDecoration: "underline",
+                textUnderlinePosition: "under",
+              }}
             >
               진행중
             </EitherButton>
@@ -86,7 +94,11 @@ const Either = props => {
           {status === "CompletePost" ? (
             <EitherButton
               onClick={onClickCompletePost}
-              style={{ color: "#00397c", textDecoration: "underline" }}
+              style={{
+                color: "#00397c",
+                textDecoration: "underline",
+                textUnderlinePosition: "under",
+              }}
             >
               종료됨
             </EitherButton>
@@ -112,7 +124,7 @@ const Either = props => {
 };
 const Container = styled.div`
   width: 100%;
-  height: 909px;
+  height: 1000px;
 `;
 const Wrap = styled.div`
   max-width: 100%;
@@ -139,6 +151,7 @@ const EitherButton = styled.button`
   &:hover {
     color: #00397c;
     text-decoration: underline;
+    text-underline-position: under;
   }
 `;
 const SlickLayout = styled.div`

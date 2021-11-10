@@ -163,7 +163,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
 const settings = {
   className: "center",
   centerMode: true,
-  infinite: false,
+  infinite: true,
   // adaptiveHeight: true,
   // focusOnSelect: true,
   slidesToShow: 3,
@@ -171,22 +171,28 @@ const settings = {
   speed: 500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
-  zIndex: 1,
+  centerPadding: "10px",
+  responsive: [
+    { breakpoint: 2000, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+    { breakpoint: 1800, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+  ],
 };
 
 const Wrap = styled.div`
-  display: inline-block;
   width: 100%;
   height: 100%;
+  margin: auto;
 `;
 
 const StyledSlider = styled(Slider)`
-  overflow: hidden;
-  .slick-slide.slick-center div {
-    /* transform: scale(1.1); */
+  /* transform: scale(0.8); */
+  .slick-slide {
+    z-index: 0;
+  }
+  .slick-slide.slick-center {
+    /* transform: scale(1); */
     button:hover {
-      color: #ffffff;
-      background-color: #00397c;
+      background-color: #dfdfdf;
     }
   }
 `;

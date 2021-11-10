@@ -6,6 +6,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import MaterialIcon from "material-icons-react";
 import { FiThumbsUp } from "react-icons/fi";
+import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
@@ -30,6 +31,7 @@ const EitherCompleteCard = props => {
 
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(likeCnt);
+  const [likeState, setLikeState] = useState(liked === null ? false : true);
   const [action, setAction] = useState(null);
 
   const { deletePostDBDone, deletePostDBError } = useSelector(
@@ -62,11 +64,6 @@ const EitherCompleteCard = props => {
     }
   }, [voteCntA, voteCntB]);
 
-  //삭제하기
-  const onClickDelete = () => {
-    dispatch(deletePostDB(eitherId));
-    setAction(true);
-  };
   //좋아요
   const onClickLike = () => {
     if (liked !== null) {
@@ -74,7 +71,13 @@ const EitherCompleteCard = props => {
     } else {
       dispatch(likePostDB(eitherId));
       setLikes(likeCnt + 1);
+      setLikeState(true);
     }
+  };
+  //삭제하기
+  const onClickDelete = () => {
+    dispatch(deletePostDB(eitherId));
+    setAction(true);
   };
   //버튼A 상태 보여주기
   const SelctButtonA = (BGcolor, content) => {
@@ -189,10 +192,16 @@ const EitherCompleteCard = props => {
           <div
             style={{ color: "#E25B45", display: "flex", alignItems: "center" }}
           >
-            <FiThumbsUp
-              onClick={onClickLike}
-              style={{ width: "24", height: "24" }}
-            />
+            {!likeState ? (
+              <FiThumbsUp
+                onClick={onClickLike}
+                style={{ width: "24", height: "24", cursor: "pointer" }}
+              />
+            ) : (
+              <HiThumbUp
+                style={{ width: "24", height: "24", cursor: "pointer" }}
+              />
+            )}
             <div style={{ fontSize: "14px", marginLeft: "14px" }}>{likes}</div>
           </div>
         </EitherFooter>
