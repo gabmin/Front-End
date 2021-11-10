@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
@@ -33,6 +33,18 @@ const Comment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(commentLikeCnt);
+
+  useEffect(() => {
+    if (dataList.multi.completed === 1) {
+      setAddInput(false);
+      setAddInput(false);
+      setAddBtn(false);
+      setCancelBtn(false);
+      setEditBtn(false);
+      setEditCancelBtn(false);
+      setDelBtn(false);
+    }
+  }, []);
 
   const showInput = () => {
     if (addInput === false) {
@@ -81,8 +93,7 @@ const Comment = props => {
 
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, id, data: { comment: newComment, date } }));
-    setAddInput(false);
-    setAddBtn(true);
+    showInput();
   };
 
   //댓글 수정
@@ -90,7 +101,6 @@ const Comment = props => {
   const [newEdit, setNewEdit] = useState();
   const changeEditComment = e => {
     setNewEdit(e.target.value);
-    console.log("newEdit", newEdit);
   };
 
   const editComment = () => {
@@ -98,7 +108,6 @@ const Comment = props => {
       EditCommentDB({ multiId, id, data: { comment: newEdit, editedDate } }),
     );
     showEditInput();
-    console.log("checkcheck", multiId, id);
   };
 
   //댓글 삭제

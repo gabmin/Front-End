@@ -23,6 +23,69 @@ const MultiSlick = props => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
+
+  function NextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          width: "50px",
+          height: "50px",
+          right: "-27px",
+          top: "120px",
+        }}
+        onClick={onClick}
+      >
+        <img
+          src={require("../images/arrow.png").default}
+          alt="arrowNext"
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            right: "30px",
+            top: "0px",
+            border: "1px solid rgb(197, 197, 197)",
+            borderRadius: "50%",
+          }}
+        />
+      </div>
+    );
+  }
+  //이전으로 넘어가기 버튼
+  function PrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{
+          ...style,
+          width: "50px",
+          height: "50px",
+          right: "-27px",
+          top: "120px",
+        }}
+        onClick={onClick}
+      >
+        <img
+          src={require("../images/arrowL.png").default}
+          alt="arrowNext"
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            left: "50px",
+            top: "0px",
+            border: "1px solid rgb(197, 197, 197)",
+            borderRadius: "50%",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <Container>
       <SliderWarpper>
@@ -62,9 +125,9 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center div {
     transform: scale(1);
   }
-  .slick-slide.slick-list div {
+  /* .slick-slide.slick-list div {
     transform: scale(0.88);
-  }
+  } */
 `;
 
 export default MultiSlick;
