@@ -82,18 +82,17 @@ const CardWrite = () => {
 };
 
 const Wrap = styled.div`
-  width: 100%;
-  height: 760px;
+  min-width: 100%;
+  max-width: 840px;
   margin: auto;
 `;
 const ContentBox = styled.div`
   border: 2px solid #00397c;
-  width: 840px;
-  height: 504px;
+  max-width: 840px;
   box-sizing: border-box;
-  margin: 56px auto 0px auto;
+  margin: 56px auto 50px auto;
   border-radius: 10px;
-  padding: 64px 109px 64px 110px;
+  padding: 3% 8% 4% 8%;
 `;
 const Index = styled.div`
   display: flex;

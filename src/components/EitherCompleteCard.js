@@ -55,9 +55,9 @@ const EitherCompleteCard = props => {
     if (voteCntA === 0 && voteCntB === 0) {
       setPercent(50);
     } else if (voteCntA === 0) {
-      setPercent(100);
-    } else if (voteCntB === 0) {
       setPercent(0);
+    } else if (voteCntB === 0) {
+      setPercent(100);
     } else {
       let calPercent = (voteCntA / (voteCntA + voteCntB)) * 100;
       setPercent(Math.round(calPercent));
@@ -244,22 +244,22 @@ const TotalCntDiv = styled.div`
 `;
 const EitherProgress = styled.div`
   margin: 24px auto 0px auto;
-  border: 2px solid #00397c;
   border-radius: 6px;
   width: 100%;
-  height: 32px;
+  height: 6px;
 `;
 const HightLight = styled.div`
   background-color: #dfdfdf;
   transition: 1s;
   width: ${props => props.width};
-  height: 32px;
+  height: 6px;
   border-radius: 5px;
 `;
 const ProgressLabel = styled.div`
   width: 480px;
   position: absolute;
   color: #00397c;
+  margin-top: 6px;
   font-size: 12px;
   display: flex;
   justify-content: space-between;

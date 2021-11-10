@@ -69,7 +69,6 @@ const EitherWrite = props => {
         />
       </Title>
       <hr />
-
       <EitherButtonGrid>
         <EitherButtonA>
           <ButtonInput
@@ -86,6 +85,7 @@ const EitherWrite = props => {
           />
         </EitherButtonB>
       </EitherButtonGrid>
+      <hr />
       <OptionButtonGrid>
         <CancleButton onClick={onClickCancle}>취소</CancleButton>
         <CheckButton onClick={onClickSave}>완료</CheckButton>
@@ -94,10 +94,11 @@ const EitherWrite = props => {
   );
 };
 const Container = styled.div`
-  max-width: 1920px;
-  max-height: 392px;
+  width: 100%;
+  height: 100%;
   hr {
     margin: 0px;
+    border-color: #eeeeee;
   }
 `;
 const Title = styled.div`
@@ -129,41 +130,39 @@ const EitherButtonGrid = styled.div`
   align-items: center;
 `;
 const EitherButtonA = styled.div`
-  width: 256px;
-  height: 206px;
+  width: 310.5px;
+  height: 232px;
   border: 1px solid #868e96;
-  margin: 24px 0px 64px 110px;
+  margin: 24px 0px 24px 0px;
   border-radius: 10px 0px 0px 10px;
-  padding: 24px 32px 0px 24px;
+  padding: 24px 24px 0px 24px;
 `;
 const EitherButtonB = styled.div`
-  width: 256px;
-  height: 206px;
+  width: 310.5px;
+  height: 232px;
   border: 1px solid #868e96;
-  margin: 24px 0px 64px 0px;
+  margin: 24px 0px 24px 0px;
   border-radius: 0px 10px 10px 0px;
-  padding: 24px 32px 0px 24px;
+  padding: 24px 24px 0px 24px;
 `;
 const ButtonInput = styled.textarea`
   border: none;
   outline: none;
   width: 100%;
-  height: 80%;
+  height: 100%;
   font-size: 16px;
   text-align: center;
   resize: none;
   box-sizing: border-box;
+  padding: 3px;
 `;
 const OptionButtonGrid = styled.div`
-  width: 840px;
-  position: absolute;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  transform: translateX(-110px);
-  margin-top: 45px;
 `;
 const CancleButton = styled.button`
-  width: 180px;
+  width: 290px;
   height: 40px;
   border: 1px solid #e25b45;
   border-radius: 8px;
@@ -171,6 +170,7 @@ const CancleButton = styled.button`
   color: #e25b45;
   font-size: 16px;
   line-height: 23px;
+  margin-top: 24px;
   cursor: pointer;
   &:hover {
     background-color: #e25b45;
@@ -178,7 +178,7 @@ const CancleButton = styled.button`
   }
 `;
 const CheckButton = styled.button`
-  width: 180px;
+  width: 290px;
   height: 40px;
   border: 1px solid #e25b45;
   border-radius: 8px;
@@ -186,6 +186,7 @@ const CheckButton = styled.button`
   color: #ffffff;
   font-size: 16px;
   line-height: 23px;
+  margin-top: 24px;
   cursor: pointer;
   &:hover {
     background-color: #ffffff;
