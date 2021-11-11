@@ -50,7 +50,7 @@ function PrevArrow(props) {
         height: "50px",
         right: "0px",
         top: "260px",
-        zIndex: "100000",
+        zIndex: "9999",
       }}
       onClick={onClick}
     >
@@ -182,6 +182,12 @@ const Wrap = styled.div`
   width: 100%;
   height: 100%;
   margin: auto;
+
+  .center .slick-slide.slick-center {
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+    z-index: 2;
+  }
 `;
 
 export default EiterSlick;

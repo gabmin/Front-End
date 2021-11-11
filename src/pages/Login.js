@@ -2,10 +2,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { ReactComponent as Logo } from "../images/logo.svg";
-import { ReactComponent as Symbol } from "../images/symbolBlue.svg";
 import { login } from "../redux/actions/user";
 import { history } from "../redux/configureStore";
+
+import { ReactComponent as Logo } from "../images/logo.svg";
+import { ReactComponent as Symbol } from "../images/symbolBlue.svg";
 import {
   blue,
   red,
