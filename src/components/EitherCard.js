@@ -9,6 +9,7 @@ import { FiThumbsUp } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
 import {
   deletePostDB,
@@ -171,6 +172,7 @@ const EitherCard = props => {
                     styles={{
                       border: "none",
                       backgroundColor: "transparent",
+                      curser: "pointer",
                     }}
                   >
                     <MaterialIcon icon="more_horiz" size={32} />
@@ -268,7 +270,15 @@ const EitherCard = props => {
           </EitherProgress>
         </div>
         <EitherFooter>
-          <div style={{ fontSize: "14px", color: "#101214" }}>{nickname}</div>
+          <div style={{ color: "#101214" }}>
+            <Nickname
+              nickname={nickname}
+              userId={userInfo.userId}
+              width={"32px"}
+              height={"32px"}
+              fontSize={"14px"}
+            />
+          </div>
           <div
             style={{ color: "#E25B45", display: "flex", alignItems: "center" }}
           >
@@ -360,6 +370,7 @@ const EitherButtonA = styled.button`
   border-bottom-left-radius: 10px;
   font-size: 16px;
   line-height: 23px;
+  cursor: pointer;
   margin: 24px auto 0px auto;
   &:hover {
     background-color: #dfdfdf;
@@ -373,13 +384,14 @@ const EitherButtonB = styled.button`
   border-bottom-right-radius: 10px;
   font-size: 16px;
   line-height: 23px;
+  cursor: pointer;
   margin: 24px auto 0px auto;
   &:hover {
     background-color: #dfdfdf;
   }
 `;
 const EitherFooter = styled.div`
-  margin: 36px 77px;
+  margin: 73px 77px;
   display: flex;
   justify-content: space-between;
   align-items: center;

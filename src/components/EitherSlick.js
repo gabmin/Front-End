@@ -184,8 +184,8 @@ const Wrap = styled.div`
   margin: auto;
 
   .center .slick-slide.slick-center {
-    -ms-transform: scale(1.3);
-    transform: scale(1.3);
+    -ms-transform: scale(1);
+    transform: scale(1);
     z-index: 2;
   }
 `;
