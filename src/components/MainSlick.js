@@ -5,10 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FiArrowRight } from "react-icons/fi";
 
+import { history } from "../redux/configureStore";
 import MainCard from "../components/MainCard";
+
 import PrevArrow from "../elements/PrevArrow";
 import NextArrow from "../elements/NextArrow";
-import { history } from "../redux/configureStore";
 import { blue, red, mobile, tablet } from "../shared/style";
 
 const ProductSlick = ({ cardList, type }) => {
@@ -89,6 +90,7 @@ const ProductSlick = ({ cardList, type }) => {
               commentNum={v.commentCnt}
               likeNum={v.likeCnt}
               username={v.nickname}
+              userId={v.user}
               date={v.date}
             />
           ))}

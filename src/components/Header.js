@@ -2,12 +2,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
+import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { loginCheck, logout } from "../redux/actions/user";
+
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
+import { ReactComponent as chevronDown } from "../images/chevronDown.svg";
+import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
 
 const Header = () => {
@@ -78,9 +82,11 @@ const Header = () => {
         />
       </Top>
       <Bottom>
-        <Wrapper>
+        <MenuWrapper>
           <StyledSymbol onClick={onClickSimbol} />
-        </Wrapper>
+          <span onClick={onClickEither}>찬반</span>
+          <span onClick={onClickMulti}>객관식</span>
+        </MenuWrapper>
         <Wrapper>
           <StyledSearch onClick={submitSearch} />
           <input
@@ -91,9 +97,7 @@ const Header = () => {
           />
         </Wrapper>
         {loginCheckDone ? (
-          <Menu loggedIn={nickname !== "GUEST"}>
-            <span onClick={onClickEither}>찬반</span>
-            <span onClick={onClickMulti}>객관식</span>
+          <IconWrapper loggedIn={nickname !== "GUEST"}>
             {nickname === "GUEST" && (
               <span onClick={onClickLogin} className="loginBtn">
                 로그인
@@ -101,11 +105,21 @@ const Header = () => {
             )}
             {nickname !== "GUEST" && (
               <>
-                <span onClick={onClickNickname}>{nickname}</span>
-                <span onClick={onClickLogout}>로그아웃</span>
+                <Menu
+                  menuButton={
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <StyledCommonIcon />
+                      <span>{nickname}</span>
+                      <StyledDown />
+                    </div>
+                  }
+                >
+                  <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
+                  <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+                </Menu>
               </>
             )}
-          </Menu>
+          </IconWrapper>
         ) : (
           <MenuLoading></MenuLoading>
         )}
@@ -141,7 +155,7 @@ const Bottom = styled.div`
   display: flex;
   position: relative;
   max-width: 1280px;
-  width: 67%;
+  width: 90%;
   height: 64px;
   align-items: center;
   flex-direction: row;
@@ -180,9 +194,46 @@ const StyledSymbol = styled(Symbol)`
   cursor: pointer;
   user-select: none;
   height: 37px;
+  margin-right: 30px;
 `;
 
-const Menu = styled.div`
+const StyledDown = styled(chevronDown)`
+  position: relative;
+  top: 1px;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+`;
+
+const StyledCommonIcon = styled(CommonIcon)`
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  cursor: pointer;
+`;
+
+const MenuWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  width: 30%;
+  height: 100%;
+
+  span {
+    margin: 0 30px;
+    color: #e25b45;
+    text-align: center;
+  }
+
+  @media screen and (max-width: ${tablet}) {
+    display: none;
+  }
+`;
+
+const IconWrapper = styled.div`
   position: relative;
   right: ${props => (props.loggedIn ? 0 : "45px")};
   display: flex;
@@ -194,7 +245,6 @@ const Menu = styled.div`
   height: 100%;
 
   span {
-    width: 100px;
     margin: 0;
     color: #e25b45;
     text-align: center;
