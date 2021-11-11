@@ -101,7 +101,6 @@ const EitherCard = props => {
     setAction(true);
   };
   //좋아요
-  console.log(userInfo);
   const onClickLike = () => {
     if (liked !== null || userInfo.nickname === "GUEST") {
       return;

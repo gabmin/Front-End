@@ -19,6 +19,7 @@ function NextArrow(props) {
         height: "50px",
         right: "0px",
         top: "260px",
+        zIndex: "100000",
       }}
       onClick={onClick}
     >
@@ -29,7 +30,7 @@ function NextArrow(props) {
           position: "absolute",
           width: "100%",
           height: "100%",
-          right: "30px",
+          right: "-100px",
           top: "0px",
           border: null,
         }}
@@ -49,6 +50,7 @@ function PrevArrow(props) {
         height: "50px",
         right: "0px",
         top: "260px",
+        zIndex: "100000",
       }}
       onClick={onClick}
     >
@@ -59,7 +61,7 @@ function PrevArrow(props) {
           position: "absolute",
           width: "100%",
           height: "100%",
-          left: "50px",
+          left: "-100px",
           top: "0px",
           border: null,
         }}
@@ -169,11 +171,11 @@ const settings = {
   speed: 500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
-  centerPadding: "60px",
-  responsive: [
-    { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-    { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-  ],
+  centerPadding: "0px",
+  // responsive: [
+  //   { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+  //   { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+  // ],
 };
 
 const Wrap = styled.div`

@@ -57,7 +57,7 @@ const CardWrite = () => {
                   type="radio"
                   id="either"
                   checked={eitherState}
-                  // onChange={EitherRadioBtn}
+                  onChange={EitherRadioBtn}
                 />
                 <label>찬반</label>
               </RadioBtnWarpperE>
