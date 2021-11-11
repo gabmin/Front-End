@@ -19,18 +19,18 @@ function NextArrow(props) {
         height: "50px",
         right: "0px",
         top: "260px",
-        zIndex: "100000",
+        zIndex: "1000",
       }}
       onClick={onClick}
     >
       <img
-        src={require("../images/arrow.png").default}
+        src={require("../images/arrowRed.png").default}
         alt="arrowNext"
         style={{
           position: "absolute",
           width: "100%",
           height: "100%",
-          right: "-100px",
+          right: "-50px",
           top: "0px",
           border: null,
         }}
@@ -50,18 +50,18 @@ function PrevArrow(props) {
         height: "50px",
         right: "0px",
         top: "260px",
-        zIndex: "9999",
+        zIndex: "1000",
       }}
       onClick={onClick}
     >
       <img
-        src={require("../images/arrowL.png").default}
+        src={require("../images/arrowLRed.png").default}
         alt="arrowNext"
         style={{
           position: "absolute",
           width: "100%",
           height: "100%",
-          left: "-100px",
+          left: "-25px",
           top: "0px",
           border: null,
         }}
@@ -183,9 +183,26 @@ const Wrap = styled.div`
   height: 100%;
   margin: auto;
 
-  .center .slick-slide.slick-center {
-    -ms-transform: scale(1);
+  .slick-slider {
+    width: 1300px;
+    margin: auto;
+  }
+
+  .slick-list {
+    width: 100%;
+    height: 80%;
+    margin: auto;
+  }
+  .slick-slide {
     transform: scale(1);
+  }
+  .slick-track {
+    height: 700px;
+  }
+
+  .center .slick-slide.slick-center {
+    transform: scale(1.1);
+    transition: 0.5s;
     z-index: 2;
   }
 `;

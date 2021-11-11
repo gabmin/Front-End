@@ -1,7 +1,9 @@
 import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
+import { SetParams } from "../redux/reducers/paramsSlice";
 import { history } from "../redux/configureStore";
 import { blue, red, mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
@@ -30,10 +32,14 @@ const Card = ({
     margin: margin,
     center: center,
   };
-
+  const dispatch = useDispatch();
   const onClickDetail = useCallback(() => {
     if (type === "either") {
-      history.push(`/either/${id}`);
+      // history.push(`/either/${id}`);
+      dispatch(SetParams(id));
+      history.push({
+        pathname: "/either",
+      });
       return;
     }
     history.push(`/multi/${id}`);
