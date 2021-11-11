@@ -13,6 +13,7 @@ import { AddLikeComment } from "../redux/actions/multiLike";
 import CommentNick from "../elements/CommentNick";
 import CommentContent from "../elements/CommentContent";
 import CommentDate from "../elements/CommentDate";
+import Nickname from "./Nickname";
 
 const Comment = props => {
   const { nickname, commentDate, commentLikeCnt, id, deleted, comment, liked } =
@@ -130,10 +131,14 @@ const Comment = props => {
       <TempWarpper>
         <InfoWarpper>
           <NickWarpper>
-            <CommentNick>
-              {nickname}
-              {"\u00a0\u00a0"}
-            </CommentNick>
+            <Nickname
+              nickname={nickname}
+              fontSize={"12px"}
+              width={"24px"}
+              height={"24px"}
+            ></Nickname>
+            {"\u00a0\u00a0"}
+
             <CommentDate>{commentDate}</CommentDate>
           </NickWarpper>
           <BtnWrapper>
@@ -199,7 +204,7 @@ const TempWarpper = styled.div`
 `;
 
 const InfoWarpper = styled.div`
-  margin: 5px 0 5px 0;
+  margin: 5px 0 8px 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -210,9 +215,12 @@ const NickWarpper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin: 0 auto 0 0;
 `;
 
-const BtnWrapper = styled.div``;
+const BtnWrapper = styled.div`
+  padding: 0 0 6px 0;
+`;
 
 const EventBtn = styled.button`
   font-size: 10px;
@@ -229,7 +237,9 @@ const ContentWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const CommentWrapper = styled.div``;
+const CommentWrapper = styled.div`
+  margin: 0 auto 0 32px;
+`;
 
 const LikeWrapper = styled.div`
   display: flex;

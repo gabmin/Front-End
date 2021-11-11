@@ -34,7 +34,7 @@ const MultiSlick = props => {
           width: "50px",
           height: "50px",
           right: "-27px",
-          top: "120px",
+          top: "260px",
           zIndex: "999",
         }}
         onClick={onClick}
@@ -60,30 +60,39 @@ const MultiSlick = props => {
     const { className, style, onClick } = props;
     return (
       <div
-        className={className}
         style={{
-          ...style,
           width: "50px",
-          height: "50px",
-          right: "-27px",
-          top: "120px",
-          zIndex: "999",
+          height: "700px",
+          position: "absolute",
+          backgroundColor: "white",
         }}
-        onClick={onClick}
       >
-        <img
-          src={require("../images/arrowL.png").default}
-          alt="arrowNext"
+        <div
+          className={className}
           style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            left: "50px",
-            top: "0px",
-            border: "1px solid rgb(197, 197, 197)",
-            borderRadius: "50%",
+            ...style,
+            width: "50px",
+            height: "50px",
+            right: "-50px",
+            top: "260px",
+            zIndex: "999",
           }}
-        />
+          onClick={onClick}
+        >
+          <img
+            src={require("../images/arrowL.png").default}
+            alt="arrowNext"
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              left: "50px",
+              top: "0px",
+              border: "1px solid rgb(197, 197, 197)",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -126,14 +135,30 @@ const SliderWarpper = styled.div`
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   margin: auto;
-  width: 1200px;
-  border-radius: 10px;
-  /* .slick-slide.slick-center div {
-    transform: scale(1);
-  } */
-  /* .slick-slide.slick-list div {
-    transform: scale(0.88);
-  } */
+  width: 1300px;
+  .slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(-60px, 0, 0);
+  }
+
+  .slick-slide.slick-center {
+    transform: scale(1.1) translateX(0px);
+    z-index: 999999 !important;
+  }
+
+  .slick-slide.slick-cloned {
+    /* transform: translateX(-100px); */
+  }
+
+  .slick-slide {
+    border-radius: 10px;
+    padding: 30px 0 30px 0;
+    /* transform: translate3d(-10px, 0, -100px); */
+    z-index: 10 !important;
+  }
 `;
 
 const CardWarpper = styled.div`

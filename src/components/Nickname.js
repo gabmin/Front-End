@@ -28,7 +28,7 @@ Nickname.defaultProps = {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  width: 110px;
+  /* width: 110px; */
   height: 16px;
   color: black;
   cursor: pointer;

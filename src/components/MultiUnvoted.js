@@ -7,6 +7,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import colors from "../shared/colors";
 import AnswerList from "./AnswerList";
 import { AddLikeDB } from "../redux/actions/multiLike";
+import Nickname from "./Nickname";
 
 const MultiUnvoted = props => {
   const dispatch = useDispatch();
@@ -38,7 +39,12 @@ const MultiUnvoted = props => {
         <Description>{multiList.description}</Description>
       </DesWrapper>
       <InfoWarpper>
-        <Nickname>{multiList.nickname}</Nickname>
+        <Nickname
+          nickname={multiList.nickname}
+          fontSize={"14px"}
+          width={"32px"}
+          height={"32px"}
+        ></Nickname>
         <RightWarpper>
           <CommentWarpper>
             <FiMessageSquare />{" "}
@@ -111,10 +117,10 @@ const InfoWarpper = styled.div`
   align-items: center;
 `;
 
-const Nickname = styled.p`
-  font-size: 14px;
-  color: ${colors.darkGray};
-`;
+// const Nickname = styled.p`
+//   font-size: 14px;
+//   color: ${colors.darkGray};
+// `;
 
 const RightWarpper = styled.div`
   width: 80px;

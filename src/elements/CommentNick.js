@@ -11,6 +11,7 @@ const CommentNick = props => {
 const P = styled.p`
   font-size: 12px;
   font-weight: 600;
+
   color: ${colors.darkGray};
 `;
 

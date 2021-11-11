@@ -7,6 +7,7 @@ import { FiMessageSquare } from "react-icons/fi";
 
 import colors from "../shared/colors";
 import { DetailDB } from "../redux/actions/multiDetail";
+import Nickname from "./Nickname";
 
 const MultiCard = props => {
   const userInfo = useSelector(state => state.user.userInfo);
@@ -42,27 +43,35 @@ const MultiCard = props => {
         <DateWarpper>
           <DateText>{date}</DateText>
         </DateWarpper>
-        <ContentHr />
+        {/* <ContentHr /> */}
         <DesWrapper>
           <DesText>{description}</DesText>
         </DesWrapper>
-        <VoteBtn onClick={goToDetail}>투표하러가기</VoteBtn>
-
-        <FooterWrapper>
-          <UserWrapper>
-            <NickText>{nickname}</NickText>
-            {/* {isEdited ? <p>{editedDate}</p> : null} */}
-          </UserWrapper>
-          <InfoWarpper>
-            <CommentWarpper>
-              <FiMessageSquare /> <TotalComment>{commentCnt}</TotalComment>
-            </CommentWarpper>
-            <LikeWarpper>
-              <FiThumbsUp />
-              <TotalLike>{likeCnt}</TotalLike>
-            </LikeWarpper>
-          </InfoWarpper>
-        </FooterWrapper>
+        <VoteBtn onClick={goToDetail}>투표하기</VoteBtn>
+        <TempWarpper>
+          <FooterWrapper>
+            <UserWrapper>
+              <NickText>
+                <Nickname
+                  nickname={nickname}
+                  fontSize={"14px"}
+                  width={"32px"}
+                  height={"32px"}
+                ></Nickname>
+              </NickText>
+              {/* {isEdited ? <p>{editedDate}</p> : null} */}
+            </UserWrapper>
+            <InfoWarpper>
+              <CommentWarpper>
+                <FiMessageSquare /> <TotalComment>{commentCnt}</TotalComment>
+              </CommentWarpper>
+              <LikeWarpper>
+                <FiThumbsUp />
+                <TotalLike>{likeCnt}</TotalLike>
+              </LikeWarpper>
+            </InfoWarpper>
+          </FooterWrapper>
+        </TempWarpper>
       </Card>
     </Container>
   );
@@ -70,9 +79,9 @@ const MultiCard = props => {
 
 const Container = styled.div`
   text-align: left;
-  width: 620px;
-  height: 600px;
-  padding: 56px 72px;
+  width: 380px;
+  height: 490px;
+  padding: 46px 56px;
   margin: 0 auto;
   background-color: ${colors.white};
   border: 2px ${colors.blue} solid;
@@ -92,16 +101,16 @@ const Card = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  width: 482px;
-  height: 70px;
+  width: 100%;
+  /* height: 30px; */
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   margin: auto;
 `;
 
 const TitleText = styled.p`
-  font-size: 24px;
+  font-size: 20px;
   margin: 0 auto;
 `;
 
@@ -110,8 +119,9 @@ const DateWarpper = styled.div`
 `;
 
 const DateText = styled.p`
-  font-size: 14px;
-  margin: 0 auto;
+  font-size: 11px;
+  text-align: center;
+  margin: 8px auto;
   color: ${colors.gray5};
 `;
 
@@ -119,24 +129,31 @@ const ContentHr = styled.hr`
   border: none;
   width: 103px;
   height: 1px;
-  margin: 24px auto 22px 0;
+  margin: 12px auto 11px auto;
   background-color: ${colors.gray5};
 `;
 
 const DesWrapper = styled.div`
-  height: 258px;
+  margin: 16px auto 0 auto;
+  height: 176px;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
 `;
 
 const DesText = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   color: ${colors.gray5};
 `;
 
 const VoteBtn = styled.button`
   display: block;
-  width: 180px;
+  width: 150px;
   height: 40px;
-  margin: 26px auto 20px auto;
+  margin: 40px auto 0 auto;
   border: none;
   border-radius: 8px;
   background-color: ${colors.red};
@@ -144,10 +161,13 @@ const VoteBtn = styled.button`
   color: ${colors.white};
 `;
 
+const TempWarpper = styled.div``;
+
 const FooterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 12px auto 0 auto;
 `;
 
 const UserWrapper = styled.div`

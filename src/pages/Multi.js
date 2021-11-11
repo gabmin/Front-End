@@ -65,7 +65,7 @@ const Multi = props => {
         ) : null}
       </SliderWarpper>
       <QuestionBtnWarpper>
-        <QuestionBtn onClick={goToWrite}>나도질문하기</QuestionBtn>
+        <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
       </QuestionBtnWarpper>
     </Container>
   );
@@ -101,19 +101,23 @@ const TabBtn = styled.button`
 `;
 
 const SliderWarpper = styled.div`
-  margin: 100px auto;
+  margin: 70px auto;
   width: 100%;
   height: 100%;
 `;
 
 const QuestionBtnWarpper = styled.div`
-  margin: 50px 0px;
+  margin: 0 auto;
   width: 100%;
   text-align: center;
 `;
 
 const QuestionBtn = styled.button`
-  border: none;
+  border: 1px ${colors.red} solid;
+  border-radius: 8px;
+  width: 180px;
+  height: 40px;
+  color: ${colors.red};
   background-color: #ffffff;
   font-size: 16px;
   cursor: pointer;
