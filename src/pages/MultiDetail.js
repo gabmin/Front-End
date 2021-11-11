@@ -215,7 +215,7 @@ const Container = styled.div`
 const Temp = styled.div`
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: white;
   opacity: 0.1;
   z-index: 50;
   position: absolute;

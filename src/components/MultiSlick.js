@@ -14,8 +14,8 @@ const MultiSlick = props => {
     className: "center",
     centerMode: true,
     infinite: true,
-    adaptiveHeight: true,
-    focusOnSelect: true,
+    // adaptiveHeight: true,
+    // focusOnSelect: true,
     centerPadding: "0px",
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -35,6 +35,7 @@ const MultiSlick = props => {
           height: "50px",
           right: "-27px",
           top: "120px",
+          zIndex: "999",
         }}
         onClick={onClick}
       >
@@ -66,6 +67,7 @@ const MultiSlick = props => {
           height: "50px",
           right: "-27px",
           top: "120px",
+          zIndex: "999",
         }}
         onClick={onClick}
       >
@@ -91,7 +93,7 @@ const MultiSlick = props => {
       <SliderWarpper>
         <StyledSlider {...settings}>
           {CardList?.map((p, i) => (
-            <div>
+            <CardWarpper>
               <MultiCard
                 multiId={p.multiId}
                 title={p.title}
@@ -104,7 +106,7 @@ const MultiSlick = props => {
                 commentCnt={p.commentCnt}
                 nickname={p.nickname}
               />
-            </div>
+            </CardWarpper>
           ))}
         </StyledSlider>
       </SliderWarpper>
@@ -117,17 +119,26 @@ const Container = styled.div`
 `;
 
 const SliderWarpper = styled.div`
-  margin: 20px auto;
+  /* margin: 0 auto; */
+  height: 100%;
 `;
 
 const StyledSlider = styled(Slider)`
   overflow: hidden;
-  .slick-slide.slick-center div {
+  margin: auto;
+  width: 1200px;
+  border-radius: 10px;
+  /* .slick-slide.slick-center div {
     transform: scale(1);
-  }
+  } */
   /* .slick-slide.slick-list div {
     transform: scale(0.88);
   } */
+`;
+
+const CardWarpper = styled.div`
+  /* transform: translate(-100px, 0); */
+  height: 100%;
 `;
 
 export default MultiSlick;

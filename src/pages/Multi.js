@@ -5,6 +5,7 @@ import { history } from "../redux/configureStore";
 import styled from "styled-components";
 import MultiSlick from "../components/MultiSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
+import colors from "../shared/colors";
 
 const Multi = props => {
   const dispatch = useDispatch();
@@ -72,21 +73,30 @@ const Multi = props => {
 
 const Container = styled.div`
   max-width: 100%;
+  height: 100%;
 `;
 
 const TabBtnWarpper = styled.div`
-  margin: 50px 0px;
+  margin: 51px auto 0px auto;
   width: 100%;
   text-align: center;
+  width: 401px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const TabBtn = styled.button`
   border: none;
-  background-color: #ffffff;
-  font-size: 16px;
+  background-color: ${colors.white};
+  font-size: 20px;
+  font-weight: bold;
+  color: ${colors.gray5};
+  line-height: 29px;
   cursor: pointer;
   &:hover {
-    color: #777777;
+    color: ${colors.blue};
+    text-decoration: underline;
+    text-underline-position: under;
   }
 `;
 

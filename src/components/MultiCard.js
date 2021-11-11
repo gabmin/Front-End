@@ -2,6 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
+import { FiThumbsUp } from "react-icons/fi";
+import { FiMessageSquare } from "react-icons/fi";
+
+import colors from "../shared/colors";
 import { DetailDB } from "../redux/actions/multiDetail";
 
 const MultiCard = props => {
@@ -30,23 +34,34 @@ const MultiCard = props => {
     }
   };
   return (
-    <Container onClick={goToDetail}>
+    <Container>
       <Card>
         <TitleWrapper>
           <TitleText>{title}</TitleText>
         </TitleWrapper>
+        <DateWarpper>
+          <DateText>{date}</DateText>
+        </DateWarpper>
+        <ContentHr />
         <DesWrapper>
-          <p>{description}</p>
+          <DesText>{description}</DesText>
         </DesWrapper>
-        <hr></hr>
+        <VoteBtn onClick={goToDetail}>투표하러가기</VoteBtn>
+
         <FooterWrapper>
           <UserWrapper>
-            <p>{nickname}</p>
-            <p>{date}</p>
+            <NickText>{nickname}</NickText>
             {/* {isEdited ? <p>{editedDate}</p> : null} */}
           </UserWrapper>
-          <p>{likeCnt}</p>
-          <p>{commentCnt}</p>
+          <InfoWarpper>
+            <CommentWarpper>
+              <FiMessageSquare /> <TotalComment>{commentCnt}</TotalComment>
+            </CommentWarpper>
+            <LikeWarpper>
+              <FiThumbsUp />
+              <TotalLike>{likeCnt}</TotalLike>
+            </LikeWarpper>
+          </InfoWarpper>
         </FooterWrapper>
       </Card>
     </Container>
@@ -54,49 +69,128 @@ const MultiCard = props => {
 };
 
 const Container = styled.div`
+  text-align: left;
   width: 620px;
   height: 600px;
-  padding: 20px;
-  margin: 100px auto;
-  background-color: #ffffff;
-  border: 2px #00397c solid;
+  padding: 56px 72px;
+  margin: 0 auto;
+  background-color: ${colors.white};
+  border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
   word-break: break-all;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Card = styled.div`
-  width: 620px;
+  width: 100%;
   height: 600px;
-  padding: 20px 20px;
+
   margin: auto;
   word-break: break-all;
 `;
 
 const TitleWrapper = styled.div`
-  width: 100%;
-  margin: 0 0 0 10px;
-  min-height: 20%;
-  word-break: break-all;
+  width: 482px;
+  height: 70px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin: auto;
 `;
 
 const TitleText = styled.p`
   font-size: 24px;
+  margin: 0 auto;
+`;
+
+const DateWarpper = styled.div`
+  margin: auto;
+`;
+
+const DateText = styled.p`
+  font-size: 14px;
+  margin: 0 auto;
+  color: ${colors.gray5};
+`;
+
+const ContentHr = styled.hr`
+  border: none;
+  width: 103px;
+  height: 1px;
+  margin: 24px auto 22px 0;
+  background-color: ${colors.gray5};
 `;
 
 const DesWrapper = styled.div`
-  min-height: 70%;
+  height: 258px;
+`;
+
+const DesText = styled.p`
+  font-size: 16px;
+  color: ${colors.gray5};
+`;
+
+const VoteBtn = styled.button`
+  display: block;
+  width: 180px;
+  height: 40px;
+  margin: 26px auto 20px auto;
+  border: none;
+  border-radius: 8px;
+  background-color: ${colors.red};
+  font-size: 16px;
+  color: ${colors.white};
 `;
 
 const FooterWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 const UserWrapper = styled.div`
   font-size: 6px;
   display: flex;
   flex-direction: row;
+`;
+
+const NickText = styled.p`
+  font-size: 14px;
+  color: ${colors.darkGray};
+`;
+
+const InfoWarpper = styled.div`
+  width: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const CommentWarpper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: ${colors.blue};
+`;
+
+const TotalComment = styled.p`
+  font-size: 12px;
+`;
+
+const LikeWarpper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: ${colors.red};
+`;
+
+const TotalLike = styled.p`
+  font-size: 12px;
 `;
 
 export default MultiCard;
