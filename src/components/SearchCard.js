@@ -17,14 +17,14 @@ import {
 const SearchCard = ({
   type,
   id,
-  user,
+  userId,
   title,
   date,
   editedDate,
   completed,
   likeCnt,
   commentCnt,
-  userId,
+  nickname,
 }) => {
   const onClickContent = useCallback(() => {
     if (type === "찬반") {
@@ -56,7 +56,7 @@ const SearchCard = ({
             style={{ fontWeight: "bold", cursor: "pointer" }}
             onClick={onClickNick}
           >
-            {user}
+            {nickname}
           </span>
           <span
             style={{ color: gray5, margin: "0 30px", fontWeight: "normal" }}

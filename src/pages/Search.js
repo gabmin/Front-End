@@ -27,7 +27,8 @@ const Search = ({ location }) => {
           type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
           id={v.multiId || v.eitherId}
           title={v.title}
-          user={v.user}
+          userId={v.user}
+          nickname={v.nickname}
           date={v.date}
           editedDate={v.editedDate}
           completed={v.completed}
