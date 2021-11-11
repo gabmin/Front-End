@@ -49,6 +49,7 @@ function PrevArrow(props) {
         height: "50px",
         right: "0px",
         top: "260px",
+        zIndex: "9999",
       }}
       onClick={onClick}
     >
@@ -169,7 +170,7 @@ const settings = {
   speed: 500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
-  centerPadding: "60px",
+  centerPadding: "0px",
   responsive: [
     { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
     { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
@@ -180,6 +181,12 @@ const Wrap = styled.div`
   width: 100%;
   height: 100%;
   margin: auto;
+
+  .center .slick-slide.slick-center {
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+    z-index: 2;
+  }
 `;
 
 export default EiterSlick;
