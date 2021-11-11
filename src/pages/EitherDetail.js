@@ -4,10 +4,9 @@ import styled from "styled-components";
 
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import EitherCard from "../components/EitherCard";
 import EitherCompleteCard from "../components/EitherCompleteCard";
-
 import { history } from "../redux/configureStore";
 import { PostDB, PostingDB } from "../redux/actions/eitherCard";
 
@@ -29,26 +28,30 @@ const EitherDetail = props => {
     dispatch(PostDB());
     dispatch(PostingDB());
   }, [dispatch]);
-
-  //돌아가기
-  const onClickGoBack = () => {
-    history.goBack();
-  };
-  //목록으로 돌아가기
-  const onClickIndex = () => {
-    history.push("/either");
-  };
+  //비로그인시 접근 제한
   if (userInfo.nickname === "GUEST") {
     alert("로그인 후 이용가능합니다.");
     history.push("/login");
   }
+  //돌아가기
+  const onClickGoBack = () => {
+    history.goBack();
+  };
+  //게시글 작성하러가기
+  const goToWrite = () => {
+    if (userInfo.nickname === "GEUST") {
+      alert("로그인 후 가능합니다.");
+      history.push("/login");
+    } else {
+      history.push("/write");
+    }
+  };
   return (
     <>
       <Wrap>
-        <EitherButtonGrid>
-          <EitherButton onClick={onClickGoBack}>돌아가기</EitherButton>
-          <EitherButton onClick={onClickIndex}>목록</EitherButton>
-        </EitherButtonGrid>
+        <GoBackGrid>
+          <AiOutlineArrowLeft className="ICON" onClick={onClickGoBack} />
+        </GoBackGrid>
         {targetPost && targetPost.completed === 0 ? (
           <EitherCard
             eitherId={targetPost.eitherId}
@@ -81,6 +84,9 @@ const EitherDetail = props => {
             completed={targetPost.completed}
           />
         ) : null}
+        <QuestionBtnDiv>
+          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+        </QuestionBtnDiv>
       </Wrap>
     </>
   );
@@ -90,26 +96,34 @@ const Wrap = styled.div`
   width: 100%;
   height: 773px;
 `;
-const EitherButtonGrid = styled.div`
-  margin: 51px auto 0px auto;
-  width: 100%;
-  text-align: center;
-  width: 401px;
-  display: flex;
-  justify-content: space-between;
-`;
-const EitherButton = styled.button`
-  border: none;
-  background-color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-  color: #868e96;
-  line-height: 29px;
+const GoBackGrid = styled.div`
+  position: absolute;
+  left: 36.5%;
+  top: 24%;
   cursor: pointer;
-  &:hover {
-    color: #00397c;
-    text-decoration: underline;
+  .ICON {
+    width: 32px;
+    height: 32px;
+    color: #adb5bd;
   }
 `;
-
+const QuestionBtnDiv = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-top: 48px;
+`;
+const QuestionBtn = styled.button`
+  width: 180px;
+  height: 40px;
+  border: 1px solid #e25b45;
+  color: #e25b45;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background-color: #e25b45;
+    color: #ffffff;
+  }
+`;
 export default EitherDetail;

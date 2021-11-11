@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
 import { FiThumbsUp } from "react-icons/fi";
@@ -16,6 +16,7 @@ const MultiVoted = props => {
   // const DataList = props.dataList.multi;
   const multiId = props.multiId;
   const [likes, setLikes] = useState(multiList.likeCnt);
+  console.log(dataList);
 
   const TotalCnt =
     multiList.voteCntA +
@@ -95,137 +96,108 @@ const MultiVoted = props => {
 
       <ProgressWrapper>
         <div>
-          <SelectContent>
-            {multiList.contentA} {perA}
-          </SelectContent>
-          <EitherProgress>
-            <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{perA + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}></div>
-            </ProgressLabel>
-            <HighLight width={perA + "%"} />
-          </EitherProgress>
-          <SelectContent>
-            {multiList.contentB} {perB}
-          </SelectContent>
-          <EitherProgress>
-            <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{perB + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}></div>
-            </ProgressLabel>
-            <HighLight width={perB + "%"} />
-          </EitherProgress>
-          <SelectContent>
-            {multiList.contentC} {perC}
-          </SelectContent>
-          <EitherProgress>
-            <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{perC + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}></div>
-            </ProgressLabel>
-            <HighLight width={perC + "%"} />
-          </EitherProgress>
-          <EitherProgress>
-            <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{perD + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}></div>
-            </ProgressLabel>
-            <HighLight width={perD + "%"} />
-          </EitherProgress>
-          <EitherProgress>
-            <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{perE + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}></div>
-            </ProgressLabel>
-            <HighLight width={perE + "%"} />
-          </EitherProgress>
-          <SelectContent>
-            {multiList.contentA} {perA}
-          </SelectContent>
-          <StyledProgressBar
-            labelSize="2px"
-            margin="auto"
-            width="620px"
-            height="32px"
-            baseBgColor={colors.white}
-            bgColor={colors.blue}
-            borderRadius="8px"
-            completed={perA}
-            maxCompleted={100}
-          />
-        </div>
-        <div>
-          <SelectContent>
-            {multiList.contentB} {perB}
-          </SelectContent>
-          <StyledProgressBar
-            labelSize="2px"
-            margin="auto"
-            width="620px"
-            height="32px"
-            baseBgColor={colors.white}
-            bgColor={colors.blue}
-            borderRadius="8px"
-            completed={perB}
-            maxCompleted={100}
-          />
-        </div>
-        {multiList.contentC !== null ? (
           <div>
             <SelectContent>
-              {multiList.contentC} {perC}
+              {multiList.contentA} {perA + "%"}
             </SelectContent>
-            <StyledProgressBar
-              labelSize="2px"
-              margin="auto"
-              width="620px"
-              height="32px"
-              baseBgColor={colors.white}
-              bgColor={colors.blue}
-              borderRadius="8px"
-              completed={perC + "%"}
-              maxCompleted={100}
-            />
+            <Progress>
+              {multiList.voted === "A" ? (
+                <div>
+                  <VotedLabel>{perA + "%"}</VotedLabel>
+                  <VotedHighLight width={perA + "%"} />
+                </div>
+              ) : (
+                <div>
+                  <UnVotedLabel>{perA + "%"}</UnVotedLabel>
+                  <HighLight width={perA + "%"} />
+                </div>
+              )}
+            </Progress>
           </div>
-        ) : null}
-        {multiList.contentD !== null ? (
           <div>
             <SelectContent>
-              {multiList.contentD} {perD}
+              {multiList.contentB} {perB + "%"}
             </SelectContent>
-            <StyledProgressBar
-              labelSize="2px"
-              margin="auto"
-              width="620px"
-              height="32px"
-              baseBgColor={colors.white}
-              bgColor={colors.blue}
-              borderRadius="8px"
-              completed={perD + "%"}
-              maxCompleted={100}
-            />
+            <Progress>
+              {multiList.voted === "B" ? (
+                <div>
+                  <VotedLabel>{perB + "%"}</VotedLabel>
+                  <VotedHighLight width={perB + "%"} />
+                </div>
+              ) : (
+                <div>
+                  <UnVotedLabel>{perB + "%"}</UnVotedLabel>
+                  <HighLight width={perB + "%"} />
+                </div>
+              )}
+            </Progress>
           </div>
-        ) : null}
-        {multiList.contentE !== null ? (
-          <div>
-            <SelectContent>
-              {multiList.contentE} {perE}
-            </SelectContent>
-            <StyledProgressBar
-              labelSize="2px"
-              margin="auto"
-              width="620px"
-              height="32px"
-              baseBgColor={colors.white}
-              bgColor={colors.blue}
-              borderRadius="8px"
-              completed={perE + "%"}
-              maxCompleted={100}
-            />
-          </div>
-        ) : null}
-      </ProgressWrapper>
 
+          {multiList.contentC !== null ? (
+            <div>
+              <SelectContent>
+                {multiList.contentC} {perC + "%"}
+              </SelectContent>
+              <Progress>
+                {multiList.voted === "C" ? (
+                  <div>
+                    <VotedLabel>{perC + "%"}</VotedLabel>
+                    <VotedHighLight width={perC + "%"} />
+                  </div>
+                ) : (
+                  <div>
+                    <UnVotedLabel>{perC + "%"}</UnVotedLabel>
+                    <HighLight width={perC + "%"} />
+                  </div>
+                )}
+              </Progress>
+            </div>
+          ) : null}
+          {multiList.contentD !== null ? (
+            <div>
+              <SelectContent>
+                {multiList.contentD} {perD + "%"}
+              </SelectContent>
+              <Progress>
+                {multiList.voted === "D" ? (
+                  <div>
+                    <VotedLabel>{perD + "%"}</VotedLabel>
+                    <VotedHighLight width={perD + "%"} />
+                  </div>
+                ) : (
+                  <div>
+                    <UnVotedLabel>{perD + "%"}</UnVotedLabel>
+                    <HighLight width={perD + "%"} />
+                  </div>
+                )}
+              </Progress>
+            </div>
+          ) : null}
+          {multiList.contentE !== null ? (
+            <div>
+              <SelectContent>
+                {multiList.contentE} {perE + "%"}
+              </SelectContent>
+              <Progress>
+                {multiList.voted === "E" ? (
+                  <div>
+                    <VotedLabel>{perE + "%"}</VotedLabel>
+                    <VotedHighLight width={perE + "%"} />
+                  </div>
+                ) : (
+                  <div>
+                    <UnVotedLabel>{perE + "%"}</UnVotedLabel>
+                    <HighLight width={perE + "%"} />
+                  </div>
+                )}
+              </Progress>
+            </div>
+          ) : null}
+        </div>
+      </ProgressWrapper>
+      <DesWrapper>
+        <Description>{multiList.description}</Description>
+      </DesWrapper>
       <InfoWarpper>
         <Nickname>{multiList.nickname}</Nickname>
         <RightWarpper>
@@ -264,49 +236,82 @@ const TitleWrapper = styled.div`
 
 const Title = styled.p`
   font-size: 24px;
+  word-break: break-all;
 `;
 
 const TitleHr = styled.hr`
   margin: 34px auto 34px auto;
   width: 103px;
+  height: 1px;
+  border: none;
+  background-color: ${colors.gray5};
 `;
 
 const ProgressWrapper = styled.div`
-  margin: auto;
+  width: 620px;
 `;
 
 const SelectContent = styled.p`
   font-size: 16px;
   color: ${colors.blue};
+  margin: 16px auto 0 auto;
+  word-break: break-all;
 `;
 
-const StyledProgressBar = styled(ProgressBar)`
-  height: 40px;
-`;
-
-const EitherProgress = styled.div`
-  margin: 24px auto;
-  border: 2px solid #00397c;
-  border-radius: 6px;
-  width: 100%;
+const Progress = styled.div`
+  margin: 9px 0 0 0;
+  border: 1px ${colors.blue} solid;
+  border-radius: 8px;
+  min-width: 100%;
+  max-width: 620px;
   height: 32px;
+  position: relative;
 `;
 
 const HighLight = styled.div`
+  margin: 0 0 0 0;
+  background-color: #dfdfdf;
+  transition: 1s;
+  width: ${props => props.width};
+  height: 32px;
+  border-radius: 8px;
+`;
+
+const VotedHighLight = styled.div`
+  margin: 0 0 0 -1px;
   background-color: ${colors.blue};
   transition: 1s;
   width: ${props => props.width};
   height: 32px;
-  border-radius: 5px;
+  border-radius: 7px;
 `;
 
-const ProgressLabel = styled.div`
-  width: 480px;
+const UnVotedLabel = styled.div`
+  margin: 8px 0px 0px 10px;
+  position: absolute;
+  color: ${colors.darkGray};
+  font-size: 12px;
+  display: flex;
+`;
+
+const VotedLabel = styled.div`
+  margin: 8px 0px 0px 10px;
   position: absolute;
   color: ${colors.white};
   font-size: 12px;
   display: flex;
-  justify-content: space-between;
+`;
+
+const DesWrapper = styled.div`
+  margin: 20px auto 20px 0;
+  font-size: 14px;
+`;
+
+const Description = styled.p`
+  font-size: 16px;
+  color: ${colors.gray5};
+  word-break: break-all;
+  white-space: pre-wrap;
 `;
 
 const InfoWarpper = styled.div`

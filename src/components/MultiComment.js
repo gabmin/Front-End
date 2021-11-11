@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import CommentList from "./CommentList";
 import CommentInput from "../elements/CommentInput";
+import colors from "../shared/colors";
 
 const MultiComment = props => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const MultiComment = props => {
             />
           </div>
         ) : (
-          <p>댓글이 없습니다.</p>
+          <EmptyComment> 첫번째 댓글을 남겨주세요!</EmptyComment>
         )}
       </TempWarpper>
     </Contaier>
@@ -45,20 +46,26 @@ const MultiComment = props => {
 };
 
 const Contaier = styled.div`
-  width: 620px;
-  margin: auto;
+  max-width: 620px;
+  margin: 10px auto 20px auto;
   display: flex;
   flex-direction: column;
 `;
 
 const TempWarpper = styled.div`
-  max-width: 100%;
+  max-width: 90%;
   margin: auto;
 `;
 
 const TextAreaWarpper = styled.div`
   max-width: 100%;
   margin: 0 auto 20px;
+`;
+
+const EmptyComment = styled.p`
+  text-align: center;
+  color: ${colors.darkGray};
+  font-size: 12px;
 `;
 
 export default MultiComment;

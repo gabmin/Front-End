@@ -4,6 +4,7 @@ import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
 import { history } from "../redux/configureStore";
 import { blue, red, mobile, tablet } from "../shared/style";
+import Nickname from "./Nickname";
 
 const Card = ({
   title,
@@ -17,6 +18,7 @@ const Card = ({
   color,
   type,
   username,
+  userId,
   commentNum,
   likeNum,
   id,
@@ -49,7 +51,7 @@ const Card = ({
         )}
       </TextLayout>
       <Info type={type}>
-        <Username>{username}</Username>
+        <Nickname nickname={username} userId={userId}></Nickname>
         <div>
           {type === "multi" && (
             <CommentNum>
@@ -137,10 +139,6 @@ const Date = styled.p`
   padding-bottom: 10px;
   box-sizing: border-box;
   border-bottom: 1px solid lightgray;
-`;
-
-const Username = styled.span`
-  color: black;
 `;
 
 const Info = styled.div`

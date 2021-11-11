@@ -54,25 +54,22 @@ const MultiEdit = props => {
     return (
       <>
         <Wrap>
-          <ButtonGrid>
-            <button onClick={onClickBack}>{"<"} 뒤로가기</button>
-            <button onClick={onClickIndex}>목록</button>
-          </ButtonGrid>
           <ContentBox>
             <Index>
-              <h4 style={{ width: "30px" }}>구분</h4>
+              <p>구분</p>
               <div style={{ display: "flex" }}>
-                <RadioBtnWarpper>
+                <RadioBtnWarpperE>
                   <input
                     name="write"
                     type="radio"
                     id="either"
                     checked={eitherState}
                     onChange={EitherRadioBtn}
+                    disabled
                   />
                   <label>찬반</label>
-                </RadioBtnWarpper>
-                <RadioBtnWarpper>
+                </RadioBtnWarpperE>
+                <RadioBtnWarpperM>
                   <input
                     name="write"
                     type="radio"
@@ -81,7 +78,7 @@ const MultiEdit = props => {
                     onChange={MultiRadioBtn}
                   />
                   <label>객관식</label>
-                </RadioBtnWarpper>
+                </RadioBtnWarpperM>
               </div>
             </Index>
 
@@ -97,9 +94,9 @@ const MultiEdit = props => {
 };
 
 const Wrap = styled.div`
-  width: 80%;
-  height: 100%;
-  margin: 50px auto;
+  min-width: 100%;
+  max-width: 840px;
+  margin: auto;
 `;
 const ButtonGrid = styled.div`
   width: 100%;
@@ -109,22 +106,42 @@ const ButtonGrid = styled.div`
 `;
 
 const ContentBox = styled.div`
-  border: 1px solid black;
-  width: 100%;
-  height: 100%;
-  padding: 1em;
+  border: 2px solid #00397c;
+  max-width: 840px;
   box-sizing: border-box;
-`;
-const RadioBtnWarpper = styled.div`
-  width: 70px;
-  display: flex;
-  margin: 0px 0px 0px 60px;
-  align-items: center;
+  margin: 56px auto 56px auto;
+  border-radius: 10px;
+  padding: 4% 110px 4% 110px;
 `;
 
 const Index = styled.div`
-  margin: 10px;
   display: flex;
+  p {
+    font-size: 18px;
+    color: #101214;
+    font-weight: bold;
+    line-height: 26px;
+    margin: 0px;
+  }
+  margin: 0px 0px 22px 0px;
+`;
+
+const RadioBtnWarpperE = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 76px;
+  align-items: center;
+  label {
+    font-size: 16px;
+  }
+`;
+
+const RadioBtnWarpperM = styled.div`
+  display: flex;
+  margin: 0px 0px 0px 47px;
+  align-items: center;
+  label {
+    font-size: 16px;
+  }
 `;
 
 export default MultiEdit;

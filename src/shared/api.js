@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Axios 인스턴스 설정
 const api = axios.create({
-  baseURL: "https://starandnight.shop",
+  baseURL: "https://stockscreener.shop",
   withCredentials: true,
 });
 
