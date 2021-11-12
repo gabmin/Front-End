@@ -106,10 +106,6 @@ const Layout = styled.div`
 
 const TextLayout = styled.div`
   width: 90%;
-
-  p {
-    margin: 0.5em;
-  }
 `;
 
 const Subject = styled.p`
@@ -124,6 +120,7 @@ const Subject = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   box-sizing: border-box;
+  margin: 0;
 `;
 
 const Content = styled.p`
