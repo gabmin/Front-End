@@ -166,7 +166,7 @@ const Title = styled.div`
     padding: 0.5px 10px;
     color: ${red};
     border: 1px solid red;
-    border-radius: 9px;
+    border-radius: 7px;
     box-sizing: border-box;
   }
 
