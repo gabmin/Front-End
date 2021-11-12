@@ -157,6 +157,7 @@ const LikeBtn = styled.button`
   color: ${colors.red};
   border: none;
   background-color: ${colors.white};
+  cursor: pointer;
 `;
 
 const TotalLike = styled.p`

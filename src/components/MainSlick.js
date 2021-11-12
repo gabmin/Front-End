@@ -8,8 +8,8 @@ import { FiArrowRight } from "react-icons/fi";
 import { history } from "../redux/configureStore";
 import MainCard from "../components/MainCard";
 
-import PrevArrow from "../elements/PrevArrow";
-import NextArrow from "../elements/NextArrow";
+import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
+import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
 
 const ProductSlick = ({ cardList, type }) => {
@@ -23,8 +23,8 @@ const ProductSlick = ({ cardList, type }) => {
     slidesToScroll: 1,
     initialSlide: 0,
     lazyLoad: true,
-    nextArrow: <NextArrow color="red" />,
-    prevArrow: <PrevArrow color="red" />,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     centerPadding: "150px",
     responsive: [
       {
@@ -115,20 +115,34 @@ const Wrap = styled.div`
   li button:before {
     position: relative;
     top: 2px;
-    background-color: transparent;
-    border: 1px solid ${red};
+    background-color: white;
+    border: 0.2em solid ${red};
     border-radius: 50%;
     display: inline-block;
-    height: 6px;
-    width: 6px;
+    height: 1.1em;
+    width: 1.1em;
     opacity: 1;
     color: transparent;
     margin: 0;
   }
 
+  li button::before {
+    width: 1.1em;
+    height: 1.1em;
+  }
+
   li.slick-active {
     top: -6px;
+    right: -1.5px;
     margin: 0 5px;
+    button::before {
+      position: relative;
+      top: 2.3px;
+      right: 2px;
+      transform: scale(1.1);
+      box-sizing: border-box;
+      margin: 0;
+    }
   }
 
   li.slick-active button:before {
@@ -165,7 +179,7 @@ const Title = styled.div`
     margin: 0 10px;
     padding: 0.5px 10px;
     color: ${red};
-    border: 1px solid red;
+    border: 1px solid ${red};
     border-radius: 7px;
     box-sizing: border-box;
   }
@@ -192,6 +206,12 @@ const Title = styled.div`
   }
 `;
 
-const StyledSlider = styled(Slider)``;
+const StyledSlider = styled(Slider)`
+  .slick-prev,
+  .slick-next {
+    width: 12px;
+    height: 28px;
+  }
+`;
 
 export default ProductSlick;
