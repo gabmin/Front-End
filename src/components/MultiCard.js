@@ -17,6 +17,7 @@ const MultiCard = props => {
     multiId,
     title,
     description,
+    user,
     nickname,
     date,
     editedDate,
@@ -55,6 +56,7 @@ const MultiCard = props => {
                 <UserWrapper>
                   <NickText>
                     <Nickname
+                      userId={user}
                       nickname={nickname}
                       fontSize={"14px"}
                       width={"32px"}
@@ -96,6 +98,7 @@ const MultiCard = props => {
                 <UserWrapper>
                   <NickText>
                     <Nickname
+                      userId={user}
                       nickname={nickname}
                       fontSize={"14px"}
                       width={"32px"}

@@ -29,6 +29,7 @@ const CommentList = props => {
               id={p.id}
               deleted={p.deleted}
               liked={p.liked}
+              user={p.user}
             />
           </div>
         ))}

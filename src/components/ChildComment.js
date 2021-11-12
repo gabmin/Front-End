@@ -27,6 +27,7 @@ const ChildComment = props => {
     deleted,
     commentLikeCnt,
     liked,
+    user,
   } = props;
 
   const dispatch = useDispatch();
@@ -137,6 +138,7 @@ const ChildComment = props => {
         <InfoWarpper>
           <NickWarpper>
             <Nickname
+              userId={user}
               nickname={nickname}
               fontSize={"12px"}
               width={"24px"}
