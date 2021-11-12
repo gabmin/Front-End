@@ -227,6 +227,7 @@ const VoteBtn = styled.button`
   background-color: ${colors.red};
   font-size: 16px;
   color: ${colors.white};
+  cursor: pointer;
 `;
 
 const VoteBtnB = styled.button`
@@ -239,6 +240,7 @@ const VoteBtnB = styled.button`
   background-color: ${colors.gray5};
   font-size: 16px;
   color: ${colors.white};
+  cursor: pointer;
 `;
 
 const TempWarpper = styled.div``;

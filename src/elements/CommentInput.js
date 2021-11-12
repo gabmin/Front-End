@@ -92,6 +92,7 @@ const AddBtn = styled.button`
   font-size: 10px;
   color: ${colors.white};
   background-color: ${colors.red};
+  cursor: pointer;
 `;
 
 const DisabledComment = styled.p`
