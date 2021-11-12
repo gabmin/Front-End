@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import SearchCard from "../components/SearchCard";
+
 import { search } from "../redux/actions/search";
 
 const Search = ({ location }) => {
