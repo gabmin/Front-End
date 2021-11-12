@@ -206,6 +206,7 @@ const MultiVoted = props => {
       </DesWrapper>
       <InfoWarpper>
         <Nickname
+          userId={multiList.user}
           nickname={multiList.nickname}
           fontSize={"14px"}
           width={"32px"}
