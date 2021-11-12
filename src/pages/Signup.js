@@ -41,6 +41,7 @@ const Signup = () => {
   const [nickNotice, setNickNotice] = useState(false);
   const [nickDupCheck, setNickDupCheck] = useState(false);
   const [nickError, setNickError] = useState(false);
+  const [nickLength, setNickLength] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordEqual, setPasswordEqual] = useState(false);
   const [ageError, setAgeError] = useState(false);
@@ -96,6 +97,11 @@ const Signup = () => {
   }, [idFilter, id]);
 
   const nickChecker = useCallback(() => {
+    if (nickname.length < 2 || nickname.length > 7) {
+      setNickLength(true);
+      return;
+    }
+    setNickLength(false);
     if (!nickname.trim()) {
       setNickError(true);
       setNickNotice(true);
@@ -251,15 +257,19 @@ const Signup = () => {
                   onBlur={onClickNickDup}
                 />
               </InputWrapper>
-              {nickError && !checkNickDupLoading && nickNotice && (
+              {/* {nickError && !checkNickDupLoading && nickNotice && (
                 <span>닉네임을 입력하세요</span>
-              )}
+              )} */}
               {checkNickDupResult &&
                 !nickError &&
                 !checkNickDupLoading &&
+                !nickLength &&
                 nickNotice && (
                   <span style={{ color: blue }}>사용가능한 닉네임 입니다</span>
                 )}
+              {nickLength && !checkNickDupLoading && nickNotice && (
+                <span>2~7자로 입력해 주세요</span>
+              )}
               {checkNickDupResult === false &&
                 !checkNickDupLoading &&
                 nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
