@@ -227,6 +227,7 @@ const BackBtn = styled.button`
   font-size: 24px;
   color: ${colors.gray5};
   background-color: ${colors.white};
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
@@ -255,6 +256,7 @@ const TopBtn = styled.button`
   border: none;
   background-color: ${colors.white};
   color: ${colors.blue};
+  cursor: pointer;
 `;
 
 export default MultiDetail;

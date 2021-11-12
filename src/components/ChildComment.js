@@ -219,6 +219,7 @@ const EventBtn = styled.button`
   border: none;
   color: ${colors.red};
   background-color: ${colors.white};
+  cursor: pointer;
 `;
 
 const ContentWrapper = styled.div`
@@ -242,6 +243,7 @@ const LikeBtn = styled.button`
   border: none;
   color: ${colors.gray5};
   background-color: ${colors.white};
+  cursor: pointer;
 `;
 
 const TotalLikes = styled.p`
@@ -269,6 +271,7 @@ const TextAreaBtn = styled.button`
   font-size: 10px;
   color: ${colors.white};
   background-color: ${colors.red};
+  cursor: pointer;
 `;
 
 const TextArea = styled.textarea`

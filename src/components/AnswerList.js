@@ -118,6 +118,7 @@ const CompleteBtn = styled.button`
   background-color: #e25b45;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const CompleteWrapper = styled.div`
