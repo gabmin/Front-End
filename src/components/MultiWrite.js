@@ -521,6 +521,7 @@ const FullBtn = styled.button`
   background-color: ${colors.white};
   border: 1px ${colors.blue} solid;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const HalfBtn = styled.button`
@@ -533,6 +534,7 @@ const HalfBtn = styled.button`
   background-color: ${colors.white};
   border: 1px ${colors.blue} solid;
   border-radius: 8px;
+  cursor: pointer;
 `;
 
 const EventBtnWarpper = styled.div`
@@ -550,6 +552,7 @@ const AddBtn = styled.button`
   border: 1px ${colors.red} solid;
   border-radius: 8px;
   background-color: ${colors.red};
+  cursor: pointer;
 `;
 
 const CancelBtn = styled.button`
@@ -559,6 +562,7 @@ const CancelBtn = styled.button`
   border: 1px ${colors.red} solid;
   border-radius: 8px;
   background-color: ${colors.white};
+  cursor: pointer;
 `;
 
 export default MultiWrite;

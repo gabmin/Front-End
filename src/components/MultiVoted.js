@@ -296,7 +296,7 @@ const HighLight = styled.div`
 `;
 
 const VotedHighLight = styled.div`
-  margin: 0 0 0 -1px;
+  margin: 0 0 0 0;
   background-color: ${colors.blue};
   transition: 1s;
   width: ${props => props.width};
@@ -384,6 +384,7 @@ const LikeBtn = styled.button`
   color: ${colors.red};
   border: none;
   background-color: ${colors.white};
+  cursor: pointer;
 `;
 
 const LikedBtn = styled.div`

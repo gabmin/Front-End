@@ -1,12 +1,10 @@
 import React from "react";
-import Slider from "react-slick";
 import styled from "styled-components";
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import MultiCard from "../components/MultiCard";
-import NextArrow from "../elements/NextArrow";
-import PrevArrow from "../elements/PrevArrow";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
@@ -14,8 +12,8 @@ const MultiSlick = props => {
     className: "center",
     centerMode: true,
     infinite: true,
-    // adaptiveHeight: true,
-    // focusOnSelect: true,
+    adaptiveHeight: true,
+    focusOnSelect: true,
     centerPadding: "0px",
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -33,23 +31,23 @@ const MultiSlick = props => {
           ...style,
           width: "50px",
           height: "50px",
-          right: "-27px",
+          right: "0px",
           top: "260px",
-          zIndex: "999",
+          zIndex: "1000",
         }}
         onClick={onClick}
       >
         <img
-          src={require("../images/arrow.png").default}
+          src={require("../images/arrowRed.svg").default}
           alt="arrowNext"
           style={{
             position: "absolute",
             width: "100%",
             height: "100%",
-            right: "30px",
-            top: "0px",
-            border: "1px solid rgb(197, 197, 197)",
-            borderRadius: "50%",
+            // right: "10px",
+            // top: "0px",
+
+            border: "50%",
           }}
         />
       </div>
@@ -75,21 +73,20 @@ const MultiSlick = props => {
             height: "50px",
             right: "-50px",
             top: "260px",
-            zIndex: "999",
+            zIndex: "1000",
           }}
           onClick={onClick}
         >
           <img
-            src={require("../images/arrowL.png").default}
+            src={require("../images/arrowLRed.svg").default}
             alt="arrowNext"
             style={{
               position: "absolute",
               width: "100%",
               height: "100%",
-              left: "50px",
+              left: "0px",
               top: "0px",
-              border: "1px solid rgb(197, 197, 197)",
-              borderRadius: "50%",
+              border: null,
             }}
           />
         </div>
@@ -137,17 +134,12 @@ const StyledSlider = styled(Slider)`
   margin: auto;
   width: 1300px;
   .slick-slider .slick-list {
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(-60px, 0, 0);
   }
 
   .slick-slide.slick-center {
-    transform: scale(1.1) translateX(0px);
+    transform: scale(1.1);
     transition: 0.5s;
-    z-index: 999999 !important;
+    /* z-index: 999 !important; */
   }
 
   .slick-slide.slick-cloned {
@@ -158,7 +150,7 @@ const StyledSlider = styled(Slider)`
     border-radius: 10px;
     padding: 30px 0 30px 0;
     /* transform: translate3d(-10px, 0, -100px); */
-    z-index: 10 !important;
+    /* z-index: 10 !important; */
   }
 `;
 
