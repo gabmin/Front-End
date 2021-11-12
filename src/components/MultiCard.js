@@ -221,7 +221,7 @@ const VoteBtn = styled.button`
   display: block;
   width: 150px;
   height: 40px;
-  margin: 40px auto 0 auto;
+  margin: 60px auto 0 auto;
   border: none;
   border-radius: 8px;
   background-color: ${colors.red};
@@ -234,7 +234,7 @@ const VoteBtnB = styled.button`
   display: block;
   width: 150px;
   height: 40px;
-  margin: 40px auto 0 auto;
+  margin: 60px auto 0 auto;
   border: none;
   border-radius: 8px;
   background-color: ${colors.gray5};
@@ -264,13 +264,14 @@ const NickText = styled.p`
 `;
 
 const InfoWarpper = styled.div`
-  width: 60px;
+  width: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
 const CommentWarpper = styled.div`
+  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -283,12 +284,17 @@ const TotalComment = styled.p`
 `;
 
 const LikeWarpper = styled.div`
+  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
   color: ${colors.red};
+
+  .FiThumbsUp {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const TotalLike = styled.p`

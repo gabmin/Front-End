@@ -132,6 +132,7 @@ const RightWarpper = styled.div`
 `;
 
 const CommentWarpper = styled.div`
+  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -144,6 +145,7 @@ const TotalComment = styled.p`
 `;
 
 const LikeWarpper = styled.div`
+  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

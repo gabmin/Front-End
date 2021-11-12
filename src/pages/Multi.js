@@ -53,9 +53,21 @@ const Multi = props => {
   return (
     <Container>
       <TabBtnWarpper>
-        <TabBtn onClick={showPost}>전체</TabBtn>
-        <TabBtn onClick={showPosting}>진행중</TabBtn>
-        <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
+        {status === "Post" ? (
+          <TabBtnOn onClick={showPost}>전체</TabBtnOn>
+        ) : (
+          <TabBtn onClick={showPost}>전체</TabBtn>
+        )}
+        {status === "Posting" ? (
+          <TabBtnOn onClick={showPosting}>진행중</TabBtnOn>
+        ) : (
+          <TabBtn onClick={showPosting}>진행중</TabBtn>
+        )}
+        {status === "CompletePost" ? (
+          <TabBtnOn onClick={showCompletePost}>종료됨</TabBtnOn>
+        ) : (
+          <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
+        )}
       </TabBtnWarpper>
       <SliderWarpper>
         {status === "Post" ? <MultiSlick cardList={cardList} /> : null}
@@ -100,6 +112,18 @@ const TabBtn = styled.button`
   }
 `;
 
+const TabBtnOn = styled.button`
+  border: none;
+  background-color: ${colors.white};
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 29px;
+  cursor: pointer;
+  color: ${colors.blue};
+  text-decoration: underline;
+  text-underline-position: under;
+`;
+
 const SliderWarpper = styled.div`
   margin: 70px auto;
   width: 100%;
@@ -118,11 +142,12 @@ const QuestionBtn = styled.button`
   width: 180px;
   height: 40px;
   color: ${colors.red};
-  background-color: #ffffff;
+  background-color: ${colors.white};
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    color: #777777;
+    background-color: ${colors.red};
+    color: ${colors.white};
   }
 `;
 
