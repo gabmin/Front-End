@@ -24,7 +24,7 @@ function NextArrow(props) {
       onClick={onClick}
     >
       <img
-        src={require("../images/arrowRed.png").default}
+        src={require("../images/arrowRed.svg").default}
         alt="arrowNext"
         style={{
           position: "absolute",
@@ -55,7 +55,7 @@ function PrevArrow(props) {
       onClick={onClick}
     >
       <img
-        src={require("../images/arrowLRed.png").default}
+        src={require("../images/arrowLRed.svg").default}
         alt="arrowNext"
         style={{
           position: "absolute",
