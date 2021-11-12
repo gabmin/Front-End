@@ -67,7 +67,10 @@ const EitherCompleteCard = props => {
 
   //좋아요
   const onClickLike = () => {
-    if (liked !== null || userInfo.nickname === "GUEST") {
+    if (liked !== null) {
+      return;
+    } else if (userInfo.nickname === "GUEST") {
+      alert("로그인 후 사용 가능합니다.");
       return;
     } else {
       dispatch(likePostDB(eitherId));

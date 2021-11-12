@@ -103,7 +103,10 @@ const EitherCard = props => {
   };
   //좋아요
   const onClickLike = () => {
-    if (liked !== null || userInfo.nickname === "GUEST") {
+    if (liked !== null) {
+      return;
+    } else if (userInfo.nickname === "GUEST") {
+      alert("로그인 후 사용 가능합니다.");
       return;
     } else {
       dispatch(likePostDB(eitherId));
@@ -113,8 +116,12 @@ const EitherCard = props => {
   };
   //content 투표
   const onClickContent = e => {
-    dispatch(votePostDB({ eitherId, data: { vote: e } }));
-    setChoice(e);
+    if (userInfo.nickname === "GUEST") {
+      alert("로그인 후 사용 가능합니다.");
+    } else {
+      dispatch(votePostDB({ eitherId, data: { vote: e } }));
+      setChoice(e);
+    }
   };
   //투표 종료하기
   const onClickComplete = () => {
@@ -221,10 +228,10 @@ const EitherCard = props => {
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
         {/* 선택 결과에 따라 보여주기 */}
-        {!userInfo.nickname ? (
+        {userInfo.nickname === "GUEST" ? (
           <ButtonGrid>
-            {SelctButtonA(null, "#101214", true, null, contentA)}
-            {SelctButtonB(null, "#101214", true, null, contentB)}
+            {SelctButtonA(null, "#101214", false, null, contentA)}
+            {SelctButtonB(null, "#101214", false, null, contentB)}
           </ButtonGrid>
         ) : userInfo.nickname && choice === "A" ? (
           <ButtonGrid>
