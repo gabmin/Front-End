@@ -35,110 +35,49 @@ const MultiCard = props => {
     }
   };
   return (
-    <>
-      {completed !== 1 ? (
-        <Container>
-          <Card>
-            <TitleWrapper>
-              <TitleText>{title}</TitleText>
-            </TitleWrapper>
-            <DateWarpper>
-              <DateText>{date}</DateText>
-            </DateWarpper>
-            {/* <ContentHr /> */}
-            <DesWrapper>
-              <DesText>{description}</DesText>
-            </DesWrapper>
-            <VoteBtn onClick={goToDetail}>투표하기</VoteBtn>
-            <TempWarpper>
-              <FooterWrapper>
-                <UserWrapper>
-                  <NickText>
-                    <Nickname
-                      nickname={nickname}
-                      fontSize={"14px"}
-                      width={"32px"}
-                      height={"32px"}
-                    ></Nickname>
-                  </NickText>
-                  {/* {isEdited ? <p>{editedDate}</p> : null} */}
-                </UserWrapper>
-                <InfoWarpper>
-                  <CommentWarpper>
-                    <FiMessageSquare />{" "}
-                    <TotalComment>{commentCnt}</TotalComment>
-                  </CommentWarpper>
-                  <LikeWarpper>
-                    <FiThumbsUp />
-                    <TotalLike>{likeCnt}</TotalLike>
-                  </LikeWarpper>
-                </InfoWarpper>
-              </FooterWrapper>
-            </TempWarpper>
-          </Card>
-        </Container>
-      ) : (
-        <ContainerB>
-          <Card>
-            <TitleWrapper>
-              <TitleText>{title}</TitleText>
-            </TitleWrapper>
-            <DateWarpper>
-              <DateText>{date}</DateText>
-            </DateWarpper>
-            {/* <ContentHr /> */}
-            <DesWrapper>
-              <DesText>{description}</DesText>
-            </DesWrapper>
-            <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
-            <TempWarpper>
-              <FooterWrapper>
-                <UserWrapper>
-                  <NickText>
-                    <Nickname
-                      nickname={nickname}
-                      fontSize={"14px"}
-                      width={"32px"}
-                      height={"32px"}
-                    ></Nickname>
-                  </NickText>
-                  {/* {isEdited ? <p>{editedDate}</p> : null} */}
-                </UserWrapper>
-                <InfoWarpper>
-                  <CommentWarpper>
-                    <FiMessageSquare />{" "}
-                    <TotalComment>{commentCnt}</TotalComment>
-                  </CommentWarpper>
-                  <LikeWarpper>
-                    <FiThumbsUp />
-                    <TotalLike>{likeCnt}</TotalLike>
-                  </LikeWarpper>
-                </InfoWarpper>
-              </FooterWrapper>
-            </TempWarpper>
-          </Card>
-        </ContainerB>
-      )}
-    </>
+    <Container>
+      <Card>
+        <TitleWrapper>
+          <TitleText>{title}</TitleText>
+        </TitleWrapper>
+        <DateWarpper>
+          <DateText>{date}</DateText>
+        </DateWarpper>
+        {/* <ContentHr /> */}
+        <DesWrapper>
+          <DesText>{description}</DesText>
+        </DesWrapper>
+        <VoteBtn onClick={goToDetail}>투표하기</VoteBtn>
+        <TempWarpper>
+          <FooterWrapper>
+            <UserWrapper>
+              <NickText>
+                <Nickname
+                  nickname={nickname}
+                  fontSize={"14px"}
+                  width={"32px"}
+                  height={"32px"}
+                ></Nickname>
+              </NickText>
+              {/* {isEdited ? <p>{editedDate}</p> : null} */}
+            </UserWrapper>
+            <InfoWarpper>
+              <CommentWarpper>
+                <FiMessageSquare /> <TotalComment>{commentCnt}</TotalComment>
+              </CommentWarpper>
+              <LikeWarpper>
+                <FiThumbsUp />
+                <TotalLike>{likeCnt}</TotalLike>
+              </LikeWarpper>
+            </InfoWarpper>
+          </FooterWrapper>
+        </TempWarpper>
+      </Card>
+    </Container>
   );
 };
 
 const Container = styled.div`
-  text-align: left;
-  width: 380px;
-  height: 490px;
-  padding: 46px 56px;
-  margin: 0 auto;
-  border: 2px ${colors.blue} solid;
-  border-radius: 10px;
-  box-sizing: border-box;
-  word-break: break-all;
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors.white};
-`;
-
-const ContainerB = styled.div`
   text-align: left;
   width: 380px;
   height: 490px;
@@ -222,18 +161,6 @@ const VoteBtn = styled.button`
   border: none;
   border-radius: 8px;
   background-color: ${colors.red};
-  font-size: 16px;
-  color: ${colors.white};
-`;
-
-const VoteBtnB = styled.button`
-  display: block;
-  width: 150px;
-  height: 40px;
-  margin: 40px auto 0 auto;
-  border: none;
-  border-radius: 8px;
-  background-color: ${colors.gray5};
   font-size: 16px;
   color: ${colors.white};
 `;

@@ -19,13 +19,13 @@ import CompletedDetail from "../components/CompletedDetail";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
-  const [state, setState] = useState(false);
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataListList", dataList);
+  const [state, setState] = useState(false);
 
   const render = temp => {
     setState(temp);

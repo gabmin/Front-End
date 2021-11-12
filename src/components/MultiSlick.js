@@ -146,6 +146,7 @@ const StyledSlider = styled(Slider)`
 
   .slick-slide.slick-center {
     transform: scale(1.1) translateX(0px);
+    transition: 0.5s;
     z-index: 999999 !important;
   }
 

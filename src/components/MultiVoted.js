@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
 import { FiThumbsUp } from "react-icons/fi";
+import { HiThumbUp } from "react-icons/hi";
 import { FiMessageSquare } from "react-icons/fi";
 
 import colors from "../shared/colors";
@@ -17,6 +18,9 @@ const MultiVoted = props => {
   // const DataList = props.dataList.multi;
   const multiId = props.multiId;
   const [likes, setLikes] = useState(multiList.likeCnt);
+  const [likeState, setLikeState] = useState(
+    multiList.liked === null ? false : true,
+  );
   console.log(dataList);
 
   const TotalCnt =
@@ -81,6 +85,7 @@ const MultiVoted = props => {
     if (multiList.liked === null) {
       dispatch(AddLikeDB(multiId));
       setLikes(multiList.likeCnt + 1);
+      setLikeState(true);
     } else {
       return;
     }
@@ -214,9 +219,15 @@ const MultiVoted = props => {
             </TotalComment>
           </CommentWarpper>
           <LikeWarpper>
-            <LikeBtn onClick={addLike}>
-              <FiThumbsUp />
-            </LikeBtn>{" "}
+            {!likeState ? (
+              <LikeBtn onClick={addLike}>
+                <FiThumbsUp />
+              </LikeBtn>
+            ) : (
+              <LikedBtn>
+                <HiThumbUp />
+              </LikedBtn>
+            )}
             <TotalLike>{likes}</TotalLike>
           </LikeWarpper>
         </RightWarpper>
@@ -372,6 +383,12 @@ const LikeBtn = styled.button`
   color: ${colors.red};
   border: none;
   background-color: ${colors.white};
+`;
+
+const LikedBtn = styled.div`
+  font-size: 20px;
+  align-items: center;
+  color: ${colors.red};
 `;
 
 const TotalLike = styled.p`
