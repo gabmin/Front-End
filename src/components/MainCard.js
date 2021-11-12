@@ -43,7 +43,7 @@ const Card = ({
       return;
     }
     history.push(`/multi/${id}`);
-  }, [id, type]);
+  }, [id, type, dispatch]);
 
   return (
     <Layout {...styles} onClick={onClickDetail} type={type}>
