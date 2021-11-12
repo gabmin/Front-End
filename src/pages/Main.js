@@ -243,10 +243,10 @@ const GoMulti = styled.div`
 
 const StyledGoAnt = styled(GoAnt)`
   position: absolute;
-  bottom: ${props => (props.color === "blue" ? "0" : "2px")};
-  right: ${props => (props.color === "blue" ? "0" : "2px")};
+  bottom: ${props => (props.color === "blue" ? "-1px" : "2px")};
+  right: ${props => (props.color === "blue" ? "-1px" : "2px")};
   border-radius: ${props =>
-    props.color === "blue" ? "0 0 12px 0" : "0 0 17px 0"};
+    props.color === "blue" ? "0 0 15px 0" : "0 0 17px 0"};
   fill: ${props => (props.color === "blue" ? blue : "#ffffff")};
   stroke: ${props => (props.color === "blue" ? blue : "#ffffff")};
 
