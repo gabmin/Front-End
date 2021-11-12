@@ -33,6 +33,7 @@ const EitherCard = props => {
     liked,
     voted,
     completed,
+    user,
   } = props;
 
   const [percent, setPercent] = useState("");
@@ -274,7 +275,7 @@ const EitherCard = props => {
           <div>
             <Nickname
               nickname={nickname}
-              userId={userInfo.userId}
+              userId={user}
               width={"32px"}
               height={"32px"}
               fontSize={"14px"}

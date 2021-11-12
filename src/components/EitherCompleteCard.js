@@ -25,6 +25,7 @@ const EitherCompleteCard = props => {
     voteCntA,
     voteCntB,
     liked,
+    user,
   } = props;
 
   //유저정보(닉네임)
@@ -184,7 +185,7 @@ const EitherCompleteCard = props => {
           <div>
             <Nickname
               nickname={nickname}
-              userId={userInfo.userId}
+              userId={user}
               width={"32px"}
               height={"32px"}
               fontSize={"14px"}
