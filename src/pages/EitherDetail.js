@@ -22,7 +22,7 @@ const EitherDetail = props => {
   const PostLists = PostList && PostList.either;
   //전체 게시글 중 해당 게시글 찾기
   const targetPost = PostLists?.find(p => p.eitherId == eitherId);
-  console.log(userInfo);
+
   useEffect(() => {
     //데이터 가져오기
     dispatch(PostDB());

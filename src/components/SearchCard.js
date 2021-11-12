@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
 import { history } from "../redux/configureStore";
-
+import { SetParams } from "../redux/reducers/paramsSlice";
 import {
   blue,
   red,
@@ -26,9 +27,14 @@ const SearchCard = ({
   commentCnt,
   nickname,
 }) => {
+  const dispatch = useDispatch();
+
   const onClickContent = useCallback(() => {
     if (type === "찬반") {
-      history.push(`/either/${id}`);
+      dispatch(SetParams(id));
+      history.push({
+        pathname: "/either",
+      });
       return;
     }
     history.push(`/multi/${id}`);
