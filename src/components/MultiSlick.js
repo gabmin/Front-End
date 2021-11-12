@@ -38,15 +38,16 @@ const MultiSlick = props => {
         onClick={onClick}
       >
         <img
-          src={require("../images/arrowRed.png").default}
+          src={require("../images/arrowRed.svg").default}
           alt="arrowNext"
           style={{
             position: "absolute",
             width: "100%",
             height: "100%",
-            right: "10px",
-            top: "0px",
-            border: null,
+            // right: "10px",
+            // top: "0px",
+
+            border: "50%",
           }}
         />
       </div>
@@ -77,7 +78,7 @@ const MultiSlick = props => {
           onClick={onClick}
         >
           <img
-            src={require("../images/arrowLRed.png").default}
+            src={require("../images/arrowLRed.svg").default}
             alt="arrowNext"
             style={{
               position: "absolute",
@@ -136,7 +137,7 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-slide.slick-center {
-    transform: scale(1.1) translateX(0px);
+    transform: scale(1.1);
     transition: 0.5s;
     /* z-index: 999 !important; */
   }
