@@ -97,6 +97,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   liked={v.liked}
                   voted={v.voted}
                   completed={v.completed}
+                  user={v.user}
                 />
               ))}
             {CompleteList &&
@@ -115,6 +116,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   liked={v.liked}
                   voted={v.voted}
                   completed={v.completed}
+                  user={v.user}
                 />
               ))}
             {PostingList &&
@@ -133,6 +135,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   liked={v.liked}
                   voted={v.voted}
                   completed={v.completed}
+                  user={v.user}
                 />
               ))}
             {PostCompleteList &&
@@ -151,6 +154,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   liked={v.liked}
                   voted={v.voted}
                   completed={v.completed}
+                  user={v.user}
                 />
               ))}
           </Slider>
@@ -164,8 +168,8 @@ const settings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  // adaptiveHeight: true,
-  // focusOnSelect: true,
+  adaptiveHeight: true,
+  focusOnSelect: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   speed: 500,
