@@ -113,7 +113,7 @@ const TextLayout = styled.div`
 `;
 
 const Subject = styled.p`
-  height: 52px;
+  height: 50px;
   width: 100%;
   font-size: ${props => props.titleSize};
   font-weight: bold;
