@@ -222,37 +222,37 @@ const EitherCard = props => {
         </TotalCntGrid>
         {/* 선택 결과에 따라 보여주기 */}
         {!userInfo.nickname ? (
-          <div>
+          <ButtonGrid>
             {SelctButtonA(null, "#101214", true, null, contentA)}
             {SelctButtonB(null, "#101214", true, null, contentB)}
-          </div>
+          </ButtonGrid>
         ) : userInfo.nickname && choice === "A" ? (
-          <div>
+          <ButtonGrid>
             {completed === 1
               ? SelctButtonA("#00397c", "#FFFFFF", true, null, contentA)
               : SelctButtonA("#00397c", "#FFFFFF", false, "A", contentA)}
             {completed === 1
               ? SelctButtonB(null, "#101214", true, null, contentB)
               : SelctButtonB(null, "#101214", false, "B", contentB)}
-          </div>
+          </ButtonGrid>
         ) : userInfo.nickname && choice === "B" ? (
-          <div>
+          <ButtonGrid>
             {completed === 1
               ? SelctButtonA(null, "#101214", true, null, contentA)
               : SelctButtonA(null, "#101214", false, "A", contentA)}
             {completed === 1
               ? SelctButtonB("#E25B45", "#101214", true, null, contentB)
               : SelctButtonB("#E25B45", "#101214", false, "B", contentB)}
-          </div>
+          </ButtonGrid>
         ) : (
-          <div>
+          <ButtonGrid>
             {completed === 1
               ? SelctButtonA(null, "#101214", true, null, contentA)
               : SelctButtonA(null, "#101214", false, "A", contentA)}
             {completed === 1
               ? SelctButtonB(null, "#101214", true, null, contentB)
               : SelctButtonB(null, "#101214", false, "B", contentB)}
-          </div>
+          </ButtonGrid>
         )}
         <ProgressGrid>
           <EitherProgress>
@@ -380,6 +380,13 @@ const ProgressLabel = styled.div`
     margin: 8px 10px 0px 0px;
   }
 `;
+const ButtonGrid = styled.div`
+  width: 312px;
+  height: 160px;
+  box-sizing: border-box;
+  margin: 24px auto 0px auto;
+  justify-content: center;
+`;
 const EitherButtonA = styled.button`
   width: 156px;
   height: 160px;
@@ -388,8 +395,8 @@ const EitherButtonA = styled.button`
   border-bottom-left-radius: 10px;
   font-size: 16px;
   line-height: 23px;
+
   cursor: pointer;
-  margin: 24px auto 0px auto;
   &:hover {
     background-color: #dfdfdf;
   }
@@ -402,8 +409,8 @@ const EitherButtonB = styled.button`
   border-bottom-right-radius: 10px;
   font-size: 16px;
   line-height: 23px;
+
   cursor: pointer;
-  margin: 24px auto 0px auto;
   &:hover {
     background-color: #dfdfdf;
   }
@@ -426,7 +433,12 @@ const EitherFooter = styled.div`
     margin-left: 14px;
   }
 `;
-const ButtonText = styled.h5`
+const ButtonText = styled.div`
   word-break: break-all;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 3px;
 `;
 export default EitherCard;
