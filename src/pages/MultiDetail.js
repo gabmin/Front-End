@@ -19,13 +19,13 @@ import CompletedDetail from "../components/CompletedDetail";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
-  const [state, setState] = useState(false);
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataListList", dataList);
+  const [state, setState] = useState(false);
 
   const render = temp => {
     setState(temp);
@@ -215,7 +215,7 @@ const Container = styled.div`
 const Temp = styled.div`
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: white;
   opacity: 0.1;
   z-index: 50;
   position: absolute;

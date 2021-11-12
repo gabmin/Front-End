@@ -29,7 +29,7 @@ const AnswerList = props => {
     setColor(color);
     selected(e);
     setSelect(e.target.id);
-    console.log("e", e.target.id);
+    console.log("e", e);
   };
 
   console.log("select", select);
