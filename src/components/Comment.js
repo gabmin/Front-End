@@ -16,8 +16,16 @@ import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
 
 const Comment = props => {
-  const { nickname, commentDate, commentLikeCnt, id, deleted, comment, liked } =
-    props;
+  const {
+    nickname,
+    commentDate,
+    commentLikeCnt,
+    id,
+    deleted,
+    comment,
+    liked,
+    user,
+  } = props;
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
@@ -132,6 +140,7 @@ const Comment = props => {
         <InfoWarpper>
           <NickWarpper>
             <Nickname
+              userId={user}
               nickname={nickname}
               fontSize={"12px"}
               width={"24px"}
