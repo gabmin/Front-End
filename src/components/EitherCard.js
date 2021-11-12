@@ -9,6 +9,7 @@ import { FiThumbsUp } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
 import {
   deletePostDB,
@@ -101,7 +102,6 @@ const EitherCard = props => {
     setAction(true);
   };
   //좋아요
-  console.log(userInfo);
   const onClickLike = () => {
     if (liked !== null || userInfo.nickname === "GUEST") {
       return;
@@ -157,72 +157,69 @@ const EitherCard = props => {
   return (
     <>
       <Container>
-        <div
-          style={{
-            position: "absolute",
-            margin: "21px 31px 0px 557px",
-          }}
-        >
-          {/* 자신이 작성한 글에 따른 수정,삭제,종료하기 버튼 보여주기 */}
-          {nickname === userInfo.nickname ? (
-            <div>
-              <Menu
-                menuButton={
-                  <MenuButton
+        <ManuButtonGrid>
+          <div>
+            {nickname === userInfo.nickname ? (
+              <div>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                        curser: "pointer",
+                      }}
+                    >
+                      <MaterialIcon icon="more_horiz" size={32} />
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                  portal={true}
+                >
+                  <MenuItem
                     styles={{
-                      border: "none",
-                      backgroundColor: "transparent",
+                      fontSize: "20px",
                     }}
+                    onClick={onClickModify}
                   >
-                    <MaterialIcon icon="more_horiz" size={32} />
-                  </MenuButton>
-                }
-                menuStyles={{ border: "0px solid" }}
-                portal={true}
-              >
-                <MenuItem
-                  styles={{
-                    fontSize: "20px",
-                  }}
-                  onClick={onClickModify}
-                >
-                  <MaterialIcon icon="mode_edit_outline" size="small" />
-                  수정하기
-                </MenuItem>
-                <MenuItem
-                  styles={{
-                    fontSize: "20px",
-                  }}
-                  onClick={onClickComplete}
-                >
-                  <MaterialIcon icon="done" size="small" />
-                  투표 종료하기
-                </MenuItem>
-                <MenuItem
-                  styles={{
-                    fontSize: "20px",
-                  }}
-                  onClick={onClickDelete}
-                >
-                  <MaterialIcon icon="delete" size="small" />
-                  삭제하기
-                </MenuItem>
-              </Menu>
-            </div>
-          ) : null}
-        </div>
+                    <MaterialIcon icon="mode_edit_outline" size="small" />
+                    수정하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "20px",
+                    }}
+                    onClick={onClickComplete}
+                  >
+                    <MaterialIcon icon="done" size="small" />
+                    투표 종료하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "20px",
+                    }}
+                    onClick={onClickDelete}
+                  >
+                    <MaterialIcon icon="delete" size="small" />
+                    삭제하기
+                  </MenuItem>
+                </Menu>
+              </div>
+            ) : null}
+          </div>
+        </ManuButtonGrid>
         <TitleDiv> {title} </TitleDiv>
         <DateDiv>{date}</DateDiv>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "32px",
-          }}
-        >
-          <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
+        <TotalCntGrid>
+          <FaRegUser
+            style={{
+              width: "14",
+              height: "14",
+              color: "#00397c",
+            }}
+          />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
-        </div>
+        </TotalCntGrid>
         {/* 선택 결과에 따라 보여주기 */}
         {!userInfo.nickname ? (
           <div>
@@ -257,22 +254,26 @@ const EitherCard = props => {
               : SelctButtonB(null, "#101214", false, "B", contentB)}
           </div>
         )}
-        <div style={{ width: "480px", margin: "auto" }}>
+        <ProgressGrid>
           <EitherProgress>
             <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{percent + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}>
-                {100 - percent + "%"}
-              </div>
+              <div className="LabelLeft">{percent + "%"}</div>
+              <div className="LabelRight">{100 - percent + "%"}</div>
             </ProgressLabel>
             <HightLight width={percent + "%"} />
           </EitherProgress>
-        </div>
+        </ProgressGrid>
         <EitherFooter>
-          <div style={{ fontSize: "14px", color: "#101214" }}>{nickname}</div>
-          <div
-            style={{ color: "#E25B45", display: "flex", alignItems: "center" }}
-          >
+          <div>
+            <Nickname
+              nickname={nickname}
+              userId={userInfo.userId}
+              width={"32px"}
+              height={"32px"}
+              fontSize={"14px"}
+            />
+          </div>
+          <div className="Grid">
             {!likeState ? (
               <FiThumbsUp
                 onClick={onClickLike}
@@ -291,8 +292,7 @@ const EitherCard = props => {
                 }}
               />
             )}
-
-            <div style={{ fontSize: "14px", marginLeft: "14px" }}>{likes}</div>
+            <div className="Likes">{likes}</div>
           </div>
         </EitherFooter>
       </Container>
@@ -302,30 +302,51 @@ const EitherCard = props => {
 
 const Container = styled.div`
   text-align: center;
-  width: 620px;
-  height: 600px;
+  width: 380px;
+  height: 490px;
+  box-sizing: border-box;
   margin: 100px auto 0px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
   background-color: #ffffff;
+  padding: 46px 32px;
+`;
+const ManuButtonGrid = styled.div`
+  .div {
+    position: relative;
+  }
+  position: absolute;
+  top: 110px;
+  right: 40px;
 `;
 const TitleDiv = styled.div`
-  width: 482px;
-  height: 60px;
+  width: 100%;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  margin: 56px auto 16px auto;
+  margin: auto;
+  word-break: break-all;
 `;
 const DateDiv = styled.div`
-  margin: auto;
+  margin: 8px auto;
+  font-size: 11px;
   color: #868e96;
 `;
+const TotalCntGrid = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+`;
 const TotalCntDiv = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
   color: #868e96;
   margin-left: 8px;
+`;
+const ProgressGrid = styled.div`
+  width: 100%;
+  margin: auto;
 `;
 const EitherProgress = styled.div`
   margin: 24px auto;
@@ -345,45 +366,65 @@ const HightLight = styled.div`
     props.width === "100%" ? "5px 5px 5px 5px" : "5px 0px 0px 5px"};
 `;
 const ProgressLabel = styled.div`
-  width: 480px;
+  width: 316px;
   position: absolute;
   color: #00397c;
   margin-top: 6px;
   font-size: 12px;
   display: flex;
   justify-content: space-between;
+  .LabelLeft {
+    margin: 8px 0px 0px 10px;
+  }
+  .LabelRight {
+    margin: 8px 10px 0px 0px;
+  }
 `;
 const EitherButtonA = styled.button`
-  width: 240px;
-  height: 210px;
+  width: 156px;
+  height: 160px;
   border: 2px solid #00397c;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   font-size: 16px;
   line-height: 23px;
+  cursor: pointer;
   margin: 24px auto 0px auto;
   &:hover {
     background-color: #dfdfdf;
   }
 `;
 const EitherButtonB = styled.button`
-  width: 240px;
-  height: 210px;
+  width: 156px;
+  height: 160px;
   border: 2px solid #00397c;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size: 16px;
   line-height: 23px;
+  cursor: pointer;
   margin: 24px auto 0px auto;
   &:hover {
     background-color: #dfdfdf;
   }
 `;
 const EitherFooter = styled.div`
-  margin: 36px 77px;
-  display: flex;
+  width: 313px;
+  position: absolute;
+  left: 60px;
+  top: 540px;
+  display: inline-flex;
   justify-content: space-between;
   align-items: center;
+  .Grid {
+    color: #e25b45;
+    display: flex;
+    align-items: center;
+  }
+  .Likes {
+    font-size: 14px;
+    margin-left: 14px;
+  }
 `;
 const ButtonText = styled.h5`
   word-break: break-all;

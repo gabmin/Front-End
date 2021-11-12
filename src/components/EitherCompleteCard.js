@@ -9,6 +9,7 @@ import { FiThumbsUp } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import Nickname from "./Nickname";
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
 const EitherCompleteCard = props => {
@@ -104,53 +105,44 @@ const EitherCompleteCard = props => {
   return (
     <>
       <Container>
-        <div
-          style={{
-            position: "absolute",
-            margin: "21px 32px 0px 557px",
-          }}
-        >
-          {nickname === userInfo.nickname ? (
-            <div>
-              <Menu
-                menuButton={
-                  <MenuButton
-                    styles={{
-                      border: "none",
-                      backgroundColor: "transparent",
-                    }}
-                  >
-                    <MaterialIcon icon="more_horiz" size={32} />
-                  </MenuButton>
-                }
-                menuStyles={{ border: "0px solid" }}
-                portal={true}
-              >
-                <MenuItem
-                  styles={{
-                    fontSize: "20px",
-                  }}
-                  onClick={onClickDelete}
+        <ManuButtonGrid>
+          <div>
+            {nickname === userInfo.nickname ? (
+              <div>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                      }}
+                    >
+                      <MaterialIcon icon="more_horiz" size={32} />
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                  portal={true}
                 >
-                  <MaterialIcon icon="delete" size="small" />
-                  삭제하기
-                </MenuItem>
-              </Menu>
-            </div>
-          ) : null}
-        </div>
+                  <MenuItem
+                    styles={{
+                      fontSize: "20px",
+                    }}
+                    onClick={onClickDelete}
+                  >
+                    <MaterialIcon icon="delete" size="small" />
+                    삭제하기
+                  </MenuItem>
+                </Menu>
+              </div>
+            ) : null}
+          </div>
+        </ManuButtonGrid>
         <TitleDiv> {title} </TitleDiv>
         <DateDiv>{date}</DateDiv>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "32px",
-          }}
-        >
+        <TotalCntGrid>
           <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
-        </div>
+        </TotalCntGrid>
         {!userInfo.nickname ? (
           <div>
             {SelctButtonA(null, contentA)}
@@ -176,22 +168,26 @@ const EitherCompleteCard = props => {
             )}
           </div>
         )}
-        <div style={{ width: "480px", margin: "auto" }}>
+        <ProgressGrid>
           <EitherProgress>
             <ProgressLabel>
-              <div style={{ margin: "8px 0px 0px 10px" }}>{percent + "%"}</div>
-              <div style={{ margin: "8px 10px 0px 0px" }}>
-                {100 - percent + "%"}
-              </div>
+              <div className="LabelLeft">{percent + "%"}</div>
+              <div className="LabelRight">{100 - percent + "%"}</div>
             </ProgressLabel>
             <HightLight width={percent + "%"} />
           </EitherProgress>
-        </div>
+        </ProgressGrid>
         <EitherFooter>
-          <div style={{ fontSize: "14px", color: "#101214" }}>{nickname}</div>
-          <div
-            style={{ color: "#E25B45", display: "flex", alignItems: "center" }}
-          >
+          <div>
+            <Nickname
+              nickname={nickname}
+              userId={userInfo.userId}
+              width={"32px"}
+              height={"32px"}
+              fontSize={"14px"}
+            />
+          </div>
+          <div className="Grid">
             {!likeState ? (
               <FiThumbsUp
                 onClick={onClickLike}
@@ -202,7 +198,7 @@ const EitherCompleteCard = props => {
                 style={{ width: "24", height: "24", cursor: "pointer" }}
               />
             )}
-            <div style={{ fontSize: "14px", marginLeft: "14px" }}>{likes}</div>
+            <div className="Likes">{likes}</div>
           </div>
         </EitherFooter>
       </Container>
@@ -212,62 +208,91 @@ const EitherCompleteCard = props => {
 
 const Container = styled.div`
   text-align: center;
-  width: 620px;
-  height: 600px;
-  margin: 100px auto;
+  width: 380px;
+  height: 490px;
+  box-sizing: border-box;
+  margin: 100px auto 0px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
+  padding: 46px 32px;
   background: linear-gradient(
     180deg,
     rgba(0, 57, 124, 0.2) 0%,
     rgba(0, 0, 0, 0) 100%
   );
 `;
+const ManuButtonGrid = styled.div`
+  .div {
+    position: relative;
+  }
+  position: absolute;
+  top: 110px;
+  right: 40px;
+`;
 const TitleDiv = styled.div`
-  width: 482px;
-  height: 60px;
+  width: 100%;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  margin: 56px auto 16px auto;
+  margin: auto;
   word-break: break-all;
 `;
 const DateDiv = styled.div`
-  margin: auto;
+  margin: 8px auto;
+  font-size: 11px;
   color: #868e96;
 `;
+const TotalCntGrid = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+`;
 const TotalCntDiv = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   line-height: 20px;
   color: #868e96;
   margin-left: 8px;
 `;
+const ProgressGrid = styled.div`
+  width: 100%;
+  margin: auto;
+`;
 const EitherProgress = styled.div`
-  margin: 24px auto 0px auto;
+  margin: 24px auto;
+  border: 1px solid #00397c;
   border-radius: 6px;
   width: 100%;
   height: 6px;
+  background-color: #ffffff;
 `;
 const HightLight = styled.div`
   background-color: #dfdfdf;
   transition: 1s;
   width: ${props => props.width};
   height: 6px;
-  border-radius: 5px;
+  margin-bottom: 1px;
+  border-radius: ${props =>
+    props.width === "100%" ? "5px 5px 5px 5px" : "5px 0px 0px 5px"};
 `;
 const ProgressLabel = styled.div`
-  width: 480px;
+  width: 316px;
   position: absolute;
   color: #00397c;
   margin-top: 6px;
   font-size: 12px;
   display: flex;
   justify-content: space-between;
+  .LabelLeft {
+    margin: 8px 0px 0px 10px;
+  }
+  .LabelRight {
+    margin: 8px 10px 0px 0px;
+  }
 `;
 
 const EitherButtonA = styled.button`
-  width: 240px;
-  height: 210px;
+  width: 156px;
+  height: 160px;
   border: 2px solid #00397c;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -276,8 +301,8 @@ const EitherButtonA = styled.button`
   margin: 24px auto 0px auto;
 `;
 const EitherButtonB = styled.button`
-  width: 240px;
-  height: 210px;
+  width: 156px;
+  height: 160px;
   border: 2px solid #00397c;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -286,10 +311,24 @@ const EitherButtonB = styled.button`
   margin: 24px auto 0px auto;
 `;
 const EitherFooter = styled.div`
-  margin: 36px 77px;
-  display: flex;
+  width: 313px;
+  position: absolute;
+  left: 60px;
+  top: 540px;
+  display: inline-flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+
+  .Grid {
+    color: #e25b45;
+    display: flex;
+    align-items: center;
+  }
+  .Likes {
+    font-size: 14px;
+    margin-left: 14px;
+  }
 `;
 const ButtonText = styled.h5`
   word-break: break-all;

@@ -98,7 +98,9 @@ const Container = styled.div`
   height: 100%;
   hr {
     margin: 0px;
-    border-color: #eeeeee;
+    border: none;
+    height: 1px;
+    background-color: #eeeeee;
   }
 `;
 const Title = styled.div`
