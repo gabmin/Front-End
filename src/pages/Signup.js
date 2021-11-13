@@ -77,7 +77,8 @@ const Signup = () => {
   }, []);
 
   const pwFilter = useCallback(password => {
-    const filter = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,16}$/;
+    const filter =
+      /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[a-z0-9!@#$%^&*?-]{8,16}$/;
     return filter.test(password);
   }, []);
 
