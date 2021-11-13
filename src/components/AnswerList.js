@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
+import colors from "../shared/colors";
 import { DetailVote } from "../redux/actions/multiDetail";
 import { history } from "../redux/configureStore";
 
@@ -13,30 +15,30 @@ const AnswerList = props => {
   const [color, setColor] = useState("");
   const [select, setSelect] = useState("");
 
-  const selected = e => {
-    const checkSelect = t => [...t.parentElement.children].filter(e => e !== t);
-    checkSelect(e.target).map(x => {
-      const newClass = String(x.classList[0] + " " + x.classList[1]);
-      if (x.classList[2] === "on") {
-        x.setAttribute("class", newClass);
-      }
-    });
-    e.target.classList.add("on");
-  };
+  // const selected = e => {
+  //   const checkSelect = t => [...t.parentElement.children].filter(e => e !== t);
+  //   checkSelect(e.target).map(x => {
+  //     const newClass = String(x.classList[0] + " " + x.classList[1]);
+  //     if (x.classList[2] === "on") {
+  //       x.setAttribute("class", newClass);
+  //     }
+  //   });
+  //   e.target.classList.add("on");
+  // };
+
+  // const selectAnswer = e => {
+  //   const color = e.target.attributes.color.value;
+  //   setColor(color);
+  //   selected(e);
+  //   setSelect(e.target.id);
+  //   console.log("e", color);
+  // };
 
   const selectAnswer = e => {
-    const color = e.target.attributes.color.value;
-    setColor(color);
-    selected(e);
     setSelect(e.target.id);
-    console.log("e", e);
   };
 
   console.log("select", select);
-
-  const reRender = () => {
-    render(true);
-  };
 
   const selectComplete = () => {
     if (select !== "") {
@@ -51,27 +53,62 @@ const AnswerList = props => {
 
   return (
     <Container>
-      <AnswerBtn id="A" color="#ffffff" onClick={selectAnswer}>
-        {DataList.contentA}
-      </AnswerBtn>
-      <AnswerBtn id="B" color="#ffffff" onClick={selectAnswer}>
-        {DataList.contentB}
-      </AnswerBtn>
+      {select === "A" ? (
+        <AnswerBtnOn id="A" onClick={selectAnswer}>
+          {DataList.contentA}
+        </AnswerBtnOn>
+      ) : (
+        <AnswerBtn id="A" onClick={selectAnswer}>
+          {DataList.contentA}
+        </AnswerBtn>
+      )}
+
+      {select === "B" ? (
+        <AnswerBtnOn id="B" onClick={selectAnswer}>
+          {DataList.contentB}
+        </AnswerBtnOn>
+      ) : (
+        <AnswerBtn id="B" onClick={selectAnswer}>
+          {DataList.contentB}
+        </AnswerBtn>
+      )}
+
       {DataList.contentC !== null ? (
-        <AnswerBtn id="C" color="#ffffff" onClick={selectAnswer}>
-          {DataList.contentC}
-        </AnswerBtn>
+        select === "C" ? (
+          <AnswerBtnOn id="C" onClick={selectAnswer}>
+            {DataList.contentC}
+          </AnswerBtnOn>
+        ) : (
+          <AnswerBtn id="C" onClick={selectAnswer}>
+            {DataList.contentC}
+          </AnswerBtn>
+        )
       ) : null}
+
       {DataList.contentD !== null ? (
-        <AnswerBtn id="D" color="#ffffff" onClick={selectAnswer}>
-          {DataList.contentD}
-        </AnswerBtn>
+        select === "D" ? (
+          <AnswerBtnOn id="D" onClick={selectAnswer}>
+            {DataList.contentD}
+          </AnswerBtnOn>
+        ) : (
+          <AnswerBtn id="D" onClick={selectAnswer}>
+            {DataList.contentD}
+          </AnswerBtn>
+        )
       ) : null}
+
       {DataList.contentE !== null ? (
-        <AnswerBtn id="E" color="#ffffff" onClick={selectAnswer}>
-          {DataList.contentE}
-        </AnswerBtn>
+        select === "E" ? (
+          <AnswerBtnOn id="E" onClick={selectAnswer}>
+            {DataList.contentE}
+          </AnswerBtnOn>
+        ) : (
+          <AnswerBtn id="E" onClick={selectAnswer}>
+            {DataList.contentE}
+          </AnswerBtn>
+        )
       ) : null}
+
       <CompleteWrapper>
         <CompleteBtn onClick={selectComplete}>완료하고 결과보기</CompleteBtn>
       </CompleteWrapper>
@@ -97,8 +134,30 @@ const AnswerBtn = styled.button`
   text-align: left;
   word-break: break-all;
   border-radius: 8px;
-  color: #00397c;
-  background-color: ${props => props.color};
+  color: ${colors.blue};
+  background-color: ${colors.white};
+  cursor: pointer;
+  &.on {
+    opacity: 1;
+    background-color: ${colors.blue};
+    color: ${colors.white};
+  }
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const AnswerBtnOn = styled.button`
+  border: 1px #00397c solid;
+  margin: 5px auto;
+  min-width: 100%;
+  max-width: 620px;
+  height: 72px;
+  text-align: left;
+  word-break: break-all;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #00397c;
   cursor: pointer;
   &.on {
     opacity: 1;
