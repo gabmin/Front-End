@@ -23,7 +23,7 @@ const Nickname = ({ nickname, userId, width, height, fontSize }) => {
 Nickname.defaultProps = {
   width: "16px",
   height: "16px",
-  fontSize: "14px",
+  fontSize: "12px",
 };
 
 const Container = styled.div`
