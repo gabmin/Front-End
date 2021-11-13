@@ -81,8 +81,7 @@ const Login = () => {
   const onClickSignup = useCallback(() => {
     history.push("/signup");
   }, []);
-  console.log("pwCheck");
-  console.log(pwCheck);
+
   return (
     <>
       <Container>

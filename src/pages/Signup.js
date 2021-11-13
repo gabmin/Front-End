@@ -212,6 +212,10 @@ const Signup = () => {
     [dispatch, nickname, nickChecker],
   );
 
+  const onClickLogin = useCallback(() => {
+    history.push("/login");
+  }, []);
+
   return (
     <>
       <Container>
@@ -325,10 +329,35 @@ const Signup = () => {
             <SignupButton type="submit">회원가입</SignupButton>
           </ButtonWrapper>
         </Form>
+        <LoginWrapper>
+          <span>계정이 이미 있으신가요?</span>
+          <span className="goLogin" onClick={onClickLogin}>
+            로그인
+          </span>
+        </LoginWrapper>
       </Container>
     </>
   );
 };
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  user-select: none;
+
+  .goLogin {
+    color: ${red};
+    margin: 0 24px;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    flex-direction: column;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
