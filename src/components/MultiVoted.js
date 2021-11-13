@@ -43,7 +43,7 @@ const MultiVoted = props => {
     } else {
       setPerA(PerA.toFixed(0));
     }
-  }, 1000);
+  }, 10);
 
   const [perB, setPerB] = useState(0);
   setTimeout(() => {
@@ -52,7 +52,7 @@ const MultiVoted = props => {
     } else {
       setPerB(PerB.toFixed(0));
     }
-  }, 1200);
+  }, 20);
 
   const [perC, setPerC] = useState(0);
   setTimeout(() => {
@@ -61,7 +61,7 @@ const MultiVoted = props => {
     } else {
       setPerC(PerC.toFixed(0));
     }
-  }, 1400);
+  }, 30);
 
   const [perD, setPerD] = useState(0);
   setTimeout(() => {
@@ -70,7 +70,7 @@ const MultiVoted = props => {
     } else {
       setPerD(PerD.toFixed(0));
     }
-  }, 1600);
+  }, 40);
 
   const [perE, setPerE] = useState(0);
   setTimeout(() => {
@@ -79,7 +79,7 @@ const MultiVoted = props => {
     } else {
       setPerE(PerE.toFixed(0));
     }
-  }, 1800);
+  }, 50);
 
   const addLike = () => {
     if (multiList.liked === null) {

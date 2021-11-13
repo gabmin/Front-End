@@ -9,6 +9,7 @@ import { useCallback } from "react";
 const Nickname = ({ nickname, userId, width, height, fontSize }) => {
   const onClickNick = useCallback(() => {
     history.push(`/profile/${userId}`);
+    window.scroll(0, 0);
   }, [userId]);
 
   return (
