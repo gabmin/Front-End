@@ -31,7 +31,7 @@ const MultiSlick = props => {
           ...style,
           width: "50px",
           height: "50px",
-          right: "0px",
+          right: "-25px",
           top: "260px",
           zIndex: "1000",
         }}
@@ -44,10 +44,8 @@ const MultiSlick = props => {
             position: "absolute",
             width: "100%",
             height: "100%",
-            // right: "10px",
-            // top: "0px",
-
             border: "50%",
+            right: "-25px",
           }}
         />
       </div>
@@ -84,7 +82,7 @@ const MultiSlick = props => {
               position: "absolute",
               width: "100%",
               height: "100%",
-              left: "0px",
+              left: "-25px",
               top: "0px",
               border: null,
             }}
@@ -130,7 +128,7 @@ const SliderWarpper = styled.div`
 `;
 
 const StyledSlider = styled(Slider)`
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: auto;
   width: 1300px;
   .slick-slider .slick-list {

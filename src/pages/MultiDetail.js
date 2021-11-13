@@ -257,6 +257,8 @@ const TopBtn = styled.button`
   background-color: ${colors.white};
   color: ${colors.blue};
   cursor: pointer;
+  text-decoration: underline;
+  text-underline-position: under;
 `;
 
 export default MultiDetail;

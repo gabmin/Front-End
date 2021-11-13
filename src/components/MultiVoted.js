@@ -301,7 +301,7 @@ const VotedHighLight = styled.div`
   transition: 1s;
   width: ${props => props.width};
   height: 32px;
-  border-radius: 7px;
+  border-radius: 6px;
 `;
 
 const UnVotedLabel = styled.div`
@@ -359,6 +359,7 @@ const RightWarpper = styled.div`
 `;
 
 const CommentWarpper = styled.div`
+  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -371,6 +372,7 @@ const TotalComment = styled.p`
 `;
 
 const LikeWarpper = styled.div`
+  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
