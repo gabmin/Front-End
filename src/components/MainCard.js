@@ -95,7 +95,7 @@ const Layout = styled.div`
   text-align: ${props => (props.center ? "center" : "unset")};
   border: 2px solid ${blue};
   border-radius: 10px;
-  padding: 20px 35px;
+  padding: 20px 30px;
   box-sizing: border-box;
   cursor: pointer;
 
