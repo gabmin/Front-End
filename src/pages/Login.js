@@ -189,7 +189,6 @@ const Form = styled.form`
 `;
 
 const StyledSymbol = styled(Symbol)`
-  cursor: pointer;
   user-select: none;
   height: 37px;
   fill: ${blue};
