@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -52,6 +52,14 @@ const MultiWrite = props => {
   const contentCRef = useRef();
   const contentDRef = useRef();
   const contentERef = useRef();
+
+  useEffect(() => {
+    if (isEdit) {
+      dispatch(SetParams(multiId));
+    } else {
+      dispatch(SetParams());
+    }
+  });
 
   // post 작성하기
   const addPost = () => {
