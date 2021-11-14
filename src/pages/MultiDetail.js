@@ -69,10 +69,8 @@ const MultiDetail = props => {
     const closeVote = window.confirm("투표를 종료하시겠습니까?");
     if (closeVote == true) {
       dispatch(ClosePostDB(multiId));
-      history.push({
-        pathname: "/multi",
-        state: { multiId: multiId },
-      });
+      dispatch(SetParams(multiId));
+      history.push("/multi");
     }
     return;
   };
