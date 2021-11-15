@@ -252,7 +252,7 @@ const Signup = () => {
                 <span>이미 사용중인 아이디 입니다</span>
               )}
             </InputContent>
-            <Content>
+            <InputContent>
               <InputWrapper>
                 <input
                   type="text"
@@ -278,7 +278,7 @@ const Signup = () => {
               {checkNickDupResult === false &&
                 !checkNickDupLoading &&
                 nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
-            </Content>
+            </InputContent>
           </IdPwWrapper>
           <Content>
             <InputWrapper>
@@ -370,7 +370,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 840px;
+  max-width: 840px;
+  width: 90%;
   height: 656px;
   box-sizing: border-box;
   margin: 30px auto;
@@ -399,6 +400,10 @@ const Form = styled.form`
       font-size: 14px;
     }
   }
+
+  @media screen and (max-width: ${tablet}) {
+    height: 730px;
+  }
 `;
 
 const StyledSymbol = styled(Symbol)`
@@ -410,11 +415,14 @@ const StyledSymbol = styled(Symbol)`
 const InputContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 290px;
   max-width: 620px;
   height: 80px;
   font-size: 0.6em;
   color: ${red};
+  @media screen and (max-width: ${tablet}) {
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
@@ -467,6 +475,14 @@ const IdPwWrapper = styled.div`
   input {
     width: 290px;
     box-sizing: border-box;
+  }
+
+  @media screen and (max-width: ${tablet}) {
+    flex-direction: column;
+
+    input {
+      width: 100%;
+    }
   }
 `;
 
