@@ -3,6 +3,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 
 import "./App.css";
+import GlobalStyle from "./GlobalStyle";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -22,6 +23,7 @@ import Footer from "../components/Footer";
 function App() {
   return (
     <>
+      <GlobalStyle />
       <Header></Header>
       <ConnectedRouter history={history}>
         <Switch>
