@@ -169,9 +169,9 @@ const Bottom = styled.div`
     border-radius: 9px;
   }
 
-  @media screen and (max-width: ${tablet}) {
+  /* @media screen and (max-width: ${mobile}) {
     display: none;
-  }
+  } */
 `;
 
 const Wrapper = styled.div`
@@ -179,6 +179,9 @@ const Wrapper = styled.div`
   width: 30%;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: ${mobile}) {
+    display: none;
+  }
 `;
 
 const StyledSearch = styled(FiSearch)`
@@ -195,6 +198,9 @@ const StyledSymbol = styled(Symbol)`
   user-select: none;
   height: 37px;
   margin-right: 30px;
+  @media screen and (max-width: ${mobile}) {
+    display: none;
+  }
 `;
 
 const StyledDown = styled(chevronDown)`
@@ -229,7 +235,14 @@ const MenuWrapper = styled.div`
   }
 
   @media screen and (max-width: ${tablet}) {
-    display: none;
+    width: 40%;
+    span {
+      margin: 0 10px;
+    }
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    width: 60%;
   }
 `;
 
@@ -254,15 +267,15 @@ const IconWrapper = styled.div`
     color: white;
     position: relative;
     left: 40px;
-    width: 60px;
+    width: 70px;
     background-color: #e25b45;
     padding: 5px;
     border-radius: 7px;
     box-sizing: border-box;
   }
 
-  @media screen and (max-width: ${tablet}) {
-    display: none;
+  @media screen and (max-width: ${mobile}) {
+    width: 40%;
   }
 `;
 
