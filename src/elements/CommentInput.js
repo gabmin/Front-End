@@ -17,7 +17,7 @@ const CommentInput = props => {
   console.log("comp", dataList);
 
   const changeComment = e => {
-    setComment(e.target.value);
+    setComment(e.target.value.substr(0, 1000));
     console.log(e.target.value);
   };
 
@@ -77,6 +77,8 @@ const TextArea = styled.textarea`
   padding: 0 0 0 10px;
   border: none;
   resize: none;
+  font-family: "Noto-Sans KR", sans-serif;
+
   background-color: ${colors.gray};
   &:focus {
     outline: none;

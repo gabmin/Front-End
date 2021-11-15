@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import moment from "moment";
 
@@ -52,6 +52,14 @@ const MultiWrite = props => {
   const contentCRef = useRef();
   const contentDRef = useRef();
   const contentERef = useRef();
+
+  useEffect(() => {
+    if (isEdit) {
+      dispatch(SetParams(multiId));
+    } else {
+      dispatch(SetParams());
+    }
+  });
 
   // post 작성하기
   const addPost = () => {
@@ -226,7 +234,7 @@ const MultiWrite = props => {
   };
 
   const changeTitle = e => {
-    setTitle(e.target.value);
+    setTitle(e.target.value.substr(0, 30));
   };
 
   const changeDescription = e => {
@@ -296,23 +304,23 @@ const MultiWrite = props => {
   };
 
   const changeContentA = e => {
-    setContentA(e.target.value);
+    setContentA(e.target.value.substr(0, 50));
   };
 
   const changeContentB = e => {
-    setContentB(e.target.value);
+    setContentB(e.target.value.substr(0, 50));
   };
 
   const changeContentC = e => {
-    setContentC(e.target.value);
+    setContentC(e.target.value.substr(0, 50));
   };
 
   const changeContentD = e => {
-    setContentD(e.target.value);
+    setContentD(e.target.value.substr(0, 50));
   };
 
   const changeContentE = e => {
-    setContentE(e.target.value);
+    setContentE(e.target.value.substr(0, 50));
   };
 
   return (
@@ -327,7 +335,7 @@ const MultiWrite = props => {
             ref={titleRef}
             type="text"
             maxlength="40"
-            placeholder="질문을 입력해주세요 (40자이내)"
+            placeholder="질문을 입력해주세요. (30자이내)"
             onChange={changeTitle}
             value={title}
           />
@@ -355,6 +363,7 @@ const MultiWrite = props => {
             ref={contentARef}
             onChange={changeContentA}
             value={contentA}
+            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
           />
         </PollWarpper>
         <PollWarpper>
@@ -362,6 +371,7 @@ const MultiWrite = props => {
             ref={contentBRef}
             onChange={changeContentB}
             value={contentB}
+            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
           />
           {hiddenBtnB ? (
             <FullBtn onClick={showInputC}>+ 선택지 추가</FullBtn>
@@ -373,6 +383,7 @@ const MultiWrite = props => {
               ref={contentCRef}
               onChange={changeContentC}
               value={contentC}
+              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
             />
             <BtnWarpper>
               {hiddenBtnC ? (
@@ -390,6 +401,7 @@ const MultiWrite = props => {
               ref={contentDRef}
               onChange={changeContentD}
               value={contentD}
+              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
             />
             <BtnWarpper>
               {hiddenBtnD ? (
@@ -407,6 +419,7 @@ const MultiWrite = props => {
               ref={contentERef}
               onChange={changeContentE}
               value={contentE}
+              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
             />
             <FullBtn onClick={hideInputE}>- 선택지 삭제</FullBtn>
           </PollWarpper>
@@ -464,6 +477,10 @@ const Input = styled.input`
   border: none;
   outline: none;
   font-size: 18px;
+  &::placeholder {
+    font-size: 16px;
+    color: ${colors.gray5};
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -475,6 +492,10 @@ const Textarea = styled.textarea`
   outline: none;
   font-size: 18px;
   resize: none;
+  &::placeholder {
+    font-size: 16px;
+    color: ${colors.gray5};
+  }
 `;
 
 const VoteBox = styled.div`
