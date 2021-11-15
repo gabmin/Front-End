@@ -109,7 +109,7 @@ const ChildComment = props => {
 
   const [newEditChild, setNewEditChild] = useState();
   const changeEditChild = e => {
-    setNewEditChild(e.target.value);
+    setNewEditChild(e.target.value.substr(0, 1000));
   };
 
   const editChildComment = () => {
@@ -145,7 +145,7 @@ const ChildComment = props => {
               height={"24px"}
             ></Nickname>
             {"\u00a0\u00a0"}
-            <CommentDate>{date}</CommentDate>
+            <CommentDate>{date.substring(0, 16)}</CommentDate>
           </NickWarpper>
           <BtnWrapper>
             {userInfo.nickname === nickname && !deleted && editBtn ? (

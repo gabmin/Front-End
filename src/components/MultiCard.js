@@ -67,11 +67,11 @@ const MultiCard = props => {
                 </UserWrapper>
                 <InfoWarpper>
                   <CommentWarpper>
-                    <FiMessageSquare />{" "}
+                    <FiMessageSquare size={24} />{" "}
                     <TotalComment>{commentCnt}</TotalComment>
                   </CommentWarpper>
                   <LikeWarpper>
-                    <FiThumbsUp />
+                    <FiThumbsUp size={24} />
                     <TotalLike>{likeCnt}</TotalLike>
                   </LikeWarpper>
                 </InfoWarpper>
@@ -109,11 +109,11 @@ const MultiCard = props => {
                 </UserWrapper>
                 <InfoWarpper>
                   <CommentWarpper>
-                    <FiMessageSquare />{" "}
+                    <FiMessageSquare size={24} />{" "}
                     <TotalComment>{commentCnt}</TotalComment>
                   </CommentWarpper>
                   <LikeWarpper>
-                    <FiThumbsUp />
+                    <FiThumbsUp size={24} />
                     <TotalLike>{likeCnt}</TotalLike>
                   </LikeWarpper>
                 </InfoWarpper>
@@ -271,7 +271,7 @@ const InfoWarpper = styled.div`
 `;
 
 const CommentWarpper = styled.div`
-  width: 30px;
+  /* width: 30px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -280,11 +280,13 @@ const CommentWarpper = styled.div`
 `;
 
 const TotalComment = styled.p`
-  font-size: 12px;
+  margin: 14px auto 14px 14px;
+  font-size: 14px;
 `;
 
 const LikeWarpper = styled.div`
-  width: 30px;
+  /* width: 40px; */
+  margin: auto auto auto 14px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -292,13 +294,12 @@ const LikeWarpper = styled.div`
   color: ${colors.red};
 
   .FiThumbsUp {
-    width: 20px;
-    height: 20px;
   }
 `;
 
 const TotalLike = styled.p`
-  font-size: 12px;
+  margin: 14px auto 14px 14px;
+  font-size: 14px;
 `;
 
 export default MultiCard;

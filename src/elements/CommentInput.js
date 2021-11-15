@@ -17,7 +17,7 @@ const CommentInput = props => {
   console.log("comp", dataList);
 
   const changeComment = e => {
-    setComment(e.target.value);
+    setComment(e.target.value.substr(0, 1000));
     console.log(e.target.value);
   };
 

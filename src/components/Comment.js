@@ -148,7 +148,7 @@ const Comment = props => {
             ></Nickname>
             {"\u00a0\u00a0"}
 
-            <CommentDate>{commentDate}</CommentDate>
+            <CommentDate>{commentDate.substring(0, 16)}</CommentDate>
           </NickWarpper>
           <BtnWrapper>
             {userInfo.nickname === nickname && !deleted && editBtn ? (
