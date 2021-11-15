@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import MaterialIcon from "material-icons-react";
-import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
@@ -41,6 +40,7 @@ const EitherCard = props => {
   const [choice, setChoice] = useState(voted);
   const [likeState, setLikeState] = useState(liked === null ? false : true);
   const [action, setAction] = useState(null);
+  const [showGraph, setShowGraph] = useState(voted === null ? false : true);
 
   const {
     completePostDBDone,
@@ -142,6 +142,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
+          setShowGraph(true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -156,6 +157,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
+          setShowGraph(true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -178,7 +180,7 @@ const EitherCard = props => {
                         curser: "pointer",
                       }}
                     >
-                      <MaterialIcon icon="more_horiz" size={32} />
+                      <FiMoreHorizontal size={20} />
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
@@ -186,29 +188,26 @@ const EitherCard = props => {
                 >
                   <MenuItem
                     styles={{
-                      fontSize: "20px",
+                      fontSize: "14px",
                     }}
                     onClick={onClickModify}
                   >
-                    <MaterialIcon icon="mode_edit_outline" size="small" />
                     수정하기
                   </MenuItem>
                   <MenuItem
                     styles={{
-                      fontSize: "20px",
+                      fontSize: "14px",
                     }}
                     onClick={onClickComplete}
                   >
-                    <MaterialIcon icon="done" size="small" />
                     투표 종료하기
                   </MenuItem>
                   <MenuItem
                     styles={{
-                      fontSize: "20px",
+                      fontSize: "14px",
                     }}
                     onClick={onClickDelete}
                   >
-                    <MaterialIcon icon="delete" size="small" />
                     삭제하기
                   </MenuItem>
                 </Menu>
@@ -217,7 +216,7 @@ const EitherCard = props => {
           </div>
         </ManuButtonGrid>
         <TitleDiv> {title} </TitleDiv>
-        <DateDiv>{date}</DateDiv>
+        <DateDiv>{date.substring(0, 16)}</DateDiv>
         <TotalCntGrid>
           <FaRegUser
             style={{
@@ -262,15 +261,17 @@ const EitherCard = props => {
               : SelctButtonB(null, "#101214", false, "B", contentB)}
           </ButtonGrid>
         )}
-        <ProgressGrid>
-          <EitherProgress>
-            <ProgressLabel>
-              <div className="LabelLeft">{percent + "%"}</div>
-              <div className="LabelRight">{100 - percent + "%"}</div>
-            </ProgressLabel>
-            <HightLight width={percent + "%"} />
-          </EitherProgress>
-        </ProgressGrid>
+        {showGraph ? (
+          <ProgressGrid>
+            <EitherProgress>
+              <ProgressLabel>
+                <div className="LabelLeft">{percent + "%"}</div>
+                <div className="LabelRight">{100 - percent + "%"}</div>
+              </ProgressLabel>
+              <HightLight width={percent + "%"} />
+            </EitherProgress>
+          </ProgressGrid>
+        ) : null}
         <EitherFooter>
           <div>
             <Nickname
@@ -313,7 +314,7 @@ const Container = styled.div`
   width: 380px;
   height: 490px;
   box-sizing: border-box;
-  margin: 100px auto 0px auto;
+  margin: 70px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
   background-color: #ffffff;
