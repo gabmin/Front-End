@@ -5,7 +5,7 @@ import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import MaterialIcon from "material-icons-react";
-import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
@@ -121,7 +121,7 @@ const EitherCompleteCard = props => {
                         backgroundColor: "transparent",
                       }}
                     >
-                      <MaterialIcon icon="more_horiz" size={32} />
+                      <FiMoreHorizontal size={20} />
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
@@ -129,11 +129,10 @@ const EitherCompleteCard = props => {
                 >
                   <MenuItem
                     styles={{
-                      fontSize: "20px",
+                      fontSize: "14px",
                     }}
                     onClick={onClickDelete}
                   >
-                    <MaterialIcon icon="delete" size="small" />
                     삭제하기
                   </MenuItem>
                 </Menu>
@@ -142,7 +141,7 @@ const EitherCompleteCard = props => {
           </div>
         </ManuButtonGrid>
         <TitleDiv> {title} </TitleDiv>
-        <DateDiv>{date}</DateDiv>
+        <DateDiv>{date.substring(0, 16)}</DateDiv>
         <TotalCntGrid>
           <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
@@ -215,7 +214,7 @@ const Container = styled.div`
   width: 380px;
   height: 490px;
   box-sizing: border-box;
-  margin: 100px auto 0px auto;
+  margin: 70px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
   padding: 46px 32px;
@@ -316,9 +315,8 @@ const EitherButtonB = styled.button`
 `;
 const EitherFooter = styled.div`
   width: 313px;
-  position: absolute;
-  left: 60px;
-  top: 540px;
+  position: relative;
+  margin-top: 40px;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;

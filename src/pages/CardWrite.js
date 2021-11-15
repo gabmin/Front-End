@@ -27,10 +27,7 @@ const CardWrite = () => {
       setMultiState(false);
     }
   }, []);
-  //뒤로가기
-  const onClickBack = useCallback(() => {
-    history.push("/either");
-  });
+
   // radio button
   const EitherRadioBtn = e => {
     setEitherState(!eitherState);
@@ -115,6 +112,9 @@ const RadioBtnWarpperE = styled.div`
   label {
     font-size: 16px;
   }
+  input {
+    margin: 0px 8px 0px 0px;
+  }
 `;
 
 const RadioBtnWarpperM = styled.div`
@@ -123,6 +123,9 @@ const RadioBtnWarpperM = styled.div`
   align-items: center;
   label {
     font-size: 16px;
+  }
+  input {
+    margin: 0px 8px 0px 0px;
   }
 `;
 
