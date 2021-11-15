@@ -127,7 +127,7 @@ const MultiDetail = props => {
                         backgroundColor: "transparent",
                       }}
                     >
-                      <FiMoreHorizontal />
+                      <FiMoreHorizontal size={20} />
                       {/* <MaterialIcon icon="more_horiz" size={32} /> */}
                     </MenuButton>
                   }

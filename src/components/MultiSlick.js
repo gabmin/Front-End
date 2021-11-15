@@ -32,7 +32,6 @@ const MultiSlick = props => {
           width: "50px",
           height: "50px",
           right: "-25px",
-          top: "260px",
           zIndex: "1000",
         }}
         onClick={onClick}
@@ -42,8 +41,8 @@ const MultiSlick = props => {
           alt="arrowNext"
           style={{
             position: "absolute",
-            width: "100%",
-            height: "100%",
+            width: "12.25px",
+            height: "28px",
             border: "50%",
             right: "-25px",
           }}
@@ -56,38 +55,28 @@ const MultiSlick = props => {
     const { className, style, onClick } = props;
     return (
       <div
+        className={className}
         style={{
+          ...style,
           width: "50px",
-          height: "700px",
-          position: "absolute",
-          backgroundColor: "white",
+          height: "50px",
+          right: "0px",
+          zIndex: "1000",
         }}
+        onClick={onClick}
       >
-        <div
-          className={className}
+        <img
+          src={require("../images/arrowLRed.svg").default}
+          alt="arrowNext"
           style={{
-            ...style,
-            width: "50px",
-            height: "50px",
-            right: "-50px",
-            top: "260px",
-            zIndex: "1000",
+            position: "absolute",
+            width: "12.25px",
+            height: "28px",
+            left: "-25px",
+            top: "0px",
+            border: null,
           }}
-          onClick={onClick}
-        >
-          <img
-            src={require("../images/arrowLRed.svg").default}
-            alt="arrowNext"
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              left: "-25px",
-              top: "0px",
-              border: null,
-            }}
-          />
-        </div>
+        />
       </div>
     );
   }
@@ -123,12 +112,10 @@ const Container = styled.div`
 `;
 
 const SliderWarpper = styled.div`
-  /* margin: 0 auto; */
   height: 100%;
 `;
 
 const StyledSlider = styled(Slider)`
-  /* overflow: hidden; */
   margin: auto;
   width: 1300px;
   .slick-slider .slick-list {
@@ -137,23 +124,14 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center {
     transform: scale(1.1);
     transition: 0.5s;
-    /* z-index: 999 !important; */
-  }
-
-  .slick-slide.slick-cloned {
-    /* transform: translateX(-100px); */
   }
 
   .slick-slide {
-    border-radius: 10px;
     padding: 30px 0 30px 0;
-    /* transform: translate3d(-10px, 0, -100px); */
-    /* z-index: 10 !important; */
   }
 `;
 
 const CardWarpper = styled.div`
-  /* transform: translate(-100px, 0); */
   height: 100%;
 `;
 
