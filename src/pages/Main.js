@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { SetParams } from "../redux/reducers/paramsSlice";
 import MainSlick from "../components/MainSlick";
 import { getMainData } from "../redux/actions/main";
 import { history } from "../redux/configureStore";
@@ -21,6 +22,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getMainData());
+    dispatch(SetParams());
   }, [dispatch]);
 
   const goToWrite = select => {
