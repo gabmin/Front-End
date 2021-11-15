@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiMoreHorizontal } from "react-icons/fi";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
@@ -46,10 +46,7 @@ const MultiDetail = props => {
   }, [dispatch, multiId]);
 
   const goToMulti = () => {
-    history.push({
-      pathname: "/multi",
-      state: { multiId: multiId },
-    });
+    history.push("/multi");
   };
 
   const goToTop = () => {
@@ -130,7 +127,8 @@ const MultiDetail = props => {
                         backgroundColor: "transparent",
                       }}
                     >
-                      <MaterialIcon icon="more_horiz" size={32} />
+                      <FiMoreHorizontal />
+                      {/* <MaterialIcon icon="more_horiz" size={32} /> */}
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
@@ -223,7 +221,8 @@ const BackBtn = styled.button`
   margin: 10px auto 0 10px;
   border: none;
   font-size: 24px;
-  color: ${colors.gray5};
+  font-weight: 400;
+  color: ${colors.gray4};
   background-color: ${colors.white};
   cursor: pointer;
 `;

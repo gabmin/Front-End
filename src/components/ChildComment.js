@@ -241,6 +241,7 @@ const LikeWrapper = styled.div`
 
 const LikeBtn = styled.button`
   border: none;
+  padding: 2px 6px 0 6px;
   color: ${colors.gray5};
   background-color: ${colors.white};
   cursor: pointer;
@@ -280,6 +281,7 @@ const TextArea = styled.textarea`
   margin: auto;
   border: none;
   resize: none;
+  font-family: "Noto-Sans KR", sans-serif;
   background-color: ${colors.gray};
   &:focus {
     outline: none;

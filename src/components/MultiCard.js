@@ -44,7 +44,7 @@ const MultiCard = props => {
               <TitleText>{title}</TitleText>
             </TitleWrapper>
             <DateWarpper>
-              <DateText>{date}</DateText>
+              <DateText>{date.substring(0, 16)}</DateText>
             </DateWarpper>
             {/* <ContentHr /> */}
             <DesWrapper>
@@ -86,7 +86,7 @@ const MultiCard = props => {
               <TitleText>{title}</TitleText>
             </TitleWrapper>
             <DateWarpper>
-              <DateText>{date}</DateText>
+              <DateText>{date.substring(0, 16)}</DateText>
             </DateWarpper>
             {/* <ContentHr /> */}
             <DesWrapper>
