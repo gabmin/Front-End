@@ -426,9 +426,8 @@ const EitherButtonB = styled.button`
 `;
 const EitherFooter = styled.div`
   width: 313px;
-  position: absolute;
-  left: 60px;
-  top: 540px;
+  margin-top: 40px;
+  position: relative;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
