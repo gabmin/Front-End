@@ -181,27 +181,37 @@ const EitherCompleteCard = props => {
           </EitherProgress>
         </ProgressGrid>
         <EitherFooter>
-          <div>
-            <Nickname
-              nickname={nickname}
-              userId={user}
-              width={"32px"}
-              height={"32px"}
-              fontSize={"14px"}
-            />
-          </div>
-          <div className="Grid">
-            {!likeState ? (
-              <FiThumbsUp
-                onClick={onClickLike}
-                style={{ width: "24", height: "24", cursor: "pointer" }}
+          <div className="Position">
+            <div>
+              <Nickname
+                nickname={nickname}
+                userId={user}
+                width={"32px"}
+                height={"32px"}
+                fontSize={"14px"}
               />
-            ) : (
-              <HiThumbUp
-                style={{ width: "24", height: "24", cursor: "pointer" }}
-              />
-            )}
-            <div className="Likes">{likes}</div>
+            </div>
+            <div className="Grid">
+              {!likeState ? (
+                <FiThumbsUp
+                  onClick={onClickLike}
+                  style={{
+                    width: "24",
+                    height: "24",
+                    cursor: "pointer",
+                  }}
+                />
+              ) : (
+                <HiThumbUp
+                  style={{
+                    width: "24",
+                    height: "24",
+                    cursor: "pointer",
+                  }}
+                />
+              )}
+              <div className="Likes">{likes}</div>
+            </div>
           </div>
         </EitherFooter>
       </Container>
@@ -316,12 +326,15 @@ const EitherButtonB = styled.button`
 const EitherFooter = styled.div`
   width: 313px;
   position: relative;
-  margin-top: 40px;
-  display: inline-flex;
-  justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
-
+  .Position {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 60px;
+  }
   .Grid {
     color: #e25b45;
     display: flex;
