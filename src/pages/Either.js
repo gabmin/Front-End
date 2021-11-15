@@ -124,11 +124,11 @@ const Either = props => {
 };
 const Container = styled.div`
   width: 100%;
-  height: 1000px;
+  height: 100%;
 `;
 const Wrap = styled.div`
   max-width: 100%;
-  height: 733px;
+  height: 100%;
 `;
 
 const EitherButtonGrid = styled.div`

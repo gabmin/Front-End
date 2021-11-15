@@ -31,15 +31,15 @@ const EitherWrite = props => {
 
   //Title 데이터
   const onChangeTitle = e => {
-    setTitle(e.target.value);
+    setTitle(e.target.value.substr(0, 30));
   };
   //contentA 데이터
   const onChangeContentA = e => {
-    setContentA(e.target.value);
+    setContentA(e.target.value.substr(0, 30));
   };
   //contentB 데이터
   const onChangeContentB = e => {
-    setContentB(e.target.value);
+    setContentB(e.target.value.substr(0, 30));
   };
   // date
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -63,7 +63,7 @@ const EitherWrite = props => {
         <p>제목</p>
         <Input
           type="text"
-          placeholder="질문을 입력해주세요. (40자 이내)"
+          placeholder="질문을 입력해주세요. (30자 이내)"
           value={title}
           onChange={onChangeTitle}
         />
@@ -72,6 +72,7 @@ const EitherWrite = props => {
       <EitherButtonGrid>
         <EitherButtonA>
           <ButtonInput
+            type="text"
             placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
             value={contentA}
             onChange={onChangeContentA}
@@ -79,6 +80,7 @@ const EitherWrite = props => {
         </EitherButtonA>
         <EitherButtonB>
           <ButtonInput
+            type="text"
             placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
             value={contentB}
             onChange={onChangeContentB}
@@ -110,7 +112,6 @@ const Title = styled.div`
     font-size: 18px;
     font-weight: bold;
     line-height: 26px;
-    color: #101214;
     margin: 0px;
     margin: 22px 76px 28px 0px;
   }
@@ -122,6 +123,9 @@ const Input = styled.input`
   line-height: 22px;
   font-size: 16px;
   font-weight: 300;
+  &:placeholder {
+    color: #101214;
+  }
 `;
 const EitherButtonGrid = styled.div`
   width: 100%;
@@ -157,6 +161,9 @@ const ButtonInput = styled.textarea`
   resize: none;
   box-sizing: border-box;
   padding: 3px;
+  &:placeholder {
+    color: #101214;
+  }
 `;
 const OptionButtonGrid = styled.div`
   width: 100%;

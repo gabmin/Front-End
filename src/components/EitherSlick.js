@@ -15,23 +15,20 @@ function NextArrow(props) {
       className={className}
       style={{
         ...style,
-        width: "50px",
-        height: "50px",
-        right: "0px",
-        top: "260px",
+        width: "12.25px",
+        height: "28px",
         zIndex: "1000",
       }}
       onClick={onClick}
     >
       <img
-        src={require("../images/arrowRed.png").default}
+        src={require("../images/arrowRed.svg").default}
         alt="arrowNext"
         style={{
           position: "absolute",
           width: "100%",
           height: "100%",
-          right: "-50px",
-          top: "0px",
+          right: "-25px",
           border: null,
         }}
       />
@@ -46,23 +43,20 @@ function PrevArrow(props) {
       className={className}
       style={{
         ...style,
-        width: "50px",
-        height: "50px",
-        right: "0px",
-        top: "260px",
+        width: "12.25px",
+        height: "28px",
         zIndex: "1000",
       }}
       onClick={onClick}
     >
       <img
-        src={require("../images/arrowLRed.png").default}
+        src={require("../images/arrowLRed.svg").default}
         alt="arrowNext"
         style={{
           position: "absolute",
           width: "100%",
           height: "100%",
           left: "-25px",
-          top: "0px",
           border: null,
         }}
       />
@@ -80,7 +74,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     <>
       <Wrap>
         <div>
-          <Slider {...settings}>
+          <StyledSlider {...settings}>
             {NotCompleteList &&
               NotCompleteList?.map(v => (
                 <EitherCard
@@ -157,7 +151,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   user={v.user}
                 />
               ))}
-          </Slider>
+          </StyledSlider>
         </div>
       </Wrap>
     </>
@@ -186,28 +180,18 @@ const Wrap = styled.div`
   width: 100%;
   height: 100%;
   margin: auto;
+`;
 
-  .slick-slider {
-    width: 1300px;
-    margin: auto;
-  }
+const StyledSlider = styled(Slider)`
+  margin: auto;
+  width: 1300px;
 
-  .slick-list {
-    width: 100%;
-    height: 80%;
-    margin: auto;
-  }
-  .slick-slide {
-    transform: scale(1);
-  }
-  .slick-track {
-    height: 700px;
-  }
-
-  .center .slick-slide.slick-center {
+  .slick-slide.slick-center {
     transform: scale(1.1);
     transition: 0.5s;
-    z-index: 2;
+  }
+  .slick-slide {
+    padding: 30px 0 30px 0;
   }
 `;
 
