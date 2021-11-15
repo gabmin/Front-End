@@ -119,16 +119,16 @@ const Wrap = styled.div`
     border: 0.2em solid ${red};
     border-radius: 50%;
     display: inline-block;
-    height: 1.1em;
-    width: 1.1em;
     opacity: 1;
     color: transparent;
     margin: 0;
+    box-sizing: border-box;
   }
 
   li button::before {
-    width: 1.1em;
-    height: 1.1em;
+    width: 6.5px;
+    height: 6.5px;
+    box-sizing: content-box;
   }
 
   li.slick-active {
@@ -139,7 +139,6 @@ const Wrap = styled.div`
       position: relative;
       top: 2.3px;
       right: 2px;
-      transform: scale(1.1);
       box-sizing: border-box;
       margin: 0;
     }
