@@ -109,7 +109,7 @@ const ChildComment = props => {
 
   const [newEditChild, setNewEditChild] = useState();
   const changeEditChild = e => {
-    setNewEditChild(e.target.value);
+    setNewEditChild(e.target.value.substr(0, 1000));
   };
 
   const editChildComment = () => {
@@ -145,7 +145,7 @@ const ChildComment = props => {
               height={"24px"}
             ></Nickname>
             {"\u00a0\u00a0"}
-            <CommentDate>{date}</CommentDate>
+            <CommentDate>{date.substring(0, 16)}</CommentDate>
           </NickWarpper>
           <BtnWrapper>
             {userInfo.nickname === nickname && !deleted && editBtn ? (
@@ -241,6 +241,7 @@ const LikeWrapper = styled.div`
 
 const LikeBtn = styled.button`
   border: none;
+  padding: 2px 6px 0 6px;
   color: ${colors.gray5};
   background-color: ${colors.white};
   cursor: pointer;
@@ -280,6 +281,7 @@ const TextArea = styled.textarea`
   margin: auto;
   border: none;
   resize: none;
+  font-family: "Noto-Sans KR", sans-serif;
   background-color: ${colors.gray};
   &:focus {
     outline: none;

@@ -30,7 +30,7 @@ const MultiUnvoted = props => {
       <TitleWrapper>
         <Title>{multiList.title}</Title>
       </TitleWrapper>
-      <Date>{multiList.date}</Date>
+      <Date>{multiList.date.substring(0, 16)}</Date>
       <TitleHr />
       <div>
         <AnswerList dataList={multiList} />

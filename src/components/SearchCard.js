@@ -38,14 +38,14 @@ const SearchCard = ({
       return;
     }
     history.push(`/multi/${id}`);
-  }, [id, type]);
+  }, [id, type, dispatch]);
 
   const onClickNick = useCallback(() => {
     if (userId) {
       history.push(`/profile/${userId}`);
       window.scroll(0, 0);
     }
-  });
+  }, [userId]);
 
   return (
     <Container>
@@ -128,6 +128,7 @@ const Completed = styled.span`
 const Type = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 50px;
   height: 20px;
   padding: 0 5px;

@@ -34,6 +34,7 @@ const Card = ({
   };
   const dispatch = useDispatch();
   const onClickDetail = useCallback(() => {
+    window.scroll(0, 0);
     if (type === "either") {
       // history.push(`/either/${id}`);
       dispatch(SetParams(id));
@@ -105,11 +106,11 @@ const Layout = styled.div`
 `;
 
 const TextLayout = styled.div`
-  width: 90%;
+  width: 100%;
 `;
 
 const Subject = styled.p`
-  height: 50px;
+  height: 52px;
   width: 100%;
   font-size: ${props => props.titleSize};
   font-weight: bold;
