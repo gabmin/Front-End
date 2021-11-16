@@ -321,6 +321,7 @@ const Container = styled.div`
   border-radius: 10px;
   background-color: #ffffff;
   padding: 46px 32px;
+  position: relative;
 `;
 const ManuButtonGrid = styled.div`
   .div {
@@ -360,7 +361,7 @@ const ProgressGrid = styled.div`
   margin: auto;
 `;
 const EitherProgress = styled.div`
-  margin: 24px auto;
+  margin: 24px auto 0px auto;
   border-radius: 6px;
   width: 100%;
   height: 6px;
@@ -427,16 +428,15 @@ const EitherButtonB = styled.button`
   }
 `;
 const EitherFooter = styled.div`
-  width: 313px;
-  position: relative;
   align-items: center;
+
   .Position {
-    width: 100%;
+    width: 313px;
     position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 60px;
+    top: 430px;
   }
   .Grid {
     color: #e25b45;
