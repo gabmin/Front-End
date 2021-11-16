@@ -5,7 +5,6 @@ import { FiArrowLeft, FiMoreHorizontal } from "react-icons/fi";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import MaterialIcon from "material-icons-react";
 
 import colors from "../shared/colors";
 import MultiComment from "../components/MultiComment";
@@ -21,16 +20,15 @@ const MultiDetail = props => {
   const dispatch = useDispatch();
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
-  console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataListList", dataList);
-  const [state, setState] = useState(false);
+  // const [state, setState] = useState(false);
 
-  const render = temp => {
-    setState(temp);
-  };
-  console.log("state", state);
+  // const render = temp => {
+  //   setState(temp);
+  // };
+  // console.log("state", state);
 
   const TotalCnt =
     dataList &&
@@ -184,7 +182,7 @@ const MultiDetail = props => {
             <MultiUnvoted
               multiId={multiId}
               dataList={dataList}
-              render={p => render(p)}
+              // render={p => render(p)}
             />
           )}
 
