@@ -177,7 +177,7 @@ const settings = {
 };
 
 const Wrap = styled.div`
-  width: 100%;
+  width: 1300px;
   height: 100%;
   margin: auto;
 `;
@@ -189,9 +189,18 @@ const StyledSlider = styled(Slider)`
   .slick-slide.slick-center {
     transform: scale(1.1);
     transition: 0.5s;
+    z-index: 2;
   }
   .slick-slide {
     padding: 30px 0 30px 0;
+    margin: auto;
+    width: 1300px;
+  }
+  .slick-list {
+    width: 100%;
+  }
+  .slick-track {
+    width: 100%;
   }
 `;
 
