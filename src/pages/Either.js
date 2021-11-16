@@ -138,6 +138,10 @@ const EitherButtonGrid = styled.div`
   width: 401px;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    width: 330px;
+    margin: 30px auto;
+  }
 `;
 
 const EitherButton = styled.button`

@@ -170,14 +170,14 @@ const settings = {
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   centerPadding: "0px",
-  // responsive: [
-  //   { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-  //   { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-  // ],
+  responsive: [
+    { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+    { breakpoint: 1400, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+  ],
 };
 
 const Wrap = styled.div`
-  width: 1300px;
+  width: 100%;
   height: 100%;
   margin: auto;
 `;
