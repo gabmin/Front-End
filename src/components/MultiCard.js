@@ -135,7 +135,7 @@ const Container = styled.div`
   width: 380px;
   height: 490px;
   padding: 46px 56px;
-  margin: 70 auto;
+  margin: 70px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -144,6 +144,10 @@ const Container = styled.div`
   flex-direction: column; */
   position: relative;
   background-color: ${colors.white};
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+    width: 80%;
+  }
 `;
 
 const ContainerB = styled.div`
@@ -151,7 +155,7 @@ const ContainerB = styled.div`
   width: 380px;
   height: 490px;
   padding: 46px 56px;
-  margin: 70 auto;
+  margin: 70px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -163,6 +167,10 @@ const ContainerB = styled.div`
     rgba(134, 142, 150, 0.2) 0%,
     rgba(0, 0, 0, 0) 100%
   );
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+    width: 80%;
+  }
 `;
 
 const Card = styled.div`

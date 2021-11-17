@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { FiThumbsUp } from "react-icons/fi";
+import { HiThumbUp } from "react-icons/hi";
 import { FiMessageSquare } from "react-icons/fi";
 
 import colors from "../shared/colors";
@@ -15,11 +16,15 @@ const MultiUnvoted = props => {
   const multiList = dataList.multi;
   const multiId = props.multiId;
   const [likes, setLikes] = useState(multiList.likeCnt);
+  const [likeState, setLikeState] = useState(
+    multiList.liked === null ? false : true,
+  );
 
   const addLike = () => {
     if (multiList.liked === null) {
       dispatch(AddLikeDB(multiId));
       setLikes(multiList.likeCnt + 1);
+      setLikeState(true);
     } else {
       return;
     }
@@ -54,9 +59,15 @@ const MultiUnvoted = props => {
             </TotalComment>
           </CommentWarpper>
           <LikeWarpper>
-            <LikeBtn onClick={addLike}>
-              <FiThumbsUp />
-            </LikeBtn>{" "}
+            {!likeState ? (
+              <LikeBtn onClick={addLike}>
+                <FiThumbsUp />
+              </LikeBtn>
+            ) : (
+              <LikedBtn>
+                <HiThumbUp />
+              </LikedBtn>
+            )}
             <TotalLike>{likes}</TotalLike>
           </LikeWarpper>
         </RightWarpper>
@@ -161,6 +172,12 @@ const LikeBtn = styled.button`
   border: none;
   background-color: ${colors.white};
   cursor: pointer;
+`;
+
+const LikedBtn = styled.div`
+  font-size: 20px;
+  align-items: center;
+  color: ${colors.red};
 `;
 
 const TotalLike = styled.p`
