@@ -390,6 +390,7 @@ const EitherButtonA = styled.button`
   font-size: 16px;
   line-height: 23px;
   cursor: pointer;
+  margin-right: -1px;
   &:hover {
     background-color: #dfdfdf;
   }
@@ -406,6 +407,7 @@ const EitherButtonB = styled.button`
   font-size: 16px;
   line-height: 23px;
   cursor: pointer;
+  margin-left: -1px;
   &:hover {
     background-color: #dfdfdf;
   }
