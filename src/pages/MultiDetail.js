@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
+import styled from "styled-components";
 import { FiArrowLeft, FiMoreHorizontal } from "react-icons/fi";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import MaterialIcon from "material-icons-react";
 
 import colors from "../shared/colors";
 import MultiComment from "../components/MultiComment";
@@ -13,24 +13,23 @@ import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
-import styled from "styled-components";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import CompletedDetail from "../components/CompletedDetail";
+import { mobile } from "../shared/style";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
-  console.log("multiDetail", multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
   console.log("dataListList", dataList);
-  const [state, setState] = useState(false);
+  // const [state, setState] = useState(false);
 
-  const render = temp => {
-    setState(temp);
-  };
-  console.log("state", state);
+  // const render = temp => {
+  //   setState(temp);
+  // };
+  // console.log("state", state);
 
   const TotalCnt =
     dataList &&
@@ -184,7 +183,7 @@ const MultiDetail = props => {
             <MultiUnvoted
               multiId={multiId}
               dataList={dataList}
-              render={p => render(p)}
+              // render={p => render(p)}
             />
           )}
 
@@ -206,6 +205,10 @@ const Container = styled.div`
   max-width: 1100px;
   min-height: 100%;
   margin: 10px auto 50px auto;
+  box-sizing: border-box;
+  @media screen and (max-width: ${mobile}) {
+    padding: 10px;
+  }
 `;
 
 const Temp = styled.div`

@@ -8,6 +8,7 @@ import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
 import {
@@ -33,6 +34,7 @@ const EitherCard = props => {
     voted,
     completed,
     user,
+    goToNext,
   } = props;
 
   const [percent, setPercent] = useState("");
@@ -122,6 +124,7 @@ const EitherCard = props => {
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
+      goToNext();
     }
   };
   //투표 종료하기
@@ -142,7 +145,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(true);
+          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -157,7 +160,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(true);
+          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -321,6 +324,10 @@ const Container = styled.div`
   border-radius: 10px;
   background-color: #ffffff;
   padding: 46px 32px;
+  position: relative;
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+  }
 `;
 const ManuButtonGrid = styled.div`
   .div {
@@ -360,7 +367,7 @@ const ProgressGrid = styled.div`
   margin: auto;
 `;
 const EitherProgress = styled.div`
-  margin: 24px auto;
+  margin: 24px auto 0px auto;
   border-radius: 6px;
   width: 100%;
   height: 6px;
@@ -427,16 +434,15 @@ const EitherButtonB = styled.button`
   }
 `;
 const EitherFooter = styled.div`
-  width: 313px;
-  position: relative;
   align-items: center;
+
   .Position {
-    width: 100%;
+    width: 313px;
     position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 60px;
+    top: 430px;
   }
   .Grid {
     color: #e25b45;

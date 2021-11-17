@@ -84,6 +84,7 @@ const TitleWrapper = styled.div`
 
 const Title = styled.p`
   font-size: 24px;
+  word-break: break-all;
 `;
 
 const Date = styled.p`

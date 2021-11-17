@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
@@ -123,8 +124,12 @@ const Either = props => {
   );
 };
 const Container = styled.div`
-  width: 100%;
+  max-width: 1280px;
   height: 100%;
+  margin: auto;
+  @media screen and (max-width: ${mobile}) {
+    max-width: 768px;
+  }
 `;
 const Wrap = styled.div`
   max-width: 100%;
@@ -138,6 +143,11 @@ const EitherButtonGrid = styled.div`
   width: 401px;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    max-width: 300px;
+    width: 100%;
+    margin: 30px auto 0px auto;
+  }
 `;
 
 const EitherButton = styled.button`
@@ -152,6 +162,9 @@ const EitherButton = styled.button`
     color: #00397c;
     text-decoration: underline;
     text-underline-position: under;
+  }
+  @media screen and (max-width: ${mobile}) {
+    font-size: 17px;
   }
 `;
 const SlickLayout = styled.div`
@@ -175,6 +188,9 @@ const QuestionBtn = styled.button`
   &:hover {
     background-color: #e25b45;
     color: #ffffff;
+  }
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.9);
   }
 `;
 export default Either;

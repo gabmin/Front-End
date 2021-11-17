@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { FiThumbsUp } from "react-icons/fi";
-import { FiMessageSquare } from "react-icons/fi";
+import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
 import colors from "../shared/colors";
 import { DetailDB } from "../redux/actions/multiDetail";
@@ -11,6 +10,8 @@ import Nickname from "./Nickname";
 
 const MultiCard = props => {
   const userInfo = useSelector(state => state.user.userInfo);
+  const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const dataList = multiDetail.multi && multiDetail;
 
   const dispatch = useDispatch();
   const {
@@ -25,6 +26,7 @@ const MultiCard = props => {
     likeCnt,
     commentCnt,
   } = props;
+
   const history = useHistory();
   const goToDetail = () => {
     if (!userInfo.nickname) {
@@ -35,6 +37,7 @@ const MultiCard = props => {
       history.push(`/multi/${multiId}`);
     }
   };
+
   return (
     <>
       {completed !== 1 ? (
@@ -191,14 +194,6 @@ const DateText = styled.p`
   text-align: center;
   margin: 8px auto;
   color: ${colors.gray5};
-`;
-
-const ContentHr = styled.hr`
-  border: none;
-  width: 103px;
-  height: 1px;
-  margin: 12px auto 11px auto;
-  background-color: ${colors.gray5};
 `;
 
 const DesWrapper = styled.div`

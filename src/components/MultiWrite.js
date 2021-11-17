@@ -11,7 +11,6 @@ import colors from "../shared/colors";
 const MultiWrite = props => {
   const editData = props.editData;
   const multiId = props.multiId;
-  console.log("editwrite", editData);
   const isEdit = editData ? true : false;
   console.log("isEdit", isEdit);
   const [title, setTitle] = useState(isEdit ? editData.title : "");
@@ -486,7 +485,6 @@ const Input = styled.input`
 const Textarea = styled.textarea`
   min-width: 100%;
   max-width: 510px;
-  /* max-width: 100%; */
   margin: 16px 0;
   border: none;
   outline: none;
@@ -502,7 +500,6 @@ const VoteBox = styled.div`
   margin: auto;
   min-width: 100%;
   max-width: 620px;
-  /* height: 500px; */
 `;
 
 const PollWarpper = styled.div`
@@ -546,7 +543,6 @@ const FullBtn = styled.button`
 `;
 
 const HalfBtn = styled.button`
-  /* min-width: 0%; */
   width: 290px;
   height: 48px;
   margin: 8px 0;
