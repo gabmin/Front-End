@@ -9,6 +9,7 @@ import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
@@ -233,6 +234,9 @@ const Container = styled.div`
     rgba(0, 57, 124, 0.2) 0%,
     rgba(0, 0, 0, 0) 100%
   );
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+  }
 `;
 const ManuButtonGrid = styled.div`
   .div {
