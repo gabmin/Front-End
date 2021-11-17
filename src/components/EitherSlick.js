@@ -187,7 +187,7 @@ const settings = {
 };
 
 const Wrap = styled.div`
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
 
@@ -224,7 +224,7 @@ const StyledSlider = styled(Slider)`
     .slick-next {
       width: 10px;
       height: 20px;
-      margin: 0px 20px;
+      margin: 0px 40px;
     }
   }
 `;
