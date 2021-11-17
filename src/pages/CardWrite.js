@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router";
 
+import { mobile, tablet } from "../shared/style";
 import EitherWrite from "../components/EitherWrite";
 import MultiWrite from "../components/MultiWrite";
 import { history } from "../redux/configureStore";
@@ -47,7 +48,7 @@ const CardWrite = () => {
         <ContentBox>
           <Index>
             <p>구분</p>
-            <div style={{ display: "flex" }}>
+            <div>
               <RadioBtnWarpperE>
                 <input
                   name="write"
@@ -79,8 +80,8 @@ const CardWrite = () => {
 };
 
 const Wrap = styled.div`
-  min-width: 100%;
   max-width: 840px;
+  width: 90%;
   margin: auto;
 `;
 
@@ -91,6 +92,10 @@ const ContentBox = styled.div`
   margin: 56px auto 56px auto;
   border-radius: 10px;
   padding: 4% 110px 4% 110px;
+  @media screen and (max-width: ${mobile}) {
+    padding: 7%;
+    margin: 10% auto;
+  }
 `;
 
 const Index = styled.div`
@@ -101,31 +106,56 @@ const Index = styled.div`
     font-weight: bold;
     line-height: 26px;
     margin: 0px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 16px;
+    }
+  }
+  div {
+    display: flex;
   }
   margin: 0px 0px 22px 0px;
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 10px 0px;
+  }
 `;
 
 const RadioBtnWarpperE = styled.div`
   display: flex;
   margin: 0px 0px 0px 76px;
+  width: 100px;
   align-items: center;
   label {
     font-size: 16px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 40px;
+    }
   }
   input {
     margin: 0px 8px 0px 0px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 0px 20%;
   }
 `;
 
 const RadioBtnWarpperM = styled.div`
   display: flex;
   margin: 0px 0px 0px 47px;
+  width: 100px;
   align-items: center;
   label {
     font-size: 16px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 40px;
+    }
   }
   input {
     margin: 0px 8px 0px 0px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 0px 20%;
   }
 `;
 

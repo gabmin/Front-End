@@ -335,8 +335,8 @@ const ManuButtonGrid = styled.div`
     position: relative;
   }
   position: absolute;
-  top: 110px;
-  right: 40px;
+  top: 15px;
+  right: 20px;
 `;
 const TitleDiv = styled.div`
   width: 100%;
