@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -69,12 +69,15 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     PostList && PostList.filter(post => post.completed === 0);
   const CompleteList =
     PostList && PostList.filter(post => post.completed === 1);
-
+  const sliderRef = useRef();
+  const goToNext = () => {
+    sliderRef.current.slickNext();
+  };
   return (
     <>
       <Wrap>
         <div>
-          <StyledSlider {...settings}>
+          <StyledSlider {...settings} ref={sliderRef}>
             {NotCompleteList &&
               NotCompleteList?.map(v => (
                 <EitherCard
@@ -92,6 +95,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   voted={v.voted}
                   completed={v.completed}
                   user={v.user}
+                  goToNext={goToNext}
                 />
               ))}
             {CompleteList &&
@@ -130,6 +134,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   voted={v.voted}
                   completed={v.completed}
                   user={v.user}
+                  goToNext={goToNext}
                 />
               ))}
             {PostCompleteList &&
@@ -163,13 +168,15 @@ const settings = {
   centerMode: true,
   infinite: true,
   adaptiveHeight: true,
-  focusOnSelect: true,
+  focusOnSelect: false,
   slidesToShow: 3,
   slidesToScroll: 1,
+  swipeToSlide: true,
   speed: 500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   centerPadding: "0px",
+
   responsive: [
     { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
     { breakpoint: 1400, settings: { slidesToShow: 1, slidesToScroll: 1 } },

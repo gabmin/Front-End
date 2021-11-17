@@ -8,6 +8,7 @@ import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
 import {
@@ -33,6 +34,7 @@ const EitherCard = props => {
     voted,
     completed,
     user,
+    goToNext,
   } = props;
 
   const [percent, setPercent] = useState("");
@@ -122,6 +124,7 @@ const EitherCard = props => {
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
+      goToNext();
     }
   };
   //투표 종료하기
@@ -142,7 +145,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(true);
+          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -157,7 +160,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(true);
+          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
       >
         <ButtonText>{content}</ButtonText>
