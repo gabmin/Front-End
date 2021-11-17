@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
-import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
-import { FiMessageSquare } from "react-icons/fi";
+import { FaRegUser } from "react-icons/fa";
 
 import colors from "../shared/colors";
 import { useDispatch, useSelector } from "react-redux";
@@ -97,9 +97,10 @@ const MultiVoted = props => {
         <Title>{multiList.title}</Title>
       </TitleWrapper>
       <Date>{multiList.date.substring(0, 16)}</Date>
-
-      <TitleHr />
-
+      <TotalCntWarpper>
+        <FaRegUser /> {TotalCnt}
+      </TotalCntWarpper>
+      {/* <TitleHr /> */}
       <ProgressWrapper>
         <div>
           <div>
@@ -263,6 +264,13 @@ const Date = styled.p`
   margin: auto;
   color: ${colors.gray5};
   font-size: 14px;
+`;
+
+const TotalCntWarpper = styled.div`
+  margin: 12px auto;
+  text-align: center;
+  font-size: 14px;
+  color: ${colors.gray5};
 `;
 
 const TitleHr = styled.hr`

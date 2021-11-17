@@ -134,7 +134,7 @@ const Container = styled.div`
   text-align: left;
   width: 380px;
   height: 490px;
-  padding: 46px 56px;
+  padding: 46px 32px;
   margin: 70px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
@@ -154,11 +154,12 @@ const ContainerB = styled.div`
   text-align: left;
   width: 380px;
   height: 490px;
-  padding: 46px 56px;
+  padding: 46px 32px;
   margin: 70px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
+  position: relative;
   /* word-break: break-all; */
   /* display: flex;
   flex-direction: column; */
@@ -251,10 +252,13 @@ const VoteBtnB = styled.button`
 const TempWarpper = styled.div``;
 
 const FooterWrapper = styled.div`
+  position: absolute;
+  top: 420px;
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 12px auto 0 auto;
+  margin: 0 auto;
 `;
 
 const UserWrapper = styled.div`
@@ -285,7 +289,7 @@ const CommentWarpper = styled.div`
 `;
 
 const TotalComment = styled.p`
-  margin: 14px auto 14px 14px;
+  margin: 0 auto 0 14px;
   font-size: 14px;
 `;
 
@@ -300,7 +304,7 @@ const LikeWarpper = styled.div`
 `;
 
 const TotalLike = styled.p`
-  margin: 14px auto 14px 14px;
+  margin: 0 auto 0 14px;
   font-size: 14px;
 `;
 

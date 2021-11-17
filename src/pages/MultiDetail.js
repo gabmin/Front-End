@@ -252,13 +252,30 @@ const MenuWarpper = styled.div`
 
 const TopBtn = styled.button`
   display: block;
-  margin: 0 10% 20px auto;
+  margin: 5% 8% 20px auto;
+  font-weight: 700;
   border: none;
   background-color: ${colors.white};
   color: ${colors.blue};
   cursor: pointer;
   text-decoration: underline;
   text-underline-position: under;
+`;
+
+const Top = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: -80px;
+  font-size: 18px;
+  font-weight: bold;
+  color: ${colors.blue};
+  border-bottom: 1px solid ${colors.blue};
+  cursor: pointer;
+
+  @media screen and (max-width: 1540px) {
+    bottom: 100px;
+    right: -40px;
+  }
 `;
 
 export default MultiDetail;
