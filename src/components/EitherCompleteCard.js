@@ -9,6 +9,7 @@ import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
 import { deletePostDB, likePostDB } from "../redux/actions/eitherCard";
 
@@ -147,29 +148,29 @@ const EitherCompleteCard = props => {
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
         {!userInfo.nickname ? (
-          <div>
+          <ButtonGrid>
             {SelctButtonA(null, contentA)}
             {SelctButtonB(null, contentB)}
-          </div>
+          </ButtonGrid>
         ) : (
-          <div>
+          <ButtonGrid>
             {voteCntA === voteCntB ? (
-              <div>
+              <ButtonGrid>
                 {SelctButtonA("#DFDFDF", contentA)}
                 {SelctButtonB("#DFDFDF", contentB)}
-              </div>
+              </ButtonGrid>
             ) : voteCntA > voteCntB ? (
-              <div>
+              <ButtonGrid>
                 {SelctButtonA("#DFDFDF", contentA)}
                 {SelctButtonB(null, contentB)}
-              </div>
+              </ButtonGrid>
             ) : (
-              <div>
+              <ButtonGrid>
                 {SelctButtonA(null, contentA)}
                 {SelctButtonB("#DFDFDF", contentB)}
-              </div>
+              </ButtonGrid>
             )}
-          </div>
+          </ButtonGrid>
         )}
         <ProgressGrid>
           <EitherProgress>
@@ -181,27 +182,37 @@ const EitherCompleteCard = props => {
           </EitherProgress>
         </ProgressGrid>
         <EitherFooter>
-          <div>
-            <Nickname
-              nickname={nickname}
-              userId={user}
-              width={"32px"}
-              height={"32px"}
-              fontSize={"14px"}
-            />
-          </div>
-          <div className="Grid">
-            {!likeState ? (
-              <FiThumbsUp
-                onClick={onClickLike}
-                style={{ width: "24", height: "24", cursor: "pointer" }}
+          <div className="Position">
+            <div>
+              <Nickname
+                nickname={nickname}
+                userId={user}
+                width={"32px"}
+                height={"32px"}
+                fontSize={"14px"}
               />
-            ) : (
-              <HiThumbUp
-                style={{ width: "24", height: "24", cursor: "pointer" }}
-              />
-            )}
-            <div className="Likes">{likes}</div>
+            </div>
+            <div className="Grid">
+              {!likeState ? (
+                <FiThumbsUp
+                  onClick={onClickLike}
+                  style={{
+                    width: "24",
+                    height: "24",
+                    cursor: "pointer",
+                  }}
+                />
+              ) : (
+                <HiThumbUp
+                  style={{
+                    width: "24",
+                    height: "24",
+                    cursor: "pointer",
+                  }}
+                />
+              )}
+              <div className="Likes">{likes}</div>
+            </div>
           </div>
         </EitherFooter>
       </Container>
@@ -217,20 +228,25 @@ const Container = styled.div`
   margin: 70px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
-  padding: 46px 32px;
   background: linear-gradient(
     180deg,
     rgba(0, 57, 124, 0.2) 0%,
     rgba(0, 0, 0, 0) 100%
   );
+  padding: 46px 32px;
+  position: relative;
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+    width: 80%;
+  }
 `;
 const ManuButtonGrid = styled.div`
   .div {
     position: relative;
   }
   position: absolute;
-  top: 110px;
-  right: 40px;
+  top: 15px;
+  right: 20px;
 `;
 const TitleDiv = styled.div`
   width: 100%;
@@ -248,6 +264,7 @@ const DateDiv = styled.div`
 const TotalCntGrid = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 16px;
 `;
 const TotalCntDiv = styled.div`
@@ -256,20 +273,62 @@ const TotalCntDiv = styled.div`
   color: #868e96;
   margin-left: 8px;
 `;
+const ButtonGrid = styled.div`
+  width: 312px;
+  height: 160px;
+  box-sizing: border-box;
+  margin: 24px auto 0px auto;
+  justify-content: center;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+  }
+`;
+const EitherButtonA = styled.button`
+  width: 156px;
+  height: 160px;
+  border: 2px solid #00397c;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  &:hover {
+    background-color: #dfdfdf;
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
+`;
+const EitherButtonB = styled.button`
+  width: 156px;
+  height: 160px;
+  border: 2px solid #00397c;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  &:hover {
+    background-color: #dfdfdf;
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
+`;
 const ProgressGrid = styled.div`
   width: 100%;
   margin: auto;
 `;
 const EitherProgress = styled.div`
-  margin: 24px auto;
-  border: 1px solid #00397c;
+  margin: 24px auto 0px auto;
   border-radius: 6px;
   width: 100%;
   height: 6px;
-  background-color: #ffffff;
+  z-index: 0;
+  background-color: #e25b45;
 `;
 const HightLight = styled.div`
-  background-color: #dfdfdf;
+  background-color: #00397c;
   transition: 1s;
   width: ${props => props.width};
   height: 6px;
@@ -283,45 +342,40 @@ const ProgressLabel = styled.div`
   color: #00397c;
   margin-top: 6px;
   font-size: 12px;
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
+  transform: translateX(-50%);
   .LabelLeft {
     margin: 8px 0px 0px 10px;
   }
   .LabelRight {
     margin: 8px 10px 0px 0px;
   }
-`;
-
-const EitherButtonA = styled.button`
-  width: 156px;
-  height: 160px;
-  border: 2px solid #00397c;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
-  margin: 24px auto 0px auto;
-`;
-const EitherButtonB = styled.button`
-  width: 156px;
-  height: 160px;
-  border: 2px solid #00397c;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
-  margin: 24px auto 0px auto;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+    .LabelLeft {
+      margin: 8px 0px 0px 40px;
+    }
+    .LabelRight {
+      margin: 8px 40px 0px 0px;
+    }
+  }
 `;
 const EitherFooter = styled.div`
-  width: 313px;
-  position: relative;
-  margin-top: 40px;
-  display: inline-flex;
-  justify-content: space-between;
+  width: 100%;
+  margin: auto;
   align-items: center;
-  box-sizing: border-box;
 
+  .Position {
+    width: 82%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 430px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
   .Grid {
     color: #e25b45;
     display: flex;
@@ -332,7 +386,12 @@ const EitherFooter = styled.div`
     margin-left: 14px;
   }
 `;
-const ButtonText = styled.h5`
+const ButtonText = styled.div`
   word-break: break-all;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 5px 3px;
 `;
 export default EitherCompleteCard;

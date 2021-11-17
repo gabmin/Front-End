@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
+import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import { addPostDB } from "../redux/actions/eitherCard";
 
@@ -112,8 +113,11 @@ const Title = styled.div`
     font-size: 18px;
     font-weight: bold;
     line-height: 26px;
-    margin: 0px;
     margin: 22px 76px 28px 0px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 16px;
+      margin: 20px 35px 20px 0px;
+    }
   }
 `;
 const Input = styled.input`
@@ -123,8 +127,10 @@ const Input = styled.input`
   line-height: 22px;
   font-size: 16px;
   font-weight: 300;
-  &:placeholder {
-    color: #101214;
+  color: #101214;
+
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
   }
 `;
 const EitherButtonGrid = styled.div`
@@ -161,8 +167,10 @@ const ButtonInput = styled.textarea`
   resize: none;
   box-sizing: border-box;
   padding: 3px;
-  &:placeholder {
-    color: #101214;
+  font-family: "Noto-Sans KR", sans-serif;
+
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
   }
 `;
 const OptionButtonGrid = styled.div`
@@ -185,6 +193,9 @@ const CancleButton = styled.button`
     background-color: #e25b45;
     color: #ffffff;
   }
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
+  }
 `;
 const CheckButton = styled.button`
   width: 290px;
@@ -200,6 +211,9 @@ const CheckButton = styled.button`
   &:hover {
     background-color: #ffffff;
     color: #e25b45;
+  }
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
   }
 `;
 export default EitherWrite;

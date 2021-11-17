@@ -138,7 +138,7 @@ const Content = styled.p`
 `;
 
 const Date = styled.p`
-  width: 50%;
+  width: 100px;
   font-size: 12px;
   color: gray;
   padding-bottom: 10px;

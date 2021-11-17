@@ -8,6 +8,7 @@ import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 
+import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
 import {
@@ -33,6 +34,7 @@ const EitherCard = props => {
     voted,
     completed,
     user,
+    goToNext,
   } = props;
 
   const [percent, setPercent] = useState("");
@@ -122,6 +124,7 @@ const EitherCard = props => {
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
+      goToNext();
     }
   };
   //투표 종료하기
@@ -142,7 +145,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(true);
+          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -157,7 +160,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(true);
+          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
       >
         <ButtonText>{content}</ButtonText>
@@ -273,35 +276,37 @@ const EitherCard = props => {
           </ProgressGrid>
         ) : null}
         <EitherFooter>
-          <div>
-            <Nickname
-              nickname={nickname}
-              userId={user}
-              width={"32px"}
-              height={"32px"}
-              fontSize={"14px"}
-            />
-          </div>
-          <div className="Grid">
-            {!likeState ? (
-              <FiThumbsUp
-                onClick={onClickLike}
-                style={{
-                  width: "24",
-                  height: "24",
-                  cursor: "pointer",
-                }}
+          <div className="Position">
+            <div>
+              <Nickname
+                nickname={nickname}
+                userId={user}
+                width={"32px"}
+                height={"32px"}
+                fontSize={"14px"}
               />
-            ) : (
-              <HiThumbUp
-                style={{
-                  width: "24",
-                  height: "24",
-                  cursor: "pointer",
-                }}
-              />
-            )}
-            <div className="Likes">{likes}</div>
+            </div>
+            <div className="Grid">
+              {!likeState ? (
+                <FiThumbsUp
+                  onClick={onClickLike}
+                  style={{
+                    width: "24",
+                    height: "24",
+                    cursor: "pointer",
+                  }}
+                />
+              ) : (
+                <HiThumbUp
+                  style={{
+                    width: "24",
+                    height: "24",
+                    cursor: "pointer",
+                  }}
+                />
+              )}
+              <div className="Likes">{likes}</div>
+            </div>
           </div>
         </EitherFooter>
       </Container>
@@ -319,14 +324,19 @@ const Container = styled.div`
   border-radius: 10px;
   background-color: #ffffff;
   padding: 46px 32px;
+  position: relative;
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+    width: 80%;
+  }
 `;
 const ManuButtonGrid = styled.div`
   .div {
     position: relative;
   }
   position: absolute;
-  top: 110px;
-  right: 40px;
+  top: 15px;
+  right: 20px;
 `;
 const TitleDiv = styled.div`
   width: 100%;
@@ -353,12 +363,54 @@ const TotalCntDiv = styled.div`
   color: #868e96;
   margin-left: 8px;
 `;
+const ButtonGrid = styled.div`
+  width: 312px;
+  height: 160px;
+  box-sizing: border-box;
+  margin: 24px auto 0px auto;
+  justify-content: center;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+  }
+`;
+const EitherButtonA = styled.button`
+  width: 156px;
+  height: 160px;
+  border: 2px solid #00397c;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  &:hover {
+    background-color: #dfdfdf;
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
+`;
+const EitherButtonB = styled.button`
+  width: 156px;
+  height: 160px;
+  border: 2px solid #00397c;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  &:hover {
+    background-color: #dfdfdf;
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
+`;
 const ProgressGrid = styled.div`
   width: 100%;
   margin: auto;
 `;
 const EitherProgress = styled.div`
-  margin: 24px auto;
+  margin: 24px auto 0px auto;
   border-radius: 6px;
   width: 100%;
   height: 6px;
@@ -380,57 +432,40 @@ const ProgressLabel = styled.div`
   color: #00397c;
   margin-top: 6px;
   font-size: 12px;
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
+  transform: translateX(-50%);
   .LabelLeft {
     margin: 8px 0px 0px 10px;
   }
   .LabelRight {
     margin: 8px 10px 0px 0px;
   }
-`;
-const ButtonGrid = styled.div`
-  width: 312px;
-  height: 160px;
-  box-sizing: border-box;
-  margin: 24px auto 0px auto;
-  justify-content: center;
-`;
-const EitherButtonA = styled.button`
-  width: 156px;
-  height: 160px;
-  border: 2px solid #00397c;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
-
-  cursor: pointer;
-  &:hover {
-    background-color: #dfdfdf;
-  }
-`;
-const EitherButtonB = styled.button`
-  width: 156px;
-  height: 160px;
-  border: 2px solid #00397c;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
-
-  cursor: pointer;
-  &:hover {
-    background-color: #dfdfdf;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+    .LabelLeft {
+      margin: 8px 0px 0px 40px;
+    }
+    .LabelRight {
+      margin: 8px 40px 0px 0px;
+    }
   }
 `;
 const EitherFooter = styled.div`
-  width: 313px;
-  margin-top: 40px;
-  position: relative;
-  display: inline-flex;
-  justify-content: space-between;
+  width: 100%;
+  margin: auto;
   align-items: center;
+
+  .Position {
+    width: 82%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 430px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
   .Grid {
     color: #e25b45;
     display: flex;

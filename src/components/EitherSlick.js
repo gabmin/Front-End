@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,75 +6,81 @@ import "slick-carousel/slick/slick-theme.css";
 
 import EitherCard from "./EitherCard";
 import EitherCompleteCard from "./EitherCompleteCard";
+import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
+import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
+import { mobile, tablet } from "../shared/style";
 
-//다음으로 넘어가기 버튼
-function NextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: "12.25px",
-        height: "28px",
-        zIndex: "1000",
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={require("../images/arrowRed.svg").default}
-        alt="arrowNext"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          right: "-25px",
-          border: null,
-        }}
-      />
-    </div>
-  );
-}
-//이전으로 넘어가기 버튼
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: "12.25px",
-        height: "28px",
-        zIndex: "1000",
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={require("../images/arrowLRed.svg").default}
-        alt="arrowNext"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          left: "-25px",
-          border: null,
-        }}
-      />
-    </div>
-  );
-}
+// //다음으로 넘어가기 버튼
+// function NextArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         width: "12.25px",
+//         height: "28px",
+//         zIndex: "1000",
+//       }}
+//       onClick={onClick}
+//     >
+//       <img
+//         src={require("../images/arrowRed.svg").default}
+//         alt="arrowNext"
+//         style={{
+//           position: "absolute",
+//           width: "100%",
+//           height: "100%",
+//           right: "-25px",
+//           border: null,
+//         }}
+//       />
+//     </div>
+//   );
+// }
+// //이전으로 넘어가기 버튼
+// function PrevArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         width: "12.25px",
+//         height: "28px",
+//         zIndex: "1000",
+//       }}
+//       onClick={onClick}
+//     >
+//       <img
+//         src={require("../images/arrowLRed.svg").default}
+//         alt="arrowNext"
+//         style={{
+//           position: "absolute",
+//           width: "100%",
+//           height: "100%",
+//           left: "-25px",
+//           border: null,
+//         }}
+//       />
+//     </div>
+//   );
+// }
 
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   const NotCompleteList =
     PostList && PostList.filter(post => post.completed === 0);
   const CompleteList =
     PostList && PostList.filter(post => post.completed === 1);
-
+  const sliderRef = useRef();
+  const goToNext = () => {
+    sliderRef.current.slickNext();
+  };
   return (
     <>
       <Wrap>
         <div>
-          <StyledSlider {...settings}>
+          <StyledSlider {...settings} ref={sliderRef}>
             {NotCompleteList &&
               NotCompleteList?.map(v => (
                 <EitherCard
@@ -92,6 +98,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   voted={v.voted}
                   completed={v.completed}
                   user={v.user}
+                  goToNext={goToNext}
                 />
               ))}
             {CompleteList &&
@@ -130,6 +137,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                   voted={v.voted}
                   completed={v.completed}
                   user={v.user}
+                  goToNext={goToNext}
                 />
               ))}
             {PostCompleteList &&
@@ -163,35 +171,66 @@ const settings = {
   centerMode: true,
   infinite: true,
   adaptiveHeight: true,
-  focusOnSelect: true,
+  focusOnSelect: false,
   slidesToShow: 3,
   slidesToScroll: 1,
+  swipeToSlide: true,
   speed: 500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   centerPadding: "0px",
-  // responsive: [
-  //   { breakpoint: 2200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-  //   { breakpoint: 1900, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-  // ],
+
+  responsive: [
+    { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+    { breakpoint: 1200, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+  ],
 };
 
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
-  margin: auto;
-`;
-
-const StyledSlider = styled(Slider)`
-  margin: auto;
-  width: 1300px;
+  margin: 0 auto;
 
   .slick-slide.slick-center {
     transform: scale(1.1);
     transition: 0.5s;
+    z-index: 2;
+    pointer-events: all;
+
+    .slick-list {
+      width: 100%;
+    }
   }
-  .slick-slide {
-    padding: 30px 0 30px 0;
+  .slick-slider {
+    padding: 30px 0px;
+    margin: auto;
+    width: 100%;
+    pointer-events: none;
+    @media screen and (max-width: ${mobile}) {
+      padding: 0px;
+    }
+  }
+  .slick-list {
+    width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      transform: scale(0.8);
+    }
+  }
+`;
+
+const StyledSlider = styled(Slider)`
+  margin: auto;
+  .slick-prev,
+  .slick-next {
+    width: 12px;
+    height: 28px;
+    pointer-events: all;
+  }
+  @media screen and (max-width: ${mobile}) {
+    .slick-prev,
+    .slick-next {
+      margin: 0px 40px;
+    }
   }
 `;
 

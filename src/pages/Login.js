@@ -27,13 +27,6 @@ const Login = () => {
   const [pwCheck, setPwCheck] = useState(false);
   const [typed, setTyped] = useState(false);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      alert("로그인 상태에서 접속할 수 없습니다");
-      history.push("/");
-    }
-  }, [isLoggedIn]);
-
   const idChecker = useCallback(() => {
     if (!id.trim()) {
       setIdCheck(true);
@@ -116,7 +109,9 @@ const Login = () => {
           <LoginButton type="submit">로그인</LoginButton>
         </Form>
         <SignupWrapper>
-          <span>계정이 없으신가요? 지금 바로 가입하세요!</span>
+          <span data-testid="idInput">
+            계정이 없으신가요? 지금 바로 가입하세요!
+          </span>
           <SignupButton onClick={onClickSignup}>회원가입</SignupButton>
         </SignupWrapper>
       </Container>
