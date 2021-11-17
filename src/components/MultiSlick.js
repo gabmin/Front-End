@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import MultiCard from "../components/MultiCard";
+import { mobile } from "../shared/style";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
@@ -13,13 +14,31 @@ const MultiSlick = props => {
     centerMode: true,
     infinite: true,
     adaptiveHeight: true,
-    focusOnSelect: true,
+    // focusOnSelect: true,
     centerPadding: "0px",
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1700,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+    ],
   };
 
   function NextArrow(props) {
@@ -109,6 +128,8 @@ const MultiSlick = props => {
 
 const Container = styled.div`
   height: 100%;
+  @media screen and (max-width: ${mobile}) {
+  }
 `;
 
 const SliderWarpper = styled.div`
@@ -117,7 +138,7 @@ const SliderWarpper = styled.div`
 
 const StyledSlider = styled(Slider)`
   margin: auto;
-  width: 1300px;
+  max-width: 1300px;
   .slick-slider .slick-list {
   }
 

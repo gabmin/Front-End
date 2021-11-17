@@ -2,15 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { FiThumbsUp } from "react-icons/fi";
-import { FiMessageSquare } from "react-icons/fi";
+import { FiThumbsUp, FiMessageSquare, FiMoreHorizontal } from "react-icons/fi";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
 
 import colors from "../shared/colors";
 import { DetailDB } from "../redux/actions/multiDetail";
+import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import Nickname from "./Nickname";
 
 const MultiCard = props => {
   const userInfo = useSelector(state => state.user.userInfo);
+  const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const dataList = multiDetail.multi && multiDetail;
 
   const dispatch = useDispatch();
   const {
@@ -25,6 +30,15 @@ const MultiCard = props => {
     likeCnt,
     commentCnt,
   } = props;
+
+  // const TotalCnt =
+  //   dataList &&
+  //   dataList.multi.voteCntA +
+  //     dataList.multi.voteCntB +
+  //     dataList.multi.voteCntC +
+  //     dataList.multi.voteCntD +
+  //     dataList.multi.voteCntE;
+
   const history = useHistory();
   const goToDetail = () => {
     if (!userInfo.nickname) {
@@ -35,11 +49,83 @@ const MultiCard = props => {
       history.push(`/multi/${multiId}`);
     }
   };
+
+  // const deletePost = () => {
+  //   if (TotalCnt === 0) {
+  //     dispatch(DeletePostDB(multiId));
+  //   } else {
+  //     window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
+  //     return;
+  //   }
+  // };
+
+  const closePost = () => {
+    const closeVote = window.confirm("투표를 종료하시겠습니까?");
+    if (closeVote == true) {
+      dispatch(ClosePostDB(multiId));
+      history.push("/multi");
+    }
+    return;
+  };
+
+  // const editPost = () => {
+  //   if (TotalCnt === 0) {
+  //     history.push(`/multi/${multiId}/edit`);
+  //   } else {
+  //     window.alert("투표가 진행된 게시물은 수정할 수 없습니다");
+  //     return;
+  //   }
+  // };
+
   return (
     <>
       {completed !== 1 ? (
         <Container>
           <Card>
+            <MenuWarpper>
+              <MenuBar>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      styles={{
+                        border: "none",
+                        backgroundColor: "transparent",
+                      }}
+                    >
+                      <FiMoreHorizontal size={20} />
+                      {/* <MaterialIcon icon="more_horiz" size={32} /> */}
+                    </MenuButton>
+                  }
+                  menuStyles={{ border: "0px solid" }}
+                  portal={true}
+                >
+                  <MenuItem
+                    styles={{
+                      fontSize: "14px",
+                    }}
+                    // onClick={editPost}
+                  >
+                    수정하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "14px",
+                    }}
+                    // onClick={deletePost}
+                  >
+                    삭제하기
+                  </MenuItem>
+                  <MenuItem
+                    styles={{
+                      fontSize: "14px",
+                    }}
+                    onClick={closePost}
+                  >
+                    투표 종료하기
+                  </MenuItem>
+                </Menu>
+              </MenuBar>
+            </MenuWarpper>
             <TitleWrapper>
               <TitleText>{title}</TitleText>
             </TitleWrapper>
@@ -166,6 +252,18 @@ const Card = styled.div`
 
   margin: auto;
   word-break: break-all;
+`;
+
+const MenuWarpper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const MenuBar = styled.div`
+  margin: 10px 10px 0 auto;
 `;
 
 const TitleWrapper = styled.div`

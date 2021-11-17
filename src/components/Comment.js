@@ -285,9 +285,10 @@ const TextAreaBtn = styled.button`
   border: none;
   border-radius: 4px;
   margin: 60px 5px 0 0;
-  width: 35px;
+  width: 40px;
   height: 16px;
   font-size: 10px;
+  font-weight: 700;
   color: ${colors.white};
   background-color: ${colors.red};
   cursor: pointer;
@@ -307,7 +308,8 @@ const TextArea = styled.textarea`
 `;
 
 const CommentHr = styled.hr`
-  width: 556px;
+  min-width: 100%;
+  max-width: 556px;
   height: 1px;
   border: none;
   background-color: ${colors.lineGray};
