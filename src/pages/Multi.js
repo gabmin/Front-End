@@ -81,12 +81,10 @@ const Multi = props => {
 };
 
 const Container = styled.div`
-  max-width: 100%;
+  min-width: 100%;
   height: 100%;
   @media screen and (max-width: 1540px) {
     top: 50px;
-    flex-direction: column;
-    height: 1300px;
   }
 `;
 
