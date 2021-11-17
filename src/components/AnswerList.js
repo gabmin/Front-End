@@ -126,12 +126,14 @@ const Container = styled.div`
 `;
 
 const AnswerBtn = styled.button`
-  border: 1px #00397c solid;
+  border: 1px ${colors.blue} solid;
+  padding: 0 auto 0 24px;
   margin: 5px auto;
   min-width: 100%;
   max-width: 620px;
   height: 72px;
   text-align: left;
+  text-indent: 18px;
   word-break: break-all;
   border-radius: 8px;
   color: ${colors.blue};
@@ -148,12 +150,13 @@ const AnswerBtn = styled.button`
 `;
 
 const AnswerBtnOn = styled.button`
-  border: 1px #00397c solid;
+  border: 1px ${colors.blue} solid;
   margin: 5px auto;
   min-width: 100%;
   max-width: 620px;
   height: 72px;
   text-align: left;
+  text-indent: 18px;
   word-break: break-all;
   border-radius: 8px;
   color: #ffffff;
