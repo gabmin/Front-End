@@ -5,6 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchCard from "../components/SearchCard";
 
 import { search } from "../redux/actions/search";
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+  darkGray,
+} from "../shared/style";
 
 const Search = ({ location }) => {
   const dispatch = useDispatch();
@@ -19,9 +28,9 @@ const Search = ({ location }) => {
 
   return (
     <Container>
-      <div style={{ height: "100px", margin: "0 auto", fontSize: "24px" }}>
+      <SearchResultText>
         '{searchValue}' 를 검색한 결과입니다. ({searchList.length})
-      </div>
+      </SearchResultText>
       {searchList.map((v, i) => (
         <SearchCard
           key={i}
@@ -48,6 +57,23 @@ const Container = styled.div`
   height: 1200px;
   margin: auto;
   padding: 50px 100px;
+
+  @media screen and (max-width: ${tablet}) {
+    width: 90%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+`;
+
+const SearchResultText = styled.div`
+  height: 100px;
+  margin: 0 auto;
+  font-size: 24px;
+
+  @media screen and (max-width: ${tablet}) {
+    font-size: 18px;
+    height: 50px;
+  }
 `;
 
 const NoList = styled.div`

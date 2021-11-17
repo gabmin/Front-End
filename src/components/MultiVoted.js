@@ -239,7 +239,7 @@ const MultiVoted = props => {
 };
 
 const Container = styled.div`
-  width: 620px;
+  max-width: 620px;
   margin: auto;
   padding: 20px;
   display: flex;
@@ -247,6 +247,8 @@ const Container = styled.div`
 `;
 
 const TitleWrapper = styled.div`
+  max-width: 612px;
+  margin: auto;
   text-align: center;
   font-size: 20px;
   font-weight: 700;
@@ -255,6 +257,12 @@ const TitleWrapper = styled.div`
 const Title = styled.p`
   font-size: 24px;
   word-break: break-all;
+`;
+
+const Date = styled.p`
+  margin: auto;
+  color: ${colors.gray5};
+  font-size: 14px;
 `;
 
 const TitleHr = styled.hr`
@@ -266,7 +274,7 @@ const TitleHr = styled.hr`
 `;
 
 const ProgressWrapper = styled.div`
-  width: 620px;
+  max-width: 620px;
 `;
 
 const SelectContent = styled.p`
@@ -290,7 +298,7 @@ const HighLight = styled.div`
   margin: 0 0 0 0;
   background-color: #dfdfdf;
   transition: 1s;
-  width: ${props => props.width};
+  max-width: ${props => props.width};
   height: 32px;
   border-radius: 8px;
 `;
@@ -344,12 +352,6 @@ const InfoWarpper = styled.div`
 //   color: ${colors.darkGray};
 // `;
 
-const Date = styled.p`
-  margin: auto;
-  color: ${colors.gray5};
-  font-size: 14px;
-`;
-
 const RightWarpper = styled.div`
   width: 80px;
   display: flex;
@@ -401,7 +403,8 @@ const TotalLike = styled.p`
 
 const CommentHr = styled.hr`
   border: none;
-  width: 620px;
+  min-width: 100%;
+  max-width: 620px;
   height: 1px;
   background-color: ${colors.lineGray};
 `;

@@ -64,27 +64,37 @@ const SearchCard = ({
           >
             {nickname}
           </span>
-          <span
-            style={{ color: gray5, margin: "0 30px", fontWeight: "normal" }}
-          >
-            {date.substring(0, 16)}
-          </span>
+          <span className="dateContent">{date.substring(0, 16)}</span>
         </div>
-        <div style={{ position: "relative", right: "-85px" }}>
-          {type === "객관식" && (
-            <FiMessageSquare
-              stroke={blue}
-              style={{ position: "relative", top: "1px" }}
-            />
-          )}
+        <IconWrapper>
+          {type === "객관식" && <StyledFiMessage stroke={blue} />}
           <span style={{ color: blue }}>{type === "객관식" && commentCnt}</span>
-          <FiThumbsUp stroke={red} style={{ marginLeft: "10px" }} />
+          <StyledFiThumbsUp stroke={red} />
           <span style={{ color: red }}> {likeCnt}</span>
-        </div>
+        </IconWrapper>
       </Contents>
     </Container>
   );
 };
+
+const IconWrapper = styled.div`
+  position: relative;
+  right: -85px;
+
+  @media screen and (max-width: ${tablet}) {
+    width: 100px;
+    right: -20px;
+  }
+`;
+
+const StyledFiMessage = styled(FiMessageSquare)`
+  position: relative;
+  top: 1px;
+`;
+
+const StyledFiThumbsUp = styled(FiThumbsUp)`
+  margin-left: 10px;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -97,6 +107,10 @@ const Container = styled.div`
   margin: 10px auto;
   box-sizing: border-box;
   user-select: none;
+
+  @media screen and (max-width: ${tablet}) {
+    height: auto;
+  }
 `;
 
 const Subjects = styled.div`
@@ -118,8 +132,18 @@ const Subjects = styled.div`
     width: 619px;
     color: ${blue};
     font-weight: bold;
+
+    @media screen and (max-width: ${tablet}) {
+      width: 90%;
+    }
+  }
+
+  @media screen and (max-width: ${tablet}) {
+    flex-direction: column;
+    height: auto;
   }
 `;
+
 const Completed = styled.span`
   color: ${props => (props.completed ? gray5 : red)};
   font-weight: bold;
@@ -147,6 +171,20 @@ const Contents = styled.div`
   margin: 0 auto 14px;
   flex-direction: row;
   justify-content: space-between;
+
+  .dateContent {
+    color: ${gray5};
+    margin: 0 30px;
+    font-weight: normal;
+
+    @media screen and (max-width: ${tablet}) {
+      margin: 0 0 0 10px;
+    }
+  }
+
+  @media screen and (max-width: ${tablet}) {
+    width: 90%;
+  }
 `;
 
 export default SearchCard;

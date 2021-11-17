@@ -267,9 +267,10 @@ const TextAreaBtn = styled.button`
   border: none;
   border-radius: 4px;
   margin: 60px 5px 0 0;
-  width: 35px;
+  width: 40px;
   height: 16px;
   font-size: 10px;
+  font-weight: 700;
   color: ${colors.white};
   background-color: ${colors.red};
   cursor: pointer;
