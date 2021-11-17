@@ -138,7 +138,6 @@ const Wrap = styled.div`
 
 const EitherButtonGrid = styled.div`
   margin: 51px auto 0px auto;
-  width: 100%;
   text-align: center;
   width: 401px;
   display: flex;

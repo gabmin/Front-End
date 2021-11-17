@@ -135,7 +135,7 @@ const Container = styled.div`
   width: 380px;
   height: 490px;
   padding: 46px 56px;
-  margin: 70 auto;
+  margin: 70px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -151,7 +151,7 @@ const ContainerB = styled.div`
   width: 380px;
   height: 490px;
   padding: 46px 56px;
-  margin: 70 auto;
+  margin: 70px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
