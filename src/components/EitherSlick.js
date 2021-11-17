@@ -195,11 +195,17 @@ const Wrap = styled.div`
     transform: scale(1.1);
     transition: 0.5s;
     z-index: 2;
+    pointer-events: all;
+
+    .slick-list {
+      width: 100%;
+    }
   }
   .slick-slider {
-    padding: 30px 0 30px 0;
+    padding: 30px 0px;
     margin: auto;
     width: 100%;
+    pointer-events: none;
     @media screen and (max-width: ${mobile}) {
       padding: 0px;
     }
@@ -218,12 +224,11 @@ const StyledSlider = styled(Slider)`
   .slick-next {
     width: 12px;
     height: 28px;
+    pointer-events: all;
   }
   @media screen and (max-width: ${mobile}) {
     .slick-prev,
     .slick-next {
-      width: 10px;
-      height: 20px;
       margin: 0px 40px;
     }
   }
