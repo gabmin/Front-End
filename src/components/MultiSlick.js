@@ -9,6 +9,7 @@ import { mobile } from "../shared/style";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
+  console.log("Card", CardList);
   const settings = {
     className: "center",
     centerMode: true,
