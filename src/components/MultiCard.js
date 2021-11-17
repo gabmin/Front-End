@@ -5,8 +5,9 @@ import styled from "styled-components";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
 import colors from "../shared/colors";
-import { DetailDB } from "../redux/actions/multiDetail";
 import Nickname from "./Nickname";
+import { DetailDB } from "../redux/actions/multiDetail";
+import { mobile } from "../shared/style";
 
 const MultiCard = props => {
   const userInfo = useSelector(state => state.user.userInfo);
@@ -134,13 +135,14 @@ const Container = styled.div`
   width: 380px;
   height: 490px;
   padding: 46px 56px;
-  margin: 0 auto;
+  margin: 70 auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
-  word-break: break-all;
-  display: flex;
-  flex-direction: column;
+  /* word-break: break-all; */
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
   background-color: ${colors.white};
 `;
 
@@ -149,13 +151,13 @@ const ContainerB = styled.div`
   width: 380px;
   height: 490px;
   padding: 46px 56px;
-  margin: 0 auto;
+  margin: 70 auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
-  word-break: break-all;
-  display: flex;
-  flex-direction: column;
+  /* word-break: break-all; */
+  /* display: flex;
+  flex-direction: column; */
   background: linear-gradient(
     180deg,
     rgba(134, 142, 150, 0.2) 0%,
@@ -287,9 +289,6 @@ const LikeWarpper = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${colors.red};
-
-  .FiThumbsUp {
-  }
 `;
 
 const TotalLike = styled.p`
