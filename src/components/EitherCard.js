@@ -124,7 +124,9 @@ const EitherCard = props => {
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
-      goToNext();
+      if (window.innerWidth > 1200) {
+        goToNext();
+      }
     }
   };
   //투표 종료하기
