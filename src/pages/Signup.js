@@ -357,6 +357,9 @@ const Container = styled.div`
   flex-direction: column;
   width: 90%;
   margin: 100px auto;
+  @media screen and (max-width: ${mobile}) {
+    margin: auto;
+  }
 `;
 
 const Form = styled.form`
@@ -394,8 +397,10 @@ const Form = styled.form`
     }
   }
 
-  @media screen and (max-width: ${tablet}) {
+  @media screen and (max-width: ${mobile}) {
     height: 730px;
+    width: 95%;
+    padding: 0.5em;
   }
 `;
 
