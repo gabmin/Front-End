@@ -127,9 +127,8 @@ const Input = styled.input`
   line-height: 22px;
   font-size: 16px;
   font-weight: 300;
-  &:placeholder {
-    color: #101214;
-  }
+  color: #101214;
+
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;
   }
@@ -168,9 +167,8 @@ const ButtonInput = styled.textarea`
   resize: none;
   box-sizing: border-box;
   padding: 3px;
-  &:placeholder {
-    color: #101214;
-  }
+  font-family: "Noto-Sans KR", sans-serif;
+
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;
   }
