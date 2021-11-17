@@ -147,6 +147,7 @@ const Container = styled.div`
     padding: 30px 0;
     margin: auto;
     width: 100%;
+
     @media screen and (max-width: ${mobile}) {
       padding: 0px;
     }

@@ -74,6 +74,12 @@ const EitherCard = props => {
     completePostDBError,
     deletePostDBError,
   ]);
+
+  //Props likeCnt 변화시 재렌더링
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
+
   //Progress Bar 퍼센트 계산
   useEffect(() => {
     if (voteCntA === 0 && voteCntB === 0) {
