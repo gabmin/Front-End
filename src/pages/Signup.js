@@ -57,13 +57,6 @@ const Signup = () => {
   }, [nickname]);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      alert("로그인 상태에서 접속할 수 없습니다");
-      history.push("/");
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
     setIdDupCheck(checkIdDupResult);
   }, [checkIdDupResult]);
 
