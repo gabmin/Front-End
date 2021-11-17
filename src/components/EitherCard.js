@@ -325,6 +325,9 @@ const Container = styled.div`
   background-color: #ffffff;
   padding: 46px 32px;
   position: relative;
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+  }
 `;
 const ManuButtonGrid = styled.div`
   .div {

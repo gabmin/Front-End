@@ -6,63 +6,66 @@ import "slick-carousel/slick/slick-theme.css";
 
 import EitherCard from "./EitherCard";
 import EitherCompleteCard from "./EitherCompleteCard";
+import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
+import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
+import { mobile, tablet } from "../shared/style";
 
-//다음으로 넘어가기 버튼
-function NextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: "12.25px",
-        height: "28px",
-        zIndex: "1000",
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={require("../images/arrowRed.svg").default}
-        alt="arrowNext"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          right: "-25px",
-          border: null,
-        }}
-      />
-    </div>
-  );
-}
-//이전으로 넘어가기 버튼
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: "12.25px",
-        height: "28px",
-        zIndex: "1000",
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={require("../images/arrowLRed.svg").default}
-        alt="arrowNext"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          left: "-25px",
-          border: null,
-        }}
-      />
-    </div>
-  );
-}
+// //다음으로 넘어가기 버튼
+// function NextArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         width: "12.25px",
+//         height: "28px",
+//         zIndex: "1000",
+//       }}
+//       onClick={onClick}
+//     >
+//       <img
+//         src={require("../images/arrowRed.svg").default}
+//         alt="arrowNext"
+//         style={{
+//           position: "absolute",
+//           width: "100%",
+//           height: "100%",
+//           right: "-25px",
+//           border: null,
+//         }}
+//       />
+//     </div>
+//   );
+// }
+// //이전으로 넘어가기 버튼
+// function PrevArrow(props) {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{
+//         ...style,
+//         width: "12.25px",
+//         height: "28px",
+//         zIndex: "1000",
+//       }}
+//       onClick={onClick}
+//     >
+//       <img
+//         src={require("../images/arrowLRed.svg").default}
+//         alt="arrowNext"
+//         style={{
+//           position: "absolute",
+//           width: "100%",
+//           height: "100%",
+//           left: "-25px",
+//           border: null,
+//         }}
+//       />
+//     </div>
+//   );
+// }
 
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   const NotCompleteList =
@@ -179,35 +182,50 @@ const settings = {
 
   responsive: [
     { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-    { breakpoint: 1400, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+    { breakpoint: 1200, settings: { slidesToShow: 1, slidesToScroll: 1 } },
   ],
 };
 
 const Wrap = styled.div`
-  width: 100%;
+  width: 90%;
   height: 100%;
-  margin: auto;
-`;
-
-const StyledSlider = styled(Slider)`
-  margin: auto;
-  width: 1300px;
+  margin: 0 auto;
 
   .slick-slide.slick-center {
     transform: scale(1.1);
     transition: 0.5s;
     z-index: 2;
   }
-  .slick-slide {
+  .slick-slider {
     padding: 30px 0 30px 0;
     margin: auto;
-    width: 1300px;
+    width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      padding: 0px;
+    }
   }
   .slick-list {
     width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      transform: scale(0.8);
+    }
   }
-  .slick-track {
-    width: 100%;
+`;
+
+const StyledSlider = styled(Slider)`
+  margin: auto;
+  .slick-prev,
+  .slick-next {
+    width: 12px;
+    height: 28px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    .slick-prev,
+    .slick-next {
+      width: 10px;
+      height: 20px;
+      margin: 0px 20px;
+    }
   }
 `;
 
