@@ -178,7 +178,7 @@ const EitherCard = props => {
   return (
     <>
       <Container>
-        <ManuButtonGrid>
+        <MenuButtonGrid>
           <div>
             {nickname === userInfo.nickname ? (
               <div>
@@ -225,7 +225,7 @@ const EitherCard = props => {
               </div>
             ) : null}
           </div>
-        </ManuButtonGrid>
+        </MenuButtonGrid>
         <TitleDiv> {title} </TitleDiv>
         <DateDiv>{date.substring(0, 16)}</DateDiv>
         <TotalCntGrid>
@@ -338,7 +338,7 @@ const Container = styled.div`
     width: 80%;
   }
 `;
-const ManuButtonGrid = styled.div`
+const MenuButtonGrid = styled.div`
   .div {
     position: relative;
   }
