@@ -156,18 +156,18 @@ const EitherCompleteCard = props => {
           <ButtonGrid>
             {voteCntA === voteCntB ? (
               <ButtonGrid>
-                {SelctButtonA("#DFDFDF", contentA)}
-                {SelctButtonB("#DFDFDF", contentB)}
+                {SelctButtonA("#ADB5BD", contentA)}
+                {SelctButtonB("#ADB5BD", contentB)}
               </ButtonGrid>
             ) : voteCntA > voteCntB ? (
               <ButtonGrid>
-                {SelctButtonA("#DFDFDF", contentA)}
+                {SelctButtonA("#ADB5BD", contentA)}
                 {SelctButtonB(null, contentB)}
               </ButtonGrid>
             ) : (
               <ButtonGrid>
                 {SelctButtonA(null, contentA)}
-                {SelctButtonB("#DFDFDF", contentB)}
+                {SelctButtonB("#ADB5BD", contentB)}
               </ButtonGrid>
             )}
           </ButtonGrid>
@@ -230,7 +230,7 @@ const Container = styled.div`
   border-radius: 10px;
   background: linear-gradient(
     180deg,
-    rgba(0, 57, 124, 0.2) 0%,
+    rgba(134, 142, 150, 0.2) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   padding: 46px 32px;
@@ -292,6 +292,7 @@ const EitherButtonA = styled.button`
   font-size: 16px;
   line-height: 23px;
   cursor: pointer;
+  margin-right: -1px;
   &:hover {
     background-color: #dfdfdf;
   }
@@ -308,6 +309,7 @@ const EitherButtonB = styled.button`
   font-size: 16px;
   line-height: 23px;
   cursor: pointer;
+  margin-left: -1px;
   &:hover {
     background-color: #dfdfdf;
   }
@@ -325,10 +327,11 @@ const EitherProgress = styled.div`
   width: 100%;
   height: 6px;
   z-index: 0;
-  background-color: #e25b45;
+  background-color: transparent;
+  border: 2px solid #00397c;
 `;
 const HightLight = styled.div`
-  background-color: #00397c;
+  background-color: #adb5bd;
   transition: 1s;
   width: ${props => props.width};
   height: 6px;

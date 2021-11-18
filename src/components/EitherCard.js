@@ -74,6 +74,12 @@ const EitherCard = props => {
     completePostDBError,
     deletePostDBError,
   ]);
+
+  //Props likeCnt 변화시 재렌더링
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
+
   //Progress Bar 퍼센트 계산
   useEffect(() => {
     if (voteCntA === 0 && voteCntB === 0) {
@@ -384,6 +390,7 @@ const EitherButtonA = styled.button`
   font-size: 16px;
   line-height: 23px;
   cursor: pointer;
+  margin-right: -1px;
   &:hover {
     background-color: #dfdfdf;
   }
@@ -400,6 +407,7 @@ const EitherButtonB = styled.button`
   font-size: 16px;
   line-height: 23px;
   cursor: pointer;
+  margin-left: -1px;
   &:hover {
     background-color: #dfdfdf;
   }
