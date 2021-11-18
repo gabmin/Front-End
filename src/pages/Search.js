@@ -43,9 +43,10 @@ const Search = ({ location }) => {
           editedDate={v.editedDate}
           completed={v.completed}
           likeCnt={v.likeCnt}
+          commentCnt={v.commentCnt}
         />
       ))}
-      {searchList.length === 0 && <NoList>검색 결과가 없습니다</NoList>}
+      {/* {searchList.length === 0 && <NoList>검색 결과가 없습니다</NoList>} */}
     </Container>
   );
 };
@@ -59,8 +60,8 @@ const Container = styled.div`
   padding: 50px 100px;
 
   @media screen and (max-width: ${tablet}) {
-    width: 90%;
-    padding: 10px 20px;
+    width: 100%;
+    padding: 10px 0;
     box-sizing: border-box;
   }
 `;

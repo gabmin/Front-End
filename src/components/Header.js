@@ -124,9 +124,41 @@ const Header = () => {
           <MenuLoading></MenuLoading>
         )}
       </Bottom>
+      <SearchMobile>
+        <StyledSearch onClick={submitSearch} />
+        <input
+          placeholder="검색..."
+          onKeyPress={submitSearch}
+          onChange={onChangeSearch}
+          value={search}
+        />
+      </SearchMobile>
     </Container>
   );
 };
+const SearchMobile = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  max-width: 1280px;
+  width: 90%;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    max-width: 400px;
+    width: 90%;
+    height: 32px;
+    padding-left: 32px;
+    border: 1px solid #e25b45;
+    border-radius: 9px;
+  }
+
+  @media screen and (min-width: ${mobile}) {
+    display: none;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -139,6 +171,10 @@ const Container = styled.div`
   span {
     cursor: pointer;
     user-select: none;
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    height: unset;
   }
 `;
 
@@ -169,9 +205,8 @@ const Bottom = styled.div`
     border-radius: 9px;
   }
 
-  /* @media screen and (max-width: ${mobile}) {
-    display: none;
-  } */
+  @media screen and (max-width: ${mobile}) {
+  }
 `;
 
 const Wrapper = styled.div`
