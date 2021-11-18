@@ -83,6 +83,7 @@ const Login = () => {
           <Logo fill={blue} height="30px" style={{ margin: "10px 0 40px" }} />
           <div>
             <input
+              className="idInput"
               type="text"
               value={id}
               onChange={onChangeIdInput}
@@ -93,6 +94,7 @@ const Login = () => {
 
           <div>
             <input
+              className="pwInput"
               type="password"
               value={password}
               onChange={onChangePasswordInput}
