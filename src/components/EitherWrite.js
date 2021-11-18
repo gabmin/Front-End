@@ -108,15 +108,18 @@ const Container = styled.div`
 `;
 const Title = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 72px;
   p {
-    width: 34px;
+    width: 68px;
     font-size: 18px;
     font-weight: bold;
-    line-height: 26px;
-    margin: 22px 76px 28px 0px;
+    /* line-height: 26px; */
+    /* margin: 22px 76px 28px 0px; */
     @media screen and (max-width: ${mobile}) {
       font-size: 16px;
-      margin: 20px 35px 20px 0px;
+      /* margin: 20px 35px 20px 0px; */
     }
   }
 `;
@@ -125,9 +128,12 @@ const Input = styled.input`
   border: none;
   outline: none;
   line-height: 22px;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 18px;
   color: #101214;
+  &::placeholder {
+    font-size: 16px;
+    color: #868e96;
+  }
 
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;

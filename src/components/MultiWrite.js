@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { AddPostDB, EditPostDB } from "../redux/actions/multiCard";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import colors from "../shared/colors";
+import { mobile } from "../shared/style";
 
 const MultiWrite = props => {
   const editData = props.editData;
@@ -334,7 +335,7 @@ const MultiWrite = props => {
             ref={titleRef}
             type="text"
             maxlength="40"
-            placeholder="질문을 입력해주세요. (30자이내)"
+            placeholder="질문을 입력해주세요. (30자 이내)"
             onChange={changeTitle}
             value={title}
           />
@@ -440,11 +441,12 @@ const MultiWrite = props => {
 const WriteHr = styled.hr`
   border: none;
   height: 1px;
+  margin: 0 auto;
   background-color: ${colors.lineGray};
 `;
 
 const TitleWarpper = styled.div`
-  height: 66px;
+  height: 72px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -461,6 +463,9 @@ const InfoText = styled.p`
   font-size: 18px;
   font-weight: 700;
   color: ${colors.darkGray};
+  @media screen and (max-width: ${mobile}) {
+    font-size: 16px;
+  }
 `;
 
 const ContentWarpper = styled.div`
@@ -480,6 +485,9 @@ const Input = styled.input`
     font-size: 16px;
     color: ${colors.gray5};
   }
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -493,6 +501,9 @@ const Textarea = styled.textarea`
   &::placeholder {
     font-size: 16px;
     color: ${colors.gray5};
+  }
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
   }
 `;
 
@@ -552,6 +563,9 @@ const HalfBtn = styled.button`
   border: 1px ${colors.blue} solid;
   border-radius: 8px;
   cursor: pointer;
+  @media screen and (max-width: ${mobile}) {
+    width: 48%;
+  }
 `;
 
 const EventBtnWarpper = styled.div`
@@ -565,21 +579,29 @@ const EventBtnWarpper = styled.div`
 const AddBtn = styled.button`
   width: 290px;
   height: 40px;
+  font-size: 16px;
   color: ${colors.white};
   border: 1px ${colors.red} solid;
   border-radius: 8px;
   background-color: ${colors.red};
   cursor: pointer;
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
+  }
 `;
 
 const CancelBtn = styled.button`
   width: 290px;
   height: 40px;
+  font-size: 16px;
   color: ${colors.red};
   border: 1px ${colors.red} solid;
   border-radius: 8px;
   background-color: ${colors.white};
   cursor: pointer;
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
+  }
 `;
 
 export default MultiWrite;
