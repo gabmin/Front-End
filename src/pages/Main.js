@@ -22,7 +22,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getMainData());
-    dispatch(SetParams());
+    dispatch(SetParams("all"));
   }, [dispatch]);
 
   const goToWrite = select => {

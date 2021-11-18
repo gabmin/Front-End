@@ -57,7 +57,7 @@ const MultiWrite = props => {
     if (isEdit) {
       dispatch(SetParams(multiId));
     } else {
-      dispatch(SetParams());
+      dispatch(SetParams("all"));
     }
   });
 
@@ -140,7 +140,7 @@ const MultiWrite = props => {
         }),
       );
     }
-    dispatch(SetParams());
+    dispatch(SetParams("all"));
     history.push("/multi");
   };
 
@@ -229,7 +229,7 @@ const MultiWrite = props => {
         }),
       );
     }
-    dispatch(SetParams());
+    dispatch(SetParams("all"));
     history.push("/multi");
   };
 
@@ -299,7 +299,7 @@ const MultiWrite = props => {
   };
 
   const cancel = () => {
-    dispatch(SetParams());
+    dispatch(SetParams("all"));
     history.push("/multi");
   };
 
