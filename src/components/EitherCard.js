@@ -74,6 +74,12 @@ const EitherCard = props => {
     completePostDBError,
     deletePostDBError,
   ]);
+
+  //Props likeCnt 변화시 재렌더링
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
+
   //Progress Bar 퍼센트 계산
   useEffect(() => {
     if (voteCntA === 0 && voteCntB === 0) {
@@ -124,7 +130,9 @@ const EitherCard = props => {
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
-      goToNext();
+      if (window.innerWidth > 1200) {
+        goToNext();
+      }
     }
   };
   //투표 종료하기
@@ -327,6 +335,7 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
+    width: 80%;
   }
 `;
 const ManuButtonGrid = styled.div`
@@ -334,8 +343,8 @@ const ManuButtonGrid = styled.div`
     position: relative;
   }
   position: absolute;
-  top: 110px;
-  right: 40px;
+  top: 15px;
+  right: 20px;
 `;
 const TitleDiv = styled.div`
   width: 100%;
@@ -361,6 +370,50 @@ const TotalCntDiv = styled.div`
   line-height: 20px;
   color: #868e96;
   margin-left: 8px;
+`;
+const ButtonGrid = styled.div`
+  width: 312px;
+  height: 160px;
+  box-sizing: border-box;
+  margin: 24px auto 0px auto;
+  justify-content: center;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+  }
+`;
+const EitherButtonA = styled.button`
+  width: 156px;
+  height: 160px;
+  border: 2px solid #00397c;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  margin-right: -1px;
+  &:hover {
+    background-color: #dfdfdf;
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
+`;
+const EitherButtonB = styled.button`
+  width: 156px;
+  height: 160px;
+  border: 2px solid #00397c;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  cursor: pointer;
+  margin-left: -1px;
+  &:hover {
+    background-color: #dfdfdf;
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
 `;
 const ProgressGrid = styled.div`
   width: 100%;
@@ -389,60 +442,39 @@ const ProgressLabel = styled.div`
   color: #00397c;
   margin-top: 6px;
   font-size: 12px;
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
+  transform: translateX(-50%);
   .LabelLeft {
     margin: 8px 0px 0px 10px;
   }
   .LabelRight {
     margin: 8px 10px 0px 0px;
   }
-`;
-const ButtonGrid = styled.div`
-  width: 312px;
-  height: 160px;
-  box-sizing: border-box;
-  margin: 24px auto 0px auto;
-  justify-content: center;
-`;
-const EitherButtonA = styled.button`
-  width: 156px;
-  height: 160px;
-  border: 2px solid #00397c;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
-
-  cursor: pointer;
-  &:hover {
-    background-color: #dfdfdf;
-  }
-`;
-const EitherButtonB = styled.button`
-  width: 156px;
-  height: 160px;
-  border: 2px solid #00397c;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
-
-  cursor: pointer;
-  &:hover {
-    background-color: #dfdfdf;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+    .LabelLeft {
+      margin: 8px 0px 0px 40px;
+    }
+    .LabelRight {
+      margin: 8px 40px 0px 0px;
+    }
   }
 `;
 const EitherFooter = styled.div`
+  width: 100%;
+  margin: auto;
   align-items: center;
 
   .Position {
-    width: 313px;
+    width: 82%;
     position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
     top: 430px;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
   .Grid {
     color: #e25b45;

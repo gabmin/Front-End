@@ -6,6 +6,7 @@ import styled from "styled-components";
 import MultiSlick from "../components/MultiSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
 import colors from "../shared/colors";
+import { mobile } from "../shared/style";
 
 const Multi = props => {
   const dispatch = useDispatch();
@@ -81,12 +82,11 @@ const Multi = props => {
 };
 
 const Container = styled.div`
-  max-width: 100%;
+  max-width: 1280px;
+  margin: auto;
   height: 100%;
-  @media screen and (max-width: 1540px) {
-    top: 50px;
-    flex-direction: column;
-    height: 1300px;
+  @media screen and (max-width: ${mobile}) {
+    max-width: 768px;
   }
 `;
 
@@ -97,6 +97,12 @@ const TabBtnWarpper = styled.div`
   width: 401px;
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: ${mobile}) {
+    max-width: 300px;
+    width: 100%;
+    margin: 30px auto 0px auto;
+  }
 `;
 
 const TabBtn = styled.button`
@@ -112,6 +118,9 @@ const TabBtn = styled.button`
     text-decoration: underline;
     text-underline-position: under;
   }
+  @media screen and (max-width: ${mobile}) {
+    font-size: 17px;
+  }
 `;
 
 const TabBtnOn = styled.button`
@@ -124,10 +133,13 @@ const TabBtnOn = styled.button`
   color: ${colors.blue};
   text-decoration: underline;
   text-underline-position: under;
+  @media screen and (max-width: ${mobile}) {
+    font-size: 17px;
+  }
 `;
 
 const SliderWarpper = styled.div`
-  margin: 70px auto;
+  margin: 0px auto;
   width: 100%;
   height: 100%;
 `;
@@ -150,6 +162,9 @@ const QuestionBtn = styled.button`
   &:hover {
     background-color: ${colors.red};
     color: ${colors.white};
+  }
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.9);
   }
 `;
 

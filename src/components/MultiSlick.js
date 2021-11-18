@@ -6,15 +6,18 @@ import "slick-carousel/slick/slick-theme.css";
 
 import MultiCard from "../components/MultiCard";
 import { mobile } from "../shared/style";
+import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
+import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
+  console.log("Card", CardList);
   const settings = {
     className: "center",
     centerMode: true,
     infinite: true,
     adaptiveHeight: true,
-    // focusOnSelect: true,
+    focusOnSelect: true,
     centerPadding: "0px",
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -41,64 +44,64 @@ const MultiSlick = props => {
     ],
   };
 
-  function NextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          width: "50px",
-          height: "50px",
-          right: "-25px",
-          zIndex: "1000",
-        }}
-        onClick={onClick}
-      >
-        <img
-          src={require("../images/arrowRed.svg").default}
-          alt="arrowNext"
-          style={{
-            position: "absolute",
-            width: "12.25px",
-            height: "28px",
-            border: "50%",
-            right: "-25px",
-          }}
-        />
-      </div>
-    );
-  }
-  //이전으로 넘어가기 버튼
-  function PrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          width: "50px",
-          height: "50px",
-          right: "0px",
-          zIndex: "1000",
-        }}
-        onClick={onClick}
-      >
-        <img
-          src={require("../images/arrowLRed.svg").default}
-          alt="arrowNext"
-          style={{
-            position: "absolute",
-            width: "12.25px",
-            height: "28px",
-            left: "-25px",
-            top: "0px",
-            border: null,
-          }}
-        />
-      </div>
-    );
-  }
+  // function NextArrow(props) {
+  //   const { className, style, onClick } = props;
+  //   return (
+  //     <div
+  //       className={className}
+  //       style={{
+  //         ...style,
+  //         width: "50px",
+  //         height: "50px",
+  //         right: "-25px",
+  //         zIndex: "1000",
+  //       }}
+  //       onClick={onClick}
+  //     >
+  //       <img
+  //         src={require("../images/arrowRed.svg").default}
+  //         alt="arrowNext"
+  //         style={{
+  //           position: "absolute",
+  //           width: "12.25px",
+  //           height: "28px",
+  //           border: "50%",
+  //           right: "-25px",
+  //         }}
+  //       />
+  //     </div>
+  //   );
+  // }
+  // //이전으로 넘어가기 버튼
+  // function PrevArrow(props) {
+  //   const { className, style, onClick } = props;
+  //   return (
+  //     <div
+  //       className={className}
+  //       style={{
+  //         ...style,
+  //         width: "50px",
+  //         height: "50px",
+  //         right: "0px",
+  //         zIndex: "1000",
+  //       }}
+  //       onClick={onClick}
+  //     >
+  //       <img
+  //         src={require("../images/arrowLRed.svg").default}
+  //         alt="arrowNext"
+  //         style={{
+  //           position: "absolute",
+  //           width: "12.25px",
+  //           height: "28px",
+  //           left: "-25px",
+  //           top: "0px",
+  //           border: null,
+  //         }}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <Container>
@@ -127,33 +130,58 @@ const MultiSlick = props => {
 };
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
-  @media screen and (max-width: ${mobile}) {
-  }
-`;
-
-const SliderWarpper = styled.div`
-  height: 100%;
-`;
-
-const StyledSlider = styled(Slider)`
-  margin: auto;
-  max-width: 1300px;
-  .slick-slider .slick-list {
-  }
+  margin: 0 auto;
 
   .slick-slide.slick-center {
     transform: scale(1.1);
     transition: 0.5s;
-  }
+    z-index: 2;
 
-  .slick-slide {
-    padding: 30px 0 30px 0;
+    .slick-list {
+      width: 100%;
+    }
+  }
+  .slick-slider {
+    padding: 30px 0;
+    margin: auto;
+    width: 100%;
+
+    @media screen and (max-width: ${mobile}) {
+      padding: 0px;
+    }
+  }
+  .slick-list {
+    width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      transform: scale(0.8);
+    }
   }
 `;
 
+const SliderWarpper = styled.div`
+  /* height: 100%; */
+`;
+
+const StyledSlider = styled(Slider)`
+  margin: auto;
+  .slick-prev,
+  .slick-next {
+    width: 12px;
+    height: 28px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    .slick-prev,
+    .slick-next {
+      margin: 0px 40px;
+    }
+  }
+  /* max-width: 1300px; */
+`;
+
 const CardWarpper = styled.div`
-  height: 100%;
+  /* height: 100%; */
 `;
 
 export default MultiSlick;
