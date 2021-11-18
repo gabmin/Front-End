@@ -227,6 +227,7 @@ const Signup = () => {
                   onChange={onChangeId}
                   placeholder="아이디"
                   onBlur={onClickIdDup}
+                  data-testid="idInput"
                 />
               </InputWrapper>
 
