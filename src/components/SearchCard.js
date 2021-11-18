@@ -68,7 +68,9 @@ const SearchCard = ({
         </div>
         <IconWrapper>
           {type === "객관식" && <StyledFiMessage stroke={blue} />}
-          <span style={{ color: blue }}>{type === "객관식" && commentCnt}</span>
+          <span style={{ color: blue, marginRight: "10px" }}>
+            {type === "객관식" && commentCnt}
+          </span>
           <StyledFiThumbsUp stroke={red} />
           <span style={{ color: red }}> {likeCnt}</span>
         </IconWrapper>
@@ -83,17 +85,26 @@ const IconWrapper = styled.div`
 
   @media screen and (max-width: ${tablet}) {
     width: 100px;
-    right: -20px;
+    right: 0px;
+    margin: 0;
   }
 `;
 
 const StyledFiMessage = styled(FiMessageSquare)`
   position: relative;
+  margin-right: 5px;
   top: 1px;
+
+  @media screen and (max-width: ${tablet}) {
+  }
 `;
 
 const StyledFiThumbsUp = styled(FiThumbsUp)`
-  margin-left: 10px;
+  margin-left: 0px;
+
+  @media screen and (max-width: ${tablet}) {
+    margin: 0;
+  }
 `;
 
 const Container = styled.div`
@@ -134,13 +145,14 @@ const Subjects = styled.div`
     font-weight: bold;
 
     @media screen and (max-width: ${tablet}) {
-      width: 90%;
+      width: 100%;
     }
   }
 
   @media screen and (max-width: ${tablet}) {
     flex-direction: column;
     height: auto;
+    margin: 18px auto;
   }
 `;
 
@@ -167,9 +179,9 @@ const Type = styled.div`
 
 const Contents = styled.div`
   display: flex;
+  flex-direction: row;
   width: 619px;
   margin: 0 auto 14px;
-  flex-direction: row;
   justify-content: space-between;
 
   .dateContent {
@@ -183,7 +195,8 @@ const Contents = styled.div`
   }
 
   @media screen and (max-width: ${tablet}) {
-    width: 90%;
+    flex-direction: column;
+    width: 95%;
   }
 `;
 
