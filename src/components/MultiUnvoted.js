@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { FiThumbsUp } from "react-icons/fi";
-import { FiMessageSquare } from "react-icons/fi";
+import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { HiThumbUp } from "react-icons/hi";
+import { FaRegUser } from "react-icons/fa";
 
 import colors from "../shared/colors";
 import AnswerList from "./AnswerList";
@@ -15,11 +16,21 @@ const MultiUnvoted = props => {
   const multiList = dataList.multi;
   const multiId = props.multiId;
   const [likes, setLikes] = useState(multiList.likeCnt);
+  const [likeState, setLikeState] = useState(
+    multiList.liked === null ? false : true,
+  );
+  const TotalCnt =
+    multiList.voteCntA +
+    multiList.voteCntB +
+    multiList.voteCntC +
+    multiList.voteCntD +
+    multiList.voteCntE;
 
   const addLike = () => {
     if (multiList.liked === null) {
       dispatch(AddLikeDB(multiId));
       setLikes(multiList.likeCnt + 1);
+      setLikeState(true);
     } else {
       return;
     }
@@ -31,7 +42,10 @@ const MultiUnvoted = props => {
         <Title>{multiList.title}</Title>
       </TitleWrapper>
       <Date>{multiList.date.substring(0, 16)}</Date>
-      <TitleHr />
+      <TotalCntWarpper>
+        <FaRegUser /> {TotalCnt}
+      </TotalCntWarpper>
+      {/* <TitleHr /> */}
       <div>
         <AnswerList dataList={multiList} />
       </div>
@@ -54,9 +68,15 @@ const MultiUnvoted = props => {
             </TotalComment>
           </CommentWarpper>
           <LikeWarpper>
-            <LikeBtn onClick={addLike}>
-              <FiThumbsUp />
-            </LikeBtn>{" "}
+            {!likeState ? (
+              <LikeBtn onClick={addLike}>
+                <FiThumbsUp />
+              </LikeBtn>
+            ) : (
+              <LikedBtn>
+                <HiThumbUp />
+              </LikedBtn>
+            )}
             <TotalLike>{likes}</TotalLike>
           </LikeWarpper>
         </RightWarpper>
@@ -91,6 +111,13 @@ const Date = styled.p`
   margin: auto;
   color: ${colors.gray5};
   font-size: 14px;
+`;
+
+const TotalCntWarpper = styled.div`
+  margin: 12px auto;
+  text-align: center;
+  font-size: 14px;
+  color: ${colors.gray5};
 `;
 
 const TitleHr = styled.hr`
@@ -161,6 +188,12 @@ const LikeBtn = styled.button`
   border: none;
   background-color: ${colors.white};
   cursor: pointer;
+`;
+
+const LikedBtn = styled.div`
+  font-size: 20px;
+  align-items: center;
+  color: ${colors.red};
 `;
 
 const TotalLike = styled.p`
