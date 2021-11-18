@@ -1,8 +1,11 @@
+import React from "react";
+import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
-import { SignupWrapper } from "../../src/pages/Login";
+
+import ErrorPage from "../../src/pages/ErrorPage";
 
 test("login id input", () => {
-  render(<SignupWrapper />);
+  render(<ErrorPage />);
   const idInput = screen.getByTestId("idInput");
-  expect(idInput).toHaveTextContext("계정이 없으신가요? 지금 바로 가입하세요!");
+  expect(idInput).toHaveTextContent("에러 페이지");
 });

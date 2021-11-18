@@ -397,6 +397,10 @@ const Form = styled.form`
     }
   }
 
+  @media screen and (max-width: ${tablet}) {
+    height: 730px;
+  }
+
   @media screen and (max-width: ${mobile}) {
     height: 730px;
     width: 95%;

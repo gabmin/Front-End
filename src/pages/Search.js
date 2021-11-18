@@ -43,6 +43,7 @@ const Search = ({ location }) => {
           editedDate={v.editedDate}
           completed={v.completed}
           likeCnt={v.likeCnt}
+          commentCnt={v.commentCnt}
         />
       ))}
       {/* {searchList.length === 0 && <NoList>검색 결과가 없습니다</NoList>} */}
