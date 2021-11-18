@@ -100,8 +100,9 @@ const Layout = styled.div`
   box-sizing: border-box;
   cursor: pointer;
 
-  @media screen and (max-width: 1540px) {
-    width: 90%;
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+    padding: 20px 10px 0px;
   }
 `;
 
