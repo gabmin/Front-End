@@ -13,8 +13,6 @@ import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
 
 const ProductSlick = ({ cardList, type }) => {
-  console.log("cardList");
-  console.log(cardList);
   const settings = {
     dots: true,
     speed: 500,
