@@ -153,13 +153,16 @@ const Signup = () => {
     e => {
       e.preventDefault();
 
-      if (!idChecker()) return;
-      if (!nickChecker()) return;
-      if (!pwChecker()) return;
+      // if (!idChecker()) return;
+      // if (!nickChecker()) return;
+      // if (!pwChecker()) return;
       if (!pwEqualChecker()) return;
       if (!ageChecker()) return;
-      if (!idDupCheck) return;
-      if (!nickDupCheck) return;
+      // if (!idDupCheck) return;
+      // if (!nickDupCheck) return;
+      if (!nickDupCheck || !idDupCheck || passwordError) {
+        return;
+      }
       dispatch(
         signup({
           userId: id,
@@ -172,6 +175,8 @@ const Signup = () => {
       return;
     },
     [
+      idDupCheck,
+      nickDupCheck,
       idChecker,
       idDupCheck,
       pwChecker,
@@ -185,6 +190,9 @@ const Signup = () => {
       passwordCheck,
       age,
       dispatch,
+      idError,
+      nickError,
+      passwordError,
     ],
   );
 
@@ -275,9 +283,9 @@ const Signup = () => {
                 !idNotice && (
                   <span style={{ color: blue }}>사용가능한 아이디 입니다</span>
                 )}
-              {checkIdDupResult === false && !checkIdDupLoading && idNotice && (
-                <span>이미 사용중인 아이디 입니다</span>
-              )}
+              {checkIdDupResult === false &&
+                !checkIdDupLoading &&
+                !idNotice && <span>이미 사용중인 아이디 입니다</span>}
             </InputContent>
             <InputContent>
               <InputWrapper>
