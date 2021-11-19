@@ -22,6 +22,7 @@ const MultiSlick = props => {
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
+    initialSlide: 0,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -30,7 +31,7 @@ const MultiSlick = props => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          initialSlide: 1,
+          initialSlide: 0,
         },
       },
       {
