@@ -77,22 +77,24 @@ const ProductSlick = ({ cardList, type }) => {
             <FiArrowRight />
           </div>
         </Title>
-        <StyledSlider {...settings}>
-          {cardList?.map((v, i) => (
-            <MainCard
-              id={v.eitherId || v.multiId}
-              key={i}
-              title={v.title}
-              content={v.description}
-              type={type}
-              commentNum={v.commentCnt}
-              likeNum={v.likeCnt}
-              username={v.nickname}
-              userId={v.user}
-              date={v.date}
-            />
-          ))}
-        </StyledSlider>
+        <div data-testid="slickSlider">
+          <StyledSlider {...settings}>
+            {cardList?.map((v, i) => (
+              <MainCard
+                id={v.eitherId || v.multiId}
+                key={i}
+                title={v.title}
+                content={v.description}
+                type={type}
+                commentNum={v.commentCnt}
+                likeNum={v.likeCnt}
+                username={v.nickname}
+                userId={v.user}
+                date={v.date}
+              />
+            ))}
+          </StyledSlider>
+        </div>
       </Wrap>
     </>
   );
