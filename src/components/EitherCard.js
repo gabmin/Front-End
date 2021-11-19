@@ -127,6 +127,7 @@ const EitherCard = props => {
   const onClickContent = e => {
     if (userInfo.nickname === "GUEST") {
       alert("로그인 후 사용 가능합니다.");
+      history.push("/login");
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
@@ -146,7 +147,7 @@ const EitherCard = props => {
     }
   };
   //버튼A 상태 보여주기
-  const SelctButtonA = (BGcolor, color, disabled, vote, content) => {
+  const SelctButtonA = (BGcolor, color, disabled, vote, content, eitherId) => {
     return (
       <EitherButtonA
         style={{ backgroundColor: BGcolor, color: color }}
@@ -155,13 +156,14 @@ const EitherCard = props => {
           onClickContent(vote);
           setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
+        data-testid={"buttonA" + eitherId}
       >
         <ButtonText>{content}</ButtonText>
       </EitherButtonA>
     );
   };
   //버튼B 상태 보여주기
-  const SelctButtonB = (BGcolor, color, disabled, vote, content) => {
+  const SelctButtonB = (BGcolor, color, disabled, vote, content, eitherId) => {
     return (
       <EitherButtonB
         style={{ backgroundColor: BGcolor, color: color }}
@@ -170,6 +172,7 @@ const EitherCard = props => {
           onClickContent(vote);
           setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
+        data-testid={"buttonB" + eitherId}
       >
         <ButtonText>{content}</ButtonText>
       </EitherButtonB>
@@ -191,7 +194,7 @@ const EitherCard = props => {
                         curser: "pointer",
                       }}
                     >
-                      <FiMoreHorizontal size={20} />
+                      <FiMoreHorizontal size={20} data-testid="menuImage" />
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
