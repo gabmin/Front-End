@@ -209,6 +209,15 @@ const Signup = () => {
     history.push("/login");
   }, []);
 
+  const onBlurPw = useCallback(() => {
+    if (!pwChecker()) return;
+  }, [pwChecker]);
+
+  const onBlurPwCheck = useCallback(() => {
+    if (!pwChecker()) return;
+    if (!pwEqualChecker()) return;
+  }, [pwChecker, pwEqualChecker]);
+
   return (
     <>
       <Container>
@@ -225,14 +234,14 @@ const Signup = () => {
                   type="id"
                   value={id}
                   onChange={onChangeId}
-                  placeholder="아이디"
+                  placeholder="아이디 ( 5~20자의 영문 소문자, 숫자, 특수기호 '-' )"
                   onBlur={onClickIdDup}
                   data-testid="idInput"
                 />
               </InputWrapper>
               {idError && !checkIdDupLoading && idNotice && (
                 <span>
-                  5~20자의 영문 소문자, 숫자와 특수기호(),(-)만 가능합니다.
+                  5~20자의 영문 소문자, 숫자와 특수기호(-)만 가능합니다.
                 </span>
               )}
               {checkIdDupResult &&
@@ -251,7 +260,7 @@ const Signup = () => {
                   type="text"
                   value={nickname}
                   onChange={onChangeNickname}
-                  placeholder="닉네임"
+                  placeholder="닉네임 ( 2~7자 )"
                   onBlur={onClickNickDup}
                   data-testid="nickInput"
                 />
@@ -280,8 +289,9 @@ const Signup = () => {
                 type="password"
                 value={password}
                 onChange={setPassword}
-                placeholder="비밀번호"
+                placeholder="비밀번호 ( 8~16자 영문, 숫자, 특수문자 )"
                 autocomplete="new-password"
+                onBlur={onBlurPw}
                 data-testid="pwInput"
               />
             </InputWrapper>
@@ -296,6 +306,7 @@ const Signup = () => {
                 value={passwordCheck}
                 onChange={setPasswordCheck}
                 placeholder="비밀번호확인"
+                onBlur={onBlurPwCheck}
                 data-testid="pwCheckInput"
               />
             </InputWrapper>
