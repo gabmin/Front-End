@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
@@ -42,6 +42,8 @@ const Comment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(commentLikeCnt);
+  const inputRef = useRef();
+  const editInputRef = useRef();
 
   useEffect(() => {
     if (dataList.multi.completed === 1) {
@@ -62,6 +64,9 @@ const Comment = props => {
       setCancelBtn(true);
       setEditBtn(false);
       setDelBtn(false);
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 500);
     } else {
       setAddInput(false);
       setAddBtn(true);
@@ -78,6 +83,9 @@ const Comment = props => {
       setEditCancelBtn(true);
       setEditBtn(false);
       setDelBtn(false);
+      setTimeout(() => {
+        editInputRef.current.focus();
+      }, 500);
     } else {
       setEditInput(false);
       setAddBtn(true);
@@ -178,7 +186,12 @@ const Comment = props => {
 
         {addInput ? (
           <ReplyWarpper>
-            <TextArea onChange={changeComment}></TextArea>
+            <TextArea
+              ref={inputRef}
+              data-testid="childCommentInput"
+              placeholder="내용을 입력해주세요"
+              onChange={changeComment}
+            ></TextArea>
             {cancelBtn ? (
               <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
             ) : null}
@@ -188,7 +201,9 @@ const Comment = props => {
 
         {editInput ? (
           <ReplyWarpper>
-            <TextArea onChange={changeEditComment}>{comment}</TextArea>
+            <TextArea ref={editInputRef} onChange={changeEditComment}>
+              {comment}
+            </TextArea>
             {userInfo.nickname === nickname && !deleted ? (
               <div>
                 {editCancelBtn ? (
@@ -298,6 +313,7 @@ const TextArea = styled.textarea`
   width: 80%;
   height: 50px;
   margin: auto;
+  padding-left: 10px;
   border: none;
   resize: none;
   font-family: "Noto-Sans KR", sans-serif;

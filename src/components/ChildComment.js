@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
@@ -43,6 +43,8 @@ const ChildComment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(commentLikeCnt);
+  const inputRef = useRef();
+  const editInputRef = useRef();
 
   console.log("childComment", comment);
 
@@ -65,7 +67,9 @@ const ChildComment = props => {
       setCancelBtn(true);
       setEditBtn(false);
       setDelBtn(false);
-      console.log("comp", multiId, parentComment, id);
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 500);
     } else {
       setAddInput(false);
       setAddBtn(true);
@@ -98,6 +102,9 @@ const ChildComment = props => {
       setEditBtn(false);
       setEditCancelBtn(true);
       setDelBtn(false);
+      setTimeout(() => {
+        editInputRef.current.focus();
+      }, 500);
     } else {
       setEditInput(false);
       setEditBtn(true);
@@ -175,7 +182,9 @@ const ChildComment = props => {
 
         {userInfo.nickname === nickname && !deleted && editInput ? (
           <ReplyWarpper>
-            <TextArea onChange={changeEditChild}>{comment}</TextArea>
+            <TextArea ref={editInputRef} onChange={changeEditChild}>
+              {comment}
+            </TextArea>
             <TextAreaBtn onClick={editChildComment}>완료</TextAreaBtn>
             <TextAreaBtn onClick={showEditInput}>취소</TextAreaBtn>
           </ReplyWarpper>
@@ -183,7 +192,7 @@ const ChildComment = props => {
 
         {addInput ? (
           <ReplyWarpper>
-            <TextArea onChange={changeChild}></TextArea>
+            <TextArea ref={inputRef} onChange={changeChild}></TextArea>
             <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
             <TextAreaBtn onClick={addChildComment}>완료</TextAreaBtn>
           </ReplyWarpper>
@@ -280,6 +289,7 @@ const TextArea = styled.textarea`
   width: 80%;
   height: 50px;
   margin: auto;
+  padding-left: 10px;
   border: none;
   resize: none;
   font-family: "Noto-Sans KR", sans-serif;
