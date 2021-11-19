@@ -43,6 +43,7 @@ const Signup = () => {
   const [nickError, setNickError] = useState(false);
   const [nickLength, setNickLength] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [passwordNotice, setPasswordNotice] = useState(true);
   const [passwordEqual, setPasswordEqual] = useState(false);
   const [ageError, setAgeError] = useState(false);
 
@@ -55,6 +56,12 @@ const Signup = () => {
     setNickNotice(false);
     setNickDupCheck(false);
   }, [nickname]);
+
+  useEffect(() => {
+    if (password.trim()) {
+      setPasswordNotice(false);
+    }
+  }, [password]);
 
   useEffect(() => {
     setIdDupCheck(checkIdDupResult);
@@ -210,6 +217,7 @@ const Signup = () => {
   }, []);
 
   const onBlurPw = useCallback(() => {
+    setPasswordNotice(false);
     if (!pwChecker()) return;
   }, [pwChecker]);
 
@@ -234,15 +242,18 @@ const Signup = () => {
                   type="id"
                   value={id}
                   onChange={onChangeId}
-                  placeholder="아이디 ( 5~20자의 영문 소문자, 숫자, 특수기호 '-' )"
+                  placeholder="아이디"
                   onBlur={onClickIdDup}
                   data-testid="idInput"
                 />
               </InputWrapper>
-              {idError && !checkIdDupLoading && idNotice && (
-                <span>
-                  5~20자의 영문 소문자, 숫자와 특수기호(-)만 가능합니다.
+              {!idNotice && (
+                <span style={{ color: "black" }}>
+                  5~20자 영문 소문자, 숫자, 특수기호(-)를 사용하세요
                 </span>
+              )}
+              {idError && !checkIdDupLoading && idNotice && (
+                <span>5~20자 영문 소문자, 숫자, 특수기호(-)만 가능합니다</span>
               )}
               {checkIdDupResult &&
                 !idError &&
@@ -265,9 +276,9 @@ const Signup = () => {
                   data-testid="nickInput"
                 />
               </InputWrapper>
-              {/* {nickError && !checkNickDupLoading && nickNotice && (
-                <span>닉네임을 입력하세요</span>
-              )} */}
+              {!nickNotice && (
+                <span style={{ color: "black" }}>닉네임을 입력하세요</span>
+              )}
               {checkNickDupResult &&
                 !nickError &&
                 !checkNickDupLoading &&
@@ -289,12 +300,17 @@ const Signup = () => {
                 type="password"
                 value={password}
                 onChange={setPassword}
-                placeholder="비밀번호 ( 8~16자 영문, 숫자, 특수문자 )"
+                placeholder="비밀번호"
                 autocomplete="new-password"
                 onBlur={onBlurPw}
                 data-testid="pwInput"
               />
             </InputWrapper>
+            {passwordNotice && (
+              <span style={{ color: "black" }}>
+                8~16자 영문, 숫자, 특수문자를 사용하세요
+              </span>
+            )}
             {passwordError && (
               <span>8~16자 영문, 숫자, 특수문자를 사용하세요</span>
             )}
@@ -461,6 +477,9 @@ const InputWrapper = styled.div`
 
   input {
     width: 100%;
+    ::placeholder {
+      font-size: 12px;
+    }
   }
 `;
 
