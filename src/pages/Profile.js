@@ -104,6 +104,7 @@ const Profile = props => {
                     top: "5px",
                     position: "absolute",
                   }}
+                  data-testid="nickEditBtn"
                 />
               )}
             </>
