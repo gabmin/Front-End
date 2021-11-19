@@ -175,14 +175,21 @@ const settings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   swipeToSlide: true,
+  lazyLoad: true,
   speed: 500,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
+  nextArrow: <NextArrow data-testId="nextArrow" />,
+  prevArrow: <PrevArrow data-testId="prevArrow" />,
   centerPadding: "0px",
 
   responsive: [
-    { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-    { breakpoint: 1200, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+    {
+      breakpoint: 1920,
+      settings: { slidesToShow: 3, slidesToScroll: 1, initialSlide: 0 },
+    },
+    {
+      breakpoint: 1300,
+      settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 0 },
+    },
   ],
 };
 
@@ -196,16 +203,15 @@ const Wrap = styled.div`
     transition: 0.5s;
     z-index: 2;
     pointer-events: all;
-
-    .slick-list {
-      width: 100%;
-    }
   }
   .slick-slider {
     padding: 30px 0px;
     margin: auto;
     width: 100%;
     pointer-events: none;
+    @media screen and (min-width: ${mobile}) and (max-width: 1300px) {
+      width: 55%;
+    }
     @media screen and (max-width: ${mobile}) {
       padding: 0px;
     }

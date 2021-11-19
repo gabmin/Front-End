@@ -26,7 +26,7 @@ const MultiSlick = props => {
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 1700,
+        breakpoint: 1920,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -34,7 +34,7 @@ const MultiSlick = props => {
         },
       },
       {
-        breakpoint: 900,
+        breakpoint: 1300,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -147,7 +147,9 @@ const Container = styled.div`
     padding: 30px 0;
     margin: auto;
     width: 100%;
-
+    @media screen and (min-width: ${mobile}) and (max-width: 1300px) {
+      width: 55%;
+    }
     @media screen and (max-width: ${mobile}) {
       padding: 0px;
     }
