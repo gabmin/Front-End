@@ -108,14 +108,16 @@ const Header = () => {
                 <Menu
                   menuButton={
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <StyledCommonIcon />
+                      <StyledCommonIcon data-testid="menuButton" />
                       <span>{nickname}</span>
                       <StyledDown />
                     </div>
                   }
                 >
                   <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
-                  <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+                  <MenuItem onClick={onClickLogout} data-testid="logOutButton">
+                    로그아웃
+                  </MenuItem>
                 </Menu>
               </>
             )}

@@ -67,6 +67,7 @@ const EitherWrite = props => {
           placeholder="질문을 입력해주세요. (30자 이내)"
           value={title}
           onChange={onChangeTitle}
+          data-testid="titleInput"
         />
       </Title>
       <hr />
@@ -77,6 +78,7 @@ const EitherWrite = props => {
             placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
             value={contentA}
             onChange={onChangeContentA}
+            data-testid="contentA"
           />
         </EitherButtonA>
         <EitherButtonB>
@@ -85,6 +87,7 @@ const EitherWrite = props => {
             placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
             value={contentB}
             onChange={onChangeContentB}
+            data-testid="contentB"
           />
         </EitherButtonB>
       </EitherButtonGrid>

@@ -182,13 +182,15 @@ const settings = {
   centerPadding: "0px",
 
   responsive: [
-    {
-      breakpoint: 1920,
-      settings: { slidesToShow: 3, slidesToScroll: 1, initialSlide: 0 },
-    },
+    { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
     {
       breakpoint: 1300,
-      settings: { slidesToShow: 1, slidesToScroll: 1, initialSlide: 0 },
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        initialSlide: 0,
+      },
     },
   ],
 };

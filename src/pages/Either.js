@@ -21,6 +21,7 @@ const Either = props => {
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
+  console.log(PostList);
 
   const [select, setSelect] = useState("checkEither");
 
