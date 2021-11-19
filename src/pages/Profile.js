@@ -75,7 +75,7 @@ const Profile = props => {
           ) : (
             <>
               {
-                <Nickname>
+                <Nickname data-testid="profileNick">
                   {getProfileNickLoading ? nickInput : profileNick}
                 </Nickname>
               }

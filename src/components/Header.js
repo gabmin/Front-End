@@ -109,7 +109,7 @@ const Header = () => {
                   menuButton={
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <StyledCommonIcon />
-                      <span>{nickname}</span>
+                      <span data-testid="headerNick">{nickname}</span>
                       <StyledDown />
                     </div>
                   }
