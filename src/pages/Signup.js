@@ -71,7 +71,7 @@ const Signup = () => {
 
   const pwFilter = useCallback(password => {
     const filter =
-      /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[a-z0-9!@#$%^&*?-]{8,16}$/;
+      /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[a-zA-Z0-9!@#$%^&*?-]{8,16}$/;
     return filter.test(password);
   }, []);
 
@@ -227,9 +227,9 @@ const Signup = () => {
                   onChange={onChangeId}
                   placeholder="아이디"
                   onBlur={onClickIdDup}
+                  data-testid="idInput"
                 />
               </InputWrapper>
-
               {idError && !checkIdDupLoading && idNotice && (
                 <span>
                   5~20자의 영문 소문자, 숫자와 특수기호(),(-)만 가능합니다.
@@ -253,6 +253,7 @@ const Signup = () => {
                   onChange={onChangeNickname}
                   placeholder="닉네임"
                   onBlur={onClickNickDup}
+                  data-testid="nickInput"
                 />
               </InputWrapper>
               {/* {nickError && !checkNickDupLoading && nickNotice && (
@@ -281,6 +282,7 @@ const Signup = () => {
                 onChange={setPassword}
                 placeholder="비밀번호"
                 autocomplete="new-password"
+                data-testid="pwInput"
               />
             </InputWrapper>
             {passwordError && (
@@ -294,6 +296,7 @@ const Signup = () => {
                 value={passwordCheck}
                 onChange={setPasswordCheck}
                 placeholder="비밀번호확인"
+                data-testid="pwCheckInput"
               />
             </InputWrapper>
             {passwordEqual && <span>같은 비밀번호를 입력해 주세요</span>}
@@ -307,7 +310,7 @@ const Signup = () => {
               </span>
             </SelectSubject>
             <InputWrapper>
-              <select onChange={setAge}>
+              <select onChange={setAge} data-testid="ageSelect">
                 <option value="">연령대를 선택해 주세요</option>
                 <option value={10}>10대</option>
                 <option value={20}>20대</option>
@@ -319,7 +322,9 @@ const Signup = () => {
             {ageError && <span>연령대를 선택해 주세요</span>}
           </Content>
           <ButtonWrapper>
-            <SignupButton type="submit">회원가입</SignupButton>
+            <SignupButton type="submit" data-testid="signupButton">
+              회원가입
+            </SignupButton>
           </ButtonWrapper>
         </Form>
         <LoginWrapper>
