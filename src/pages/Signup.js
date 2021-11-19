@@ -36,24 +36,28 @@ const Signup = () => {
   const [passwordCheck, setPasswordCheck] = useInput("");
   const [age, setAge] = useInput("");
   const [idError, setIdError] = useState(false);
-  const [idNotice, setIdNotice] = useState(false);
+  const [idNotice, setIdNotice] = useState(true);
   const [idDupCheck, setIdDupCheck] = useState(false);
-  const [nickNotice, setNickNotice] = useState(false);
+  const [nickNotice, setNickNotice] = useState(true);
   const [nickDupCheck, setNickDupCheck] = useState(false);
   const [nickError, setNickError] = useState(false);
   const [nickLength, setNickLength] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [passwordError, setPasswordError] = useState(true);
   const [passwordNotice, setPasswordNotice] = useState(true);
   const [passwordEqual, setPasswordEqual] = useState(false);
   const [ageError, setAgeError] = useState(false);
 
   useEffect(() => {
-    setIdNotice(false);
+    if (id.trim()) {
+      setIdNotice(false);
+    }
     setIdDupCheck(false);
   }, [id]);
 
   useEffect(() => {
-    setNickNotice(false);
+    if (nickname.trim()) {
+      setNickNotice(false);
+    }
     setNickDupCheck(false);
   }, [nickname]);
 
@@ -100,6 +104,7 @@ const Signup = () => {
   const nickChecker = useCallback(() => {
     if (nickname.length < 2 || nickname.length > 7) {
       setNickLength(true);
+      setNickNotice(false);
       return;
     }
     setNickLength(false);
@@ -109,6 +114,7 @@ const Signup = () => {
       return false;
     }
     setNickError(false);
+    setNickNotice(false);
     return true;
   }, [nickname]);
 
@@ -191,8 +197,12 @@ const Signup = () => {
           userId: id,
         }),
       );
-      setIdNotice(true);
       setIdDupCheck(true);
+      if (!id.trim()) {
+        setIdNotice(true);
+        return;
+      }
+      setIdNotice(false);
     },
     [dispatch, id, idChecker],
   );
@@ -206,8 +216,12 @@ const Signup = () => {
           nickname,
         }),
       );
-      setNickNotice(true);
       setNickDupCheck(true);
+      if (!nickname.trim()) {
+        setNickNotice(true);
+        return;
+      }
+      setNickNotice(false);
     },
     [dispatch, nickname, nickChecker],
   );
@@ -247,18 +261,18 @@ const Signup = () => {
                   data-testid="idInput"
                 />
               </InputWrapper>
-              {!idNotice && (
+              {idNotice && (
                 <span style={{ color: "black" }}>
                   5~20자 영문 소문자, 숫자, 특수기호(-)를 사용하세요
                 </span>
               )}
-              {idError && !checkIdDupLoading && idNotice && (
+              {idError && !checkIdDupLoading && !idNotice && (
                 <span>5~20자 영문 소문자, 숫자, 특수기호(-)만 가능합니다</span>
               )}
               {checkIdDupResult &&
                 !idError &&
                 !checkIdDupLoading &&
-                idNotice && (
+                !idNotice && (
                   <span style={{ color: blue }}>사용가능한 아이디 입니다</span>
                 )}
               {checkIdDupResult === false && !checkIdDupLoading && idNotice && (
@@ -271,27 +285,29 @@ const Signup = () => {
                   type="text"
                   value={nickname}
                   onChange={onChangeNickname}
-                  placeholder="닉네임 ( 2~7자 )"
+                  placeholder="닉네임"
                   onBlur={onClickNickDup}
                   data-testid="nickInput"
                 />
               </InputWrapper>
-              {!nickNotice && (
-                <span style={{ color: "black" }}>닉네임을 입력하세요</span>
+              {nickNotice && (
+                <span style={{ color: "black" }}>
+                  2~7자의 닉네임을 사용하세요
+                </span>
               )}
               {checkNickDupResult &&
                 !nickError &&
                 !checkNickDupLoading &&
                 !nickLength &&
-                nickNotice && (
+                !nickNotice && (
                   <span style={{ color: blue }}>사용가능한 닉네임 입니다</span>
                 )}
-              {nickLength && !checkNickDupLoading && nickNotice && (
+              {nickLength && !checkNickDupLoading && !nickNotice && (
                 <span>2~7자로 입력해 주세요</span>
               )}
               {checkNickDupResult === false &&
                 !checkNickDupLoading &&
-                nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
+                !nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
             </InputContent>
           </IdPwWrapper>
           <Content>
@@ -311,8 +327,11 @@ const Signup = () => {
                 8~16자 영문, 숫자, 특수문자를 사용하세요
               </span>
             )}
-            {passwordError && (
+            {!passwordNotice && passwordError && (
               <span>8~16자 영문, 숫자, 특수문자를 사용하세요</span>
+            )}
+            {!passwordNotice && !passwordError && (
+              <span style={{ color: blue }}>사용 가능한 비밀번호입니다</span>
             )}
           </Content>
           <Content>
