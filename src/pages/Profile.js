@@ -67,11 +67,26 @@ const Profile = props => {
         <CommonIcon />
         <div className="nicknameWrapper">
           {nicknameClick ? (
-            <input
-              onChange={onChangeNick}
-              defaultValue={profileNick}
-              onKeyPress={onSubmitNick}
-            />
+            <>
+              <input
+                onChange={onChangeNick}
+                defaultValue={profileNick}
+                onKeyPress={onSubmitNick}
+              />
+              <FiEdit3
+                size={24}
+                stroke={red}
+                onClick={() => {
+                  onSubmitNick({ key: "Enter" });
+                }}
+                style={{
+                  cursor: "pointer",
+                  top: "7px",
+                  right: "-30px",
+                  position: "absolute",
+                }}
+              />
+            </>
           ) : (
             <>
               {
@@ -86,12 +101,10 @@ const Profile = props => {
                   onClick={onClickNickname}
                   style={{
                     cursor: "pointer",
-                    top: "3px",
+                    top: "5px",
                     position: "absolute",
                   }}
-                >
-                  수정
-                </FiEdit3>
+                />
               )}
             </>
           )}
