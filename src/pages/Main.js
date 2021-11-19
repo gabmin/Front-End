@@ -89,6 +89,7 @@ const Main = () => {
           onClick={() => {
             goToWrite("checkEither");
           }}
+          data-testid="goEitherBtn"
         >
           <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
           <h1> 찬반 질문 작성하기</h1>
@@ -98,6 +99,7 @@ const Main = () => {
           onClick={() => {
             goToWrite("checkMulti");
           }}
+          data-testid="goMultiBtn"
         >
           <h3>들린다... {multiNum}개의 곡소리가.....</h3>
           <h1> 객관식 질문 작성하기</h1>
