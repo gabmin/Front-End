@@ -69,52 +69,51 @@ describe("로그인 상태", () => {
     cy.url().should("include", "either");
   });
 
-  // it("다음 카드 보기", () => {
-  //   cy.get('[data-testId="nextArrow"]')
-  //     .click({ force: true })
-  //     .click({ force: true });
-  // });
+  it("다음 카드 보기", () => {
+    cy.get('[data-testId="nextArrow"]')
+      .click({ force: true })
+      .click({ force: true });
+  });
 
-  // it("이전 카드 보기", () => {
-  //   cy.get('[data-testId="prevArrow"]')
-  //     .click({ force: true })
-  //     .click({ force: true });
-  // });
+  it("이전 카드 보기", () => {
+    cy.get('[data-testId="prevArrow"]')
+      .click({ force: true })
+      .click({ force: true });
+  });
 
   it("진행중보기", () => {
     cy.contains("진행중").click({ force: true });
   });
 
-  // it("종료됨보기", () => {
-  //   cy.contains("종료됨").click({ force: true });
-  // });
+  it("종료됨보기", () => {
+    cy.contains("종료됨").click({ force: true });
+  });
 
-  // it("전체보기", () => {
-  //   cy.contains("전체").click({ force: true });
-  // });
+  it("전체보기", () => {
+    cy.contains("전체").click({ force: true });
+  });
 
-  // it("작성하기버튼 클릭", () => {
-  //   cy.contains("찬반").click().url().should("include", "either");
-  //   cy.contains("질문하기").click();
-  //   cy.get('[data-testid="menuButton"]').click({ force: true });
-  //   cy.get('[data-testid="logOutButton"]').click();
-  // });
+  it("작성하기버튼 클릭", () => {
+    cy.contains("찬반").click().url().should("include", "either");
+    cy.contains("질문하기").click();
+  });
 
-  // it("작성하기", () => {
-  //   cy.get('[data-testid="radioBtn"]').click();
-  //   cy.get('[data-testid="titleInput"]')
-  //     .type("테스트입니다.")
-  //     .should("have.value", "테스트입니다.");
-  //   cy.get('[data-testid="contentA"]')
-  //     .type("컨텐트A 테스트입니다.")
-  //     .should("have.value", "컨텐트A 테스트입니다.");
-  //   cy.get('[data-testid="contentB"]')
-  //     .type("컨텐트B 테스트입니다.")
-  //     .should("have.value", "컨텐트B 테스트입니다.");
-  //   cy.contains("완료").click().location("pathname").should("equal", "/either");
-  // });
+  it("작성하기", () => {
+    cy.get('[data-testid="radioBtn"]').click();
+    cy.get('[data-testid="titleInput"]')
+      .type("테스트입니다.")
+      .should("have.value", "테스트입니다.");
+    cy.get('[data-testid="contentA"]')
+      .type("컨텐트A 테스트입니다.")
+      .should("have.value", "컨텐트A 테스트입니다.");
+    cy.get('[data-testid="contentB"]')
+      .type("컨텐트B 테스트입니다.")
+      .should("have.value", "컨텐트B 테스트입니다.");
+    cy.contains("완료").click().location("pathname").should("equal", "/either");
+  });
 
   // it("A 투표하기", eitherId => {
+  //   cy.contains("진행중").click({ force: true });
   //   cy.get("button")
   //     .filter(".buttonA")
   //     .first()
@@ -122,6 +121,7 @@ describe("로그인 상태", () => {
   //     .should("have.css", "background-color");
   // });
   // it("B 투표하기", () => {
+  //   cy.contains("진행중").click({ force: true });
   //   cy.get("button")
   //     .filter(".buttonB")
   //     .first()
@@ -130,6 +130,7 @@ describe("로그인 상태", () => {
   // });
 
   it("투표수정하기", () => {
+    cy.get('[data-testId="nextArrow"]').click({ force: true });
     cy.get("button").get('[data-testid="menuImage"]').first().click();
     cy.get('[data-testid="menuModify"]').click();
     cy.get('[data-testId="editTitle"]')
@@ -149,10 +150,24 @@ describe("로그인 상태", () => {
 
   it("완료하기", () => {
     const stub = cy.stub();
+    cy.get('[data-testId="prevArrow"]').click({ force: true });
+    cy.get('[data-testId="nextArrow"]')
+      .click({ force: true })
+      .click({ force: true });
     cy.get("button").get('[data-testid="menuImage"]').first().click();
     cy.get('[data-testid="menuComplete"]').click();
-    cy.on("window:alert", stub);
+    cy.on("window:alert", stub).location("pathname").should("equal", "/either");
   });
+
+  it("삭제하기", () => {
+    const stub = cy.stub();
+    cy.contains("종료됨").click({ force: true });
+    cy.get('[data-testId="nextArrow"]').click({ force: true });
+    cy.get("button").get('[data-testid="menuImage"]').first().click();
+    cy.get('[data-testid="menuDelete"]').click();
+    cy.on("window:alert", stub).location("pathname").should("equal", "/either");
+  });
+
   it("로그아웃하기", () => {
     cy.get('[data-testid="menuButton"]').click({ force: true });
     cy.get('[data-testid="logOutButton"]').click();
