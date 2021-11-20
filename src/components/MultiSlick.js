@@ -8,9 +8,11 @@ import MultiCard from "../components/MultiCard";
 import { mobile } from "../shared/style";
 import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
 import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
+import { useSelector } from "react-redux";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
+  const { PostDBDone } = useSelector(state => state.multiCard);
   console.log("Card", CardList);
   const settings = {
     className: "center",
@@ -22,7 +24,7 @@ const MultiSlick = props => {
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
-    initialSlide: 0,
+    // initialSlide: 0,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -31,7 +33,7 @@ const MultiSlick = props => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          initialSlide: 0,
+          // initialSlide: 0,
         },
       },
       {
@@ -39,7 +41,7 @@ const MultiSlick = props => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
+          initialSlide: 0,
         },
       },
     ],
@@ -107,24 +109,26 @@ const MultiSlick = props => {
   return (
     <Container>
       <SliderWarpper>
-        <StyledSlider {...settings}>
-          {CardList?.map((p, i) => (
-            <CardWarpper>
-              <MultiCard
-                multiId={p.multiId}
-                title={p.title}
-                description={p.description}
-                user={p.user}
-                date={p.date}
-                editedDate={p.editedDate}
-                completed={p.completed}
-                likeCnt={p.likeCnt}
-                commentCnt={p.commentCnt}
-                nickname={p.nickname}
-              />
-            </CardWarpper>
-          ))}
-        </StyledSlider>
+        {PostDBDone === true && (
+          <StyledSlider {...settings}>
+            {CardList?.map((p, i) => (
+              <CardWarpper>
+                <MultiCard
+                  multiId={p.multiId}
+                  title={p.title}
+                  description={p.description}
+                  user={p.user}
+                  date={p.date}
+                  editedDate={p.editedDate}
+                  completed={p.completed}
+                  likeCnt={p.likeCnt}
+                  commentCnt={p.commentCnt}
+                  nickname={p.nickname}
+                />
+              </CardWarpper>
+            ))}
+          </StyledSlider>
+        )}
       </SliderWarpper>
     </Container>
   );
