@@ -54,7 +54,9 @@ const MultiCard = props => {
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtn onClick={goToDetail}>투표하기</VoteBtn>
+            <VoteBtn className="Detail" onClick={goToDetail}>
+              투표하기
+            </VoteBtn>
             <TempWarpper>
               <FooterWrapper>
                 <UserWrapper>
