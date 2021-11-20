@@ -90,7 +90,7 @@ const ContentBox = styled.div`
   border: 2px solid #00397c;
   max-width: 840px;
   box-sizing: border-box;
-  margin: 56px auto 56px auto;
+  margin: 56px auto;
   border-radius: 10px;
   padding: 4% 110px 4% 110px;
   @media screen and (max-width: ${mobile}) {

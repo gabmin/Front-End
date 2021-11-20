@@ -205,6 +205,7 @@ const EitherCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickModify}
+                    data-testid="menuModify"
                   >
                     수정하기
                   </MenuItem>
@@ -213,6 +214,7 @@ const EitherCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickComplete}
+                    data-testid="menuComplete"
                   >
                     투표 종료하기
                   </MenuItem>
@@ -221,6 +223,7 @@ const EitherCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickDelete}
+                    data-testid="menuDelete"
                   >
                     삭제하기
                   </MenuItem>
