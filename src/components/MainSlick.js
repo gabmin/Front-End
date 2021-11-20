@@ -211,6 +211,10 @@ const StyledSlider = styled(Slider)`
     width: 12px;
     height: 28px;
   }
+
+  .slick-disabled {
+    display: none !important;
+  }
 `;
 
 export default ProductSlick;
