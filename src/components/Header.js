@@ -94,6 +94,7 @@ const Header = () => {
             onKeyPress={submitSearch}
             onChange={onChangeSearch}
             value={search}
+            data-testid="searchInput"
           />
         </Wrapper>
         {loginCheckDone ? (
@@ -125,7 +126,7 @@ const Header = () => {
         )}
       </Bottom>
       <SearchMobile>
-        <StyledSearch onClick={submitSearch} />
+        <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
         <input
           placeholder="검색..."
           onKeyPress={submitSearch}

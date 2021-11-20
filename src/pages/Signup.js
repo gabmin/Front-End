@@ -177,11 +177,6 @@ const Signup = () => {
     [
       idDupCheck,
       nickDupCheck,
-      idChecker,
-      idDupCheck,
-      pwChecker,
-      nickChecker,
-      nickDupCheck,
       pwEqualChecker,
       ageChecker,
       id,
@@ -190,8 +185,6 @@ const Signup = () => {
       passwordCheck,
       age,
       dispatch,
-      idError,
-      nickError,
       passwordError,
     ],
   );
