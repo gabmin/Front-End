@@ -9,6 +9,7 @@ import EitherCompleteCard from "./EitherCompleteCard";
 import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
 import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 import { mobile, tablet } from "../shared/style";
+import { useSelector } from "react-redux";
 
 // //다음으로 넘어가기 버튼
 // function NextArrow(props) {
@@ -68,6 +69,8 @@ import { mobile, tablet } from "../shared/style";
 // }
 
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
+  const { PostDBDone } = useSelector(state => state.eitherCard);
+
   const NotCompleteList =
     PostList && PostList.filter(post => post.completed === 0);
   const CompleteList =
@@ -80,86 +83,88 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     <>
       <Wrap>
         <div>
-          <StyledSlider {...settings} ref={sliderRef}>
-            {NotCompleteList &&
-              NotCompleteList?.map(v => (
-                <EitherCard
-                  key={v.toString()}
-                  eitherId={v.eitherId}
-                  nickname={v.nickname}
-                  title={v.title}
-                  contentA={v.contentA}
-                  contentB={v.contentB}
-                  date={v.date}
-                  likeCnt={v.likeCnt}
-                  voteCntA={v.voteCntA}
-                  voteCntB={v.voteCntB}
-                  liked={v.liked}
-                  voted={v.voted}
-                  completed={v.completed}
-                  user={v.user}
-                  goToNext={goToNext}
-                />
-              ))}
-            {CompleteList &&
-              CompleteList.map(v => (
-                <EitherCompleteCard
-                  key={v.toString()}
-                  eitherId={v.eitherId}
-                  nickname={v.nickname}
-                  title={v.title}
-                  contentA={v.contentA}
-                  contentB={v.contentB}
-                  date={v.date}
-                  likeCnt={v.likeCnt}
-                  voteCntA={v.voteCntA}
-                  voteCntB={v.voteCntB}
-                  liked={v.liked}
-                  voted={v.voted}
-                  completed={v.completed}
-                  user={v.user}
-                />
-              ))}
-            {PostingList &&
-              PostingList?.map(v => (
-                <EitherCard
-                  key={v.toString()}
-                  eitherId={v.eitherId}
-                  nickname={v.nickname}
-                  title={v.title}
-                  contentA={v.contentA}
-                  contentB={v.contentB}
-                  date={v.date}
-                  likeCnt={v.likeCnt}
-                  voteCntA={v.voteCntA}
-                  voteCntB={v.voteCntB}
-                  liked={v.liked}
-                  voted={v.voted}
-                  completed={v.completed}
-                  user={v.user}
-                  goToNext={goToNext}
-                />
-              ))}
-            {PostCompleteList &&
-              PostCompleteList?.map(v => (
-                <EitherCompleteCard
-                  key={v.toString()}
-                  eitherId={v.eitherId}
-                  nickname={v.nickname}
-                  title={v.title}
-                  contentA={v.contentA}
-                  contentB={v.contentB}
-                  date={v.date}
-                  likeCnt={v.likeCnt}
-                  voteCntA={v.voteCntA}
-                  voteCntB={v.voteCntB}
-                  liked={v.liked}
-                  voted={v.voted}
-                  completed={v.completed}
-                  user={v.user}
-                />
-              ))}
-          </StyledSlider>
+          {PostDBDone === true && (
+            <StyledSlider {...settings} ref={sliderRef}>
+              {NotCompleteList &&
+                NotCompleteList?.map(v => (
+                  <EitherCard
+                    key={v.toString()}
+                    eitherId={v.eitherId}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
+                    user={v.user}
+                    goToNext={goToNext}
+                  />
+                ))}
+              {CompleteList &&
+                CompleteList.map(v => (
+                  <EitherCompleteCard
+                    key={v.toString()}
+                    eitherId={v.eitherId}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
+                    user={v.user}
+                  />
+                ))}
+              {PostingList &&
+                PostingList?.map(v => (
+                  <EitherCard
+                    key={v.toString()}
+                    eitherId={v.eitherId}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
+                    user={v.user}
+                    goToNext={goToNext}
+                  />
+                ))}
+              {PostCompleteList &&
+                PostCompleteList?.map(v => (
+                  <EitherCompleteCard
+                    key={v.toString()}
+                    eitherId={v.eitherId}
+                    nickname={v.nickname}
+                    title={v.title}
+                    contentA={v.contentA}
+                    contentB={v.contentB}
+                    date={v.date}
+                    likeCnt={v.likeCnt}
+                    voteCntA={v.voteCntA}
+                    voteCntB={v.voteCntB}
+                    liked={v.liked}
+                    voted={v.voted}
+                    completed={v.completed}
+                    user={v.user}
+                  />
+                ))}
+            </StyledSlider>
+          )}
         </div>
       </Wrap>
     </>
@@ -183,15 +188,7 @@ const settings = {
 
   responsive: [
     { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: true,
-        initialSlide: 0,
-      },
-    },
+    { breakpoint: 1300, settings: { slidesToShow: 1, slidesToScroll: 1 } },
   ],
 };
 
