@@ -147,7 +147,7 @@ const EitherCard = props => {
     }
   };
   //버튼A 상태 보여주기
-  const SelctButtonA = (BGcolor, color, disabled, vote, content, eitherId) => {
+  const SelctButtonA = (BGcolor, color, disabled, vote, content) => {
     return (
       <EitherButtonA
         style={{ backgroundColor: BGcolor, color: color }}
@@ -156,14 +156,14 @@ const EitherCard = props => {
           onClickContent(vote);
           setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
-        data-testid={"buttonA" + eitherId}
+        className="buttonA"
       >
         <ButtonText>{content}</ButtonText>
       </EitherButtonA>
     );
   };
   //버튼B 상태 보여주기
-  const SelctButtonB = (BGcolor, color, disabled, vote, content, eitherId) => {
+  const SelctButtonB = (BGcolor, color, disabled, vote, content) => {
     return (
       <EitherButtonB
         style={{ backgroundColor: BGcolor, color: color }}
@@ -172,7 +172,7 @@ const EitherCard = props => {
           onClickContent(vote);
           setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
-        data-testid={"buttonB" + eitherId}
+        className="buttonB"
       >
         <ButtonText>{content}</ButtonText>
       </EitherButtonB>
