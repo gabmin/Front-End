@@ -47,32 +47,34 @@ const Card = ({
   }, [id, type, dispatch]);
 
   return (
-    <Layout {...styles} onClick={onClickDetail} type={type}>
-      <TextLayout>
-        <Subject titleSize={titleSize}>{title}</Subject>
-        <Date>{date.substring(0, 16)}</Date>
-        {type === "multi" && (
-          <Content contentSize={contentSize} color={color}>
-            {content}
-          </Content>
-        )}
-      </TextLayout>
-      <Info type={type}>
-        <Nickname nickname={username} userId={userId}></Nickname>
-        <div>
+    <div data-testid="slickcard">
+      <Layout {...styles} onClick={onClickDetail} type={type}>
+        <TextLayout>
+          <Subject titleSize={titleSize}>{title}</Subject>
+          <Date>{date.substring(0, 16)}</Date>
           {type === "multi" && (
-            <CommentNum>
-              <StyledFiMessageSquare />
-              {commentNum}
-            </CommentNum>
+            <Content contentSize={contentSize} color={color}>
+              {content}
+            </Content>
           )}
-          <span>
-            <StyledFiThumbsUp />
-            {likeNum}
-          </span>
-        </div>
-      </Info>
-    </Layout>
+        </TextLayout>
+        <Info type={type}>
+          <Nickname nickname={username} userId={userId}></Nickname>
+          <div>
+            {type === "multi" && (
+              <CommentNum>
+                <StyledFiMessageSquare />
+                {commentNum}
+              </CommentNum>
+            )}
+            <span>
+              <StyledFiThumbsUp />
+              {likeNum}
+            </span>
+          </div>
+        </Info>
+      </Layout>
+    </div>
   );
 };
 

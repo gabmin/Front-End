@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -9,16 +9,25 @@ import { history } from "../redux/configureStore";
 
 import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
+import LoadingBubble from "../elements/LoadingBubble";
 
 const Main = () => {
   const dispatch = useDispatch();
 
+  const [loadDone, setLoadDone] = useState(false);
+
   const { either, multi, attendNum, postingNum, eitherNum, multiNum } =
     useSelector(state => state.main.mainPosts);
-
-  const { mainDataDone } = useSelector(state => state.main);
-
+  const { mainDataLoading, mainDataDone } = useSelector(state => state.main);
   const { nickname } = useSelector(state => state.user.userInfo);
+
+  useEffect(() => {
+    if (mainDataDone === true) {
+      setTimeout(() => {
+        setLoadDone(true);
+      }, 200);
+    }
+  }, [mainDataDone]);
 
   useEffect(() => {
     dispatch(getMainData());
@@ -89,8 +98,13 @@ const Main = () => {
           onClick={() => {
             goToWrite("checkEither");
           }}
+          data-testid="goEitherBtn"
         >
-          <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
+          {mainDataLoading === true ? (
+            <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
+          ) : (
+            <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
+          )}
           <h1> 찬반 질문 작성하기</h1>
           <StyledGoAnt color="blue" />
         </GoEither>
@@ -98,13 +112,19 @@ const Main = () => {
           onClick={() => {
             goToWrite("checkMulti");
           }}
+          data-testid="goMultiBtn"
         >
-          <h3>들린다... {multiNum}개의 곡소리가.....</h3>
+          {mainDataLoading === true ? (
+            <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
+          ) : (
+            <h3>들린다... {multiNum}개의 곡소리가.....</h3>
+          )}
           <h1> 객관식 질문 작성하기</h1>
           <StyledGoAnt color="white" />
         </GoMulti>
       </Notice>
       <Wrapper height="230px">
+        {loadDone !== true && <LoadingBubble />}
         {mainDataDone === true && (
           <MainSlick cardList={either} type="either"></MainSlick>
         )}
@@ -129,6 +149,13 @@ const Main = () => {
     </Container>
   );
 };
+
+const MainLoading = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  background-image: url("../images/sadAntIcon.png");
+`;
 
 const Container = styled.div`
   display: flex;
@@ -165,12 +192,13 @@ const Top = styled.div`
 `;
 
 const Notice = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 250px;
+  height: 200px;
 
   @media screen and (max-width: 1540px) {
     flex-direction: column;

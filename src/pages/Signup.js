@@ -36,25 +36,36 @@ const Signup = () => {
   const [passwordCheck, setPasswordCheck] = useInput("");
   const [age, setAge] = useInput("");
   const [idError, setIdError] = useState(false);
-  const [idNotice, setIdNotice] = useState(false);
+  const [idNotice, setIdNotice] = useState(true);
   const [idDupCheck, setIdDupCheck] = useState(false);
-  const [nickNotice, setNickNotice] = useState(false);
+  const [nickNotice, setNickNotice] = useState(true);
   const [nickDupCheck, setNickDupCheck] = useState(false);
   const [nickError, setNickError] = useState(false);
   const [nickLength, setNickLength] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [passwordError, setPasswordError] = useState(true);
+  const [passwordNotice, setPasswordNotice] = useState(true);
   const [passwordEqual, setPasswordEqual] = useState(false);
   const [ageError, setAgeError] = useState(false);
 
   useEffect(() => {
-    setIdNotice(false);
+    if (id.trim()) {
+      setIdNotice(false);
+    }
     setIdDupCheck(false);
   }, [id]);
 
   useEffect(() => {
-    setNickNotice(false);
+    if (nickname.trim()) {
+      setNickNotice(false);
+    }
     setNickDupCheck(false);
   }, [nickname]);
+
+  useEffect(() => {
+    if (password.trim()) {
+      setPasswordNotice(false);
+    }
+  }, [password]);
 
   useEffect(() => {
     setIdDupCheck(checkIdDupResult);
@@ -71,7 +82,7 @@ const Signup = () => {
 
   const pwFilter = useCallback(password => {
     const filter =
-      /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[a-z0-9!@#$%^&*?-]{8,16}$/;
+      /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])[a-zA-Z0-9!@#$%^&*?-]{8,16}$/;
     return filter.test(password);
   }, []);
 
@@ -93,6 +104,7 @@ const Signup = () => {
   const nickChecker = useCallback(() => {
     if (nickname.length < 2 || nickname.length > 7) {
       setNickLength(true);
+      setNickNotice(false);
       return;
     }
     setNickLength(false);
@@ -102,6 +114,7 @@ const Signup = () => {
       return false;
     }
     setNickError(false);
+    setNickNotice(false);
     return true;
   }, [nickname]);
 
@@ -140,13 +153,16 @@ const Signup = () => {
     e => {
       e.preventDefault();
 
-      if (!idChecker()) return;
-      if (!nickChecker()) return;
-      if (!pwChecker()) return;
+      // if (!idChecker()) return;
+      // if (!nickChecker()) return;
+      // if (!pwChecker()) return;
       if (!pwEqualChecker()) return;
       if (!ageChecker()) return;
-      if (!idDupCheck) return;
-      if (!nickDupCheck) return;
+      // if (!idDupCheck) return;
+      // if (!nickDupCheck) return;
+      if (!nickDupCheck || !idDupCheck || passwordError) {
+        return;
+      }
       dispatch(
         signup({
           userId: id,
@@ -159,10 +175,7 @@ const Signup = () => {
       return;
     },
     [
-      idChecker,
       idDupCheck,
-      pwChecker,
-      nickChecker,
       nickDupCheck,
       pwEqualChecker,
       ageChecker,
@@ -172,6 +185,7 @@ const Signup = () => {
       passwordCheck,
       age,
       dispatch,
+      passwordError,
     ],
   );
 
@@ -184,8 +198,12 @@ const Signup = () => {
           userId: id,
         }),
       );
-      setIdNotice(true);
       setIdDupCheck(true);
+      if (!id.trim()) {
+        setIdNotice(true);
+        return;
+      }
+      setIdNotice(false);
     },
     [dispatch, id, idChecker],
   );
@@ -199,8 +217,12 @@ const Signup = () => {
           nickname,
         }),
       );
-      setNickNotice(true);
       setNickDupCheck(true);
+      if (!nickname.trim()) {
+        setNickNotice(true);
+        return;
+      }
+      setNickNotice(false);
     },
     [dispatch, nickname, nickChecker],
   );
@@ -208,6 +230,16 @@ const Signup = () => {
   const onClickLogin = useCallback(() => {
     history.push("/login");
   }, []);
+
+  const onBlurPw = useCallback(() => {
+    setPasswordNotice(false);
+    if (!pwChecker()) return;
+  }, [pwChecker]);
+
+  const onBlurPwCheck = useCallback(() => {
+    if (!pwChecker()) return;
+    if (!pwEqualChecker()) return;
+  }, [pwChecker, pwEqualChecker]);
 
   return (
     <>
@@ -230,21 +262,23 @@ const Signup = () => {
                   data-testid="idInput"
                 />
               </InputWrapper>
-
-              {idError && !checkIdDupLoading && idNotice && (
-                <span>
-                  5~20자의 영문 소문자, 숫자와 특수기호(),(-)만 가능합니다.
+              {idNotice && (
+                <span style={{ color: "black" }}>
+                  5~20자 영문 소문자, 숫자, 특수기호(-)를 사용하세요
                 </span>
+              )}
+              {idError && !checkIdDupLoading && !idNotice && (
+                <span>5~20자 영문 소문자, 숫자, 특수기호(-)만 가능합니다</span>
               )}
               {checkIdDupResult &&
                 !idError &&
                 !checkIdDupLoading &&
-                idNotice && (
+                !idNotice && (
                   <span style={{ color: blue }}>사용가능한 아이디 입니다</span>
                 )}
-              {checkIdDupResult === false && !checkIdDupLoading && idNotice && (
-                <span>이미 사용중인 아이디 입니다</span>
-              )}
+              {checkIdDupResult === false &&
+                !checkIdDupLoading &&
+                !idNotice && <span>이미 사용중인 아이디 입니다</span>}
             </InputContent>
             <InputContent>
               <InputWrapper>
@@ -254,24 +288,27 @@ const Signup = () => {
                   onChange={onChangeNickname}
                   placeholder="닉네임"
                   onBlur={onClickNickDup}
+                  data-testid="nickInput"
                 />
               </InputWrapper>
-              {/* {nickError && !checkNickDupLoading && nickNotice && (
-                <span>닉네임을 입력하세요</span>
-              )} */}
+              {nickNotice && (
+                <span style={{ color: "black" }}>
+                  2~7자의 닉네임을 사용하세요
+                </span>
+              )}
               {checkNickDupResult &&
                 !nickError &&
                 !checkNickDupLoading &&
                 !nickLength &&
-                nickNotice && (
+                !nickNotice && (
                   <span style={{ color: blue }}>사용가능한 닉네임 입니다</span>
                 )}
-              {nickLength && !checkNickDupLoading && nickNotice && (
+              {nickLength && !checkNickDupLoading && !nickNotice && (
                 <span>2~7자로 입력해 주세요</span>
               )}
               {checkNickDupResult === false &&
                 !checkNickDupLoading &&
-                nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
+                !nickNotice && <span>이미 사용중인 닉네임 입니다</span>}
             </InputContent>
           </IdPwWrapper>
           <Content>
@@ -282,10 +319,20 @@ const Signup = () => {
                 onChange={setPassword}
                 placeholder="비밀번호"
                 autocomplete="new-password"
+                onBlur={onBlurPw}
+                data-testid="pwInput"
               />
             </InputWrapper>
-            {passwordError && (
-              <span>8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요</span>
+            {passwordNotice && (
+              <span style={{ color: "black" }}>
+                8~16자 영문, 숫자, 특수문자를 사용하세요
+              </span>
+            )}
+            {!passwordNotice && passwordError && (
+              <span>8~16자 영문, 숫자, 특수문자를 사용하세요</span>
+            )}
+            {!passwordNotice && !passwordError && (
+              <span style={{ color: blue }}>사용 가능한 비밀번호입니다</span>
             )}
           </Content>
           <Content>
@@ -295,6 +342,8 @@ const Signup = () => {
                 value={passwordCheck}
                 onChange={setPasswordCheck}
                 placeholder="비밀번호확인"
+                onBlur={onBlurPwCheck}
+                data-testid="pwCheckInput"
               />
             </InputWrapper>
             {passwordEqual && <span>같은 비밀번호를 입력해 주세요</span>}
@@ -308,7 +357,7 @@ const Signup = () => {
               </span>
             </SelectSubject>
             <InputWrapper>
-              <select onChange={setAge}>
+              <select onChange={setAge} data-testid="ageSelect">
                 <option value="">연령대를 선택해 주세요</option>
                 <option value={10}>10대</option>
                 <option value={20}>20대</option>
@@ -320,7 +369,9 @@ const Signup = () => {
             {ageError && <span>연령대를 선택해 주세요</span>}
           </Content>
           <ButtonWrapper>
-            <SignupButton type="submit">회원가입</SignupButton>
+            <SignupButton type="submit" data-testid="signupButton">
+              회원가입
+            </SignupButton>
           </ButtonWrapper>
         </Form>
         <LoginWrapper>
@@ -446,6 +497,9 @@ const InputWrapper = styled.div`
 
   input {
     width: 100%;
+    ::placeholder {
+      font-size: 12px;
+    }
   }
 `;
 

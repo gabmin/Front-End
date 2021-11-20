@@ -29,7 +29,8 @@ const Search = ({ location }) => {
   return (
     <Container>
       <SearchResultText>
-        '{searchValue}' 를 검색한 결과입니다. ({searchList.length})
+        '<span className="resultText">{searchValue}</span>' 검색한 결과입니다. (
+        {searchList.length})
       </SearchResultText>
       {searchList.map((v, i) => (
         <SearchCard
@@ -70,6 +71,10 @@ const SearchResultText = styled.div`
   height: 100px;
   margin: 0 auto;
   font-size: 24px;
+
+  .resultText {
+    font-weight: bold;
+  }
 
   @media screen and (max-width: ${tablet}) {
     font-size: 18px;

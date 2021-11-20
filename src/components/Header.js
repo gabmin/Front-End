@@ -94,6 +94,7 @@ const Header = () => {
             onKeyPress={submitSearch}
             onChange={onChangeSearch}
             value={search}
+            data-testid="searchInput"
           />
         </Wrapper>
         {loginCheckDone ? (
@@ -109,7 +110,7 @@ const Header = () => {
                   menuButton={
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <StyledCommonIcon />
-                      <span>{nickname}</span>
+                      <span data-testid="headerNick">{nickname}</span>
                       <StyledDown />
                     </div>
                   }
@@ -124,6 +125,15 @@ const Header = () => {
           <MenuLoading></MenuLoading>
         )}
       </Bottom>
+      <SearchMobile>
+        <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
+        <input
+          placeholder="검색..."
+          onKeyPress={submitSearch}
+          onChange={onChangeSearch}
+          value={search}
+        />
+      </SearchMobile>
     </Container>
   );
 };
