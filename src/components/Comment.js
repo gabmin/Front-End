@@ -16,16 +16,8 @@ import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
 
 const Comment = props => {
-  const {
-    nickname,
-    commentDate,
-    commentLikeCnt,
-    id,
-    deleted,
-    comment,
-    liked,
-    user,
-  } = props;
+  const { nickname, commentDate, likeCnt, id, deleted, comment, liked, user } =
+    props;
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
@@ -41,7 +33,7 @@ const Comment = props => {
   const [editBtn, setEditBtn] = useState(true);
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
-  const [likes, setLikes] = useState(commentLikeCnt);
+  const [likes, setLikes] = useState(likeCnt);
   const inputRef = useRef();
   const editInputRef = useRef();
 
@@ -136,7 +128,7 @@ const Comment = props => {
   const addLike = () => {
     if (liked === null) {
       dispatch(AddLikeComment({ id, multiId }));
-      setLikes(commentLikeCnt + 1);
+      setLikes(likeCnt + 1);
     } else {
       return;
     }

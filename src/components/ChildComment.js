@@ -25,7 +25,7 @@ const ChildComment = props => {
     parentComment,
     comment,
     deleted,
-    commentLikeCnt,
+    likeCnt,
     liked,
     user,
   } = props;
@@ -42,7 +42,7 @@ const ChildComment = props => {
   const [editBtn, setEditBtn] = useState(true);
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
-  const [likes, setLikes] = useState(commentLikeCnt);
+  const [likes, setLikes] = useState(likeCnt);
   const inputRef = useRef();
   const editInputRef = useRef();
 
@@ -133,7 +133,7 @@ const ChildComment = props => {
   const addLike = () => {
     if (liked === null) {
       dispatch(AddLikeChild({ id, multiId }));
-      setLikes(commentLikeCnt + 1);
+      setLikes(likeCnt + 1);
     } else {
       return;
     }

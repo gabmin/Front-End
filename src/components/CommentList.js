@@ -25,7 +25,7 @@ const CommentList = props => {
               nickname={p.nickname}
               comment={p.comment}
               commentDate={p.date}
-              commentLikeCnt={p.CommentLikeCnt}
+              likeCnt={p.likeCnt}
               id={p.id}
               deleted={p.deleted}
               liked={p.liked}
