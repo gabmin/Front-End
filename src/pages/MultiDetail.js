@@ -55,6 +55,7 @@ const MultiDetail = props => {
   const deletePost = () => {
     if (TotalCnt === 0) {
       dispatch(DeletePostDB(multiId));
+      history.push("/multi");
     } else {
       window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
       return;
@@ -65,7 +66,7 @@ const MultiDetail = props => {
     const closeVote = window.confirm("투표를 종료하시겠습니까?");
     if (closeVote == true) {
       dispatch(ClosePostDB(multiId));
-      dispatch(SetParams(multiId));
+      // dispatch(SetParams(multiId));
       history.push("/multi");
     }
     return;
@@ -82,7 +83,7 @@ const MultiDetail = props => {
 
   if (userInfo.nickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
-    history.push("/login");
+    history.replace("/login");
   } else if (dataList && dataList.multi.completed === 1) {
     return (
       <div>
@@ -121,6 +122,7 @@ const MultiDetail = props => {
                 <Menu
                   menuButton={
                     <MenuButton
+                      data-testid="menuBtn"
                       styles={{
                         border: "none",
                         backgroundColor: "transparent",
@@ -176,7 +178,7 @@ const MultiDetail = props => {
     return (
       <Container>
         <Wrapper>
-          <BackBtn onClick={goToMulti}>
+          <BackBtn data-testid="backBtn" onClick={goToMulti}>
             <FiArrowLeft />
           </BackBtn>
           {dataList && (
