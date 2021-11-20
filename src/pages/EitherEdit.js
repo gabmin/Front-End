@@ -140,6 +140,7 @@ const EitherEdit = props => {
                 placeholder="질문을 입력해주세요. (40자 이내)"
                 value={title}
                 onChange={onChangeTitle}
+                data-testId="editTitle"
               />
             </Title>
             <hr />
@@ -149,6 +150,7 @@ const EitherEdit = props => {
                   placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
                   value={contentA}
                   onChange={onChangeContentA}
+                  data-testId="editContentA"
                 />
               </EitherButtonA>
               <EitherButtonB>
@@ -156,6 +158,7 @@ const EitherEdit = props => {
                   placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
                   value={contentB}
                   onChange={onChangeContentB}
+                  data-testId="editContentB"
                 />
               </EitherButtonB>
             </EitherButtonGrid>

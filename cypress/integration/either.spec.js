@@ -114,11 +114,44 @@ describe("로그인 상태", () => {
   //   cy.contains("완료").click().location("pathname").should("equal", "/either");
   // });
 
-  it("A 투표하기", eitherId => {
-    cy.get("button").filter(".buttonA").first().click();
+  // it("A 투표하기", eitherId => {
+  //   cy.get("button")
+  //     .filter(".buttonA")
+  //     .first()
+  //     .click()
+  //     .should("have.css", "background-color");
+  // });
+  // it("B 투표하기", () => {
+  //   cy.get("button")
+  //     .filter(".buttonB")
+  //     .first()
+  //     .click()
+  //     .should("have.css", "background-color");
+  // });
+
+  it("투표수정하기", () => {
+    cy.get("button").get('[data-testid="menuImage"]').first().click();
+    cy.get('[data-testid="menuModify"]').click();
+    cy.get('[data-testId="editTitle"]')
+      .clear()
+      .type("수정된 제목입니다.")
+      .should("have.value", "수정된 제목입니다.");
+    cy.get('[data-testId="editContentA"]')
+      .clear()
+      .type("수정된 컨텐츠A 입니다.")
+      .should("have.value", "수정된 컨텐츠A 입니다.");
+    cy.get('[data-testId="editContentB"]')
+      .clear()
+      .type("수정된 컨텐츠B 입니다.")
+      .should("have.value", "수정된 컨텐츠B 입니다.");
+    cy.contains("완료").click().location("pathname").should("equal", "/either");
   });
-  it("B 투표하기", () => {
-    cy.get("button").filter(".buttonB").first().click();
+
+  it("완료하기", () => {
+    const stub = cy.stub();
+    cy.get("button").get('[data-testid="menuImage"]').first().click();
+    cy.get('[data-testid="menuComplete"]').click();
+    cy.on("window:alert", stub);
   });
   it("로그아웃하기", () => {
     cy.get('[data-testid="menuButton"]').click({ force: true });
