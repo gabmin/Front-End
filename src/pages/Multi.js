@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
-
 import styled from "styled-components";
+
 import MultiSlick from "../components/MultiSlick";
-import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
 import colors from "../shared/colors";
 import { mobile } from "../shared/style";
+import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
+import LoadingBubble from "../elements/LoadingBubble";
 
 const Multi = props => {
   const dispatch = useDispatch();
   const [select, setSelect] = useState("checkMulti");
   const [status, setStatus] = useState("Post");
+  const [loadDone, setLoadDone] = useState(false);
   const userInfo = useSelector(state => state.user.userInfo);
   const paramsId = useSelector(state => state.params.paramsId);
-  const { multiPost, multiPosting, multiPostComplete } = useSelector(
-    state => state.multiCard,
-  );
+  const {
+    multiPost,
+    multiPosting,
+    multiPostComplete,
+    PostDBDone,
+    PostingDBDone,
+    PostCompleteDBDone,
+    PostDBLoading,
+    PostingDBLoading,
+    PostCompleteDBLoading,
+  } = useSelector(state => state.multiCard);
 
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
@@ -68,11 +78,16 @@ const Multi = props => {
         )}
       </TabBtnWarpper>
       <SliderWarpper>
-        {status === "Post" ? <MultiSlick cardList={cardList} /> : null}
-        {status === "Posting" ? <MultiSlick cardList={ingCardList} /> : null}
-        {status === "CompletePost" ? (
+        {PostDBLoading === true && <LoadingBubble />}
+        {status === "Post" && PostDBDone === true && (
+          <MultiSlick cardList={cardList} />
+        )}
+        {/* {PostingDBLoading === true && <LoadingBubble />} */}
+        {status === "Posting" && <MultiSlick cardList={ingCardList} />}
+        {/* {PostCompleteDBLoading === true && <LoadingBubble />} */}
+        {status === "CompletePost" && (
           <MultiSlick cardList={completeCardList} />
-        ) : null}
+        )}
       </SliderWarpper>
       <QuestionBtnWarpper>
         <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>

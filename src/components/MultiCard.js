@@ -275,7 +275,6 @@ const NickText = styled.p`
 `;
 
 const InfoWarpper = styled.div`
-  width: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

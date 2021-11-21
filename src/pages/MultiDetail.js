@@ -11,11 +11,12 @@ import colors from "../shared/colors";
 import MultiComment from "../components/MultiComment";
 import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
+import CompletedDetail from "../components/CompletedDetail";
+import { mobile } from "../shared/style";
+import LoadingBubble from "../elements/LoadingBubble";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
-import CompletedDetail from "../components/CompletedDetail";
-import { mobile } from "../shared/style";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ const MultiDetail = props => {
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   const userInfo = useSelector(state => state.user.userInfo);
   const dataList = multiDetail.multi && multiDetail;
+  const { DetailDBDone, DetailDBLoading } = useSelector(
+    state => state.multiDetail,
+  );
   console.log("dataListList", dataList);
   // const [state, setState] = useState(false);
 
@@ -98,108 +102,113 @@ const MultiDetail = props => {
   ) {
     return (
       <Container>
-        {/* {dataList.multi.completed === 0 ? <Temp>aaaaa</Temp> : null} */}
-        <Wrapper>
-          <MenuWarpper>
-            <BackBtn onClick={goToMulti}>
-              <FiArrowLeft />
-            </BackBtn>
+        {DetailDBLoading === true && <LoadingBubble />}
+        {DetailDBDone === true && (
+          <Wrapper>
+            <MenuWarpper>
+              <BackBtn onClick={goToMulti}>
+                <FiArrowLeft />
+              </BackBtn>
 
-            {userInfo.nickname === dataList.multi.nickname ? (
-              // <div>
-              //   {/* <div>투표가 종료되었습니다</div> */}
-              //   <div>
-              //     <button onClick={deletePost}>삭제하기</button>
-              //     {dataList.multi.completed !== 1 ? (
-              //       <div>
-              //         <button onClick={editPost}>수정하기</button>
-              //         <button onClick={closePost}>종료하기</button>
-              //       </div>
-              //     ) : null}
-              //   </div>
-              // </div>
-              <MenuBar>
-                <Menu
-                  menuButton={
-                    <MenuButton
-                      data-testid="menuBtn"
+              {userInfo.nickname === dataList.multi.nickname ? (
+                // <div>
+                //   {/* <div>투표가 종료되었습니다</div> */}
+                //   <div>
+                //     <button onClick={deletePost}>삭제하기</button>
+                //     {dataList.multi.completed !== 1 ? (
+                //       <div>
+                //         <button onClick={editPost}>수정하기</button>
+                //         <button onClick={closePost}>종료하기</button>
+                //       </div>
+                //     ) : null}
+                //   </div>
+                // </div>
+                <MenuBar>
+                  <Menu
+                    menuButton={
+                      <MenuButton
+                        data-testid="menuBtn"
+                        styles={{
+                          border: "none",
+                          backgroundColor: "transparent",
+                        }}
+                      >
+                        <FiMoreHorizontal size={20} />
+                        {/* <MaterialIcon icon="more_horiz" size={32} /> */}
+                      </MenuButton>
+                    }
+                    menuStyles={{ border: "0px solid" }}
+                    portal={true}
+                  >
+                    <MenuItem
                       styles={{
-                        border: "none",
-                        backgroundColor: "transparent",
+                        fontSize: "14px",
                       }}
+                      onClick={editPost}
                     >
-                      <FiMoreHorizontal size={20} />
-                      {/* <MaterialIcon icon="more_horiz" size={32} /> */}
-                    </MenuButton>
-                  }
-                  menuStyles={{ border: "0px solid" }}
-                  portal={true}
-                >
-                  <MenuItem
-                    styles={{
-                      fontSize: "14px",
-                    }}
-                    onClick={editPost}
-                  >
-                    수정하기
-                  </MenuItem>
-                  <MenuItem
-                    styles={{
-                      fontSize: "14px",
-                    }}
-                    onClick={deletePost}
-                  >
-                    삭제하기
-                  </MenuItem>
-                  <MenuItem
-                    styles={{
-                      fontSize: "14px",
-                    }}
-                    onClick={closePost}
-                  >
-                    투표 종료하기
-                  </MenuItem>
-                </Menu>
-              </MenuBar>
-            ) : null}
-          </MenuWarpper>
-          <div>
-            <MultiVoted multiId={multiId} dataList={dataList} />
-          </div>
+                      수정하기
+                    </MenuItem>
+                    <MenuItem
+                      styles={{
+                        fontSize: "14px",
+                      }}
+                      onClick={deletePost}
+                    >
+                      삭제하기
+                    </MenuItem>
+                    <MenuItem
+                      styles={{
+                        fontSize: "14px",
+                      }}
+                      onClick={closePost}
+                    >
+                      투표 종료하기
+                    </MenuItem>
+                  </Menu>
+                </MenuBar>
+              ) : null}
+            </MenuWarpper>
+            <div>
+              {DetailDBLoading === true && <LoadingBubble />}
+              {DetailDBDone === true && (
+                <MultiVoted multiId={multiId} dataList={dataList} />
+              )}
+            </div>
 
-          <div>
-            <MultiComment multiId={multiId} />
-          </div>
-        </Wrapper>
+            <div>
+              {DetailDBDone === true && <MultiComment multiId={multiId} />}
+            </div>
+          </Wrapper>
+        )}
         <TopBtn onClick={goToTop}>TOP</TopBtn>
       </Container>
     );
   } else {
     return (
       <Container>
-        <Wrapper>
-          <BackBtn data-testid="backBtn" onClick={goToMulti}>
-            <FiArrowLeft />
-          </BackBtn>
-          {dataList && (
+        {DetailDBLoading === true && <LoadingBubble />}
+        {DetailDBDone === true && (
+          <Wrapper>
+            <BackBtn data-testid="backBtn" onClick={goToMulti}>
+              <FiArrowLeft />
+            </BackBtn>
+            {/* {DetailDBDone === true && ( */}
             <MultiUnvoted
               multiId={multiId}
               dataList={dataList}
               // render={p => render(p)}
             />
-          )}
-
-          {dataList && (
+            {/* {DetailDBDone === true && ( */}
             <div>
               <MultiComment multiId={multiId} />
             </div>
-          )}
-        </Wrapper>
+          </Wrapper>
+        )}
         <TopBtn onClick={goToTop}>TOP</TopBtn>
       </Container>
     );
   }
-  return null;
+  return <LoadingBubble />;
 };
 
 const Container = styled.div`

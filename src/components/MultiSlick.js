@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
+import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -8,7 +9,6 @@ import MultiCard from "../components/MultiCard";
 import { mobile } from "../shared/style";
 import { ReactComponent as PrevArrow } from "../images/arrowLRed.svg";
 import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
-import { useSelector } from "react-redux";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
