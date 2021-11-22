@@ -50,6 +50,7 @@ const EitherCard = props => {
     deletePostDBDone,
     deletePostDBError,
   } = useSelector(state => state.eitherCard);
+
   useEffect(() => {
     if (action) {
       if (completePostDBDone) {
@@ -95,7 +96,8 @@ const EitherCard = props => {
   }, [voteCntA, voteCntB]);
 
   //유저정보(닉네임)
-  const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
+
   //수정하기
   const onClickModify = () => {
     if (completed === 1 || voteCntA + voteCntB > 0) {
@@ -114,9 +116,9 @@ const EitherCard = props => {
   const onClickLike = () => {
     if (liked !== null) {
       return;
-    } else if (userInfo.nickname === "GUEST") {
+    } else if (!userNickname) {
       alert("로그인 후 사용 가능합니다.");
-      return;
+      history.replace("/login");
     } else {
       dispatch(likePostDB(eitherId));
       setLikes(likeCnt + 1);
@@ -125,9 +127,9 @@ const EitherCard = props => {
   };
   //content 투표
   const onClickContent = e => {
-    if (userInfo.nickname === "GUEST") {
+    if (!userNickname) {
       alert("로그인 후 사용 가능합니다.");
-      history.push("/login");
+      history.replace("/login");
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
@@ -154,7 +156,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
+          setShowGraph(!userNickname ? false : true);
         }}
         className="buttonA"
       >
@@ -170,7 +172,7 @@ const EitherCard = props => {
         disabled={disabled}
         onClick={() => {
           onClickContent(vote);
-          setShowGraph(userInfo.nickname === "GUEST" ? false : true);
+          setShowGraph(!userNickname ? false : true);
         }}
         className="buttonB"
       >
@@ -183,7 +185,7 @@ const EitherCard = props => {
       <Container>
         <MenuButtonGrid>
           <div>
-            {nickname === userInfo.nickname ? (
+            {nickname === userNickname ? (
               <div>
                 <Menu
                   menuButton={
@@ -245,12 +247,12 @@ const EitherCard = props => {
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
         {/* 선택 결과에 따라 보여주기 */}
-        {userInfo.nickname === "GUEST" ? (
+        {!userNickname ? (
           <ButtonGrid>
             {SelctButtonA(null, "#101214", false, null, contentA)}
             {SelctButtonB(null, "#101214", false, null, contentB)}
           </ButtonGrid>
-        ) : userInfo.nickname && choice === "A" ? (
+        ) : userNickname && choice === "A" ? (
           <ButtonGrid>
             {completed === 1
               ? SelctButtonA("#00397c", "#FFFFFF", true, null, contentA)
@@ -259,7 +261,7 @@ const EitherCard = props => {
               ? SelctButtonB(null, "#101214", true, null, contentB)
               : SelctButtonB(null, "#101214", false, "B", contentB)}
           </ButtonGrid>
-        ) : userInfo.nickname && choice === "B" ? (
+        ) : userNickname && choice === "B" ? (
           <ButtonGrid>
             {completed === 1
               ? SelctButtonA(null, "#101214", true, null, contentA)

@@ -25,6 +25,7 @@ const Either = props => {
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   //이전 페이지 파람스 아이디 가져오기
   const paramsId = useSelector(state => state.params.paramsId);
   // 전체, 진행중, 종료됨 게시글 리스트
@@ -60,7 +61,7 @@ const Either = props => {
   };
   //게시글 작성하러가기
   const goToWrite = () => {
-    if (userInfo.nickname === "GEUST") {
+    if (!userNickname) {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
