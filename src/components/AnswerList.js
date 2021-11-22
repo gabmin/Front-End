@@ -110,7 +110,9 @@ const AnswerList = props => {
       ) : null}
 
       <CompleteWrapper>
-        <CompleteBtn onClick={selectComplete}>완료하고 결과보기</CompleteBtn>
+        <CompleteBtn data-testid="test" onClick={selectComplete}>
+          완료하고 결과보기
+        </CompleteBtn>
       </CompleteWrapper>
     </Container>
   );

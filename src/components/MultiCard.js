@@ -54,7 +54,9 @@ const MultiCard = props => {
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtn onClick={goToDetail}>투표하기</VoteBtn>
+            <VoteBtn className="Detail" onClick={goToDetail}>
+              투표하기
+            </VoteBtn>
             <TempWarpper>
               <FooterWrapper>
                 <UserWrapper>
@@ -273,7 +275,6 @@ const NickText = styled.p`
 `;
 
 const InfoWarpper = styled.div`
-  width: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

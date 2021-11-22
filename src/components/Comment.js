@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
@@ -16,16 +16,8 @@ import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
 
 const Comment = props => {
-  const {
-    nickname,
-    commentDate,
-    commentLikeCnt,
-    id,
-    deleted,
-    comment,
-    liked,
-    user,
-  } = props;
+  const { nickname, commentDate, likeCnt, id, deleted, comment, liked, user } =
+    props;
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
@@ -41,7 +33,9 @@ const Comment = props => {
   const [editBtn, setEditBtn] = useState(true);
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
-  const [likes, setLikes] = useState(commentLikeCnt);
+  const [likes, setLikes] = useState(likeCnt);
+  const inputRef = useRef();
+  const editInputRef = useRef();
 
   useEffect(() => {
     if (dataList.multi.completed === 1) {
@@ -62,6 +56,9 @@ const Comment = props => {
       setCancelBtn(true);
       setEditBtn(false);
       setDelBtn(false);
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 500);
     } else {
       setAddInput(false);
       setAddBtn(true);
@@ -78,6 +75,9 @@ const Comment = props => {
       setEditCancelBtn(true);
       setEditBtn(false);
       setDelBtn(false);
+      setTimeout(() => {
+        editInputRef.current.focus();
+      }, 500);
     } else {
       setEditInput(false);
       setAddBtn(true);
@@ -128,7 +128,7 @@ const Comment = props => {
   const addLike = () => {
     if (liked === null) {
       dispatch(AddLikeComment({ id, multiId }));
-      setLikes(commentLikeCnt + 1);
+      setLikes(likeCnt + 1);
     } else {
       return;
     }
@@ -178,7 +178,12 @@ const Comment = props => {
 
         {addInput ? (
           <ReplyWarpper>
-            <TextArea onChange={changeComment}></TextArea>
+            <TextArea
+              ref={inputRef}
+              data-testid="childCommentInput"
+              placeholder="내용을 입력해주세요"
+              onChange={changeComment}
+            ></TextArea>
             {cancelBtn ? (
               <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
             ) : null}
@@ -188,7 +193,9 @@ const Comment = props => {
 
         {editInput ? (
           <ReplyWarpper>
-            <TextArea onChange={changeEditComment}>{comment}</TextArea>
+            <TextArea ref={editInputRef} onChange={changeEditComment}>
+              {comment}
+            </TextArea>
             {userInfo.nickname === nickname && !deleted ? (
               <div>
                 {editCancelBtn ? (
@@ -298,6 +305,7 @@ const TextArea = styled.textarea`
   width: 80%;
   height: 50px;
   margin: auto;
+  padding-left: 10px;
   border: none;
   resize: none;
   font-family: "Noto-Sans KR", sans-serif;

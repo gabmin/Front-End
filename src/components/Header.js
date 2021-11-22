@@ -65,12 +65,12 @@ const Header = () => {
   }, [userId]);
 
   const onClickEither = useCallback(() => {
-    dispatch(SetParams());
+    dispatch(SetParams("all"));
     history.push(`/either`);
   }, [dispatch]);
 
   const onClickMulti = useCallback(() => {
-    dispatch(SetParams());
+    dispatch(SetParams("all"));
     history.push(`/multi`);
   }, [dispatch]);
 
@@ -145,7 +145,6 @@ const SearchMobile = styled.div`
   height: 54px;
   align-items: center;
   justify-content: center;
-
   input {
     max-width: 400px;
     width: 90%;
@@ -154,7 +153,6 @@ const SearchMobile = styled.div`
     border: 1px solid #e25b45;
     border-radius: 9px;
   }
-
   @media screen and (min-width: ${mobile}) {
     display: none;
   }
@@ -171,10 +169,6 @@ const Container = styled.div`
   span {
     cursor: pointer;
     user-select: none;
-  }
-
-  @media screen and (max-width: ${mobile}) {
-    height: unset;
   }
 `;
 
@@ -205,8 +199,9 @@ const Bottom = styled.div`
     border-radius: 9px;
   }
 
-  @media screen and (max-width: ${mobile}) {
-  }
+  /* @media screen and (max-width: ${mobile}) {
+    display: none;
+  } */
 `;
 
 const Wrapper = styled.div`

@@ -31,6 +31,7 @@ const EitherCompleteCard = props => {
 
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
 
   const [percent, setPercent] = useState("");
   const [likes, setLikes] = useState(likeCnt);
@@ -71,7 +72,7 @@ const EitherCompleteCard = props => {
   const onClickLike = () => {
     if (liked !== null) {
       return;
-    } else if (userInfo.nickname === "GUEST") {
+    } else if (!userNickname) {
       alert("로그인 후 사용 가능합니다.");
       return;
     } else {
@@ -112,7 +113,7 @@ const EitherCompleteCard = props => {
       <Container>
         <ManuButtonGrid>
           <div>
-            {nickname === userInfo.nickname ? (
+            {nickname === userNickname ? (
               <div>
                 <Menu
                   menuButton={
@@ -147,7 +148,7 @@ const EitherCompleteCard = props => {
           <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
-        {!userInfo.nickname ? (
+        {!userNickname ? (
           <ButtonGrid>
             {SelctButtonA(null, contentA)}
             {SelctButtonB(null, contentB)}
