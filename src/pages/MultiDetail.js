@@ -22,7 +22,7 @@ const MultiDetail = props => {
   const dispatch = useDispatch();
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
-  const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   const dataList = multiDetail.multi && multiDetail;
   const { DetailDBDone, DetailDBLoading } = useSelector(
     state => state.multiDetail,
@@ -85,7 +85,7 @@ const MultiDetail = props => {
     }
   };
 
-  if (userInfo.nickname === "GUEST") {
+  if (userNickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
     history.replace("/login");
   } else if (dataList && dataList.multi.completed === 1) {
@@ -97,8 +97,7 @@ const MultiDetail = props => {
     );
   } else if (
     dataList &&
-    (userInfo.nickname === dataList.multi.nickname ||
-      dataList.multi.voted !== null)
+    (userNickname === dataList.multi.nickname || dataList.multi.voted !== null)
   ) {
     return (
       <Container>
@@ -110,7 +109,7 @@ const MultiDetail = props => {
                 <FiArrowLeft />
               </BackBtn>
 
-              {userInfo.nickname === dataList.multi.nickname ? (
+              {userNickname === dataList.multi.nickname ? (
                 // <div>
                 //   {/* <div>투표가 종료되었습니다</div> */}
                 //   <div>
