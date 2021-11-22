@@ -30,6 +30,7 @@ const StyledLoading = styled.div`
 
   @media screen and (max-width: ${mobile}) {
     top: -50px;
+    left: -40px;
   }
 
   img {
