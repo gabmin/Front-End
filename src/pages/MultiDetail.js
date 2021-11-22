@@ -97,7 +97,8 @@ const MultiDetail = props => {
     );
   } else if (
     dataList &&
-    (userNickname === dataList.multi.nickname || dataList.multi.voted !== null)
+    // (userNickname === dataList.multi.nickname || dataList.multi.voted !== null)
+    dataList.multi.voted !== null
   ) {
     return (
       <Container>
@@ -132,7 +133,7 @@ const MultiDetail = props => {
                           backgroundColor: "transparent",
                         }}
                       >
-                        <FiMoreHorizontal size={20} />
+                        <FiMoreHorizontal size={20} color="#575757" />
                         {/* <MaterialIcon icon="more_horiz" size={32} /> */}
                       </MenuButton>
                     }
