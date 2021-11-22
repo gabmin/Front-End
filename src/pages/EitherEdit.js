@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import moment from "moment";
 
 import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
@@ -68,9 +67,6 @@ const EitherEdit = props => {
     setContentB(e.target.value);
   };
 
-  // 수정된 날짜
-  const editedDate = moment().format("YYYY-MM-DD HH:mm:ss");
-
   //뒤로가기
   const onClickCancle = useCallback(() => {
     history.push("/either");
@@ -95,9 +91,7 @@ const EitherEdit = props => {
 
   //수정하기
   const onClickEdit = () => {
-    dispatch(
-      editPostDB({ eitherId, data: { title, contentA, contentB, editedDate } }),
-    );
+    dispatch(editPostDB({ eitherId, data: { title, contentA, contentB } }));
   };
 
   return (
