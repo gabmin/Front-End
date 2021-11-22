@@ -14,7 +14,7 @@ const Multi = props => {
   const [select, setSelect] = useState("checkMulti");
   const [status, setStatus] = useState("Post");
   const [loadDone, setLoadDone] = useState(false);
-  const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   const paramsId = useSelector(state => state.params.paramsId);
   const {
     multiPost,
@@ -51,7 +51,7 @@ const Multi = props => {
   };
 
   const goToWrite = () => {
-    if (!userInfo.nickname) {
+    if (!userNickname) {
       window.alert("로그인 후 이용 가능합니다");
       history.push("/login");
     } else {

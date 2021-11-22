@@ -12,7 +12,6 @@ import Nickname from "./Nickname";
 
 const MultiVoted = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user.userInfo);
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   const multiList = dataList.multi;
   // const DataList = props.dataList.multi;

@@ -32,7 +32,7 @@ const ChildComment = props => {
 
   const dispatch = useDispatch();
   const multiId = props.multiId;
-  const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   const dataList = useSelector(state => state.multiDetail.multiDetail);
 
   const [addInput, setAddInput] = useState(false);
@@ -155,10 +155,10 @@ const ChildComment = props => {
             <CommentDate>{date.substring(0, 16)}</CommentDate>
           </NickWarpper>
           <BtnWrapper>
-            {userInfo.nickname === nickname && !deleted && editBtn ? (
+            {userNickname === nickname && !deleted && editBtn ? (
               <EventBtn onClick={showEditInput}>수정</EventBtn>
             ) : null}
-            {userInfo.nickname === nickname && !deleted && delBtn ? (
+            {userNickname === nickname && !deleted && delBtn ? (
               <EventBtn onClick={delComment}>삭제</EventBtn>
             ) : null}
             {addBtn ? <EventBtn onClick={showInput}>답글 달기</EventBtn> : null}
@@ -180,7 +180,7 @@ const ChildComment = props => {
           </LikeWrapper>
         </ContentWrapper>
 
-        {userInfo.nickname === nickname && !deleted && editInput ? (
+        {userNickname === nickname && !deleted && editInput ? (
           <ReplyWarpper>
             <TextArea ref={editInputRef} onChange={changeEditChild}>
               {comment}

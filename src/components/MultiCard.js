@@ -10,7 +10,7 @@ import { DetailDB } from "../redux/actions/multiDetail";
 import { mobile } from "../shared/style";
 
 const MultiCard = props => {
-  const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   const dataList = multiDetail.multi && multiDetail;
 
@@ -30,7 +30,7 @@ const MultiCard = props => {
 
   const history = useHistory();
   const goToDetail = () => {
-    if (!userInfo.nickname) {
+    if (!userNickname) {
       window.alert("로그인 후 이용가능합니다");
       history.push("/login");
     } else {
