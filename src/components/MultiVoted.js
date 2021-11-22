@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
