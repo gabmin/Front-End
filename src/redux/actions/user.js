@@ -16,30 +16,33 @@ export const login = createAsyncThunk(
   },
 );
 
-export const loginCheck = createAsyncThunk(
-  "/users/loginCheck",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await api.get("/users/login");
-      console.log(response.data);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
-    }
-  },
-);
+// export const loginCheck = createAsyncThunk(
+//   "/users/loginCheck",
+//   async (data, { rejectWithValue }) => {
+//     try {
+//       const response = await api.get("/users/login");
+//       console.log(response.data);
+//       return response.data;
+//     } catch (err) {
+//       return rejectWithValue(err.response.data);
+//     }
+//   },
+// );
 
-export const logout = createAsyncThunk(
-  "/users/logout",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await api.get("/users/logout");
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
-    }
-  },
-);
+// export const logout = createAsyncThunk(
+//   "/users/logout",
+//   async (data, { rejectWithValue }) => {
+//     try {
+//       localStorage.removeItem("token");
+//       localStorage.removeItem("userId");
+//       localStorage.removeItem("nickname");
+//       const response = await api.get("/users/logout");
+//       return response.data;
+//     } catch (err) {
+//       return rejectWithValue(err.response.data);
+//     }
+//   },
+// );
 
 export const signup = createAsyncThunk(
   "/users/signup",
@@ -86,6 +89,7 @@ export const updateNick = createAsyncThunk(
       const response = await api.patch("/profiles/nick", { nickname });
       return response.data;
     } catch (err) {
+      console.log(err);
       return rejectWithValue(err.response.data);
     }
   },
