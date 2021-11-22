@@ -6,7 +6,7 @@ import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
-import { loginCheck, logout } from "../redux/actions/user";
+import { loginCheck, logoutUser } from "../redux/reducers/userSlice";
 
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
@@ -19,9 +19,12 @@ const Header = () => {
   const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
-  const { loginCheckDone } = useSelector(state => state.user);
+  // const { loginCheckDone } = useSelector(state => state.user);
 
   const [search, setSearch] = useState("");
+
+  console.log("nick");
+  console.log(nickname);
 
   useEffect(() => {
     dispatch(loginCheck());
@@ -36,7 +39,7 @@ const Header = () => {
   }, []);
 
   const onClickLogout = useCallback(() => {
-    dispatch(logout());
+    dispatch(logoutUser());
   }, [dispatch]);
 
   const onChangeSearch = useCallback(e => {
@@ -97,35 +100,29 @@ const Header = () => {
             data-testid="searchInput"
           />
         </Wrapper>
-        {loginCheckDone ? (
-          <IconWrapper loggedIn={nickname !== "GUEST"}>
-            {nickname === "GUEST" && (
-              <span onClick={onClickLogin} className="loginBtn">
-                로그인
-              </span>
-            )}
-            {nickname !== "GUEST" && (
-              <>
-                <Menu
-                  menuButton={
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <StyledCommonIcon />
-                      <span data-testid="headerNick">{nickname}</span>
-                      <StyledDown />
-                    </div>
-                  }
-                >
-                  <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
-                  <MenuItem onClick={onClickLogout} data-testid="logOutButton">
-                    로그아웃
-                  </MenuItem>
-                </Menu>
-              </>
-            )}
-          </IconWrapper>
-        ) : (
-          <MenuLoading></MenuLoading>
-        )}
+        <IconWrapper loggedIn={nickname !== "GUEST"}>
+          {nickname === "GUEST" && (
+            <span onClick={onClickLogin} className="loginBtn">
+              로그인
+            </span>
+          )}
+          {nickname !== "GUEST" && (
+            <>
+              <Menu
+                menuButton={
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <StyledCommonIcon />
+                    <span data-testid="headerNick">{nickname}</span>
+                    <StyledDown />
+                  </div>
+                }
+              >
+                <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
+                <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+              </Menu>
+            </>
+          )}
+        </IconWrapper>
       </Bottom>
       <SearchMobile>
         <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />

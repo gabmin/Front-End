@@ -5,25 +5,25 @@ import {
   checkNickDup,
   getProfileNick,
   login,
-  loginCheck,
-  logout,
+  // loginCheck,
+  // logout,
   signup,
   updateNick,
 } from "../actions/user";
 
 // 기본 state
 export const initialState = {
-  userInfo: { nickname: null, userId: null },
+  userInfo: { nickname: "GUEST", userId: null },
   profileNick: null,
   loginLoading: false, // 로그인 시도 중
   loginDone: false,
   loginError: null,
-  loginCheckLoading: false, // 로그인체크크 시도 중
-  loginCheckDone: false,
-  loginCheckError: null,
-  logoutLoading: false, // 로그아웃 시도 중
-  logoutDone: false,
-  logoutError: null,
+  // loginCheckLoading: false, // 로그인체크 시도 중
+  // loginCheckDone: false,
+  // loginCheckError: null,
+  // logoutLoading: false, // 로그아웃 시도 중
+  // logoutDone: false,
+  // logoutError: null,
   signupLoading: false, // 회원가입 시도 중
   signupDone: false,
   signupError: null,
@@ -49,7 +49,23 @@ export const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    loginCheck: state => {
+      if (localStorage.getItem("nickname")) {
+        state.userInfo.nickname = localStorage.getItem("nickname");
+        state.userInfo.userId = Number(localStorage.getItem("userId"));
+        return;
+      }
+      state.userInfo.nickname = "GUEST";
+    },
+    logoutUser: state => {
+      state.userInfo = { nickname: "GUEST", userId: null };
+      state.loginDone = false;
+      localStorage.removeItem("token");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("userId");
+    },
+  },
   extraReducers: builder =>
     builder
       // login
@@ -59,10 +75,16 @@ const userSlice = createSlice({
         state.loginError = null;
       })
       .addCase(login.fulfilled, (state, action) => {
+        localStorage.setItem("token", action.payload.token);
+        const base64Payload = action.payload.token.split(".")[1];
+        const payload = Buffer.from(base64Payload, "base64");
+        const result = JSON.parse(payload.toString());
+        localStorage.setItem("userId", result.id);
+        localStorage.setItem("nickname", action.payload.nickname);
+
         state.loginLoading = false;
         state.userInfo.nickname = action.payload.nickname;
-        state.userInfo.userId = action.payload.userId;
-
+        state.userInfo.userId = result.id;
         state.loginDone = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -70,39 +92,39 @@ const userSlice = createSlice({
         state.loginError = action.payload;
       })
       // loginCheck
-      .addCase(loginCheck.pending, state => {
-        state.loginCheckLoading = true;
-        state.loginCheckDone = false;
-        state.loginCheckError = null;
-      })
-      .addCase(loginCheck.fulfilled, (state, action) => {
-        state.loginCheckLoading = false;
-        state.userInfo.nickname =
-          action.payload.nickname === "GUEST"
-            ? "GUEST"
-            : action.payload.nickname;
-        state.userInfo.userId = action.payload.user || null;
-        state.loginCheckDone = true;
-      })
-      .addCase(loginCheck.rejected, (state, action) => {
-        state.loginCheckLoading = false;
-        state.loginCheckError = action.payload;
-      })
+      // .addCase(loginCheck.pending, state => {
+      //   state.loginCheckLoading = true;
+      //   state.loginCheckDone = false;
+      //   state.loginCheckError = null;
+      // })
+      // .addCase(loginCheck.fulfilled, (state, action) => {
+      //   state.loginCheckLoading = false;
+      //   state.userInfo.nickname =
+      //     action.payload.nickname === "GUEST"
+      //       ? "GUEST"
+      //       : action.payload.nickname;
+      //   state.userInfo.userId = action.payload.user || null;
+      //   state.loginCheckDone = true;
+      // })
+      // .addCase(loginCheck.rejected, (state, action) => {
+      //   state.loginCheckLoading = false;
+      //   state.loginCheckError = action.payload;
+      // })
       // logout
-      .addCase(logout.pending, state => {
-        state.logoutLoading = true;
-        state.logoutDone = false;
-        state.logoutError = null;
-      })
-      .addCase(logout.fulfilled, (state, action) => {
-        state.userInfo = { nickname: "GUEST", userId: "" };
-        state.logoutLoading = false;
-        state.logoutDone = true;
-      })
-      .addCase(logout.rejected, (state, action) => {
-        state.logoutLoading = false;
-        state.logoutError = action.payload;
-      })
+      // .addCase(logout.pending, state => {
+      //   state.logoutLoading = true;
+      //   state.logoutDone = false;
+      //   state.logoutError = null;
+      // })
+      // .addCase(logout.fulfilled, (state, action) => {
+      //   state.userInfo = { nickname: "GUEST", userId: "" };
+      //   state.logoutLoading = false;
+      //   state.logoutDone = true;
+      // })
+      // .addCase(logout.rejected, (state, action) => {
+      //   state.logoutLoading = false;
+      //   state.logoutError = action.payload;
+      // })
       // signup
       .addCase(signup.pending, state => {
         state.signupLoading = true;
@@ -160,6 +182,7 @@ const userSlice = createSlice({
         state.updateNickDone = true;
         state.userInfo.nickname = action.payload.nickname;
         state.profileNick = action.payload.nickname;
+        localStorage["nickname"] = action.payload.nickname;
       })
       .addCase(updateNick.rejected, (state, action) => {
         state.updateNickLoading = false;
@@ -167,6 +190,14 @@ const userSlice = createSlice({
         state.updateNickError = action.payload;
         if (action.payload === "Validation error") {
           alert("이미 사용중인 닉네임입니다");
+          return;
+        }
+
+        if (
+          action.payload ===
+          '"nickname" length must be less than or equal to 7 characters long'
+        ) {
+          alert("닉네임은 2~7자로 설정해 주세요");
         }
       })
       // getProfileNick
@@ -187,6 +218,6 @@ const userSlice = createSlice({
       }),
 });
 
-// export const { loginUser } = userSlice.actions;
+export const { loginCheck, logoutUser } = userSlice.actions;
 
 export default userSlice;
