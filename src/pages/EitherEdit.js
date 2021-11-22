@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
 
+import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import { editPostDB, completePostDB } from "../redux/actions/eitherCard";
 
@@ -105,7 +106,7 @@ const EitherEdit = props => {
         <ContentBox>
           <Index>
             <p>구분</p>
-            <div style={{ display: "flex" }}>
+            <div>
               <RadioBtnWarpperE>
                 <input
                   name="write"
@@ -139,6 +140,7 @@ const EitherEdit = props => {
                 placeholder="질문을 입력해주세요. (40자 이내)"
                 value={title}
                 onChange={onChangeTitle}
+                data-testId="editTitle"
               />
             </Title>
             <hr />
@@ -148,6 +150,7 @@ const EitherEdit = props => {
                   placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
                   value={contentA}
                   onChange={onChangeContentA}
+                  data-testId="editContentA"
                 />
               </EitherButtonA>
               <EitherButtonB>
@@ -155,6 +158,7 @@ const EitherEdit = props => {
                   placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
                   value={contentB}
                   onChange={onChangeContentB}
+                  data-testId="editContentB"
                 />
               </EitherButtonB>
             </EitherButtonGrid>
@@ -171,17 +175,21 @@ const EitherEdit = props => {
 };
 
 const Wrap = styled.div`
-  min-width: 100%;
   max-width: 840px;
+  width: 90%;
   margin: auto;
 `;
 const ContentBox = styled.div`
   border: 2px solid #00397c;
-  width: 840px;
+  max-width: 840px;
   box-sizing: border-box;
-  margin: 56px auto 50px auto;
+  margin: 56px auto;
   border-radius: 10px;
-  padding: 64px 109px 64px 110px;
+  padding: 4% 110px 4% 110px;
+  @media screen and (max-width: ${mobile}) {
+    padding: 7%;
+    margin: 10% auto;
+  }
 `;
 const Index = styled.div`
   display: flex;
@@ -191,8 +199,17 @@ const Index = styled.div`
     font-weight: bold;
     line-height: 26px;
     margin: 0px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 16px;
+    }
+  }
+  div {
+    display: flex;
   }
   margin: 0px 0px 22px 0px;
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 10px 0px;
+  }
 `;
 const RadioBtnWarpperE = styled.div`
   display: flex;
@@ -200,6 +217,16 @@ const RadioBtnWarpperE = styled.div`
   align-items: center;
   label {
     font-size: 16px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 40px;
+    }
+  }
+  input {
+    margin: 0px 8px 0px 0px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 0px 20%;
   }
 `;
 const RadioBtnWarpperM = styled.div`
@@ -208,6 +235,16 @@ const RadioBtnWarpperM = styled.div`
   align-items: center;
   label {
     font-size: 16px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 40px;
+    }
+  }
+  input {
+    margin: 0px 8px 0px 0px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 0px 20%;
   }
 `;
 const Container = styled.div`
@@ -215,19 +252,26 @@ const Container = styled.div`
   height: 100%;
   hr {
     margin: 0px;
+    border: none;
+    height: 1px;
     border-color: #eeeeee;
   }
 `;
 const Title = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 72px;
   p {
-    width: 34px;
+    width: 68px;
     font-size: 18px;
     font-weight: bold;
-    line-height: 26px;
-    color: #101214;
-    margin: 0px;
-    margin: 22px 76px 28px 0px;
+    /* line-height: 26px; */
+    /* margin: 22px 76px 28px 0px; */
+    @media screen and (max-width: ${mobile}) {
+      font-size: 16px;
+      /* margin: 20px 35px 20px 0px; */
+    }
   }
 `;
 const Input = styled.input`
@@ -235,11 +279,19 @@ const Input = styled.input`
   border: none;
   outline: none;
   line-height: 22px;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 18px;
+  color: #101214;
+  &::placeholder {
+    font-size: 16px;
+    color: #868e96;
+  }
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
+  }
 `;
 const EitherButtonGrid = styled.div`
   width: 100%;
+  height: 320px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -271,6 +323,11 @@ const ButtonInput = styled.textarea`
   resize: none;
   box-sizing: border-box;
   padding: 3px;
+  font-family: "Noto-Sans KR", sans-serif;
+
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
+  }
 `;
 const OptionButtonGrid = styled.div`
   width: 100%;
@@ -292,6 +349,9 @@ const CancleButton = styled.button`
     background-color: #e25b45;
     color: #ffffff;
   }
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
+  }
 `;
 const CheckButton = styled.button`
   width: 290px;
@@ -307,6 +367,9 @@ const CheckButton = styled.button`
   &:hover {
     background-color: #ffffff;
     color: #e25b45;
+  }
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
   }
 `;
 export default EitherEdit;

@@ -127,6 +127,7 @@ const EitherCard = props => {
   const onClickContent = e => {
     if (userInfo.nickname === "GUEST") {
       alert("로그인 후 사용 가능합니다.");
+      history.push("/login");
     } else {
       dispatch(votePostDB({ eitherId, data: { vote: e } }));
       setChoice(e);
@@ -155,6 +156,7 @@ const EitherCard = props => {
           onClickContent(vote);
           setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
+        className="buttonA"
       >
         <ButtonText>{content}</ButtonText>
       </EitherButtonA>
@@ -170,6 +172,7 @@ const EitherCard = props => {
           onClickContent(vote);
           setShowGraph(userInfo.nickname === "GUEST" ? false : true);
         }}
+        className="buttonB"
       >
         <ButtonText>{content}</ButtonText>
       </EitherButtonB>
@@ -178,7 +181,7 @@ const EitherCard = props => {
   return (
     <>
       <Container>
-        <ManuButtonGrid>
+        <MenuButtonGrid>
           <div>
             {nickname === userInfo.nickname ? (
               <div>
@@ -191,7 +194,7 @@ const EitherCard = props => {
                         curser: "pointer",
                       }}
                     >
-                      <FiMoreHorizontal size={20} />
+                      <FiMoreHorizontal size={20} data-testid="menuImage" />
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
@@ -202,6 +205,7 @@ const EitherCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickModify}
+                    data-testid="menuModify"
                   >
                     수정하기
                   </MenuItem>
@@ -210,6 +214,7 @@ const EitherCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickComplete}
+                    data-testid="menuComplete"
                   >
                     투표 종료하기
                   </MenuItem>
@@ -218,6 +223,7 @@ const EitherCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickDelete}
+                    data-testid="menuDelete"
                   >
                     삭제하기
                   </MenuItem>
@@ -225,7 +231,7 @@ const EitherCard = props => {
               </div>
             ) : null}
           </div>
-        </ManuButtonGrid>
+        </MenuButtonGrid>
         <TitleDiv> {title} </TitleDiv>
         <DateDiv>{date.substring(0, 16)}</DateDiv>
         <TotalCntGrid>
@@ -338,7 +344,7 @@ const Container = styled.div`
     width: 80%;
   }
 `;
-const ManuButtonGrid = styled.div`
+const MenuButtonGrid = styled.div`
   .div {
     position: relative;
   }
