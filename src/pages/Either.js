@@ -6,6 +6,7 @@ import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
+import LoadingBubble from "../elements/LoadingBubble";
 
 const Either = props => {
   const dispatch = useDispatch();
@@ -13,8 +14,18 @@ const Either = props => {
   const { eitherPost, eitherPosting, eitherPostComplete } = useSelector(
     state => state.eitherCard,
   );
+  const {
+    PostDBDone,
+    PostDBLoading,
+    PostingDBDone,
+    PostingDBLoading,
+    PostCompleteDBDone,
+    PostCompleteDBLoading,
+  } = useSelector(state => state.eitherCard);
+
   //유저정보(닉네임)
   const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   //이전 페이지 파람스 아이디 가져오기
   const paramsId = useSelector(state => state.params.paramsId);
   // 전체, 진행중, 종료됨 게시글 리스트
@@ -50,7 +61,7 @@ const Either = props => {
   };
   //게시글 작성하러가기
   const goToWrite = () => {
-    if (userInfo.nickname === "GEUST") {
+    if (!userNickname) {
       alert("로그인 후 가능합니다.");
       history.push("/login");
     } else {
@@ -108,11 +119,16 @@ const Either = props => {
           )}
         </EitherButtonGrid>
         <SlickLayout>
-          {status === "Post" ? <EitherSlick PostList={PostList} /> : null}
-          {status === "Posting" ? (
+          {PostDBLoading ? <LoadingBubble /> : null}
+          {PostingDBLoading ? <LoadingBubble /> : null}
+          {PostCompleteDBLoading ? <LoadingBubble /> : null}
+          {PostDBDone && status === "Post" ? (
+            <EitherSlick PostList={PostList} />
+          ) : null}
+          {PostingDBDone && status === "Posting" ? (
             <EitherSlick PostingList={PostingList} />
           ) : null}
-          {status === "CompletePost" ? (
+          {PostCompleteDBDone && status === "CompletePost" ? (
             <EitherSlick PostCompleteList={PostCompleteList} />
           ) : null}
         </SlickLayout>

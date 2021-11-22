@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import moment from "moment";
 
 import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
@@ -42,14 +41,13 @@ const EitherWrite = props => {
   const onChangeContentB = e => {
     setContentB(e.target.value.substr(0, 30));
   };
-  // date
-  const date = moment().format("YYYY-MM-DD HH:mm:ss");
+
   //저장하기
   const onClickSave = () => {
     if (title === "" || contentA === "" || contentB === "") {
       alert("모든 항목을 입력해주세요!");
     } else {
-      dispatch(addPostDB({ title, contentA, contentB, date }));
+      dispatch(addPostDB({ title, contentA, contentB }));
       setAction(true);
     }
   };
@@ -67,6 +65,7 @@ const EitherWrite = props => {
           placeholder="질문을 입력해주세요. (30자 이내)"
           value={title}
           onChange={onChangeTitle}
+          data-testid="titleInput"
         />
       </Title>
       <hr />
@@ -77,6 +76,7 @@ const EitherWrite = props => {
             placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
             value={contentA}
             onChange={onChangeContentA}
+            data-testid="contentA"
           />
         </EitherButtonA>
         <EitherButtonB>
@@ -85,6 +85,7 @@ const EitherWrite = props => {
             placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
             value={contentB}
             onChange={onChangeContentB}
+            data-testid="contentB"
           />
         </EitherButtonB>
       </EitherButtonGrid>
