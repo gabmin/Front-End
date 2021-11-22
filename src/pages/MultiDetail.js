@@ -61,7 +61,7 @@ const MultiDetail = props => {
     if (TotalCnt === 0 && deleteConfirm == true) {
       dispatch(SetParams("all"));
       dispatch(DeletePostDB(multiId));
-      history.replace("/multi");
+      window.location.replace("/multi");
     } else if (deleteConfirm == false) {
       return;
     } else {
