@@ -33,7 +33,7 @@ const EitherEdit = props => {
   //종료 후 알림창, 페이지 이동
   useEffect(() => {
     if (completePostDBDone) {
-      alert("투표가 완료되었습니다.");
+      alert("투표가 종료되었습니다.");
       window.location.replace("/either");
     }
   }, [completePostDBDone]);
