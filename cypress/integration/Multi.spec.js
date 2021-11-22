@@ -17,17 +17,17 @@ describe("Multi test", () => {
       .click()
       .location("pathname")
       .should("equal", "/");
-    // cy.visit("/multi");
-    // cy.contains("질문하기").click();
-  });
-  it("질문하기", () => {
     cy.visit("/multi");
     cy.contains("질문하기").click();
   });
+  // it("질문하기", () => {
+  //   cy.visit("/multi");
+  //   cy.contains("질문하기").click();
+  // });
   // it("객관식 라디오 선택", () => {
   //   cy.contains("객관식").click();
   // });
-  it("취소하기", () => {
+  it("작성 취소하기", () => {
     cy.contains("취소").click().location("pathname").should("equal", "/multi");
   });
   it("진행중", () => {
@@ -40,6 +40,15 @@ describe("Multi test", () => {
     cy.contains("전체").click({ force: true });
   });
   it("투표하기", () => {
+    cy.contains("투표하기").click({ force: true });
+    cy.get(".idInput").type("tomato").should("have.value", "tomato");
+    cy.get(".pwInput").type("test111!").should("have.value", "test111!");
+    cy.waitForReact();
+    cy.get('[data-testid="loginButton"]')
+      .click()
+      .location("pathname")
+      .should("equal", "/");
+    cy.visit("/multi");
     cy.contains("투표하기").click({ force: true });
   });
   it("선택없이 완료하기", () => {
