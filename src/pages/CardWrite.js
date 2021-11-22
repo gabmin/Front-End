@@ -12,7 +12,7 @@ const CardWrite = () => {
   const [eitherState, setEitherState] = useState(true);
   const [multiState, setMultiState] = useState(false);
   const checkRadio = location.state?.select;
-  const nickname = localStorage.getItem("nickname");
+  const userNickname = localStorage.getItem("nickname");
 
   useEffect(() => {
     if (checkRadio === "checkMulti") {
@@ -36,7 +36,7 @@ const CardWrite = () => {
     setEitherState(!eitherState);
     setMultiState(!multiState);
   };
-  if (nickname === "GUEST") {
+  if (!userNickname) {
     window.alert("로그인 후 이용가능합니다");
     history.push("/login");
   }
