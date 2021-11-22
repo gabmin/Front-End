@@ -18,6 +18,7 @@ const MultiSlick = props => {
     className: "center",
     centerMode: true,
     infinite: true,
+    lazyLoad: "progress",
     adaptiveHeight: true,
     focusOnSelect: true,
     centerPadding: "0px",
