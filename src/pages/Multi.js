@@ -31,6 +31,7 @@ const Multi = props => {
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
   const completeCardList = multiPostComplete && multiPostComplete.multi;
+  console.log("cardLIstMulti", cardList);
 
   useEffect(() => {
     dispatch(PostDB(paramsId));

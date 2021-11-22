@@ -57,9 +57,13 @@ const MultiDetail = props => {
   };
 
   const deletePost = () => {
-    if (TotalCnt === 0) {
+    const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
+    if (TotalCnt === 0 && deleteConfirm == true) {
+      dispatch(SetParams("all"));
       dispatch(DeletePostDB(multiId));
-      history.push("/multi");
+      history.replace("/multi");
+    } else if (deleteConfirm == false) {
+      return;
     } else {
       window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
       return;
@@ -97,7 +101,8 @@ const MultiDetail = props => {
     );
   } else if (
     dataList &&
-    (userNickname === dataList.multi.nickname || dataList.multi.voted !== null)
+    // (userNickname === dataList.multi.nickname || dataList.multi.voted !== null)
+    dataList.multi.voted !== null
   ) {
     return (
       <Container>
@@ -132,7 +137,7 @@ const MultiDetail = props => {
                           backgroundColor: "transparent",
                         }}
                       >
-                        <FiMoreHorizontal size={20} />
+                        <FiMoreHorizontal size={20} color="#575757" />
                         {/* <MaterialIcon icon="more_horiz" size={32} /> */}
                       </MenuButton>
                     }
@@ -188,9 +193,57 @@ const MultiDetail = props => {
         {DetailDBLoading === true && <LoadingBubble />}
         {DetailDBDone === true && (
           <Wrapper>
-            <BackBtn data-testid="backBtn" onClick={goToMulti}>
-              <FiArrowLeft />
-            </BackBtn>
+            <MenuWarpper>
+              <BackBtn onClick={goToMulti}>
+                <FiArrowLeft />
+              </BackBtn>
+
+              {userNickname === dataList.multi.nickname ? (
+                <MenuBar>
+                  <Menu
+                    menuButton={
+                      <MenuButton
+                        data-testid="menuBtn"
+                        styles={{
+                          border: "none",
+                          backgroundColor: "transparent",
+                        }}
+                      >
+                        <FiMoreHorizontal size={20} color="#575757" />
+                        {/* <MaterialIcon icon="more_horiz" size={32} /> */}
+                      </MenuButton>
+                    }
+                    menuStyles={{ border: "0px solid" }}
+                    portal={true}
+                  >
+                    <MenuItem
+                      styles={{
+                        fontSize: "14px",
+                      }}
+                      onClick={editPost}
+                    >
+                      수정하기
+                    </MenuItem>
+                    <MenuItem
+                      styles={{
+                        fontSize: "14px",
+                      }}
+                      onClick={deletePost}
+                    >
+                      삭제하기
+                    </MenuItem>
+                    <MenuItem
+                      styles={{
+                        fontSize: "14px",
+                      }}
+                      onClick={closePost}
+                    >
+                      투표 종료하기
+                    </MenuItem>
+                  </Menu>
+                </MenuBar>
+              ) : null}
+            </MenuWarpper>
             {/* {DetailDBDone === true && ( */}
             <MultiUnvoted
               multiId={multiId}

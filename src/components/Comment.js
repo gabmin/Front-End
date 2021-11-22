@@ -99,7 +99,7 @@ const Comment = props => {
   };
 
   const addChildComment = () => {
-    dispatch(AddChildDB({ multiId, id, data: { comment: newComment, date } }));
+    dispatch(AddChildDB({ multiId, id, data: { comment: newComment } }));
     showInput();
   };
 
@@ -111,9 +111,7 @@ const Comment = props => {
   };
 
   const editComment = () => {
-    dispatch(
-      EditCommentDB({ multiId, id, data: { comment: newEdit, editedDate } }),
-    );
+    dispatch(EditCommentDB({ multiId, id, data: { comment: newEdit } }));
     showEditInput();
   };
 

@@ -98,7 +98,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
         }),
@@ -108,7 +107,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
           contentC,
@@ -119,7 +117,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
           contentC,
@@ -131,7 +128,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
           contentC,
@@ -140,7 +136,6 @@ const MultiWrite = props => {
         }),
       );
     }
-    dispatch(SetParams("all"));
     window.alert("작성이 완료되었습니다.");
     history.push("/multi");
   };
@@ -181,7 +176,7 @@ const MultiWrite = props => {
       dispatch(
         EditPostDB({
           multiId,
-          data: { title, description, editedDate, contentA, contentB },
+          data: { title, description, contentA, contentB },
         }),
       );
     } else if (contentD === "" && contentE === "") {
@@ -191,7 +186,6 @@ const MultiWrite = props => {
           data: {
             title,
             description,
-            editedDate,
             contentA,
             contentB,
             contentC,
@@ -205,7 +199,6 @@ const MultiWrite = props => {
           data: {
             title,
             description,
-            editedDate,
             contentA,
             contentB,
             contentC,
@@ -220,7 +213,6 @@ const MultiWrite = props => {
           data: {
             title,
             description,
-            editedDate,
             contentA,
             contentB,
             contentC,
@@ -230,7 +222,6 @@ const MultiWrite = props => {
         }),
       );
     }
-    dispatch(SetParams("all"));
     window.alert("수정이 완료되었습니다.");
     history.push("/multi");
   };
