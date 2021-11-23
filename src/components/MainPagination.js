@@ -2,22 +2,41 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+import SearchCard from "./SearchCard";
+
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+  darkGray,
+} from "../shared/style";
 
 function Items({ currentItems }) {
   return (
     <div className="items">
       {currentItems &&
-        currentItems.map((item, i) => (
-          <div key={i}>
-            <h3>{item}번째 아이템</h3>
-          </div>
+        currentItems.map((v, i) => (
+          <SearchCard
+            key={i}
+            type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
+            id={v.multiId || v.eitherId}
+            title={v.title}
+            userId={v.user}
+            nickname={v.nickname}
+            date={v.date}
+            completed={v.completed}
+            likeCnt={v.likeCnt}
+            commentCnt={v.commentCnt}
+          />
         ))}
     </div>
   );
 }
 
-const MainPagination = ({ itemsPerPage = 5 }) => {
+const MainPagination = ({ items, itemsPerPage = 5 }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -26,9 +45,10 @@ const MainPagination = ({ itemsPerPage = 5 }) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+  }, [itemOffset, itemsPerPage, items]);
 
   const handlePageClick = event => {
+    window.scroll(0, 0);
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };
@@ -37,11 +57,11 @@ const MainPagination = ({ itemsPerPage = 5 }) => {
     <StyledPagenation>
       <Items currentItems={currentItems} />
       <ReactPaginate
-        nextLabel="next >"
+        nextLabel="다음 >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="< 이전"
         pageClassName="page-item"
         pageLinkClassName="page-link"
         previousClassName="page-item"
@@ -63,16 +83,19 @@ const StyledPagenation = styled.div`
   .pagination {
     margin: 15px auto;
     display: flex;
+    justify-content: center;
     list-style: none;
     outline: none;
+    padding: 0;
+    user-select: none;
   }
   .pagination > .active > a {
-    background-color: black;
-    border-color: black;
+    background-color: ${blue};
+    border-color: ${blue};
     color: #fff;
   }
   .pagination > li > a {
-    /* border: 1px solid black; */
+    /* border: 1px solid ${blue}; */
     padding: 5px 10px;
     outline: none;
     cursor: pointer;
@@ -83,14 +106,19 @@ const StyledPagenation = styled.div`
   .pagination > .active > span:hover,
   .pagination > .active > a:focus,
   .pagination > .active > span:focus {
-    background-color: black;
-    border-color: black;
+    background-color: ${blue};
+    border-color: ${blue};
     outline: none;
   }
   .pagination > li > a,
   .pagination > li > span {
-    color: black;
+    color: ${blue};
   }
+
+  .page-link:hover {
+    background-color: #eeeeee;
+  }
+
   .pagination > li:first-child > a,
   .pagination > li:first-child > span,
   .pagination > li:last-child > a,
