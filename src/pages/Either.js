@@ -8,6 +8,7 @@ import EitherSlick from "../components/EitherSlick";
 import EitherPagination from "../components/EitherPagination";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 import LoadingBubble from "../elements/LoadingBubble";
+import { BsCardText, BsList } from "react-icons/bs";
 
 const Either = props => {
   const dispatch = useDispatch();
@@ -125,8 +126,20 @@ const Either = props => {
             <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
           )}
         </EitherButtonGrid>
-        <button onClick={setSlickCard}>슬릭</button>
-        <button onClick={setListCard}>리스트</button>
+        <FormatChangeGrid>
+          <BsCardText
+            onClick={setSlickCard}
+            style={{ width: "32px", height: "32px" }}
+          >
+            슬릭
+          </BsCardText>
+          <BsList
+            onClick={setListCard}
+            style={{ width: "32px", height: "32px" }}
+          >
+            리스트
+          </BsList>
+        </FormatChangeGrid>
         {grid === "slick" ? (
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
@@ -177,7 +190,12 @@ const Wrap = styled.div`
   max-width: 100%;
   height: 100%;
 `;
-
+const FormatChangeGrid = styled.div`
+  margin: 30px auto 0px auto;
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+`;
 const EitherButtonGrid = styled.div`
   margin: 51px auto 0px auto;
   text-align: center;
