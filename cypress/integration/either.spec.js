@@ -52,7 +52,7 @@
 // });
 
 describe("로그인 상태", () => {
-  it("로그인하기", () => {
+  beforeEach(() => {
     cy.visit("/");
     cy.contains("로그인").click();
     cy.get(".idInput").type("rlarkqals").should("have.value", "rlarkqals");
@@ -98,6 +98,8 @@ describe("로그인 상태", () => {
   });
 
   it("작성하기", () => {
+    cy.contains("찬반").click().url().should("include", "either");
+    cy.contains("질문하기").click();
     cy.get('[data-testid="radioBtn"]').click();
     cy.get('[data-testid="titleInput"]')
       .type("테스트입니다.")
