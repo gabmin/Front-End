@@ -102,6 +102,14 @@ const Layout = styled.div`
   box-sizing: border-box;
   cursor: pointer;
 
+  :hover {
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(229, 241, 255, 1) 100%
+    );
+  }
+
   @media screen and (max-width: ${mobile}) {
     width: 100%;
     padding: 20px 10px 0px;

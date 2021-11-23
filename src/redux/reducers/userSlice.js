@@ -60,6 +60,7 @@ const userSlice = createSlice({
     },
     logoutUser: state => {
       state.userInfo = { nickname: "GUEST", userId: null };
+      state.profileNick = null;
       state.loginDone = false;
       localStorage.removeItem("token");
       localStorage.removeItem("nickname");

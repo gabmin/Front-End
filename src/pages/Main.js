@@ -124,7 +124,7 @@ const Main = () => {
         </GoMulti>
       </Notice>
       <Wrapper height="230px">
-        {loadDone !== true && <LoadingBubble />}
+        {loadDone !== true && <LoadingBubble position="absolute" />}
         {mainDataDone === true && (
           <MainSlick cardList={either} type="either"></MainSlick>
         )}
