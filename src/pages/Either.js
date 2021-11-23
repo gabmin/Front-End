@@ -24,7 +24,6 @@ const Either = props => {
   } = useSelector(state => state.eitherCard);
 
   //유저정보(닉네임)
-  const userInfo = useSelector(state => state.user.userInfo);
   const userNickname = localStorage.getItem("nickname");
   //이전 페이지 파람스 아이디 가져오기
   const paramsId = useSelector(state => state.params.paramsId);
