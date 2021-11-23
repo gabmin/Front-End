@@ -359,6 +359,7 @@ const LeftGrid = styled.div`
 `;
 const TitleDiv = styled.div`
   width: 100%;
+  height: 48px;
   font-size: 20px;
   font-weight: bold;
   word-break: break-all;

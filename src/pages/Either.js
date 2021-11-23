@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
-import EitherList from "../components/EitherList";
+import EitherPagination from "../components/EitherPagination";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 import LoadingBubble from "../elements/LoadingBubble";
 
@@ -148,13 +148,13 @@ const Either = props => {
             {PostingDBLoading ? <LoadingBubble /> : null}
             {PostCompleteDBLoading ? <LoadingBubble /> : null}
             {PostDBDone && status === "Post" ? (
-              <EitherList PostList={PostList} />
+              <EitherPagination items={PostList} />
             ) : null}
             {PostingDBDone && status === "Posting" ? (
-              <EitherList PostingList={PostingList} />
+              <EitherPagination items={PostingList} />
             ) : null}
             {PostCompleteDBDone && status === "CompletePost" ? (
-              <EitherList PostCompleteList={PostCompleteList} />
+              <EitherPagination items={PostCompleteList} />
             ) : null}
           </SlickLayout>
         )}
