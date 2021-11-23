@@ -13,7 +13,7 @@ const ChildList = props => {
     return parentComment == p.parentComment;
   });
   // console.log("childList", childList);
-  console.log("filterList", filterList);
+  // console.log("filterList", filterList);
 
   return (
     <>
