@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import ReactPaginate from "react-paginate";
 
 import SearchCard from "../components/SearchCard";
 
@@ -41,7 +42,6 @@ const Search = ({ location }) => {
           userId={v.user}
           nickname={v.nickname}
           date={v.date}
-          editedDate={v.editedDate}
           completed={v.completed}
           likeCnt={v.likeCnt}
           commentCnt={v.commentCnt}

@@ -21,7 +21,6 @@ const SearchCard = ({
   userId,
   title,
   date,
-  editedDate,
   completed,
   likeCnt,
   commentCnt,
