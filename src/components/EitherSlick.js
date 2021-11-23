@@ -180,7 +180,7 @@ const settings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   swipeToSlide: true,
-  lazyLoad: true,
+  lazyLoad: "progress",
   speed: 500,
   nextArrow: <NextArrow data-testId="nextArrow" />,
   prevArrow: <PrevArrow data-testId="prevArrow" />,
@@ -202,12 +202,24 @@ const Wrap = styled.div`
     transition: 0.5s;
     z-index: 2;
     pointer-events: all;
+    button {
+      pointer-events: all;
+    }
+    .Position {
+      pointer-events: all;
+    }
   }
   .slick-slider {
     padding: 30px 0px;
     margin: auto;
     width: 100%;
-    pointer-events: none;
+    button {
+      pointer-events: none;
+    }
+    .Position {
+      pointer-events: none;
+    }
+
     @media screen and (min-width: ${mobile}) and (max-width: 1300px) {
       width: 55%;
     }

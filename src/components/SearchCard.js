@@ -21,7 +21,6 @@ const SearchCard = ({
   userId,
   title,
   date,
-  editedDate,
   completed,
   likeCnt,
   commentCnt,
@@ -58,10 +57,7 @@ const SearchCard = ({
       </Subjects>
       <Contents>
         <div>
-          <span
-            style={{ fontWeight: "bold", cursor: "pointer" }}
-            onClick={onClickNick}
-          >
+          <span className="searchCardNick" onClick={onClickNick}>
             {nickname}
           </span>
           <span className="dateContent">{date.substring(0, 16)}</span>
@@ -133,6 +129,13 @@ const Subjects = styled.div`
   margin: 18px 20px;
   box-sizing: border-box;
   cursor: pointer;
+  transition: 0.3s;
+
+  :hover {
+    background-color: #eeeeee;
+    border-radius: 5px;
+    transform: scale(1.05);
+  }
 
   div {
     display: flex;
@@ -183,6 +186,15 @@ const Contents = styled.div`
   width: 619px;
   margin: 0 auto 14px;
   justify-content: space-between;
+
+  .searchCardNick {
+    font-weight: bold;
+    cursor: pointer;
+
+    :hover {
+      border-bottom: 1px solid ${gray5};
+    }
+  }
 
   .dateContent {
     color: ${gray5};

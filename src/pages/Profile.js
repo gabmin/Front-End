@@ -139,7 +139,6 @@ const Profile = props => {
                 title={v.title}
                 nickname={profileNick}
                 date={v.date}
-                editedDate={v.editedDate}
                 completed={v.completed}
                 likeCnt={v.likeCnt}
                 commentCnt={v.commentCnt}
@@ -154,7 +153,6 @@ const Profile = props => {
                 nickname={v.nickname}
                 userId={v.user}
                 date={v.date}
-                editedDate={v.editedDate}
                 completed={v.completed}
                 likeCnt={v.likeCnt}
                 commentCnt={v.commentCnt}
