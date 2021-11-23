@@ -5,8 +5,8 @@ import sadIcon from "../images/sadAntIcon.png";
 
 import { blue, red, mobile, tablet } from "../shared/style";
 
-const LoadingBubble = props => (
-  <StyledLoading>
+const LoadingBubble = ({ position, height, left }) => (
+  <StyledLoading position={position} height={height}>
     <div class="lds-ellipsis">
       <img class="fit-picture" src={sadIcon} alt="icon" />
       <div></div>
@@ -17,16 +17,23 @@ const LoadingBubble = props => (
   </StyledLoading>
 );
 
+LoadingBubble.defaultProps = {
+  position: "relative",
+  height: "100vh",
+};
+
 const StyledLoading = styled.div`
-  position: absolute;
+  position: ${props => props.position};
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 50px;
   border-radius: 20px;
   background-color: white;
   z-index: 9999;
+  margin: 0 auto;
+  left: -30px;
 
   @media screen and (max-width: ${mobile}) {
     top: -50px;
