@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import ProgressBar from "@ramonak/react-progress-bar";
 import styled from "styled-components";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 import { HiThumbUp } from "react-icons/hi";
@@ -12,7 +11,6 @@ import Nickname from "./Nickname";
 
 const MultiVoted = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user.userInfo);
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   const multiList = dataList.multi;
   // const DataList = props.dataList.multi;

@@ -98,7 +98,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
         }),
@@ -108,7 +107,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
           contentC,
@@ -119,7 +117,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
           contentC,
@@ -131,7 +128,6 @@ const MultiWrite = props => {
         AddPostDB({
           title,
           description,
-          date,
           contentA,
           contentB,
           contentC,
@@ -140,7 +136,7 @@ const MultiWrite = props => {
         }),
       );
     }
-    dispatch(SetParams("all"));
+    window.alert("작성이 완료되었습니다.");
     history.push("/multi");
   };
 
@@ -180,7 +176,7 @@ const MultiWrite = props => {
       dispatch(
         EditPostDB({
           multiId,
-          data: { title, description, editedDate, contentA, contentB },
+          data: { title, description, contentA, contentB },
         }),
       );
     } else if (contentD === "" && contentE === "") {
@@ -190,7 +186,6 @@ const MultiWrite = props => {
           data: {
             title,
             description,
-            editedDate,
             contentA,
             contentB,
             contentC,
@@ -204,7 +199,6 @@ const MultiWrite = props => {
           data: {
             title,
             description,
-            editedDate,
             contentA,
             contentB,
             contentC,
@@ -219,7 +213,6 @@ const MultiWrite = props => {
           data: {
             title,
             description,
-            editedDate,
             contentA,
             contentB,
             contentC,
@@ -229,7 +222,7 @@ const MultiWrite = props => {
         }),
       );
     }
-    dispatch(SetParams("all"));
+    window.alert("수정이 완료되었습니다.");
     history.push("/multi");
   };
 
@@ -304,23 +297,23 @@ const MultiWrite = props => {
   };
 
   const changeContentA = e => {
-    setContentA(e.target.value.substr(0, 50));
+    setContentA(e.target.value.substr(0, 30));
   };
 
   const changeContentB = e => {
-    setContentB(e.target.value.substr(0, 50));
+    setContentB(e.target.value.substr(0, 30));
   };
 
   const changeContentC = e => {
-    setContentC(e.target.value.substr(0, 50));
+    setContentC(e.target.value.substr(0, 30));
   };
 
   const changeContentD = e => {
-    setContentD(e.target.value.substr(0, 50));
+    setContentD(e.target.value.substr(0, 30));
   };
 
   const changeContentE = e => {
-    setContentE(e.target.value.substr(0, 50));
+    setContentE(e.target.value.substr(0, 30));
   };
 
   return (
@@ -363,7 +356,7 @@ const MultiWrite = props => {
             ref={contentARef}
             onChange={changeContentA}
             value={contentA}
-            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
+            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
           />
         </PollWarpper>
         <PollWarpper>
@@ -371,7 +364,7 @@ const MultiWrite = props => {
             ref={contentBRef}
             onChange={changeContentB}
             value={contentB}
-            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
+            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
           />
           {hiddenBtnB ? (
             <FullBtn onClick={showInputC}>+ 선택지 추가</FullBtn>
@@ -383,7 +376,7 @@ const MultiWrite = props => {
               ref={contentCRef}
               onChange={changeContentC}
               value={contentC}
-              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
+              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
             />
             <BtnWarpper>
               {hiddenBtnC ? (
@@ -401,7 +394,7 @@ const MultiWrite = props => {
               ref={contentDRef}
               onChange={changeContentD}
               value={contentD}
-              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
+              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
             />
             <BtnWarpper>
               {hiddenBtnD ? (
@@ -419,7 +412,7 @@ const MultiWrite = props => {
               ref={contentERef}
               onChange={changeContentE}
               value={contentE}
-              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (50자 이내)"
+              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
             />
             <FullBtn onClick={hideInputE}>- 선택지 삭제</FullBtn>
           </PollWarpper>

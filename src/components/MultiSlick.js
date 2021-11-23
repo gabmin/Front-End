@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
+import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -11,17 +12,20 @@ import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 
 const MultiSlick = props => {
   const CardList = props.cardList;
+  const { PostDBDone } = useSelector(state => state.multiCard);
   console.log("Card", CardList);
   const settings = {
     className: "center",
     centerMode: true,
     infinite: true,
+    lazyLoad: "progress",
     adaptiveHeight: true,
     focusOnSelect: true,
     centerPadding: "0px",
     slidesToShow: 3,
     slidesToScroll: 1,
     speed: 500,
+    // initialSlide: 0,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
@@ -30,7 +34,7 @@ const MultiSlick = props => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          initialSlide: 1,
+          // initialSlide: 0,
         },
       },
       {
@@ -38,7 +42,7 @@ const MultiSlick = props => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
+          initialSlide: 0,
         },
       },
     ],
@@ -106,24 +110,26 @@ const MultiSlick = props => {
   return (
     <Container>
       <SliderWarpper>
-        <StyledSlider {...settings}>
-          {CardList?.map((p, i) => (
-            <CardWarpper>
-              <MultiCard
-                multiId={p.multiId}
-                title={p.title}
-                description={p.description}
-                user={p.user}
-                date={p.date}
-                editedDate={p.editedDate}
-                completed={p.completed}
-                likeCnt={p.likeCnt}
-                commentCnt={p.commentCnt}
-                nickname={p.nickname}
-              />
-            </CardWarpper>
-          ))}
-        </StyledSlider>
+        {PostDBDone === true && (
+          <StyledSlider {...settings}>
+            {CardList?.map((p, i) => (
+              <CardWarpper>
+                <MultiCard
+                  multiId={p.multiId}
+                  title={p.title}
+                  description={p.description}
+                  user={p.user}
+                  date={p.date}
+                  editedDate={p.editedDate}
+                  completed={p.completed}
+                  likeCnt={p.likeCnt}
+                  commentCnt={p.commentCnt}
+                  nickname={p.nickname}
+                />
+              </CardWarpper>
+            ))}
+          </StyledSlider>
+        )}
       </SliderWarpper>
     </Container>
   );

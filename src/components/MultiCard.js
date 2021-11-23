@@ -10,7 +10,7 @@ import { DetailDB } from "../redux/actions/multiDetail";
 import { mobile } from "../shared/style";
 
 const MultiCard = props => {
-  const userInfo = useSelector(state => state.user.userInfo);
+  const userNickname = localStorage.getItem("nickname");
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   const dataList = multiDetail.multi && multiDetail;
 
@@ -30,7 +30,7 @@ const MultiCard = props => {
 
   const history = useHistory();
   const goToDetail = () => {
-    if (!userInfo.nickname) {
+    if (!userNickname) {
       window.alert("로그인 후 이용가능합니다");
       history.push("/login");
     } else {
@@ -54,7 +54,9 @@ const MultiCard = props => {
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtn onClick={goToDetail}>투표하기</VoteBtn>
+            <VoteBtn className="Detail" onClick={goToDetail}>
+              투표하기
+            </VoteBtn>
             <TempWarpper>
               <FooterWrapper>
                 <UserWrapper>
@@ -273,7 +275,6 @@ const NickText = styled.p`
 `;
 
 const InfoWarpper = styled.div`
-  width: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
