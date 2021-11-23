@@ -44,11 +44,14 @@ const CommentList = ({ items, itemsPerPage = 5 }) => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, items]);
+    // setItemOffset(pageCount);
+    console.log("pageCount", pageCount);
+  }, [itemOffset, itemsPerPage, items, pageCount]);
 
   const handlePageClick = event => {
     // window.scroll(0, 0);
     const newOffset = (event.selected * itemsPerPage) % items.length;
+    console.log("newOffset", newOffset);
     setItemOffset(newOffset);
   };
 
@@ -73,6 +76,7 @@ const CommentList = ({ items, itemsPerPage = 5 }) => {
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
+        initialPage={Math.ceil(items.length / itemsPerPage) - 1}
       />
     </StyledPagination>
   );
