@@ -80,22 +80,11 @@ describe("로그인 상태", () => {
   //     .click({ force: true });
   // });
 
-  // it("진행중보기", () => {
+  // it("전체,진행중,종료됨 보기", () => {
   //   cy.contains("진행중").click({ force: true });
-  // });
-
-  // it("종료됨보기", () => {
   //   cy.contains("종료됨").click({ force: true });
+  //   cy.contains("전체").click({ force: true })
   // });
-
-  // it("전체보기", () => {
-  //   cy.contains("전체").click({ force: true });
-  // });
-
-  it("작성하기버튼 클릭", () => {
-    cy.contains("찬반").click().url().should("include", "either");
-    cy.contains("질문하기").click();
-  });
 
   it("작성하기", () => {
     cy.contains("찬반").click().url().should("include", "either");
@@ -113,26 +102,29 @@ describe("로그인 상태", () => {
     cy.contains("완료").click().location("pathname").should("equal", "/either");
   });
 
-  // it("A 투표하기", eitherId => {
-  //   cy.contains("진행중").click({ force: true });
-  //   cy.get("button")
-  //     .filter(".buttonA")
-  //     .first()
-  //     .click()
-  //     .should("have.css", "background-color");
-  // });
-  // it("B 투표하기", () => {
-  //   cy.contains("진행중").click({ force: true });
-  //   cy.get("button")
-  //     .filter(".buttonB")
-  //     .first()
-  //     .click()
-  //     .should("have.css", "background-color");
-  // });
+  it("A 투표하기", eitherId => {
+    cy.contains("찬반").click().url().should("include", "either");
+    cy.contains("진행중").click({ force: true });
+    cy.get("button")
+      .filter(".buttonA")
+      .first()
+      .click()
+      .should("have.css", "background-color");
+  });
+  it("B 투표하기", () => {
+    cy.contains("찬반").click().url().should("include", "either");
+    cy.contains("진행중").click({ force: true });
+    cy.get("button")
+      .filter(".buttonB")
+      .first()
+      .click()
+      .should("have.css", "background-color");
+  });
 
   // it("투표수정하기", () => {
   //   // cy.get('[data-testId="nextArrow"]').click({ force: true });
-  //   cy.get("button").get('[data-testid="headerNick"]').first().click();
+  //   cy.contains("찬반").click().url().should("include", "either");
+  //   cy.get("button").get('[data-testid="menuImage"]').first().click();
   //   cy.get('[data-testid="menuModify"]').click();
   //   cy.get('[data-testId="editTitle"]')
   //     .clear()
@@ -151,21 +143,23 @@ describe("로그인 상태", () => {
 
   // it("완료하기", () => {
   //   const stub = cy.stub();
-  //   cy.get("button").get('[data-testid="headerNick"]').first().click();
+  //   cy.contains("찬반").click().url().should("include", "either");
+  //   cy.get("button").get('[data-testid="menuImage"]').first().click();
   //   cy.get('[data-testid="menuComplete"]').click();
   //   cy.on("window:alert", stub).location("pathname").should("equal", "/either");
   // });
 
   // it("삭제하기", () => {
   //   const stub = cy.stub();
+  //   cy.contains("찬반").click().url().should("include", "either");
   //   cy.contains("종료됨").click({ force: true });
-  //   cy.get("button").get('[data-testid="headerNick"]').first().click();
+  //   cy.get("button").get('[data-testid="compeleteMenuImage"]').first().click();
   //   cy.get('[data-testid="menuDelete"]').click();
   //   cy.on("window:alert", stub).location("pathname").should("equal", "/either");
   // });
 
   // it("로그아웃하기", () => {
-  //   cy.get('[data-testid="menuButton"]').click({ force: true });
+  //   cy.get('[data-testid="headerNick"]').click({ force: true });
   //   cy.get('[data-testid="logOutButton"]').click();
   // });
 });

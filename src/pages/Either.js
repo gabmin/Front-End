@@ -194,6 +194,7 @@ const QuestionBtn = styled.button`
   width: 180px;
   height: 40px;
   border: 1px solid #e25b45;
+  margin-bottom: 40px;
   color: #e25b45;
   font-size: 16px;
   border-radius: 8px;

@@ -123,7 +123,10 @@ const EitherCompleteCard = props => {
                         backgroundColor: "transparent",
                       }}
                     >
-                      <FiMoreHorizontal size={20} />
+                      <FiMoreHorizontal
+                        size={20}
+                        data-testid="compeleteMenuImage"
+                      />
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
@@ -134,6 +137,7 @@ const EitherCompleteCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickDelete}
+                    data-testid="menuDelete"
                   >
                     삭제하기
                   </MenuItem>
