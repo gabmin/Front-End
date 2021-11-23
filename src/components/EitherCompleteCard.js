@@ -30,7 +30,6 @@ const EitherCompleteCard = props => {
   } = props;
 
   //유저정보(닉네임)
-  const userInfo = useSelector(state => state.user.userInfo);
   const userNickname = localStorage.getItem("nickname");
 
   const [percent, setPercent] = useState("");
@@ -53,6 +52,11 @@ const EitherCompleteCard = props => {
       setAction(null);
     }
   }, [deletePostDBDone, deletePostDBError]);
+
+  //Props likeCnt 변화시 재렌더링
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
@@ -81,11 +85,13 @@ const EitherCompleteCard = props => {
       setLikeState(true);
     }
   };
+
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
     setAction(true);
   };
+
   //버튼A 상태 보여주기
   const SelctButtonA = (BGcolor, content) => {
     return (
@@ -97,6 +103,7 @@ const EitherCompleteCard = props => {
       </EitherButtonA>
     );
   };
+
   //버튼B 상태 보여주기
   const SelctButtonB = (BGcolor, content) => {
     return (

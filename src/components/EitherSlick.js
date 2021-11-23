@@ -11,63 +11,6 @@ import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 import { mobile, tablet } from "../shared/style";
 import { useSelector } from "react-redux";
 
-// //다음으로 넘어가기 버튼
-// function NextArrow(props) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         width: "12.25px",
-//         height: "28px",
-//         zIndex: "1000",
-//       }}
-//       onClick={onClick}
-//     >
-//       <img
-//         src={require("../images/arrowRed.svg").default}
-//         alt="arrowNext"
-//         style={{
-//           position: "absolute",
-//           width: "100%",
-//           height: "100%",
-//           right: "-25px",
-//           border: null,
-//         }}
-//       />
-//     </div>
-//   );
-// }
-// //이전으로 넘어가기 버튼
-// function PrevArrow(props) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         width: "12.25px",
-//         height: "28px",
-//         zIndex: "1000",
-//       }}
-//       onClick={onClick}
-//     >
-//       <img
-//         src={require("../images/arrowLRed.svg").default}
-//         alt="arrowNext"
-//         style={{
-//           position: "absolute",
-//           width: "100%",
-//           height: "100%",
-//           left: "-25px",
-//           border: null,
-//         }}
-//       />
-//     </div>
-//   );
-// }
-
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   const { PostDBDone } = useSelector(state => state.eitherCard);
 

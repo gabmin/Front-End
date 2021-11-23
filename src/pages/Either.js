@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
+import EitherList from "../components/EitherList";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 import LoadingBubble from "../elements/LoadingBubble";
 
@@ -33,6 +34,7 @@ const Either = props => {
   const PostCompleteList = eitherPostComplete.either;
 
   const [select, setSelect] = useState("checkEither");
+  const [grid, setGrid] = useState("slick");
 
   //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("Post");
@@ -69,6 +71,12 @@ const Either = props => {
         state: { select: select },
       });
     }
+  };
+  const setSlickCard = () => {
+    setGrid("slick");
+  };
+  const setListCard = () => {
+    setGrid("List");
   };
   return (
     <Container>
@@ -117,20 +125,39 @@ const Either = props => {
             <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
           )}
         </EitherButtonGrid>
-        <SlickLayout>
-          {PostDBLoading ? <LoadingBubble /> : null}
-          {PostingDBLoading ? <LoadingBubble /> : null}
-          {PostCompleteDBLoading ? <LoadingBubble /> : null}
-          {PostDBDone && status === "Post" ? (
-            <EitherSlick PostList={PostList} />
-          ) : null}
-          {PostingDBDone && status === "Posting" ? (
-            <EitherSlick PostingList={PostingList} />
-          ) : null}
-          {PostCompleteDBDone && status === "CompletePost" ? (
-            <EitherSlick PostCompleteList={PostCompleteList} />
-          ) : null}
-        </SlickLayout>
+        <button onClick={setSlickCard}>슬릭</button>
+        <button onClick={setListCard}>리스트</button>
+        {grid === "slick" ? (
+          <SlickLayout>
+            {PostDBLoading ? <LoadingBubble /> : null}
+            {PostingDBLoading ? <LoadingBubble /> : null}
+            {PostCompleteDBLoading ? <LoadingBubble /> : null}
+            {PostDBDone && status === "Post" ? (
+              <EitherSlick PostList={PostList} />
+            ) : null}
+            {PostingDBDone && status === "Posting" ? (
+              <EitherSlick PostingList={PostingList} />
+            ) : null}
+            {PostCompleteDBDone && status === "CompletePost" ? (
+              <EitherSlick PostCompleteList={PostCompleteList} />
+            ) : null}
+          </SlickLayout>
+        ) : (
+          <SlickLayout>
+            {PostDBLoading ? <LoadingBubble /> : null}
+            {PostingDBLoading ? <LoadingBubble /> : null}
+            {PostCompleteDBLoading ? <LoadingBubble /> : null}
+            {PostDBDone && status === "Post" ? (
+              <EitherList PostList={PostList} />
+            ) : null}
+            {PostingDBDone && status === "Posting" ? (
+              <EitherList PostingList={PostingList} />
+            ) : null}
+            {PostCompleteDBDone && status === "CompletePost" ? (
+              <EitherList PostCompleteList={PostCompleteList} />
+            ) : null}
+          </SlickLayout>
+        )}
         <QuestionBtnDiv>
           <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
         </QuestionBtnDiv>
