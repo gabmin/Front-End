@@ -129,16 +129,22 @@ const Either = props => {
         <FormatChangeGrid>
           <BsCardText
             onClick={setSlickCard}
-            style={{ width: "32px", height: "32px" }}
-          >
-            슬릭
-          </BsCardText>
+            style={{
+              width: "32px",
+              height: "32px",
+              color: "#00397c",
+              cursor: "pointer",
+            }}
+          ></BsCardText>
           <BsList
             onClick={setListCard}
-            style={{ width: "32px", height: "32px" }}
-          >
-            리스트
-          </BsList>
+            style={{
+              width: "32px",
+              height: "32px",
+              color: "#00397c",
+              cursor: "pointer",
+            }}
+          ></BsList>
         </FormatChangeGrid>
         {grid === "slick" ? (
           <SlickLayout>
