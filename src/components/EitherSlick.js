@@ -14,10 +14,6 @@ import { useSelector } from "react-redux";
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   const { PostDBDone } = useSelector(state => state.eitherCard);
 
-  const NotCompleteList =
-    PostList && PostList.filter(post => post.completed === 0);
-  const CompleteList =
-    PostList && PostList.filter(post => post.completed === 1);
   const sliderRef = useRef();
   const goToNext = () => {
     sliderRef.current.slickNext();
@@ -28,45 +24,45 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
         <div>
           {PostDBDone === true && (
             <StyledSlider {...settings} ref={sliderRef}>
-              {NotCompleteList &&
-                NotCompleteList?.map(v => (
-                  <EitherCard
-                    key={v.toString()}
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                    user={v.user}
-                    goToNext={goToNext}
-                  />
-                ))}
-              {CompleteList &&
-                CompleteList.map(v => (
-                  <EitherCompleteCard
-                    key={v.toString()}
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                    user={v.user}
-                  />
-                ))}
+              {PostList &&
+                PostList?.map(v =>
+                  v.completed === 0 ? (
+                    <EitherCard
+                      key={v.toString()}
+                      eitherId={v.eitherId}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                      liked={v.liked}
+                      voted={v.voted}
+                      completed={v.completed}
+                      user={v.user}
+                      goToNext={goToNext}
+                    />
+                  ) : (
+                    <EitherCompleteCard
+                      key={v.toString()}
+                      eitherId={v.eitherId}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                      liked={v.liked}
+                      voted={v.voted}
+                      completed={v.completed}
+                      user={v.user}
+                    />
+                  ),
+                )}
               {PostingList &&
                 PostingList?.map(v => (
                   <EitherCard
