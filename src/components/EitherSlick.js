@@ -13,8 +13,9 @@ import { useSelector } from "react-redux";
 
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   const { PostDBDone } = useSelector(state => state.eitherCard);
-
   const sliderRef = useRef();
+
+  // 투표시 다음 카드로 넘어가게 하는 함수
   const goToNext = () => {
     sliderRef.current.slickNext();
   };
@@ -22,11 +23,11 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     <>
       <Wrap>
         <div>
-          {PostDBDone === true && (
+          {PostDBDone === true && ( //PostDBDone 모든 데이터가 불러져 왔을 때 슬릭을 보여줌
             <StyledSlider {...settings} ref={sliderRef}>
-              {PostList &&
+              {PostList && //PostList (전체보기) 데이터가 들어왔을 때
                 PostList?.map(v =>
-                  v.completed === 0 ? (
+                  v.completed === 0 ? ( //종료된 여부에 따른 Component 구분
                     <EitherCard
                       key={v.toString()}
                       eitherId={v.eitherId}
@@ -63,7 +64,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     />
                   ),
                 )}
-              {PostingList &&
+              {PostingList && //PostingList (진행중보기) 데이터가 들어왔을 때
                 PostingList?.map(v => (
                   <EitherCard
                     key={v.toString()}
@@ -83,7 +84,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     goToNext={goToNext}
                   />
                 ))}
-              {PostCompleteList &&
+              {PostCompleteList && //PostCompleteList (종료됨보기) 데이터가 들어왔을 때
                 PostCompleteList?.map(v => (
                   <EitherCompleteCard
                     key={v.toString()}

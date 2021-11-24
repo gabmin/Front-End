@@ -106,7 +106,7 @@ const MainPagination = ({ items, itemsPerPage = 5 }) => {
 
 const StyledPagenation = styled.div`
   .pagination {
-    margin: 15px auto;
+    margin: 40px auto;
     display: flex;
     justify-content: center;
     list-style: none;

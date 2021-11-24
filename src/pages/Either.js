@@ -46,21 +46,25 @@ const Either = props => {
     dispatch(PostingDB(paramsId));
     setStatus("Post");
   }, [dispatch, paramsId]);
+
   //전체 게시글 보여주기
   const onClickPost = () => {
     dispatch(PostDB(paramsId));
     setStatus("Post");
   };
+
   //진행중 게시글 보여주기
   const onClickPosting = () => {
     dispatch(PostingDB(paramsId));
     setStatus("Posting");
   };
+
   //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
     dispatch(PostCompleteDB(paramsId));
     setStatus("CompletePost");
   };
+
   //게시글 작성하러가기
   const goToWrite = () => {
     if (!userNickname) {
@@ -73,17 +77,22 @@ const Either = props => {
       });
     }
   };
+
+  // 카드 형식으로 보여주기
   const setSlickCard = () => {
     setGrid("slick");
   };
+
+  // 리스트 형식으로 보여주기
   const setListCard = () => {
     setGrid("List");
   };
+
   return (
     <Container>
       <Wrap>
         <EitherButtonGrid>
-          {status === "Post" ? (
+          {status === "Post" ? ( //전체보기일때 CSS 적용
             <EitherButton
               onClick={onClickPost}
               style={{
@@ -97,7 +106,7 @@ const Either = props => {
           ) : (
             <EitherButton onClick={onClickPost}>전체</EitherButton>
           )}
-          {status === "Posting" ? (
+          {status === "Posting" ? ( //진행중보기일때 CSS 적용
             <EitherButton
               onClick={onClickPosting}
               style={{
@@ -111,7 +120,7 @@ const Either = props => {
           ) : (
             <EitherButton onClick={onClickPosting}>진행중</EitherButton>
           )}
-          {status === "CompletePost" ? (
+          {status === "CompletePost" ? ( //종료됨보기일때 CSS 적용
             <EitherButton
               onClick={onClickCompletePost}
               style={{
@@ -127,7 +136,7 @@ const Either = props => {
           )}
         </EitherButtonGrid>
         <FormatChangeGrid>
-          <BsCardText
+          <BsCardText // 카드형식으로 보기 버튼
             onClick={setSlickCard}
             style={{
               width: "32px",
@@ -136,7 +145,7 @@ const Either = props => {
               cursor: "pointer",
             }}
           ></BsCardText>
-          <BsList
+          <BsList // 리스트형식으로 보기 버튼
             onClick={setListCard}
             style={{
               width: "32px",
@@ -146,7 +155,7 @@ const Either = props => {
             }}
           ></BsList>
         </FormatChangeGrid>
-        {grid === "slick" ? (
+        {grid === "slick" ? ( //카드형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
             {PostingDBLoading ? <LoadingBubble /> : null}
@@ -162,6 +171,7 @@ const Either = props => {
             ) : null}
           </SlickLayout>
         ) : (
+          //리스트형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
             {PostingDBLoading ? <LoadingBubble /> : null}
