@@ -32,7 +32,7 @@ const Search = ({ location }) => {
   }, [dispatch, searchValue]);
 
   useEffect(() => {
-    if (searchDone === true) {
+    if (searchDone) {
       setTimeout(() => {
         setLoadDone(true);
       }, 100);

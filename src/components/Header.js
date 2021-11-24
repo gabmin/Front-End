@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
@@ -13,18 +13,20 @@ import { ReactComponent as Symbol } from "../images/symbolRed.svg";
 import { ReactComponent as chevronDown } from "../images/chevronDown.svg";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
+import useOnScreen from "../hooks/useOnScreen";
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
   // const { loginCheckDone } = useSelector(state => state.user);
 
   const [search, setSearch] = useState("");
+  const scrollRef = useRef();
 
-  console.log("nick");
-  console.log(nickname);
+  const onScreen = useOnScreen(scrollRef);
 
   useEffect(() => {
     dispatch(loginCheck());
@@ -76,7 +78,7 @@ const Header = () => {
 
   return (
     <Container>
-      <Top>
+      <Top ref={scrollRef}>
         <Logo
           height="26px"
           fill="white"
@@ -84,55 +86,57 @@ const Header = () => {
           cursor="pointer"
         />
       </Top>
-      <Bottom>
-        <MenuWrapper>
-          <StyledSymbol onClick={onClickSimbol} />
-          <span onClick={onClickEither}>찬반</span>
-          <span onClick={onClickMulti}>객관식</span>
-        </MenuWrapper>
-        <Wrapper>
-          <StyledSearch onClick={submitSearch} />
+      <BottomWrapper topOnScreen={onScreen}>
+        <Bottom>
+          <MenuWrapper>
+            <StyledSymbol onClick={onClickSimbol} />
+            <span onClick={onClickEither}>찬반</span>
+            <span onClick={onClickMulti}>객관식</span>
+          </MenuWrapper>
+          <Wrapper>
+            <StyledSearch onClick={submitSearch} />
+            <input
+              placeholder="검색..."
+              onKeyPress={submitSearch}
+              onChange={onChangeSearch}
+              value={search}
+              data-testid="searchInput"
+            />
+          </Wrapper>
+          <IconWrapper loggedIn={nickname !== "GUEST"}>
+            {nickname === "GUEST" && (
+              <span onClick={onClickLogin} className="loginBtn">
+                로그인
+              </span>
+            )}
+            {nickname !== "GUEST" && (
+              <>
+                <Menu
+                  menuButton={
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <StyledCommonIcon />
+                      <span data-testid="headerNick">{nickname}</span>
+                      <StyledDown />
+                    </div>
+                  }
+                >
+                  <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
+                  <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+                </Menu>
+              </>
+            )}
+          </IconWrapper>
+        </Bottom>
+        <SearchMobile>
+          <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
           <input
             placeholder="검색..."
             onKeyPress={submitSearch}
             onChange={onChangeSearch}
             value={search}
-            data-testid="searchInput"
           />
-        </Wrapper>
-        <IconWrapper loggedIn={nickname !== "GUEST"}>
-          {nickname === "GUEST" && (
-            <span onClick={onClickLogin} className="loginBtn">
-              로그인
-            </span>
-          )}
-          {nickname !== "GUEST" && (
-            <>
-              <Menu
-                menuButton={
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <StyledCommonIcon />
-                    <span data-testid="headerNick">{nickname}</span>
-                    <StyledDown />
-                  </div>
-                }
-              >
-                <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
-                <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
-              </Menu>
-            </>
-          )}
-        </IconWrapper>
-      </Bottom>
-      <SearchMobile>
-        <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
-        <input
-          placeholder="검색..."
-          onKeyPress={submitSearch}
-          onChange={onChangeSearch}
-          value={search}
-        />
-      </SearchMobile>
+        </SearchMobile>
+      </BottomWrapper>
     </Container>
   );
 };
@@ -142,12 +146,12 @@ const SearchMobile = styled.div`
   flex-direction: row;
   max-width: 1280px;
   width: 90%;
-  height: 54px;
   align-items: center;
   justify-content: center;
+
   input {
     max-width: 400px;
-    width: 90%;
+    width: 100%;
     height: 32px;
     padding-left: 32px;
     border: 1px solid #e25b45;
@@ -164,7 +168,6 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 120px;
-  border-bottom: 1px solid ${red};
 
   span {
     cursor: pointer;
@@ -181,12 +184,34 @@ const Top = styled.div`
   justify-content: center;
 `;
 
+const BottomWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: ${props => (props.topOnScreen ? "56px" : "0")};
+  width: 100%;
+  height: 64px;
+  background-color: white;
+  border: 1px solid ${red};
+  box-sizing: border-box;
+  z-index: 9999;
+  transition: all 300ms cubic-bezier(0.19, 0.855, 0.265, 0.985);
+
+  @media screen and (max-width: ${mobile}) {
+    flex-direction: column;
+    align-items: center;
+    height: 80px;
+    top: ${props => (props.topOnScreen ? "50px" : "0")};
+    border: none;
+  }
+`;
+
 const Bottom = styled.div`
   display: flex;
-  position: relative;
   max-width: 1280px;
   width: 90%;
-  height: 64px;
+  height: 100%;
+  background-color: white;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
@@ -198,10 +223,6 @@ const Bottom = styled.div`
     border: 1px solid #e25b45;
     border-radius: 9px;
   }
-
-  /* @media screen and (max-width: ${mobile}) {
-    display: none;
-  } */
 `;
 
 const Wrapper = styled.div`
@@ -215,8 +236,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledSearch = styled(FiSearch)`
-  position: relative;
-  left: 27px;
+  position: absolute;
+  left: 15px;
   min-width: 16px;
   min-height: 16px;
   color: #e25b45;

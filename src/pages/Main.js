@@ -22,7 +22,7 @@ const Main = () => {
   const { nickname } = useSelector(state => state.user.userInfo);
 
   useEffect(() => {
-    if (mainDataDone === true) {
+    if (mainDataDone) {
       setTimeout(() => {
         setLoadDone(true);
       }, 200);
@@ -164,7 +164,7 @@ const Container = styled.div`
   align-items: center;
   width: 67%;
   max-width: 1280px;
-  height: 1170px;
+  height: 1160px;
   margin: auto;
   user-select: none;
 
@@ -202,6 +202,7 @@ const Notice = styled.div`
 
   @media screen and (max-width: 1540px) {
     flex-direction: column;
+    height: 130px;
   }
 `;
 
@@ -220,13 +221,15 @@ const GoEither = styled.div`
 
   @media screen and (max-width: 1540px) {
     width: 100%;
+    height: 60px;
     padding: 0 10px;
+    border-radius: 10px;
   }
 
   h1 {
     margin: 5px 0 0;
     color: ${blue};
-    font-size: 24px;
+    font-size: 20px;
   }
   h3 {
     margin: 0;
@@ -263,10 +266,12 @@ const GoMulti = styled.div`
 
   @media screen and (max-width: 1540px) {
     width: 100%;
+    height: 60px;
     padding: 0 10px;
+    border-radius: 10px;
 
     h1 {
-      font-size: 22px;
+      font-size: 20px;
     }
   }
 `;
@@ -294,7 +299,7 @@ const Wrapper = styled.div`
   margin: 10px 0 80px;
 
   @media screen and (max-width: 1540px) {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 `;
 
