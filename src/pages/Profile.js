@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-
-import SearchCard from "../components/SearchCard";
-import { getMyPolls, getMyPosts } from "../redux/actions/profile";
-import { getProfileNick, updateNick } from "../redux/actions/user";
 import { FiEdit3 } from "react-icons/fi";
 
+import LoadingBubble from "../elements/LoadingBubble";
+import { getMyPolls, getMyPosts } from "../redux/actions/profile";
+import { getProfileNick, updateNick } from "../redux/actions/user";
+
+import MainPagination from "../components/MainPagination";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
 import {
   blue,
@@ -22,7 +23,9 @@ const Profile = props => {
   const userId = props.match.params.user_id;
   const dispatch = useDispatch();
 
-  const { myPosts, myPolls } = useSelector(state => state.profile);
+  const { myPosts, myPolls, getMyPostsDone, getMyPollsDone } = useSelector(
+    state => state.profile,
+  );
   const { userId: myId, nickname: userNick } = useSelector(
     state => state.user.userInfo,
   );
@@ -32,6 +35,20 @@ const Profile = props => {
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(profileNick);
+  const [myPostsloadDone, setMyPostsloadDone] = useState(false);
+  const [myPollsloadDone, setMyPollsloadDone] = useState(false);
+
+  useEffect(() => {
+    if (getMyPostsDone && getMyPollsDone) {
+      setTimeout(() => {
+        setMyPostsloadDone(true);
+        setMyPollsloadDone(true);
+      }, 100);
+      return;
+    }
+    setMyPollsloadDone(false);
+    setMyPostsloadDone(false);
+  }, [getMyPostsDone, getMyPollsDone]);
 
   useEffect(() => {
     dispatch(getProfileNick(userId));
@@ -130,34 +147,12 @@ const Profile = props => {
         </PostBtns>
       </MyInfo>
       <PostsContainer>
-        {clicked === "posts"
-          ? myPosts.map((v, i) => (
-              <SearchCard
-                key={i}
-                type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
-                id={v.multiId || v.eitherId}
-                title={v.title}
-                nickname={profileNick}
-                date={v.date}
-                completed={v.completed}
-                likeCnt={v.likeCnt}
-                commentCnt={v.commentCnt}
-              />
-            ))
-          : myPolls.map((v, i) => (
-              <SearchCard
-                key={i}
-                type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
-                id={v.multiId || v.eitherId}
-                title={v.title}
-                nickname={v.nickname}
-                userId={v.user}
-                date={v.date}
-                completed={v.completed}
-                likeCnt={v.likeCnt}
-                commentCnt={v.commentCnt}
-              />
-            ))}
+        {!myPostsloadDone && !myPollsloadDone && <LoadingBubble />}
+        {clicked === "posts" ? (
+          <MainPagination items={myPosts} />
+        ) : (
+          <MainPagination items={myPolls} />
+        )}
       </PostsContainer>
     </>
   );
@@ -202,10 +197,10 @@ const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 600px;
+  min-height: 400px;
   background-color: ${grayMultiply};
   margin: auto;
-  padding: 54px 0;
+  padding: 54px 0 0;
 `;
 
 const PostBtns = styled.div`
