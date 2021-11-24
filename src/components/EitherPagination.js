@@ -20,10 +20,10 @@ function Items({ currentItems }) {
   return (
     <div className="items">
       {currentItems &&
-        currentItems.map(v =>
+        currentItems.map((v, i) =>
           v.completed === 0 ? (
             <EitherListCard
-              key={v.toString()}
+              key={i}
               eitherId={v.eitherId}
               nickname={v.nickname}
               title={v.title}
@@ -40,7 +40,7 @@ function Items({ currentItems }) {
             />
           ) : (
             <EitherCompleteListCard
-              key={v.toString()}
+              key={i}
               eitherId={v.eitherId}
               nickname={v.nickname}
               title={v.title}

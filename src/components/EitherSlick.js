@@ -127,6 +127,7 @@ const settings = {
   centerPadding: "0px",
 
   responsive: [
+    // 반응형에 따른 슬라이드 개수 변경
     { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
     { breakpoint: 1300, settings: { slidesToShow: 1, slidesToScroll: 1 } },
   ],

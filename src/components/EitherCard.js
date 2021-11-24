@@ -185,7 +185,7 @@ const EitherCard = props => {
       <Container>
         <MenuButtonGrid>
           <div>
-            {nickname === userNickname ? (
+            {nickname === userNickname ? ( // 메뉴 버튼
               <div>
                 <Menu
                   menuButton={
@@ -234,8 +234,11 @@ const EitherCard = props => {
             ) : null}
           </div>
         </MenuButtonGrid>
+        {/* 제목 */}
         <TitleDiv> {title} </TitleDiv>
+        {/* 날짜 */}
         <DateDiv>{date.substring(0, 16)}</DateDiv>
+        {/* 투표한 인원 수 */}
         <TotalCntGrid>
           <FaRegUser
             style={{
@@ -246,7 +249,7 @@ const EitherCard = props => {
           />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
-        {/* 선택 결과에 따라 보여주기 */}
+        {/* 투표 상태에 따른 버튼 형식 변경 */}
         {!userNickname ? (
           <ButtonGrid>
             {SelctButtonA(null, "#101214", false, null, contentA)}
@@ -280,6 +283,7 @@ const EitherCard = props => {
               : SelctButtonB(null, "#101214", false, "B", contentB)}
           </ButtonGrid>
         )}
+        {/* 투표율 그래프 */}
         {showGraph ? (
           <ProgressGrid>
             <EitherProgress>
@@ -294,6 +298,7 @@ const EitherCard = props => {
         <EitherFooter>
           <div className="Position">
             <div>
+              {/* 프로필 */}
               <Nickname
                 nickname={nickname}
                 userId={user}
@@ -303,7 +308,7 @@ const EitherCard = props => {
               />
             </div>
             <div className="Grid">
-              {!likeState ? (
+              {!likeState ? ( //좋아요 이미지
                 <FiThumbsUp
                   onClick={onClickLike}
                   style={{

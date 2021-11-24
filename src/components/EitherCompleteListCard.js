@@ -126,7 +126,7 @@ const EitherListCard = props => {
         <div>
           <MenuButtonGrid>
             <div>
-              {nickname === userNickname ? (
+              {nickname === userNickname ? ( // 메뉴 버튼
                 <div>
                   <Menu
                     menuButton={
@@ -159,11 +159,14 @@ const EitherListCard = props => {
           </MenuButtonGrid>
           <TitleButtonGrid>
             <LeftGrid>
+              {/* 제목 */}
               <TitleDiv> {title} </TitleDiv>
+              {/* 날짜 */}
               <DateDiv>{date.substring(0, 16)}</DateDiv>
               <EitherFooter>
                 <div className="Position">
                   <div>
+                    {/* 프로필 */}
                     <Nickname
                       nickname={nickname}
                       userId={user}
@@ -173,6 +176,7 @@ const EitherListCard = props => {
                     />
                   </div>
                   <div className="Grid">
+                    {/* 투표한 인원 수 */}
                     <TotalCntGrid>
                       <FaRegUser
                         style={{
@@ -183,7 +187,7 @@ const EitherListCard = props => {
                       />
                       <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
                     </TotalCntGrid>
-                    {!likeState ? (
+                    {!likeState ? ( //좋아요 이미지
                       <FiThumbsUp
                         onClick={onClickLike}
                         style={{
@@ -207,6 +211,7 @@ const EitherListCard = props => {
               </EitherFooter>
             </LeftGrid>
             <div>
+              {/* 투표 상태에 따른 버튼 형식 변경 */}
               {!userNickname ? (
                 <ButtonGrid>
                   {SelctButtonA(null, contentA)}
@@ -232,6 +237,7 @@ const EitherListCard = props => {
                   )}
                 </ButtonGrid>
               )}
+              {/* 투표율 그래프 */}
               <ProgressGrid>
                 <EitherProgress>
                   <ProgressLabel>
