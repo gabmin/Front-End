@@ -37,29 +37,31 @@ const Multi = props => {
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
   const completeCardList = multiPostComplete && multiPostComplete.multi;
-  console.log("cardLIstMulti", cardList);
+  console.log("cardList", cardList);
+  console.log("ingCardList", ingCardList);
 
   useEffect(() => {
     if (viewStatus === false) {
       dispatch(PostDB(paramsId));
+      dispatch(PostingDB(paramsId));
+      dispatch(PostCompleteDB(paramsId));
       setStatus("Post");
     } else {
       dispatch(PostDB("all"));
+      dispatch(PostingDB("all"));
+      dispatch(PostCompleteDB("all"));
       setStatus("Post");
     }
     console.log("view", viewStatus);
   }, [dispatch, paramsId, viewStatus]);
 
   const showPost = () => {
-    dispatch(PostDB(paramsId));
     setStatus("Post");
   };
   const showPosting = () => {
-    dispatch(PostingDB(paramsId));
     setStatus("Posting");
   };
   const showCompletePost = () => {
-    dispatch(PostCompleteDB(paramsId));
     setStatus("CompletePost");
   };
 
@@ -108,7 +110,7 @@ const Multi = props => {
       </TabBtnWarpper>
       {changeView === false ? (
         <SliderWarpper>
-          {PostDBLoading === true && <LoadingBubble />}
+          {PostDBLoading ? <LoadingBubble /> : null}
           {status === "Post" && PostDBDone === true && (
             <MultiSlick cardList={cardList} />
           )}
@@ -121,7 +123,14 @@ const Multi = props => {
         </SliderWarpper>
       ) : (
         <PaginationWarpper>
-          <MultiPagination items={cardList} />
+          {PostDBLoading ? <LoadingBubble /> : null}
+          {status === "Post" && PostDBDone === true && (
+            <MultiPagination items={cardList} />
+          )}
+          {status === "Posting" && <MultiPagination items={ingCardList} />}
+          {status === "CompletePost" && (
+            <MultiPagination items={completeCardList} />
+          )}
         </PaginationWarpper>
       )}
       <QuestionBtnWarpper>

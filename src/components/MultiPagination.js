@@ -10,6 +10,10 @@ import { SetParams } from "../redux/reducers/paramsSlice";
 
 function Items({ currentItems }) {
   const { PostDBDone } = useSelector(state => state.multiCard);
+
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <Container>
       <ListWarpper>
@@ -35,6 +39,7 @@ function Items({ currentItems }) {
           </div>
         )}
       </ListWarpper>
+      <TopBtn onClick={goToTop}>TOP</TopBtn>
     </Container>
   );
 }
@@ -44,32 +49,31 @@ const MultiPagination = ({ items, itemsPerPage = 5 }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const paramsId = useSelector(state => state.params.paramsId);
   const target = items.findIndex(p => {
     console.log("pppppp", paramsId);
     return p.multiId == paramsId;
   });
-  console.log("length", document.body.scrollHeight);
+  console.log("length", Math.floor(target / itemsPerPage));
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
-    window.scroll(
-      0,
-      (target % itemsPerPage) * (document.body.scrollHeight / itemsPerPage),
-    );
-  }, [itemOffset, itemsPerPage, items]);
-
-  useEffect(() => {
-    // dispatch(SetParams("all"));
-    window.scroll(0, 0);
-  }, []);
+    if (currentPage === Math.floor(target / itemsPerPage)) {
+      window.scroll(
+        0,
+        (target % itemsPerPage) * (document.body.scrollHeight / itemsPerPage),
+      );
+    }
+  }, [itemOffset, itemsPerPage, items, target, currentPage]);
 
   const handlePageClick = event => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
-    console.log("newOffset", event.selected);
+    setCurrentPage(event.selected);
+    window.scroll(0, 0);
   };
 
   return (
@@ -159,6 +163,18 @@ const ListWarpper = styled.div`
 
 const CardWarpper = styled.div`
   /* height: 100%; */
+`;
+
+const TopBtn = styled.button`
+  display: block;
+  margin: 5% 8% 20px auto;
+  font-weight: 700;
+  border: none;
+  background-color: ${colors.white};
+  color: ${colors.blue};
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-position: under;
 `;
 
 export default MultiPagination;
