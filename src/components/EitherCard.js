@@ -401,7 +401,7 @@ const EitherButtonA = styled.button`
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   font-size: 16px;
-  line-height: 23px;
+  font-family: "Noto-Sans KR", sans-serif;
   cursor: pointer;
   margin-right: -1px;
   &:hover {
@@ -418,7 +418,7 @@ const EitherButtonB = styled.button`
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size: 16px;
-  line-height: 23px;
+  font-family: "Noto-Sans KR", sans-serif;
   cursor: pointer;
   margin-left: -1px;
   &:hover {

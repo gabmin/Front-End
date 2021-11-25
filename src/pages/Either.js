@@ -6,6 +6,8 @@ import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
 import EitherPagination from "../components/EitherPagination";
+import { SetView } from "../redux/reducers/viewSlice";
+import { SetParams } from "../redux/reducers/paramsSlice";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 import LoadingBubble from "../elements/LoadingBubble";
 import { BsCardText, BsList } from "react-icons/bs";
@@ -29,6 +31,8 @@ const Either = props => {
   const userNickname = localStorage.getItem("nickname");
   //이전 페이지 파람스 아이디 가져오기
   const paramsId = useSelector(state => state.params.paramsId);
+  // 게시물 보기 형태 상태
+  const viewStatus = useSelector(state => state.view.viewStatus);
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
@@ -36,15 +40,22 @@ const Either = props => {
 
   const [select, setSelect] = useState("checkEither");
   const [grid, setGrid] = useState("slick");
-
   //보여주기 상태 (초기값 전체보기)
-  const [status, setStatus] = useState("Post");
+  const [status, setStatus] = useState("post");
 
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
-    dispatch(PostDB(paramsId));
-    dispatch(PostingDB(paramsId));
-    setStatus("Post");
+    if (viewStatus === false) {
+      dispatch(PostDB(paramsId));
+      dispatch(PostingDB(paramsId));
+      dispatch(PostCompleteDB(paramsId));
+      setStatus("Post");
+    } else {
+      dispatch(PostDB("all"));
+      dispatch(PostingDB("all"));
+      dispatch(PostCompleteDB("all"));
+      setStatus("Post");
+    }
   }, [dispatch, paramsId, grid]);
 
   //전체 게시글 보여주기
@@ -248,6 +259,7 @@ const EitherButton = styled.button`
   background-color: #ffffff;
   font-size: 20px;
   font-weight: bold;
+  font-family: "Noto-Sans KR", sans-serif;
   color: #868e96;
   line-height: 29px;
   cursor: pointer;
@@ -290,6 +302,7 @@ const QuestionBtn = styled.button`
   border: 1px solid #e25b45;
   color: #e25b45;
   font-size: 16px;
+  font-family: "Noto-Sans KR", sans-serif;
   border-radius: 8px;
   background-color: #ffffff;
   cursor: pointer;
