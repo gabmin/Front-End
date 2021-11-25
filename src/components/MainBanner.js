@@ -16,8 +16,8 @@ const MainBanner = () => {
     <BannerWrapper ref={scrollRef}>
       <BannerTexts>
         <img alt="bannerText" src={bannerText} />
+        <BannerAnt onScreen={onScreen} alt="bannerAnt" src={bannerAnt} />
       </BannerTexts>
-      <BannerAnt onScreen={onScreen} alt="bannerAnt" src={bannerAnt} />
       <StyledBannerBack alt="mainBanner" src={bannerBack} />
     </BannerWrapper>
   );
@@ -30,7 +30,7 @@ const BannerWrapper = styled.div`
   position: relative;
   width: 100%;
   margin: auto;
-  height: 500px;
+  height: 300px;
   overflow-x: hidden;
 
   @media screen and (max-width: ${mobile}) {
@@ -42,14 +42,22 @@ const BannerTexts = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
+  width: 67%;
+  max-width: 1280px;
   position: relative;
-  left: 63px;
+
+  img {
+    position: absolute;
+    vertical-align: middle;
+  }
 `;
 
 const BannerAnt = styled.img`
-  position: relative;
-  left: ${props => (props.onScreen ? "30px" : "1200px")};
+  position: absolute;
+  right: ${props => (props.onScreen ? "0" : "-700px")};
   transition: all 0.5s cubic-bezier(0.19, 0.855, 0.265, 0.985);
+  height: 100%;
 `;
 
 const StyledBannerBack = styled.img`
