@@ -151,9 +151,12 @@ const Wrap = styled.div`
     }
   }
   .slick-slider {
-    padding: 30px 0px;
-    margin: auto;
+    margin: -20px auto;
     width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      z-index: 0;
+      margin: -50px auto;
+    }
     button {
       pointer-events: none;
     }

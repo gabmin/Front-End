@@ -270,11 +270,19 @@ const FormatWrapper = styled.div`
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    width: 75%;
+  }
 `;
 const FormatChangeGrid = styled.div`
   width: 13%;
   display: flex;
+  z-index: 10;
   justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.8);
+    width: 27%;
+  }
 `;
 const QuestionBtn = styled.button`
   width: 132px;
@@ -285,6 +293,7 @@ const QuestionBtn = styled.button`
   border-radius: 8px;
   background-color: #ffffff;
   cursor: pointer;
+  z-index: 10;
   &:hover {
     background-color: #e25b45;
     color: #ffffff;

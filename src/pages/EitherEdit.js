@@ -54,17 +54,17 @@ const EitherEdit = props => {
 
   //제목 데이터
   const onChangeTitle = e => {
-    setTitle(e.target.value);
+    setTitle(e.target.value.substr(0, 30));
   };
 
   //contentA 데이터
   const onChangeContentA = e => {
-    setContentA(e.target.value);
+    setContentA(e.target.value.substr(0, 10));
   };
 
   //contentB 데이터
   const onChangeContentB = e => {
-    setContentB(e.target.value);
+    setContentB(e.target.value.substr(0, 10));
   };
 
   //뒤로가기
@@ -141,7 +141,7 @@ const EitherEdit = props => {
             <EitherButtonGrid>
               <EitherButtonA>
                 <ButtonInput
-                  placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
+                  placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (10자 이내)"
                   value={contentA}
                   onChange={onChangeContentA}
                   data-testId="editContentA"
@@ -149,7 +149,7 @@ const EitherEdit = props => {
               </EitherButtonA>
               <EitherButtonB>
                 <ButtonInput
-                  placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
+                  placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (10자 이내)"
                   value={contentB}
                   onChange={onChangeContentB}
                   data-testId="editContentB"

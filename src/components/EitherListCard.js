@@ -339,6 +339,7 @@ const EitherListCard = props => {
 const Container = styled.div`
   max-width: 840px;
   width: 100%;
+  min-height: 258px;
   height: 100%;
   box-sizing: border-box;
   margin: 20px auto;
@@ -349,8 +350,9 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     transform: scale(80%);
-    margin: auto;
+    margin: -20px auto;
     padding: 10% 6%;
+    min-height: 240px;
   }
 `;
 const MenuButtonGrid = styled.div`
@@ -360,6 +362,10 @@ const MenuButtonGrid = styled.div`
   position: absolute;
   top: 15px;
   right: 20px;
+  @media screen and (max-width: ${mobile}) {
+    top: 10px;
+    right: 20px;
+  }
 `;
 const TitleButtonGrid = styled.div`
   display: flex;
@@ -479,9 +485,12 @@ const ProgressLabel = styled.div`
 const EitherFooter = styled.div`
   width: 39%;
   position: absolute;
-  top: 180px;
+  top: 71.5%;
   left: 56px;
   align-items: center;
+  @media screen and (max-width: ${mobile}) {
+    left: 5%;
+  }
 
   .Position {
     width: 100%;
@@ -492,7 +501,7 @@ const EitherFooter = styled.div`
   .Profile {
     width: 100%;
     @media screen and (max-width: ${mobile}) {
-      transform: scale(0.8);
+      transform: scale(0.9);
     }
   }
   .Grid {
