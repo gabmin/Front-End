@@ -237,6 +237,7 @@ const BtnWrapper = styled.div`
 const EventBtn = styled.button`
   font-size: 10px;
   text-decoration: underline;
+  font-family: "Noto Sans KR", sans-serif;
   border: none;
   color: ${colors.red};
   background-color: ${colors.white};
@@ -263,6 +264,7 @@ const LikeWrapper = styled.div`
 const LikeBtn = styled.button`
   border: none;
   padding: 2px 6px 0 6px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.gray5};
   background-color: ${colors.white};
   cursor: pointer;
@@ -292,6 +294,7 @@ const TextAreaBtn = styled.button`
   height: 16px;
   font-size: 10px;
   font-weight: 700;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
   background-color: ${colors.red};
   cursor: pointer;

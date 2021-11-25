@@ -474,6 +474,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   font-size: 18px;
+  font-family: "Noto Sans KR", sans-serif;
   &::placeholder {
     font-size: 16px;
     color: ${colors.gray5};
@@ -490,6 +491,7 @@ const Textarea = styled.textarea`
   border: none;
   outline: none;
   font-size: 18px;
+  font-family: "Noto Sans KR", sans-serif;
   resize: none;
   &::placeholder {
     font-size: 16px;
@@ -517,6 +519,7 @@ const PollWarpper = styled.div`
 const InputPoll = styled.input`
   width: 100%;
   height: 48px;
+  font-family: "Noto Sans KR", sans-serif;
   margin: 4px auto;
   padding: 10px;
   background-color: ${colors.gray};
@@ -537,6 +540,7 @@ const FullBtn = styled.button`
   min-width: 100%;
   max-width: 510px;
   height: 48px;
+  font-family: "Noto Sans KR", sans-serif;
   padding: 10px;
   margin: 8px auto 16px auto;
   color: ${colors.blue};
@@ -549,6 +553,7 @@ const FullBtn = styled.button`
 const HalfBtn = styled.button`
   width: 290px;
   height: 48px;
+  font-family: "Noto Sans KR", sans-serif;
   margin: 8px 0;
   padding: 10px;
   color: ${colors.blue};
@@ -573,6 +578,7 @@ const AddBtn = styled.button`
   width: 290px;
   height: 40px;
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
   border: 1px ${colors.red} solid;
   border-radius: 8px;
@@ -587,6 +593,7 @@ const CancelBtn = styled.button`
   width: 290px;
   height: 40px;
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.red};
   border: 1px ${colors.red} solid;
   border-radius: 8px;
