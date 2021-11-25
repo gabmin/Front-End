@@ -7,13 +7,13 @@ import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { loginCheck, logoutUser } from "../redux/reducers/userSlice";
+import useOnScreen from "../hooks/useOnScreen";
 
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
 import { ReactComponent as chevronDown } from "../images/chevronDown.svg";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
 import { blue, red, mobile, tablet } from "../shared/style";
-import useOnScreen from "../hooks/useOnScreen";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -21,12 +21,11 @@ const Header = () => {
   const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
-  // const { loginCheckDone } = useSelector(state => state.user);
 
   const [search, setSearch] = useState("");
   const scrollRef = useRef();
 
-  const onScreen = useOnScreen(scrollRef);
+  const onScreen = useOnScreen(scrollRef, 0.6);
 
   useEffect(() => {
     dispatch(loginCheck());
@@ -77,8 +76,8 @@ const Header = () => {
   }, [dispatch]);
 
   return (
-    <Container>
-      <Top ref={scrollRef}>
+    <Container ref={scrollRef}>
+      <Top>
         <Logo
           height="26px"
           fill="white"
@@ -145,12 +144,11 @@ const SearchMobile = styled.div`
   display: flex;
   flex-direction: row;
   max-width: 1280px;
-  width: 90%;
+  width: 75%;
   align-items: center;
   justify-content: center;
 
   input {
-    max-width: 400px;
     width: 100%;
     height: 32px;
     padding-left: 32px;
@@ -187,22 +185,21 @@ const Top = styled.div`
 const BottomWrapper = styled.div`
   display: flex;
   justify-content: center;
-  position: fixed;
-  top: ${props => (props.topOnScreen ? "56px" : "0")};
+  position: ${props => (props.topOnScreen ? "relative" : "fixed")};
   width: 100%;
   height: 64px;
   background-color: white;
   border: 1px solid ${red};
   box-sizing: border-box;
-  z-index: 9999;
-  transition: all 300ms cubic-bezier(0.19, 0.855, 0.265, 0.985);
+  z-index: 99999;
+  transition: all 150ms cubic-bezier(0.19, 0.855, 0.265, 0.985);
 
   @media screen and (max-width: ${mobile}) {
     flex-direction: column;
     align-items: center;
-    height: 80px;
-    top: ${props => (props.topOnScreen ? "50px" : "0")};
+    height: 90px;
     border: none;
+    padding: 0 0 5px;
   }
 `;
 
@@ -223,9 +220,14 @@ const Bottom = styled.div`
     border: 1px solid #e25b45;
     border-radius: 9px;
   }
+
+  @media screen and (max-width: ${mobile}) {
+    width: 90%;
+  }
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   width: 30%;
   flex-direction: row;
@@ -237,7 +239,7 @@ const Wrapper = styled.div`
 
 const StyledSearch = styled(FiSearch)`
   position: absolute;
-  left: 15px;
+  left: 11px;
   min-width: 16px;
   min-height: 16px;
   color: #e25b45;
@@ -249,6 +251,7 @@ const StyledSymbol = styled(Symbol)`
   user-select: none;
   height: 37px;
   margin-right: 30px;
+
   @media screen and (max-width: ${mobile}) {
     display: none;
   }
@@ -328,10 +331,6 @@ const IconWrapper = styled.div`
   @media screen and (max-width: ${mobile}) {
     width: 40%;
   }
-`;
-
-const MenuLoading = styled.div`
-  width: 30%;
 `;
 
 export default Header;
