@@ -85,7 +85,7 @@ const Either = props => {
 
   // 리스트 형식으로 보여주기
   const setListCard = () => {
-    setGrid("List");
+    setGrid("list");
   };
 
   return (
@@ -135,26 +135,53 @@ const Either = props => {
             <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
           )}
         </EitherButtonGrid>
-        <FormatChangeGrid>
-          <BsCardText // 카드형식으로 보기 버튼
-            onClick={setSlickCard}
-            style={{
-              width: "32px",
-              height: "32px",
-              color: "#00397c",
-              cursor: "pointer",
-            }}
-          ></BsCardText>
-          <BsList // 리스트형식으로 보기 버튼
-            onClick={setListCard}
-            style={{
-              width: "32px",
-              height: "32px",
-              color: "#00397c",
-              cursor: "pointer",
-            }}
-          ></BsList>
-        </FormatChangeGrid>
+        <FormatWrapper>
+          <FormatChangeGrid>
+            {grid === "slick" ? (
+              <BsCardText // 카드형식으로 보기 버튼 (파란색)
+                onClick={setSlickCard}
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  color: "#00397c",
+                  cursor: "pointer",
+                }}
+              ></BsCardText>
+            ) : (
+              <BsCardText // 카드형식으로 보기 버튼 (회색)
+                onClick={setSlickCard}
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  color: "#ADB5BD",
+                  cursor: "pointer",
+                }}
+              ></BsCardText>
+            )}
+            {grid === "list" ? (
+              <BsList // 리스트형식으로 보기 버튼 (파란색)
+                onClick={setListCard}
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  color: "#00397c",
+                  cursor: "pointer",
+                }}
+              ></BsList>
+            ) : (
+              <BsList // 리스트형식으로 보기 버튼 (회색)
+                onClick={setListCard}
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  color: "#ADB5BD",
+                  cursor: "pointer",
+                }}
+              ></BsList>
+            )}
+          </FormatChangeGrid>
+          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+        </FormatWrapper>
         {grid === "slick" ? ( //카드형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
@@ -187,9 +214,6 @@ const Either = props => {
             ) : null}
           </SlickLayout>
         )}
-        <QuestionBtnDiv>
-          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
-        </QuestionBtnDiv>
       </Wrap>
     </Container>
   );
@@ -205,12 +229,6 @@ const Container = styled.div`
 const Wrap = styled.div`
   max-width: 100%;
   height: 100%;
-`;
-const FormatChangeGrid = styled.div`
-  margin: 30px auto 0px auto;
-  width: 10%;
-  display: flex;
-  justify-content: space-between;
 `;
 const EitherButtonGrid = styled.div`
   margin: 51px auto 0px auto;
@@ -247,15 +265,21 @@ const SlickLayout = styled.div`
   width: 100%;
   height: 100%;
 `;
-const QuestionBtnDiv = styled.div`
-  width: 100%;
-  text-align: center;
+const FormatWrapper = styled.div`
+  width: 65%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+`;
+const FormatChangeGrid = styled.div`
+  width: 13%;
+  display: flex;
+  justify-content: space-between;
 `;
 const QuestionBtn = styled.button`
-  width: 180px;
+  width: 132px;
   height: 40px;
   border: 1px solid #e25b45;
-  margin-bottom: 40px;
   color: #e25b45;
   font-size: 16px;
   border-radius: 8px;

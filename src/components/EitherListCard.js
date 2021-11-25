@@ -179,7 +179,7 @@ const EitherListCard = props => {
         <div>
           <MenuButtonGrid>
             <div>
-              {nickname === userNickname ? (
+              {nickname === userNickname ? ( // 메뉴 버튼
                 <div>
                   <Menu
                     menuButton={
@@ -229,55 +229,60 @@ const EitherListCard = props => {
             </div>
           </MenuButtonGrid>
           <TitleButtonGrid>
-            <LeftGrid>
-              <TitleDiv> {title} </TitleDiv>
-              <DateDiv>{date.substring(0, 16)}</DateDiv>
-              <EitherFooter>
-                <div className="Position">
-                  <div>
-                    <Nickname
-                      nickname={nickname}
-                      userId={user}
-                      width={"32px"}
-                      height={"32px"}
-                      fontSize={"14px"}
-                    />
-                  </div>
-                  <div className="Grid">
-                    <TotalCntGrid>
-                      <FaRegUser
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          color: "#00397c",
-                        }}
-                      />
-                      <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
-                    </TotalCntGrid>
-                    {!likeState ? (
-                      <FiThumbsUp
-                        onClick={onClickLike}
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          cursor: "pointer",
-                        }}
-                      />
-                    ) : (
-                      <HiThumbUp
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          cursor: "pointer",
-                        }}
-                      />
-                    )}
-                    <div className="Likes">{likes}</div>
-                  </div>
+            <EitherFooter>
+              <div className="Position">
+                <div className="Profile">
+                  {/* 프로필 */}
+                  <Nickname
+                    nickname={nickname}
+                    userId={user}
+                    width={"32px"}
+                    height={"32px"}
+                    fontSize={"14px"}
+                  />
                 </div>
-              </EitherFooter>
+                <div className="Grid">
+                  {/* 투표한 인원 수 */}
+                  <TotalCntGrid>
+                    <FaRegUser
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        color: "#00397c",
+                      }}
+                    />
+                    <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
+                  </TotalCntGrid>
+                  {!likeState ? ( //좋아요 이미지
+                    <FiThumbsUp
+                      onClick={onClickLike}
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  ) : (
+                    <HiThumbUp
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  )}
+                  <div className="Likes">{likes}</div>
+                </div>
+              </div>
+            </EitherFooter>
+            <LeftGrid>
+              {/* 제목 */}
+              <TitleDiv> {title} </TitleDiv>
+              {/* 날짜 */}
+              <DateDiv>{date.substring(0, 16)}</DateDiv>
             </LeftGrid>
-            <div>
+            <RightGrid>
+              {/* 투표 상태에 따른 버튼 형식 변경 */}
               {!userNickname ? (
                 <ButtonGrid>
                   {SelctButtonA(null, "#101214", false, null, contentA)}
@@ -311,6 +316,7 @@ const EitherListCard = props => {
                     : SelctButtonB(null, "#101214", false, "B", contentB)}
                 </ButtonGrid>
               )}
+              {/* 투표율 그래프 */}
               {showGraph ? (
                 <ProgressGrid>
                   <EitherProgress>
@@ -322,7 +328,7 @@ const EitherListCard = props => {
                   </EitherProgress>
                 </ProgressGrid>
               ) : null}
-            </div>
+            </RightGrid>
           </TitleButtonGrid>
         </div>
       </Container>
@@ -331,15 +337,21 @@ const EitherListCard = props => {
 };
 
 const Container = styled.div`
-  width: 840px;
-  height: 253px;
+  max-width: 840px;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
   margin: 20px auto;
   border: 2px solid #00397c;
   border-radius: 10px;
   background-color: #ffffff;
-  padding: 52px 57px 39px 56px;
+  padding: 44px 70px 60px 56px;
   position: relative;
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(80%);
+    margin: auto;
+    padding: 10% 6%;
+  }
 `;
 const MenuButtonGrid = styled.div`
   .div {
@@ -352,31 +364,47 @@ const MenuButtonGrid = styled.div`
 const TitleButtonGrid = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 110px;
+  height: 100%;
 `;
 const LeftGrid = styled.div`
-  width: 47%;
+  width: 48%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+const RightGrid = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const TitleDiv = styled.div`
   width: 100%;
-  height: 48px;
   font-size: 20px;
   font-weight: bold;
   word-break: break-all;
+  @media screen and (max-width: ${mobile}) {
+    font-size: 17px;
+  }
 `;
 const DateDiv = styled.div`
-  margin: 8px auto;
+  margin: 10px 0px;
   font-size: 11px;
   color: #868e96;
+  position: relative;
 `;
 const ButtonGrid = styled.div`
-  width: 355px;
+  max-width: 365px;
+  width: 100%;
   height: 100%;
   margin: 0px;
 `;
 const EitherButtonA = styled.button`
-  width: 177px;
-  height: 117px;
+  width: 50%;
+  min-height: 120px;
+  height: 100%;
   border: 2px solid #00397c;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -384,10 +412,14 @@ const EitherButtonA = styled.button`
   line-height: 23px;
   cursor: pointer;
   margin-right: -1px;
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
 `;
 const EitherButtonB = styled.button`
-  width: 177px;
-  height: 117px;
+  width: 50%;
+  min-height: 120px;
+  height: 100%;
   border: 2px solid #00397c;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -395,6 +427,9 @@ const EitherButtonB = styled.button`
   line-height: 23px;
   cursor: pointer;
   margin-left: -1px;
+  @media screen and (max-width: ${mobile}) {
+    width: 50%;
+  }
 `;
 const ButtonText = styled.div`
   word-break: break-all;
@@ -442,10 +477,11 @@ const ProgressLabel = styled.div`
   }
 `;
 const EitherFooter = styled.div`
-  width: 100%;
-  position: relative;
+  width: 39%;
+  position: absolute;
+  top: 180px;
+  left: 56px;
   align-items: center;
-  margin-top: 60px;
 
   .Position {
     width: 100%;
@@ -453,14 +489,27 @@ const EitherFooter = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+  .Profile {
+    width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      transform: scale(0.8);
+    }
+  }
   .Grid {
     color: #e25b45;
     display: flex;
     align-items: center;
+    @media screen and (max-width: ${mobile}) {
+      transform: scale(0.8);
+    }
   }
   .Likes {
     font-size: 14px;
     margin-left: 14px;
+    @media screen and (max-width: ${mobile}) {
+      transform: scale(0.8);
+      margin-left: 10px;
+    }
   }
 `;
 const TotalCntGrid = styled.div`
@@ -468,10 +517,13 @@ const TotalCntGrid = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 20px;
+  @media screen and (max-width: ${mobile}) {
+    transform: scale(0.9);
+    margin-right: 10px;
+  }
 `;
 const TotalCntDiv = styled.div`
   font-size: 14px;
-  line-height: 20px;
   color: #868e96;
   margin-left: 8px;
 `;
