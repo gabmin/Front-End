@@ -45,7 +45,7 @@ const MultiCard = props => {
         <Container>
           <Card>
             <TitleWrapper>
-              <TitleText>{title}</TitleText>
+              <TitleText onClick={goToDetail}>{title}</TitleText>
             </TitleWrapper>
             <DateWarpper>
               <DateText>{date.substring(0, 16)}</DateText>
@@ -178,8 +178,8 @@ const ContainerB = styled.div`
 
 const Card = styled.div`
   width: 100%;
-  height: 600px;
-
+  height: 100%;
+  position: relative;
   margin: auto;
   word-break: break-all;
 `;
@@ -196,6 +196,11 @@ const TitleWrapper = styled.div`
 const TitleText = styled.p`
   font-size: 20px;
   margin: 0 auto;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-3px);
+    transition: transform 200ms;
+  }
 `;
 
 const DateWarpper = styled.div`
@@ -266,8 +271,8 @@ const TempWarpper = styled.div``;
 
 const FooterWrapper = styled.div`
   position: absolute;
-  top: 420px;
-  width: 80%;
+  bottom: -4px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

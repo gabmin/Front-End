@@ -105,9 +105,15 @@ const Multi = props => {
         ) : (
           <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
         )}
-        <button onClick={viewList}>list</button>
-        <button onClick={viewSlide}>slide</button>
       </TabBtnWarpper>
+      <QuestionWarpper>
+        <ViewWarpper>
+          <button onClick={viewSlide}>slide</button>
+          <button onClick={viewList}>list</button>
+        </ViewWarpper>
+
+        <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+      </QuestionWarpper>
       {changeView === false ? (
         <SliderWarpper>
           {PostDBLoading ? <LoadingBubble /> : null}
@@ -133,9 +139,6 @@ const Multi = props => {
           )}
         </PaginationWarpper>
       )}
-      <QuestionBtnWarpper>
-        <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
-      </QuestionBtnWarpper>
     </Container>
   );
 };
@@ -197,18 +200,18 @@ const TabBtnOn = styled.button`
   }
 `;
 
-const SliderWarpper = styled.div`
-  margin: 0px auto;
+const QuestionWarpper = styled.div`
+  margin: 16px auto -8px auto;
   width: 100%;
-  height: 100%;
-`;
-
-const PaginationWarpper = styled.div``;
-
-const QuestionBtnWarpper = styled.div`
-  margin: 0 auto;
-  width: 100%;
+  max-width: 840px;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+    width: 80%;
+  }
 `;
 
 const QuestionBtn = styled.button`
@@ -228,5 +231,15 @@ const QuestionBtn = styled.button`
     transform: scale(0.9);
   }
 `;
+
+const ViewWarpper = styled.div``;
+
+const SliderWarpper = styled.div`
+  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+`;
+
+const PaginationWarpper = styled.div``;
 
 export default Multi;

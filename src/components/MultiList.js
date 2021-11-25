@@ -65,20 +65,20 @@ const MultiList = props => {
                   <Nickname
                     userId={user}
                     nickname={nickname}
-                    fontSize={"14px"}
-                    width={"32px"}
-                    height={"32px"}
+                    fontSize={"12px"}
+                    width={"16px"}
+                    height={"16px"}
                   ></Nickname>
                 </NickText>
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
                 <CommentWarpper>
-                  <FiMessageSquare size={24} />{" "}
+                  <FiMessageSquare size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={24} />
+                  <FiThumbsUp size={16} />
                   <TotalLike>{likeCnt}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
@@ -106,20 +106,20 @@ const MultiList = props => {
                   <Nickname
                     userId={user}
                     nickname={nickname}
-                    fontSize={"14px"}
-                    width={"32px"}
-                    height={"32px"}
+                    fontSize={"12px"}
+                    width={"16px"}
+                    height={"16px"}
                   ></Nickname>
                 </NickText>
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
                 <CommentWarpper>
-                  <FiMessageSquare size={24} />{" "}
+                  <FiMessageSquare size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={24} />
+                  <FiThumbsUp size={16} />
                   <TotalLike>{likeCnt}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
@@ -135,8 +135,8 @@ const Container = styled.div`
   text-align: left;
   width: 840px;
   height: 254px;
-  padding: 46px 32px;
-  margin: 70px auto;
+  padding: 46px 56px;
+  margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -155,8 +155,8 @@ const ContainerB = styled.div`
   text-align: left;
   width: 840px;
   height: 254px;
-  padding: 46px 32px;
-  margin: 70px auto;
+  padding: 46px 56px;
+  margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -178,7 +178,7 @@ const ContainerB = styled.div`
 const Card = styled.div`
   width: 100%;
   height: 100%;
-
+  position: relative;
   margin: auto;
   word-break: break-all;
 `;
@@ -193,8 +193,13 @@ const TitleWrapper = styled.div`
 `;
 
 const TitleText = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   margin: 0 auto;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-3px);
+    transition: transform 200ms;
+  }
 `;
 
 const DateWarpper = styled.div`
@@ -202,7 +207,7 @@ const DateWarpper = styled.div`
 `;
 
 const DateText = styled.p`
-  font-size: 11px;
+  font-size: 10px;
   text-align: left;
   margin: 8px auto;
   color: ${colors.gray5};
@@ -215,12 +220,12 @@ const DesWrapper = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 9;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 `;
 
 const DesText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: ${colors.gray5};
 `;
 
@@ -262,22 +267,25 @@ const VoteBtnB = styled.button`
 
 const FooterWrapper = styled.div`
   position: absolute;
-  top: 200px;
-  width: 80%;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0 auto -12px auto;
+  /* align-items: flex-end; */
 `;
 
 const UserWrapper = styled.div`
   font-size: 6px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 const NickText = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   color: ${colors.darkGray};
   &:hover {
     transform: translateY(-3px);
