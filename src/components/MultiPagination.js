@@ -1,58 +1,79 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 
 import colors from "../shared/colors";
-import Comment from "./Comment";
-
-// const dataList = useSelector(state => state.multiDetail.multiDetail);
+import MultiList from "../components/MultiList";
+import { mobile } from "../shared/style";
+import { SetParams } from "../redux/reducers/paramsSlice";
 
 function Items({ currentItems }) {
+  const { PostDBDone } = useSelector(state => state.multiCard);
+
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
-    <>
-      <TempWarpper>
-        {currentItems &&
-          currentItems.map((p, i) => (
-            <div>
-              <Comment
-                // dataList={dataList}
-                multiId={p.multi}
-                nickname={p.nickname}
-                comment={p.comment}
-                commentDate={p.date}
-                likeCnt={p.likeCnt}
-                id={p.id}
-                deleted={p.deleted}
-                liked={p.liked}
-                user={p.user}
-              />
-            </div>
-          ))}
-      </TempWarpper>
-    </>
+    <Container>
+      <ListWarpper>
+        {PostDBDone === true && (
+          <div>
+            {currentItems &&
+              currentItems?.map((p, i) => (
+                <CardWarpper>
+                  <MultiList
+                    multiId={p.multiId}
+                    title={p.title}
+                    description={p.description}
+                    user={p.user}
+                    date={p.date}
+                    editedDate={p.editedDate}
+                    completed={p.completed}
+                    likeCnt={p.likeCnt}
+                    commentCnt={p.commentCnt}
+                    nickname={p.nickname}
+                  />
+                </CardWarpper>
+              ))}
+          </div>
+        )}
+      </ListWarpper>
+      <TopBtn onClick={goToTop}>TOP</TopBtn>
+    </Container>
   );
 }
 
-const CommentList = ({ items, itemsPerPage = 5 }) => {
+const MultiPagination = ({ items, itemsPerPage = 5 }) => {
+  const dispatch = useDispatch();
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  console.log(currentItems);
+  const [currentPage, setCurrentPage] = useState(0);
+  const paramsId = useSelector(state => state.params.paramsId);
+  const target = items.findIndex(p => {
+    console.log("pppppp", paramsId);
+    return p.multiId == paramsId;
+  });
+  console.log("length", Math.floor(target / itemsPerPage));
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
-    // setItemOffset(pageCount);
-    console.log("pageCount", pageCount);
-  }, [itemOffset, itemsPerPage, items, pageCount]);
+    if (currentPage === Math.floor(target / itemsPerPage)) {
+      window.scroll(
+        0,
+        (target % itemsPerPage) * (document.body.scrollHeight / itemsPerPage),
+      );
+    }
+  }, [itemOffset, itemsPerPage, items, target, currentPage]);
 
   const handlePageClick = event => {
-    // window.scroll(0, 0);
     const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log("newOffset", newOffset);
     setItemOffset(newOffset);
+    setCurrentPage(event.selected);
+    window.scroll(0, 0);
   };
 
   return (
@@ -76,7 +97,7 @@ const CommentList = ({ items, itemsPerPage = 5 }) => {
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
-        initialPage={Math.ceil(items.length / itemsPerPage) - 1}
+        initialPage={target !== -1 ? Math.floor(target / itemsPerPage) : 0}
       />
     </StyledPagination>
   );
@@ -130,9 +151,30 @@ const StyledPagination = styled.div`
   }
 `;
 
-const TempWarpper = styled.div`
+const Container = styled.div`
   width: 100%;
-  margin: auto;
+  height: 100%;
+  margin: 0 auto;
 `;
 
-export default CommentList;
+const ListWarpper = styled.div`
+  /* height: 100%; */
+`;
+
+const CardWarpper = styled.div`
+  /* height: 100%; */
+`;
+
+const TopBtn = styled.button`
+  display: block;
+  margin: 5% 8% 20px auto;
+  font-weight: 700;
+  border: none;
+  background-color: ${colors.white};
+  color: ${colors.blue};
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-position: under;
+`;
+
+export default MultiPagination;

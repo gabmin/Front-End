@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import { useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 const MultiSlick = props => {
   const CardList = props.cardList;
   const { PostDBDone } = useSelector(state => state.multiCard);
+  const checkRef = useRef();
   console.log("Card", CardList);
   const settings = {
     className: "center",
@@ -106,12 +107,16 @@ const MultiSlick = props => {
   //     </div>
   //   );
   // }
+  const onCheck = e => {
+    console.log("eeee", e);
+  };
+  console.log("checker", checkRef);
 
   return (
     <Container>
       <SliderWarpper>
         {PostDBDone === true && (
-          <StyledSlider {...settings}>
+          <StyledSlider {...settings} ref={checkRef}>
             {CardList?.map((p, i) => (
               <CardWarpper>
                 <MultiCard

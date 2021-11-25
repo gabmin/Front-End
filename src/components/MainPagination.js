@@ -48,7 +48,6 @@ const MainPagination = ({ items, itemsPerPage = 5 }) => {
   }, [itemOffset, itemsPerPage, items]);
 
   const handlePageClick = event => {
-    window.scroll(0, 0);
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };

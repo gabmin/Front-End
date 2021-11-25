@@ -32,7 +32,7 @@ const MultiComment = props => {
           <div>
             <CommentList
               multiId={multiId}
-              dataList={dataList}
+              items={dataList.comment}
               // render={render}
               // renderState={renderState}
             />

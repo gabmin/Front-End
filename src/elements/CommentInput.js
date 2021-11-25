@@ -25,7 +25,7 @@ const CommentInput = props => {
     if (comment == "") {
       window.alert("댓글 내용을 입력해주세요");
     } else {
-      dispatch(AddCommentDB({ multiId, data: { comment, date } }));
+      dispatch(AddCommentDB({ multiId, data: { comment } }));
       inputReset();
     }
     console.log("comment", comment);
