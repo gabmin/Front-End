@@ -236,6 +236,12 @@ const VoteBtn = styled.button`
   font-size: 16px;
   color: ${colors.white};
   cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.white};
+    color: ${colors.red};
+    border: 1px ${colors.red} solid;
+  }
 `;
 
 const VoteBtnB = styled.button`
@@ -249,6 +255,11 @@ const VoteBtnB = styled.button`
   font-size: 16px;
   color: ${colors.white};
   cursor: pointer;
+  &:hover {
+    background-color: ${colors.white};
+    color: ${colors.red};
+    border: 1px ${colors.red} solid;
+  }
 `;
 
 const TempWarpper = styled.div``;
@@ -272,6 +283,10 @@ const UserWrapper = styled.div`
 const NickText = styled.p`
   font-size: 14px;
   color: ${colors.darkGray};
+  &:hover {
+    transform: translateY(-3px);
+    transition: transform 200ms;
+  }
 `;
 
 const InfoWarpper = styled.div`
