@@ -39,9 +39,10 @@ const Either = props => {
   const PostCompleteList = eitherPostComplete.either;
 
   const [select, setSelect] = useState("checkEither");
-  const [grid, setGrid] = useState("slick");
   //보여주기 상태 (초기값 전체보기)
   const [status, setStatus] = useState("post");
+  //보여주기 형식 (초기값 카드형)
+  const [changeView, setChangeView] = useState(viewStatus);
 
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
@@ -56,23 +57,20 @@ const Either = props => {
       dispatch(PostCompleteDB("all"));
       setStatus("Post");
     }
-  }, [dispatch, paramsId, grid]);
+  }, [dispatch, paramsId, viewStatus]);
 
   //전체 게시글 보여주기
   const onClickPost = () => {
-    dispatch(PostDB(paramsId));
     setStatus("Post");
   };
 
   //진행중 게시글 보여주기
   const onClickPosting = () => {
-    dispatch(PostingDB(paramsId));
     setStatus("Posting");
   };
 
   //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
-    dispatch(PostCompleteDB(paramsId));
     setStatus("CompletePost");
   };
 
@@ -91,12 +89,16 @@ const Either = props => {
 
   // 카드 형식으로 보여주기
   const setSlickCard = () => {
-    setGrid("slick");
+    setChangeView(false);
+    dispatch(SetView(false));
+    dispatch(SetParams("all"));
   };
 
   // 리스트 형식으로 보여주기
   const setListCard = () => {
-    setGrid("list");
+    setChangeView(true);
+    dispatch(SetView(true));
+    dispatch(SetParams("all"));
   };
 
   return (
@@ -148,7 +150,7 @@ const Either = props => {
         </EitherButtonGrid>
         <FormatWrapper>
           <FormatChangeGrid>
-            {grid === "slick" ? (
+            {changeView === false ? (
               <BsCardText // 카드형식으로 보기 버튼 (파란색)
                 onClick={setSlickCard}
                 style={{
@@ -169,7 +171,7 @@ const Either = props => {
                 }}
               ></BsCardText>
             )}
-            {grid === "list" ? (
+            {changeView === true ? (
               <BsList // 리스트형식으로 보기 버튼 (파란색)
                 onClick={setListCard}
                 style={{
@@ -193,7 +195,7 @@ const Either = props => {
           </FormatChangeGrid>
           <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
         </FormatWrapper>
-        {grid === "slick" ? ( //카드형식
+        {changeView === false ? ( //카드형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
             {PostingDBLoading ? <LoadingBubble /> : null}
@@ -279,7 +281,7 @@ const SlickLayout = styled.div`
 `;
 const FormatWrapper = styled.div`
   width: 65%;
-  margin: 20px auto;
+  margin: 16px auto;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {

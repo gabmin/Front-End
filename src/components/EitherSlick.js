@@ -151,7 +151,7 @@ const Wrap = styled.div`
     }
   }
   .slick-slider {
-    margin: -20px auto;
+    margin: -40px auto;
     width: 100%;
     @media screen and (max-width: ${mobile}) {
       z-index: 0;
