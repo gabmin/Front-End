@@ -45,7 +45,7 @@ const Either = props => {
     dispatch(PostDB(paramsId));
     dispatch(PostingDB(paramsId));
     setStatus("Post");
-  }, [dispatch, paramsId]);
+  }, [dispatch, paramsId, grid]);
 
   //전체 게시글 보여주기
   const onClickPost = () => {
