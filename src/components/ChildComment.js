@@ -46,8 +46,6 @@ const ChildComment = props => {
   const inputRef = useRef();
   const editInputRef = useRef();
 
-  console.log("childComment", comment);
-
   useEffect(() => {
     if (dataList.multi.completed === 1) {
       setAddInput(false);

@@ -8,14 +8,20 @@ import colors from "../shared/colors";
 import { mobile } from "../shared/style";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/multiCard";
 import LoadingBubble from "../elements/LoadingBubble";
+import MultiPagination from "../components/MultiPagination";
+import { SetView } from "../redux/reducers/viewSlice";
+import { SetParams } from "../redux/reducers/paramsSlice";
 
 const Multi = props => {
   const dispatch = useDispatch();
+  const paramsId = useSelector(state => state.params.paramsId);
+  const viewStatus = useSelector(state => state.view.viewStatus);
   const [select, setSelect] = useState("checkMulti");
   const [status, setStatus] = useState("Post");
   const [loadDone, setLoadDone] = useState(false);
+  const [changeView, setChangeView] = useState(viewStatus);
   const userNickname = localStorage.getItem("nickname");
-  const paramsId = useSelector(state => state.params.paramsId);
+
   const {
     multiPost,
     multiPosting,
@@ -31,23 +37,31 @@ const Multi = props => {
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
   const completeCardList = multiPostComplete && multiPostComplete.multi;
-  console.log("cardLIstMulti", cardList);
+  console.log("cardList", cardList);
+  console.log("ingCardList", ingCardList);
 
   useEffect(() => {
-    dispatch(PostDB(paramsId));
-    setStatus("Post");
-  }, [dispatch, paramsId]);
+    if (viewStatus === false) {
+      dispatch(PostDB(paramsId));
+      dispatch(PostingDB(paramsId));
+      dispatch(PostCompleteDB(paramsId));
+      setStatus("Post");
+    } else {
+      dispatch(PostDB("all"));
+      dispatch(PostingDB("all"));
+      dispatch(PostCompleteDB("all"));
+      setStatus("Post");
+    }
+    console.log("view", viewStatus);
+  }, [dispatch, paramsId, viewStatus]);
 
   const showPost = () => {
-    dispatch(PostDB(paramsId));
     setStatus("Post");
   };
   const showPosting = () => {
-    dispatch(PostingDB(paramsId));
     setStatus("Posting");
   };
   const showCompletePost = () => {
-    dispatch(PostCompleteDB(paramsId));
     setStatus("CompletePost");
   };
 
@@ -56,8 +70,22 @@ const Multi = props => {
       window.alert("로그인 후 이용 가능합니다");
       history.push("/login");
     } else {
+      window.scroll(0, 0);
       history.push("/write");
     }
+  };
+
+  const viewList = () => {
+    setChangeView(true);
+    dispatch(SetView(true));
+    dispatch(SetParams("all"));
+    // console.log(changeView);
+  };
+  const viewSlide = () => {
+    setChangeView(false);
+    dispatch(SetView(false));
+    dispatch(SetParams("all"));
+    // console.log(changeView);
   };
   return (
     <Container>
@@ -77,19 +105,34 @@ const Multi = props => {
         ) : (
           <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
         )}
+        <button onClick={viewList}>list</button>
+        <button onClick={viewSlide}>slide</button>
       </TabBtnWarpper>
-      <SliderWarpper>
-        {PostDBLoading === true && <LoadingBubble />}
-        {status === "Post" && PostDBDone === true && (
-          <MultiSlick cardList={cardList} />
-        )}
-        {/* {PostingDBLoading === true && <LoadingBubble />} */}
-        {status === "Posting" && <MultiSlick cardList={ingCardList} />}
-        {/* {PostCompleteDBLoading === true && <LoadingBubble />} */}
-        {status === "CompletePost" && (
-          <MultiSlick cardList={completeCardList} />
-        )}
-      </SliderWarpper>
+      {changeView === false ? (
+        <SliderWarpper>
+          {PostDBLoading ? <LoadingBubble /> : null}
+          {status === "Post" && PostDBDone === true && (
+            <MultiSlick cardList={cardList} />
+          )}
+          {/* {PostingDBLoading === true && <LoadingBubble />} */}
+          {status === "Posting" && <MultiSlick cardList={ingCardList} />}
+          {/* {PostCompleteDBLoading === true && <LoadingBubble />} */}
+          {status === "CompletePost" && (
+            <MultiSlick cardList={completeCardList} />
+          )}
+        </SliderWarpper>
+      ) : (
+        <PaginationWarpper>
+          {PostDBLoading ? <LoadingBubble /> : null}
+          {status === "Post" && PostDBDone === true && (
+            <MultiPagination items={cardList} />
+          )}
+          {status === "Posting" && <MultiPagination items={ingCardList} />}
+          {status === "CompletePost" && (
+            <MultiPagination items={completeCardList} />
+          )}
+        </PaginationWarpper>
+      )}
       <QuestionBtnWarpper>
         <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
       </QuestionBtnWarpper>
@@ -159,6 +202,8 @@ const SliderWarpper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+const PaginationWarpper = styled.div``;
 
 const QuestionBtnWarpper = styled.div`
   margin: 0 auto;

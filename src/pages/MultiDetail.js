@@ -110,7 +110,7 @@ const MultiDetail = props => {
         {DetailDBDone === true && (
           <Wrapper>
             <MenuWarpper>
-              <BackBtn onClick={goToMulti}>
+              <BackBtn data-testid="backBtn" onClick={goToMulti}>
                 <FiArrowLeft />
               </BackBtn>
 
@@ -194,7 +194,7 @@ const MultiDetail = props => {
         {DetailDBDone === true && (
           <Wrapper>
             <MenuWarpper>
-              <BackBtn onClick={goToMulti}>
+              <BackBtn data-testid="backBtn" onClick={goToMulti}>
                 <FiArrowLeft />
               </BackBtn>
 

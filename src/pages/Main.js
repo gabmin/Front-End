@@ -6,10 +6,11 @@ import { SetParams } from "../redux/reducers/paramsSlice";
 import MainSlick from "../components/MainSlick";
 import { getMainData } from "../redux/actions/main";
 import { history } from "../redux/configureStore";
+import LoadingBubble from "../elements/LoadingBubble";
+import MainBanner from "../components/MainBanner";
+import { blue, red, mobile, tablet } from "../shared/style";
 
 import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
-import { blue, red, mobile, tablet } from "../shared/style";
-import LoadingBubble from "../elements/LoadingBubble";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Main = () => {
   const { nickname } = useSelector(state => state.user.userInfo);
 
   useEffect(() => {
-    if (mainDataDone === true) {
+    if (mainDataDone) {
       setTimeout(() => {
         setLoadDone(true);
       }, 200);
@@ -50,112 +51,67 @@ const Main = () => {
     window.scroll(0, 0);
   }, []);
 
-  // const cardList = [
-  //   {
-  //     title: "삼전 풀매수 가나요?",
-  //     content: "내용입니다",
-  //     username: "김개미",
-  //     commentNum: 1,
-  //     likeNum: 11,
-  //   },
-  //   {
-  //     title: "삼전 풀매수 가나요?2",
-  //     content: "내용입니다2",
-  //     username: "김개미",
-  //     commentNum: 2,
-  //     likeNum: 12,
-  //   },
-  //   {
-  //     title: "삼전 풀매수 가나요?3",
-  //     content: "내용입니다3",
-  //     username: "김개미",
-  //     commentNum: 3,
-  //     likeNum: 13,
-  //   },
-  //   {
-  //     title: "삼전 풀매수 가나요?4",
-  //     content: "내용입니다4",
-  //     username: "김개미",
-  //     commentNum: 4,
-  //     likeNum: 14,
-  //   },
-  //   {
-  //     title: "삼전 풀매수 가나요?5",
-  //     content: "내용입니다5",
-  //     username: "김개미",
-  //     commentNum: 5,
-  //     likeNum: 15,
-  //     Comment: {
-  //       parentComment: "zzz",
-  //     },
-  //   },
-  // ];
-
   return (
-    <Container>
-      <Notice>
-        <GoEither
-          onClick={() => {
-            goToWrite("checkEither");
-          }}
-          data-testid="goEitherBtn"
-        >
-          {mainDataLoading === true ? (
-            <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
-          ) : (
-            <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
+    <>
+      <MainBanner />
+      <Container>
+        <Notice>
+          <GoEither
+            onClick={() => {
+              goToWrite("checkEither");
+            }}
+            data-testid="goEitherBtn"
+          >
+            {mainDataLoading === true ? (
+              <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
+            ) : (
+              <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
+            )}
+            <h1> 찬반 질문 작성하기</h1>
+            <StyledGoAnt color="blue" />
+          </GoEither>
+          <GoMulti
+            onClick={() => {
+              goToWrite("checkMulti");
+            }}
+            data-testid="goMultiBtn"
+          >
+            {mainDataLoading === true ? (
+              <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
+            ) : (
+              <h3>들린다... {multiNum}개의 곡소리가.....</h3>
+            )}
+            <h1> 객관식 질문 작성하기</h1>
+            <StyledGoAnt color="white" />
+          </GoMulti>
+        </Notice>
+        <Wrapper height="230px">
+          {loadDone !== true && <LoadingBubble position="absolute" />}
+          {mainDataDone === true && (
+            <MainSlick cardList={either} type="either"></MainSlick>
           )}
-          <h1> 찬반 질문 작성하기</h1>
-          <StyledGoAnt color="blue" />
-        </GoEither>
-        <GoMulti
-          onClick={() => {
-            goToWrite("checkMulti");
-          }}
-          data-testid="goMultiBtn"
-        >
-          {mainDataLoading === true ? (
-            <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
-          ) : (
-            <h3>들린다... {multiNum}개의 곡소리가.....</h3>
+        </Wrapper>
+        <Wrapper height="500px">
+          {mainDataDone === true && (
+            <MainSlick cardList={multi} type="multi"></MainSlick>
           )}
-          <h1> 객관식 질문 작성하기</h1>
-          <StyledGoAnt color="white" />
-        </GoMulti>
-      </Notice>
-      <Wrapper height="230px">
-        {loadDone !== true && <LoadingBubble position="absolute" />}
-        {mainDataDone === true && (
-          <MainSlick cardList={either} type="either"></MainSlick>
-        )}
-      </Wrapper>
-      <Wrapper height="500px">
-        {mainDataDone === true && (
-          <MainSlick cardList={multi} type="multi"></MainSlick>
-        )}
-      </Wrapper>
-      <Counts>
-        <div className="countsWrapper">
-          <p className="countNum">{postingNum}</p>
-          <p className="countType">곡소리</p>
-        </div>
-        <div className="betweenLine"></div>
-        <div className="countsWrapper">
-          <p className="countNum">{attendNum}</p>
-          <p className="countType">참여</p>
-        </div>
-      </Counts>
-      <Top onClick={onClickTop}>TOP</Top>
-    </Container>
+        </Wrapper>
+        <Counts>
+          <div className="countsWrapper">
+            <p className="countNum">{postingNum}</p>
+            <p className="countType">곡소리</p>
+          </div>
+          <div className="betweenLine"></div>
+          <div className="countsWrapper">
+            <p className="countNum">{attendNum}</p>
+            <p className="countType">참여</p>
+          </div>
+        </Counts>
+        <Top onClick={onClickTop}>TOP</Top>
+      </Container>
+    </>
   );
 };
-
-const MainLoading = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: lightgray;
-  background-image: url("../images/sadAntIcon.png");
-`;
 
 const Container = styled.div`
   display: flex;
@@ -164,14 +120,14 @@ const Container = styled.div`
   align-items: center;
   width: 67%;
   max-width: 1280px;
-  height: 1170px;
   margin: auto;
   user-select: none;
 
   @media screen and (max-width: 1540px) {
-    top: 50px;
+    top: 20px;
     flex-direction: column;
     height: 1300px;
+    width: 75%;
   }
 `;
 
@@ -187,7 +143,7 @@ const Top = styled.div`
 
   @media screen and (max-width: 1540px) {
     bottom: 100px;
-    right: -40px;
+    right: -30px;
   }
 `;
 
@@ -202,6 +158,10 @@ const Notice = styled.div`
 
   @media screen and (max-width: 1540px) {
     flex-direction: column;
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    height: 130px;
   }
 `;
 
@@ -226,13 +186,20 @@ const GoEither = styled.div`
   h1 {
     margin: 5px 0 0;
     color: ${blue};
-    font-size: 24px;
+    font-size: 20px;
   }
   h3 {
     margin: 0;
     color: ${blue};
     font-size: 14px;
     font-weight: 500;
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 10px;
   }
 `;
 
@@ -266,8 +233,15 @@ const GoMulti = styled.div`
     padding: 0 10px;
 
     h1 {
-      font-size: 22px;
+      font-size: 20px;
     }
+  }
+
+  @media screen and (max-width: ${mobile}) {
+    width: 100%;
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 10px;
   }
 `;
 
@@ -294,7 +268,7 @@ const Wrapper = styled.div`
   margin: 10px 0 80px;
 
   @media screen and (max-width: 1540px) {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 `;
 

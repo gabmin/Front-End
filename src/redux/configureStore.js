@@ -14,6 +14,7 @@ import multiDetailSlice from "./reducers/multiDetailSlice";
 import commentSlice from "./reducers/commentSlice";
 import childCommentSlice from "./reducers/childCommentSlice";
 import paramsSlice from "./reducers/paramsSlice";
+import viewSlice from "./reducers/viewSlice";
 
 export const history = createBrowserHistory();
 
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   profile: profileSlice.reducer,
   search: searchSlice.reducer,
   params: paramsSlice.reducer,
+  view: viewSlice.reducer,
   comment: commentSlice.reducer,
   childComment: childCommentSlice.reducer,
 });

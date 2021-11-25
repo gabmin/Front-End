@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
@@ -7,6 +7,7 @@ import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { loginCheck, logoutUser } from "../redux/reducers/userSlice";
+import useOnScreen from "../hooks/useOnScreen";
 
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
@@ -16,15 +17,15 @@ import { blue, red, mobile, tablet } from "../shared/style";
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
-  // const { loginCheckDone } = useSelector(state => state.user);
 
   const [search, setSearch] = useState("");
+  const scrollRef = useRef();
 
-  console.log("nick");
-  console.log(nickname);
+  const onScreen = useOnScreen(scrollRef, 0.6);
 
   useEffect(() => {
     dispatch(loginCheck());
@@ -75,7 +76,7 @@ const Header = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container ref={scrollRef}>
       <Top>
         <Logo
           height="26px"
@@ -84,55 +85,57 @@ const Header = () => {
           cursor="pointer"
         />
       </Top>
-      <Bottom>
-        <MenuWrapper>
-          <StyledSymbol onClick={onClickSimbol} />
-          <span onClick={onClickEither}>찬반</span>
-          <span onClick={onClickMulti}>객관식</span>
-        </MenuWrapper>
-        <Wrapper>
-          <StyledSearch onClick={submitSearch} />
+      <BottomWrapper topOnScreen={onScreen}>
+        <Bottom>
+          <MenuWrapper>
+            <StyledSymbol onClick={onClickSimbol} />
+            <span onClick={onClickEither}>찬반</span>
+            <span onClick={onClickMulti}>객관식</span>
+          </MenuWrapper>
+          <Wrapper>
+            <StyledSearch onClick={submitSearch} />
+            <input
+              placeholder="검색..."
+              onKeyPress={submitSearch}
+              onChange={onChangeSearch}
+              value={search}
+              data-testid="searchInput"
+            />
+          </Wrapper>
+          <IconWrapper loggedIn={nickname !== "GUEST"}>
+            {nickname === "GUEST" && (
+              <span onClick={onClickLogin} className="loginBtn">
+                로그인
+              </span>
+            )}
+            {nickname !== "GUEST" && (
+              <>
+                <Menu
+                  menuButton={
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <StyledCommonIcon />
+                      <span data-testid="headerNick">{nickname}</span>
+                      <StyledDown />
+                    </div>
+                  }
+                >
+                  <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
+                  <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+                </Menu>
+              </>
+            )}
+          </IconWrapper>
+        </Bottom>
+        <SearchMobile>
+          <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
           <input
             placeholder="검색..."
             onKeyPress={submitSearch}
             onChange={onChangeSearch}
             value={search}
-            data-testid="searchInput"
           />
-        </Wrapper>
-        <IconWrapper loggedIn={nickname !== "GUEST"}>
-          {nickname === "GUEST" && (
-            <span onClick={onClickLogin} className="loginBtn">
-              로그인
-            </span>
-          )}
-          {nickname !== "GUEST" && (
-            <>
-              <Menu
-                menuButton={
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <StyledCommonIcon />
-                    <span data-testid="headerNick">{nickname}</span>
-                    <StyledDown />
-                  </div>
-                }
-              >
-                <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
-                <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
-              </Menu>
-            </>
-          )}
-        </IconWrapper>
-      </Bottom>
-      <SearchMobile>
-        <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
-        <input
-          placeholder="검색..."
-          onKeyPress={submitSearch}
-          onChange={onChangeSearch}
-          value={search}
-        />
-      </SearchMobile>
+        </SearchMobile>
+      </BottomWrapper>
     </Container>
   );
 };
@@ -141,13 +144,12 @@ const SearchMobile = styled.div`
   display: flex;
   flex-direction: row;
   max-width: 1280px;
-  width: 90%;
-  height: 54px;
+  width: 75%;
   align-items: center;
   justify-content: center;
+
   input {
-    max-width: 400px;
-    width: 90%;
+    width: 100%;
     height: 32px;
     padding-left: 32px;
     border: 1px solid #e25b45;
@@ -164,7 +166,6 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 120px;
-  border-bottom: 1px solid ${red};
 
   span {
     cursor: pointer;
@@ -181,12 +182,33 @@ const Top = styled.div`
   justify-content: center;
 `;
 
+const BottomWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  position: ${props => (props.topOnScreen ? "relative" : "fixed")};
+  width: 100%;
+  height: 64px;
+  background-color: white;
+  border: 1px solid ${red};
+  box-sizing: border-box;
+  z-index: 99999;
+  transition: all 150ms cubic-bezier(0.19, 0.855, 0.265, 0.985);
+
+  @media screen and (max-width: ${mobile}) {
+    flex-direction: column;
+    align-items: center;
+    height: 90px;
+    border: none;
+    padding: 0 0 5px;
+  }
+`;
+
 const Bottom = styled.div`
   display: flex;
-  position: relative;
   max-width: 1280px;
   width: 90%;
-  height: 64px;
+  height: 100%;
+  background-color: white;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
@@ -199,12 +221,13 @@ const Bottom = styled.div`
     border-radius: 9px;
   }
 
-  /* @media screen and (max-width: ${mobile}) {
-    display: none;
-  } */
+  @media screen and (max-width: ${mobile}) {
+    width: 90%;
+  }
 `;
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   width: 30%;
   flex-direction: row;
@@ -215,8 +238,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledSearch = styled(FiSearch)`
-  position: relative;
-  left: 27px;
+  position: absolute;
+  left: 11px;
   min-width: 16px;
   min-height: 16px;
   color: #e25b45;
@@ -228,6 +251,7 @@ const StyledSymbol = styled(Symbol)`
   user-select: none;
   height: 37px;
   margin-right: 30px;
+
   @media screen and (max-width: ${mobile}) {
     display: none;
   }
@@ -307,10 +331,6 @@ const IconWrapper = styled.div`
   @media screen and (max-width: ${mobile}) {
     width: 40%;
   }
-`;
-
-const MenuLoading = styled.div`
-  width: 30%;
 `;
 
 export default Header;
