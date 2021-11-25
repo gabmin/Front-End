@@ -35,11 +35,11 @@ const EitherWrite = props => {
   };
   //contentA 데이터
   const onChangeContentA = e => {
-    setContentA(e.target.value.substr(0, 30));
+    setContentA(e.target.value.substr(0, 10));
   };
   //contentB 데이터
   const onChangeContentB = e => {
-    setContentB(e.target.value.substr(0, 30));
+    setContentB(e.target.value.substr(0, 10));
   };
 
   //저장하기
@@ -73,7 +73,7 @@ const EitherWrite = props => {
         <EitherButtonA>
           <ButtonInput
             type="text"
-            placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
+            placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (10자 이내)"
             value={contentA}
             onChange={onChangeContentA}
             data-testid="contentA"
@@ -82,7 +82,7 @@ const EitherWrite = props => {
         <EitherButtonB>
           <ButtonInput
             type="text"
-            placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (30자 이내)"
+            placeholder="박스를 클릭해서 항목에 대한 상세 설명을 입력해보세요. (10자 이내)"
             value={contentB}
             onChange={onChangeContentB}
             data-testid="contentB"

@@ -30,7 +30,6 @@ const EitherCompleteCard = props => {
   } = props;
 
   //유저정보(닉네임)
-  const userInfo = useSelector(state => state.user.userInfo);
   const userNickname = localStorage.getItem("nickname");
 
   const [percent, setPercent] = useState("");
@@ -53,6 +52,11 @@ const EitherCompleteCard = props => {
       setAction(null);
     }
   }, [deletePostDBDone, deletePostDBError]);
+
+  //Props likeCnt 변화시 재렌더링
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
@@ -81,11 +85,13 @@ const EitherCompleteCard = props => {
       setLikeState(true);
     }
   };
+
   //삭제하기
   const onClickDelete = () => {
     dispatch(deletePostDB(eitherId));
     setAction(true);
   };
+
   //버튼A 상태 보여주기
   const SelctButtonA = (BGcolor, content) => {
     return (
@@ -97,6 +103,7 @@ const EitherCompleteCard = props => {
       </EitherButtonA>
     );
   };
+
   //버튼B 상태 보여주기
   const SelctButtonB = (BGcolor, content) => {
     return (
@@ -108,12 +115,13 @@ const EitherCompleteCard = props => {
       </EitherButtonB>
     );
   };
+
   return (
     <>
       <Container>
         <ManuButtonGrid>
           <div>
-            {nickname === userNickname ? (
+            {nickname === userNickname ? ( // 메뉴버튼
               <div>
                 <Menu
                   menuButton={
@@ -123,7 +131,10 @@ const EitherCompleteCard = props => {
                         backgroundColor: "transparent",
                       }}
                     >
-                      <FiMoreHorizontal size={20} />
+                      <FiMoreHorizontal
+                        size={20}
+                        data-testid="compeleteMenuImage"
+                      />
                     </MenuButton>
                   }
                   menuStyles={{ border: "0px solid" }}
@@ -134,6 +145,7 @@ const EitherCompleteCard = props => {
                       fontSize: "14px",
                     }}
                     onClick={onClickDelete}
+                    data-testid="menuDelete"
                   >
                     삭제하기
                   </MenuItem>
@@ -142,12 +154,16 @@ const EitherCompleteCard = props => {
             ) : null}
           </div>
         </ManuButtonGrid>
+        {/* 제목 */}
         <TitleDiv> {title} </TitleDiv>
+        {/* 날짜 */}
         <DateDiv>{date.substring(0, 16)}</DateDiv>
+        {/* 투표한 인원 수 */}
         <TotalCntGrid>
           <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
+        {/* 투표 상태에 따른 버튼 형식 변경 */}
         {!userNickname ? (
           <ButtonGrid>
             {SelctButtonA(null, contentA)}
@@ -173,6 +189,7 @@ const EitherCompleteCard = props => {
             )}
           </ButtonGrid>
         )}
+        {/* 투표율 그래프 */}
         <ProgressGrid>
           <EitherProgress>
             <ProgressLabel>
@@ -185,6 +202,7 @@ const EitherCompleteCard = props => {
         <EitherFooter>
           <div className="Position">
             <div>
+              {/* 프로필 */}
               <Nickname
                 nickname={nickname}
                 userId={user}
@@ -194,7 +212,7 @@ const EitherCompleteCard = props => {
               />
             </div>
             <div className="Grid">
-              {!likeState ? (
+              {!likeState ? ( //좋아요 이미지
                 <FiThumbsUp
                   onClick={onClickLike}
                   style={{

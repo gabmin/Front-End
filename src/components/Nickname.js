@@ -43,6 +43,7 @@ const StyledCommonIcon = styled(CommonIcon)`
 
 const Nick = styled.span`
   font-size: ${props => props.fontSize};
+  width: 100%;
 `;
 
 export default Nickname;

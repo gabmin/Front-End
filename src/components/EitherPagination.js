@@ -2,7 +2,8 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-import SearchCard from "./SearchCard";
+import EitherListCard from "./EitherListCard";
+import EitherCompleteListCard from "./EitherCompleteListCard";
 
 import {
   blue,
@@ -15,23 +16,47 @@ import {
 } from "../shared/style";
 
 function Items({ currentItems }) {
+  console.log(currentItems);
   return (
     <div className="items">
       {currentItems &&
-        currentItems.map((v, i) => (
-          <SearchCard
-            key={i}
-            type={Object.keys(v).includes("eitherId") ? "찬반" : "객관식"}
-            id={v.multiId || v.eitherId}
-            title={v.title}
-            userId={v.user}
-            nickname={v.nickname}
-            date={v.date}
-            completed={v.completed}
-            likeCnt={v.likeCnt}
-            commentCnt={v.commentCnt}
-          />
-        ))}
+        currentItems.map((v, i) =>
+          v.completed === 0 ? (
+            <EitherListCard
+              key={i}
+              eitherId={v.eitherId}
+              nickname={v.nickname}
+              title={v.title}
+              contentA={v.contentA}
+              contentB={v.contentB}
+              date={v.date}
+              likeCnt={v.likeCnt}
+              voteCntA={v.voteCntA}
+              voteCntB={v.voteCntB}
+              liked={v.liked}
+              voted={v.voted}
+              completed={v.completed}
+              user={v.user}
+            />
+          ) : (
+            <EitherCompleteListCard
+              key={i}
+              eitherId={v.eitherId}
+              nickname={v.nickname}
+              title={v.title}
+              contentA={v.contentA}
+              contentB={v.contentB}
+              date={v.date}
+              likeCnt={v.likeCnt}
+              voteCntA={v.voteCntA}
+              voteCntB={v.voteCntB}
+              liked={v.liked}
+              voted={v.voted}
+              completed={v.completed}
+              user={v.user}
+            />
+          ),
+        )}
     </div>
   );
 }
@@ -48,6 +73,7 @@ const MainPagination = ({ items, itemsPerPage = 5 }) => {
   }, [itemOffset, itemsPerPage, items]);
 
   const handlePageClick = event => {
+    window.scroll(0, 0);
     const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };
@@ -80,7 +106,7 @@ const MainPagination = ({ items, itemsPerPage = 5 }) => {
 
 const StyledPagenation = styled.div`
   .pagination {
-    margin: 40px auto;
+    margin: 60px auto;
     display: flex;
     justify-content: center;
     list-style: none;
@@ -89,12 +115,9 @@ const StyledPagenation = styled.div`
     user-select: none;
   }
   .pagination > .active > a {
-    background-color: ${blue};
-    border-color: ${blue};
     color: #fff;
   }
   .pagination > li > a {
-    /* border: 1px solid ${blue}; */
     padding: 5px 10px;
     outline: none;
     cursor: pointer;

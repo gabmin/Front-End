@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import ReactPaginate from "react-paginate";
-
-import SearchCard from "../components/SearchCard";
 
 import { search } from "../redux/actions/search";
-import {
-  blue,
-  red,
-  mobile,
-  tablet,
-  gray5,
-  grayMultiply,
-  darkGray,
-} from "../shared/style";
 import MainPagination from "../components/MainPagination";
 import LoadingBubble from "../elements/LoadingBubble";
+
+import { tablet } from "../shared/style";
 
 const Search = ({ location }) => {
   const dispatch = useDispatch();
