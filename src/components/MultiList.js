@@ -47,8 +47,10 @@ const MultiList = props => {
           <Card>
             <TitleWrapper>
               <TitleText onClick={goToDetail}>{title}</TitleText>
-              <VoteBtn className="Detail" onClick={goToDetail}>
-                투표하기
+              <VoteBtn>
+                <button className="Detail" onClick={goToDetail}>
+                  투표하기
+                </button>
               </VoteBtn>
             </TitleWrapper>
             <DateWarpper>
@@ -148,6 +150,7 @@ const Container = styled.div`
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
     width: 80%;
+    padding: 7% 6%;
   }
 `;
 
@@ -172,6 +175,7 @@ const ContainerB = styled.div`
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
     width: 80%;
+    padding: 7% 6%;
   }
 `;
 
@@ -194,21 +198,31 @@ const TitleWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: ${mobile}) {
+    /* flex-direction: column; */
+  }
 `;
 
 const TitleText = styled.p`
   font-size: 18px;
   /* margin: 0 auto; */
   cursor: pointer;
-  line-height: 26px;
-  &:hover {
-    transform: translateY(-3px);
-    transition: transform 200ms;
+  /* line-height: 26px; */
+  @media screen and (max-width: ${mobile}) {
+    font-size: 18px;
+    margin-right: 5px;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 `;
 
 const DateWarpper = styled.div`
   margin: auto;
+  height: 20px;
 `;
 
 const DateText = styled.p`
@@ -217,6 +231,9 @@ const DateText = styled.p`
   line-height: 20px;
   margin: 10px auto 12px auto;
   color: ${colors.gray5};
+  @media screen and (max-width: ${mobile}) {
+    font-size: 12px;
+  }
 `;
 
 const ContentHr = styled.hr`
@@ -236,30 +253,52 @@ const DesWrapper = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  @media screen and (max-width: ${mobile}) {
+    font-size: 12px;
+    -webkit-line-clamp: 3;
+  }
 `;
 
 const DesText = styled.p`
   font-size: 16px;
-  line-height: 22px;
+  /* line-height: 22px; */
   color: ${colors.gray5};
   /* margin: 0 auto 0 0; */
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
+  }
 `;
 
-const VoteBtn = styled.button`
-  display: block;
+const VoteBtn = styled.div`
   width: 150px;
-  height: 40px;
-  /* margin: 60px auto 0 auto; */
-  border: none;
-  border-radius: 8px;
-  background-color: ${colors.red};
-  font-size: 16px;
-  color: ${colors.white};
-  cursor: pointer;
-  &:hover {
-    background-color: ${colors.white};
-    color: ${colors.red};
-    border: 1px ${colors.red} solid;
+  min-width: 110px;
+
+  .Detail {
+    display: block;
+    width: 150px;
+    height: 40px;
+    margin: 0 0 0 auto;
+
+    border: none;
+    border-radius: 8px;
+    background-color: ${colors.red};
+    font-size: 16px;
+    font-family: "Noto-Sans KR", sans-serif;
+    color: ${colors.white};
+    cursor: pointer;
+    &:hover {
+      background-color: ${colors.white};
+      color: ${colors.red};
+      border: 1px ${colors.red} solid;
+    }
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 110px;
+      height: 36px;
+    }
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 120px;
   }
 `;
 
