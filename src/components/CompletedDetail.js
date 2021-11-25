@@ -75,6 +75,7 @@ const BackBtn = styled.button`
   margin: 10px auto 0 10px;
   border: none;
   font-size: 24px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.gray5};
   background-color: ${colors.white};
 `;

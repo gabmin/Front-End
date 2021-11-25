@@ -288,6 +288,7 @@ const BackBtn = styled.button`
   border: none;
   font-size: 24px;
   font-weight: 400;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.gray4};
   background-color: ${colors.white};
   cursor: pointer;
@@ -317,6 +318,7 @@ const TopBtn = styled.button`
   display: block;
   margin: 5% 8% 20px auto;
   font-weight: 700;
+  font-family: "Noto Sans KR", sans-serif;
   border: none;
   background-color: ${colors.white};
   color: ${colors.blue};

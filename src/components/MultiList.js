@@ -311,6 +311,7 @@ const VoteBtnB = styled.button`
   border-radius: 8px;
   background-color: ${colors.gray5};
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
   cursor: pointer;
   &:hover {

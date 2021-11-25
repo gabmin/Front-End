@@ -168,6 +168,7 @@ const CardWarpper = styled.div`
 const TopBtn = styled.button`
   display: block;
   margin: 5% 8% 20px auto;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   border: none;
   background-color: ${colors.white};

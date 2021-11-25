@@ -156,9 +156,10 @@ const Container = styled.div`
   }
   .slick-slider {
     padding: 30px 0;
-    margin: auto;
+    margin: -40px auto -20px auto;
     width: 100%;
     @media screen and (min-width: ${mobile}) and (max-width: 1300px) {
+      margin: -50px auto -20px auto;
       width: 55%;
     }
     @media screen and (max-width: ${mobile}) {
