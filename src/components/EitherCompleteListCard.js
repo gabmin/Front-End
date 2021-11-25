@@ -408,11 +408,12 @@ const ProgressLabel = styled.div`
 const EitherFooter = styled.div`
   width: 39%;
   position: absolute;
-  top: 179px;
+  top: 71.5%;
   left: 56px;
   align-items: center;
   @media screen and (max-width: ${mobile}) {
-    left: 17px;
+    top: 75.5%;
+    left: 5%;
   }
 
   .Position {

@@ -489,6 +489,7 @@ const EitherFooter = styled.div`
   left: 56px;
   align-items: center;
   @media screen and (max-width: ${mobile}) {
+    top: 75.5%;
     left: 5%;
   }
 
