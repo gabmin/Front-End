@@ -7,8 +7,8 @@ import { blue, red, mobile, tablet } from "../shared/style";
 
 const LoadingBubble = ({ position, height, left }) => (
   <StyledLoading position={position} height={height}>
-    <div class="lds-ellipsis">
-      <img class="fit-picture" src={sadIcon} alt="icon" />
+    <div className="lds-ellipsis">
+      <img className="fit-picture" src={sadIcon} alt="icon" />
       <div></div>
       <div></div>
       <div></div>

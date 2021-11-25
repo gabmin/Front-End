@@ -11,71 +11,11 @@ import { ReactComponent as NextArrow } from "../images/arrowRed.svg";
 import { mobile, tablet } from "../shared/style";
 import { useSelector } from "react-redux";
 
-// //다음으로 넘어가기 버튼
-// function NextArrow(props) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         width: "12.25px",
-//         height: "28px",
-//         zIndex: "1000",
-//       }}
-//       onClick={onClick}
-//     >
-//       <img
-//         src={require("../images/arrowRed.svg").default}
-//         alt="arrowNext"
-//         style={{
-//           position: "absolute",
-//           width: "100%",
-//           height: "100%",
-//           right: "-25px",
-//           border: null,
-//         }}
-//       />
-//     </div>
-//   );
-// }
-// //이전으로 넘어가기 버튼
-// function PrevArrow(props) {
-//   const { className, style, onClick } = props;
-//   return (
-//     <div
-//       className={className}
-//       style={{
-//         ...style,
-//         width: "12.25px",
-//         height: "28px",
-//         zIndex: "1000",
-//       }}
-//       onClick={onClick}
-//     >
-//       <img
-//         src={require("../images/arrowLRed.svg").default}
-//         alt="arrowNext"
-//         style={{
-//           position: "absolute",
-//           width: "100%",
-//           height: "100%",
-//           left: "-25px",
-//           border: null,
-//         }}
-//       />
-//     </div>
-//   );
-// }
-
 const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
   const { PostDBDone } = useSelector(state => state.eitherCard);
-
-  const NotCompleteList =
-    PostList && PostList.filter(post => post.completed === 0);
-  const CompleteList =
-    PostList && PostList.filter(post => post.completed === 1);
   const sliderRef = useRef();
+
+  // 투표시 다음 카드로 넘어가게 하는 함수
   const goToNext = () => {
     sliderRef.current.slickNext();
   };
@@ -83,48 +23,48 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
     <>
       <Wrap>
         <div>
-          {PostDBDone === true && (
+          {PostDBDone === true && ( //PostDBDone 모든 데이터가 불러져 왔을 때 슬릭을 보여줌
             <StyledSlider {...settings} ref={sliderRef}>
-              {NotCompleteList &&
-                NotCompleteList?.map(v => (
-                  <EitherCard
-                    key={v.toString()}
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                    user={v.user}
-                    goToNext={goToNext}
-                  />
-                ))}
-              {CompleteList &&
-                CompleteList.map(v => (
-                  <EitherCompleteCard
-                    key={v.toString()}
-                    eitherId={v.eitherId}
-                    nickname={v.nickname}
-                    title={v.title}
-                    contentA={v.contentA}
-                    contentB={v.contentB}
-                    date={v.date}
-                    likeCnt={v.likeCnt}
-                    voteCntA={v.voteCntA}
-                    voteCntB={v.voteCntB}
-                    liked={v.liked}
-                    voted={v.voted}
-                    completed={v.completed}
-                    user={v.user}
-                  />
-                ))}
-              {PostingList &&
+              {PostList && //PostList (전체보기) 데이터가 들어왔을 때
+                PostList?.map(v =>
+                  v.completed === 0 ? ( //종료된 여부에 따른 Component 구분
+                    <EitherCard
+                      key={v.toString()}
+                      eitherId={v.eitherId}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                      liked={v.liked}
+                      voted={v.voted}
+                      completed={v.completed}
+                      user={v.user}
+                      goToNext={goToNext}
+                    />
+                  ) : (
+                    <EitherCompleteCard
+                      key={v.toString()}
+                      eitherId={v.eitherId}
+                      nickname={v.nickname}
+                      title={v.title}
+                      contentA={v.contentA}
+                      contentB={v.contentB}
+                      date={v.date}
+                      likeCnt={v.likeCnt}
+                      voteCntA={v.voteCntA}
+                      voteCntB={v.voteCntB}
+                      liked={v.liked}
+                      voted={v.voted}
+                      completed={v.completed}
+                      user={v.user}
+                    />
+                  ),
+                )}
+              {PostingList && //PostingList (진행중보기) 데이터가 들어왔을 때
                 PostingList?.map(v => (
                   <EitherCard
                     key={v.toString()}
@@ -144,7 +84,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     goToNext={goToNext}
                   />
                 ))}
-              {PostCompleteList &&
+              {PostCompleteList && //PostCompleteList (종료됨보기) 데이터가 들어왔을 때
                 PostCompleteList?.map(v => (
                   <EitherCompleteCard
                     key={v.toString()}
@@ -187,6 +127,7 @@ const settings = {
   centerPadding: "0px",
 
   responsive: [
+    // 반응형에 따른 슬라이드 개수 변경
     { breakpoint: 1920, settings: { slidesToShow: 3, slidesToScroll: 1 } },
     { breakpoint: 1300, settings: { slidesToShow: 1, slidesToScroll: 1 } },
   ],
@@ -210,9 +151,12 @@ const Wrap = styled.div`
     }
   }
   .slick-slider {
-    padding: 30px 0px;
-    margin: auto;
+    margin: -20px auto;
     width: 100%;
+    @media screen and (max-width: ${mobile}) {
+      z-index: 0;
+      margin: -50px auto;
+    }
     button {
       pointer-events: none;
     }
