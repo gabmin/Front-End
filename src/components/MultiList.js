@@ -46,18 +46,18 @@ const MultiList = props => {
         <Container>
           <Card>
             <TitleWrapper>
-              <TitleText>{title}</TitleText>
+              <TitleText onClick={goToDetail}>{title}</TitleText>
+              <VoteBtn className="Detail" onClick={goToDetail}>
+                투표하기
+              </VoteBtn>
             </TitleWrapper>
             <DateWarpper>
               <DateText>{date.substring(0, 16)}</DateText>
             </DateWarpper>
-            {/* <ContentHr /> */}
+            <ContentHr />
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtn className="Detail" onClick={goToDetail}>
-              투표하기
-            </VoteBtn>
 
             <FooterWrapper>
               <UserWrapper>
@@ -89,16 +89,16 @@ const MultiList = props => {
         <ContainerB>
           <Card>
             <TitleWrapper>
-              <TitleText>{title}</TitleText>
+              <TitleText onClick={goToDetail}>{title}</TitleText>
+              <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
             </TitleWrapper>
             <DateWarpper>
               <DateText>{date.substring(0, 16)}</DateText>
             </DateWarpper>
-            {/* <ContentHr /> */}
+            <ContentHr />
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
 
             <FooterWrapper>
               <UserWrapper>
@@ -134,8 +134,8 @@ const MultiList = props => {
 const Container = styled.div`
   text-align: left;
   width: 840px;
-  height: 254px;
-  padding: 46px 56px;
+  height: 248px;
+  padding: 44px 56px 56px 56px;
   margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
@@ -154,8 +154,8 @@ const Container = styled.div`
 const ContainerB = styled.div`
   text-align: left;
   width: 840px;
-  height: 254px;
-  padding: 46px 56px;
+  height: 248px;
+  padding: 44px 56px;
   margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
@@ -185,17 +185,22 @@ const Card = styled.div`
 
 const TitleWrapper = styled.div`
   width: 100%;
-  /* height: 30px; */
+  height: 26px;
   text-align: left;
   font-size: 20px;
   font-weight: 700;
   margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const TitleText = styled.p`
   font-size: 18px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   cursor: pointer;
+  line-height: 26px;
   &:hover {
     transform: translateY(-3px);
     transition: transform 200ms;
@@ -207,14 +212,23 @@ const DateWarpper = styled.div`
 `;
 
 const DateText = styled.p`
-  font-size: 10px;
+  font-size: 14px;
   text-align: left;
-  margin: 8px auto;
+  line-height: 20px;
+  margin: 10px auto 12px auto;
   color: ${colors.gray5};
 `;
 
+const ContentHr = styled.hr`
+  border: none;
+  background-color: ${colors.gray5};
+  width: 48px;
+  height: 1px;
+  margin: 8px auto 0 0;
+`;
+
 const DesWrapper = styled.div`
-  margin: 16px auto 0 auto;
+  /* margin: 16px auto 0 auto; */
   /* height: 176px; */
   word-break: break-all;
   overflow: hidden;
@@ -226,7 +240,9 @@ const DesWrapper = styled.div`
 
 const DesText = styled.p`
   font-size: 16px;
+  line-height: 22px;
   color: ${colors.gray5};
+  /* margin: 0 auto 0 0; */
 `;
 
 const VoteBtn = styled.button`
@@ -285,7 +301,7 @@ const UserWrapper = styled.div`
 `;
 
 const NickText = styled.p`
-  font-size: 12px;
+  height: 17px;
   color: ${colors.darkGray};
   &:hover {
     transform: translateY(-3px);
@@ -300,12 +316,13 @@ const InfoWarpper = styled.div`
 `;
 
 const CommentWarpper = styled.div`
-  /* width: 30px; */
+  margin: auto auto auto 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: ${colors.blue};
+  height: 20px;
 `;
 
 const TotalComment = styled.p`
@@ -314,13 +331,13 @@ const TotalComment = styled.p`
 `;
 
 const LikeWarpper = styled.div`
-  /* width: 40px; */
   margin: auto auto auto 14px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: ${colors.red};
+  height: 20px;
 `;
 
 const TotalLike = styled.p`

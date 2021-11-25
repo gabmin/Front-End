@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 
+import listView from "../images/listView.png";
 import MultiSlick from "../components/MultiSlick";
 import colors from "../shared/colors";
 import { mobile } from "../shared/style";
@@ -108,8 +109,16 @@ const Multi = props => {
       </TabBtnWarpper>
       <QuestionWarpper>
         <ViewWarpper>
-          <button onClick={viewSlide}>slide</button>
-          <button onClick={viewList}>list</button>
+          <ViewBtn onClick={viewSlide}>
+            <img
+              src={require("../images/slideView.png").default}
+              alt=""
+              height="16px"
+            />
+          </ViewBtn>
+          <ViewBtn>
+            <img src={listView} alt="" height="16px" onClick={viewList} />
+          </ViewBtn>
         </ViewWarpper>
 
         <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
@@ -217,7 +226,7 @@ const QuestionWarpper = styled.div`
 const QuestionBtn = styled.button`
   border: 1px ${colors.red} solid;
   border-radius: 8px;
-  width: 180px;
+  width: 132px;
   height: 40px;
   color: ${colors.red};
   background-color: ${colors.white};
@@ -232,7 +241,21 @@ const QuestionBtn = styled.button`
   }
 `;
 
-const ViewWarpper = styled.div``;
+const ViewWarpper = styled.div`
+  height: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ViewBtn = styled.button`
+  display: block;
+  border: none;
+  background-color: ${colors.white};
+  cursor: pointer;
+  margin: auto auto;
+`;
 
 const SliderWarpper = styled.div`
   margin: 0px auto;
