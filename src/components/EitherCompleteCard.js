@@ -88,8 +88,13 @@ const EitherCompleteCard = props => {
 
   //삭제하기
   const onClickDelete = () => {
-    dispatch(deletePostDB(eitherId));
-    setAction(true);
+    const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
+    if (deleteConfirm === true) {
+      dispatch(deletePostDB(eitherId));
+      setAction(true);
+    } else if (deleteConfirm === false) {
+      return;
+    }
   };
 
   //버튼A 상태 보여주기

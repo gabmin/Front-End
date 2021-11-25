@@ -109,8 +109,13 @@ const EitherCard = props => {
   };
   //삭제하기
   const onClickDelete = () => {
-    dispatch(deletePostDB(eitherId));
-    setAction(true);
+    const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
+    if (deleteConfirm === true) {
+      dispatch(deletePostDB(eitherId));
+      setAction(true);
+    } else if (deleteConfirm === false) {
+      return;
+    }
   };
   //좋아요
   const onClickLike = () => {
@@ -140,12 +145,15 @@ const EitherCard = props => {
   };
   //투표 종료하기
   const onClickComplete = () => {
+    const deleteConfirm = window.confirm("투표를 종료하시겠습니까?");
     if (completed === 1) {
       alert("이미 투표가 종료되었습니다.");
       return;
-    } else {
+    } else if (deleteConfirm === true) {
       dispatch(completePostDB(eitherId));
       setAction(true);
+    } else {
+      return;
     }
   };
   //버튼A 상태 보여주기
