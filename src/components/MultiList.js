@@ -46,18 +46,20 @@ const MultiList = props => {
         <Container>
           <Card>
             <TitleWrapper>
-              <TitleText>{title}</TitleText>
+              <TitleText onClick={goToDetail}>{title}</TitleText>
+              <VoteBtn>
+                <button className="Detail" onClick={goToDetail}>
+                  투표하기
+                </button>
+              </VoteBtn>
             </TitleWrapper>
             <DateWarpper>
               <DateText>{date.substring(0, 16)}</DateText>
             </DateWarpper>
-            {/* <ContentHr /> */}
+            <ContentHr />
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtn className="Detail" onClick={goToDetail}>
-              투표하기
-            </VoteBtn>
 
             <FooterWrapper>
               <UserWrapper>
@@ -65,20 +67,20 @@ const MultiList = props => {
                   <Nickname
                     userId={user}
                     nickname={nickname}
-                    fontSize={"14px"}
-                    width={"32px"}
-                    height={"32px"}
+                    fontSize={"12px"}
+                    width={"16px"}
+                    height={"16px"}
                   ></Nickname>
                 </NickText>
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
                 <CommentWarpper>
-                  <FiMessageSquare size={24} />{" "}
+                  <FiMessageSquare size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={24} />
+                  <FiThumbsUp size={16} />
                   <TotalLike>{likeCnt}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
@@ -89,16 +91,16 @@ const MultiList = props => {
         <ContainerB>
           <Card>
             <TitleWrapper>
-              <TitleText>{title}</TitleText>
+              <TitleText onClick={goToDetail}>{title}</TitleText>
+              <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
             </TitleWrapper>
             <DateWarpper>
               <DateText>{date.substring(0, 16)}</DateText>
             </DateWarpper>
-            {/* <ContentHr /> */}
+            <ContentHr />
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
 
             <FooterWrapper>
               <UserWrapper>
@@ -106,20 +108,20 @@ const MultiList = props => {
                   <Nickname
                     userId={user}
                     nickname={nickname}
-                    fontSize={"14px"}
-                    width={"32px"}
-                    height={"32px"}
+                    fontSize={"12px"}
+                    width={"16px"}
+                    height={"16px"}
                   ></Nickname>
                 </NickText>
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
                 <CommentWarpper>
-                  <FiMessageSquare size={24} />{" "}
+                  <FiMessageSquare size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={24} />
+                  <FiThumbsUp size={16} />
                   <TotalLike>{likeCnt}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
@@ -134,9 +136,9 @@ const MultiList = props => {
 const Container = styled.div`
   text-align: left;
   width: 840px;
-  height: 254px;
-  padding: 46px 32px;
-  margin: 70px auto;
+  height: 248px;
+  padding: 44px 56px 56px 56px;
+  margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -148,15 +150,16 @@ const Container = styled.div`
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
     width: 80%;
+    padding: 7% 6%;
   }
 `;
 
 const ContainerB = styled.div`
   text-align: left;
   width: 840px;
-  height: 254px;
-  padding: 46px 32px;
-  margin: 70px auto;
+  height: 248px;
+  padding: 44px 56px;
+  margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
   box-sizing: border-box;
@@ -172,69 +175,131 @@ const ContainerB = styled.div`
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
     width: 80%;
+    padding: 7% 6%;
   }
 `;
 
 const Card = styled.div`
   width: 100%;
   height: 100%;
-
+  position: relative;
   margin: auto;
   word-break: break-all;
 `;
 
 const TitleWrapper = styled.div`
   width: 100%;
-  /* height: 30px; */
+  height: 26px;
   text-align: left;
   font-size: 20px;
   font-weight: 700;
   margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: ${mobile}) {
+    /* flex-direction: column; */
+  }
 `;
 
 const TitleText = styled.p`
-  font-size: 20px;
-  margin: 0 auto;
+  font-size: 18px;
+  /* margin: 0 auto; */
+  cursor: pointer;
+  /* line-height: 26px; */
+  @media screen and (max-width: ${mobile}) {
+    font-size: 18px;
+    margin-right: 5px;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 `;
 
 const DateWarpper = styled.div`
   margin: auto;
+  height: 20px;
 `;
 
 const DateText = styled.p`
-  font-size: 11px;
+  font-size: 14px;
   text-align: left;
-  margin: 8px auto;
+  line-height: 20px;
+  margin: 10px auto 12px auto;
   color: ${colors.gray5};
+  @media screen and (max-width: ${mobile}) {
+    font-size: 12px;
+  }
+`;
+
+const ContentHr = styled.hr`
+  border: none;
+  background-color: ${colors.gray5};
+  width: 48px;
+  height: 1px;
+  margin: 8px auto 0 0;
 `;
 
 const DesWrapper = styled.div`
-  margin: 16px auto 0 auto;
+  /* margin: 16px auto 0 auto; */
   /* height: 176px; */
   word-break: break-all;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 9;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  @media screen and (max-width: ${mobile}) {
+    font-size: 12px;
+    -webkit-line-clamp: 3;
+  }
 `;
 
 const DesText = styled.p`
-  font-size: 14px;
+  font-size: 16px;
+  /* line-height: 22px; */
   color: ${colors.gray5};
+  /* margin: 0 auto 0 0; */
+  @media screen and (max-width: ${mobile}) {
+    font-size: 14px;
+  }
 `;
 
-const VoteBtn = styled.button`
-  display: block;
+const VoteBtn = styled.div`
   width: 150px;
-  height: 40px;
-  /* margin: 60px auto 0 auto; */
-  border: none;
-  border-radius: 8px;
-  background-color: ${colors.red};
-  font-size: 16px;
-  color: ${colors.white};
-  cursor: pointer;
+  min-width: 110px;
+
+  .Detail {
+    display: block;
+    width: 150px;
+    height: 40px;
+    margin: 0 0 0 auto;
+
+    border: none;
+    border-radius: 8px;
+    background-color: ${colors.red};
+    font-size: 16px;
+    font-family: "Noto-Sans KR", sans-serif;
+    color: ${colors.white};
+    cursor: pointer;
+    &:hover {
+      background-color: ${colors.white};
+      color: ${colors.red};
+      border: 1px ${colors.red} solid;
+    }
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 110px;
+      height: 36px;
+    }
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 120px;
+  }
 `;
 
 const VoteBtnB = styled.button`
@@ -248,27 +313,39 @@ const VoteBtnB = styled.button`
   font-size: 16px;
   color: ${colors.white};
   cursor: pointer;
+  &:hover {
+    background-color: ${colors.white};
+    color: ${colors.red};
+    border: 1px ${colors.red} solid;
+  }
 `;
 
 const FooterWrapper = styled.div`
   position: absolute;
-  top: 200px;
-  width: 80%;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0 auto -12px auto;
+  /* align-items: flex-end; */
 `;
 
 const UserWrapper = styled.div`
   font-size: 6px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 const NickText = styled.p`
-  font-size: 14px;
+  height: 17px;
   color: ${colors.darkGray};
+  &:hover {
+    transform: translateY(-3px);
+    transition: transform 200ms;
+  }
 `;
 
 const InfoWarpper = styled.div`
@@ -278,12 +355,13 @@ const InfoWarpper = styled.div`
 `;
 
 const CommentWarpper = styled.div`
-  /* width: 30px; */
+  margin: auto auto auto 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: ${colors.blue};
+  height: 20px;
 `;
 
 const TotalComment = styled.p`
@@ -292,13 +370,13 @@ const TotalComment = styled.p`
 `;
 
 const LikeWarpper = styled.div`
-  /* width: 40px; */
   margin: auto auto auto 14px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: ${colors.red};
+  height: 20px;
 `;
 
 const TotalLike = styled.p`
