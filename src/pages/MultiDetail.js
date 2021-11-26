@@ -17,6 +17,7 @@ import LoadingBubble from "../elements/LoadingBubble";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
+import MultiMenu from "../elements/MultiMenu";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
@@ -116,7 +117,7 @@ const MultiDetail = props => {
   } else if (dataList && dataList.multi.completed === 1) {
     return (
       <div>
-        <CompletedDetail multiId={multiId} />{" "}
+        <CompletedDetail multiId={multiId} TotalCnt={TotalCnt} />{" "}
         <TopBtn onClick={goToTop}>TOP</TopBtn>
       </div>
     );
@@ -136,61 +137,7 @@ const MultiDetail = props => {
               </BackBtn>
 
               {userNickname === dataList.multi.nickname ? (
-                // <div>
-                //   {/* <div>투표가 종료되었습니다</div> */}
-                //   <div>
-                //     <button onClick={deletePost}>삭제하기</button>
-                //     {dataList.multi.completed !== 1 ? (
-                //       <div>
-                //         <button onClick={editPost}>수정하기</button>
-                //         <button onClick={closePost}>종료하기</button>
-                //       </div>
-                //     ) : null}
-                //   </div>
-                // </div>
-                <MenuBar>
-                  <Menu
-                    menuButton={
-                      <MenuButton
-                        data-testid="menuBtn"
-                        styles={{
-                          border: "none",
-                          backgroundColor: "transparent",
-                        }}
-                      >
-                        <FiMoreHorizontal size={20} color="#575757" />
-                        {/* <MaterialIcon icon="more_horiz" size={32} /> */}
-                      </MenuButton>
-                    }
-                    menuStyles={{ border: "0px solid" }}
-                    portal={true}
-                  >
-                    <MenuItem
-                      styles={{
-                        fontSize: "14px",
-                      }}
-                      onClick={editPost}
-                    >
-                      수정하기
-                    </MenuItem>
-                    <MenuItem
-                      styles={{
-                        fontSize: "14px",
-                      }}
-                      onClick={deletePost}
-                    >
-                      삭제하기
-                    </MenuItem>
-                    <MenuItem
-                      styles={{
-                        fontSize: "14px",
-                      }}
-                      onClick={closePost}
-                    >
-                      투표 종료하기
-                    </MenuItem>
-                  </Menu>
-                </MenuBar>
+                <MultiMenu multiId={multiId} TotalCnt={TotalCnt} />
               ) : null}
             </MenuWarpper>
             <div>
@@ -220,49 +167,7 @@ const MultiDetail = props => {
               </BackBtn>
 
               {userNickname === dataList.multi.nickname ? (
-                <MenuBar>
-                  <Menu
-                    menuButton={
-                      <MenuButton
-                        data-testid="menuBtn"
-                        styles={{
-                          border: "none",
-                          backgroundColor: "transparent",
-                        }}
-                      >
-                        <FiMoreHorizontal size={20} color="#575757" />
-                        {/* <MaterialIcon icon="more_horiz" size={32} /> */}
-                      </MenuButton>
-                    }
-                    menuStyles={{ border: "0px solid" }}
-                    portal={true}
-                  >
-                    <MenuItem
-                      styles={{
-                        fontSize: "14px",
-                      }}
-                      onClick={editPost}
-                    >
-                      수정하기
-                    </MenuItem>
-                    <MenuItem
-                      styles={{
-                        fontSize: "14px",
-                      }}
-                      onClick={deletePost}
-                    >
-                      삭제하기
-                    </MenuItem>
-                    <MenuItem
-                      styles={{
-                        fontSize: "14px",
-                      }}
-                      onClick={closePost}
-                    >
-                      투표 종료하기
-                    </MenuItem>
-                  </Menu>
-                </MenuBar>
+                <MultiMenu multiId={multiId} TotalCnt={TotalCnt} />
               ) : null}
             </MenuWarpper>
             {/* {DetailDBDone === true && ( */}
