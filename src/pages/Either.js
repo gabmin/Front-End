@@ -148,7 +148,48 @@ const Either = props => {
             <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
           )}
         </EitherButtonGrid>
-        <FormatWrapper>
+        {viewStatus === false ? (
+          <FormatWrapper>
+            <FormatChangeGrid>
+              <ViewBtn onClick={setSlickCard}>
+                <img
+                  className="view"
+                  src={require("../images/slideViewSelected.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+              <ViewBtn onClick={setListCard}>
+                <img
+                  className="view"
+                  src={require("../images/listView.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+            </FormatChangeGrid>
+            <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+          </FormatWrapper>
+        ) : (
+          <FormatWrapperB>
+            <FormatChangeGrid>
+              <ViewBtn onClick={setSlickCard}>
+                <img
+                  className="view"
+                  src={require("../images/slideView.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+              <ViewBtn onClick={setListCard}>
+                <img
+                  className="view"
+                  src={require("../images/listViewSelected.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+            </FormatChangeGrid>
+            <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+          </FormatWrapperB>
+        )}
+        {/* <FormatWrapper>
           <FormatChangeGrid>
             {changeView === false ? (
               <BsCardText // 카드형식으로 보기 버튼 (파란색)
@@ -194,7 +235,8 @@ const Either = props => {
             )}
           </FormatChangeGrid>
           <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
-        </FormatWrapper>
+        </FormatWrapper> */}
+
         {changeView === false ? ( //카드형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
@@ -246,7 +288,7 @@ const Wrap = styled.div`
 const EitherButtonGrid = styled.div`
   margin: 51px auto 0px auto;
   text-align: center;
-  width: 401px;
+  width: 240px;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
@@ -279,6 +321,18 @@ const SlickLayout = styled.div`
   height: 100%;
 `;
 const FormatWrapper = styled.div`
+  max-width: 418px;
+  width: 100%;
+  margin: 16px auto -8px auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    width: 80%;
+    margin: 30px auto;
+  }
+`;
+const FormatWrapperB = styled.div`
   max-width: 840px;
   width: 100%;
   margin: 16px auto -8px auto;
@@ -291,8 +345,21 @@ const FormatWrapper = styled.div`
   }
 `;
 const FormatChangeGrid = styled.div`
-  height: 100%;
+  height: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   vertical-align: middle;
+  margin: auto 0;
+`;
+const ViewBtn = styled.div`
+  z-index: 10;
+  margin-right: 16px;
+  cursor: pointer;
+  .view {
+    height: 16px;
+  }
 `;
 const QuestionBtn = styled.button`
   width: 132px;
