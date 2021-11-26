@@ -17,12 +17,16 @@ import { mobile } from "../shared/style";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
+import MultiMenu from "../elements/MultiMenu";
 
 const CompletedDetail = props => {
   const dispatch = useDispatch();
-  const multiId = props.multiId;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const userNickname = localStorage.getItem("nickname");
+  const multiId = props.multiId;
+  const TotalCnt = props.TotalCnt;
   const dataList = multiDetail.multi && multiDetail;
+  const completed = true;
   const { DetailDBDone, DetailDBLoading } = useSelector(
     state => state.multiDetail,
   );
@@ -49,6 +53,13 @@ const CompletedDetail = props => {
               <BackBtn onClick={goToMulti}>
                 <FiArrowLeft />
               </BackBtn>
+              {userNickname === dataList.multi.nickname ? (
+                <MultiMenu
+                  multiId={multiId}
+                  TotalCnt={TotalCnt}
+                  completed={completed}
+                />
+              ) : null}
             </MenuWarpper>
             <DisabledComment>투표가 종료된 게시물 입니다</DisabledComment>
             <div>

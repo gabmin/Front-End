@@ -105,7 +105,7 @@ const MultiPagination = ({ items, itemsPerPage = 5 }) => {
 
 const StyledPagination = styled.div`
   .pagination {
-    margin: 35px auto 25px auto;
+    margin: -40px auto 55px auto;
     font-size: 12px;
     display: flex;
     justify-content: center;

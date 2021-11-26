@@ -246,7 +246,7 @@ const QuestionWarpper = styled.div`
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 70%;
   }
 `;
 
@@ -265,6 +265,8 @@ const QuestionWarpperB = styled.div`
 `;
 
 const QuestionBtn = styled.button`
+  display: block;
+
   border: 1px ${colors.red} solid;
   border-radius: 8px;
   width: 132px;
@@ -281,6 +283,7 @@ const QuestionBtn = styled.button`
   }
   @media screen and (max-width: ${mobile}) {
     transform: scale(0.9);
+    margin: 0 -8px;
   }
 `;
 
