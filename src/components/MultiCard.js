@@ -197,10 +197,6 @@ const TitleText = styled.p`
   font-size: 20px;
   margin: 0 auto;
   cursor: pointer;
-  &:hover {
-    transform: translateY(-3px);
-    transition: transform 200ms;
-  }
 `;
 
 const DateWarpper = styled.div`
@@ -239,6 +235,7 @@ const VoteBtn = styled.button`
   border-radius: 8px;
   background-color: ${colors.red};
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
   cursor: pointer;
 
@@ -258,6 +255,7 @@ const VoteBtnB = styled.button`
   border-radius: 8px;
   background-color: ${colors.gray5};
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
   cursor: pointer;
   &:hover {
@@ -288,10 +286,7 @@ const UserWrapper = styled.div`
 const NickText = styled.p`
   font-size: 14px;
   color: ${colors.darkGray};
-  &:hover {
-    transform: translateY(-3px);
-    transition: transform 200ms;
-  }
+  cursor: pointer;
 `;
 
 const InfoWarpper = styled.div`

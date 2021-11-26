@@ -6,6 +6,8 @@ import { mobile, tablet } from "../shared/style";
 import { history } from "../redux/configureStore";
 import EitherSlick from "../components/EitherSlick";
 import EitherPagination from "../components/EitherPagination";
+import { SetView } from "../redux/reducers/viewSlice";
+import { SetParams } from "../redux/reducers/paramsSlice";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 import LoadingBubble from "../elements/LoadingBubble";
 import { BsCardText, BsList } from "react-icons/bs";
@@ -29,39 +31,46 @@ const Either = props => {
   const userNickname = localStorage.getItem("nickname");
   //이전 페이지 파람스 아이디 가져오기
   const paramsId = useSelector(state => state.params.paramsId);
+  // 게시물 보기 형태 상태
+  const viewStatus = useSelector(state => state.view.viewStatus);
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
 
   const [select, setSelect] = useState("checkEither");
-  const [grid, setGrid] = useState("slick");
-
   //보여주기 상태 (초기값 전체보기)
-  const [status, setStatus] = useState("Post");
+  const [status, setStatus] = useState("post");
+  //보여주기 형식 (초기값 카드형)
+  const [changeView, setChangeView] = useState(viewStatus);
 
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
-    dispatch(PostDB(paramsId));
-    dispatch(PostingDB(paramsId));
-    setStatus("Post");
-  }, [dispatch, paramsId, grid]);
+    if (viewStatus === false) {
+      dispatch(PostDB(paramsId));
+      dispatch(PostingDB(paramsId));
+      dispatch(PostCompleteDB(paramsId));
+      setStatus("Post");
+    } else {
+      dispatch(PostDB("all"));
+      dispatch(PostingDB("all"));
+      dispatch(PostCompleteDB("all"));
+      setStatus("Post");
+    }
+  }, [dispatch, paramsId, viewStatus]);
 
   //전체 게시글 보여주기
   const onClickPost = () => {
-    dispatch(PostDB(paramsId));
     setStatus("Post");
   };
 
   //진행중 게시글 보여주기
   const onClickPosting = () => {
-    dispatch(PostingDB(paramsId));
     setStatus("Posting");
   };
 
   //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
-    dispatch(PostCompleteDB(paramsId));
     setStatus("CompletePost");
   };
 
@@ -80,12 +89,16 @@ const Either = props => {
 
   // 카드 형식으로 보여주기
   const setSlickCard = () => {
-    setGrid("slick");
+    setChangeView(false);
+    dispatch(SetView(false));
+    dispatch(SetParams("all"));
   };
 
   // 리스트 형식으로 보여주기
   const setListCard = () => {
-    setGrid("list");
+    setChangeView(true);
+    dispatch(SetView(true));
+    dispatch(SetParams("all"));
   };
 
   return (
@@ -135,9 +148,50 @@ const Either = props => {
             <EitherButton onClick={onClickCompletePost}>종료됨</EitherButton>
           )}
         </EitherButtonGrid>
-        <FormatWrapper>
+        {viewStatus === false ? (
+          <FormatWrapper>
+            <FormatChangeGrid>
+              <ViewBtn onClick={setSlickCard}>
+                <img
+                  className="view"
+                  src={require("../images/slideViewSelected.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+              <ViewBtn onClick={setListCard}>
+                <img
+                  className="view"
+                  src={require("../images/listView.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+            </FormatChangeGrid>
+            <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+          </FormatWrapper>
+        ) : (
+          <FormatWrapperB>
+            <FormatChangeGrid>
+              <ViewBtn onClick={setSlickCard}>
+                <img
+                  className="view"
+                  src={require("../images/slideView.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+              <ViewBtn onClick={setListCard}>
+                <img
+                  className="view"
+                  src={require("../images/listViewSelected.png").default}
+                  alt=""
+                />
+              </ViewBtn>
+            </FormatChangeGrid>
+            <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+          </FormatWrapperB>
+        )}
+        {/* <FormatWrapper>
           <FormatChangeGrid>
-            {grid === "slick" ? (
+            {changeView === false ? (
               <BsCardText // 카드형식으로 보기 버튼 (파란색)
                 onClick={setSlickCard}
                 style={{
@@ -158,7 +212,7 @@ const Either = props => {
                 }}
               ></BsCardText>
             )}
-            {grid === "list" ? (
+            {changeView === true ? (
               <BsList // 리스트형식으로 보기 버튼 (파란색)
                 onClick={setListCard}
                 style={{
@@ -181,8 +235,9 @@ const Either = props => {
             )}
           </FormatChangeGrid>
           <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
-        </FormatWrapper>
-        {grid === "slick" ? ( //카드형식
+        </FormatWrapper> */}
+
+        {changeView === false ? ( //카드형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}
             {PostingDBLoading ? <LoadingBubble /> : null}
@@ -233,7 +288,7 @@ const Wrap = styled.div`
 const EitherButtonGrid = styled.div`
   margin: 51px auto 0px auto;
   text-align: center;
-  width: 401px;
+  width: 240px;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
@@ -242,12 +297,12 @@ const EitherButtonGrid = styled.div`
     margin: 30px auto 0px auto;
   }
 `;
-
 const EitherButton = styled.button`
   border: none;
   background-color: #ffffff;
   font-size: 20px;
   font-weight: bold;
+  font-family: "Noto-Sans KR", sans-serif;
   color: #868e96;
   line-height: 29px;
   cursor: pointer;
@@ -266,22 +321,44 @@ const SlickLayout = styled.div`
   height: 100%;
 `;
 const FormatWrapper = styled.div`
-  width: 65%;
-  margin: 20px auto;
+  max-width: 418px;
+  width: 100%;
+  margin: 16px auto -8px auto;
+  text-align: center;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
-    width: 75%;
+    width: 80%;
+    margin: 30px auto;
+  }
+`;
+const FormatWrapperB = styled.div`
+  max-width: 840px;
+  width: 100%;
+  margin: 16px auto -8px auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    width: 80%;
+    margin: 30px auto;
   }
 `;
 const FormatChangeGrid = styled.div`
-  width: 13%;
+  height: 16px;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  margin: auto 0;
+`;
+const ViewBtn = styled.div`
   z-index: 10;
-  justify-content: space-between;
-  @media screen and (max-width: ${mobile}) {
-    transform: scale(0.8);
-    width: 27%;
+  margin-right: 16px;
+  cursor: pointer;
+  .view {
+    height: 16px;
   }
 `;
 const QuestionBtn = styled.button`
@@ -290,6 +367,7 @@ const QuestionBtn = styled.button`
   border: 1px solid #e25b45;
   color: #e25b45;
   font-size: 16px;
+  font-family: "Noto-Sans KR", sans-serif;
   border-radius: 8px;
   background-color: #ffffff;
   cursor: pointer;

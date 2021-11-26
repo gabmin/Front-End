@@ -134,6 +134,7 @@ const AnswerBtn = styled.button`
   min-width: 100%;
   max-width: 620px;
   height: 72px;
+  font-family: "Noto Sans KR", sans-serif;
   text-align: left;
   text-indent: 18px;
   word-break: break-all;
@@ -157,6 +158,7 @@ const AnswerBtnOn = styled.button`
   min-width: 100%;
   max-width: 620px;
   height: 72px;
+  font-family: "Noto Sans KR", sans-serif;
   text-align: left;
   text-indent: 18px;
   word-break: break-all;
@@ -183,6 +185,7 @@ const CompleteBtn = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const CompleteWrapper = styled.div`

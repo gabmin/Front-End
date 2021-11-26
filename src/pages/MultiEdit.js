@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 
+import { mobile, tablet } from "../shared/style";
 import MultiWrite from "../components/MultiWrite";
 import { useDispatch, useSelector } from "react-redux";
 import { DetailDB } from "../redux/actions/multiDetail";
@@ -49,7 +50,7 @@ const MultiEdit = props => {
 
   if (userNickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
-    history.push("/login");
+    history.replace("/login");
   } else if (dataList) {
     return (
       <>
@@ -94,24 +95,22 @@ const MultiEdit = props => {
 };
 
 const Wrap = styled.div`
-  min-width: 100%;
   max-width: 840px;
+  width: 90%;
   margin: auto;
-`;
-const ButtonGrid = styled.div`
-  width: 100%;
-  margin: 10px 0px;
-  display: flex;
-  justify-content: space-between;
 `;
 
 const ContentBox = styled.div`
   border: 2px solid #00397c;
   max-width: 840px;
   box-sizing: border-box;
-  margin: 56px auto 56px auto;
+  margin: 56px auto;
   border-radius: 10px;
   padding: 4% 110px 4% 110px;
+  @media screen and (max-width: ${mobile}) {
+    padding: 7%;
+    margin: 10% auto;
+  }
 `;
 
 const Index = styled.div`
@@ -122,25 +121,56 @@ const Index = styled.div`
     font-weight: bold;
     line-height: 26px;
     margin: 0px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 16px;
+    }
+  }
+  div {
+    display: flex;
   }
   margin: 0px 0px 22px 0px;
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 10px 0px;
+  }
 `;
 
 const RadioBtnWarpperE = styled.div`
   display: flex;
   margin: 0px 0px 0px 76px;
+  width: 100px;
   align-items: center;
   label {
     font-size: 16px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 40px;
+    }
+  }
+  input {
+    margin: 0px 8px 0px 0px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 0px 20%;
   }
 `;
 
 const RadioBtnWarpperM = styled.div`
   display: flex;
   margin: 0px 0px 0px 47px;
+  width: 100px;
   align-items: center;
   label {
     font-size: 16px;
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 40px;
+    }
+  }
+  input {
+    margin: 0px 8px 0px 0px;
+  }
+  @media screen and (max-width: ${mobile}) {
+    margin: 0px 0px 0px 20%;
   }
 `;
 

@@ -22,6 +22,11 @@ const MultiDetail = props => {
   const dispatch = useDispatch();
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const { DeletePostDBDone, ClosePostDBDone } = useSelector(
+    state => state.multiCard,
+  );
+  const [deleteAction, setDeleteAction] = useState(null);
+  const [closeAction, setCloseAction] = useState(null);
   const userNickname = localStorage.getItem("nickname");
   const dataList = multiDetail.multi && multiDetail;
   const { DetailDBDone, DetailDBLoading } = useSelector(
@@ -48,6 +53,20 @@ const MultiDetail = props => {
     dispatch(SetParams(multiId));
   }, [dispatch, multiId]);
 
+  useEffect(() => {
+    if (deleteAction && DeletePostDBDone) {
+      // window.alert("삭제가 완료되었습니다.");
+      history.replace("/multi");
+    }
+  }, [DeletePostDBDone, deleteAction]);
+
+  useEffect(() => {
+    if (closeAction && ClosePostDBDone) {
+      // window.alert("삭제가 완료되었습니다.");
+      history.replace("/multi");
+    }
+  }, [ClosePostDBDone, closeAction]);
+
   const goToMulti = () => {
     history.push("/multi");
   };
@@ -61,7 +80,8 @@ const MultiDetail = props => {
     if (TotalCnt === 0 && deleteConfirm == true) {
       dispatch(SetParams("all"));
       dispatch(DeletePostDB(multiId));
-      window.location.replace("/multi");
+      setDeleteAction(true);
+      // window.location.replace("/multi");
     } else if (deleteConfirm == false) {
       return;
     } else {
@@ -75,7 +95,8 @@ const MultiDetail = props => {
     if (closeVote == true) {
       dispatch(ClosePostDB(multiId));
       // dispatch(SetParams(multiId));
-      history.push("/multi");
+      // history.push("/multi");
+      setCloseAction(true);
     }
     return;
   };
@@ -288,6 +309,7 @@ const BackBtn = styled.button`
   border: none;
   font-size: 24px;
   font-weight: 400;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.gray4};
   background-color: ${colors.white};
   cursor: pointer;
@@ -317,6 +339,7 @@ const TopBtn = styled.button`
   display: block;
   margin: 5% 8% 20px auto;
   font-weight: 700;
+  font-family: "Noto Sans KR", sans-serif;
   border: none;
   background-color: ${colors.white};
   color: ${colors.blue};

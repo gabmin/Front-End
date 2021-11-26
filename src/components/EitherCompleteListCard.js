@@ -92,8 +92,13 @@ const EitherListCard = props => {
 
   //삭제하기
   const onClickDelete = () => {
-    dispatch(deletePostDB(eitherId));
-    setAction(true);
+    const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
+    if (deleteConfirm === true) {
+      dispatch(deletePostDB(eitherId));
+      setAction(true);
+    } else if (deleteConfirm === false) {
+      return;
+    }
   };
 
   //버튼A 상태 보여주기
@@ -258,7 +263,7 @@ const EitherListCard = props => {
 const Container = styled.div`
   max-width: 840px;
   width: 100%;
-  min-height: 258px;
+  min-height: 248px;
   height: 100%;
   box-sizing: border-box;
   margin: 20px auto;
@@ -271,12 +276,10 @@ const Container = styled.div`
   );
   padding: 44px 70px 60px 56px;
   position: relative;
-
   @media screen and (max-width: ${mobile}) {
-    transform: scale(80%);
-    margin: -20px auto;
+    margin: 30px auto;
     padding: 10% 6%;
-    min-height: 240px;
+    width: 80%;
   }
 `;
 const MenuButtonGrid = styled.div`
@@ -312,24 +315,25 @@ const RightGrid = styled.div`
 `;
 const TitleDiv = styled.div`
   width: 100%;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   word-break: break-all;
-  @media screen and (max-width: ${mobile}) {
-    font-size: 17px;
-  }
 `;
 const DateDiv = styled.div`
   margin: 10px 0px;
-  font-size: 11px;
+  font-size: 14px;
   color: #868e96;
   position: relative;
+  @media screen and (max-width: ${mobile}) {
+    font-size: 12px;
+  }
 `;
 const ButtonGrid = styled.div`
   max-width: 365px;
   width: 100%;
   height: 100%;
   margin: 0px;
+  display: inline-flex;
 `;
 const EitherButtonA = styled.button`
   width: 50%;
@@ -338,8 +342,6 @@ const EitherButtonA = styled.button`
   border: 2px solid #00397c;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
   margin-right: -1px;
   @media screen and (max-width: ${mobile}) {
     width: 50%;
@@ -352,20 +354,20 @@ const EitherButtonB = styled.button`
   border: 2px solid #00397c;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  font-size: 16px;
-  line-height: 23px;
   margin-left: -1px;
   @media screen and (max-width: ${mobile}) {
     width: 50%;
   }
 `;
 const ButtonText = styled.div`
+  max-width: 65px;
+  width: 100%;
   word-break: break-all;
   display: inline-block;
   vertical-align: middle;
   font-size: 13px;
   font-weight: bold;
-  padding: 5px 3px;
+  font-family: "Noto-Sans KR", sans-serif;
 `;
 const ProgressGrid = styled.div`
   width: 100%;
@@ -412,8 +414,8 @@ const EitherFooter = styled.div`
   left: 56px;
   align-items: center;
   @media screen and (max-width: ${mobile}) {
-    top: 75.5%;
-    left: 5%;
+    top: 67%;
+    left: 8%;
   }
 
   .Position {
@@ -421,26 +423,27 @@ const EitherFooter = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media screen and (max-width: ${mobile}) {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
   }
   .Profile {
     width: 100%;
     @media screen and (max-width: ${mobile}) {
-      transform: scale(0.9);
+      margin-bottom: 10px;
     }
   }
   .Grid {
+    width: 100%;
     color: #e25b45;
     display: flex;
     align-items: center;
-    @media screen and (max-width: ${mobile}) {
-      transform: scale(0.8);
-    }
   }
   .Likes {
     font-size: 14px;
     margin-left: 14px;
     @media screen and (max-width: ${mobile}) {
-      transform: scale(0.8);
       margin-left: 10px;
     }
   }
@@ -451,14 +454,13 @@ const TotalCntGrid = styled.div`
   align-items: center;
   margin-right: 20px;
   @media screen and (max-width: ${mobile}) {
-    transform: scale(0.9);
     margin-right: 10px;
   }
 `;
 const TotalCntDiv = styled.div`
   font-size: 14px;
   color: #868e96;
-  margin-left: 8px;
+  margin-left: 10px;
 `;
 
 export default EitherListCard;
