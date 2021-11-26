@@ -255,7 +255,6 @@ const EitherButtonGrid = styled.div`
     margin: 30px auto 0px auto;
   }
 `;
-
 const EitherButton = styled.button`
   border: none;
   background-color: #ffffff;
@@ -280,23 +279,20 @@ const SlickLayout = styled.div`
   height: 100%;
 `;
 const FormatWrapper = styled.div`
-  width: 65%;
-  margin: 16px auto;
+  max-width: 840px;
+  width: 100%;
+  margin: 16px auto -8px auto;
+  text-align: center;
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
-    width: 75%;
+    width: 80%;
+    margin: 30px auto;
   }
 `;
 const FormatChangeGrid = styled.div`
-  width: 13%;
-  display: flex;
-  z-index: 10;
-  justify-content: space-between;
-  @media screen and (max-width: ${mobile}) {
-    transform: scale(0.8);
-    width: 27%;
-  }
+  height: 100%;
+  vertical-align: middle;
 `;
 const QuestionBtn = styled.button`
   width: 132px;
