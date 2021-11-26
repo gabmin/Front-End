@@ -38,6 +38,8 @@ const Profile = props => {
   const [myPostsloadDone, setMyPostsloadDone] = useState(false);
   const [myPollsloadDone, setMyPollsloadDone] = useState(false);
 
+  const myPostsList = myPosts.map(v => ({ ...v, nickname: userNick }));
+
   useEffect(() => {
     if (getMyPostsDone && getMyPollsDone) {
       setTimeout(() => {
@@ -149,7 +151,7 @@ const Profile = props => {
       <PostsContainer>
         {!myPostsloadDone && !myPollsloadDone && <LoadingBubble />}
         {clicked === "posts" ? (
-          <MainPagination items={myPosts} />
+          <MainPagination items={myPostsList} />
         ) : (
           <MainPagination items={myPolls} />
         )}
