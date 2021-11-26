@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike, AiOutlineMessage } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import Nickname from "./Nickname";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { mobile } from "../shared/style";
+import { AddLikeDB } from "../redux/actions/multiLike";
 
 const MultiCard = props => {
+  const history = useHistory();
   const userNickname = localStorage.getItem("nickname");
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   const dataList = multiDetail.multi && multiDetail;
+  console.log(dataList);
 
   const dispatch = useDispatch();
   const {
@@ -25,10 +28,12 @@ const MultiCard = props => {
     editedDate,
     completed,
     likeCnt,
+    liked,
     commentCnt,
   } = props;
+  const [likes, setLikes] = useState(likeCnt);
+  const [likeState, setLikeState] = useState(liked === null ? false : true);
 
-  const history = useHistory();
   const goToDetail = () => {
     if (!userNickname) {
       window.alert("로그인 후 이용가능합니다");
@@ -49,6 +54,19 @@ const MultiCard = props => {
         pathname: `/multi/${multiId}`,
         state: { onComment: "onComment" },
       });
+    }
+  };
+
+  const addLike = () => {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && liked === null) {
+      dispatch(AddLikeDB(multiId));
+      setLikes(likeCnt + 1);
+      setLikeState(true);
+    } else {
+      return;
     }
   };
 
@@ -90,8 +108,12 @@ const MultiCard = props => {
                     <TotalComment>{commentCnt}</TotalComment>
                   </CommentWarpper>
                   <LikeWarpper>
-                    <AiOutlineLike size={24} />
-                    <TotalLike>{likeCnt}</TotalLike>
+                    {!likeState ? (
+                      <AiOutlineLike size={24} onClick={addLike} />
+                    ) : (
+                      <AiFillLike size={24} />
+                    )}
+                    <TotalLike>{likes}</TotalLike>
                   </LikeWarpper>
                 </InfoWarpper>
               </FooterWrapper>
