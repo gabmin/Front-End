@@ -170,9 +170,9 @@ const EitherListCard = props => {
                   <Nickname
                     nickname={nickname}
                     userId={user}
-                    width={"32px"}
-                    height={"32px"}
-                    fontSize={"14px"}
+                    width={"16px"}
+                    height={"16px"}
+                    fontSize={"12px"}
                   />
                 </div>
                 <div className="Grid">
@@ -180,8 +180,8 @@ const EitherListCard = props => {
                   <TotalCntGrid>
                     <FaRegUser
                       style={{
-                        width: "20px",
-                        height: "20px",
+                        width: "16px",
+                        height: "16px",
                         color: "#00397c",
                       }}
                     />
@@ -191,16 +191,16 @@ const EitherListCard = props => {
                     <FiThumbsUp
                       onClick={onClickLike}
                       style={{
-                        width: "24px",
-                        height: "24px",
+                        width: "16px",
+                        height: "16px",
                         cursor: "pointer",
                       }}
                     />
                   ) : (
                     <HiThumbUp
                       style={{
-                        width: "24px",
-                        height: "24px",
+                        width: "16px",
+                        height: "16px",
                         cursor: "pointer",
                       }}
                     />
