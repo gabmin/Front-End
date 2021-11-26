@@ -99,12 +99,12 @@ const Main = () => {
         <Counts>
           <div className="countsWrapper">
             <p className="countNum">{postingNum}</p>
-            <p className="countType">곡소리</p>
+            <p className="countType">전체 곡소리 수</p>
           </div>
           <div className="betweenLine"></div>
           <div className="countsWrapper">
             <p className="countNum">{attendNum}</p>
-            <p className="countType">참여</p>
+            <p className="countType">참여한 개미 수</p>
           </div>
         </Counts>
         <Top onClick={onClickTop}>TOP</Top>
@@ -126,7 +126,7 @@ const Container = styled.div`
   @media screen and (max-width: 1540px) {
     top: 20px;
     flex-direction: column;
-    height: 1300px;
+    height: 1100px;
     width: 75%;
   }
 `;
@@ -158,6 +158,7 @@ const Notice = styled.div`
 
   @media screen and (max-width: 1540px) {
     flex-direction: column;
+    height: 300px;
   }
 
   @media screen and (max-width: ${mobile}) {
@@ -169,7 +170,8 @@ const GoEither = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 620px;
+  width: 49%;
+  max-width: 620px;
   height: 120px;
   padding: 0 50px;
   justify-content: center;
@@ -181,6 +183,8 @@ const GoEither = styled.div`
   @media screen and (max-width: 1540px) {
     width: 100%;
     padding: 0 10px;
+    max-width: 95%;
+    margin-bottom: 10px;
   }
 
   h1 {
@@ -208,7 +212,8 @@ const GoMulti = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
-  width: 620px;
+  width: 49%;
+  max-width: 620px;
   height: 120px;
   padding: 0 50px;
   background-color: ${blue};
@@ -231,7 +236,7 @@ const GoMulti = styled.div`
   @media screen and (max-width: 1540px) {
     width: 100%;
     padding: 0 10px;
-
+    max-width: 95%;
     h1 {
       font-size: 20px;
     }
@@ -280,10 +285,17 @@ const Counts = styled.div`
   width: 50%;
   justify-content: space-between;
 
+  @media screen and (max-width: ${mobile}) {
+    width: 65%;
+  }
+
   .countsWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and (max-width: ${mobile}) {
+      width: 200px;
+    }
   }
 
   .betweenLine {
