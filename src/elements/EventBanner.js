@@ -38,7 +38,7 @@ const Container = styled.div`
   height: 130px;
   position: fixed;
   z-index: 10;
-  bottom: 10%;
+  bottom: 8%;
   right: 10%;
   cursor: pointer;
   /* border-radius: 100px;
