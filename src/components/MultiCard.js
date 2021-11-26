@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import Nickname from "./Nickname";
@@ -39,6 +39,19 @@ const MultiCard = props => {
     }
   };
 
+  const goToComment = () => {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else {
+      dispatch(DetailDB(multiId));
+      history.push({
+        pathname: `/multi/${multiId}`,
+        state: { onComment: "onComment" },
+      });
+    }
+  };
+
   return (
     <>
       {completed !== 1 ? (
@@ -72,12 +85,12 @@ const MultiCard = props => {
                   {/* {isEdited ? <p>{editedDate}</p> : null} */}
                 </UserWrapper>
                 <InfoWarpper>
-                  <CommentWarpper>
-                    <FiMessageSquare size={24} />{" "}
+                  <CommentWarpper onClick={goToComment}>
+                    <AiOutlineMessage size={24} />{" "}
                     <TotalComment>{commentCnt}</TotalComment>
                   </CommentWarpper>
                   <LikeWarpper>
-                    <FiThumbsUp size={24} />
+                    <AiOutlineLike size={24} />
                     <TotalLike>{likeCnt}</TotalLike>
                   </LikeWarpper>
                 </InfoWarpper>
@@ -114,12 +127,12 @@ const MultiCard = props => {
                   {/* {isEdited ? <p>{editedDate}</p> : null} */}
                 </UserWrapper>
                 <InfoWarpper>
-                  <CommentWarpper>
-                    <FiMessageSquare size={24} />{" "}
+                  <CommentWarpper onClick={goToComment}>
+                    <AiOutlineMessage size={24} />{" "}
                     <TotalComment>{commentCnt}</TotalComment>
                   </CommentWarpper>
                   <LikeWarpper>
-                    <FiThumbsUp size={24} />
+                    <AiOutlineLike size={24} />
                     <TotalLike>{likeCnt}</TotalLike>
                   </LikeWarpper>
                 </InfoWarpper>
@@ -302,6 +315,7 @@ const CommentWarpper = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${colors.blue};
+  cursor: pointer;
 `;
 
 const TotalComment = styled.p`

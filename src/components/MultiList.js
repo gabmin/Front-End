@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import Nickname from "./Nickname";
@@ -76,11 +76,11 @@ const MultiList = props => {
               </UserWrapper>
               <InfoWarpper>
                 <CommentWarpper>
-                  <FiMessageSquare size={16} />{" "}
+                  <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={16} />
+                  <AiOutlineLike size={16} />
                   <TotalLike>{likeCnt}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
@@ -122,11 +122,11 @@ const MultiList = props => {
               </UserWrapper>
               <InfoWarpper>
                 <CommentWarpper>
-                  <FiMessageSquare size={16} />{" "}
+                  <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={16} />
+                  <AiOutlineLike size={16} />
                   <TotalLike>{likeCnt}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>

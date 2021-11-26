@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
-import { FiThumbsUp } from "react-icons/fi";
+import { AiOutlineLike } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import ChildCommentInput from "../elements/ChildCommentInput";
@@ -170,7 +170,7 @@ const ChildComment = props => {
           </CommentWrapper>
           <LikeWrapper>
             <LikeBtn onClick={addLike}>
-              <FiThumbsUp />
+              <AiOutlineLike />
             </LikeBtn>
             <TotalLikes>{likes}</TotalLikes>
           </LikeWrapper>
