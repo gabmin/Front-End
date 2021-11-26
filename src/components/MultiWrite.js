@@ -3,7 +3,7 @@ import styled from "styled-components";
 import moment from "moment";
 
 import { history } from "../redux/configureStore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddPostDB, EditPostDB } from "../redux/actions/multiCard";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import colors from "../shared/colors";
@@ -13,7 +13,10 @@ const MultiWrite = props => {
   const editData = props.editData;
   const multiId = props.multiId;
   const isEdit = editData ? true : false;
-  console.log("isEdit", isEdit);
+  // console.log("isEdit", isEdit);
+  const { AddPostDBDone, EditPostDBDone } = useSelector(
+    state => state.multiCard,
+  );
   const [title, setTitle] = useState(isEdit ? editData.title : "");
   const [description, setDescription] = useState(
     isEdit ? editData.description : "",
@@ -41,6 +44,8 @@ const MultiWrite = props => {
   const [contentC, setContentC] = useState(isEdit ? editData.contentC : "");
   const [contentD, setContentD] = useState(isEdit ? editData.contentD : "");
   const [contentE, setContentE] = useState(isEdit ? editData.contentE : "");
+  const [addAction, setAddAction] = useState(null);
+  const [editAction, setEditAction] = useState(null);
 
   const dispatch = useDispatch();
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -60,6 +65,20 @@ const MultiWrite = props => {
       dispatch(SetParams("all"));
     }
   });
+
+  useEffect(() => {
+    if (addAction && AddPostDBDone) {
+      window.alert("작성이 완료되었습니다.");
+      history.replace("/multi");
+    }
+  }, [AddPostDBDone, addAction]);
+
+  useEffect(() => {
+    if (editAction && EditPostDBDone) {
+      window.alert("수정이 완료되었습니다.");
+      history.replace("/multi");
+    }
+  }, [EditPostDBDone, editAction]);
 
   // post 작성하기
   const addPost = () => {
@@ -102,6 +121,7 @@ const MultiWrite = props => {
           contentB,
         }),
       );
+      setAddAction(true);
     } else if (contentD === "" && contentE === "") {
       dispatch(
         AddPostDB({
@@ -112,6 +132,7 @@ const MultiWrite = props => {
           contentC,
         }),
       );
+      setAddAction(true);
     } else if (contentE === "") {
       dispatch(
         AddPostDB({
@@ -123,6 +144,7 @@ const MultiWrite = props => {
           contentD,
         }),
       );
+      setAddAction(true);
     } else {
       dispatch(
         AddPostDB({
@@ -135,9 +157,11 @@ const MultiWrite = props => {
           contentE,
         }),
       );
+      setAddAction(true);
     }
-    window.alert("작성이 완료되었습니다.");
-    history.push("/multi");
+    // window.alert("작성이 완료되었습니다.");
+    // AddPostDBDone === true &&
+    // history.replace("/multi");
   };
 
   // post 수정하기
@@ -179,6 +203,7 @@ const MultiWrite = props => {
           data: { title, description, contentA, contentB },
         }),
       );
+      setEditAction(true);
     } else if (contentD === "" && contentE === "") {
       dispatch(
         EditPostDB({
@@ -192,6 +217,7 @@ const MultiWrite = props => {
           },
         }),
       );
+      setEditAction(true);
     } else if (contentE === "") {
       dispatch(
         EditPostDB({
@@ -206,6 +232,7 @@ const MultiWrite = props => {
           },
         }),
       );
+      setEditAction(true);
     } else {
       dispatch(
         EditPostDB({
@@ -221,9 +248,10 @@ const MultiWrite = props => {
           },
         }),
       );
+      setEditAction(true);
     }
-    window.alert("수정이 완료되었습니다.");
-    history.push("/multi");
+    // window.alert("수정이 완료되었습니다.");
+    // history.push("/multi");
   };
 
   const changeTitle = e => {

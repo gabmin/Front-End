@@ -92,7 +92,12 @@ const MultiList = props => {
           <Card>
             <TitleWrapper>
               <TitleText onClick={goToDetail}>{title}</TitleText>
-              <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
+              <VoteBtnB>
+                {" "}
+                <button className="DetailB" onClick={goToDetail}>
+                  다시보기
+                </button>
+              </VoteBtnB>
             </TitleWrapper>
             <DateWarpper>
               <DateText>{date.substring(0, 16)}</DateText>
@@ -158,7 +163,7 @@ const ContainerB = styled.div`
   text-align: left;
   width: 840px;
   height: 248px;
-  padding: 44px 56px;
+  padding: 44px 56px 56px 56px;
   margin: 24px auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
@@ -302,22 +307,36 @@ const VoteBtn = styled.div`
   }
 `;
 
-const VoteBtnB = styled.button`
-  display: block;
+const VoteBtnB = styled.div`
   width: 150px;
-  height: 40px;
-  /* margin: 60px auto 0 auto; */
-  border: none;
-  border-radius: 8px;
-  background-color: ${colors.gray5};
-  font-size: 16px;
-  font-family: "Noto Sans KR", sans-serif;
-  color: ${colors.white};
-  cursor: pointer;
-  &:hover {
-    background-color: ${colors.white};
-    color: ${colors.red};
-    border: 1px ${colors.red} solid;
+  min-width: 110px;
+
+  .DetailB {
+    display: block;
+    width: 150px;
+    height: 40px;
+    margin: 0 0 0 auto;
+
+    border: none;
+    border-radius: 8px;
+    background-color: ${colors.gray5};
+    font-size: 16px;
+    font-family: "Noto Sans KR", sans-serif;
+    color: ${colors.white};
+    cursor: pointer;
+    &:hover {
+      background-color: ${colors.white};
+      color: ${colors.gray5};
+      border: 1px ${colors.gray5} solid;
+    }
+    @media screen and (max-width: ${mobile}) {
+      font-size: 14px;
+      width: 110px;
+      height: 36px;
+    }
+  }
+  @media screen and (max-width: ${mobile}) {
+    width: 120px;
   }
 `;
 
@@ -330,7 +349,6 @@ const FooterWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto -12px auto;
-  /* align-items: flex-end; */
 `;
 
 const UserWrapper = styled.div`
@@ -343,10 +361,10 @@ const UserWrapper = styled.div`
 const NickText = styled.p`
   height: 17px;
   color: ${colors.darkGray};
-  &:hover {
+  /* &:hover {
     transform: translateY(-3px);
     transition: transform 200ms;
-  }
+  } */
 `;
 
 const InfoWarpper = styled.div`

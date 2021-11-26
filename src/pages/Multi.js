@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 
-import listView from "../images/listView.png";
 import MultiSlick from "../components/MultiSlick";
 import colors from "../shared/colors";
 import { mobile } from "../shared/style";
@@ -38,8 +37,8 @@ const Multi = props => {
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
   const completeCardList = multiPostComplete && multiPostComplete.multi;
-  console.log("cardList", cardList);
-  console.log("ingCardList", ingCardList);
+  // console.log("cardList", cardList);
+  // console.log("ingCardList", ingCardList);
 
   useEffect(() => {
     if (viewStatus === false) {
@@ -83,13 +82,11 @@ const Multi = props => {
     setChangeView(true);
     dispatch(SetView(true));
     dispatch(SetParams("all"));
-    // console.log(changeView);
   };
   const viewSlide = () => {
     setChangeView(false);
     dispatch(SetView(false));
     dispatch(SetParams("all"));
-    // console.log(changeView);
   };
   return (
     <Container>
