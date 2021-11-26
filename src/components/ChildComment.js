@@ -273,9 +273,9 @@ const ReplyWarpper = styled.div`
 const TextAreaBtn = styled.button`
   border: none;
   border-radius: 4px;
-  margin: 60px 5px 0 0;
+  margin: 54px 5px 0 0;
   width: 40px;
-  height: 16px;
+  height: 20px;
   font-size: 10px;
   font-weight: 700;
   font-family: "Noto Sans KR", sans-serif;
