@@ -111,7 +111,7 @@ const Layout = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 100%;
+    width: 91%;
     padding: 20px 10px 0px;
   }
 `;

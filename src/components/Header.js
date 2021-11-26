@@ -158,6 +158,10 @@ const SearchMobile = styled.div`
   @media screen and (min-width: ${mobile}) {
     display: none;
   }
+
+  @media screen and (max-width: ${mobile}) {
+    width: 71%;
+  }
 `;
 
 const Container = styled.div`
