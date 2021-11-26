@@ -89,8 +89,8 @@ const Header = () => {
         <Bottom>
           <MenuWrapper>
             <StyledSymbol onClick={onClickSimbol} />
-            <span onClick={onClickEither}>찬반</span>
-            <span onClick={onClickMulti}>객관식</span>
+            <span onClick={onClickEither}>찬반투표</span>
+            <span onClick={onClickMulti}>객관식투표</span>
           </MenuWrapper>
           <Wrapper>
             <StyledSearch onClick={submitSearch} />
@@ -290,6 +290,10 @@ const MenuWrapper = styled.div`
     margin: 0 30px;
     color: #e25b45;
     text-align: center;
+  }
+
+  @media screen and (max-width: 1540px) {
+    width: 35%;
   }
 
   @media screen and (max-width: ${tablet}) {

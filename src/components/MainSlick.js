@@ -18,7 +18,7 @@ const ProductSlick = ({ cardList, type }) => {
     speed: 500,
     infinite: false,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 4,
     initialSlide: 0,
     lazyLoad: true,
     nextArrow: <NextArrow />,
@@ -29,7 +29,7 @@ const ProductSlick = ({ cardList, type }) => {
         breakpoint: 1700,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 3,
           dots: true,
           initialSlide: 1,
         },
@@ -38,7 +38,7 @@ const ProductSlick = ({ cardList, type }) => {
         breakpoint: 1300,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           dots: true,
           initialSlide: 1,
         },
