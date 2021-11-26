@@ -260,8 +260,8 @@ const VoteBtnB = styled.button`
   cursor: pointer;
   &:hover {
     background-color: ${colors.white};
-    color: ${colors.red};
-    border: 1px ${colors.red} solid;
+    color: ${colors.gray5};
+    border: 1px ${colors.gray5} solid;
   }
 `;
 
