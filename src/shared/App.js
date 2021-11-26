@@ -19,10 +19,13 @@ import MultiDetail from "../pages/MultiDetail";
 import CardWrite from "../pages/CardWrite";
 import ErrorPage from "../pages/ErrorPage";
 import Footer from "../components/Footer";
+import styled from "styled-components";
+import colors from "./colors";
+import EventBanner from "../elements/EventBanner";
 
 function App() {
   return (
-    <>
+    <Container>
       <GlobalStyle />
       <Header></Header>
       <ConnectedRouter history={history}>
@@ -43,8 +46,19 @@ function App() {
         </Switch>
         {/* <Footer></Footer> */}
       </ConnectedRouter>
-    </>
+      <EventBanner />
+    </Container>
   );
 }
+
+const Container = styled.div`
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: ${colors.lineGray};
+  background-size: 100%; */
+`;
 
 export default App;
