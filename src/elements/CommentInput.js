@@ -93,6 +93,7 @@ const AddBtn = styled.button`
   height: 16px;
   font-size: 10px;
   font-weight: 700;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
   background-color: ${colors.red};
   cursor: pointer;

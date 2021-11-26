@@ -184,6 +184,7 @@ const LikeWarpper = styled.div`
 
 const LikeBtn = styled.button`
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.red};
   border: none;
   background-color: ${colors.white};

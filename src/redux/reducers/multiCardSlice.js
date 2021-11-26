@@ -97,7 +97,7 @@ const multiPostSlice = createSlice({
       .addCase(AddPostDB.fulfilled, (state, action) => {
         state.AddPostDBLoading = false;
         state.AddPostDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        // state.multiPost.push(action.payload);
       })
       .addCase(AddPostDB.rejected, (state, action) => {
         state.AddPostDBLoading = false;
@@ -112,7 +112,7 @@ const multiPostSlice = createSlice({
       .addCase(EditPostDB.fulfilled, (state, action) => {
         state.EditPostDBLoading = false;
         state.EditPostDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        // state.multiPost.push(action.payload);
       })
       .addCase(EditPostDB.rejected, (state, action) => {
         state.EditPostDBLoading = false;
@@ -127,7 +127,7 @@ const multiPostSlice = createSlice({
       .addCase(DeletePostDB.fulfilled, (state, action) => {
         state.DeletePostDBLoading = false;
         state.DeletePostDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        // state.multiPost.push(action.payload);
       })
       .addCase(DeletePostDB.rejected, (state, action) => {
         state.DeletePostDBLoading = false;
@@ -142,7 +142,7 @@ const multiPostSlice = createSlice({
       .addCase(ClosePostDB.fulfilled, (state, action) => {
         state.ClosePostDBLoading = false;
         state.ClosePostDBDone = true;
-        // state.multiPost = [...state.multiPost, action.payload];
+        // state.multiPost.push(action.payload);
       })
       .addCase(ClosePostDB.rejected, (state, action) => {
         state.ClosePostDBLoading = false;

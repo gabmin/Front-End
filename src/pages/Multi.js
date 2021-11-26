@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
 
-import listView from "../images/listView.png";
 import MultiSlick from "../components/MultiSlick";
 import colors from "../shared/colors";
 import { mobile } from "../shared/style";
@@ -38,8 +37,8 @@ const Multi = props => {
   const cardList = multiPost && multiPost.multi;
   const ingCardList = multiPosting && multiPosting.multi;
   const completeCardList = multiPostComplete && multiPostComplete.multi;
-  console.log("cardList", cardList);
-  console.log("ingCardList", ingCardList);
+  // console.log("cardList", cardList);
+  // console.log("ingCardList", ingCardList);
 
   useEffect(() => {
     if (viewStatus === false) {
@@ -69,10 +68,13 @@ const Multi = props => {
   const goToWrite = () => {
     if (!userNickname) {
       window.alert("로그인 후 이용 가능합니다");
-      history.push("/login");
+      history.replace("/login");
     } else {
       window.scroll(0, 0);
-      history.push("/write");
+      history.push({
+        pathname: "/write",
+        state: { select: select },
+      });
     }
   };
 
@@ -80,13 +82,11 @@ const Multi = props => {
     setChangeView(true);
     dispatch(SetView(true));
     dispatch(SetParams("all"));
-    // console.log(changeView);
   };
   const viewSlide = () => {
     setChangeView(false);
     dispatch(SetView(false));
     dispatch(SetParams("all"));
-    // console.log(changeView);
   };
   return (
     <Container>
@@ -107,22 +107,47 @@ const Multi = props => {
           <TabBtn onClick={showCompletePost}>종료됨</TabBtn>
         )}
       </TabBtnWarpper>
-      <QuestionWarpper>
-        <ViewWarpper>
-          <ViewBtn onClick={viewSlide}>
-            <img
-              src={require("../images/slideView.png").default}
-              alt=""
-              height="16px"
-            />
-          </ViewBtn>
-          <ViewBtn>
-            <img src={listView} alt="" height="16px" onClick={viewList} />
-          </ViewBtn>
-        </ViewWarpper>
-
-        <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
-      </QuestionWarpper>
+      {viewStatus === false ? (
+        <QuestionWarpper>
+          <ViewWarpper>
+            <ViewBtn onClick={viewSlide}>
+              <img
+                className="view"
+                src={require("../images/slideViewSelected.png").default}
+                alt=""
+              />
+            </ViewBtn>
+            <ViewBtn onClick={viewList}>
+              <img
+                className="view"
+                src={require("../images/listView.png").default}
+                alt=""
+              />
+            </ViewBtn>
+          </ViewWarpper>
+          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+        </QuestionWarpper>
+      ) : (
+        <QuestionWarpperB>
+          <ViewWarpper>
+            <ViewBtn onClick={viewSlide}>
+              <img
+                className="view"
+                src={require("../images/slideView.png").default}
+                alt=""
+              />
+            </ViewBtn>
+            <ViewBtn onClick={viewList}>
+              <img
+                className="view"
+                src={require("../images/listViewSelected.png").default}
+                alt=""
+              />
+            </ViewBtn>
+          </ViewWarpper>
+          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
+        </QuestionWarpperB>
+      )}
       {changeView === false ? (
         <SliderWarpper>
           {PostDBLoading ? <LoadingBubble /> : null}
@@ -165,7 +190,7 @@ const TabBtnWarpper = styled.div`
   margin: 51px auto 0px auto;
   width: 100%;
   text-align: center;
-  width: 401px;
+  width: 240px;
   display: flex;
   justify-content: space-between;
 
@@ -181,6 +206,7 @@ const TabBtn = styled.button`
   background-color: ${colors.white};
   font-size: 20px;
   font-weight: bold;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.gray5};
   line-height: 29px;
   cursor: pointer;
@@ -199,6 +225,7 @@ const TabBtnOn = styled.button`
   background-color: ${colors.white};
   font-size: 20px;
   font-weight: bold;
+  font-family: "Noto Sans KR", sans-serif;
   line-height: 29px;
   cursor: pointer;
   color: ${colors.blue};
@@ -210,6 +237,20 @@ const TabBtnOn = styled.button`
 `;
 
 const QuestionWarpper = styled.div`
+  margin: 16px auto -8px auto;
+  width: 100%;
+  max-width: 418px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media screen and (max-width: ${mobile}) {
+    margin: 30px auto;
+    width: 80%;
+  }
+`;
+
+const QuestionWarpperB = styled.div`
   margin: 16px auto -8px auto;
   width: 100%;
   max-width: 840px;
@@ -231,6 +272,8 @@ const QuestionBtn = styled.button`
   color: ${colors.red};
   background-color: ${colors.white};
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
+  z-index: 10;
   cursor: pointer;
   &:hover {
     background-color: ${colors.red};
@@ -247,14 +290,17 @@ const ViewWarpper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  vertical-align: middle;
+  margin: auto 0;
 `;
 
-const ViewBtn = styled.button`
-  display: block;
-  border: none;
-  background-color: ${colors.white};
+const ViewBtn = styled.div`
+  z-index: 10;
+  margin-right: 16px;
   cursor: pointer;
-  margin: auto auto;
+  .view {
+    height: 16px;
+  }
 `;
 
 const SliderWarpper = styled.div`
