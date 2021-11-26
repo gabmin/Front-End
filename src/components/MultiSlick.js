@@ -14,7 +14,7 @@ const MultiSlick = props => {
   const CardList = props.cardList;
   const { PostDBDone } = useSelector(state => state.multiCard);
   const checkRef = useRef();
-  console.log("Card", CardList);
+  // console.log("Card", CardList);
   const settings = {
     className: "center",
     centerMode: true,
@@ -156,9 +156,10 @@ const Container = styled.div`
   }
   .slick-slider {
     padding: 30px 0;
-    margin: auto;
+    margin: -40px auto -20px auto;
     width: 100%;
     @media screen and (min-width: ${mobile}) and (max-width: 1300px) {
+      margin: -50px auto -20px auto;
       width: 55%;
     }
     @media screen and (max-width: ${mobile}) {

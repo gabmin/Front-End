@@ -34,6 +34,7 @@ const TextArea = styled.textarea`
   width: 80%;
   height: 50px;
   resize: none;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 export default ChildCommentInput;

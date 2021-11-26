@@ -88,8 +88,13 @@ const EitherCompleteCard = props => {
 
   //삭제하기
   const onClickDelete = () => {
-    dispatch(deletePostDB(eitherId));
-    setAction(true);
+    const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
+    if (deleteConfirm === true) {
+      dispatch(deletePostDB(eitherId));
+      setAction(true);
+    } else if (deleteConfirm === false) {
+      return;
+    }
   };
 
   //버튼A 상태 보여주기
@@ -309,7 +314,7 @@ const EitherButtonA = styled.button`
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   font-size: 16px;
-  line-height: 23px;
+  font-family: "Noto-Sans KR", sans-serif;
   cursor: pointer;
   margin-right: -1px;
   &:hover {
@@ -326,7 +331,7 @@ const EitherButtonB = styled.button`
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size: 16px;
-  line-height: 23px;
+  font-family: "Noto-Sans KR", sans-serif;
   cursor: pointer;
   margin-left: -1px;
   &:hover {

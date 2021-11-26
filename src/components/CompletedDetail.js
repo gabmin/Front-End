@@ -13,6 +13,7 @@ import MultiComment from "../components/MultiComment";
 import MultiUnvoted from "../components/MultiUnvoted";
 import MultiVoted from "../components/MultiVoted";
 import LoadingBubble from "../elements/LoadingBubble";
+import { mobile } from "../shared/style";
 import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
@@ -69,12 +70,17 @@ const Container = styled.div`
   max-width: 1100px;
   min-height: 100%;
   margin: 10px auto 50px auto;
+  box-sizing: border-box;
+  @media screen and (max-width: ${mobile}) {
+    padding: 10px;
+  }
 `;
 
 const BackBtn = styled.button`
   margin: 10px auto 0 10px;
   border: none;
   font-size: 24px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.gray5};
   background-color: ${colors.white};
 `;

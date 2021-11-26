@@ -116,11 +116,8 @@ const Title = styled.div`
     width: 68px;
     font-size: 18px;
     font-weight: bold;
-    /* line-height: 26px; */
-    /* margin: 22px 76px 28px 0px; */
     @media screen and (max-width: ${mobile}) {
       font-size: 16px;
-      /* margin: 20px 35px 20px 0px; */
     }
   }
 `;
@@ -134,6 +131,7 @@ const Input = styled.input`
   &::placeholder {
     font-size: 16px;
     color: #868e96;
+    font-family: "Noto-Sans KR", sans-serif;
   }
 
   @media screen and (max-width: ${mobile}) {
@@ -175,9 +173,11 @@ const ButtonInput = styled.textarea`
   box-sizing: border-box;
   padding: 3px;
   font-family: "Noto-Sans KR", sans-serif;
-
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;
+  }
+  &::placeholder {
+    font-family: "Noto-Sans KR", sans-serif;
   }
 `;
 const OptionButtonGrid = styled.div`
@@ -193,7 +193,7 @@ const CancleButton = styled.button`
   background-color: #ffffff;
   color: #e25b45;
   font-size: 16px;
-  line-height: 23px;
+  font-family: "Noto-Sans KR", sans-serif;
   margin-top: 24px;
   cursor: pointer;
   &:hover {
@@ -212,9 +212,10 @@ const CheckButton = styled.button`
   background-color: #e25b45;
   color: #ffffff;
   font-size: 16px;
-  line-height: 23px;
+  font-family: "Noto-Sans KR", sans-serif;
   margin-top: 24px;
   cursor: pointer;
+
   &:hover {
     background-color: #ffffff;
     color: #e25b45;

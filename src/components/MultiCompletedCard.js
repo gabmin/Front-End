@@ -162,6 +162,7 @@ const VoteBtn = styled.button`
   border-radius: 8px;
   background-color: ${colors.red};
   font-size: 16px;
+  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.white};
 `;
 

@@ -111,6 +111,7 @@ const Index = styled.div`
   }
   div {
     display: flex;
+    margin-left: 22px;
   }
   margin: 0px 0px 22px 0px;
   @media screen and (max-width: ${mobile}) {
