@@ -38,8 +38,6 @@ const Profile = props => {
   const [myPostsloadDone, setMyPostsloadDone] = useState(false);
   const [myPollsloadDone, setMyPollsloadDone] = useState(false);
 
-  const myPostsList = myPosts.map(v => ({ ...v, nickname: userNick }));
-
   useEffect(() => {
     if (getMyPostsDone && getMyPollsDone) {
       setTimeout(() => {
@@ -136,7 +134,7 @@ const Profile = props => {
               onClickPostBtn("posts");
             }}
           >
-            내 작성글
+            작성한 글
           </MyPostsBtn>
           <MyPollsBtn
             clicked={clicked}
@@ -151,7 +149,7 @@ const Profile = props => {
       <PostsContainer>
         {!myPostsloadDone && !myPollsloadDone && <LoadingBubble />}
         {clicked === "posts" ? (
-          <MainPagination items={myPostsList} />
+          <MainPagination items={myPosts} />
         ) : (
           <MainPagination items={myPolls} />
         )}
