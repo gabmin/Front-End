@@ -131,12 +131,6 @@ const Subjects = styled.div`
   cursor: pointer;
   transition: 0.3s;
 
-  :hover {
-    background-color: #eeeeee;
-    border-radius: 5px;
-    transform: scale(1.05);
-  }
-
   div {
     display: flex;
     flex-direction: row;
@@ -190,10 +184,6 @@ const Contents = styled.div`
   .searchCardNick {
     font-weight: bold;
     cursor: pointer;
-
-    :hover {
-      border-bottom: 1px solid ${gray5};
-    }
   }
 
   .dateContent {

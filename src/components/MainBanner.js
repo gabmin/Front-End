@@ -14,10 +14,21 @@ const MainBanner = () => {
 
   return (
     <BannerWrapper ref={scrollRef}>
-      <BannerTexts>
-        <img alt="bannerText" src={bannerText} />
-      </BannerTexts>
-      <BannerAnt onScreen={onScreen} alt="bannerAnt" src={bannerAnt} />
+      <BannerInner>
+        <BannerTexts>
+          <span className="innerTextTop">
+            곡소리 나는 개미들의 주식 커뮤니티
+          </span>
+          <img alt="bannerText" src={bannerText} />
+          <span className="innerTextBottom1">
+            투자에 대한 무거운 고민을 쉽고 가볍게 해결할 수 있는 커뮤니티.
+          </span>
+          <span className="innerTextBottom2">
+            투표를 통해 당신의 생각을 여러 개미들과 자유롭게 나눠보세요!
+          </span>
+        </BannerTexts>
+        <BannerAnt onScreen={onScreen} alt="bannerAnt" src={bannerAnt} />
+      </BannerInner>
       <StyledBannerBack alt="mainBanner" src={bannerBack} />
     </BannerWrapper>
   );
@@ -30,7 +41,7 @@ const BannerWrapper = styled.div`
   position: relative;
   width: 100%;
   margin: auto;
-  height: 500px;
+  height: 300px;
   overflow-x: hidden;
 
   @media screen and (max-width: ${mobile}) {
@@ -38,18 +49,48 @@ const BannerWrapper = styled.div`
   }
 `;
 
-const BannerTexts = styled.div`
+const BannerInner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
+  width: 67%;
+  max-width: 1280px;
   position: relative;
-  left: 63px;
+`;
+
+const BannerTexts = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+
+  .innerTextTop {
+    position: relative;
+    top: -20px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  img {
+    position: relative;
+    top: -10px;
+  }
+
+  .innerTextBottom1,
+  .innerTextBottom2 {
+    position: relative;
+    top: 47px;
+    color: white;
+    font-size: 14px;
+  }
 `;
 
 const BannerAnt = styled.img`
-  position: relative;
-  left: ${props => (props.onScreen ? "30px" : "1200px")};
+  position: absolute;
+  left: ${props => (props.onScreen ? "600px" : "1200px")};
   transition: all 0.5s cubic-bezier(0.19, 0.855, 0.265, 0.985);
+  height: 100%;
 `;
 
 const StyledBannerBack = styled.img`
