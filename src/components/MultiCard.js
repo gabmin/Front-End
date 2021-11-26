@@ -154,8 +154,12 @@ const MultiCard = props => {
                     <TotalComment>{commentCnt}</TotalComment>
                   </CommentWarpper>
                   <LikeWarpper>
-                    <AiOutlineLike size={24} />
-                    <TotalLike>{likeCnt}</TotalLike>
+                    {!likeState ? (
+                      <AiOutlineLike size={24} onClick={addLike} />
+                    ) : (
+                      <AiFillLike size={24} />
+                    )}
+                    <TotalLike>{likes}</TotalLike>
                   </LikeWarpper>
                 </InfoWarpper>
               </FooterWrapper>

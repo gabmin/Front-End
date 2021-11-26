@@ -155,13 +155,17 @@ const MultiList = props => {
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
-                <CommentWarpper>
+                <CommentWarpper onClick={goToComment}>
                   <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <AiOutlineLike size={16} />
-                  <TotalLike>{likeCnt}</TotalLike>
+                  {!likeState ? (
+                    <AiOutlineLike size={16} onClick={addLike} />
+                  ) : (
+                    <AiFillLike size={16} />
+                  )}
+                  <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
             </FooterWrapper>
