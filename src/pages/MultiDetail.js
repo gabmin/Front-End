@@ -226,6 +226,7 @@ const Wrapper = styled.div`
   margin: auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
+  background-color: ${colors.white};
 `;
 
 const MenuBar = styled.div`
@@ -246,7 +247,7 @@ const TopBtn = styled.button`
   font-weight: 700;
   font-family: "Noto Sans KR", sans-serif;
   border: none;
-  background-color: ${colors.white};
+  background-color: transparent;
   color: ${colors.blue};
   cursor: pointer;
   text-decoration: underline;
