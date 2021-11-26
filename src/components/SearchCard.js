@@ -57,9 +57,11 @@ const SearchCard = ({
       </Subjects>
       <Contents>
         <div>
-          <span className="searchCardNick" onClick={onClickNick}>
-            {nickname}
-          </span>
+          {nickname && (
+            <span className="searchCardNick" onClick={onClickNick}>
+              {nickname}
+            </span>
+          )}
           <span className="dateContent">{date.substring(0, 16)}</span>
         </div>
         <IconWrapper>
@@ -184,15 +186,15 @@ const Contents = styled.div`
   .searchCardNick {
     font-weight: bold;
     cursor: pointer;
+    margin: 0 30px 0 0;
   }
 
   .dateContent {
     color: ${gray5};
-    margin: 0 30px;
     font-weight: normal;
 
     @media screen and (max-width: ${tablet}) {
-      margin: 0 0 0 10px;
+      margin: 0;
     }
   }
 
