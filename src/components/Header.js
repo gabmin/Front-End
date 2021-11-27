@@ -226,7 +226,7 @@ const Bottom = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 90%;
+    width: 100%;
   }
 `;
 
@@ -274,6 +274,12 @@ const StyledCommonIcon = styled(CommonIcon)`
   height: 40px;
   margin-right: 12px;
   cursor: pointer;
+
+  @media screen and (max-width: ${mobile}) {
+    width: 30px;
+    height: 30px;
+    margin-right: 0;
+  }
 `;
 
 const MenuWrapper = styled.div`
@@ -337,7 +343,8 @@ const IconWrapper = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 40%;
+    width: 45%;
+    font-size: 12px;
   }
 `;
 
