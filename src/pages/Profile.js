@@ -23,9 +23,14 @@ const Profile = props => {
   const userId = props.match.params.user_id;
   const dispatch = useDispatch();
 
-  const { myPosts, myPolls, getMyPostsDone, getMyPollsDone } = useSelector(
-    state => state.profile,
-  );
+  const {
+    myPosts,
+    myPolls,
+    getMyPostsDone,
+    getMyPollsDone,
+    getMyPostsLoading,
+    getMyPollsLoading,
+  } = useSelector(state => state.profile);
   const { userId: myId } = useSelector(state => state.user.userInfo);
   const { profileNick, getProfileNickLoading } = useSelector(
     state => state.user,
@@ -51,12 +56,21 @@ const Profile = props => {
   useEffect(() => {
     dispatch(getProfileNick(userId));
     dispatch(getMyPosts(userId));
-    dispatch(getMyPolls(userId));
   }, [dispatch, userId]);
 
-  const onClickPostBtn = useCallback(type => {
-    setClicked(type);
-  }, []);
+  const onClickPostBtn = useCallback(
+    type => {
+      setClicked(type);
+      if (type === "posts" && !myPostsloadDone) {
+        dispatch(getMyPosts(userId));
+        return;
+      }
+      if (!myPollsloadDone) {
+        dispatch(getMyPolls(userId));
+      }
+    },
+    [dispatch, userId, myPollsloadDone, myPostsloadDone],
+  );
 
   const onClickNickname = useCallback(() => {
     setNicknameClick(true);
@@ -145,7 +159,8 @@ const Profile = props => {
         </PostBtns>
       </MyInfo>
       <PostsContainer>
-        {!myPostsloadDone && !myPollsloadDone && <LoadingBubble />}
+        {getMyPostsLoading && <LoadingBubble />}
+        {getMyPollsLoading && <LoadingBubble />}
         {clicked === "posts" ? (
           <MainPagination items={myPosts} />
         ) : (
