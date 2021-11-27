@@ -52,7 +52,6 @@ const Multi = props => {
       dispatch(PostCompleteDB("all"));
       setStatus("Post");
     }
-    console.log("view", viewStatus);
   }, [dispatch, paramsId, viewStatus]);
 
   const showPost = () => {

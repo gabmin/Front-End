@@ -173,7 +173,6 @@ const multiDetailSlice = createSlice({
         //   action.payload.childComment,
         // ];
         state.multiDetail.childComment.push(action.payload.childComment);
-        console.log("child", action.payload);
       })
       .addCase(AddChildDB.rejected, (state, action) => {
         state.AddChildDBLoading = false;

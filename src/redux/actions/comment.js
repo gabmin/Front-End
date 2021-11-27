@@ -20,7 +20,6 @@ export const AddCommentDB = createAsyncThunk(
 export const EditCommentDB = createAsyncThunk(
   "multiPost/EditCommentDB",
   async (data, { rejectWithValue }) => {
-    console.log("editcommentData", data);
     try {
       const response = await api.patch(
         `/posts/multi/${data.multiId}/comment/${data.id}/edit`,
@@ -37,7 +36,6 @@ export const EditCommentDB = createAsyncThunk(
 export const DelCommentDB = createAsyncThunk(
   "multiPost/DelCommentDB",
   async (data, { rejectWithValue }) => {
-    console.log("delcommentData", data);
     try {
       const response = await api.patch(
         `/posts/multi/${data.multiId}/comment/${data.id}/delete`,

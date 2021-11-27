@@ -37,7 +37,7 @@ const MultiDetail = props => {
   const onComment = location.state?.onComment;
   const commentRef = useRef();
 
-  console.log("onComment", commentRef);
+  // console.log("onComment", commentRef);
   // const [deleteAction, setDeleteAction] = useState(null);
   // const [closeAction, setCloseAction] = useState(null);
 
@@ -60,9 +60,9 @@ const MultiDetail = props => {
   useEffect(() => {
     dispatch(DetailDB(multiId));
     dispatch(SetParams(multiId));
-    if (onComment == "onComment") {
-      console.log("aaa", commentRef);
-    }
+    // if (onComment == "onComment") {
+    //   console.log("aaa", commentRef);
+    // }
   }, [dispatch, multiId, onComment]);
 
   const goToMulti = () => {

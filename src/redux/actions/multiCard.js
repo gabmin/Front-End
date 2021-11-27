@@ -5,7 +5,6 @@ import api from "../../shared/api";
 export const PostDB = createAsyncThunk(
   "multiPost/PostDB",
   async (multiId, { rejectWithValue }) => {
-    console.log("checkPosition", multiId);
     try {
       const response = await api.get(`/posts/multi/${multiId}`);
       return response.data;
