@@ -102,6 +102,7 @@ const Wrapper = styled.div`
   margin: auto;
   border: 2px ${colors.blue} solid;
   border-radius: 10px;
+  background-color: ${colors.white};
 `;
 
 const MenuWarpper = styled.div`

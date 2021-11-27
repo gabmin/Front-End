@@ -107,7 +107,7 @@ const Main = () => {
             <p className="countType">참여한 개미 수</p>
           </div>
         </Counts>
-        <Top onClick={onClickTop}>TOP</Top>
+        {/* <Top onClick={onClickTop}>TOP</Top> */}
       </Container>
     </>
   );
@@ -126,7 +126,7 @@ const Container = styled.div`
   @media screen and (max-width: 1540px) {
     top: 20px;
     flex-direction: column;
-    height: 1100px;
+    height: 1200px;
     width: 75%;
   }
 `;

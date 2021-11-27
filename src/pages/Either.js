@@ -189,54 +189,6 @@ const Either = props => {
             <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
           </FormatWrapperB>
         )}
-        {/* <FormatWrapper>
-          <FormatChangeGrid>
-            {changeView === false ? (
-              <BsCardText // 카드형식으로 보기 버튼 (파란색)
-                onClick={setSlickCard}
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  color: "#00397c",
-                  cursor: "pointer",
-                }}
-              ></BsCardText>
-            ) : (
-              <BsCardText // 카드형식으로 보기 버튼 (회색)
-                onClick={setSlickCard}
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  color: "#ADB5BD",
-                  cursor: "pointer",
-                }}
-              ></BsCardText>
-            )}
-            {changeView === true ? (
-              <BsList // 리스트형식으로 보기 버튼 (파란색)
-                onClick={setListCard}
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  color: "#00397c",
-                  cursor: "pointer",
-                }}
-              ></BsList>
-            ) : (
-              <BsList // 리스트형식으로 보기 버튼 (회색)
-                onClick={setListCard}
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  color: "#ADB5BD",
-                  cursor: "pointer",
-                }}
-              ></BsList>
-            )}
-          </FormatChangeGrid>
-          <QuestionBtn onClick={goToWrite}>질문하기</QuestionBtn>
-        </FormatWrapper> */}
-
         {changeView === false ? ( //카드형식
           <SlickLayout>
             {PostDBLoading ? <LoadingBubble /> : null}

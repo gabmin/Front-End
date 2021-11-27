@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
-import { FiThumbsUp } from "react-icons/fi";
+import { AiOutlineLike } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import ChildCommentInput from "../elements/ChildCommentInput";
@@ -170,7 +170,7 @@ const ChildComment = props => {
           </CommentWrapper>
           <LikeWrapper>
             <LikeBtn onClick={addLike}>
-              <FiThumbsUp />
+              <AiOutlineLike />
             </LikeBtn>
             <TotalLikes>{likes}</TotalLikes>
           </LikeWrapper>
@@ -273,9 +273,9 @@ const ReplyWarpper = styled.div`
 const TextAreaBtn = styled.button`
   border: none;
   border-radius: 4px;
-  margin: 60px 5px 0 0;
+  margin: 54px 5px 0 0;
   width: 40px;
-  height: 16px;
+  height: 20px;
   font-size: 10px;
   font-weight: 700;
   font-family: "Noto Sans KR", sans-serif;

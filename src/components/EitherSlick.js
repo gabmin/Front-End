@@ -61,6 +61,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                       voted={v.voted}
                       completed={v.completed}
                       user={v.user}
+                      goToNext={goToNext}
                     />
                   ),
                 )}
@@ -101,6 +102,7 @@ const EiterSlick = ({ PostList, PostingList, PostCompleteList }) => {
                     voted={v.voted}
                     completed={v.completed}
                     user={v.user}
+                    goToNext={goToNext}
                   />
                 ))}
             </StyledSlider>
@@ -116,7 +118,7 @@ const settings = {
   centerMode: true,
   infinite: true,
   adaptiveHeight: true,
-  focusOnSelect: false,
+  focusOnSelect: true,
   slidesToShow: 3,
   slidesToScroll: 1,
   swipeToSlide: true,
@@ -162,7 +164,7 @@ const Wrap = styled.div`
       pointer-events: none;
     }
     .Position {
-      pointer-events: none;
+      /* pointer-events: none; */
     }
 
     @media screen and (min-width: ${mobile}) and (max-width: 1300px) {

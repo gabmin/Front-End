@@ -19,10 +19,15 @@ import MultiDetail from "../pages/MultiDetail";
 import CardWrite from "../pages/CardWrite";
 import ErrorPage from "../pages/ErrorPage";
 import Footer from "../components/Footer";
+import styled from "styled-components";
+import colors from "./colors";
+import EventBanner from "../elements/EventBanner";
+import background from "../images/background.png";
 
 function App() {
   return (
     <>
+      {/* <BackGround /> */}
       <GlobalStyle />
       <Header></Header>
       <ConnectedRouter history={history}>
@@ -41,10 +46,23 @@ function App() {
           <Route exact path="/write" component={CardWrite} />
           <Route path="*" component={ErrorPage} />
         </Switch>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </ConnectedRouter>
+      <EventBanner />
     </>
   );
 }
+
+const BackGround = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(${background});
+  z-index: -99999;
+  /* opacity: 0.3; */
+  background-size: cover;
+`;
 
 export default App;

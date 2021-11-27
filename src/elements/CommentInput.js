@@ -88,9 +88,9 @@ const TextArea = styled.textarea`
 const AddBtn = styled.button`
   border: none;
   border-radius: 4px;
-  margin: 60px 5px 0 0;
-  min-width: 40px;
-  height: 16px;
+  margin: 54px 5px 0 0;
+  min-width: 50px;
+  height: 20px;
   font-size: 10px;
   font-weight: 700;
   font-family: "Noto Sans KR", sans-serif;
