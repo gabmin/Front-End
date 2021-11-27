@@ -129,7 +129,7 @@ const Container = styled.div`
   align-items: center;
   max-width: 620px;
   width: 90%;
-  height: 961px;
+  height: 850px;
   margin: auto;
 
   @media screen and (max-width: ${mobile}) {

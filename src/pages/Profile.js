@@ -26,9 +26,7 @@ const Profile = props => {
   const { myPosts, myPolls, getMyPostsDone, getMyPollsDone } = useSelector(
     state => state.profile,
   );
-  const { userId: myId, nickname: userNick } = useSelector(
-    state => state.user.userInfo,
-  );
+  const { userId: myId } = useSelector(state => state.user.userInfo);
   const { profileNick, getProfileNickLoading } = useSelector(
     state => state.user,
   );
@@ -54,7 +52,7 @@ const Profile = props => {
     dispatch(getProfileNick(userId));
     dispatch(getMyPosts(userId));
     dispatch(getMyPolls(userId));
-  }, [dispatch, userId, userNick]);
+  }, [dispatch, userId]);
 
   const onClickPostBtn = useCallback(type => {
     setClicked(type);
