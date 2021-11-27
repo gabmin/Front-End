@@ -41,7 +41,7 @@ function App() {
           <Route exact path="/write" component={CardWrite} />
           <Route path="*" component={ErrorPage} />
         </Switch>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </ConnectedRouter>
     </>
   );
