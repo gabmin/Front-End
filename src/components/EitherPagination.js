@@ -16,7 +16,6 @@ import {
 } from "../shared/style";
 
 function Items({ currentItems }) {
-  console.log(currentItems);
   return (
     <div className="items">
       {currentItems &&
