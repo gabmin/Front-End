@@ -101,7 +101,7 @@ const ProductSlick = ({ cardList, type }) => {
 };
 
 const Wrap = styled.div`
-  width: 104%;
+  width: 103%;
   height: 336px;
   margin: 0;
 
