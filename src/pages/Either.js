@@ -35,6 +35,7 @@ const Either = props => {
   const viewStatus = useSelector(state => state.view.viewStatus);
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
+  console.log(PostList);
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
 
@@ -62,16 +63,19 @@ const Either = props => {
   //전체 게시글 보여주기
   const onClickPost = () => {
     setStatus("Post");
+    dispatch(PostDB(paramsId));
   };
 
   //진행중 게시글 보여주기
   const onClickPosting = () => {
     setStatus("Posting");
+    dispatch(PostingDB(paramsId));
   };
 
   //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
     setStatus("CompletePost");
+    dispatch(PostCompleteDB(paramsId));
   };
 
   //게시글 작성하러가기

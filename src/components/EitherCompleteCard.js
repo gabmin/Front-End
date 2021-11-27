@@ -4,10 +4,8 @@ import styled from "styled-components";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import MaterialIcon from "material-icons-react";
-import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
-import { HiThumbUp } from "react-icons/hi";
-import { FaRegUser } from "react-icons/fa";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { AiOutlineLike, AiFillLike, AiOutlineUser } from "react-icons/ai";
 
 import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
@@ -165,7 +163,9 @@ const EitherCompleteCard = props => {
         <DateDiv>{date.substring(0, 16)}</DateDiv>
         {/* 투표한 인원 수 */}
         <TotalCntGrid>
-          <FaRegUser style={{ width: "16", height: "16", color: "#00397c" }} />
+          <AiOutlineUser
+            style={{ width: "18", height: "18", color: "#00397c" }}
+          />
           <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
         </TotalCntGrid>
         {/* 투표 상태에 따른 버튼 형식 변경 */}
@@ -218,7 +218,7 @@ const EitherCompleteCard = props => {
             </div>
             <div className="Grid">
               {!likeState ? ( //좋아요 이미지
-                <FiThumbsUp
+                <AiOutlineLike
                   onClick={onClickLike}
                   style={{
                     width: "24",
@@ -227,7 +227,7 @@ const EitherCompleteCard = props => {
                   }}
                 />
               ) : (
-                <HiThumbUp
+                <AiFillLike
                   style={{
                     width: "24",
                     height: "24",
@@ -293,9 +293,9 @@ const TotalCntGrid = styled.div`
 `;
 const TotalCntDiv = styled.div`
   font-size: 12px;
-  line-height: 20px;
   color: #868e96;
   margin-left: 8px;
+  align-items: center;
 `;
 const ButtonGrid = styled.div`
   width: 312px;
