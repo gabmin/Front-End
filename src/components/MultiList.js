@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { AiOutlineLike, AiFillLike, AiOutlineMessage } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import Nickname from "./Nickname";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { mobile } from "../shared/style";
+import { AddLikeDB } from "../redux/actions/multiLike";
 
 const MultiList = props => {
   const userNickname = localStorage.getItem("nickname");
@@ -25,8 +26,11 @@ const MultiList = props => {
     editedDate,
     completed,
     likeCnt,
+    liked,
     commentCnt,
   } = props;
+  const [likes, setLikes] = useState(likeCnt);
+  const [likeState, setLikeState] = useState(liked === null ? false : true);
 
   const history = useHistory();
   const goToDetail = () => {
@@ -37,6 +41,32 @@ const MultiList = props => {
       window.scroll(0, 0);
       dispatch(DetailDB(multiId));
       history.push(`/multi/${multiId}`);
+    }
+  };
+
+  const goToComment = () => {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else {
+      dispatch(DetailDB(multiId));
+      history.push({
+        pathname: `/multi/${multiId}`,
+        state: { onComment: "onComment" },
+      });
+    }
+  };
+
+  const addLike = () => {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && liked === null) {
+      dispatch(AddLikeDB(multiId));
+      setLikes(likeCnt + 1);
+      setLikeState(true);
+    } else {
+      return;
     }
   };
 
@@ -75,13 +105,17 @@ const MultiList = props => {
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
-                <CommentWarpper>
-                  <FiMessageSquare size={16} />{" "}
+                <CommentWarpper onClick={goToComment}>
+                  <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={16} />
-                  <TotalLike>{likeCnt}</TotalLike>
+                  {!likeState ? (
+                    <AiOutlineLike size={16} onClick={addLike} />
+                  ) : (
+                    <AiFillLike size={16} />
+                  )}
+                  <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
             </FooterWrapper>
@@ -121,13 +155,17 @@ const MultiList = props => {
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
               </UserWrapper>
               <InfoWarpper>
-                <CommentWarpper>
-                  <FiMessageSquare size={16} />{" "}
+                <CommentWarpper onClick={goToComment}>
+                  <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
                 <LikeWarpper>
-                  <FiThumbsUp size={16} />
-                  <TotalLike>{likeCnt}</TotalLike>
+                  {!likeState ? (
+                    <AiOutlineLike size={16} onClick={addLike} />
+                  ) : (
+                    <AiFillLike size={16} />
+                  )}
+                  <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
               </InfoWarpper>
             </FooterWrapper>
@@ -381,6 +419,7 @@ const CommentWarpper = styled.div`
   align-items: center;
   color: ${colors.blue};
   height: 20px;
+  cursor: pointer;
 `;
 
 const TotalComment = styled.p`
@@ -396,6 +435,7 @@ const LikeWarpper = styled.div`
   align-items: center;
   color: ${colors.red};
   height: 20px;
+  cursor: pointer;
 `;
 
 const TotalLike = styled.p`

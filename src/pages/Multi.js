@@ -203,7 +203,7 @@ const TabBtnWarpper = styled.div`
 
 const TabBtn = styled.button`
   border: none;
-  background-color: ${colors.white};
+  background-color: transparent;
   font-size: 20px;
   font-weight: bold;
   font-family: "Noto Sans KR", sans-serif;
@@ -222,7 +222,7 @@ const TabBtn = styled.button`
 
 const TabBtnOn = styled.button`
   border: none;
-  background-color: ${colors.white};
+  background-color: transparent;
   font-size: 20px;
   font-weight: bold;
   font-family: "Noto Sans KR", sans-serif;

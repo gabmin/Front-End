@@ -1,8 +1,11 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
-import { HiThumbUp } from "react-icons/hi";
-import { FaRegUser } from "react-icons/fa";
+import {
+  AiOutlineLike,
+  AiFillLike,
+  AiOutlineMessage,
+  AiOutlineUser,
+} from "react-icons/ai";
 
 import colors from "../shared/colors";
 import { useDispatch, useSelector } from "react-redux";
@@ -96,7 +99,8 @@ const MultiVoted = props => {
       </TitleWrapper>
       <Date>{multiList.date.substring(0, 16)}</Date>
       <TotalCntWarpper>
-        <FaRegUser /> {TotalCnt}
+        <AiOutlineUser className="icon" />
+        <p>{TotalCnt}</p>
       </TotalCntWarpper>
       {/* <TitleHr /> */}
       <ProgressWrapper>
@@ -213,7 +217,7 @@ const MultiVoted = props => {
         ></Nickname>
         <RightWarpper>
           <CommentWarpper>
-            <FiMessageSquare />{" "}
+            <AiOutlineMessage />{" "}
             <TotalComment>
               {dataList.comment.length + dataList.childComment.length}
             </TotalComment>
@@ -221,11 +225,11 @@ const MultiVoted = props => {
           <LikeWarpper>
             {!likeState ? (
               <LikeBtn onClick={addLike}>
-                <FiThumbsUp />
+                <AiOutlineLike />
               </LikeBtn>
             ) : (
               <LikedBtn>
-                <HiThumbUp />
+                <AiFillLike />
               </LikedBtn>
             )}
             <TotalLike>{likes}</TotalLike>
@@ -265,10 +269,17 @@ const Date = styled.p`
 `;
 
 const TotalCntWarpper = styled.div`
-  margin: 12px auto;
+  margin: 0 auto;
   text-align: center;
   font-size: 14px;
   color: ${colors.gray5};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .icon {
+    padding-bottom: 2px;
+    margin-right: 6px;
+  }
 `;
 
 const TitleHr = styled.hr`
@@ -367,20 +378,21 @@ const RightWarpper = styled.div`
 `;
 
 const CommentWarpper = styled.div`
-  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   color: ${colors.blue};
+  padding-bottom: 2px;
 `;
 
 const TotalComment = styled.p`
   font-size: 12px;
+  margin-left: 10px;
+  padding-top: 2px;
 `;
 
 const LikeWarpper = styled.div`
-  width: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -389,23 +401,22 @@ const LikeWarpper = styled.div`
   color: ${colors.red};
 `;
 
-const LikeBtn = styled.button`
+const LikeBtn = styled.div`
   font-size: 16px;
-  font-family: "Noto Sans KR", sans-serif;
   color: ${colors.red};
-  border: none;
-  background-color: ${colors.white};
+  padding-top: 1px;
   cursor: pointer;
 `;
 
 const LikedBtn = styled.div`
-  font-size: 20px;
-  align-items: center;
+  font-size: 16px;
   color: ${colors.red};
+  padding-top: 1px;
 `;
 
 const TotalLike = styled.p`
   font-size: 12px;
+  margin-left: 10px;
 `;
 
 const CommentHr = styled.hr`

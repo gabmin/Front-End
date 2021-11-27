@@ -14,7 +14,7 @@ const MultiSlick = props => {
   const CardList = props.cardList;
   const { PostDBDone } = useSelector(state => state.multiCard);
   const checkRef = useRef();
-  // console.log("Card", CardList);
+  console.log("Card", CardList);
   const settings = {
     className: "center",
     centerMode: true,
@@ -130,6 +130,7 @@ const MultiSlick = props => {
                   likeCnt={p.likeCnt}
                   commentCnt={p.commentCnt}
                   nickname={p.nickname}
+                  liked={p.liked}
                 />
               </CardWarpper>
             ))}

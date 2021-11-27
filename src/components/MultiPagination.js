@@ -31,6 +31,7 @@ function Items({ currentItems }) {
                     editedDate={p.editedDate}
                     completed={p.completed}
                     likeCnt={p.likeCnt}
+                    liked={p.liked}
                     commentCnt={p.commentCnt}
                     nickname={p.nickname}
                   />
@@ -171,11 +172,14 @@ const TopBtn = styled.button`
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   border: none;
-  background-color: ${colors.white};
+  background-color: transparent;
   color: ${colors.blue};
   cursor: pointer;
   text-decoration: underline;
   text-underline-position: under;
+  @media screen and (max-width: ${mobile}) {
+    margin: 8% 8% -5px auto;
+  }
 `;
 
 export default MultiPagination;
