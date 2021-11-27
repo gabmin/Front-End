@@ -65,7 +65,10 @@ const Main = () => {
             {mainDataLoading === true ? (
               <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
             ) : (
-              <h3>들린다... {eitherNum}개의 곡소리가.....</h3>
+              <h3>
+                들린다... {Number(eitherNum).toLocaleString("ko-KR")}개의
+                곡소리가.....
+              </h3>
             )}
             <h1> 찬반 질문 작성하기</h1>
             <StyledGoAnt color="blue" />
@@ -79,7 +82,10 @@ const Main = () => {
             {mainDataLoading === true ? (
               <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
             ) : (
-              <h3>들린다... {multiNum}개의 곡소리가.....</h3>
+              <h3>
+                들린다... {Number(multiNum).toLocaleString("ko-KR")}개의
+                곡소리가.....
+              </h3>
             )}
             <h1> 객관식 질문 작성하기</h1>
             <StyledGoAnt color="white" />
@@ -98,12 +104,16 @@ const Main = () => {
         </Wrapper>
         <Counts>
           <div className="countsWrapper">
-            <p className="countNum">{postingNum}</p>
+            <p className="countNum">
+              {Number(postingNum).toLocaleString("ko-KR")}
+            </p>
             <p className="countType">전체 곡소리 수</p>
           </div>
           <div className="betweenLine"></div>
           <div className="countsWrapper">
-            <p className="countNum">{attendNum}</p>
+            <p className="countNum">
+              {Number(attendNum).toLocaleString("ko-KR")}
+            </p>
             <p className="countType">참여한 개미 수</p>
           </div>
         </Counts>
