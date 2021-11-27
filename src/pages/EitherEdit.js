@@ -171,7 +171,9 @@ const EitherEdit = props => {
 const Wrap = styled.div`
   max-width: 840px;
   width: 90%;
+  min-height: 650px;
   margin: auto;
+  background-color: #ffffff;
 `;
 const ContentBox = styled.div`
   border: 2px solid #00397c;
@@ -199,6 +201,7 @@ const Index = styled.div`
   }
   div {
     display: flex;
+    margin-left: 20px;
   }
   margin: 0px 0px 22px 0px;
   @media screen and (max-width: ${mobile}) {
@@ -208,6 +211,7 @@ const Index = styled.div`
 const RadioBtnWarpperE = styled.div`
   display: flex;
   margin: 0px 0px 0px 76px;
+  width: 100px;
   align-items: center;
   label {
     font-size: 16px;
@@ -226,6 +230,7 @@ const RadioBtnWarpperE = styled.div`
 const RadioBtnWarpperM = styled.div`
   display: flex;
   margin: 0px 0px 0px 47px;
+  width: 100px;
   align-items: center;
   label {
     font-size: 16px;
