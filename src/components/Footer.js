@@ -5,6 +5,9 @@ import { ReactComponent as Logo } from "../images/logo.svg";
 import { mobile, tablet } from "../shared/style";
 
 const Footer = props => {
+  const onClickTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <Container>
       <Wrapper>
@@ -14,9 +17,7 @@ const Footer = props => {
         <Contents>
           <button
             onClick={() =>
-              window.open(
-                "https://crawling-health-e0d.notion.site/Project-3b911ebdb6114fb7be4b54956a9579dd",
-              )
+              window.open("https://github.com/Ant-DDun-DDun-Project")
             }
           >
             about site
@@ -25,7 +26,7 @@ const Footer = props => {
           <button
             onClick={() =>
               window.open(
-                "https://crawling-health-e0d.notion.site/Project-3b911ebdb6114fb7be4b54956a9579dd",
+                "https://crawling-health-e0d.notion.site/be6df84bde484ca883f54739be96eb8f",
               )
             }
           >
@@ -43,6 +44,7 @@ const Footer = props => {
           </button>
         </Contents>
         <CopyWriter>ⓒ 2021. Antsori all rights reserved</CopyWriter>
+        <Top onClick={onClickTop}>TOP</Top>
       </Wrapper>
     </Container>
   );
@@ -105,6 +107,22 @@ const CopyWriter = styled.div`
   font-weight: bold;
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;
+  }
+`;
+const Top = styled.div`
+  position: absolute;
+  right: 2%;
+  display: block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-position: under;
+  @media screen and (max-width: ${mobile}) {
+    right: 0px;
   }
 `;
 export default Footer;
