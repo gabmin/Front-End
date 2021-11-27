@@ -129,7 +129,7 @@ const MultiDetail = props => {
     return (
       <div>
         <CompletedDetail multiId={multiId} TotalCnt={TotalCnt} />{" "}
-        <TopBtn onClick={goToTop}>TOP</TopBtn>
+        {/* <TopBtn onClick={goToTop}>TOP</TopBtn> */}
       </div>
     );
   } else if (
@@ -163,7 +163,7 @@ const MultiDetail = props => {
             </div>
           </Wrapper>
         )}
-        <TopBtn onClick={goToTop}>TOP</TopBtn>
+        {/* <TopBtn onClick={goToTop}>TOP</TopBtn> */}
       </Container>
     );
   } else {
@@ -193,7 +193,7 @@ const MultiDetail = props => {
             </div>
           </Wrapper>
         )}
-        <TopBtn onClick={goToTop}>TOP</TopBtn>
+        {/* <TopBtn onClick={goToTop}>TOP</TopBtn> */}
       </Container>
     );
   }
