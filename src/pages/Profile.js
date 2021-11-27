@@ -61,13 +61,15 @@ const Profile = props => {
   const onClickPostBtn = useCallback(
     type => {
       setClicked(type);
-      if (type === "posts") {
+      if (type === "posts" && !myPostsloadDone) {
         dispatch(getMyPosts(userId));
         return;
       }
-      dispatch(getMyPolls(userId));
+      if (!myPollsloadDone) {
+        dispatch(getMyPolls(userId));
+      }
     },
-    [dispatch, userId],
+    [dispatch, userId, myPollsloadDone, myPostsloadDone],
   );
 
   const onClickNickname = useCallback(() => {
