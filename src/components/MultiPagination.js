@@ -10,7 +10,6 @@ import { SetParams } from "../redux/reducers/paramsSlice";
 
 function Items({ currentItems }) {
   const { PostDBDone } = useSelector(state => state.multiCard);
-
   const goToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -20,9 +19,10 @@ function Items({ currentItems }) {
         {PostDBDone === true && (
           <div>
             {currentItems &&
-              currentItems?.map((p, i) => (
+              currentItems.map((p, i) => (
                 <CardWarpper>
                   <MultiList
+                    key={i}
                     multiId={p.multiId}
                     title={p.title}
                     description={p.description}

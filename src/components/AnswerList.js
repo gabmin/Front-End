@@ -38,8 +38,6 @@ const AnswerList = props => {
     setSelect(e.target.id);
   };
 
-  console.log("select", select);
-
   const selectComplete = () => {
     if (select !== "") {
       dispatch(DetailVote({ multiId, select: { select } }));
