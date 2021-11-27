@@ -523,6 +523,10 @@ const SelectSubject = styled.div`
     color: #495057;
     margin: 5px 0;
   }
+
+  @media screen and (max-width: ${mobile}) {
+    margin-bottom: 12px;
+  }
 `;
 
 const IdPwWrapper = styled.div`
