@@ -176,6 +176,7 @@ const GoEither = styled.div`
   padding: 0 50px;
   justify-content: center;
   border: 2px solid ${blue};
+  background-color: white;
   box-sizing: border-box;
   border-radius: 20px;
   cursor: pointer;
