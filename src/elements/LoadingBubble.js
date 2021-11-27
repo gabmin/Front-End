@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import sadIcon from "../images/sadAntIcon.png";
 
-import { blue, red, mobile, tablet } from "../shared/style";
+import { blue, red, mobile, tablet, grayMultiply } from "../shared/style";
 
 const LoadingBubble = ({ position, height, left }) => (
   <StyledLoading position={position} height={height}>
@@ -30,7 +30,7 @@ const StyledLoading = styled.div`
   height: 100vh;
   padding: 50px;
   border-radius: 20px;
-  background-color: white;
+  background-color: ${grayMultiply};
   z-index: 9999;
   margin: 0 auto;
   left: -30px;

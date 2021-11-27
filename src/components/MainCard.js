@@ -96,6 +96,7 @@ const Layout = styled.div`
   height: ${props => (props.type === "multi" ? "336px" : "192px")};
   margin: ${props => props.margin};
   text-align: ${props => (props.center ? "center" : "unset")};
+  background-color: white;
   border: 2px solid ${blue};
   border-radius: 10px;
   padding: 20px 30px;

@@ -129,12 +129,12 @@ const Container = styled.div`
   align-items: center;
   max-width: 620px;
   width: 90%;
-  height: 850px;
+  height: 750px;
   margin: auto;
 
   @media screen and (max-width: ${mobile}) {
     align-items: unset;
-    height: 100vh;
+    height: 550px;
   }
 `;
 

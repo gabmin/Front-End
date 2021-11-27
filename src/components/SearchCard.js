@@ -114,6 +114,7 @@ const Container = styled.div`
   border: 1px solid ${blue};
   border-radius: 5px;
   margin: 10px auto;
+  background-color: white;
   box-sizing: border-box;
   user-select: none;
 
