@@ -137,6 +137,10 @@ const Container = styled.div`
     top: 20px;
     flex-direction: column;
     height: 1200px;
+    width: 67%;
+  }
+
+  @media screen and (max-width: ${mobile}) {
     width: 75%;
   }
 `;
@@ -194,7 +198,7 @@ const GoEither = styled.div`
   @media screen and (max-width: 1540px) {
     width: 100%;
     padding: 0 10px;
-    max-width: 95%;
+    max-width: 100%;
     margin-bottom: 10px;
   }
 
@@ -247,7 +251,7 @@ const GoMulti = styled.div`
   @media screen and (max-width: 1540px) {
     width: 100%;
     padding: 0 10px;
-    max-width: 95%;
+    max-width: 100%;
     h1 {
       font-size: 20px;
     }
