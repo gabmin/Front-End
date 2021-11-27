@@ -27,7 +27,7 @@ import background from "../images/background.png";
 function App() {
   return (
     <>
-      {/* <BackGround /> */}
+      <BackGround />
       <GlobalStyle />
       <Header></Header>
       <ConnectedRouter history={history}>
@@ -61,7 +61,7 @@ const BackGround = styled.div`
   height: 100%;
   background-image: url(${background});
   z-index: -99999;
-  /* opacity: 0.3; */
+  opacity: 0.3;
   background-size: cover;
 `;
 
