@@ -367,6 +367,7 @@ const LikeWarpper = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${colors.red};
+  cursor: pointer;
 `;
 
 const TotalLike = styled.p`
