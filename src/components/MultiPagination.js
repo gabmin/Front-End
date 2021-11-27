@@ -53,10 +53,8 @@ const MultiPagination = ({ items, itemsPerPage = 5 }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const paramsId = useSelector(state => state.params.paramsId);
   const target = items.findIndex(p => {
-    console.log("pppppp", paramsId);
     return p.multiId == paramsId;
   });
-  console.log("length", Math.floor(target / itemsPerPage));
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;

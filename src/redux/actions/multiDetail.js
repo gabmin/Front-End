@@ -18,7 +18,6 @@ export const DetailDB = createAsyncThunk(
 export const DetailVote = createAsyncThunk(
   "multiDetail/DetailVote",
   async (data, { rejectWithValue }) => {
-    console.log("data", data);
     try {
       const response = await api.post(
         `/posts/multi/${data.multiId}/votes`,

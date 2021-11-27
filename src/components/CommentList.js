@@ -6,8 +6,6 @@ import ReactPaginate from "react-paginate";
 import colors from "../shared/colors";
 import Comment from "./Comment";
 
-// const dataList = useSelector(state => state.multiDetail.multiDetail);
-
 function Items({ currentItems }) {
   return (
     <>
@@ -38,20 +36,17 @@ const CommentList = ({ items, itemsPerPage = 5 }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  console.log(currentItems);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(items.length / itemsPerPage));
     // setItemOffset(pageCount);
-    console.log("pageCount", pageCount);
   }, [itemOffset, itemsPerPage, items, pageCount]);
 
   const handlePageClick = event => {
     // window.scroll(0, 0);
     const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log("newOffset", newOffset);
     setItemOffset(newOffset);
   };
 

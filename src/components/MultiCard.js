@@ -15,7 +15,6 @@ const MultiCard = props => {
   const userNickname = localStorage.getItem("nickname");
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   const dataList = multiDetail.multi && multiDetail;
-  console.log(dataList);
 
   const dispatch = useDispatch();
   const {

@@ -5,7 +5,6 @@ import api from "../../shared/api";
 export const AddChildDB = createAsyncThunk(
   "multiPost/AddChildDB",
   async (data, { rejectWithValue }) => {
-    console.log("addchildData", data);
     try {
       const response = await api.post(
         `/posts/multi/${data.multiId}/comment/${data.id}`,
@@ -22,7 +21,6 @@ export const AddChildDB = createAsyncThunk(
 export const EditChildDB = createAsyncThunk(
   "multiPost/EditChildDB",
   async (data, { rejectWithValue }) => {
-    console.log("editchildData", data);
     try {
       const response = await api.patch(
         `/posts/multi/${data.multiId}/childComment/${data.id}/edit`,

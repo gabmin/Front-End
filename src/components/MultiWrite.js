@@ -13,7 +13,7 @@ const MultiWrite = props => {
   const editData = props.editData;
   const multiId = props.multiId;
   const isEdit = editData ? true : false;
-  // console.log("isEdit", isEdit);
+
   const { AddPostDBDone, EditPostDBDone } = useSelector(
     state => state.multiCard,
   );
@@ -384,7 +384,7 @@ const MultiWrite = props => {
             ref={contentARef}
             onChange={changeContentA}
             value={contentA}
-            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
+            placeholder="선택지 내용을 입력해주세요. (30자 이내)"
           />
         </PollWarpper>
         <PollWarpper>
@@ -392,7 +392,7 @@ const MultiWrite = props => {
             ref={contentBRef}
             onChange={changeContentB}
             value={contentB}
-            placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
+            placeholder="선택지 내용을 입력해주세요. (30자 이내)"
           />
           {hiddenBtnB ? (
             <FullBtn onClick={showInputC}>+ 선택지 추가</FullBtn>
@@ -404,7 +404,7 @@ const MultiWrite = props => {
               ref={contentCRef}
               onChange={changeContentC}
               value={contentC}
-              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
+              placeholder="선택지 내용을 입력해주세요. (30자 이내)"
             />
             <BtnWarpper>
               {hiddenBtnC ? (
@@ -422,7 +422,7 @@ const MultiWrite = props => {
               ref={contentDRef}
               onChange={changeContentD}
               value={contentD}
-              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
+              placeholder="선택지 내용을 입력해주세요. (30자 이내)"
             />
             <BtnWarpper>
               {hiddenBtnD ? (
@@ -440,7 +440,7 @@ const MultiWrite = props => {
               ref={contentERef}
               onChange={changeContentE}
               value={contentE}
-              placeholder="박스를 클릭해서 선택지 내용을 입력해보세요. (30자 이내)"
+              placeholder="선택지 내용을 입력해주세요. (30자 이내)"
             />
             <FullBtn onClick={hideInputE}>- 선택지 삭제</FullBtn>
           </PollWarpper>
@@ -474,13 +474,16 @@ const TitleWarpper = styled.div`
 `;
 
 const InfoWarpper = styled.div`
-  width: 110px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 72px;
 `;
 
 const InfoText = styled.p`
-  width: 100%;
-  left: 0px;
-  text-align: left;
+  width: 68px;
+  /* left: 0px;
+  text-align: left; */
   font-size: 18px;
   font-weight: 700;
   color: ${colors.darkGray};
@@ -494,7 +497,7 @@ const ContentWarpper = styled.div`
 `;
 
 const InputWarpper = styled.div`
-  width: 510px;
+  width: 80%;
 `;
 
 const Input = styled.input`

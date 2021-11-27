@@ -35,7 +35,6 @@ const Either = props => {
   const viewStatus = useSelector(state => state.view.viewStatus);
   // 전체, 진행중, 종료됨 게시글 리스트
   const PostList = eitherPost.either;
-  console.log(PostList);
   const PostingList = eitherPosting.either;
   const PostCompleteList = eitherPostComplete.either;
 
@@ -255,7 +254,7 @@ const EitherButtonGrid = styled.div`
 `;
 const EitherButton = styled.button`
   border: none;
-  background-color: #ffffff;
+  background-color: transparent;
   font-size: 20px;
   font-weight: bold;
   font-family: "Noto-Sans KR", sans-serif;

@@ -14,11 +14,8 @@ const CommentInput = props => {
   const [comment, setComment] = useState("");
   const inputRef = useRef();
 
-  console.log("comp", dataList);
-
   const changeComment = e => {
     setComment(e.target.value.substr(0, 1000));
-    console.log(e.target.value);
   };
 
   const addComment = () => {
@@ -28,7 +25,6 @@ const CommentInput = props => {
       dispatch(AddCommentDB({ multiId, data: { comment } }));
       inputReset();
     }
-    console.log("comment", comment);
   };
 
   const inputReset = () => {

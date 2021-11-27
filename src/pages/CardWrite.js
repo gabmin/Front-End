@@ -81,7 +81,9 @@ const CardWrite = () => {
 const Wrap = styled.div`
   max-width: 840px;
   width: 90%;
+  min-height: 650px;
   margin: auto;
+  background-color: #ffffff;
 `;
 
 const ContentBox = styled.div`
@@ -111,7 +113,7 @@ const Index = styled.div`
   }
   div {
     display: flex;
-    margin-left: 22px;
+    margin-left: 20px;
   }
   margin: 0px 0px 22px 0px;
   @media screen and (max-width: ${mobile}) {
