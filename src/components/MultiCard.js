@@ -85,9 +85,11 @@ const MultiCard = props => {
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtn className="Detail" onClick={goToDetail}>
-              투표하기
-            </VoteBtn>
+            <VoteBtnWarpper>
+              <VoteBtn className="Detail" onClick={goToDetail}>
+                투표하기
+              </VoteBtn>
+            </VoteBtnWarpper>
             <TempWarpper>
               <FooterWrapper>
                 <UserWrapper>
@@ -133,7 +135,9 @@ const MultiCard = props => {
             <DesWrapper>
               <DesText>{description}</DesText>
             </DesWrapper>
-            <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
+            <VoteBtnWarpper>
+              <VoteBtnB onClick={goToDetail}>다시보기</VoteBtnB>
+            </VoteBtnWarpper>
             <TempWarpper>
               <FooterWrapper>
                 <UserWrapper>
@@ -263,6 +267,13 @@ const DesWrapper = styled.div`
 const DesText = styled.p`
   font-size: 14px;
   color: ${colors.gray5};
+`;
+
+const VoteBtnWarpper = styled.div`
+  width: 100%;
+  position: absolute;
+  margin: auto;
+  bottom: 60px;
 `;
 
 const VoteBtn = styled.button`
