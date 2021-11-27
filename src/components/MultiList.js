@@ -12,8 +12,8 @@ import { AddLikeDB } from "../redux/actions/multiLike";
 
 const MultiList = props => {
   const userNickname = localStorage.getItem("nickname");
-  const multiDetail = useSelector(state => state.multiDetail.multiDetail);
-  const dataList = multiDetail.multi && multiDetail;
+  // const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  // const dataList = multiDetail.multi && multiDetail;
 
   const dispatch = useDispatch();
   const {
