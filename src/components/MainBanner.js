@@ -80,7 +80,7 @@ const BannerTexts = styled.div`
   .innerTextBottom1,
   .innerTextBottom2 {
     position: relative;
-    top: 47px;
+    top: 40px;
     color: white;
     font-size: 14px;
   }
