@@ -111,6 +111,7 @@ const StyledPagenation = styled.div`
     justify-content: center;
     list-style: none;
     outline: none;
+    font-size: 12px;
     padding: 0;
     user-select: none;
   }

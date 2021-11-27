@@ -40,7 +40,7 @@ function Items({ currentItems }) {
           </div>
         )}
       </ListWarpper>
-      <TopBtn onClick={goToTop}>TOP</TopBtn>
+      {/* <TopBtn onClick={goToTop}>TOP</TopBtn> */}
     </Container>
   );
 }
@@ -106,7 +106,7 @@ const MultiPagination = ({ items, itemsPerPage = 5 }) => {
 
 const StyledPagination = styled.div`
   .pagination {
-    margin: -40px auto 55px auto;
+    margin: 60px auto;
     font-size: 12px;
     display: flex;
     justify-content: center;
@@ -178,7 +178,8 @@ const TopBtn = styled.button`
   text-decoration: underline;
   text-underline-position: under;
   @media screen and (max-width: ${mobile}) {
-    margin: 8% 8% -5px auto;
+    margin: 8% 8% -30px auto;
+    padding-top: 30px;
   }
 `;
 

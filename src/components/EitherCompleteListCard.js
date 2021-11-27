@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import { FiThumbsUp, FiMoreHorizontal } from "react-icons/fi";
-import { HiThumbUp } from "react-icons/hi";
-import { FaRegUser } from "react-icons/fa";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { AiOutlineLike, AiFillLike, AiOutlineUser } from "react-icons/ai";
 
 import { mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
@@ -178,7 +177,7 @@ const EitherListCard = props => {
                 <div className="Grid">
                   {/* 투표한 인원 수 */}
                   <TotalCntGrid>
-                    <FaRegUser
+                    <AiOutlineUser
                       style={{
                         width: "16px",
                         height: "16px",
@@ -188,7 +187,7 @@ const EitherListCard = props => {
                     <TotalCntDiv>{voteCntA + voteCntB}</TotalCntDiv>
                   </TotalCntGrid>
                   {!likeState ? ( //좋아요 이미지
-                    <FiThumbsUp
+                    <AiOutlineLike
                       onClick={onClickLike}
                       style={{
                         width: "16px",
@@ -197,7 +196,7 @@ const EitherListCard = props => {
                       }}
                     />
                   ) : (
-                    <HiThumbUp
+                    <AiFillLike
                       style={{
                         width: "16px",
                         height: "16px",
