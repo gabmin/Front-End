@@ -14,7 +14,7 @@ const MultiSlick = props => {
   const CardList = props.cardList;
   const { PostDBDone } = useSelector(state => state.multiCard);
   const checkRef = useRef();
-  console.log("Card", CardList);
+
   const settings = {
     className: "center",
     centerMode: true,
@@ -107,10 +107,10 @@ const MultiSlick = props => {
   //     </div>
   //   );
   // }
-  const onCheck = e => {
-    console.log("eeee", e);
-  };
-  console.log("checker", checkRef);
+  // const onCheck = e => {
+  //   console.log("eeee", e);
+  // };
+  // console.log("checker", checkRef);
 
   return (
     <Container>

@@ -10,7 +10,6 @@ import colors from "../shared/colors";
 const EventBanner = props => {
   const dispatch = useDispatch();
   const onBanner = useSelector(state => state.eventBanner.bannerStatus);
-  console.log("onBanner", onBanner);
   const goToBanner = () => {
     window.open("https://forms.gle/wUbNuv1Hoofx2kje8");
   };

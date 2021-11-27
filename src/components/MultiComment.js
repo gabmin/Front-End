@@ -12,7 +12,6 @@ const MultiComment = props => {
   const multiId = props.multiId;
   const render = props.render;
   const renderState = props.state;
-  console.log("commentdataList", dataList.comment);
 
   // const { AddCommentDBLoading, AddCommentDBDone } = useSelector(
   //   state => state.comment,

@@ -22,7 +22,6 @@ const MultiVoted = props => {
   const [likeState, setLikeState] = useState(
     multiList.liked === null ? false : true,
   );
-  console.log(dataList);
 
   const TotalCnt =
     multiList.voteCntA +

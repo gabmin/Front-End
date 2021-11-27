@@ -15,15 +15,8 @@ const MultiEdit = props => {
   const multiId = props.match.params.multi_id;
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
   const userNickname = localStorage.getItem("nickname");
-
-  console.log("multiDetail", multiDetail);
   const dataList = multiDetail.multi && multiDetail;
-  console.log("dataListList", dataList);
-
   const editData = dataList && dataList.multi;
-  console.log("editData", editData);
-
-  useEffect(() => {});
 
   useEffect(() => {
     dispatch(DetailDB(multiId));

@@ -14,7 +14,6 @@ const ChildCommentInput = props => {
     setComment(e.target.value);
   };
   const data = { comment, date };
-  console.log(commentId);
 
   const addChildComment = () => {
     dispatch(AddChildDB({ multiId, commentId, data }));
