@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { history } from "../redux/configureStore";
 import styled from "styled-components";
@@ -18,22 +18,30 @@ import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import MultiMenu from "../elements/MultiMenu";
+import { useLocation } from "react-router";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
-  const multiId = props.match.params.multi_id;
+  const location = useLocation();
   const multiDetail = useSelector(state => state.multiDetail.multiDetail);
+  const userNickname = localStorage.getItem("nickname");
+  const multiId = props.match.params.multi_id;
+  const dataList = multiDetail.multi && multiDetail;
+
   const { DeletePostDBDone, ClosePostDBDone } = useSelector(
     state => state.multiCard,
   );
-  const [deleteAction, setDeleteAction] = useState(null);
-  const [closeAction, setCloseAction] = useState(null);
-  const userNickname = localStorage.getItem("nickname");
-  const dataList = multiDetail.multi && multiDetail;
   const { DetailDBDone, DetailDBLoading } = useSelector(
     state => state.multiDetail,
   );
-  console.log("dataListList", dataList);
+  const onComment = location.state?.onComment;
+  const commentRef = useRef();
+
+  console.log("onComment", commentRef);
+  // const [deleteAction, setDeleteAction] = useState(null);
+  // const [closeAction, setCloseAction] = useState(null);
+
+  // console.log("dataListList", dataList);
   // const [state, setState] = useState(false);
 
   // const render = temp => {
@@ -52,21 +60,10 @@ const MultiDetail = props => {
   useEffect(() => {
     dispatch(DetailDB(multiId));
     dispatch(SetParams(multiId));
-  }, [dispatch, multiId]);
-
-  useEffect(() => {
-    if (deleteAction && DeletePostDBDone) {
-      // window.alert("삭제가 완료되었습니다.");
-      history.replace("/multi");
+    if (onComment == "onComment") {
+      console.log("aaa", commentRef);
     }
-  }, [DeletePostDBDone, deleteAction]);
-
-  useEffect(() => {
-    if (closeAction && ClosePostDBDone) {
-      // window.alert("삭제가 완료되었습니다.");
-      history.replace("/multi");
-    }
-  }, [ClosePostDBDone, closeAction]);
+  }, [dispatch, multiId, onComment]);
 
   const goToMulti = () => {
     history.push("/multi");
@@ -76,40 +73,54 @@ const MultiDetail = props => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const deletePost = () => {
-    const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
-    if (TotalCnt === 0 && deleteConfirm == true) {
-      dispatch(SetParams("all"));
-      dispatch(DeletePostDB(multiId));
-      setDeleteAction(true);
-      // window.location.replace("/multi");
-    } else if (deleteConfirm == false) {
-      return;
-    } else {
-      window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
-      return;
-    }
-  };
+  // useEffect(() => {
+  //   if (deleteAction && DeletePostDBDone) {
+  //     // window.alert("삭제가 완료되었습니다.");
+  //     history.replace("/multi");
+  //   }
+  // }, [DeletePostDBDone, deleteAction]);
 
-  const closePost = () => {
-    const closeVote = window.confirm("투표를 종료하시겠습니까?");
-    if (closeVote == true) {
-      dispatch(ClosePostDB(multiId));
-      // dispatch(SetParams(multiId));
-      // history.push("/multi");
-      setCloseAction(true);
-    }
-    return;
-  };
+  // useEffect(() => {
+  //   if (closeAction && ClosePostDBDone) {
+  //     // window.alert("삭제가 완료되었습니다.");
+  //     history.replace("/multi");
+  //   }
+  // }, [ClosePostDBDone, closeAction]);
 
-  const editPost = () => {
-    if (TotalCnt === 0) {
-      history.push(`/multi/${multiId}/edit`);
-    } else {
-      window.alert("투표가 진행된 게시물은 수정할 수 없습니다");
-      return;
-    }
-  };
+  // const deletePost = () => {
+  //   const deleteConfirm = window.confirm("투표를 삭제하시겠습니까?");
+  //   if (TotalCnt === 0 && deleteConfirm == true) {
+  //     dispatch(SetParams("all"));
+  //     dispatch(DeletePostDB(multiId));
+  //     setDeleteAction(true);
+  //     // window.location.replace("/multi");
+  //   } else if (deleteConfirm == false) {
+  //     return;
+  //   } else {
+  //     window.alert("투표가 진행된 게시물은 삭제할 수 없습니다");
+  //     return;
+  //   }
+  // };
+
+  // const closePost = () => {
+  //   const closeVote = window.confirm("투표를 종료하시겠습니까?");
+  //   if (closeVote == true) {
+  //     dispatch(ClosePostDB(multiId));
+  //     // dispatch(SetParams(multiId));
+  //     // history.push("/multi");
+  //     setCloseAction(true);
+  //   }
+  //   return;
+  // };
+
+  // const editPost = () => {
+  //   if (TotalCnt === 0) {
+  //     history.push(`/multi/${multiId}/edit`);
+  //   } else {
+  //     window.alert("투표가 진행된 게시물은 수정할 수 없습니다");
+  //     return;
+  //   }
+  // };
 
   if (userNickname === "GUEST") {
     window.alert("로그인 후 이용가능합니다");
@@ -147,7 +158,7 @@ const MultiDetail = props => {
               )}
             </div>
 
-            <div>
+            <div ref={commentRef}>
               {DetailDBDone === true && <MultiComment multiId={multiId} />}
             </div>
           </Wrapper>
