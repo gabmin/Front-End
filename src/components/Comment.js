@@ -290,7 +290,7 @@ const TextAreaBtn = styled.button`
   border: none;
   border-radius: 4px;
   margin: 54px 5px 0 0;
-  width: 40px;
+  width: 50px;
   height: 20px;
   font-size: 10px;
   font-weight: 700;
