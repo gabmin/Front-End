@@ -158,6 +158,9 @@ const Signup = () => {
       // if (!pwChecker()) return;
       if (!pwEqualChecker()) return;
       if (!ageChecker()) return;
+      if (!nickname.trim()) {
+        return;
+      }
       // if (!idDupCheck) return;
       // if (!nickDupCheck) return;
       if (!nickDupCheck || !idDupCheck || passwordError) {
