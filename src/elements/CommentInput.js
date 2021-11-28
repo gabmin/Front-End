@@ -43,9 +43,11 @@ const CommentInput = props => {
           <AddBtn onClick={addComment}>작성</AddBtn>
         </Warpper>
       ) : (
-        <DisabledComment>
-          투표가 종료된 게시물에는 댓글을 작성할 수 없습니다
-        </DisabledComment>
+        <DisabledWarpper>
+          <DisabledComment>
+            투표가 종료된 게시물에는 댓글을 작성할 수 없습니다
+          </DisabledComment>
+        </DisabledWarpper>
       )}
     </Container>
   );
@@ -95,7 +97,18 @@ const AddBtn = styled.button`
   cursor: pointer;
 `;
 
+const DisabledWarpper = styled.div`
+  width: 556px;
+  height: 80px;
+  /* border: 1px ${colors.gray5} solid; */
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  /* background-color: ${colors.gray}; */
+`;
+
 const DisabledComment = styled.p`
+  margin: auto;
   text-align: center;
   color: ${colors.darkGray};
   font-size: 14px;

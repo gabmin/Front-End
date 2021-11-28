@@ -57,7 +57,8 @@ const TempWarpper = styled.div`
 `;
 
 const TextAreaWarpper = styled.div`
-  max-width: 100%;
+  min-width: 100%;
+  max-width: 620px;
   margin: 0 auto 20px;
 `;
 
