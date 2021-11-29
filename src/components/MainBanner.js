@@ -66,7 +66,7 @@ const BannerTexts = styled.div`
 
   .innerTextTop {
     position: relative;
-    top: -20px;
+    top: -40px;
     color: white;
     font-weight: bold;
     font-size: 16px;
@@ -74,7 +74,9 @@ const BannerTexts = styled.div`
 
   img {
     position: relative;
-    top: -10px;
+    top: -30px;
+    height: 42px;
+    width: 300px;
   }
 
   .innerTextBottom1,

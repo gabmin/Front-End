@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { FiMessageSquare } from "react-icons/fi";
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { history } from "../redux/configureStore";
-import { blue, red, mobile, tablet } from "../shared/style";
+import { gray5, blue, red, mobile, tablet } from "../shared/style";
 import Nickname from "./Nickname";
 
 const Card = ({
@@ -60,7 +59,13 @@ const Card = ({
           )}
         </TextLayout>
         <Info type={type}>
-          <Nickname nickname={username} userId={userId}></Nickname>
+          <Nickname
+            nickname={username}
+            userId={userId}
+            fontSize="14px"
+            height="20px"
+            width="20px"
+          ></Nickname>
           <div>
             {type === "multi" && (
               <CommentNum>
@@ -68,7 +73,7 @@ const Card = ({
                 {commentNum}
               </CommentNum>
             )}
-            <span>
+            <span className="thumbUp">
               <StyledFiThumbsUp />
               {likeNum}
             </span>
@@ -113,8 +118,8 @@ const Layout = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 91%;
-    padding: 20px 10px 0px;
+    width: 100%;
+    padding: 20px 30px 0px;
   }
 `;
 
@@ -164,29 +169,30 @@ const Info = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 100%;
   height: 1em;
   margin: auto;
-  color: ${red};
   font-size: 14px;
   top: ${props => (props.type === "multi" ? "10px" : "0")};
+
+  .thumbUp {
+    color: ${red};
+  }
 `;
 
-const StyledFiMessageSquare = styled(FiMessageSquare)`
+const StyledFiMessageSquare = styled(AiOutlineMessage)`
   position: relative;
   top: 2px;
-  margin-right: 5px;
 `;
 
 const StyledFiThumbsUp = styled(AiOutlineLike)`
   position: relative;
   top: 1px;
-  margin-right: 5px;
 `;
 
 const CommentNum = styled.span`
   color: ${blue};
-  margin: 0 15px;
+  margin: 0 5px;
 `;
 
 export default Card;

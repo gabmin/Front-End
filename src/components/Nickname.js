@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import { history } from "../redux/configureStore";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
-import { blue, red, mobile, tablet } from "../shared/style";
+import { gray5, blue, red, mobile, tablet } from "../shared/style";
 import { useCallback } from "react";
 
-const Nickname = ({ nickname, userId, width, height, fontSize }) => {
+const Nickname = ({ nickname, userId, width, height, fontSize, color }) => {
   const onClickNick = useCallback(() => {
     history.push(`/profile/${userId}`);
     window.scroll(0, 0);
@@ -15,7 +15,9 @@ const Nickname = ({ nickname, userId, width, height, fontSize }) => {
   return (
     <Container onClick={onClickNick}>
       <StyledCommonIcon width={width} height={height} />
-      <Nick fontSize={fontSize}>{nickname}</Nick>
+      <Nick fontSize={fontSize} color={color}>
+        {nickname}
+      </Nick>
     </Container>
   );
 };
@@ -24,6 +26,7 @@ Nickname.defaultProps = {
   width: "16px",
   height: "16px",
   fontSize: "12px",
+  color: gray5,
 };
 
 const Container = styled.div`
@@ -31,18 +34,18 @@ const Container = styled.div`
   align-items: center;
   /* width: 110px; */
   height: 16px;
-  color: black;
   cursor: pointer;
 `;
 
 const StyledCommonIcon = styled(CommonIcon)`
   width: ${props => props.width};
   height: ${props => props.height};
-  margin-right: 8px;
+  margin-right: 5px;
 `;
 
 const Nick = styled.span`
   font-size: ${props => props.fontSize};
+  color: ${props => props.color};
   width: 100%;
 `;
 
