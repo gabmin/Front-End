@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -39,17 +39,23 @@ const AnswerList = props => {
     setSelect(e.target.id);
   };
 
-  const selectComplete = async () => {
+  const selectComplete = () => {
     if (select !== "") {
       dispatch(DetailVote({ multiId, select: { select } }));
-      console.log("DetailVoteDone", DetailVoteDone);
-      await window.location.reload(`/multi/${multiId}`);
       // history.replace(`/multi/${multiId}`);
     } else {
       window.alert("선택한 투표항목이 없습니다");
       return;
     }
   };
+
+  useEffect(() => {
+    if (DetailVoteDone === true) {
+      // window.alert("ok");
+      window.location.reload(`/multi/${multiId}`);
+    }
+    return;
+  }, [DetailVoteDone, multiId]);
 
   return (
     <Container>
