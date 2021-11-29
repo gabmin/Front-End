@@ -23,7 +23,7 @@ const MultiComment = props => {
 
   return (
     <Contaier>
-      <TempWarpper>
+      <Warpper>
         <TextAreaWarpper>
           <CommentInput multiId={multiId} />
         </TextAreaWarpper>
@@ -39,7 +39,7 @@ const MultiComment = props => {
         ) : (
           <EmptyComment> 첫번째 댓글을 남겨주세요!</EmptyComment>
         )}
-      </TempWarpper>
+      </Warpper>
     </Contaier>
   );
 };
@@ -51,8 +51,8 @@ const Contaier = styled.div`
   flex-direction: column;
 `;
 
-const TempWarpper = styled.div`
-  max-width: 90%;
+const Warpper = styled.div`
+  min-width: 90%;
   margin: auto;
 `;
 
