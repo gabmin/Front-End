@@ -10,6 +10,7 @@ const AnswerList = props => {
   const dispatch = useDispatch();
   const DataList = props.dataList;
   const multiId = DataList.multiId;
+  const userNickname = localStorage.getItem("nickname");
   const { DetailVoteDone } = useSelector(state => state.multiDetail);
   const render = props.render;
 
@@ -40,7 +41,10 @@ const AnswerList = props => {
   };
 
   const selectComplete = () => {
-    if (select !== "") {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && select !== "") {
       dispatch(DetailVote({ multiId, select: { select } }));
       // history.replace(`/multi/${multiId}`);
     } else {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { history } from "../redux/configureStore";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import { FiArrowLeft, FiMoreHorizontal } from "react-icons/fi";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
@@ -18,7 +18,7 @@ import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import MultiMenu from "../elements/MultiMenu";
-import { useLocation } from "react-router";
+import { history } from "../redux/configureStore";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
