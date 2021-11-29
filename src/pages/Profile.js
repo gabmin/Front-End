@@ -6,6 +6,7 @@ import { FiEdit3 } from "react-icons/fi";
 import LoadingBubble from "../elements/LoadingBubble";
 import { getMyPolls, getMyPosts } from "../redux/actions/profile";
 import { getProfileNick, updateNick } from "../redux/actions/user";
+import { history } from "../redux/configureStore";
 
 import MainPagination from "../components/MainPagination";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
@@ -31,15 +32,23 @@ const Profile = props => {
     getMyPostsLoading,
     getMyPollsLoading,
   } = useSelector(state => state.profile);
-  const { userId: myId } = useSelector(state => state.user.userInfo);
+  const { userId: myId, nickname } = useSelector(state => state.user.userInfo);
   const { profileNick, getProfileNickLoading } = useSelector(
     state => state.user,
   );
+  console.log(nickname);
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(profileNick);
   const [myPostsloadDone, setMyPostsloadDone] = useState(false);
   const [myPollsloadDone, setMyPollsloadDone] = useState(false);
+
+  useEffect(() => {
+    if (nickname === "GUEST") {
+      alert("로그인 후 접속이 가능합니다");
+      history.replace("/login");
+    }
+  }, [nickname]);
 
   useEffect(() => {
     if (getMyPostsDone && getMyPollsDone) {
