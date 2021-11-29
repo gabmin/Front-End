@@ -254,7 +254,7 @@ const Container = styled.div`
   border-radius: 10px;
   background: linear-gradient(
     180deg,
-    rgba(134, 142, 150, 0.2) 0%,
+    rgba(134, 142, 150, 0.5) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   padding: 46px 32px;
