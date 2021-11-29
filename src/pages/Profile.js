@@ -23,6 +23,7 @@ import {
 const Profile = props => {
   const userId = props.match.params.user_id;
   const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
 
   const {
     myPosts,
@@ -44,11 +45,11 @@ const Profile = props => {
   const [myPollsloadDone, setMyPollsloadDone] = useState(false);
 
   useEffect(() => {
-    if (nickname === "GUEST") {
+    if (!token) {
       alert("로그인 후 접속이 가능합니다");
       history.replace("/login");
     }
-  }, [nickname]);
+  }, [token]);
 
   useEffect(() => {
     if (getMyPostsDone && getMyPollsDone) {
