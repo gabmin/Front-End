@@ -215,7 +215,7 @@ const GoEither = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 100%;
+    width: 95%;
     height: 60px;
     padding: 0 10px;
     border-radius: 10px;
@@ -258,7 +258,7 @@ const GoMulti = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 100%;
+    width: 95%;
     height: 60px;
     padding: 0 10px;
     border-radius: 10px;
