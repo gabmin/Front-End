@@ -167,7 +167,7 @@ const AnswerBtnOn = styled.button`
   margin: 5px auto;
   min-width: 100%;
   max-width: 620px;
-  height: 72px;
+  height: 48px;
   font-family: "Noto Sans KR", sans-serif;
   text-align: left;
   text-indent: 18px;

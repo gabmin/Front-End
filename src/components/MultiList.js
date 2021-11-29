@@ -73,7 +73,7 @@ const MultiList = props => {
               <TitleText onClick={goToDetail}>{title}</TitleText>
               <VoteBtn>
                 <button className="Detail" onClick={goToDetail}>
-                  투표하기
+                  상세보기
                 </button>
               </VoteBtn>
             </TitleWrapper>
@@ -299,7 +299,7 @@ const DesWrapper = styled.div`
 const DesText = styled.p`
   font-size: 16px;
   /* line-height: 22px; */
-  color: ${colors.gray5};
+  color: ${colors.darkGray};
   /* margin: 0 auto 0 0; */
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;
@@ -394,7 +394,7 @@ const UserWrapper = styled.div`
 const NickText = styled.p`
   width: 100%;
   height: 17px;
-  color: ${colors.darkGray};
+  color: ${colors.gray5};
   /* &:hover {
     transform: translateY(-3px);
     transition: transform 200ms;

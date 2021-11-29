@@ -76,7 +76,7 @@ const MultiCard = props => {
             </DesWrapper>
             <VoteBtnWarpper>
               <VoteBtn className="Detail" onClick={goToDetail}>
-                투표하기
+                상세보기
               </VoteBtn>
             </VoteBtnWarpper>
             <TempWarpper>
@@ -180,7 +180,7 @@ const Container = styled.div`
   background-color: ${colors.white};
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -199,12 +199,12 @@ const ContainerB = styled.div`
   flex-direction: column; */
   background: linear-gradient(
     180deg,
-    rgba(134, 142, 150, 0.2) 0%,
+    rgba(134, 142, 150, 0.5) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -255,7 +255,7 @@ const DesWrapper = styled.div`
 
 const DesText = styled.p`
   font-size: 14px;
-  color: ${colors.gray5};
+  color: ${colors.darkGray};
 `;
 
 const VoteBtnWarpper = styled.div`
@@ -324,7 +324,7 @@ const UserWrapper = styled.div`
 
 const NickText = styled.p`
   font-size: 14px;
-  color: ${colors.darkGray};
+  color: ${colors.gray5};
   cursor: pointer;
 `;
 
