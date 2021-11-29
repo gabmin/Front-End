@@ -354,7 +354,6 @@ const IconWrapper = styled.div`
 
   @media screen and (max-width: ${mobile}) {
     position: relative;
-    right: -10px;
     width: 40%;
     font-size: 14px;
     justify-content: center;
