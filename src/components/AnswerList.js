@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import colors from "../shared/colors";
@@ -10,6 +10,7 @@ const AnswerList = props => {
   const dispatch = useDispatch();
   const DataList = props.dataList;
   const multiId = DataList.multiId;
+  const { DetailVoteDone } = useSelector(state => state.multiDetail);
   const render = props.render;
 
   const [color, setColor] = useState("");
@@ -38,10 +39,11 @@ const AnswerList = props => {
     setSelect(e.target.id);
   };
 
-  const selectComplete = () => {
+  const selectComplete = async () => {
     if (select !== "") {
       dispatch(DetailVote({ multiId, select: { select } }));
-      window.location.reload(`/multi/${multiId}`);
+      console.log("DetailVoteDone", DetailVoteDone);
+      await window.location.reload(`/multi/${multiId}`);
       // history.replace(`/multi/${multiId}`);
     } else {
       window.alert("선택한 투표항목이 없습니다");
