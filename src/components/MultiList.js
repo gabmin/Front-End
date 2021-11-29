@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -31,6 +31,10 @@ const MultiList = props => {
   } = props;
   const [likes, setLikes] = useState(likeCnt);
   const [likeState, setLikeState] = useState(liked === null ? false : true);
+
+  useEffect(() => {
+    setLikes(likeCnt);
+  });
 
   const history = useHistory();
   const goToDetail = () => {
@@ -202,7 +206,7 @@ const ContainerB = styled.div`
   flex-direction: column; */
   background: linear-gradient(
     180deg,
-    rgba(134, 142, 150, 0.2) 0%,
+    rgba(134, 142, 150, 0.5) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   @media screen and (max-width: ${mobile}) {
