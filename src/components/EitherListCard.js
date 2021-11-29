@@ -76,6 +76,7 @@ const EitherListCard = props => {
   useEffect(() => {
     setLikes(likeCnt);
     setChoice(voted);
+    setShowGraph(voted);
   }, [likeCnt, voted]);
 
   //Progress Bar 퍼센트 계산
