@@ -70,7 +70,7 @@ const SearchCard = ({
           <span style={{ color: blue, marginRight: "10px" }}>
             {type === "객관식" && commentCnt}
           </span>
-          <StyledFiThumbsUp stroke={red} />
+          <StyledFiThumbsUp />
           <span style={{ color: red }}> {likeCnt}</span>
         </IconWrapper>
       </Contents>
@@ -100,6 +100,7 @@ const StyledFiMessage = styled(FiMessageSquare)`
 
 const StyledFiThumbsUp = styled(AiOutlineLike)`
   margin-left: 0px;
+  color: ${red};
 
   @media screen and (max-width: ${tablet}) {
     margin: 0;
