@@ -97,9 +97,9 @@ const MultiList = props => {
                   <Nickname
                     userId={user}
                     nickname={nickname}
-                    fontSize={"12px"}
-                    width={"16px"}
-                    height={"16px"}
+                    fontSize={"14px"}
+                    width={"26px"}
+                    height={"26px"}
                   ></Nickname>
                 </NickText>
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
@@ -147,9 +147,9 @@ const MultiList = props => {
                   <Nickname
                     userId={user}
                     nickname={nickname}
-                    fontSize={"12px"}
-                    width={"16px"}
-                    height={"16px"}
+                    fontSize={"14px"}
+                    width={"26px"}
+                    height={"26px"}
                   ></Nickname>
                 </NickText>
                 {/* {isEdited ? <p>{editedDate}</p> : null} */}
@@ -192,7 +192,7 @@ const Container = styled.div`
   background-color: ${colors.white};
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
     padding: 7% 6%;
   }
 `;
@@ -390,6 +390,7 @@ const FooterWrapper = styled.div`
 `;
 
 const UserWrapper = styled.div`
+  width: 100%;
   font-size: 6px;
   display: flex;
   flex-direction: row;
@@ -397,6 +398,7 @@ const UserWrapper = styled.div`
 `;
 
 const NickText = styled.p`
+  width: 100%;
   height: 17px;
   color: ${colors.darkGray};
   /* &:hover {
