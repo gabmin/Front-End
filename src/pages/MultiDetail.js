@@ -182,11 +182,7 @@ const MultiDetail = props => {
               ) : null}
             </MenuWarpper>
             {/* {DetailDBDone === true && ( */}
-            <MultiUnvoted
-              multiId={multiId}
-              dataList={dataList}
-              // render={p => render(p)}
-            />
+            <MultiUnvoted multiId={multiId} dataList={dataList} />
             {/* {DetailDBDone === true && ( */}
             <div>
               <MultiComment multiId={multiId} />
