@@ -43,6 +43,7 @@ const Profile = props => {
   const [nickInput, setNickInput] = useState(profileNick);
   const [myPostsloadDone, setMyPostsloadDone] = useState(false);
   const [myPollsloadDone, setMyPollsloadDone] = useState(false);
+  const [pollsClicked, setPollsClicked] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -75,11 +76,12 @@ const Profile = props => {
         dispatch(getMyPosts(userId));
         return;
       }
-      if (!myPollsloadDone) {
+      if (type === "polls" && !pollsClicked) {
         dispatch(getMyPolls(userId));
+        setPollsClicked(true);
       }
     },
-    [dispatch, userId, myPollsloadDone, myPostsloadDone],
+    [dispatch, userId, myPostsloadDone, pollsClicked],
   );
 
   const onClickNickname = useCallback(() => {

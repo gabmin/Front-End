@@ -169,7 +169,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 120px;
+  height: 140px;
 
   span {
     cursor: pointer;
@@ -276,9 +276,14 @@ const StyledCommonIcon = styled(CommonIcon)`
   cursor: pointer;
 
   @media screen and (max-width: ${mobile}) {
-    width: 30px;
+    display: none;
+    /* width: 30px;
     height: 30px;
     margin-right: 0;
+
+    span {
+      margin: 0;
+    } */
   }
 `;
 
@@ -311,6 +316,11 @@ const MenuWrapper = styled.div`
 
   @media screen and (max-width: ${mobile}) {
     width: 60%;
+    justify-content: space-around;
+
+    span {
+      margin: 0;
+    }
   }
 `;
 
@@ -343,8 +353,11 @@ const IconWrapper = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 45%;
-    font-size: 12px;
+    position: relative;
+    right: -10px;
+    width: 40%;
+    font-size: 14px;
+    justify-content: center;
   }
 `;
 

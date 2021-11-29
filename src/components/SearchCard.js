@@ -127,6 +127,7 @@ const Subjects = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   width: 95%;
   height: 39px;
   margin: 18px 20px;
@@ -159,6 +160,12 @@ const Subjects = styled.div`
 const Completed = styled.span`
   color: ${props => (props.completed ? gray5 : red)};
   font-weight: bold;
+
+  @media screen and (max-width: ${tablet}) {
+    position: absolute;
+    right: 0px;
+    font-size: 14px;
+  }
 `;
 
 const Type = styled.div`
@@ -200,8 +207,11 @@ const Contents = styled.div`
   }
 
   @media screen and (max-width: ${tablet}) {
-    flex-direction: column;
     width: 95%;
+  }
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
   }
 `;
 
