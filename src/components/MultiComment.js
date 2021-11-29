@@ -52,7 +52,7 @@ const Contaier = styled.div`
 `;
 
 const Warpper = styled.div`
-  min-width: 90%;
+  width: 90%;
   margin: auto;
 `;
 
