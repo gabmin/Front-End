@@ -169,9 +169,9 @@ const EitherListCard = props => {
                   <Nickname
                     nickname={nickname}
                     userId={user}
-                    width={"16px"}
-                    height={"16px"}
-                    fontSize={"12px"}
+                    width={"26px"}
+                    height={"26px"}
+                    fontSize={"14px"}
                   />
                 </div>
                 <div className="Grid">
@@ -278,7 +278,7 @@ const Container = styled.div`
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
     padding: 10% 6%;
-    width: 80%;
+    width: 90%;
   }
 `;
 const MenuButtonGrid = styled.div`
@@ -306,14 +306,14 @@ const LeftGrid = styled.div`
   justify-content: space-between;
 `;
 const RightGrid = styled.div`
-  width: 50%;
+  width: 52%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 const TitleDiv = styled.div`
-  width: 100%;
+  width: 90%;
   font-size: 18px;
   font-weight: bold;
   word-break: break-all;
