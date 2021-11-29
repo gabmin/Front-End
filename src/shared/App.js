@@ -61,7 +61,7 @@ const BackGround = styled.div`
   height: 100%;
   background-image: url(${background});
   z-index: -99999;
-  opacity: 0.3;
+  opacity: 0.5;
   background-size: cover;
 `;
 
