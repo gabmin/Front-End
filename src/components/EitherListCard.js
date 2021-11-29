@@ -72,10 +72,11 @@ const EitherListCard = props => {
     deletePostDBError,
   ]);
 
-  //Props likeCnt 변화시 재렌더링
+  //Props likeCnt, voted 변화시 재렌더링
   useEffect(() => {
     setLikes(likeCnt);
-  }, [likeCnt]);
+    setChoice(voted);
+  }, [likeCnt, voted]);
 
   //Progress Bar 퍼센트 계산
   useEffect(() => {
@@ -357,7 +358,7 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    padding: 10% 6%;
+    padding: 10% 4% 10% 6%;
     width: 90%;
   }
 `;
