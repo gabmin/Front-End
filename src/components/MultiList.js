@@ -34,27 +34,17 @@ const MultiList = props => {
 
   const history = useHistory();
   const goToDetail = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      window.scroll(0, 0);
-      dispatch(DetailDB(multiId));
-      history.push(`/multi/${multiId}`);
-    }
+    window.scroll(0, 0);
+    dispatch(DetailDB(multiId));
+    history.push(`/multi/${multiId}`);
   };
 
   const goToComment = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      dispatch(DetailDB(multiId));
-      history.push({
-        pathname: `/multi/${multiId}`,
-        state: { onComment: "onComment" },
-      });
-    }
+    dispatch(DetailDB(multiId));
+    history.push({
+      pathname: `/multi/${multiId}`,
+      state: { onComment: "onComment" },
+    });
   };
 
   const addLike = () => {

@@ -34,26 +34,16 @@ const MultiCard = props => {
   const [likeState, setLikeState] = useState(liked === null ? false : true);
 
   const goToDetail = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      dispatch(DetailDB(multiId));
-      history.push(`/multi/${multiId}`);
-    }
+    dispatch(DetailDB(multiId));
+    history.push(`/multi/${multiId}`);
   };
 
   const goToComment = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      dispatch(DetailDB(multiId));
-      history.push({
-        pathname: `/multi/${multiId}`,
-        state: { onComment: "onComment" },
-      });
-    }
+    dispatch(DetailDB(multiId));
+    history.push({
+      pathname: `/multi/${multiId}`,
+      state: { onComment: "onComment" },
+    });
   };
 
   const addLike = () => {
