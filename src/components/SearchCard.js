@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { FiMessageSquare } from "react-icons/fi";
+import { AiOutlineLike } from "react-icons/ai";
 
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
@@ -97,7 +98,7 @@ const StyledFiMessage = styled(FiMessageSquare)`
   }
 `;
 
-const StyledFiThumbsUp = styled(FiThumbsUp)`
+const StyledFiThumbsUp = styled(AiOutlineLike)`
   margin-left: 0px;
 
   @media screen and (max-width: ${tablet}) {

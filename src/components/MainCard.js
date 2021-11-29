@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { FiMessageSquare } from "react-icons/fi";
+import { AiOutlineLike } from "react-icons/ai";
 
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { history } from "../redux/configureStore";
@@ -177,9 +178,9 @@ const StyledFiMessageSquare = styled(FiMessageSquare)`
   margin-right: 5px;
 `;
 
-const StyledFiThumbsUp = styled(FiThumbsUp)`
+const StyledFiThumbsUp = styled(AiOutlineLike)`
   position: relative;
-  top: 2px;
+  top: 1px;
   margin-right: 5px;
 `;
 
