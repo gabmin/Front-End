@@ -34,7 +34,7 @@ const MultiList = props => {
 
   useEffect(() => {
     setLikes(likeCnt);
-  });
+  }, [likeCnt]);
 
   const history = useHistory();
   const goToDetail = () => {
