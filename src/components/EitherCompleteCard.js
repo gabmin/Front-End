@@ -261,7 +261,7 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
   }
 `;
 const ManuButtonGrid = styled.div`

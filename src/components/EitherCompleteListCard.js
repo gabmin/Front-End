@@ -277,7 +277,7 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    padding: 10% 4% 10% 6%;
+    padding: 9% 4% 7% 6%;
     width: 90%;
   }
 `;
@@ -329,7 +329,7 @@ const DateDiv = styled.div`
 `;
 const ButtonGrid = styled.div`
   max-width: 365px;
-  width: 100%;
+  width: 100.5%;
   height: 100%;
   margin: 0px;
   display: inline-flex;
@@ -373,14 +373,15 @@ const ProgressGrid = styled.div`
   margin: auto;
 `;
 const EitherProgress = styled.div`
-  margin: 24px auto 0px auto;
+  margin: 22px auto 0px auto;
   position: relative;
   border-radius: 6px;
   width: 100%;
-  height: 6px;
+  height: 10px;
   z-index: 0;
   background-color: transparent;
   border: 2px solid #00397c;
+  box-sizing: border-box;
 `;
 const HightLight = styled.div`
   background-color: #adb5bd;
