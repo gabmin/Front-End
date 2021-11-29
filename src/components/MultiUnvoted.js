@@ -12,9 +12,11 @@ import colors from "../shared/colors";
 import AnswerList from "./AnswerList";
 import { AddLikeDB } from "../redux/actions/multiLike";
 import Nickname from "./Nickname";
+import { history } from "../redux/configureStore";
 
 const MultiUnvoted = props => {
   const dispatch = useDispatch();
+  const userNickname = localStorage.getItem("nickname");
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   const multiList = dataList.multi;
   const multiId = props.multiId;
@@ -30,7 +32,10 @@ const MultiUnvoted = props => {
     multiList.voteCntE;
 
   const addLike = () => {
-    if (multiList.liked === null) {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && multiList.liked === null) {
       dispatch(AddLikeDB(multiId));
       setLikes(multiList.likeCnt + 1);
       setLikeState(true);

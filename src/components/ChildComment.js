@@ -16,6 +16,7 @@ import CommentNick from "../elements/CommentNick";
 import CommentContent from "../elements/CommentContent";
 import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
+import { history } from "../redux/configureStore";
 
 const ChildComment = props => {
   const {
@@ -59,7 +60,10 @@ const ChildComment = props => {
   }, []);
 
   const showInput = () => {
-    if (addInput === false) {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && addInput === false) {
       setAddInput(true);
       setAddBtn(false);
       setCancelBtn(true);
@@ -127,7 +131,10 @@ const ChildComment = props => {
   };
 
   const addLike = () => {
-    if (liked === null) {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && liked === null) {
       dispatch(AddLikeChild({ id, multiId }));
       setLikes(likeCnt + 1);
     } else {

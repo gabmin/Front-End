@@ -60,7 +60,7 @@ function Items({ currentItems }) {
   );
 }
 
-const MainPagination = ({ items, itemsPerPage = 5 }) => {
+const EitherPagination = ({ items, itemsPerPage = 5 }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -149,4 +149,4 @@ const StyledPagenation = styled.div`
   }
 `;
 
-export default MainPagination;
+export default EitherPagination;
