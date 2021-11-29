@@ -48,6 +48,10 @@ const ChildComment = props => {
   const editInputRef = useRef();
 
   useEffect(() => {
+    setLikes(likeCnt);
+  });
+
+  useEffect(() => {
     if (dataList.multi.completed === 1) {
       setAddInput(false);
       setAddInput(false);

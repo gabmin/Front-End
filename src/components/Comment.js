@@ -17,9 +17,18 @@ import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
 
 const Comment = props => {
-  const { nickname, commentDate, likeCnt, id, deleted, comment, liked, user } =
-    props;
-  const dataList = useSelector(state => state.multiDetail.multiDetail);
+  const {
+    nickname,
+    commentDate,
+    likeCnt,
+    id,
+    deleted,
+    comment,
+    liked,
+    user,
+    completed,
+  } = props;
+  // const dataList = useSelector(state => state.multiDetail.multiDetail);
   // const dataList = props.dataList;
   const multiId = props.multiId;
   const userNickname = localStorage.getItem("nickname");
@@ -35,9 +44,15 @@ const Comment = props => {
   const [likes, setLikes] = useState(likeCnt);
   const inputRef = useRef();
   const editInputRef = useRef();
+  console.log(likeCnt);
+  console.log(likes);
 
   useEffect(() => {
-    if (dataList.multi.completed === 1) {
+    setLikes(likeCnt);
+  });
+
+  useEffect(() => {
+    if (completed === 1) {
       setAddInput(false);
       setAddInput(false);
       setAddBtn(false);
@@ -210,7 +225,7 @@ const Comment = props => {
           </ReplyWarpper>
         ) : null}
         <div>
-          <ChildList parentComment={id} multiId={multiId} dataList={dataList} />
+          <ChildList parentComment={id} multiId={multiId} />
         </div>
         <CommentHr />
       </TempWarpper>
