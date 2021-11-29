@@ -277,7 +277,7 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    padding: 10% 6%;
+    padding: 10% 4% 10% 6%;
     width: 90%;
   }
 `;
