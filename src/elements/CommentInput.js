@@ -112,7 +112,8 @@ const AddBtn = styled.button`
 `;
 
 const DisabledWarpper = styled.div`
-  width: 556px;
+  min-width: 100%;
+  max-width: 556px;
   height: 80px;
   /* border: 1px ${colors.gray5} solid; */
   border-radius: 6px;
@@ -122,6 +123,7 @@ const DisabledWarpper = styled.div`
 `;
 
 const DisabledComment = styled.p`
+  max-width: 556px;
   margin: auto;
   text-align: center;
   color: ${colors.darkGray};

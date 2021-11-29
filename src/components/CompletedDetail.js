@@ -77,13 +77,14 @@ const CompletedDetail = props => {
 };
 
 const Container = styled.div`
-  min-width: 100%;
+  /* min-width: 100%; */
   max-width: 1100px;
   min-height: 100%;
-  margin: 10px auto 50px auto;
+  margin: 56px auto 50px auto;
   box-sizing: border-box;
   @media screen and (max-width: ${mobile}) {
-    padding: 10px;
+    width: 90%;
+    margin-top: 28px;
   }
 `;
 

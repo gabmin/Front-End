@@ -207,7 +207,7 @@ const ContainerB = styled.div`
   );
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
     padding: 7% 6%;
   }
 `;
