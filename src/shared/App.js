@@ -1,9 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
+import styled from "styled-components";
 
-import "./App.css";
-import GlobalStyle from "./GlobalStyle";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -18,10 +17,12 @@ import MultiEdit from "../pages/MultiEdit";
 import MultiDetail from "../pages/MultiDetail";
 import CardWrite from "../pages/CardWrite";
 import ErrorPage from "../pages/ErrorPage";
+import About from "../pages/About";
 import Footer from "../components/Footer";
-import styled from "styled-components";
-import colors from "./colors";
 import EventBanner from "../elements/EventBanner";
+
+import "./App.css";
+import GlobalStyle from "./GlobalStyle";
 import background from "../images/background.png";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/multi/:multi_id" component={MultiDetail} />
           <Route exact path="/multi/:multi_id/edit" component={MultiEdit} />
           <Route exact path="/write" component={CardWrite} />
+          <Route exact path="/about" component={About} />
           <Route path="*" component={ErrorPage} />
         </Switch>
         <Footer></Footer>
