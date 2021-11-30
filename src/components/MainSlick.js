@@ -105,6 +105,10 @@ const Wrap = styled.div`
   height: 336px;
   margin: 0;
 
+  @media screen and (max-width: ${mobile}) {
+    width: 95%;
+  }
+
   ul.slick-dots {
     display: flex;
     align-items: center;
@@ -197,7 +201,8 @@ const Title = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    flex-direction: column;
+    flex-direction: row;
+    margin: 0 0 20px;
 
     .showAll {
       width: 70px;

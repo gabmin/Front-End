@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import colors from "../shared/colors";
@@ -10,6 +10,8 @@ const AnswerList = props => {
   const dispatch = useDispatch();
   const DataList = props.dataList;
   const multiId = DataList.multiId;
+  const userNickname = localStorage.getItem("nickname");
+  const { DetailVoteDone } = useSelector(state => state.multiDetail);
   const render = props.render;
 
   const [color, setColor] = useState("");
@@ -39,15 +41,25 @@ const AnswerList = props => {
   };
 
   const selectComplete = () => {
-    if (select !== "") {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && select !== "") {
       dispatch(DetailVote({ multiId, select: { select } }));
-      window.location.reload(`/multi/${multiId}`);
       // history.replace(`/multi/${multiId}`);
     } else {
       window.alert("선택한 투표항목이 없습니다");
       return;
     }
   };
+
+  useEffect(() => {
+    if (DetailVoteDone === true) {
+      // window.alert("ok");
+      window.location.reload(`/multi/${multiId}`);
+    }
+    return;
+  }, [DetailVoteDone, multiId]);
 
   return (
     <Container>
@@ -131,7 +143,7 @@ const AnswerBtn = styled.button`
   margin: 5px auto;
   min-width: 100%;
   max-width: 620px;
-  height: 72px;
+  height: 48px;
   font-family: "Noto Sans KR", sans-serif;
   text-align: left;
   text-indent: 18px;
@@ -155,7 +167,7 @@ const AnswerBtnOn = styled.button`
   margin: 5px auto;
   min-width: 100%;
   max-width: 620px;
-  height: 72px;
+  height: 48px;
   font-family: "Noto Sans KR", sans-serif;
   text-align: left;
   text-indent: 18px;

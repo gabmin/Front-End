@@ -34,26 +34,16 @@ const MultiCard = props => {
   const [likeState, setLikeState] = useState(liked === null ? false : true);
 
   const goToDetail = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      dispatch(DetailDB(multiId));
-      history.push(`/multi/${multiId}`);
-    }
+    dispatch(DetailDB(multiId));
+    history.push(`/multi/${multiId}`);
   };
 
   const goToComment = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      dispatch(DetailDB(multiId));
-      history.push({
-        pathname: `/multi/${multiId}`,
-        state: { onComment: "onComment" },
-      });
-    }
+    dispatch(DetailDB(multiId));
+    history.push({
+      pathname: `/multi/${multiId}`,
+      state: { onComment: "onComment" },
+    });
   };
 
   const addLike = () => {
@@ -86,7 +76,7 @@ const MultiCard = props => {
             </DesWrapper>
             <VoteBtnWarpper>
               <VoteBtn className="Detail" onClick={goToDetail}>
-                투표하기
+                상세보기
               </VoteBtn>
             </VoteBtnWarpper>
             <TempWarpper>
@@ -110,9 +100,13 @@ const MultiCard = props => {
                   </CommentWarpper>
                   <LikeWarpper>
                     {!likeState ? (
-                      <AiOutlineLike size={24} onClick={addLike} />
+                      <LikeBtn>
+                        <AiOutlineLike size={24} onClick={addLike} />
+                      </LikeBtn>
                     ) : (
-                      <AiFillLike size={24} />
+                      <LikeBtn>
+                        <AiFillLike size={24} />
+                      </LikeBtn>
                     )}
                     <TotalLike>{likes}</TotalLike>
                   </LikeWarpper>
@@ -158,9 +152,13 @@ const MultiCard = props => {
                   </CommentWarpper>
                   <LikeWarpper>
                     {!likeState ? (
-                      <AiOutlineLike size={24} onClick={addLike} />
+                      <LikeBtn>
+                        <AiOutlineLike size={24} onClick={addLike} />
+                      </LikeBtn>
                     ) : (
-                      <AiFillLike size={24} />
+                      <LikeBtn>
+                        <AiFillLike size={24} />
+                      </LikeBtn>
                     )}
                     <TotalLike>{likes}</TotalLike>
                   </LikeWarpper>
@@ -190,7 +188,7 @@ const Container = styled.div`
   background-color: ${colors.white};
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -209,12 +207,12 @@ const ContainerB = styled.div`
   flex-direction: column; */
   background: linear-gradient(
     180deg,
-    rgba(134, 142, 150, 0.2) 0%,
+    rgba(134, 142, 150, 0.5) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -265,7 +263,7 @@ const DesWrapper = styled.div`
 
 const DesText = styled.p`
   font-size: 14px;
-  color: ${colors.gray5};
+  color: ${colors.darkGray};
 `;
 
 const VoteBtnWarpper = styled.div`
@@ -334,7 +332,7 @@ const UserWrapper = styled.div`
 
 const NickText = styled.p`
   font-size: 14px;
-  color: ${colors.darkGray};
+  color: ${colors.gray5};
   cursor: pointer;
 `;
 
@@ -367,6 +365,10 @@ const LikeWarpper = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${colors.red};
+  /* cursor: pointer; */
+`;
+
+const LikeBtn = styled.div`
   cursor: pointer;
 `;
 

@@ -63,7 +63,9 @@ const Main = () => {
             data-testid="goEitherBtn"
           >
             {mainDataLoading === true ? (
-              <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
+              <h3 className="questionCnt">
+                들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....
+              </h3>
             ) : (
               <h3>
                 들린다... {Number(eitherNum).toLocaleString("ko-KR")}개의
@@ -80,7 +82,9 @@ const Main = () => {
             data-testid="goMultiBtn"
           >
             {mainDataLoading === true ? (
-              <h3>들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....</h3>
+              <h3 className="questionCnt">
+                들린다... &nbsp;&nbsp;&nbsp;개의 곡소리가.....
+              </h3>
             ) : (
               <h3>
                 들린다... {Number(multiNum).toLocaleString("ko-KR")}개의
@@ -146,7 +150,7 @@ const Container = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 75%;
+    width: 90%;
   }
 `;
 
@@ -182,6 +186,10 @@ const Notice = styled.div`
 
   @media screen and (max-width: ${mobile}) {
     height: 130px;
+
+    h3 {
+      display: none;
+    }
   }
 `;
 
@@ -200,6 +208,12 @@ const GoEither = styled.div`
   border-radius: 20px;
   cursor: pointer;
 
+  h1 {
+    margin: 5px 0 0;
+    color: ${blue};
+    font-size: 24px;
+  }
+
   @media screen and (max-width: 1540px) {
     width: 100%;
     padding: 0 10px;
@@ -208,9 +222,7 @@ const GoEither = styled.div`
   }
 
   h1 {
-    margin: 5px 0 0;
-    color: ${blue};
-    font-size: 20px;
+    margin: 0;
   }
   h3 {
     margin: 0;
@@ -220,7 +232,8 @@ const GoEither = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 100%;
+    align-items: center;
+    width: 95%;
     height: 60px;
     padding: 0 10px;
     border-radius: 10px;
@@ -258,15 +271,17 @@ const GoMulti = styled.div`
     padding: 0 10px;
     max-width: 100%;
     h1 {
-      font-size: 20px;
+      font-size: 24px;
+      margin: 0;
     }
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 100%;
+    width: 95%;
     height: 60px;
     padding: 0 10px;
     border-radius: 10px;
+    align-items: center;
   }
 `;
 

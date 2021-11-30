@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
+import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
@@ -66,10 +66,8 @@ const SearchCard = ({
         </div>
         <IconWrapper>
           {type === "객관식" && <StyledFiMessage stroke={blue} />}
-          <span style={{ color: blue, marginRight: "10px" }}>
-            {type === "객관식" && commentCnt}
-          </span>
-          <StyledFiThumbsUp stroke={red} />
+          <span style={{ color: blue }}>{type === "객관식" && commentCnt}</span>
+          <StyledFiThumbsUp />
           <span style={{ color: red }}> {likeCnt}</span>
         </IconWrapper>
       </Contents>
@@ -82,26 +80,33 @@ const IconWrapper = styled.div`
   right: -85px;
 
   @media screen and (max-width: ${tablet}) {
-    width: 100px;
+    display: flex;
+    justify-content: end;
     right: 0px;
     margin: 0;
   }
+
+  @media screen and (max-width: 450px) {
+    justify-content: start;
+  }
 `;
 
-const StyledFiMessage = styled(FiMessageSquare)`
+const StyledFiMessage = styled(AiOutlineMessage)`
   position: relative;
   margin-right: 5px;
-  top: 1px;
+  top: 2px;
 
   @media screen and (max-width: ${tablet}) {
   }
 `;
 
-const StyledFiThumbsUp = styled(FiThumbsUp)`
-  margin-left: 0px;
+const StyledFiThumbsUp = styled(AiOutlineLike)`
+  color: ${red};
+  position: relative;
+  top: 1px;
+  margin-right: 5px;
 
   @media screen and (max-width: ${tablet}) {
-    margin: 0;
   }
 `;
 
@@ -120,6 +125,7 @@ const Container = styled.div`
 
   @media screen and (max-width: ${tablet}) {
     height: auto;
+    padding: 0 20px;
   }
 `;
 
@@ -127,6 +133,7 @@ const Subjects = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
   width: 95%;
   height: 39px;
   margin: 18px 20px;
@@ -159,6 +166,12 @@ const Subjects = styled.div`
 const Completed = styled.span`
   color: ${props => (props.completed ? gray5 : red)};
   font-weight: bold;
+
+  @media screen and (max-width: ${tablet}) {
+    position: absolute;
+    right: 0px;
+    font-size: 14px;
+  }
 `;
 
 const Type = styled.div`
@@ -183,11 +196,17 @@ const Contents = styled.div`
   width: 619px;
   margin: 0 auto 14px;
   justify-content: space-between;
+  font-size: 14px;
 
   .searchCardNick {
     font-weight: bold;
+    color: ${gray5};
     cursor: pointer;
     margin: 0 30px 0 0;
+
+    @media screen and (max-width: ${mobile}) {
+      margin: 0 10px 0 0;
+    }
   }
 
   .dateContent {
@@ -200,8 +219,11 @@ const Contents = styled.div`
   }
 
   @media screen and (max-width: ${tablet}) {
-    flex-direction: column;
     width: 95%;
+  }
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
   }
 `;
 

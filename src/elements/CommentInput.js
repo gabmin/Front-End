@@ -5,9 +5,11 @@ import moment from "moment";
 import colors from "../shared/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { AddCommentDB } from "../redux/actions/comment";
+import { history } from "../redux/configureStore";
 
 const CommentInput = props => {
   const dispatch = useDispatch();
+  const userNickname = localStorage.getItem("nickname");
   const dataList = useSelector(state => state.multiDetail.multiDetail);
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const multiId = props.multiId;
@@ -19,8 +21,12 @@ const CommentInput = props => {
   };
 
   const addComment = () => {
-    if (comment == "") {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && comment == "") {
       window.alert("댓글 내용을 입력해주세요");
+      inputRef.current.focus();
     } else {
       dispatch(AddCommentDB({ multiId, data: { comment } }));
       inputReset();
@@ -35,17 +41,27 @@ const CommentInput = props => {
     <Container>
       {dataList.multi.completed !== 1 ? (
         <Warpper>
-          <TextArea
-            ref={inputRef}
-            onChange={changeComment}
-            placeholder="내용을 입력해주세요"
-          ></TextArea>
+          {userNickname ? (
+            <TextArea
+              ref={inputRef}
+              onChange={changeComment}
+              placeholder="내용을 입력해주세요"
+            ></TextArea>
+          ) : (
+            <TextArea
+              ref={inputRef}
+              disabled
+              placeholder="로그인 후 이용 가능합니다."
+            ></TextArea>
+          )}
           <AddBtn onClick={addComment}>작성</AddBtn>
         </Warpper>
       ) : (
-        <DisabledComment>
-          투표가 종료된 게시물에는 댓글을 작성할 수 없습니다
-        </DisabledComment>
+        <DisabledWarpper>
+          <DisabledComment>
+            투표가 종료된 게시물에는 댓글을 작성할 수 없습니다
+          </DisabledComment>
+        </DisabledWarpper>
       )}
     </Container>
   );
@@ -53,11 +69,13 @@ const CommentInput = props => {
 
 const Container = styled.div`
   margin: auto;
+  min-width: 100%;
+  max-width: 556px;
 `;
 
 const Warpper = styled.div`
-  min-width: 100%;
-  max-width: 556px;
+  margin: auto;
+  /* width: 90%; */
   height: 80px;
   border: 1px ${colors.gray5} solid;
   border-radius: 6px;
@@ -67,7 +85,7 @@ const Warpper = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  width: 480px;
+  width: 540px;
   height: 50px;
   margin: auto;
   padding: 0 0 0 10px;
@@ -95,7 +113,20 @@ const AddBtn = styled.button`
   cursor: pointer;
 `;
 
+const DisabledWarpper = styled.div`
+  min-width: 100%;
+  max-width: 556px;
+  height: 80px;
+  /* border: 1px ${colors.gray5} solid; */
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  /* background-color: ${colors.gray}; */
+`;
+
 const DisabledComment = styled.p`
+  max-width: 556px;
+  margin: auto;
   text-align: center;
   color: ${colors.darkGray};
   font-size: 14px;

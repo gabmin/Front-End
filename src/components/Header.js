@@ -126,6 +126,43 @@ const Header = () => {
             )}
           </IconWrapper>
         </Bottom>
+        <BottomMobile>
+          <div>
+            <span onClick={onClickEither}>찬반투표</span>
+          </div>
+          <div>
+            <span onClick={onClickMulti}>객관식투표</span>
+          </div>
+          <IconWrapperMobile loggedIn={nickname !== "GUEST"}>
+            {nickname === "GUEST" && (
+              <span onClick={onClickLogin} className="loginBtn">
+                로그인
+              </span>
+            )}
+            {nickname !== "GUEST" && (
+              <>
+                <Menu
+                  menuButton={
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
+                    >
+                      <StyledCommonIcon />
+                      <span data-testid="headerNick">{nickname}</span>
+                      <StyledDown />
+                    </div>
+                  }
+                >
+                  <MenuItem onClick={onClickNickname}>프로필 페이지</MenuItem>
+                  <MenuItem onClick={onClickLogout}>로그아웃</MenuItem>
+                </Menu>
+              </>
+            )}
+          </IconWrapperMobile>
+        </BottomMobile>
         <SearchMobile>
           <StyledSearch onClick={submitSearch} data-testid="searchSubmit" />
           <input
@@ -139,6 +176,35 @@ const Header = () => {
     </Container>
   );
 };
+const BottomMobile = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  justify-content: space-around;
+  color: ${red};
+  font-weight: bold;
+
+  @media screen and (min-width: ${mobile}) {
+    display: none;
+  }
+`;
+
+const IconWrapperMobile = styled.div`
+  .loginBtn {
+    color: white;
+    position: relative;
+    background-color: #e25b45;
+    padding: 5px;
+    border-radius: 7px;
+    box-sizing: border-box;
+  }
+  div {
+    width: 30%;
+  }
+`;
+
 const SearchMobile = styled.div`
   position: relative;
   display: flex;
@@ -160,7 +226,7 @@ const SearchMobile = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 71%;
+    width: 86%;
   }
 `;
 
@@ -169,7 +235,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 120px;
 
   span {
     cursor: pointer;
@@ -193,7 +258,7 @@ const BottomWrapper = styled.div`
   width: 100%;
   height: 64px;
   background-color: white;
-  border: 1px solid ${red};
+  border-bottom: 1px solid ${red};
   box-sizing: border-box;
   z-index: 99999;
   transition: all 150ms cubic-bezier(0.19, 0.855, 0.265, 0.985);
@@ -202,8 +267,8 @@ const BottomWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     height: 90px;
-    border: none;
     padding: 0 0 5px;
+    border-bottom: 0;
   }
 `;
 
@@ -226,7 +291,7 @@ const Bottom = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 100%;
+    display: none;
   }
 `;
 
@@ -276,9 +341,14 @@ const StyledCommonIcon = styled(CommonIcon)`
   cursor: pointer;
 
   @media screen and (max-width: ${mobile}) {
-    width: 30px;
+    display: none;
+    /* width: 30px;
     height: 30px;
     margin-right: 0;
+
+    span {
+      margin: 0;
+    } */
   }
 `;
 
@@ -311,6 +381,11 @@ const MenuWrapper = styled.div`
 
   @media screen and (max-width: ${mobile}) {
     width: 60%;
+    justify-content: space-around;
+
+    span {
+      margin: 0;
+    }
   }
 `;
 
@@ -343,8 +418,9 @@ const IconWrapper = styled.div`
   }
 
   @media screen and (max-width: ${mobile}) {
-    width: 45%;
-    font-size: 12px;
+    position: relative;
+    font-size: 14px;
+    justify-content: center;
   }
 `;
 

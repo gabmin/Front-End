@@ -6,6 +6,7 @@ import { FiEdit3 } from "react-icons/fi";
 import LoadingBubble from "../elements/LoadingBubble";
 import { getMyPolls, getMyPosts } from "../redux/actions/profile";
 import { getProfileNick, updateNick } from "../redux/actions/user";
+import { history } from "../redux/configureStore";
 
 import MainPagination from "../components/MainPagination";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
@@ -22,6 +23,7 @@ import {
 const Profile = props => {
   const userId = props.match.params.user_id;
   const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
 
   const {
     myPosts,
@@ -31,15 +33,24 @@ const Profile = props => {
     getMyPostsLoading,
     getMyPollsLoading,
   } = useSelector(state => state.profile);
-  const { userId: myId } = useSelector(state => state.user.userInfo);
+  const { userId: myId, nickname } = useSelector(state => state.user.userInfo);
   const { profileNick, getProfileNickLoading } = useSelector(
     state => state.user,
   );
+  console.log(nickname);
   const [clicked, setClicked] = useState("posts");
   const [nicknameClick, setNicknameClick] = useState(false);
   const [nickInput, setNickInput] = useState(profileNick);
   const [myPostsloadDone, setMyPostsloadDone] = useState(false);
   const [myPollsloadDone, setMyPollsloadDone] = useState(false);
+  const [pollsClicked, setPollsClicked] = useState(false);
+
+  useEffect(() => {
+    if (!token) {
+      alert("로그인 후 접속이 가능합니다");
+      history.replace("/login");
+    }
+  }, [token]);
 
   useEffect(() => {
     if (getMyPostsDone && getMyPollsDone) {
@@ -65,11 +76,12 @@ const Profile = props => {
         dispatch(getMyPosts(userId));
         return;
       }
-      if (!myPollsloadDone) {
+      if (type === "polls" && !pollsClicked) {
         dispatch(getMyPolls(userId));
+        setPollsClicked(true);
       }
     },
-    [dispatch, userId, myPollsloadDone, myPostsloadDone],
+    [dispatch, userId, myPostsloadDone, pollsClicked],
   );
 
   const onClickNickname = useCallback(() => {

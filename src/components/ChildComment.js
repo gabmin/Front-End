@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import moment from "moment";
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 
 import colors from "../shared/colors";
 import ChildCommentInput from "../elements/ChildCommentInput";
@@ -16,6 +16,7 @@ import CommentNick from "../elements/CommentNick";
 import CommentContent from "../elements/CommentContent";
 import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
+import { history } from "../redux/configureStore";
 
 const ChildComment = props => {
   const {
@@ -43,8 +44,13 @@ const ChildComment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(likeCnt);
+  const [likeState, setLikeState] = useState(liked === null ? false : true);
   const inputRef = useRef();
   const editInputRef = useRef();
+
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
 
   useEffect(() => {
     if (dataList.multi.completed === 1) {
@@ -59,7 +65,10 @@ const ChildComment = props => {
   }, []);
 
   const showInput = () => {
-    if (addInput === false) {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && addInput === false) {
       setAddInput(true);
       setAddBtn(false);
       setCancelBtn(true);
@@ -127,9 +136,13 @@ const ChildComment = props => {
   };
 
   const addLike = () => {
-    if (liked === null) {
+    if (!userNickname) {
+      window.alert("로그인 후 이용가능합니다");
+      history.push("/login");
+    } else if (userNickname && liked === null) {
       dispatch(AddLikeChild({ id, multiId }));
       setLikes(likeCnt + 1);
+      setLikeState(true);
     } else {
       return;
     }
@@ -169,9 +182,15 @@ const ChildComment = props => {
             )}
           </CommentWrapper>
           <LikeWrapper>
-            <LikeBtn onClick={addLike}>
-              <AiOutlineLike />
-            </LikeBtn>
+            {!likeState ? (
+              <LikeBtn onClick={addLike}>
+                <AiOutlineLike />
+              </LikeBtn>
+            ) : (
+              <LikeBtn>
+                <AiFillLike />
+              </LikeBtn>
+            )}
             <TotalLikes>{likes}</TotalLikes>
           </LikeWrapper>
         </ContentWrapper>
@@ -188,7 +207,11 @@ const ChildComment = props => {
 
         {addInput ? (
           <ReplyWarpper>
-            <TextArea ref={inputRef} onChange={changeChild}></TextArea>
+            <TextArea
+              ref={inputRef}
+              onChange={changeChild}
+              placeholder="내용을 입력해주세요"
+            ></TextArea>
             <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
             <TextAreaBtn onClick={addChildComment}>완료</TextAreaBtn>
           </ReplyWarpper>
@@ -223,7 +246,7 @@ const EventBtn = styled.button`
   text-decoration: underline;
   font-family: "Noto Sans KR", sans-serif;
   border: none;
-  color: ${colors.red};
+  color: ${colors.gray5};
   background-color: ${colors.white};
   cursor: pointer;
 `;
@@ -249,14 +272,14 @@ const LikeBtn = styled.button`
   border: none;
   padding: 2px 6px 0 6px;
   font-family: "Noto Sans KR", sans-serif;
-  color: ${colors.gray5};
+  color: ${colors.red};
   background-color: ${colors.white};
   cursor: pointer;
 `;
 
 const TotalLikes = styled.p`
   font-size: 10px;
-  color: ${colors.darkGray};
+  color: ${colors.red};
 `;
 
 const ReplyWarpper = styled.div`

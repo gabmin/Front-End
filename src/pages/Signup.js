@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useInput from "../hooks/useInput";
@@ -46,6 +46,12 @@ const Signup = () => {
   const [passwordNotice, setPasswordNotice] = useState(true);
   const [passwordEqual, setPasswordEqual] = useState(false);
   const [ageError, setAgeError] = useState(false);
+
+  const idRef = useRef();
+  const nickRef = useRef();
+  const pwRef = useRef();
+  const pwCheckRef = useRef();
+  const ageRef = useRef();
 
   useEffect(() => {
     if (id.trim()) {
@@ -102,17 +108,19 @@ const Signup = () => {
   }, [idFilter, id]);
 
   const nickChecker = useCallback(() => {
-    if (nickname.length < 2 || nickname.length > 7) {
-      setNickLength(true);
-      setNickNotice(false);
-      return;
-    }
-    setNickLength(false);
     if (!nickname.trim()) {
       setNickError(true);
       setNickNotice(true);
       return false;
     }
+    if (nickname.length < 2 || nickname.length > 7) {
+      setNickLength(true);
+      setNickNotice(false);
+      setNickError(true);
+      return;
+    }
+
+    setNickLength(false);
     setNickError(false);
     setNickNotice(false);
     return true;
@@ -152,17 +160,32 @@ const Signup = () => {
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
+      if (idError || !id.trim()) {
+        idRef.current.focus();
+        return;
+      }
+      if (nickError || !nickname.trim()) {
+        nickRef.current.focus();
+        return;
+      }
+      if (passwordError) {
+        pwRef.current.focus();
+        return;
+      }
+      if (passwordEqual) {
+        pwCheckRef.current.focus();
+        return;
+      }
+      if (!ageChecker()) {
+        ageRef.current.focus();
+        return;
+      }
 
-      // if (!idChecker()) return;
-      // if (!nickChecker()) return;
-      // if (!pwChecker()) return;
       if (!pwEqualChecker()) return;
-      if (!ageChecker()) return;
+      // if (!ageChecker()) return;
       if (!nickname.trim()) {
         return;
       }
-      // if (!idDupCheck) return;
-      // if (!nickDupCheck) return;
       if (!nickDupCheck || !idDupCheck || passwordError) {
         return;
       }
@@ -189,12 +212,16 @@ const Signup = () => {
       age,
       dispatch,
       passwordError,
+      idError,
+      nickError,
+      passwordEqual,
     ],
   );
 
   const onClickIdDup = useCallback(
     e => {
       e.preventDefault();
+      if (!id.trim()) return;
       idChecker();
       dispatch(
         checkIdDup({
@@ -214,6 +241,10 @@ const Signup = () => {
   const onClickNickDup = useCallback(
     e => {
       e.preventDefault();
+      if (!nickname.trim()) {
+        nickChecker();
+        return;
+      }
       nickChecker();
       dispatch(
         checkNickDup({
@@ -244,6 +275,13 @@ const Signup = () => {
     if (!pwEqualChecker()) return;
   }, [pwChecker, pwEqualChecker]);
 
+  console.log("회원갑에러");
+  console.log("id", idError);
+  console.log("nick", nickError);
+  console.log("pw", passwordError);
+  console.log("pwEqual", passwordEqual);
+  console.log("age", ageError);
+
   return (
     <>
       <Container>
@@ -257,6 +295,7 @@ const Signup = () => {
             <InputContent>
               <InputWrapper>
                 <input
+                  ref={idRef}
                   type="id"
                   value={id}
                   onChange={onChangeId}
@@ -286,6 +325,7 @@ const Signup = () => {
             <InputContent>
               <InputWrapper>
                 <input
+                  ref={nickRef}
                   type="text"
                   value={nickname}
                   onChange={onChangeNickname}
@@ -317,6 +357,7 @@ const Signup = () => {
           <Content>
             <InputWrapper>
               <input
+                ref={pwRef}
                 type="password"
                 value={password}
                 onChange={setPassword}
@@ -328,11 +369,11 @@ const Signup = () => {
             </InputWrapper>
             {passwordNotice && (
               <span style={{ color: "black" }}>
-                8~16자 영문, 숫자, 특수문자를 사용하세요
+                8~16자 영문, 숫자, 특수문자 조합을 사용하세요
               </span>
             )}
             {!passwordNotice && passwordError && (
-              <span>8~16자 영문, 숫자, 특수문자를 사용하세요</span>
+              <span>8~16자 영문, 숫자, 특수문자 조합을 사용하세요</span>
             )}
             {!passwordNotice && !passwordError && (
               <span style={{ color: blue }}>사용 가능한 비밀번호입니다</span>
@@ -341,6 +382,7 @@ const Signup = () => {
           <Content>
             <InputWrapper>
               <input
+                ref={pwCheckRef}
                 type="password"
                 value={passwordCheck}
                 onChange={setPasswordCheck}
@@ -360,7 +402,7 @@ const Signup = () => {
               </span>
             </SelectSubject>
             <InputWrapper>
-              <select onChange={setAge} data-testid="ageSelect">
+              <select ref={ageRef} onChange={setAge} data-testid="ageSelect">
                 <option value="">연령대를 선택해 주세요</option>
                 <option value={10}>10대</option>
                 <option value={20}>20대</option>

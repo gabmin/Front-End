@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
@@ -32,29 +32,23 @@ const MultiList = props => {
   const [likes, setLikes] = useState(likeCnt);
   const [likeState, setLikeState] = useState(liked === null ? false : true);
 
+  useEffect(() => {
+    setLikes(likeCnt);
+  }, [likeCnt]);
+
   const history = useHistory();
   const goToDetail = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      window.scroll(0, 0);
-      dispatch(DetailDB(multiId));
-      history.push(`/multi/${multiId}`);
-    }
+    window.scroll(0, 0);
+    dispatch(DetailDB(multiId));
+    history.push(`/multi/${multiId}`);
   };
 
   const goToComment = () => {
-    if (!userNickname) {
-      window.alert("로그인 후 이용가능합니다");
-      history.push("/login");
-    } else {
-      dispatch(DetailDB(multiId));
-      history.push({
-        pathname: `/multi/${multiId}`,
-        state: { onComment: "onComment" },
-      });
-    }
+    dispatch(DetailDB(multiId));
+    history.push({
+      pathname: `/multi/${multiId}`,
+      state: { onComment: "onComment" },
+    });
   };
 
   const addLike = () => {
@@ -79,7 +73,7 @@ const MultiList = props => {
               <TitleText onClick={goToDetail}>{title}</TitleText>
               <VoteBtn>
                 <button className="Detail" onClick={goToDetail}>
-                  투표하기
+                  상세보기
                 </button>
               </VoteBtn>
             </TitleWrapper>
@@ -109,11 +103,15 @@ const MultiList = props => {
                   <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
-                <LikeWarpper>
+                <LikeWarpper onClick={addLike}>
                   {!likeState ? (
-                    <AiOutlineLike size={16} onClick={addLike} />
+                    <LikeBtn>
+                      <AiOutlineLike size={16} />
+                    </LikeBtn>
                   ) : (
-                    <AiFillLike size={16} />
+                    <LikeBtn>
+                      <AiFillLike size={16} />
+                    </LikeBtn>
                   )}
                   <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
@@ -161,9 +159,13 @@ const MultiList = props => {
                 </CommentWarpper>
                 <LikeWarpper>
                   {!likeState ? (
-                    <AiOutlineLike size={16} onClick={addLike} />
+                    <LikeBtn>
+                      <AiOutlineLike size={16} onClick={addLike} />
+                    </LikeBtn>
                   ) : (
-                    <AiFillLike size={16} />
+                    <LikeBtn>
+                      <AiFillLike size={16} />
+                    </LikeBtn>
                   )}
                   <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
@@ -212,12 +214,12 @@ const ContainerB = styled.div`
   flex-direction: column; */
   background: linear-gradient(
     180deg,
-    rgba(134, 142, 150, 0.2) 0%,
+    rgba(134, 142, 150, 0.5) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
     padding: 7% 6%;
   }
 `;
@@ -305,7 +307,7 @@ const DesWrapper = styled.div`
 const DesText = styled.p`
   font-size: 16px;
   /* line-height: 22px; */
-  color: ${colors.gray5};
+  color: ${colors.darkGray};
   /* margin: 0 auto 0 0; */
   @media screen and (max-width: ${mobile}) {
     font-size: 14px;
@@ -400,7 +402,7 @@ const UserWrapper = styled.div`
 const NickText = styled.p`
   width: 100%;
   height: 17px;
-  color: ${colors.darkGray};
+  color: ${colors.gray5};
   /* &:hover {
     transform: translateY(-3px);
     transition: transform 200ms;
@@ -437,6 +439,10 @@ const LikeWarpper = styled.div`
   align-items: center;
   color: ${colors.red};
   height: 20px;
+  /* cursor: pointer; */
+`;
+
+const LikeBtn = styled.div`
   cursor: pointer;
 `;
 

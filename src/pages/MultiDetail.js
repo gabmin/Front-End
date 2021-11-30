@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { history } from "../redux/configureStore";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import { FiArrowLeft, FiMoreHorizontal } from "react-icons/fi";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
@@ -18,7 +18,7 @@ import { ClosePostDB, DeletePostDB } from "../redux/actions/multiCard";
 import { DetailDB } from "../redux/actions/multiDetail";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import MultiMenu from "../elements/MultiMenu";
-import { useLocation } from "react-router";
+import { history } from "../redux/configureStore";
 
 const MultiDetail = props => {
   const dispatch = useDispatch();
@@ -182,11 +182,7 @@ const MultiDetail = props => {
               ) : null}
             </MenuWarpper>
             {/* {DetailDBDone === true && ( */}
-            <MultiUnvoted
-              multiId={multiId}
-              dataList={dataList}
-              // render={p => render(p)}
-            />
+            <MultiUnvoted multiId={multiId} dataList={dataList} />
             {/* {DetailDBDone === true && ( */}
             <div>
               <MultiComment multiId={multiId} />
@@ -201,14 +197,18 @@ const MultiDetail = props => {
 };
 
 const Container = styled.div`
-  min-width: 100%;
+  /* min-width: 100%; */
   max-width: 1100px;
+  /* min-height: 100%; */
   min-height: 100vh;
   padding-bottom: 40px;
-  margin: 10px auto 50px auto;
+  margin: 56px auto 50px auto;
   box-sizing: border-box;
   @media screen and (max-width: ${mobile}) {
-    padding: 10px 10px 60px 10px;
+    width: 90%;
+    margin-top: 28px;
+    /* padding: 10px; */
+    padding-bottom: 60px;
   }
 `;
 
