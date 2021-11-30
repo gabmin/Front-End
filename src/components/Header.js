@@ -22,13 +22,6 @@ const Header = () => {
     state => state.user.userInfo,
   );
 
-  console.log(window.location.pathname);
-  console.log(window.location.pathname);
-  console.log(window.location.pathname);
-  console.log(window.location.pathname);
-  console.log(window.location.pathname);
-  console.log(window.location.pathname);
-
   const [search, setSearch] = useState("");
   const scrollRef = useRef();
 
