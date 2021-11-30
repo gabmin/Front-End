@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { FiEdit3 } from "react-icons/fi";
+import { AiFillEdit } from "react-icons/ai";
 
 import LoadingBubble from "../elements/LoadingBubble";
 import { getMyPolls, getMyPosts } from "../redux/actions/profile";
@@ -114,15 +114,15 @@ const Profile = props => {
                 defaultValue={profileNick}
                 onKeyPress={onSubmitNick}
               />
-              <FiEdit3
+              <AiFillEdit
                 size={24}
-                stroke={red}
+                fill={red}
                 onClick={() => {
                   onSubmitNick({ key: "Enter" });
                 }}
                 style={{
                   cursor: "pointer",
-                  top: "7px",
+                  top: "5px",
                   right: "-30px",
                   position: "absolute",
                 }}
@@ -136,13 +136,13 @@ const Profile = props => {
                 </Nickname>
               }
               {Number(userId) === myId && (
-                <FiEdit3
+                <AiFillEdit
                   size={24}
-                  stroke={red}
+                  fill={red}
                   onClick={onClickNickname}
                   style={{
                     cursor: "pointer",
-                    top: "5px",
+                    top: "3px",
                     position: "absolute",
                   }}
                   data-testid="nickEditBtn"

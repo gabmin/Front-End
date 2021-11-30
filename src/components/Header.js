@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { FiSearch } from "react-icons/fi";
-import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
+import { Menu, MenuItem } from "@szhsin/react-menu";
+import { AiOutlineSearch } from "react-icons/ai";
 
 import { history } from "../redux/configureStore";
 import { SetParams } from "../redux/reducers/paramsSlice";
@@ -13,7 +13,7 @@ import { ReactComponent as Logo } from "../images/logo.svg";
 import { ReactComponent as Symbol } from "../images/symbolRed.svg";
 import { ReactComponent as chevronDown } from "../images/chevronDown.svg";
 import { ReactComponent as CommonIcon } from "../images/CommonIcon.svg";
-import { blue, red, mobile, tablet } from "../shared/style";
+import { red, mobile, tablet } from "../shared/style";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,13 @@ const Header = () => {
   const { nickname = "GUEST", userId = "" } = useSelector(
     state => state.user.userInfo,
   );
+
+  console.log(window.location.pathname);
+  console.log(window.location.pathname);
+  console.log(window.location.pathname);
+  console.log(window.location.pathname);
+  console.log(window.location.pathname);
+  console.log(window.location.pathname);
 
   const [search, setSearch] = useState("");
   const scrollRef = useRef();
@@ -127,10 +134,8 @@ const Header = () => {
           </IconWrapper>
         </Bottom>
         <BottomMobile>
-          <div>
+          <div className="voteBtns">
             <span onClick={onClickEither}>찬반투표</span>
-          </div>
-          <div>
             <span onClick={onClickMulti}>객관식투표</span>
           </div>
           <IconWrapperMobile loggedIn={nickname !== "GUEST"}>
@@ -180,11 +185,17 @@ const BottomMobile = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: 86%;
   height: 70px;
-  justify-content: space-around;
+  justify-content: space-between;
   color: ${red};
   font-weight: bold;
+
+  .voteBtns {
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+  }
 
   @media screen and (min-width: ${mobile}) {
     display: none;
@@ -290,6 +301,10 @@ const Bottom = styled.div`
     border-radius: 9px;
   }
 
+  @media screen and (max-width: ${tablet}) {
+    width: 100%;
+  }
+
   @media screen and (max-width: ${mobile}) {
     display: none;
   }
@@ -306,11 +321,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledSearch = styled(FiSearch)`
+const StyledSearch = styled(AiOutlineSearch)`
   position: absolute;
   left: 11px;
-  min-width: 16px;
-  min-height: 16px;
+  min-width: 20px;
+  min-height: 20px;
   color: #e25b45;
   cursor: pointer;
 `;
