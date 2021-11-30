@@ -100,9 +100,13 @@ const MultiCard = props => {
                   </CommentWarpper>
                   <LikeWarpper>
                     {!likeState ? (
-                      <AiOutlineLike size={24} onClick={addLike} />
+                      <LikeBtn>
+                        <AiOutlineLike size={24} onClick={addLike} />
+                      </LikeBtn>
                     ) : (
-                      <AiFillLike size={24} />
+                      <LikeBtn>
+                        <AiFillLike size={24} />
+                      </LikeBtn>
                     )}
                     <TotalLike>{likes}</TotalLike>
                   </LikeWarpper>
@@ -148,9 +152,13 @@ const MultiCard = props => {
                   </CommentWarpper>
                   <LikeWarpper>
                     {!likeState ? (
-                      <AiOutlineLike size={24} onClick={addLike} />
+                      <LikeBtn>
+                        <AiOutlineLike size={24} onClick={addLike} />
+                      </LikeBtn>
                     ) : (
-                      <AiFillLike size={24} />
+                      <LikeBtn>
+                        <AiFillLike size={24} />
+                      </LikeBtn>
                     )}
                     <TotalLike>{likes}</TotalLike>
                   </LikeWarpper>
@@ -357,6 +365,10 @@ const LikeWarpper = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${colors.red};
+  /* cursor: pointer; */
+`;
+
+const LikeBtn = styled.div`
   cursor: pointer;
 `;
 

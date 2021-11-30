@@ -103,11 +103,15 @@ const MultiList = props => {
                   <AiOutlineMessage size={16} />{" "}
                   <TotalComment>{commentCnt}</TotalComment>
                 </CommentWarpper>
-                <LikeWarpper>
+                <LikeWarpper onClick={addLike}>
                   {!likeState ? (
-                    <AiOutlineLike size={16} onClick={addLike} />
+                    <LikeBtn>
+                      <AiOutlineLike size={16} />
+                    </LikeBtn>
                   ) : (
-                    <AiFillLike size={16} />
+                    <LikeBtn>
+                      <AiFillLike size={16} />
+                    </LikeBtn>
                   )}
                   <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
@@ -155,9 +159,13 @@ const MultiList = props => {
                 </CommentWarpper>
                 <LikeWarpper>
                   {!likeState ? (
-                    <AiOutlineLike size={16} onClick={addLike} />
+                    <LikeBtn>
+                      <AiOutlineLike size={16} onClick={addLike} />
+                    </LikeBtn>
                   ) : (
-                    <AiFillLike size={16} />
+                    <LikeBtn>
+                      <AiFillLike size={16} />
+                    </LikeBtn>
                   )}
                   <TotalLike>{likes}</TotalLike>
                 </LikeWarpper>
@@ -431,6 +439,10 @@ const LikeWarpper = styled.div`
   align-items: center;
   color: ${colors.red};
   height: 20px;
+  /* cursor: pointer; */
+`;
+
+const LikeBtn = styled.div`
   cursor: pointer;
 `;
 
