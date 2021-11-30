@@ -69,11 +69,13 @@ const CommentInput = props => {
 
 const Container = styled.div`
   margin: auto;
+  min-width: 100%;
+  max-width: 556px;
 `;
 
 const Warpper = styled.div`
-  min-width: 100%;
-  max-width: 556px;
+  margin: auto;
+  /* width: 90%; */
   height: 80px;
   border: 1px ${colors.gray5} solid;
   border-radius: 6px;
@@ -83,7 +85,7 @@ const Warpper = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  width: 480px;
+  width: 540px;
   height: 50px;
   margin: auto;
   padding: 0 0 0 10px;

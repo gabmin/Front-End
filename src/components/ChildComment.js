@@ -207,7 +207,11 @@ const ChildComment = props => {
 
         {addInput ? (
           <ReplyWarpper>
-            <TextArea ref={inputRef} onChange={changeChild}></TextArea>
+            <TextArea
+              ref={inputRef}
+              onChange={changeChild}
+              placeholder="내용을 입력해주세요"
+            ></TextArea>
             <TextAreaBtn onClick={showInput}>취소</TextAreaBtn>
             <TextAreaBtn onClick={addChildComment}>완료</TextAreaBtn>
           </ReplyWarpper>

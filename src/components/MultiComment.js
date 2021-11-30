@@ -48,6 +48,7 @@ const Contaier = styled.div`
   max-width: 620px;
   margin: 10px auto 20px auto;
   display: flex;
+  padding: 0 20px;
   flex-direction: column;
 `;
 
