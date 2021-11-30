@@ -194,8 +194,8 @@ const TabBtnWarpper = styled.div`
   justify-content: space-between;
 
   @media screen and (max-width: ${mobile}) {
-    max-width: 300px;
-    width: 100%;
+    /* max-width: 300px; */
+    width: 80%;
     margin: 30px auto 0px auto;
   }
 `;
@@ -282,7 +282,7 @@ const QuestionBtn = styled.button`
   }
   @media screen and (max-width: ${mobile}) {
     transform: scale(0.9);
-    margin: 0 -8px;
+    margin: 0 -4px;
   }
 `;
 
