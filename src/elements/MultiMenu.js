@@ -80,6 +80,7 @@ const MultiMenu = props => {
               styles={{
                 border: "none",
                 backgroundColor: "transparent",
+                cursor: "pointer",
               }}
             >
               <FiMoreHorizontal size={20} color="#575757" />

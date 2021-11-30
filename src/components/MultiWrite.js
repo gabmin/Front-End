@@ -449,7 +449,7 @@ const MultiWrite = props => {
         <EventBtnWarpper>
           <CancelBtn onClick={cancel}>취소</CancelBtn>
           {isEdit ? (
-            <AddBtn onClick={eidtPost}>수정완료</AddBtn>
+            <AddBtn onClick={eidtPost}>수정 완료</AddBtn>
           ) : (
             <AddBtn onClick={addPost}>완료</AddBtn>
           )}

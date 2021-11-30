@@ -151,7 +151,7 @@ const DesWrapper = styled.div`
 
 const Description = styled.p`
   font-size: 16px;
-  color: ${colors.gray5};
+  color: ${colors.darkGray};
   white-space: pre-wrap;
 `;
 

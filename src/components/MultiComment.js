@@ -48,11 +48,12 @@ const Contaier = styled.div`
   max-width: 620px;
   margin: 10px auto 20px auto;
   display: flex;
+  padding: 0 20px;
   flex-direction: column;
 `;
 
 const Warpper = styled.div`
-  width: 90%;
+  width: 100%;
   margin: auto;
 `;
 
