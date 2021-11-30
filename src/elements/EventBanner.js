@@ -38,7 +38,7 @@ const Container = styled.div`
   position: fixed;
   z-index: 10;
   bottom: 8%;
-  right: 10%;
+  right: 3%;
   cursor: pointer;
   /* border-radius: 100px;
   box-shadow: 2px 2px 2px 2px ${colors.gray4}; */

@@ -7,6 +7,9 @@ import colors from "../shared/colors";
 import Comment from "./Comment";
 
 function Items({ currentItems }) {
+  console.log(currentItems);
+  const dataList = useSelector(state => state.multiDetail.multiDetail);
+  const completed = dataList.multi.completed;
   return (
     <>
       <TempWarpper>
@@ -15,6 +18,7 @@ function Items({ currentItems }) {
             <div>
               <Comment
                 // dataList={dataList}
+                completed={completed}
                 multiId={p.multi}
                 nickname={p.nickname}
                 comment={p.comment}

@@ -6,6 +6,7 @@ import { mobile, tablet } from "../shared/style";
 import MultiWrite from "../components/MultiWrite";
 import { useDispatch, useSelector } from "react-redux";
 import { DetailDB } from "../redux/actions/multiDetail";
+import colors from "../shared/colors";
 
 const MultiEdit = props => {
   const dispatch = useDispatch();
@@ -91,6 +92,7 @@ const Wrap = styled.div`
   max-width: 840px;
   width: 90%;
   margin: auto;
+  background-color: ${colors.white};
 `;
 
 const ContentBox = styled.div`
@@ -120,6 +122,7 @@ const Index = styled.div`
   }
   div {
     display: flex;
+    margin-left: 20px;
   }
   margin: 0px 0px 22px 0px;
   @media screen and (max-width: ${mobile}) {
