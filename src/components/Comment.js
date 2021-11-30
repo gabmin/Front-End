@@ -43,7 +43,9 @@ const Comment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(likeCnt);
-  const [likeState, setLikeState] = useState(liked === null ? false : true);
+  const [likeState, setLikeState] = useState(
+    liked && liked !== null ? true : false,
+  );
   const inputRef = useRef();
   const editInputRef = useRef();
 
