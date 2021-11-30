@@ -84,7 +84,6 @@ const Wrap = styled.div`
   min-height: 100vh;
   padding-bottom: 40px;
   margin: auto;
-  background-color: #ffffff;
   @media screen and (max-width: ${mobile}) {
     padding-bottom: 60px;
   }
@@ -94,6 +93,7 @@ const ContentBox = styled.div`
   border: 2px solid #00397c;
   max-width: 840px;
   box-sizing: border-box;
+  background-color: #ffffff;
   margin: 56px auto;
   border-radius: 10px;
   padding: 4% 110px 4% 110px;
