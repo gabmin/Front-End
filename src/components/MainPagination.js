@@ -36,7 +36,7 @@ function Items({ currentItems }) {
   );
 }
 
-const MainPagination = ({ items, itemsPerPage = 5 }) => {
+const MainPagination = ({ items, itemsPerPage = 10 }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);

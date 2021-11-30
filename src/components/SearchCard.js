@@ -65,8 +65,8 @@ const SearchCard = ({
           <span className="dateContent">{date.substring(0, 16)}</span>
         </div>
         <IconWrapper>
-          {type === "객관식" && <StyledFiMessage stroke={blue} />}
-          <span style={{ color: blue }}>{type === "객관식" && commentCnt}</span>
+          {type === "객관식" && <StyledFiMessage fill={blue} />}
+          <span className="commentCnt">{type === "객관식" && commentCnt}</span>
           <StyledFiThumbsUp />
           <span style={{ color: red }}> {likeCnt}</span>
         </IconWrapper>
@@ -78,6 +78,15 @@ const SearchCard = ({
 const IconWrapper = styled.div`
   position: relative;
   right: -85px;
+
+  .commentCnt {
+    color: ${blue};
+    margin: 0 5px 0 0;
+
+    @media screen and (max-width: ${mobile}) {
+      display: none;
+    }
+  }
 
   @media screen and (max-width: ${tablet}) {
     display: flex;
@@ -93,8 +102,8 @@ const IconWrapper = styled.div`
 
 const StyledFiMessage = styled(AiOutlineMessage)`
   position: relative;
-  margin-right: 5px;
-  top: 2px;
+  margin-right: 2px;
+  top: 1px;
 
   @media screen and (max-width: ${tablet}) {
   }
@@ -103,8 +112,7 @@ const StyledFiMessage = styled(AiOutlineMessage)`
 const StyledFiThumbsUp = styled(AiOutlineLike)`
   color: ${red};
   position: relative;
-  top: 1px;
-  margin-right: 5px;
+  margin-right: 2px;
 
   @media screen and (max-width: ${tablet}) {
   }
