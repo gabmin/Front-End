@@ -12,7 +12,7 @@
 
 ### 4. [기능](#기능)
 
-### 5. 레벨 업 (배운점, 어려운점)
+### 5. [Troubleshooting](#Troubleshooting)
 
 <hr>
 
@@ -36,16 +36,16 @@
   <tr>
   <td>
   Backend
-  </td>
   <td></td>
+  </td>
   <td>
   Frontend
-  </td>
   <td></td>
+  </td>
   <td>
   Designer
-  </td>
   <td></td>
+  </td>
   <tr>
   <td align="center"><img src="https://crawling-health-e0d.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F56d2808d-73f7-47d9-b580-310b311774f0%2FUntitled.png?table=block&id=dae3a277-b892-4185-9dc1-2b9fd53605e9&spaceId=e0735ea4-78ca-47db-be31-3e9c8641e938&width=260&userId=&cache=v2" width="60px;" alt=""/>
     </td>
@@ -102,7 +102,7 @@
 
 <hr>
 
-## 기술스텍
+## 기술 스텍
 
 ## 라이브러리
 
@@ -161,4 +161,4 @@
 
 <hr>
 
-## 레벨업 (배운 점, 문제 점)
+## Troubleshooting
