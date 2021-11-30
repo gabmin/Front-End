@@ -1,6 +1,6 @@
 # 개미들의 곡소리
 
-<!-- ![Thumbnail](./src/images/Thumbnail.png) -->
+![Thumbnail](./src/images/Thumbnail.png)
 
 ## 목차
 
@@ -12,9 +12,7 @@
 
 ### 4. 기능
 
-### 5. 진행과정
-
-### 6. 레벨 업 (배운점)
+### 5. 레벨 업 (배운점, 어려운점)
 
 <hr>
 
@@ -22,11 +20,17 @@
 
 개미들의 곡소리는 주식 투자에 대한 의견과 고민을 투표 형식으로 쉽고 간단하게 해결할 수 있는 커뮤니티 사이트 입니다. 주식 투자에 대한 관심이 높아짐에 따라 많은 개미 투자자들이 유입되었고, 이들의 고민을 부담없이 간편하게 해결하는데 도움이 되고자 프로젝트를 진행하게 되었습니다.
 
-### 시연 영상
+### 시연 영상 [youtube]()
+
+### Github [Organizations](https://github.com/Ant-DDun-DDun-Project)
+
+### Project 정보 [Notion](https://crawling-health-e0d.notion.site/Project-3b911ebdb6114fb7be4b54956a9579dd)
 
 <hr>
 
 ## 팀 구성
+
+[팀 소개 페이지](https://crawling-health-e0d.notion.site/be6df84bde484ca883f54739be96eb8f)
 
 <table>
   <tr>
@@ -59,7 +63,6 @@
     </td>
     <td align="center">
     <br /><b>김예은</b></a><br />
-    <!-- <a href="https://github.com/gabmin" title="what did I do"> Github</a> -->
     </td>
     <tr>
     <td align="center"><img src="https://crawling-health-e0d.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2f229f59-5b48-4501-b9d8-44395fa066ab%2FUntitled.png?table=block&id=65bb4f7a-a244-4ba9-85e9-1886dc98432b&spaceId=e0735ea4-78ca-47db-be31-3e9c8641e938&width=260&userId=&cache=v2" width="60px;" alt=""/>
@@ -78,7 +81,6 @@
     </td>
     <td align="center">
     <br /><b>김한비</b></a><br /> 
-    <!-- <a href="https://github.com/larisms">Github</a> -->
     </td>
     </tr>
     <tr>
@@ -102,13 +104,16 @@
 
 ## 기술스텍
 
+## 라이브러리
+
 <hr>
 
 ## 기능
 
-### 로그인
+### 로그인 / 회원가입
 
--
+- 영문 소문자, 숫자, 특수기호를 이용하여 아이디와 비밀번호를 설정할 수 있다.
+- 닉네임을 입력할 수 있으며, 커뮤니티를 이용하는 모든 곳엔 닉네임만 노출된다.
 
 ### 찬반 / 객관식 인기글
 
@@ -156,8 +161,4 @@
 
 <hr>
 
-## 진행과정
-
-<hr>
-
-## 레벨업 (배운 점)
+## 레벨업 (배운 점, 문제 점)
