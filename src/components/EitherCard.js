@@ -200,7 +200,7 @@ const EitherCard = props => {
                       styles={{
                         border: "none",
                         backgroundColor: "transparent",
-                        curser: "pointer",
+                        cursor: "pointer",
                       }}
                     >
                       <FiMoreHorizontal size={20} data-testid="menuImage" />
@@ -355,7 +355,7 @@ const Container = styled.div`
   position: relative;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 80%;
+    width: 90%;
   }
 `;
 const MenuButtonGrid = styled.div`
@@ -402,7 +402,7 @@ const ButtonGrid = styled.div`
   }
 `;
 const EitherButtonA = styled.button`
-  width: 156px;
+  width: 157px;
   height: 160px;
   border: 2px solid #00397c;
   border-top-left-radius: 10px;
@@ -419,7 +419,7 @@ const EitherButtonA = styled.button`
   }
 `;
 const EitherButtonB = styled.button`
-  width: 156px;
+  width: 157px;
   height: 160px;
   border: 2px solid #00397c;
   border-top-right-radius: 10px;

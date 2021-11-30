@@ -454,8 +454,11 @@ const Container = styled.div`
   flex-direction: column;
   width: 90%;
   margin: 100px auto;
+  min-height: 100vh;
+  padding-bottom: 40px;
   @media screen and (max-width: ${mobile}) {
     margin: auto;
+    padding-bottom: 60px;
   }
 `;
 
