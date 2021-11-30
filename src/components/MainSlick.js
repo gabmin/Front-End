@@ -165,13 +165,13 @@ const Wrap = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 20px 20px;
+  margin: 0 16px 20px;
 
   .rank {
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     color: ${blue};
   }
@@ -180,7 +180,7 @@ const Title = styled.div`
     font-size: 14px;
     font-weight: 700;
     margin: 0 10px;
-    padding: 0.5px 10px;
+    padding: 1px 10px;
     color: ${red};
     border: 1px solid ${red};
     border-radius: 7px;

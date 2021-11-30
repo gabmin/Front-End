@@ -8,7 +8,7 @@ import { getMainData } from "../redux/actions/main";
 import { history } from "../redux/configureStore";
 import LoadingBubble from "../elements/LoadingBubble";
 import MainBanner from "../components/MainBanner";
-import { blue, red, mobile, tablet } from "../shared/style";
+import { gray4, blue, red, mobile, tablet } from "../shared/style";
 
 import { ReactComponent as GoAnt } from "../images/mainAnt.svg";
 
@@ -216,7 +216,6 @@ const GoEither = styled.div`
 
   @media screen and (max-width: 1540px) {
     width: 100%;
-    padding: 0 10px;
     max-width: 100%;
     margin-bottom: 10px;
   }
@@ -255,7 +254,7 @@ const GoMulti = styled.div`
   cursor: pointer;
 
   h1 {
-    margin: 5px 0 0;
+    margin: 0;
     color: white;
     font-size: 24px;
   }
@@ -268,7 +267,6 @@ const GoMulti = styled.div`
 
   @media screen and (max-width: 1540px) {
     width: 100%;
-    padding: 0 10px;
     max-width: 100%;
     h1 {
       font-size: 24px;
@@ -318,7 +316,7 @@ const Counts = styled.div`
   display: flex;
   flex-direction: row;
   width: 50%;
-  justify-content: space-between;
+  justify-content: space-around;
 
   @media screen and (max-width: ${mobile}) {
     width: 65%;
@@ -336,8 +334,9 @@ const Counts = styled.div`
   .betweenLine {
     content: "";
     width: 1px;
+    opacity: 0.7;
     height: 100%;
-    background-color: lightgray;
+    background-color: ${gray4};
   }
 
   p {
