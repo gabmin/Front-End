@@ -180,8 +180,11 @@ const Container = styled.div`
   max-width: 1280px;
   margin: auto;
   height: 100%;
+  min-height: 100vh;
+  padding-bottom: 40px;
   @media screen and (max-width: ${mobile}) {
     max-width: 768px;
+    padding-bottom: 60px;
   }
 `;
 

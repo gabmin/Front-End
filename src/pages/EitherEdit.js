@@ -171,9 +171,13 @@ const EitherEdit = props => {
 const Wrap = styled.div`
   max-width: 840px;
   width: 90%;
-  min-height: 650px;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: auto;
   background-color: #ffffff;
+  @media screen and (max-width: ${mobile}) {
+    padding-bottom: 60px;
+  }
 `;
 const ContentBox = styled.div`
   border: 2px solid #00397c;

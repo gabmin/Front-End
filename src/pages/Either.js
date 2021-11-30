@@ -10,7 +10,6 @@ import { SetView } from "../redux/reducers/viewSlice";
 import { SetParams } from "../redux/reducers/paramsSlice";
 import { PostDB, PostingDB, PostCompleteDB } from "../redux/actions/eitherCard";
 import LoadingBubble from "../elements/LoadingBubble";
-import { BsCardText, BsList } from "react-icons/bs";
 
 const Either = props => {
   const dispatch = useDispatch();
@@ -46,35 +45,30 @@ const Either = props => {
 
   //첫 화면에 전체 데이터 불러오기
   useEffect(() => {
-    if (viewStatus === false) {
-      dispatch(PostDB(paramsId));
-      dispatch(PostingDB(paramsId));
-      dispatch(PostCompleteDB(paramsId));
-      setStatus("Post");
-    } else {
-      dispatch(PostDB("all"));
-      dispatch(PostingDB("all"));
-      dispatch(PostCompleteDB("all"));
-      setStatus("Post");
-    }
+    dispatch(PostDB(paramsId));
+    dispatch(PostingDB(paramsId));
+    dispatch(PostCompleteDB(paramsId));
+    setStatus("Post");
   }, [dispatch, paramsId, viewStatus]);
-
   //전체 게시글 보여주기
   const onClickPost = () => {
     setStatus("Post");
     dispatch(PostDB(paramsId));
+    dispatch(SetParams("all"));
   };
 
   //진행중 게시글 보여주기
   const onClickPosting = () => {
     setStatus("Posting");
     dispatch(PostingDB(paramsId));
+    dispatch(SetParams("all"));
   };
 
   //종료됨 게시글 보여주기
   const onClickCompletePost = () => {
     setStatus("CompletePost");
     dispatch(PostCompleteDB(paramsId));
+    dispatch(SetParams("all"));
   };
 
   //게시글 작성하러가기
@@ -94,14 +88,12 @@ const Either = props => {
   const setSlickCard = () => {
     setChangeView(false);
     dispatch(SetView(false));
-    dispatch(SetParams("all"));
   };
 
   // 리스트 형식으로 보여주기
   const setListCard = () => {
     setChangeView(true);
     dispatch(SetView(true));
-    dispatch(SetParams("all"));
   };
 
   return (
@@ -231,9 +223,12 @@ const Either = props => {
 const Container = styled.div`
   max-width: 1280px;
   height: 100%;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: auto;
   @media screen and (max-width: ${mobile}) {
     max-width: 768px;
+    padding-bottom: 60px;
   }
 `;
 const Wrap = styled.div`
@@ -283,7 +278,7 @@ const FormatWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
-    width: 80%;
+    width: 70%;
     margin: 30px auto;
   }
 `;

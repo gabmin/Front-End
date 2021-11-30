@@ -103,7 +103,7 @@ const Profile = props => {
   );
 
   return (
-    <>
+    <Container>
       <MyInfo>
         <CommonIcon />
         <div className="nicknameWrapper">
@@ -179,9 +179,17 @@ const Profile = props => {
           <MainPagination items={myPolls} />
         )}
       </PostsContainer>
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  min-height: 100vh;
+  padding-bottom: 40px;
+  @media screen and (max-width: ${mobile}) {
+    padding-bottom: 60px;
+  }
+`;
 
 const MyInfo = styled.div`
   display: flex;

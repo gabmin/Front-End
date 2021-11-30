@@ -69,7 +69,7 @@ const ProductSlick = ({ cardList, type }) => {
       <Wrap>
         <Title>
           <div className="rank">
-            {type === "either" ? "찬반 랭킹" : "객관식 랭킹"}
+            {type === "either" ? "찬반 인기글" : "객관식 인기글"}
             <div className="hot">HOT</div>
           </div>
           <div className="showAll" onClick={onClickShowAll}>
