@@ -54,6 +54,23 @@ const Container = styled.div`
   width: 100%;
   margin: 0px;
 `;
+const Top = styled.div`
+  position: relative;
+  display: block;
+  width: 35px;
+  transform: translate3d(80vw, -60px, 0px);
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
+  color: #00397c;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-position: under;
+  @media screen and (max-width: ${mobile}) {
+    transform: translate3d(80vw, -110px, 0px);
+  }
+`;
 const Wrapper = styled.div`
   width: 100%;
   height: 40px;
@@ -119,19 +136,5 @@ const CopyWriter = styled.div`
     text-align: center;
   }
 `;
-const Top = styled.div`
-  position: relative;
-  display: block;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 700;
-  border: none;
-  background-color: transparent;
-  color: #00397c;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-position: under;
-  @media screen and (max-width: ${mobile}) {
-    right: 0px;
-  }
-`;
+
 export default Footer;

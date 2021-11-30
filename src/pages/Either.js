@@ -278,8 +278,9 @@ const FormatWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
-    width: 70%;
+    width: 80%;
     margin: 30px auto;
+    transform: translateX(5px);
   }
 `;
 const FormatWrapperB = styled.div`
@@ -290,7 +291,8 @@ const FormatWrapperB = styled.div`
   display: flex;
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
-    width: 80%;
+    width: 90%;
+    transform: translateX(5px);
     margin: 30px auto;
   }
 `;
