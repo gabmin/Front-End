@@ -17,6 +17,7 @@ import CommentContent from "../elements/CommentContent";
 import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
+import { darkGray } from "../shared/style";
 
 const ChildComment = props => {
   const {
@@ -159,6 +160,7 @@ const ChildComment = props => {
               fontSize={"12px"}
               width={"24px"}
               height={"24px"}
+              color={darkGray}
             ></Nickname>
             {"\u00a0\u00a0"}
             <CommentDate>{date.substring(0, 16)}</CommentDate>

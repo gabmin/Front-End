@@ -245,7 +245,7 @@ const QuestionWarpper = styled.div`
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 70%;
+    width: 80%;
   }
 `;
 
@@ -301,7 +301,7 @@ const ViewBtn = styled.div`
   margin-right: 16px;
   cursor: pointer;
   .view {
-    height: 16px;
+    height: 24px;
   }
 `;
 

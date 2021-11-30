@@ -15,6 +15,7 @@ import CommentContent from "../elements/CommentContent";
 import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
+import { darkGray } from "../shared/style";
 
 const Comment = props => {
   const {
@@ -163,6 +164,7 @@ const Comment = props => {
               fontSize={"12px"}
               width={"24px"}
               height={"24px"}
+              color={darkGray}
             ></Nickname>
             {"\u00a0\u00a0"}
 
