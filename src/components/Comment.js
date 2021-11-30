@@ -15,6 +15,7 @@ import CommentContent from "../elements/CommentContent";
 import CommentDate from "../elements/CommentDate";
 import Nickname from "./Nickname";
 import { history } from "../redux/configureStore";
+import { darkGray } from "../shared/style";
 
 const Comment = props => {
   const {
@@ -42,7 +43,9 @@ const Comment = props => {
   const [editCancelBtn, setEditCancelBtn] = useState(false);
   const [delBtn, setDelBtn] = useState(true);
   const [likes, setLikes] = useState(likeCnt);
-  const [likeState, setLikeState] = useState(liked === null ? false : true);
+  const [likeState, setLikeState] = useState(
+    liked && liked !== null ? true : false,
+  );
   const inputRef = useRef();
   const editInputRef = useRef();
 
@@ -163,6 +166,7 @@ const Comment = props => {
               fontSize={"12px"}
               width={"24px"}
               height={"24px"}
+              color={darkGray}
             ></Nickname>
             {"\u00a0\u00a0"}
 
