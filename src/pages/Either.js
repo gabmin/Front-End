@@ -310,7 +310,7 @@ const ViewBtn = styled.div`
   margin-right: 16px;
   cursor: pointer;
   .view {
-    height: 16px;
+    height: 24px;
   }
 `;
 const QuestionBtn = styled.button`
