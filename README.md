@@ -34,13 +34,13 @@
 
 <table>
   <tr>
-  <td colspan='2'>
+  <td colspan='2' align="center">
   Backend
   </td>
-  <td colspan='2'>
+  <td colspan='2' align="center">
   Frontend
   </td>
-  <td colspan='2'>
+  <td colspan='2' align="center">
   Designer
   </td>
   <tr>
@@ -93,7 +93,7 @@
     <br /><b>장원배</b></a><br /> 
     <a href="https://github.com/calvin9150">Github</a>
     </td>
-    <td></td><td></td>
+    <td colspan='2'></td>
     </tr>
 </table>
 
