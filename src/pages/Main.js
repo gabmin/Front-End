@@ -130,8 +130,13 @@ const Container = styled.div`
   align-items: center;
   width: 67%;
   max-width: 1280px;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: auto;
   user-select: none;
+  @media screen and (max-width: ${mobile}) {
+    padding-bottom: 60px;
+  }
 
   @media screen and (max-width: 1540px) {
     top: 20px;

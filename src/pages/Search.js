@@ -6,7 +6,7 @@ import { search } from "../redux/actions/search";
 import MainPagination from "../components/MainPagination";
 import LoadingBubble from "../elements/LoadingBubble";
 
-import { tablet } from "../shared/style";
+import { tablet, mobile } from "../shared/style";
 
 const Search = ({ location }) => {
   const dispatch = useDispatch();
@@ -47,15 +47,20 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 1000px;
-  min-height: 600px;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: auto;
   padding: 50px 100px 0;
+
+  @media screen and (max-width: ${mobile}) {
+    padding-bottom: 60px;
+  }
 
   @media screen and (max-width: ${tablet}) {
     width: 100%;
     padding: 10px 0;
     box-sizing: border-box;
-    min-height: 400px;
+    /* min-height: 400px; */
   }
 `;
 

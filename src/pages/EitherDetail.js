@@ -95,6 +95,8 @@ const EitherDetail = props => {
 const Wrap = styled.div`
   width: 100%;
   height: 773px;
+  min-height: 100vh;
+  padding-bottom: 40px;
 `;
 const GoBackGrid = styled.div`
   position: absolute;

@@ -64,7 +64,7 @@ const Wrapper = styled.div`
   bottom: 0px;
   align-items: center;
   @media screen and (max-width: ${mobile}) {
-    height: 50px;
+    height: 60px;
   }
 `;
 const Grid = styled.div`

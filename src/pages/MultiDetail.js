@@ -203,11 +203,12 @@ const MultiDetail = props => {
 const Container = styled.div`
   min-width: 100%;
   max-width: 1100px;
-  min-height: 100%;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: 10px auto 50px auto;
   box-sizing: border-box;
   @media screen and (max-width: ${mobile}) {
-    padding: 10px;
+    padding: 10px 10px 60px 10px;
   }
 `;
 

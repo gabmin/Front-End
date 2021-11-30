@@ -130,11 +130,14 @@ const Container = styled.div`
   max-width: 620px;
   width: 90%;
   height: 750px;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: auto;
 
   @media screen and (max-width: ${mobile}) {
     align-items: unset;
     height: 550px;
+    padding-bottom: 60px;
   }
 `;
 

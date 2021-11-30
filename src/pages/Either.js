@@ -223,10 +223,12 @@ const Either = props => {
 const Container = styled.div`
   max-width: 1280px;
   height: 100%;
-  min-height: 100%;
+  min-height: 100vh;
+  padding-bottom: 40px;
   margin: auto;
   @media screen and (max-width: ${mobile}) {
     max-width: 768px;
+    padding-bottom: 60px;
   }
 `;
 const Wrap = styled.div`
