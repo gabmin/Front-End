@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { history } from "../redux/configureStore";
 import { ReactComponent as Logo } from "../images/logo.svg";
 import { mobile, tablet } from "../shared/style";
 
@@ -15,9 +16,10 @@ const Footer = props => {
         <Grid>
           <Contents>
             <button
-              onClick={() =>
-                window.open("https://github.com/Ant-DDun-DDun-Project")
-              }
+              onClick={() => {
+                history.push("/about");
+                window.scroll(0, 0);
+              }}
             >
               About
             </button>
