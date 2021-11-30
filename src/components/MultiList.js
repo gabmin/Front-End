@@ -427,8 +427,9 @@ const CommentWarpper = styled.div`
 `;
 
 const TotalComment = styled.p`
-  margin: 0 auto 0 14px;
+  margin: 0 auto 0 12px;
   font-size: 14px;
+  width: 14px;
 `;
 
 const LikeWarpper = styled.div`
@@ -443,12 +444,14 @@ const LikeWarpper = styled.div`
 `;
 
 const LikeBtn = styled.div`
+  padding-top: 2px;
   cursor: pointer;
 `;
 
 const TotalLike = styled.p`
-  margin: 0 auto 0 14px;
+  margin: 0 auto 0 12px;
   font-size: 14px;
+  width: 14px;
 `;
 
 export default MultiList;

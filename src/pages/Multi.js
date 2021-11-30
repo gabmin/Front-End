@@ -197,8 +197,8 @@ const TabBtnWarpper = styled.div`
   justify-content: space-between;
 
   @media screen and (max-width: ${mobile}) {
-    max-width: 300px;
-    width: 100%;
+    /* max-width: 300px; */
+    width: 80%;
     margin: 30px auto 0px auto;
   }
 `;
@@ -248,7 +248,7 @@ const QuestionWarpper = styled.div`
   justify-content: space-between;
   @media screen and (max-width: ${mobile}) {
     margin: 30px auto;
-    width: 70%;
+    width: 80%;
   }
 `;
 
@@ -285,7 +285,7 @@ const QuestionBtn = styled.button`
   }
   @media screen and (max-width: ${mobile}) {
     transform: scale(0.9);
-    margin: 0 -8px;
+    margin: 0 -4px;
   }
 `;
 
@@ -304,7 +304,7 @@ const ViewBtn = styled.div`
   margin-right: 16px;
   cursor: pointer;
   .view {
-    height: 16px;
+    height: 24px;
   }
 `;
 
