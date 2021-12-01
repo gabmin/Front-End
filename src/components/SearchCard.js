@@ -102,6 +102,7 @@ const StyledFiMessage = styled(AiOutlineMessage)`
   top: 1px;
 
   @media screen and (max-width: ${tablet}) {
+    top: 2px;
   }
 `;
 
@@ -111,6 +112,7 @@ const StyledFiThumbsUp = styled(AiOutlineLike)`
   margin-right: 2px;
 
   @media screen and (max-width: ${tablet}) {
+    top: 2px;
   }
 `;
 
