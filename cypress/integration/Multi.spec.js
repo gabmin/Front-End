@@ -1,11 +1,10 @@
 describe("Multi test", () => {
   beforeEach(() => {
-    // cy.visit("/multi");
-    // cy.contains("로그인").click();
-    // cy.get(".idInput").type("tomato").should("have.value", "tomato");
-    // cy.get(".pwInput").type("test111!").should("have.value", "test111!");
-    // cy.waitForReact();
-    // cy.get('[data-testid="loginButton"]').click();
+    cy.restoreLocalStorage();
+  });
+
+  afterEach(() => {
+    cy.saveLocalStorage();
   });
   it("비로그인 상태에서 작성하기 후 로그인", () => {
     cy.visit("/multi");
@@ -30,30 +29,30 @@ describe("Multi test", () => {
   it("작성 취소하기", () => {
     cy.contains("취소").click().location("pathname").should("equal", "/multi");
   });
-  it("진행중", () => {
+  it("진행중 탭 클릭", () => {
     cy.contains("진행중").click();
   });
-  it("종료됨", () => {
+  it("종료됨 탭 클릭", () => {
     cy.contains("종료됨").click({ force: true });
   });
-  it("전체", () => {
+  it("전체 탭 클릭", () => {
     cy.contains("전체").click({ force: true });
   });
-  it("투표하기", () => {
-    cy.contains("투표하기").click({ force: true });
-    cy.get(".idInput").type("tomato").should("have.value", "tomato");
-    cy.get(".pwInput").type("test111!").should("have.value", "test111!");
-    cy.waitForReact();
-    cy.get('[data-testid="loginButton"]')
-      .click()
-      .location("pathname")
-      .should("equal", "/");
-    cy.visit("/multi");
-    cy.contains("투표하기").click({ force: true });
+  it("상세보기", () => {
+    cy.contains("상세보기").click({ force: true });
+    // cy.get(".idInput").type("tomato").should("have.value", "tomato");
+    // cy.get(".pwInput").type("test111!").should("have.value", "test111!");
+    // cy.waitForReact();
+    // cy.get('[data-testid="loginButton"]')
+    //   .click()
+    //   .location("pathname")
+    //   .should("equal", "/");
+    // cy.visit("/multi");
+    // cy.contains("상세보기").click({ force: true });
   });
-  it("선택없이 완료하기", () => {
-    cy.contains("완료하고 결과보기").click({ force: true });
-  });
+  // it("선택없이 완료하기", () => {
+  //   cy.contains("완료하고 결과보기").click({ force: true });
+  // });
   it("첫번째 항목 선택하기", () => {
     cy.get('[id="A"]').click({ force: true });
   });
