@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import { darkGray, blue } from "../shared/style";
+import {
+  blue,
+  red,
+  mobile,
+  tablet,
+  gray5,
+  grayMultiply,
+  darkGray,
+} from "../shared/style";
 
 const About = () => {
   return (
@@ -42,6 +50,10 @@ const Container = styled.div`
   padding: 96px 0 0;
   line-height: 30px;
   box-sizing: border-box;
+
+  @media screen and (max-width: ${mobile}) {
+    width: 90%;
+  }
 `;
 
 const Subject = styled.div`
