@@ -201,7 +201,7 @@ const render = temp => {
 };
 ```
 
-- history 로 props를 전달하고, uselocation을 활용하여 데이터를 전달하는 방법  
+- history로 props를 전달하고, uselocation을 활용하여 데이터를 전달하는 방법  
   -> 변경이 필요한 데이터의 관리가 어렵고, 컴포넌트 구조가 복잡해짐에 따라 사용이 제한적
 
 ```jsx
