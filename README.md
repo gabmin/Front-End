@@ -22,6 +22,8 @@
 
 개미들의 곡소리는 주식 투자에 대한 의견과 고민을 투표 형식으로 쉽고 간단하게 해결할 수 있는 커뮤니티 사이트 입니다. 주식 투자에 대한 관심이 높아짐에 따라 많은 개미 투자자들이 유입되었고, 이들의 고민을 부담 없이 간편하게 해결하는 데 도움이 되고자 프로젝트를 진행하게 되었습니다.
 
+### 📆 개발 기간 : 2021년 10월 23일 ~ 2021년 12월 03일
+
 ### 홈페이지 [antsori](https://www.antsori.com/)
 
 ### 시연 영상 [youtube]()
@@ -113,18 +115,29 @@
 
 - 개발언어: JavaScript
 - 개발 라이브러리: React
-- 상태관리 : Redux, Redux/toolkit
-- 배포 : AWS S3, AWS Cloudfront
-- 통신 : Axios
-- 스타일 : styled-components
-- 테스트 : Cypress
-- 라이브러리(패키지) : React-Slick, React-Paginate, szhsin/React-Menu, Moment, lodash
+- 상태관리 :
+  - Redux : 데이터 전역 관리를 위한 위해 사용
+  - Redux/toolkit : 기존 리덕스의 복잡함을 낮추고 사용성을 높여 협업 업무 능력 향상을 위해 사용
+- 배포 :
+  - AWS S3 : 서버리스 서비스를 통해 배포를 하기 위해 사용
+  - AWS Cloudfront : HTTPS 적용을 위해 사용
+- 통신 :
+  - Axios: 서버 통신을 위해 사용
+- 스타일 :
+  - styled-components : 가독성 및 편의성을 위해 사용
+- 테스트 :
+  - Cypress : UI/UX 측면에서 기능 테스트를 위해 사용
+- 라이브러리(패키지) :
+  - React-Slick : Carousel 기능과 LazyLoad 기능을 통해 서버 효율성을 높이기 위해 사용
+  - Moment : 시간 및 날짜 설정을 위해 사용
+
 <hr>
 
 ## 🕹️ 주요 기능
 
 ### 로그인 / 회원가입
 
+- JWT 토큰 방식으로 토큰을 발급받고 LocalStorage에 저장하여 사용한다.
 - 영문 소문자, 숫자, 특수기호를 이용하여 아이디와 비밀번호를 설정할 수 있다.
 - 닉네임을 입력할 수 있으며, 커뮤니티를 이용하는 모든 곳엔 닉네임만 노출된다.
 
@@ -259,25 +272,47 @@ const cardList = multiPost && multiPost.multi;
 
 ```jsx
 .addCase(PostDB.pending, state => {
-        state.PostDBLoading = true;
-        state.PostDBDone = false;
-        state.PostDBError = null;
-      })
-      .addCase(PostDB.fulfilled, (state, action) => {
-        state.PostDBLoading = false;
-        state.PostDBDone = true;
-        state.eitherPost = action.payload;
-      })
-      .addCase(PostDB.rejected, (state, action) => {
-        state.PostDBLoading = false;
-        state.PostDBError = action.error;
-      })
+  state.PostDBLoading = true;
+  state.PostDBDone = false;
+  state.PostDBError = null;
+  })
+.addCase(PostDB.fulfilled, (state, action) => {
+  state.PostDBLoading = false;
+  state.PostDBDone = true;
+  state.eitherPost = action.payload;
+  })
+.addCase(PostDB.rejected, (state, action) => {
+  state.PostDBLoading = false;
+  state.PostDBError = action.error;
+  })
 ```
 
 ```jsx
 <SlickLayout>
   {PostDBDone && status === "Post" ? <EitherSlick PostList={PostList} /> : null}
 </SlickLayout>
+```
+
+### 4. 컨포넌트의 데이터 전달 방식에 대한 고민
+
+- [개선 사항](#개선-사항) 2번째 사항에 대한 고민으로 소량의 데이터 전달을 위해 Redux를 구성하는 게 비효율적이라고 생각함.
+- **History를 통해 작성하기 페이지로 이동 시 Props 데이터를 넘겨줌으로써 코드를 간소화함.**
+
+```jsx
+const [select, setSelect] = useState("checkMulti");
+
+const goToWrite = () => {
+  if (!userNickname) {
+    window.alert("로그인 후 이용 가능합니다");
+    history.replace("/login");
+  } else {
+    window.scroll(0, 0);
+    history.push({
+      pathname: "/write",
+      state: { select: select },
+    });
+  }
+};
 ```
 
 <hr>
