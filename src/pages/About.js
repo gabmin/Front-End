@@ -37,7 +37,8 @@ const About = () => {
 
 const Container = styled.div`
   width: 67%;
-  min-height: 927px;
+  /* min-height: 927px; */
+  min-height: 100vh;
   margin: 0 auto;
   padding: 96px 0 0;
   line-height: 30px;
