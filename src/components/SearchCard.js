@@ -82,10 +82,6 @@ const IconWrapper = styled.div`
   .commentCnt {
     color: ${blue};
     margin: 0 5px 0 0;
-
-    @media screen and (max-width: ${mobile}) {
-      display: none;
-    }
   }
 
   @media screen and (max-width: ${tablet}) {
