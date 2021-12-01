@@ -2,7 +2,7 @@
 
 ![Thumbnail](./src/images/Thumbnail.png)
 
-## 목차
+## 🗂️ 목차
 
 ### 1. [프로젝트 소개](#프로젝트-소개)
 
@@ -18,7 +18,7 @@
 
 <hr>
 
-## 프로젝트 소개
+## 📃 프로젝트 소개
 
 개미들의 곡소리는 주식 투자에 대한 의견과 고민을 투표 형식으로 쉽고 간단하게 해결할 수 있는 커뮤니티 사이트 입니다. 주식 투자에 대한 관심이 높아짐에 따라 많은 개미 투자자들이 유입되었고, 이들의 고민을 부담없이 간편하게 해결하는데 도움이 되고자 프로젝트를 진행하게 되었습니다.
 
@@ -32,7 +32,7 @@
 
 <hr>
 
-## 팀 구성
+## 🧑‍💻 팀 구성
 
 [팀 소개 페이지](https://crawling-health-e0d.notion.site/be6df84bde484ca883f54739be96eb8f)
 
@@ -109,7 +109,7 @@
 
 <hr>
 
-## 기술 스텍 및 라이브러리
+## ⭐ 기술 스텍 및 라이브러리
 
 - 개발언어: JavaScript
 - 개발 라이브러리: React
@@ -121,7 +121,7 @@
 - 라이브러리(패키지) : React-Slick, React-Paginate, szhsin/React-Menu, Moment, lodash
 <hr>
 
-## 주요 기능
+## 🕹️ 주요 기능
 
 ### 로그인 / 회원가입
 
@@ -174,7 +174,7 @@
 
 <hr>
 
-## Troubleshooting
+## 🙉 Troubleshooting
 
 ### 1. 하위 컴포넌트의 이벤트로 상위 컴포넌트의 state 변경 문제
 
@@ -282,7 +282,7 @@ const cardList = multiPost && multiPost.multi;
 
 <hr>
 
-## 유저 피드백 및 개선 사항
+## 🔧 유저 피드백 및 개선 사항
 
 ### 피드백 정리 [Notion](https://crawling-health-e0d.notion.site/1e6a76553d3b45909c134d9b62b604fd)
 
