@@ -26,7 +26,7 @@
 
 ### 홈페이지 [antsori](https://www.antsori.com/)
 
-### 시연 영상 [youtube]()
+### 소개 영상 [youtube](https://www.youtube.com/watch?v=wD4DdZ-Sp0s)
 
 ### Github [Organizations](https://github.com/Ant-DDun-DDun-Project)
 
