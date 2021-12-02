@@ -83,7 +83,8 @@ const EitherPagination = ({ items, itemsPerPage = 5 }) => {
       <ReactPaginate
         nextLabel="다음 >"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={6}
+        marginPagesDisplayed={6}
         pageCount={pageCount}
         previousLabel="< 이전"
         pageClassName="page-item"
