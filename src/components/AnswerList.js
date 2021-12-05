@@ -17,25 +17,6 @@ const AnswerList = props => {
   const [color, setColor] = useState("");
   const [select, setSelect] = useState("");
 
-  // const selected = e => {
-  //   const checkSelect = t => [...t.parentElement.children].filter(e => e !== t);
-  //   checkSelect(e.target).map(x => {
-  //     const newClass = String(x.classList[0] + " " + x.classList[1]);
-  //     if (x.classList[2] === "on") {
-  //       x.setAttribute("class", newClass);
-  //     }
-  //   });
-  //   e.target.classList.add("on");
-  // };
-
-  // const selectAnswer = e => {
-  //   const color = e.target.attributes.color.value;
-  //   setColor(color);
-  //   selected(e);
-  //   setSelect(e.target.id);
-  //   console.log("e", color);
-  // };
-
   const selectAnswer = e => {
     setSelect(e.target.id);
   };

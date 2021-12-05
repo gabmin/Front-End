@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { FiThumbsUp } from "react-icons/fi";
-import { FiMessageSquare } from "react-icons/fi";
+import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 
 import colors from "../shared/colors";
 import { DetailDB } from "../redux/actions/multiDetail";
