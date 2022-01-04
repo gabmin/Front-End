@@ -213,7 +213,7 @@ const goToMulti = () => {
 };
 ```
 
-- **모든 페이지의 paramsId를 Redux Store에 저장하여 필요시 사용하는 방법울 사용하여 해결**
+- **모든 페이지의 paramsId를 Redux Store에 저장하여 필요시 사용하는 방법을 사용하여 해결**
 
 ```jsx
 const paramsSlice = createSlice({
